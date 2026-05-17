@@ -20,6 +20,7 @@
 #include "sound_data.h"
 
 #include "mp3.h"
+#include "emFile.h"
 
 //HMI via UART
 // Button 1 : Increase Volume, Next Song
@@ -35,11 +36,7 @@ ISR(systick_handler)
 }
 
 void soundTest1()
-{
-    
-    
-    
-    
+{    
     SOUND_Init();
 
     while(1)
@@ -142,26 +139,27 @@ TASK(tsk_init)
     SEVEN_Init();
     SOUND_Init();
     
-    
+    //UART_LOG_PutString("[INIT] SOUND_Init OK\n");
     
     //Test
     //RC_t SOUND_StartPlay();
     //SOUND_SetSong(SOUND_Records[0].m_data, SOUND_Records[0].m_size);
 
     
-    
     //Reconfigure ISRs with OS parameters.
     //This line MUST be called after the hardware driver initialisation!
     EE_system_init();
     
-    UART_LOG_PutString("MP3 Player started...\n");
+    //UART_LOG_PutString("MP3 Player started...\n");
 
     //Application Init
+    /* Original MP3_Init - still uses flash songs */
+    //emFile();
     MP3_Init();
     
     //Start the alarm with 1000ms cycle time
     SetRelAlarm(alrm_1s,1000,1000);
- 
+
     ActivateTask(tsk_control);
     ActivateTask(tsk_background);
     
@@ -228,5 +226,4 @@ ISR2(isr_Timer)
     SOUND_isr();
 }
 
-
-/* [] END OF FILE */
+/* [main.c] END OF FILE */

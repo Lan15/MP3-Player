@@ -1,5 +1,5 @@
 # MP3_Player
-# 2026-05-17 12:46:39Z
+# 2026-05-17 19:54:01Z
 
 set_io "SEVEN_A(0)" iocell 1 7
 set_io "SEVEN_B(0)" iocell 1 6
@@ -32,3 +32,7 @@ set_io "TFT_CS(0)" iocell 3 3
 set_io "TFT_RES(0)" iocell 3 4
 set_io "TFT_DC(0)" iocell 12 3
 set_io "TFT_SCL(0)" iocell 12 4
+set_io "\emFile:mosi0(0)\" iocell 15 0
+set_io "\emFile:miso0(0)\" iocell 3 7
+set_io "\emFile:sclk0(0)\" iocell 3 6
+set_io "\emFile:SPI0_CS(0)\" iocell 15 1

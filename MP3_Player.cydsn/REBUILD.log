@@ -1,0 +1,380 @@
+--------------- Rebuild Started: 05/17/2026 20:58:05 Project: MP3_Player, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\button.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\led.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\seven.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\logging.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\tft.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\Boxer.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\CastleOfGlass.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\mp3.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\sound.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\sound_data.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\valerie.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\main.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\wav_parser.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\ff.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\rtc.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\sdcard.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\cymetadata.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\Cm3Start.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\CyBootAsmGnu.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\CyDmac.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\CyFlash.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\CyLib.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\cyPm.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\CySpc.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\cyutils.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\cy_em_eeprom.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_activate.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_alcancel.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_alget.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_algetbase.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_alsetabs.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_alsetrel.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_altick.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_chaintas.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_evclear.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_evget.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_evset.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_evwait.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_force_schedule.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_getcountervalue.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_getelapsedvalue.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_gettaskid.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_gettaskstate.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_iparam.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_irqendin.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_lockres.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_lookup.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_rq_exchg.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_rq_first.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_rq_inser.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_schedule.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_semgetvalue.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_sempost.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_semtrywait.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_semwait.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_shtdown.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_startos.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_terminat.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_thendin.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_tnterm.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_tstub.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_ulockallres.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_ulockres.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_cortex_mx_ee_context.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_cortex_mx_ee_system_timer.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_cortex_mx_ee_utils.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_gnu_change_context_isr.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_gnu_irq_stack.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_gnu_multi_context.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_gnu_oo.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_common_ee_hal_structs.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SimpleSystem_eecfg.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SEVEN_A.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SEVEN_B.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SEVEN_C.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SEVEN_D.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SEVEN_E.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SEVEN_F.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SEVEN_G.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SEVEN_DP.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SEVEN_SELECT.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SEVEN_reg.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SEVEN_reg_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\BUTTON_1.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\isr_Button.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\BUTTON_2.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\BUTTON_3.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\BUTTON_4.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\LED_red.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\LED_yellow.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\LED_green.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\UART_LOG.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\UART_LOG_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\UART_LOG_INT.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\UART_LOG_BOOT.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\RGB_PWM_red.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\RGB_PWM_red_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\PWM_Clock.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\RGB_PWM_green.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\RGB_PWM_green_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\RGB_PWM_blue.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\RGB_PWM_blue_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\RGB_R.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\RGB_G.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\RGB_B.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SOUND_PWM.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SOUND_PWM_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SOUND_PWM_CLOCK.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SOUND_MUX_0.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SOUND_MUX_1.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SOUND_Control.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SOUND_Control_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SOUND_OUT.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SOUND_ENABLE.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SOUND_SAMPLE.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SOUND_SAMPLE_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SOUND_SAMPLE_CLOCK.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\isr_Timer.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\UART_LOG_IntClock.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\TFT_SPI.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\TFT_SPI_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\TFT_SPI_INT.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\TFT_SCL.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\TFT_DC.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\TFT_RES.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\TFT_CS.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\TFT_LED.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\TFT_SDA.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\TFT_BackLight.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\TFT_BackLight_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\CLK_LED.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\TFT_SPI_IntClock.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SPI.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SPI_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SPI_INT.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SPI_SS.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\MOSI.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SCLK.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\MISO.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\SPI_IntClock.o"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\MP3_Player.hex"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\MP3_Player.elf"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\MP3_Player.map"
+Deleting file ".\MP3_Player.cycdx"
+Deleting file ".\MP3_Player.svd"
+Deleting file ".\MP3_Player.rpt"
+Deleting file ".\MP3_Player_timing.html"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\.deps\SOURCE_C__ARM_GCC_GENERIC.P"
+Deleting file ".\CortexM3\ARM_GCC_541\Debug\.deps\SOURCE_ASM__ARM_GCC_GENERIC.P"
+cydsfit.exe -.appdatapath "C:\Users\agila\AppData\Local\Cypress Semiconductor\PSoC Creator\4.4" -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p "C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\MP3_Player.cyprj" -d CY8C5888LTQ-LP097 -s "C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\Generated_Source\PSoC5" -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
+Elaborating Design...
+ADD: fit.M0032: warning: Clock Warning: (TFT_SPI_IntClock's accuracy range '24 MHz +/- 1%, (23.76 MHz - 24.24 MHz)' is not within the specified tolerance range '66 MHz +/- 5%, (62.7 MHz - 69.3 MHz)'.).
+ * C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\SPI_Master_v2_50\SPI_Master_v2_50.cysch (Instance:IntClock)
+ * C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\MP3_Player.cydwr (TFT_SPI_IntClock)
+HDL Generation...
+Synthesis...
+Tech Mapping...
+Analog Placement...
+Analog Routing...
+Analog Code Generation...
+Digital Placement...
+Digital Routing...
+Bitstream Generation...
+Bitstream Verification...
+Static timing analysis...
+API Generation...
+Dependency Generation...
+Cleanup...
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I.\source -I.\source\asw -I.\source\bsw -I.\source\bsw\LabBoard -I.\source\bsw\Services -I.\source\bsw\tft -I.\source\bsw\tft\fonts -I.\Libraries\FatFs_Library -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/button.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c source\bsw\LabBoard\button.c -o .\CortexM3\ARM_GCC_541\Debug\button.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I.\source -I.\source\asw -I.\source\bsw -I.\source\bsw\LabBoard -I.\source\bsw\Services -I.\source\bsw\tft -I.\source\bsw\tft\fonts -I.\Libraries\FatFs_Library -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/led.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c source\bsw\LabBoard\led.c -o .\CortexM3\ARM_GCC_541\Debug\led.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I.\source -I.\source\asw -I.\source\bsw -I.\source\bsw\LabBoard -I.\source\bsw\Services -I.\source\bsw\tft -I.\source\bsw\tft\fonts -I.\Libraries\FatFs_Library -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/seven.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c source\bsw\LabBoard\seven.c -o .\CortexM3\ARM_GCC_541\Debug\seven.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I.\source -I.\source\asw -I.\source\bsw -I.\source\bsw\LabBoard -I.\source\bsw\Services -I.\source\bsw\tft -I.\source\bsw\tft\fonts -I.\Libraries\FatFs_Library -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/logging.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c source\bsw\Services\logging.c -o .\CortexM3\ARM_GCC_541\Debug\logging.o
+In file included from Generated_Source\PSoC5/SimpleSystem_ee_api.inc:73:0,
+                 from Generated_Source\PSoC5/SimpleSystem_ee.h:129,
+                 from Generated_Source\PSoC5/project.h:22,
+                 from source\bsw\Services\logging.c:21:
+source\bsw\Services\ringbuffer.h: In function 'Ringbuffer_Write':
+Generated_Source\PSoC5/SimpleSystem_ee_oo_api.inc:136:35: warning: implicit declaration of function 'EE_oo_GetResource' [-Wimplicit-function-declaration]
+ #define GetResource               EE_oo_GetResource
+                                   ^
+source\bsw\Services\ringbuffer.h:78:9: note: in expansion of macro 'GetResource'
+         GetResource(rb->erika_ressource);
+         ^
+Generated_Source\PSoC5/SimpleSystem_ee_oo_api.inc:140:35: warning: implicit declaration of function 'EE_oo_ReleaseResource' [-Wimplicit-function-declaration]
+ #define ReleaseResource           EE_oo_ReleaseResource
+                                   ^
+source\bsw\Services\ringbuffer.h:99:9: note: in expansion of macro 'ReleaseResource'
+         ReleaseResource(rb->erika_ressource);
+         ^
+source\bsw\Services\logging.c: In function 'LOG_Init':
+source\bsw\Services\logging.c:54:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I.\source -I.\source\asw -I.\source\bsw -I.\source\bsw\LabBoard -I.\source\bsw\Services -I.\source\bsw\tft -I.\source\bsw\tft\fonts -I.\Libraries\FatFs_Library -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/tft.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c source\bsw\tft\tft.c -o .\CortexM3\ARM_GCC_541\Debug\tft.o
+In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
+                 from Generated_Source\PSoC5/project.h:17,
+                 from .\source\bsw\Services/ringbuffer.h:29,
+                 from .\source\bsw\Services/logging.h:35,
+                 from source\bsw\tft\tft.c:24:
+Generated_Source\PSoC5/cytypes.h:1377:0: warning: "LO8" redefined
+ #define LO8(x)                  ((uint8) ((x) & 0xFFu))
+ ^
+In file included from source\bsw\tft\tft.h:29:0,
+                 from source\bsw\tft\tft.c:20:
+.\source\bsw/global.h:306:0: note: this is the location of the previous definition
+  # define LO8(x)   ((uint8_t) ((x) & 0xFFu))
+ ^
+In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
+                 from Generated_Source\PSoC5/project.h:17,
+                 from .\source\bsw\Services/ringbuffer.h:29,
+                 from .\source\bsw\Services/logging.h:35,
+                 from source\bsw\tft\tft.c:24:
+Generated_Source\PSoC5/cytypes.h:1378:0: warning: "HI8" redefined
+ #define HI8(x)                  ((uint8) ((uint16)(x) >> 8))
+ ^
+In file included from source\bsw\tft\tft.h:29:0,
+                 from source\bsw\tft\tft.c:20:
+.\source\bsw/global.h:311:0: note: this is the location of the previous definition
+  # define HI8(x)   ((uint8_t) ((uint16_t)(x) >> 8))
+ ^
+In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
+                 from Generated_Source\PSoC5/project.h:17,
+                 from .\source\bsw\Services/ringbuffer.h:29,
+                 from .\source\bsw\Services/logging.h:35,
+                 from source\bsw\tft\tft.c:24:
+Generated_Source\PSoC5/cytypes.h:1381:0: warning: "LO16" redefined
+ #define LO16(x)                 ((uint16) ((x) & 0xFFFFu))
+ ^
+In file included from source\bsw\tft\tft.h:29:0,
+                 from source\bsw\tft\tft.c:20:
+.\source\bsw/global.h:316:0: note: this is the location of the previous definition
+  # define LO16(x)   ((uint16_t) ((x) & 0xFFFFu))
+ ^
+In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
+                 from Generated_Source\PSoC5/project.h:17,
+                 from .\source\bsw\Services/ringbuffer.h:29,
+                 from .\source\bsw\Services/logging.h:35,
+                 from source\bsw\tft\tft.c:24:
+Generated_Source\PSoC5/cytypes.h:1382:0: warning: "HI16" redefined
+ #define HI16(x)                 ((uint16) ((uint32)(x) >> 16))
+ ^
+In file included from source\bsw\tft\tft.h:29:0,
+                 from source\bsw\tft\tft.c:20:
+.\source\bsw/global.h:321:0: note: this is the location of the previous definition
+  # define HI16(x)   ((uint16_t) ((uint32_t)(x) >> 16))
+ ^
+In file included from Generated_Source\PSoC5/SimpleSystem_ee_api.inc:73:0,
+                 from Generated_Source\PSoC5/SimpleSystem_ee.h:129,
+                 from Generated_Source\PSoC5/project.h:22,
+                 from .\source\bsw\Services/ringbuffer.h:29,
+                 from .\source\bsw\Services/logging.h:35,
+                 from source\bsw\tft\tft.c:24:
+.\source\bsw\Services/ringbuffer.h: In function 'Ringbuffer_Write':
+Generated_Source\PSoC5/SimpleSystem_ee_oo_api.inc:136:35: warning: implicit declaration of function 'EE_oo_GetResource' [-Wimplicit-function-declaration]
+ #define GetResource               EE_oo_GetResource
+                                   ^
+.\source\bsw\Services/ringbuffer.h:78:9: note: in expansion of macro 'GetResource'
+         GetResource(rb->erika_ressource);
+         ^
+Generated_Source\PSoC5/SimpleSystem_ee_oo_api.inc:140:35: warning: implicit declaration of function 'EE_oo_ReleaseResource' [-Wimplicit-function-declaration]
+ #define ReleaseResource           EE_oo_ReleaseResource
+                                   ^
+.\source\bsw\Services/ringbuffer.h:99:9: note: in expansion of macro 'ReleaseResource'
+         ReleaseResource(rb->erika_ressource);
+         ^
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I.\source -I.\source\asw -I.\source\bsw -I.\source\bsw\LabBoard -I.\source\bsw\Services -I.\source\bsw\tft -I.\source\bsw\tft\fonts -I.\Libraries\FatFs_Library -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/Boxer.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c source\asw\Boxer.c -o .\CortexM3\ARM_GCC_541\Debug\Boxer.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I.\source -I.\source\asw -I.\source\bsw -I.\source\bsw\LabBoard -I.\source\bsw\Services -I.\source\bsw\tft -I.\source\bsw\tft\fonts -I.\Libraries\FatFs_Library -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/CastleOfGlass.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c source\asw\CastleOfGlass.c -o .\CortexM3\ARM_GCC_541\Debug\CastleOfGlass.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I.\source -I.\source\asw -I.\source\bsw -I.\source\bsw\LabBoard -I.\source\bsw\Services -I.\source\bsw\tft -I.\source\bsw\tft\fonts -I.\Libraries\FatFs_Library -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/mp3.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c source\asw\mp3.c -o .\CortexM3\ARM_GCC_541\Debug\mp3.o
+In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
+                 from Generated_Source\PSoC5/project.h:17,
+                 from source\asw\mp3.h:79,
+                 from source\asw\mp3.c:23:
+Generated_Source\PSoC5/cytypes.h:1377:0: warning: "LO8" redefined
+ #define LO8(x)                  ((uint8) ((x) & 0xFFu))
+ ^
+In file included from source\asw\mp3.h:78:0,
+                 from source\asw\mp3.c:23:
+.\source\bsw/global.h:306:0: note: this is the location of the previous definition
+  # define LO8(x)   ((uint8_t) ((x) & 0xFFu))
+ ^
+In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
+                 from Generated_Source\PSoC5/project.h:17,
+                 from source\asw\mp3.h:79,
+                 from source\asw\mp3.c:23:
+Generated_Source\PSoC5/cytypes.h:1378:0: warning: "HI8" redefined
+ #define HI8(x)                  ((uint8) ((uint16)(x) >> 8))
+ ^
+In file included from source\asw\mp3.h:78:0,
+                 from source\asw\mp3.c:23:
+.\source\bsw/global.h:311:0: note: this is the location of the previous definition
+  # define HI8(x)   ((uint8_t) ((uint16_t)(x) >> 8))
+ ^
+In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
+                 from Generated_Source\PSoC5/project.h:17,
+                 from source\asw\mp3.h:79,
+                 from source\asw\mp3.c:23:
+Generated_Source\PSoC5/cytypes.h:1381:0: warning: "LO16" redefined
+ #define LO16(x)                 ((uint16) ((x) & 0xFFFFu))
+ ^
+In file included from source\asw\mp3.h:78:0,
+                 from source\asw\mp3.c:23:
+.\source\bsw/global.h:316:0: note: this is the location of the previous definition
+  # define LO16(x)   ((uint16_t) ((x) & 0xFFFFu))
+ ^
+In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
+                 from Generated_Source\PSoC5/project.h:17,
+                 from source\asw\mp3.h:79,
+                 from source\asw\mp3.c:23:
+Generated_Source\PSoC5/cytypes.h:1382:0: warning: "HI16" redefined
+ #define HI16(x)                 ((uint16) ((uint32)(x) >> 16))
+ ^
+In file included from source\asw\mp3.h:78:0,
+                 from source\asw\mp3.c:23:
+.\source\bsw/global.h:321:0: note: this is the location of the previous definition
+  # define HI16(x)   ((uint16_t) ((uint32_t)(x) >> 16))
+ ^
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I.\source -I.\source\asw -I.\source\bsw -I.\source\bsw\LabBoard -I.\source\bsw\Services -I.\source\bsw\tft -I.\source\bsw\tft\fonts -I.\Libraries\FatFs_Library -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/sound.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c source\asw\sound.c -o .\CortexM3\ARM_GCC_541\Debug\sound.o
+In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
+                 from Generated_Source\PSoC5/project.h:17,
+                 from source\asw\sound.c:24:
+Generated_Source\PSoC5/cytypes.h:1377:0: warning: "LO8" redefined
+ #define LO8(x)                  ((uint8) ((x) & 0xFFu))
+ ^
+In file included from source\asw\sound.h:78:0,
+                 from source\asw\sound.c:23:
+.\source\bsw/global.h:306:0: note: this is the location of the previous definition
+  # define LO8(x)   ((uint8_t) ((x) & 0xFFu))
+ ^
+In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
+                 from Generated_Source\PSoC5/project.h:17,
+                 from source\asw\sound.c:24:
+Generated_Source\PSoC5/cytypes.h:1378:0: warning: "HI8" redefined
+ #define HI8(x)                  ((uint8) ((uint16)(x) >> 8))
+ ^
+In file included from source\asw\sound.h:78:0,
+                 from source\asw\sound.c:23:
+.\source\bsw/global.h:311:0: note: this is the location of the previous definition
+  # define HI8(x)   ((uint8_t) ((uint16_t)(x) >> 8))
+ ^
+In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
+                 from Generated_Source\PSoC5/project.h:17,
+                 from source\asw\sound.c:24:
+Generated_Source\PSoC5/cytypes.h:1381:0: warning: "LO16" redefined
+ #define LO16(x)                 ((uint16) ((x) & 0xFFFFu))
+ ^
+In file included from source\asw\sound.h:78:0,
+                 from source\asw\sound.c:23:
+.\source\bsw/global.h:316:0: note: this is the location of the previous definition
+  # define LO16(x)   ((uint16_t) ((x) & 0xFFFFu))
+ ^
+In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
+                 from Generated_Source\PSoC5/project.h:17,
+                 from source\asw\sound.c:24:
+Generated_Source\PSoC5/cytypes.h:1382:0: warning: "HI16" redefined
+ #define HI16(x)                 ((uint16) ((uint32)(x) >> 16))
+ ^
+In file included from source\asw\sound.h:78:0,
+                 from source\asw\sound.c:23:
+.\source\bsw/global.h:321:0: note: this is the location of the previous definition
+  # define HI16(x)   ((uint16_t) ((uint32_t)(x) >> 16))
+ ^
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I.\source -I.\source\asw -I.\source\bsw -I.\source\bsw\LabBoard -I.\source\bsw\Services -I.\source\bsw\tft -I.\source\bsw\tft\fonts -I.\Libraries\FatFs_Library -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/sound_data.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c source\asw\sound_data.c -o .\CortexM3\ARM_GCC_541\Debug\sound_data.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I.\source -I.\source\asw -I.\source\bsw -I.\source\bsw\LabBoard -I.\source\bsw\Services -I.\source\bsw\tft -I.\source\bsw\tft\fonts -I.\Libraries\FatFs_Library -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/valerie.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c source\asw\valerie.c -o .\CortexM3\ARM_GCC_541\Debug\valerie.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I.\source -I.\source\asw -I.\source\bsw -I.\source\bsw\LabBoard -I.\source\bsw\Services -I.\source\bsw\tft -I.\source\bsw\tft\fonts -I.\Libraries\FatFs_Library -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/main.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c source\asw\main.c -o .\CortexM3\ARM_GCC_541\Debug\main.o
+source\asw\main.c: In function 'Functsk_control':
+source\asw\main.c:198:18: warning: unused variable 'result' [-Wunused-variable]
+             RC_t result = MP3_ProcessEvent(nextEvent);
+                  ^
+source\asw\main.c:182:20: warning: unused variable 'count' [-Wunused-variable]
+     static uint8_t count = 0;
+                    ^
+source\asw\main.c: In function 'Functsk_sd':
+source\asw\main.c:213:19: error: 'SD__fatFs' undeclared (first use in this function)
+     fr = f_mount(&SD__fatFs, "", 1u);                          /*+INC1+*/
+                   ^
+source\asw\main.c:213:19: note: each undeclared identifier is reported only once for each function it appears in
+The command 'arm-none-eabi-gcc.exe' failed with exit code '1'.
+--------------- Rebuild Failed: 05/17/2026 20:58:17 ---------------

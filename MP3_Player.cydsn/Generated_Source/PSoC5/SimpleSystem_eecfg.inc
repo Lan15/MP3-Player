@@ -30,7 +30,7 @@
     #define tsk_control 2
     #endif
     #if EE_MAX_TASK > 3
-    #define Task_4 3
+    #define tsk_sd 3
     #endif
     #if EE_MAX_TASK > 4
     #define Task_5 4

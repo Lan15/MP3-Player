@@ -26,7 +26,7 @@
     #endif
     #if ((1 == 2) && (EE_MAX_TASK > 3))
     #define TASK_4_STACK_SIZE 0/4 // size = 0 bytes
-    int EE_cortex_mx_stack_4[TASK_4_STACK_SIZE];	/* Task 4 (Task_4) */
+    int EE_cortex_mx_stack_4[TASK_4_STACK_SIZE];	/* Task 4 (tsk_sd) */
     #endif
     #if ((1 == 2) && (EE_MAX_TASK > 4))
     #define TASK_5_STACK_SIZE 0/4 // size = 0 bytes
@@ -122,7 +122,7 @@
         ,Tsk3	 /* tsk_control*/
     #endif
     #if EE_MAX_TASK > 3
-        ,Tsk4	 /* Task_4*/
+        ,Tsk4	 /* tsk_sd*/
     #endif
     #if EE_MAX_TASK > 4
         ,Tsk5	 /* Task_5*/
@@ -150,7 +150,7 @@
         ,{(EE_ADDR)(&EE_cortex_mx_stack_3[(TASK_3_STACK_SIZE) - CORTEX_MX_INIT_TOS_OFFSET])} 	/* tsk_control*/
         #endif
         #ifdef TASK_4_STACK_SIZE
-        ,{(EE_ADDR)(&EE_cortex_mx_stack_4[(TASK_4_STACK_SIZE) - CORTEX_MX_INIT_TOS_OFFSET])}    /* Task_4*/
+        ,{(EE_ADDR)(&EE_cortex_mx_stack_4[(TASK_4_STACK_SIZE) - CORTEX_MX_INIT_TOS_OFFSET])}    /* tsk_sd*/
         #endif
         #ifdef TASK_5_STACK_SIZE
         ,{(EE_ADDR)(&EE_cortex_mx_stack_5[(TASK_5_STACK_SIZE) - CORTEX_MX_INIT_TOS_OFFSET])}    /* Task_5*/
@@ -192,7 +192,7 @@
     DeclareTask(tsk_control);
     #endif
     #if EE_MAX_TASK > 3
-    DeclareTask(Task_4);
+    DeclareTask(tsk_sd);
     #endif
     #if EE_MAX_TASK > 4
     DeclareTask(Task_5);
@@ -218,7 +218,7 @@
         ,&EE_oo_thread_stub      /* thread tsk_control */
     #endif
     #if EE_MAX_TASK > 3
-        ,&EE_oo_thread_stub      /* thread Task_4 */
+        ,&EE_oo_thread_stub      /* thread tsk_sd */
     #endif
     #if EE_MAX_TASK > 4
         ,&EE_oo_thread_stub      /* thread Task_5 */
@@ -248,7 +248,7 @@
         ,&Functsk_control
     #endif
     #if EE_MAX_TASK > 3
-        ,&FuncTask_4
+        ,&Functsk_sd
     #endif
     #if EE_MAX_TASK > 4
         ,&FuncTask_5
@@ -276,7 +276,7 @@
         ,32U
     #endif
     #if EE_MAX_TASK > 3
-        ,0U
+        ,2U
     #endif
     #if EE_MAX_TASK > 4
         ,0U
@@ -305,7 +305,7 @@
         ,"tsk_control"
     #endif
     #if EE_MAX_TASK > 3
-        ,"Task_4"
+        ,"tsk_sd"
     #endif
     #if EE_MAX_TASK > 4
         ,"Task_5"
@@ -601,8 +601,8 @@
         #endif
     #endif
     #if EE_MAX_TASK > 3
-        #if 1
-        ,0U
+        #if 0
+        ,2U
         #else
         ,MAX_PRIORITY
         #endif
@@ -1911,7 +1911,7 @@ const unsigned long EE_ALARM_ID[EE_MAX_ALARM]=
     #if 1 || 0 || 0
         ,
     #endif
-        Task_4
+        tsk_sd
     #endif
     #if (EE_MAX_TASK > 4) && 0
     #if 1 || 0 || 0 || 0

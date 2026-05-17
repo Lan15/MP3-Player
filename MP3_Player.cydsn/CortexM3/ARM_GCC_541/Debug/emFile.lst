@@ -1,0 +1,2309 @@
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"emFile.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.NextStep,"ax",%progbits
+  20              		.align	2
+  21              		.global	NextStep
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	NextStep, %function
+  25              	NextStep:
+  26              	.LFB111:
+  27              		.file 1 "emFile.c"
+   1:emFile.c      **** /* ========================================
+   2:emFile.c      ****  *
+   3:emFile.c      ****  * Copyright YOUR COMPANY, THE YEAR
+   4:emFile.c      ****  * All Rights Reserved
+   5:emFile.c      ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:emFile.c      ****  *
+   7:emFile.c      ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:emFile.c      ****  * WHICH IS THE PROPERTY OF your company.
+   9:emFile.c      ****  *
+  10:emFile.c      ****  * ========================================
+  11:emFile.c      **** */
+  12:emFile.c      **** 
+  13:emFile.c      **** /*******************************************************************************
+  14:emFile.c      **** * File Name: main.c
+  15:emFile.c      **** *
+  16:emFile.c      **** * Version: 1.10
+  17:emFile.c      **** *
+  18:emFile.c      **** * Description:
+  19:emFile.c      **** *  The example project consists of 5 simple steps. Each of the steps performs 
+  20:emFile.c      **** *  single File System operation. 
+  21:emFile.c      **** *  Step#1: Gets SD card name and displays it on the LCD.
+  22:emFile.c      **** *  Step#2: Performs Format SD operation and displays the status of the format 
+  23:emFile.c      **** *  operation execution.
+  24:emFile.c      **** *  Step#3: Creates directory with the name - "Dir" and displays a status of 
+  25:emFile.c      **** *  directory creation operation.
+  26:emFile.c      **** *  Step#4: Creates a file - "File.txt" in the root directory and writes the 
+  27:emFile.c      **** *  following string to the file -"123456789". Displays a status of operations 
+  28:emFile.c      **** *  execution.
+  29:emFile.c      **** *  Step#5: Copies newly created file ("File.txt") to directory "Dir" with the 
+  30:emFile.c      **** *  name - "File1.txt". 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 2
+
+
+  31:emFile.c      **** *
+  32:emFile.c      **** ********************************************************************************
+  33:emFile.c      **** * Copyright 2011-2012, Cypress Semiconductor Corporation. All rights reserved.
+  34:emFile.c      **** * This software is owned by Cypress Semiconductor Corporation and is protected
+  35:emFile.c      **** * by and subject to worldwide patent and copyright laws and treaties.
+  36:emFile.c      **** * Therefore, you may use this software only as provided in the license agreement
+  37:emFile.c      **** * accompanying the software package from which you obtained this software.
+  38:emFile.c      **** * CYPRESS AND ITS SUPPLIERS MAKE NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+  39:emFile.c      **** * WITH REGARD TO THIS SOFTWARE, INCLUDING, BUT NOT LIMITED TO, NONINFRINGEMENT,
+  40:emFile.c      **** * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+  41:emFile.c      **** *******************************************************************************/
+  42:emFile.c      **** 
+  43:emFile.c      **** #include <project.h>
+  44:emFile.c      **** #include <FS.h>
+  45:emFile.c      **** #include <string.h>
+  46:emFile.c      **** #include "global.h"
+  47:emFile.c      **** #include <stdio.h>
+  48:emFile.c      **** #include "emFile.h"
+  49:emFile.c      **** 
+  50:emFile.c      **** char sdFile[9] = "File.txt";
+  51:emFile.c      **** 
+  52:emFile.c      **** 
+  53:emFile.c      **** char UART_BUF[100];
+  54:emFile.c      **** 
+  55:emFile.c      **** void NextStep(U16 step, char * str)
+  56:emFile.c      **** {
+  28              		.loc 1 56 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              	.LVL0:
+  33 0000 10B5     		push	{r4, lr}
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 4, -8
+  36              		.cfi_offset 14, -4
+  57:emFile.c      ****     /* Clear LCD after previously completed operation */
+  58:emFile.c      ****     //LCD_ClearDisplay();
+  59:emFile.c      ****     
+  60:emFile.c      ****     /* This will display step number on the LCD prior
+  61:emFile.c      ****     * every operation on the SD card.
+  62:emFile.c      ****     */
+  63:emFile.c      ****     sprintf(UART_BUF,"\nStep# %d, %s\n",step,str);
+  37              		.loc 1 63 0
+  38 0002 054C     		ldr	r4, .L3
+  39 0004 0B46     		mov	r3, r1
+  40 0006 0246     		mov	r2, r0
+  41 0008 0449     		ldr	r1, .L3+4
+  42              	.LVL1:
+  43 000a 2046     		mov	r0, r4
+  44              	.LVL2:
+  45 000c FFF7FEFF 		bl	sprintf
+  46              	.LVL3:
+  64:emFile.c      ****     UART_LOG_PutString(UART_BUF);
+  47              		.loc 1 64 0
+  48 0010 2046     		mov	r0, r4
+  49 0012 FFF7FEFF 		bl	UART_LOG_PutString
+  50              	.LVL4:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 3
+
+
+  51 0016 10BD     		pop	{r4, pc}
+  52              	.L4:
+  53              		.align	2
+  54              	.L3:
+  55 0018 00000000 		.word	UART_BUF
+  56 001c 00000000 		.word	.LC0
+  57              		.cfi_endproc
+  58              	.LFE111:
+  59              		.size	NextStep, .-NextStep
+  60              		.section	.text.emFile,"ax",%progbits
+  61              		.align	2
+  62              		.global	emFile
+  63              		.thumb
+  64              		.thumb_func
+  65              		.type	emFile, %function
+  66              	emFile:
+  67              	.LFB112:
+  65:emFile.c      ****     /*
+  66:emFile.c      ****     LCD_Position(0u, 0u);
+  67:emFile.c      ****     LCD_PrintString("Step#");
+  68:emFile.c      ****     LCD_PrintDecUint16(step);
+  69:emFile.c      ****     LCD_Position(1u, 0u);
+  70:emFile.c      ****     LCD_PrintString(str);
+  71:emFile.c      ****     */
+  72:emFile.c      ****     
+  73:emFile.c      ****     /* Need some delay to make step number visible */
+  74:emFile.c      ****     //CyDelay(2000u);
+  75:emFile.c      ****     
+  76:emFile.c      ****     /* Clear LCD after step number was prompted */
+  77:emFile.c      ****     //LCD_ClearDisplay();
+  78:emFile.c      **** }
+  79:emFile.c      **** 
+  80:emFile.c      **** void emFile()
+  81:emFile.c      **** {
+  68              		.loc 1 81 0
+  69              		.cfi_startproc
+  70              		@ args = 0, pretend = 0, frame = 16
+  71              		@ frame_needed = 0, uses_anonymous_args = 0
+  72 0000 30B5     		push	{r4, r5, lr}
+  73              		.cfi_def_cfa_offset 12
+  74              		.cfi_offset 4, -12
+  75              		.cfi_offset 5, -8
+  76              		.cfi_offset 14, -4
+  77 0002 85B0     		sub	sp, sp, #20
+  78              		.cfi_def_cfa_offset 32
+  79              	.LVL5:
+  82:emFile.c      ****     char sdVolName[10];     /* Buffer that will hold SD card Volume name */
+  83:emFile.c      ****     U16 step = 1u;
+  84:emFile.c      ****     FS_FILE * pFile;
+  85:emFile.c      ****     
+  86:emFile.c      ****     /* Start LCD */
+  87:emFile.c      ****     //LCD_Start();
+  88:emFile.c      ****     
+  89:emFile.c      ****     /* Initialize file system */
+  90:emFile.c      ****     FS_Init();
+  80              		.loc 1 90 0
+  81 0004 FFF7FEFF 		bl	FS_Init
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 4
+
+
+  82              	.LVL6:
+  91:emFile.c      ****     
+  92:emFile.c      ****     /* Display step number */
+  93:emFile.c      ****     NextStep(step++, "SD CARD NAME");
+  83              		.loc 1 93 0
+  84 0008 3F49     		ldr	r1, .L21
+  85 000a 0120     		movs	r0, #1
+  86 000c FFF7FEFF 		bl	NextStep
+  87              	.LVL7:
+  94:emFile.c      ****     
+  95:emFile.c      ****     //LCD_Position(0u, 0u);
+  96:emFile.c      ****     
+  97:emFile.c      ****     /* Get volume name of SD card #0 */
+  98:emFile.c      ****     if(0 != FS_GetVolumeName(0u, &sdVolName[0], 9u))
+  88              		.loc 1 98 0
+  89 0010 0922     		movs	r2, #9
+  90 0012 01A9     		add	r1, sp, #4
+  91 0014 0020     		movs	r0, #0
+  92 0016 FFF7FEFF 		bl	FS_GetVolumeName
+  93              	.LVL8:
+  94 001a 48B1     		cbz	r0, .L6
+  99:emFile.c      ****     {
+ 100:emFile.c      ****         /* Getting volume name succeeded so prompt it on the LCD
+ 101:emFile.c      ****         LCD_PrintString("SD card name:");
+ 102:emFile.c      ****         LCD_Position(1u, 0u);
+ 103:emFile.c      ****         LCD_PrintString(sdVolName); */
+ 104:emFile.c      ****         sprintf(UART_BUF,"SD card name: %s\n", sdVolName);
+  95              		.loc 1 104 0
+  96 001c 3B4C     		ldr	r4, .L21+4
+  97 001e 01AA     		add	r2, sp, #4
+  98 0020 3B49     		ldr	r1, .L21+8
+  99 0022 2046     		mov	r0, r4
+ 100 0024 FFF7FEFF 		bl	sprintf
+ 101              	.LVL9:
+ 105:emFile.c      ****         UART_LOG_PutString(UART_BUF);
+ 102              		.loc 1 105 0
+ 103 0028 2046     		mov	r0, r4
+ 104 002a FFF7FEFF 		bl	UART_LOG_PutString
+ 105              	.LVL10:
+ 106 002e 02E0     		b	.L7
+ 107              	.L6:
+ 106:emFile.c      ****     }
+ 107:emFile.c      ****     else
+ 108:emFile.c      ****     {
+ 109:emFile.c      ****         /* Operation Failed - indicate this 
+ 110:emFile.c      ****         LCD_PrintString("Failed to get");
+ 111:emFile.c      ****         LCD_Position(1u, 0u);
+ 112:emFile.c      ****         LCD_PrintString("SD card name");
+ 113:emFile.c      ****         */
+ 114:emFile.c      ****         UART_LOG_PutString("Failed to get SD card name\n");
+ 108              		.loc 1 114 0
+ 109 0030 3848     		ldr	r0, .L21+12
+ 110 0032 FFF7FEFF 		bl	UART_LOG_PutString
+ 111              	.LVL11:
+ 112              	.L7:
+ 115:emFile.c      ****     }
+ 116:emFile.c      ****     
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 5
+
+
+ 117:emFile.c      ****     /* Need some delay to indicate output on the LCD */
+ 118:emFile.c      ****     //CyDelay(2000u);
+ 119:emFile.c      ****     
+ 120:emFile.c      ****     NextStep(step++, "SD CARD FORMAT");
+ 113              		.loc 1 120 0
+ 114 0036 3849     		ldr	r1, .L21+16
+ 115 0038 0220     		movs	r0, #2
+ 116 003a FFF7FEFF 		bl	NextStep
+ 117              	.LVL12:
+ 121:emFile.c      ****         
+ 122:emFile.c      ****     /*
+ 123:emFile.c      ****     LCD_Position(0u, 0u);
+ 124:emFile.c      ****     LCD_PrintString("SD card format");
+ 125:emFile.c      ****     */
+ 126:emFile.c      ****     UART_LOG_PutString("SD card format\n");
+ 118              		.loc 1 126 0
+ 119 003e 3748     		ldr	r0, .L21+20
+ 120 0040 FFF7FEFF 		bl	UART_LOG_PutString
+ 121              	.LVL13:
+ 127:emFile.c      ****     
+ 128:emFile.c      ****     if(0 == FS_FormatSD(sdVolName))
+ 122              		.loc 1 128 0
+ 123 0044 01A8     		add	r0, sp, #4
+ 124 0046 FFF7FEFF 		bl	FS_FormatSD
+ 125              	.LVL14:
+ 126 004a 18B9     		cbnz	r0, .L8
+ 129:emFile.c      ****     {
+ 130:emFile.c      ****         //LCD_Position(1u, 0u);
+ 131:emFile.c      ****         //LCD_PrintString("Succeeded");
+ 132:emFile.c      ****         UART_LOG_PutString("Succeeded\n");
+ 127              		.loc 1 132 0
+ 128 004c 3448     		ldr	r0, .L21+24
+ 129 004e FFF7FEFF 		bl	UART_LOG_PutString
+ 130              	.LVL15:
+ 131 0052 02E0     		b	.L9
+ 132              	.L8:
+ 133:emFile.c      ****     }
+ 134:emFile.c      ****     else
+ 135:emFile.c      ****     {
+ 136:emFile.c      ****         //LCD_Position(1u, 0u);
+ 137:emFile.c      ****         //LCD_PrintString("Failed");
+ 138:emFile.c      ****         UART_LOG_PutString("Failed\n");
+ 133              		.loc 1 138 0
+ 134 0054 3348     		ldr	r0, .L21+28
+ 135 0056 FFF7FEFF 		bl	UART_LOG_PutString
+ 136              	.LVL16:
+ 137              	.L9:
+ 139:emFile.c      ****     }
+ 140:emFile.c      ****     
+ 141:emFile.c      ****     /* Need some delay to indicate output on the LCD */
+ 142:emFile.c      ****     //CyDelay(2000u);
+ 143:emFile.c      ****     
+ 144:emFile.c      ****     NextStep(step++, "DIRECTORY");
+ 138              		.loc 1 144 0
+ 139 005a 3349     		ldr	r1, .L21+32
+ 140 005c 0320     		movs	r0, #3
+ 141 005e FFF7FEFF 		bl	NextStep
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 6
+
+
+ 142              	.LVL17:
+ 145:emFile.c      ****     
+ 146:emFile.c      ****     //LCD_Position(0u, 0u);
+ 147:emFile.c      ****     
+ 148:emFile.c      ****     /* This will create directory "Dir" on SD card */
+ 149:emFile.c      ****     if(0 == FS_MkDir("Dir"))
+ 143              		.loc 1 149 0
+ 144 0062 3248     		ldr	r0, .L21+36
+ 145 0064 FFF7FEFF 		bl	FS_MkDir
+ 146              	.LVL18:
+ 147 0068 18B9     		cbnz	r0, .L10
+ 150:emFile.c      ****     {
+ 151:emFile.c      ****         /* Display successful directory creation message */
+ 152:emFile.c      ****         //LCD_PrintString("\"Dir\" created");
+ 153:emFile.c      ****         UART_LOG_PutString("\"Dir\" created");
+ 148              		.loc 1 153 0
+ 149 006a 3148     		ldr	r0, .L21+40
+ 150 006c FFF7FEFF 		bl	UART_LOG_PutString
+ 151              	.LVL19:
+ 152 0070 02E0     		b	.L11
+ 153              	.L10:
+ 154:emFile.c      **** 
+ 155:emFile.c      ****     }
+ 156:emFile.c      ****     else
+ 157:emFile.c      ****     {
+ 158:emFile.c      ****         /* Display failure message 
+ 159:emFile.c      ****         LCD_PrintString("Failed to create");
+ 160:emFile.c      ****         LCD_Position(1u, 0u);
+ 161:emFile.c      ****         LCD_PrintString("directory");
+ 162:emFile.c      ****         */
+ 163:emFile.c      ****         
+ 164:emFile.c      ****        UART_LOG_PutString("Failed to create directory\n");
+ 154              		.loc 1 164 0
+ 155 0072 3048     		ldr	r0, .L21+44
+ 156 0074 FFF7FEFF 		bl	UART_LOG_PutString
+ 157              	.LVL20:
+ 158              	.L11:
+ 165:emFile.c      ****     }
+ 166:emFile.c      ****     
+ 167:emFile.c      ****     /* Need some delay to indicate output on the LCD */
+ 168:emFile.c      ****     //CyDelay(2000u);
+ 169:emFile.c      ****     
+ 170:emFile.c      ****     NextStep(step++, "FILE");
+ 159              		.loc 1 170 0
+ 160 0078 2F49     		ldr	r1, .L21+48
+ 161 007a 0420     		movs	r0, #4
+ 162 007c FFF7FEFF 		bl	NextStep
+ 163              	.LVL21:
+ 171:emFile.c      ****     
+ 172:emFile.c      ****     /* Create specific file for modification */
+ 173:emFile.c      ****     pFile = FS_FOpen(sdFile, "w");
+ 164              		.loc 1 173 0
+ 165 0080 2E49     		ldr	r1, .L21+52
+ 166 0082 2F48     		ldr	r0, .L21+56
+ 167 0084 FFF7FEFF 		bl	FS_FOpen
+ 168              	.LVL22:
+ 174:emFile.c      ****     
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 7
+
+
+ 175:emFile.c      ****     //LCD_Position(0u, 0u);
+ 176:emFile.c      ****     
+ 177:emFile.c      ****     /* Check if file was created */
+ 178:emFile.c      ****     if(pFile)
+ 169              		.loc 1 178 0
+ 170 0088 0446     		mov	r4, r0
+ 171 008a 30B3     		cbz	r0, .L12
+ 179:emFile.c      ****     {
+ 180:emFile.c      ****         /* Indicate successful file creation message 
+ 181:emFile.c      ****         LCD_PrintString("File ");
+ 182:emFile.c      ****         LCD_PrintString(sdFile);
+ 183:emFile.c      ****         LCD_Position(1u, 0u);
+ 184:emFile.c      ****         LCD_PrintString("was opened");
+ 185:emFile.c      ****         */
+ 186:emFile.c      ****         sprintf(UART_BUF,"File %s was opened\n", sdFile);
+ 172              		.loc 1 186 0
+ 173 008c 1F4D     		ldr	r5, .L21+4
+ 174 008e 2C4A     		ldr	r2, .L21+56
+ 175 0090 2C49     		ldr	r1, .L21+60
+ 176 0092 2846     		mov	r0, r5
+ 177              	.LVL23:
+ 178 0094 FFF7FEFF 		bl	sprintf
+ 179              	.LVL24:
+ 187:emFile.c      ****         UART_LOG_PutString(UART_BUF);
+ 180              		.loc 1 187 0
+ 181 0098 2846     		mov	r0, r5
+ 182 009a FFF7FEFF 		bl	UART_LOG_PutString
+ 183              	.LVL25:
+ 188:emFile.c      ****         
+ 189:emFile.c      ****         /* Need some delay to indicate output on the LCD */
+ 190:emFile.c      ****         //CyDelay(2000u);
+ 191:emFile.c      ****         
+ 192:emFile.c      ****         //LCD_ClearDisplay();
+ 193:emFile.c      ****         
+ 194:emFile.c      ****         //LCD_Position(0u, 0u);
+ 195:emFile.c      ****         
+ 196:emFile.c      ****         if(0 != FS_Write(pFile, "0123456789", 10u)) 
+ 184              		.loc 1 196 0
+ 185 009e 0A22     		movs	r2, #10
+ 186 00a0 2949     		ldr	r1, .L21+64
+ 187 00a2 2046     		mov	r0, r4
+ 188 00a4 FFF7FEFF 		bl	FS_Write
+ 189              	.LVL26:
+ 190 00a8 40B1     		cbz	r0, .L13
+ 197:emFile.c      ****         {
+ 198:emFile.c      ****             /* Inditate that data was written to a file
+ 199:emFile.c      ****             LCD_PrintString("\"0123456789\"");
+ 200:emFile.c      ****             LCD_PrintString(sdFile);
+ 201:emFile.c      ****             LCD_Position(1u, 0u);
+ 202:emFile.c      ****             LCD_PrintString("written to file");
+ 203:emFile.c      ****             */
+ 204:emFile.c      ****             
+ 205:emFile.c      ****             sprintf(UART_BUF,"\"0123456789\" %s written to file \n", sdFile);
+ 191              		.loc 1 205 0
+ 192 00aa 254A     		ldr	r2, .L21+56
+ 193 00ac 2749     		ldr	r1, .L21+68
+ 194 00ae 2846     		mov	r0, r5
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 8
+
+
+ 195 00b0 FFF7FEFF 		bl	sprintf
+ 196              	.LVL27:
+ 206:emFile.c      ****             UART_LOG_PutString(UART_BUF);
+ 197              		.loc 1 206 0
+ 198 00b4 2846     		mov	r0, r5
+ 199 00b6 FFF7FEFF 		bl	UART_LOG_PutString
+ 200              	.LVL28:
+ 201 00ba 02E0     		b	.L14
+ 202              	.L13:
+ 207:emFile.c      ****             
+ 208:emFile.c      ****         }
+ 209:emFile.c      ****         else
+ 210:emFile.c      ****         {
+ 211:emFile.c      ****             /*
+ 212:emFile.c      ****             LCD_PrintString("Failed to write");
+ 213:emFile.c      ****             LCD_Position(1u, 0u);
+ 214:emFile.c      ****             LCD_PrintString("data to file");
+ 215:emFile.c      ****             */
+ 216:emFile.c      ****             UART_LOG_PutString("Failed to write data to file\n");
+ 203              		.loc 1 216 0
+ 204 00bc 2448     		ldr	r0, .L21+72
+ 205 00be FFF7FEFF 		bl	UART_LOG_PutString
+ 206              	.LVL29:
+ 207              	.L14:
+ 217:emFile.c      ****         }
+ 218:emFile.c      ****         
+ 219:emFile.c      ****         /* Need some delay to indicate output on the LCD */
+ 220:emFile.c      ****         //CyDelay(2000u);
+ 221:emFile.c      ****         
+ 222:emFile.c      ****         //LCD_ClearDisplay();
+ 223:emFile.c      ****         
+ 224:emFile.c      ****         //LCD_Position(0u, 0u);
+ 225:emFile.c      ****         
+ 226:emFile.c      ****         if(0 == FS_FClose(pFile))
+ 208              		.loc 1 226 0
+ 209 00c2 2046     		mov	r0, r4
+ 210 00c4 FFF7FEFF 		bl	FS_FClose
+ 211              	.LVL30:
+ 212 00c8 18B9     		cbnz	r0, .L15
+ 227:emFile.c      ****         {
+ 228:emFile.c      ****             //LCD_PrintString("File was closed");
+ 229:emFile.c      ****             UART_LOG_PutString("File was closed");
+ 213              		.loc 1 229 0
+ 214 00ca 2248     		ldr	r0, .L21+76
+ 215 00cc FFF7FEFF 		bl	UART_LOG_PutString
+ 216              	.LVL31:
+ 217 00d0 06E0     		b	.L16
+ 218              	.L15:
+ 230:emFile.c      ****         }
+ 231:emFile.c      ****         else
+ 232:emFile.c      ****         {
+ 233:emFile.c      ****             /*
+ 234:emFile.c      ****             LCD_PrintString("Failed to close");
+ 235:emFile.c      ****             LCD_Position(1u, 0u);
+ 236:emFile.c      ****             LCD_PrintString("file");
+ 237:emFile.c      ****             */
+ 238:emFile.c      ****             
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 9
+
+
+ 239:emFile.c      ****             UART_LOG_PutString("Failed to close file");
+ 219              		.loc 1 239 0
+ 220 00d2 2148     		ldr	r0, .L21+80
+ 221 00d4 FFF7FEFF 		bl	UART_LOG_PutString
+ 222              	.LVL32:
+ 223 00d8 02E0     		b	.L16
+ 224              	.LVL33:
+ 225              	.L12:
+ 240:emFile.c      ****         }
+ 241:emFile.c      ****     }
+ 242:emFile.c      ****     else
+ 243:emFile.c      ****     {
+ 244:emFile.c      ****         /*
+ 245:emFile.c      ****         LCD_PrintString("Failed to create");
+ 246:emFile.c      ****         LCD_Position(1u, 0u);
+ 247:emFile.c      ****         LCD_PrintString("file");
+ 248:emFile.c      ****         */
+ 249:emFile.c      ****         
+ 250:emFile.c      ****         UART_LOG_PutString("Failed to create file");
+ 226              		.loc 1 250 0
+ 227 00da 2048     		ldr	r0, .L21+84
+ 228              	.LVL34:
+ 229 00dc FFF7FEFF 		bl	UART_LOG_PutString
+ 230              	.LVL35:
+ 231              	.L16:
+ 251:emFile.c      ****     }
+ 252:emFile.c      ****     
+ 253:emFile.c      ****     /* Need some delay to indicate output on the LCD */
+ 254:emFile.c      ****     //CyDelay(2000u);
+ 255:emFile.c      ****         
+ 256:emFile.c      ****     //LCD_ClearDisplay();
+ 257:emFile.c      ****     
+ 258:emFile.c      ****     NextStep(step++, "COPY");
+ 232              		.loc 1 258 0
+ 233 00e0 1F49     		ldr	r1, .L21+88
+ 234 00e2 0520     		movs	r0, #5
+ 235 00e4 FFF7FEFF 		bl	NextStep
+ 236              	.LVL36:
+ 259:emFile.c      ****     
+ 260:emFile.c      ****     //LCD_Position(0u, 0u);
+ 261:emFile.c      ****     
+ 262:emFile.c      ****     /* Copy a file to a previously created directory */
+ 263:emFile.c      ****     if(0 == FS_CopyFile(sdFile, "\\Dir\\file1.txt"))
+ 237              		.loc 1 263 0
+ 238 00e8 1E49     		ldr	r1, .L21+92
+ 239 00ea 1548     		ldr	r0, .L21+56
+ 240 00ec FFF7FEFF 		bl	FS_CopyFile
+ 241              	.LVL37:
+ 242 00f0 18B9     		cbnz	r0, .L17
+ 264:emFile.c      ****     {
+ 265:emFile.c      ****         /*LCD_PrintString("File was ");
+ 266:emFile.c      ****         LCD_Position(1u, 0u);
+ 267:emFile.c      ****         LCD_PrintString("copied to \"DIR\"");
+ 268:emFile.c      ****         */
+ 269:emFile.c      ****         
+ 270:emFile.c      ****         UART_LOG_PutString("File was copied to \"DIR\" \n");
+ 243              		.loc 1 270 0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 10
+
+
+ 244 00f2 1D48     		ldr	r0, .L21+96
+ 245 00f4 FFF7FEFF 		bl	UART_LOG_PutString
+ 246              	.LVL38:
+ 247 00f8 02E0     		b	.L18
+ 248              	.L17:
+ 271:emFile.c      ****     }
+ 272:emFile.c      ****     else
+ 273:emFile.c      ****     {
+ 274:emFile.c      ****         /*
+ 275:emFile.c      ****         LCD_PrintString("Failed to copy");
+ 276:emFile.c      ****         LCD_Position(1u, 0u);
+ 277:emFile.c      ****         LCD_PrintString("file");
+ 278:emFile.c      ****         */
+ 279:emFile.c      ****         
+ 280:emFile.c      ****         UART_LOG_PutString("Failed to copy file \n");
+ 249              		.loc 1 280 0
+ 250 00fa 1C48     		ldr	r0, .L21+100
+ 251 00fc FFF7FEFF 		bl	UART_LOG_PutString
+ 252              	.LVL39:
+ 253              	.L18:
+ 281:emFile.c      ****     }
+ 282:emFile.c      ****     
+ 283:emFile.c      ****     /* Need some delay to indicate output on the LCD */
+ 284:emFile.c      ****     //CyDelay(2000);
+ 285:emFile.c      ****     
+ 286:emFile.c      ****     //LCD_ClearDisplay();
+ 287:emFile.c      ****     /*
+ 288:emFile.c      ****     LCD_Position(0u, 0u);
+ 289:emFile.c      ****     LCD_PrintString("Example project");
+ 290:emFile.c      ****     LCD_Position(1u, 0u);
+ 291:emFile.c      ****     LCD_PrintString("completed");
+ 292:emFile.c      ****     */
+ 293:emFile.c      ****     
+ 294:emFile.c      ****     
+ 295:emFile.c      ****     UART_LOG_PutString("Example project completed \n");
+ 254              		.loc 1 295 0
+ 255 0100 1B48     		ldr	r0, .L21+104
+ 256 0102 FFF7FEFF 		bl	UART_LOG_PutString
+ 257              	.LVL40:
+ 258              	.L19:
+ 259 0106 FEE7     		b	.L19
+ 260              	.L22:
+ 261              		.align	2
+ 262              	.L21:
+ 263 0108 10000000 		.word	.LC1
+ 264 010c 00000000 		.word	UART_BUF
+ 265 0110 20000000 		.word	.LC2
+ 266 0114 34000000 		.word	.LC3
+ 267 0118 50000000 		.word	.LC4
+ 268 011c 60000000 		.word	.LC5
+ 269 0120 70000000 		.word	.LC6
+ 270 0124 7C000000 		.word	.LC7
+ 271 0128 84000000 		.word	.LC8
+ 272 012c 90000000 		.word	.LC9
+ 273 0130 94000000 		.word	.LC10
+ 274 0134 A4000000 		.word	.LC11
+ 275 0138 C0000000 		.word	.LC12
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 11
+
+
+ 276 013c C8000000 		.word	.LC13
+ 277 0140 00000000 		.word	.LANCHOR0
+ 278 0144 CC000000 		.word	.LC14
+ 279 0148 E0000000 		.word	.LC15
+ 280 014c EC000000 		.word	.LC16
+ 281 0150 10010000 		.word	.LC17
+ 282 0154 30010000 		.word	.LC18
+ 283 0158 40010000 		.word	.LC19
+ 284 015c 58010000 		.word	.LC20
+ 285 0160 70010000 		.word	.LC21
+ 286 0164 78010000 		.word	.LC22
+ 287 0168 88010000 		.word	.LC23
+ 288 016c A4010000 		.word	.LC24
+ 289 0170 BC010000 		.word	.LC25
+ 290              		.cfi_endproc
+ 291              	.LFE112:
+ 292              		.size	emFile, .-emFile
+ 293              		.comm	UART_BUF,100,4
+ 294              		.global	sdFile
+ 295              		.data
+ 296              		.align	2
+ 297              		.set	.LANCHOR0,. + 0
+ 298              		.type	sdFile, %object
+ 299              		.size	sdFile, 9
+ 300              	sdFile:
+ 301 0000 46696C65 		.ascii	"File.txt\000"
+ 301      2E747874 
+ 301      00
+ 302              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 303              		.align	2
+ 304              	.LC0:
+ 305 0000 0A537465 		.ascii	"\012Step# %d, %s\012\000"
+ 305      70232025 
+ 305      642C2025 
+ 305      730A00
+ 306 000f 00       		.space	1
+ 307              	.LC1:
+ 308 0010 53442043 		.ascii	"SD CARD NAME\000"
+ 308      41524420 
+ 308      4E414D45 
+ 308      00
+ 309 001d 000000   		.space	3
+ 310              	.LC2:
+ 311 0020 53442063 		.ascii	"SD card name: %s\012\000"
+ 311      61726420 
+ 311      6E616D65 
+ 311      3A202573 
+ 311      0A00
+ 312 0032 0000     		.space	2
+ 313              	.LC3:
+ 314 0034 4661696C 		.ascii	"Failed to get SD card name\012\000"
+ 314      65642074 
+ 314      6F206765 
+ 314      74205344 
+ 314      20636172 
+ 315              	.LC4:
+ 316 0050 53442043 		.ascii	"SD CARD FORMAT\000"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 12
+
+
+ 316      41524420 
+ 316      464F524D 
+ 316      415400
+ 317 005f 00       		.space	1
+ 318              	.LC5:
+ 319 0060 53442063 		.ascii	"SD card format\012\000"
+ 319      61726420 
+ 319      666F726D 
+ 319      61740A00 
+ 320              	.LC6:
+ 321 0070 53756363 		.ascii	"Succeeded\012\000"
+ 321      65656465 
+ 321      640A00
+ 322 007b 00       		.space	1
+ 323              	.LC7:
+ 324 007c 4661696C 		.ascii	"Failed\012\000"
+ 324      65640A00 
+ 325              	.LC8:
+ 326 0084 44495245 		.ascii	"DIRECTORY\000"
+ 326      43544F52 
+ 326      5900
+ 327 008e 0000     		.space	2
+ 328              	.LC9:
+ 329 0090 44697200 		.ascii	"Dir\000"
+ 330              	.LC10:
+ 331 0094 22446972 		.ascii	"\"Dir\" created\000"
+ 331      22206372 
+ 331      65617465 
+ 331      6400
+ 332 00a2 0000     		.space	2
+ 333              	.LC11:
+ 334 00a4 4661696C 		.ascii	"Failed to create directory\012\000"
+ 334      65642074 
+ 334      6F206372 
+ 334      65617465 
+ 334      20646972 
+ 335              	.LC12:
+ 336 00c0 46494C45 		.ascii	"FILE\000"
+ 336      00
+ 337 00c5 000000   		.space	3
+ 338              	.LC13:
+ 339 00c8 7700     		.ascii	"w\000"
+ 340 00ca 0000     		.space	2
+ 341              	.LC14:
+ 342 00cc 46696C65 		.ascii	"File %s was opened\012\000"
+ 342      20257320 
+ 342      77617320 
+ 342      6F70656E 
+ 342      65640A00 
+ 343              	.LC15:
+ 344 00e0 30313233 		.ascii	"0123456789\000"
+ 344      34353637 
+ 344      383900
+ 345 00eb 00       		.space	1
+ 346              	.LC16:
+ 347 00ec 22303132 		.ascii	"\"0123456789\" %s written to file \012\000"
+ 347      33343536 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 13
+
+
+ 347      37383922 
+ 347      20257320 
+ 347      77726974 
+ 348 010e 0000     		.space	2
+ 349              	.LC17:
+ 350 0110 4661696C 		.ascii	"Failed to write data to file\012\000"
+ 350      65642074 
+ 350      6F207772 
+ 350      69746520 
+ 350      64617461 
+ 351 012e 0000     		.space	2
+ 352              	.LC18:
+ 353 0130 46696C65 		.ascii	"File was closed\000"
+ 353      20776173 
+ 353      20636C6F 
+ 353      73656400 
+ 354              	.LC19:
+ 355 0140 4661696C 		.ascii	"Failed to close file\000"
+ 355      65642074 
+ 355      6F20636C 
+ 355      6F736520 
+ 355      66696C65 
+ 356 0155 000000   		.space	3
+ 357              	.LC20:
+ 358 0158 4661696C 		.ascii	"Failed to create file\000"
+ 358      65642074 
+ 358      6F206372 
+ 358      65617465 
+ 358      2066696C 
+ 359 016e 0000     		.space	2
+ 360              	.LC21:
+ 361 0170 434F5059 		.ascii	"COPY\000"
+ 361      00
+ 362 0175 000000   		.space	3
+ 363              	.LC22:
+ 364 0178 5C446972 		.ascii	"\\Dir\\file1.txt\000"
+ 364      5C66696C 
+ 364      65312E74 
+ 364      787400
+ 365 0187 00       		.space	1
+ 366              	.LC23:
+ 367 0188 46696C65 		.ascii	"File was copied to \"DIR\" \012\000"
+ 367      20776173 
+ 367      20636F70 
+ 367      69656420 
+ 367      746F2022 
+ 368 01a3 00       		.space	1
+ 369              	.LC24:
+ 370 01a4 4661696C 		.ascii	"Failed to copy file \012\000"
+ 370      65642074 
+ 370      6F20636F 
+ 370      70792066 
+ 370      696C6520 
+ 371 01ba 0000     		.space	2
+ 372              	.LC25:
+ 373 01bc 4578616D 		.ascii	"Example project completed \012\000"
+ 373      706C6520 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 14
+
+
+ 373      70726F6A 
+ 373      65637420 
+ 373      636F6D70 
+ 374              		.text
+ 375              	.Letext0:
+ 376              		.file 2 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
+ 377              		.file 3 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
+ 378              		.file 4 "Generated_Source\\PSoC5/SimpleSystem_common_ee_types.inc"
+ 379              		.file 5 "Generated_Source\\PSoC5/SimpleSystem_cortex_mx_ee_cpu.inc"
+ 380              		.file 6 ".\\emFile_V322c\\Code\\Include\\PSoC5/FS_Types.h"
+ 381              		.file 7 "Generated_Source\\PSoC5/SimpleSystem_ee_oo_intfunc.inc"
+ 382              		.file 8 "Generated_Source\\PSoC5/SimpleSystem_cortex_mx_ee_context.inc"
+ 383              		.file 9 "Generated_Source\\PSoC5/SimpleSystem_common_ee_primitives.inc"
+ 384              		.file 10 "Generated_Source\\PSoC5/core_cm3.h"
+ 385              		.file 11 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\
+ 386              		.file 12 "Generated_Source\\PSoC5/UART_LOG.h"
+ 387              		.file 13 ".\\emFile_V322c\\Code\\Include\\PSoC5/FS.h"
+ 388              		.section	.debug_info,"",%progbits
+ 389              	.Ldebug_info0:
+ 390 0000 D4050000 		.4byte	0x5d4
+ 391 0004 0400     		.2byte	0x4
+ 392 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 393 000a 04       		.byte	0x4
+ 394 000b 01       		.uleb128 0x1
+ 395 000c C7000000 		.4byte	.LASF45
+ 396 0010 0C       		.byte	0xc
+ 397 0011 80020000 		.4byte	.LASF46
+ 398 0015 13000000 		.4byte	.LASF47
+ 399 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 400 001d 00000000 		.4byte	0
+ 401 0021 00000000 		.4byte	.Ldebug_line0
+ 402 0025 02       		.uleb128 0x2
+ 403 0026 01       		.byte	0x1
+ 404 0027 06       		.byte	0x6
+ 405 0028 AF020000 		.4byte	.LASF0
+ 406 002c 02       		.uleb128 0x2
+ 407 002d 01       		.byte	0x1
+ 408 002e 08       		.byte	0x8
+ 409 002f B9000000 		.4byte	.LASF1
+ 410 0033 02       		.uleb128 0x2
+ 411 0034 02       		.byte	0x2
+ 412 0035 05       		.byte	0x5
+ 413 0036 5C020000 		.4byte	.LASF2
+ 414 003a 02       		.uleb128 0x2
+ 415 003b 02       		.byte	0x2
+ 416 003c 07       		.byte	0x7
+ 417 003d 70010000 		.4byte	.LASF3
+ 418 0041 03       		.uleb128 0x3
+ 419 0042 56000000 		.4byte	.LASF9
+ 420 0046 02       		.byte	0x2
+ 421 0047 3F       		.byte	0x3f
+ 422 0048 4C000000 		.4byte	0x4c
+ 423 004c 02       		.uleb128 0x2
+ 424 004d 04       		.byte	0x4
+ 425 004e 05       		.byte	0x5
+ 426 004f 93020000 		.4byte	.LASF4
+ 427 0053 02       		.uleb128 0x2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 15
+
+
+ 428 0054 04       		.byte	0x4
+ 429 0055 07       		.byte	0x7
+ 430 0056 5E010000 		.4byte	.LASF5
+ 431 005a 02       		.uleb128 0x2
+ 432 005b 08       		.byte	0x8
+ 433 005c 05       		.byte	0x5
+ 434 005d 31020000 		.4byte	.LASF6
+ 435 0061 02       		.uleb128 0x2
+ 436 0062 08       		.byte	0x8
+ 437 0063 07       		.byte	0x7
+ 438 0064 CF020000 		.4byte	.LASF7
+ 439 0068 04       		.uleb128 0x4
+ 440 0069 04       		.byte	0x4
+ 441 006a 05       		.byte	0x5
+ 442 006b 696E7400 		.ascii	"int\000"
+ 443 006f 02       		.uleb128 0x2
+ 444 0070 04       		.byte	0x4
+ 445 0071 07       		.byte	0x7
+ 446 0072 E2010000 		.4byte	.LASF8
+ 447 0076 03       		.uleb128 0x3
+ 448 0077 20020000 		.4byte	.LASF10
+ 449 007b 03       		.byte	0x3
+ 450 007c 2C       		.byte	0x2c
+ 451 007d 41000000 		.4byte	0x41
+ 452 0081 02       		.uleb128 0x2
+ 453 0082 04       		.byte	0x4
+ 454 0083 04       		.byte	0x4
+ 455 0084 B3000000 		.4byte	.LASF11
+ 456 0088 02       		.uleb128 0x2
+ 457 0089 08       		.byte	0x8
+ 458 008a 04       		.byte	0x4
+ 459 008b C2010000 		.4byte	.LASF12
+ 460 008f 02       		.uleb128 0x2
+ 461 0090 01       		.byte	0x1
+ 462 0091 08       		.byte	0x8
+ 463 0092 01020000 		.4byte	.LASF13
+ 464 0096 02       		.uleb128 0x2
+ 465 0097 08       		.byte	0x8
+ 466 0098 04       		.byte	0x4
+ 467 0099 A3020000 		.4byte	.LASF14
+ 468 009d 03       		.uleb128 0x3
+ 469 009e 55010000 		.4byte	.LASF15
+ 470 00a2 04       		.byte	0x4
+ 471 00a3 53       		.byte	0x53
+ 472 00a4 68000000 		.4byte	0x68
+ 473 00a8 03       		.uleb128 0x3
+ 474 00a9 F7010000 		.4byte	.LASF16
+ 475 00ad 04       		.byte	0x4
+ 476 00ae 54       		.byte	0x54
+ 477 00af 6F000000 		.4byte	0x6f
+ 478 00b3 03       		.uleb128 0x3
+ 479 00b4 3F020000 		.4byte	.LASF17
+ 480 00b8 05       		.byte	0x5
+ 481 00b9 4D       		.byte	0x4d
+ 482 00ba A8000000 		.4byte	0xa8
+ 483 00be 03       		.uleb128 0x3
+ 484 00bf EF010000 		.4byte	.LASF18
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 16
+
+
+ 485 00c3 05       		.byte	0x5
+ 486 00c4 4F       		.byte	0x4f
+ 487 00c5 A8000000 		.4byte	0xa8
+ 488 00c9 03       		.uleb128 0x3
+ 489 00ca 93000000 		.4byte	.LASF19
+ 490 00ce 05       		.byte	0x5
+ 491 00cf 78       		.byte	0x78
+ 492 00d0 9D000000 		.4byte	0x9d
+ 493 00d4 02       		.uleb128 0x2
+ 494 00d5 04       		.byte	0x4
+ 495 00d6 07       		.byte	0x7
+ 496 00d7 28020000 		.4byte	.LASF20
+ 497 00db 05       		.uleb128 0x5
+ 498 00dc 04       		.byte	0x4
+ 499 00dd 8F000000 		.4byte	0x8f
+ 500 00e1 03       		.uleb128 0x3
+ 501 00e2 4E000000 		.4byte	.LASF21
+ 502 00e6 06       		.byte	0x6
+ 503 00e7 7E       		.byte	0x7e
+ 504 00e8 EC000000 		.4byte	0xec
+ 505 00ec 06       		.uleb128 0x6
+ 506 00ed 4E000000 		.4byte	.LASF21
+ 507 00f1 05       		.uleb128 0x5
+ 508 00f2 04       		.byte	0x4
+ 509 00f3 E1000000 		.4byte	0xe1
+ 510 00f7 07       		.uleb128 0x7
+ 511 00f8 77020000 		.4byte	.LASF23
+ 512 00fc 01       		.byte	0x1
+ 513 00fd 37       		.byte	0x37
+ 514 00fe 00000000 		.4byte	.LFB111
+ 515 0102 20000000 		.4byte	.LFE111-.LFB111
+ 516 0106 01       		.uleb128 0x1
+ 517 0107 9C       		.byte	0x9c
+ 518 0108 5F010000 		.4byte	0x15f
+ 519 010c 08       		.uleb128 0x8
+ 520 010d 60000000 		.4byte	.LASF22
+ 521 0111 01       		.byte	0x1
+ 522 0112 37       		.byte	0x37
+ 523 0113 3A000000 		.4byte	0x3a
+ 524 0117 00000000 		.4byte	.LLST0
+ 525 011b 09       		.uleb128 0x9
+ 526 011c 73747200 		.ascii	"str\000"
+ 527 0120 01       		.byte	0x1
+ 528 0121 37       		.byte	0x37
+ 529 0122 DB000000 		.4byte	0xdb
+ 530 0126 21000000 		.4byte	.LLST1
+ 531 012a 0A       		.uleb128 0xa
+ 532 012b 10000000 		.4byte	.LVL3
+ 533 012f 61050000 		.4byte	0x561
+ 534 0133 4E010000 		.4byte	0x14e
+ 535 0137 0B       		.uleb128 0xb
+ 536 0138 01       		.uleb128 0x1
+ 537 0139 50       		.byte	0x50
+ 538 013a 02       		.uleb128 0x2
+ 539 013b 74       		.byte	0x74
+ 540 013c 00       		.sleb128 0
+ 541 013d 0B       		.uleb128 0xb
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 17
+
+
+ 542 013e 01       		.uleb128 0x1
+ 543 013f 51       		.byte	0x51
+ 544 0140 05       		.uleb128 0x5
+ 545 0141 03       		.byte	0x3
+ 546 0142 00000000 		.4byte	.LC0
+ 547 0146 0B       		.uleb128 0xb
+ 548 0147 01       		.uleb128 0x1
+ 549 0148 53       		.byte	0x53
+ 550 0149 03       		.uleb128 0x3
+ 551 014a F3       		.byte	0xf3
+ 552 014b 01       		.uleb128 0x1
+ 553 014c 51       		.byte	0x51
+ 554 014d 00       		.byte	0
+ 555 014e 0C       		.uleb128 0xc
+ 556 014f 16000000 		.4byte	.LVL4
+ 557 0153 6C050000 		.4byte	0x56c
+ 558 0157 0B       		.uleb128 0xb
+ 559 0158 01       		.uleb128 0x1
+ 560 0159 50       		.byte	0x50
+ 561 015a 02       		.uleb128 0x2
+ 562 015b 74       		.byte	0x74
+ 563 015c 00       		.sleb128 0
+ 564 015d 00       		.byte	0
+ 565 015e 00       		.byte	0
+ 566 015f 0D       		.uleb128 0xd
+ 567 0160 06020000 		.4byte	.LASF24
+ 568 0164 01       		.byte	0x1
+ 569 0165 50       		.byte	0x50
+ 570 0166 00000000 		.4byte	.LFB112
+ 571 016a 74010000 		.4byte	.LFE112-.LFB112
+ 572 016e 01       		.uleb128 0x1
+ 573 016f 9C       		.byte	0x9c
+ 574 0170 C7040000 		.4byte	0x4c7
+ 575 0174 0E       		.uleb128 0xe
+ 576 0175 89020000 		.4byte	.LASF25
+ 577 0179 01       		.byte	0x1
+ 578 017a 52       		.byte	0x52
+ 579 017b C7040000 		.4byte	0x4c7
+ 580 017f 02       		.uleb128 0x2
+ 581 0180 91       		.byte	0x91
+ 582 0181 64       		.sleb128 -28
+ 583 0182 0F       		.uleb128 0xf
+ 584 0183 60000000 		.4byte	.LASF22
+ 585 0187 01       		.byte	0x1
+ 586 0188 53       		.byte	0x53
+ 587 0189 3A000000 		.4byte	0x3a
+ 588 018d 4D000000 		.4byte	.LLST2
+ 589 0191 0F       		.uleb128 0xf
+ 590 0192 9A000000 		.4byte	.LASF26
+ 591 0196 01       		.byte	0x1
+ 592 0197 54       		.byte	0x54
+ 593 0198 F1000000 		.4byte	0xf1
+ 594 019c 9D000000 		.4byte	.LLST3
+ 595 01a0 10       		.uleb128 0x10
+ 596 01a1 08000000 		.4byte	.LVL6
+ 597 01a5 77050000 		.4byte	0x577
+ 598 01a9 0A       		.uleb128 0xa
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 18
+
+
+ 599 01aa 10000000 		.4byte	.LVL7
+ 600 01ae F7000000 		.4byte	0xf7
+ 601 01b2 C5010000 		.4byte	0x1c5
+ 602 01b6 0B       		.uleb128 0xb
+ 603 01b7 01       		.uleb128 0x1
+ 604 01b8 50       		.byte	0x50
+ 605 01b9 01       		.uleb128 0x1
+ 606 01ba 31       		.byte	0x31
+ 607 01bb 0B       		.uleb128 0xb
+ 608 01bc 01       		.uleb128 0x1
+ 609 01bd 51       		.byte	0x51
+ 610 01be 05       		.uleb128 0x5
+ 611 01bf 03       		.byte	0x3
+ 612 01c0 10000000 		.4byte	.LC1
+ 613 01c4 00       		.byte	0
+ 614 01c5 0A       		.uleb128 0xa
+ 615 01c6 1A000000 		.4byte	.LVL8
+ 616 01ca 83050000 		.4byte	0x583
+ 617 01ce E3010000 		.4byte	0x1e3
+ 618 01d2 0B       		.uleb128 0xb
+ 619 01d3 01       		.uleb128 0x1
+ 620 01d4 50       		.byte	0x50
+ 621 01d5 01       		.uleb128 0x1
+ 622 01d6 30       		.byte	0x30
+ 623 01d7 0B       		.uleb128 0xb
+ 624 01d8 01       		.uleb128 0x1
+ 625 01d9 51       		.byte	0x51
+ 626 01da 02       		.uleb128 0x2
+ 627 01db 91       		.byte	0x91
+ 628 01dc 64       		.sleb128 -28
+ 629 01dd 0B       		.uleb128 0xb
+ 630 01de 01       		.uleb128 0x1
+ 631 01df 52       		.byte	0x52
+ 632 01e0 01       		.uleb128 0x1
+ 633 01e1 39       		.byte	0x39
+ 634 01e2 00       		.byte	0
+ 635 01e3 0A       		.uleb128 0xa
+ 636 01e4 28000000 		.4byte	.LVL9
+ 637 01e8 61050000 		.4byte	0x561
+ 638 01ec 06020000 		.4byte	0x206
+ 639 01f0 0B       		.uleb128 0xb
+ 640 01f1 01       		.uleb128 0x1
+ 641 01f2 50       		.byte	0x50
+ 642 01f3 02       		.uleb128 0x2
+ 643 01f4 74       		.byte	0x74
+ 644 01f5 00       		.sleb128 0
+ 645 01f6 0B       		.uleb128 0xb
+ 646 01f7 01       		.uleb128 0x1
+ 647 01f8 51       		.byte	0x51
+ 648 01f9 05       		.uleb128 0x5
+ 649 01fa 03       		.byte	0x3
+ 650 01fb 20000000 		.4byte	.LC2
+ 651 01ff 0B       		.uleb128 0xb
+ 652 0200 01       		.uleb128 0x1
+ 653 0201 52       		.byte	0x52
+ 654 0202 02       		.uleb128 0x2
+ 655 0203 91       		.byte	0x91
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 19
+
+
+ 656 0204 64       		.sleb128 -28
+ 657 0205 00       		.byte	0
+ 658 0206 0A       		.uleb128 0xa
+ 659 0207 2E000000 		.4byte	.LVL10
+ 660 020b 6C050000 		.4byte	0x56c
+ 661 020f 1A020000 		.4byte	0x21a
+ 662 0213 0B       		.uleb128 0xb
+ 663 0214 01       		.uleb128 0x1
+ 664 0215 50       		.byte	0x50
+ 665 0216 02       		.uleb128 0x2
+ 666 0217 74       		.byte	0x74
+ 667 0218 00       		.sleb128 0
+ 668 0219 00       		.byte	0
+ 669 021a 0A       		.uleb128 0xa
+ 670 021b 36000000 		.4byte	.LVL11
+ 671 021f 6C050000 		.4byte	0x56c
+ 672 0223 31020000 		.4byte	0x231
+ 673 0227 0B       		.uleb128 0xb
+ 674 0228 01       		.uleb128 0x1
+ 675 0229 50       		.byte	0x50
+ 676 022a 05       		.uleb128 0x5
+ 677 022b 03       		.byte	0x3
+ 678 022c 34000000 		.4byte	.LC3
+ 679 0230 00       		.byte	0
+ 680 0231 0A       		.uleb128 0xa
+ 681 0232 3E000000 		.4byte	.LVL12
+ 682 0236 F7000000 		.4byte	0xf7
+ 683 023a 4D020000 		.4byte	0x24d
+ 684 023e 0B       		.uleb128 0xb
+ 685 023f 01       		.uleb128 0x1
+ 686 0240 50       		.byte	0x50
+ 687 0241 01       		.uleb128 0x1
+ 688 0242 32       		.byte	0x32
+ 689 0243 0B       		.uleb128 0xb
+ 690 0244 01       		.uleb128 0x1
+ 691 0245 51       		.byte	0x51
+ 692 0246 05       		.uleb128 0x5
+ 693 0247 03       		.byte	0x3
+ 694 0248 50000000 		.4byte	.LC4
+ 695 024c 00       		.byte	0
+ 696 024d 0A       		.uleb128 0xa
+ 697 024e 44000000 		.4byte	.LVL13
+ 698 0252 6C050000 		.4byte	0x56c
+ 699 0256 64020000 		.4byte	0x264
+ 700 025a 0B       		.uleb128 0xb
+ 701 025b 01       		.uleb128 0x1
+ 702 025c 50       		.byte	0x50
+ 703 025d 05       		.uleb128 0x5
+ 704 025e 03       		.byte	0x3
+ 705 025f 60000000 		.4byte	.LC5
+ 706 0263 00       		.byte	0
+ 707 0264 0A       		.uleb128 0xa
+ 708 0265 4A000000 		.4byte	.LVL14
+ 709 0269 8F050000 		.4byte	0x58f
+ 710 026d 78020000 		.4byte	0x278
+ 711 0271 0B       		.uleb128 0xb
+ 712 0272 01       		.uleb128 0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 20
+
+
+ 713 0273 50       		.byte	0x50
+ 714 0274 02       		.uleb128 0x2
+ 715 0275 91       		.byte	0x91
+ 716 0276 64       		.sleb128 -28
+ 717 0277 00       		.byte	0
+ 718 0278 0A       		.uleb128 0xa
+ 719 0279 52000000 		.4byte	.LVL15
+ 720 027d 6C050000 		.4byte	0x56c
+ 721 0281 8F020000 		.4byte	0x28f
+ 722 0285 0B       		.uleb128 0xb
+ 723 0286 01       		.uleb128 0x1
+ 724 0287 50       		.byte	0x50
+ 725 0288 05       		.uleb128 0x5
+ 726 0289 03       		.byte	0x3
+ 727 028a 70000000 		.4byte	.LC6
+ 728 028e 00       		.byte	0
+ 729 028f 0A       		.uleb128 0xa
+ 730 0290 5A000000 		.4byte	.LVL16
+ 731 0294 6C050000 		.4byte	0x56c
+ 732 0298 A6020000 		.4byte	0x2a6
+ 733 029c 0B       		.uleb128 0xb
+ 734 029d 01       		.uleb128 0x1
+ 735 029e 50       		.byte	0x50
+ 736 029f 05       		.uleb128 0x5
+ 737 02a0 03       		.byte	0x3
+ 738 02a1 7C000000 		.4byte	.LC7
+ 739 02a5 00       		.byte	0
+ 740 02a6 0A       		.uleb128 0xa
+ 741 02a7 62000000 		.4byte	.LVL17
+ 742 02ab F7000000 		.4byte	0xf7
+ 743 02af C2020000 		.4byte	0x2c2
+ 744 02b3 0B       		.uleb128 0xb
+ 745 02b4 01       		.uleb128 0x1
+ 746 02b5 50       		.byte	0x50
+ 747 02b6 01       		.uleb128 0x1
+ 748 02b7 33       		.byte	0x33
+ 749 02b8 0B       		.uleb128 0xb
+ 750 02b9 01       		.uleb128 0x1
+ 751 02ba 51       		.byte	0x51
+ 752 02bb 05       		.uleb128 0x5
+ 753 02bc 03       		.byte	0x3
+ 754 02bd 84000000 		.4byte	.LC8
+ 755 02c1 00       		.byte	0
+ 756 02c2 0A       		.uleb128 0xa
+ 757 02c3 68000000 		.4byte	.LVL18
+ 758 02c7 9B050000 		.4byte	0x59b
+ 759 02cb D9020000 		.4byte	0x2d9
+ 760 02cf 0B       		.uleb128 0xb
+ 761 02d0 01       		.uleb128 0x1
+ 762 02d1 50       		.byte	0x50
+ 763 02d2 05       		.uleb128 0x5
+ 764 02d3 03       		.byte	0x3
+ 765 02d4 90000000 		.4byte	.LC9
+ 766 02d8 00       		.byte	0
+ 767 02d9 0A       		.uleb128 0xa
+ 768 02da 70000000 		.4byte	.LVL19
+ 769 02de 6C050000 		.4byte	0x56c
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 21
+
+
+ 770 02e2 F0020000 		.4byte	0x2f0
+ 771 02e6 0B       		.uleb128 0xb
+ 772 02e7 01       		.uleb128 0x1
+ 773 02e8 50       		.byte	0x50
+ 774 02e9 05       		.uleb128 0x5
+ 775 02ea 03       		.byte	0x3
+ 776 02eb 94000000 		.4byte	.LC10
+ 777 02ef 00       		.byte	0
+ 778 02f0 0A       		.uleb128 0xa
+ 779 02f1 78000000 		.4byte	.LVL20
+ 780 02f5 6C050000 		.4byte	0x56c
+ 781 02f9 07030000 		.4byte	0x307
+ 782 02fd 0B       		.uleb128 0xb
+ 783 02fe 01       		.uleb128 0x1
+ 784 02ff 50       		.byte	0x50
+ 785 0300 05       		.uleb128 0x5
+ 786 0301 03       		.byte	0x3
+ 787 0302 A4000000 		.4byte	.LC11
+ 788 0306 00       		.byte	0
+ 789 0307 0A       		.uleb128 0xa
+ 790 0308 80000000 		.4byte	.LVL21
+ 791 030c F7000000 		.4byte	0xf7
+ 792 0310 23030000 		.4byte	0x323
+ 793 0314 0B       		.uleb128 0xb
+ 794 0315 01       		.uleb128 0x1
+ 795 0316 50       		.byte	0x50
+ 796 0317 01       		.uleb128 0x1
+ 797 0318 34       		.byte	0x34
+ 798 0319 0B       		.uleb128 0xb
+ 799 031a 01       		.uleb128 0x1
+ 800 031b 51       		.byte	0x51
+ 801 031c 05       		.uleb128 0x5
+ 802 031d 03       		.byte	0x3
+ 803 031e C0000000 		.4byte	.LC12
+ 804 0322 00       		.byte	0
+ 805 0323 0A       		.uleb128 0xa
+ 806 0324 88000000 		.4byte	.LVL22
+ 807 0328 A7050000 		.4byte	0x5a7
+ 808 032c 43030000 		.4byte	0x343
+ 809 0330 0B       		.uleb128 0xb
+ 810 0331 01       		.uleb128 0x1
+ 811 0332 50       		.byte	0x50
+ 812 0333 05       		.uleb128 0x5
+ 813 0334 03       		.byte	0x3
+ 814 0335 00000000 		.4byte	.LANCHOR0
+ 815 0339 0B       		.uleb128 0xb
+ 816 033a 01       		.uleb128 0x1
+ 817 033b 51       		.byte	0x51
+ 818 033c 05       		.uleb128 0x5
+ 819 033d 03       		.byte	0x3
+ 820 033e C8000000 		.4byte	.LC13
+ 821 0342 00       		.byte	0
+ 822 0343 0A       		.uleb128 0xa
+ 823 0344 98000000 		.4byte	.LVL24
+ 824 0348 61050000 		.4byte	0x561
+ 825 034c 69030000 		.4byte	0x369
+ 826 0350 0B       		.uleb128 0xb
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 22
+
+
+ 827 0351 01       		.uleb128 0x1
+ 828 0352 50       		.byte	0x50
+ 829 0353 02       		.uleb128 0x2
+ 830 0354 75       		.byte	0x75
+ 831 0355 00       		.sleb128 0
+ 832 0356 0B       		.uleb128 0xb
+ 833 0357 01       		.uleb128 0x1
+ 834 0358 51       		.byte	0x51
+ 835 0359 05       		.uleb128 0x5
+ 836 035a 03       		.byte	0x3
+ 837 035b CC000000 		.4byte	.LC14
+ 838 035f 0B       		.uleb128 0xb
+ 839 0360 01       		.uleb128 0x1
+ 840 0361 52       		.byte	0x52
+ 841 0362 05       		.uleb128 0x5
+ 842 0363 03       		.byte	0x3
+ 843 0364 00000000 		.4byte	.LANCHOR0
+ 844 0368 00       		.byte	0
+ 845 0369 0A       		.uleb128 0xa
+ 846 036a 9E000000 		.4byte	.LVL25
+ 847 036e 6C050000 		.4byte	0x56c
+ 848 0372 7D030000 		.4byte	0x37d
+ 849 0376 0B       		.uleb128 0xb
+ 850 0377 01       		.uleb128 0x1
+ 851 0378 50       		.byte	0x50
+ 852 0379 02       		.uleb128 0x2
+ 853 037a 75       		.byte	0x75
+ 854 037b 00       		.sleb128 0
+ 855 037c 00       		.byte	0
+ 856 037d 0A       		.uleb128 0xa
+ 857 037e A8000000 		.4byte	.LVL26
+ 858 0382 B3050000 		.4byte	0x5b3
+ 859 0386 9F030000 		.4byte	0x39f
+ 860 038a 0B       		.uleb128 0xb
+ 861 038b 01       		.uleb128 0x1
+ 862 038c 50       		.byte	0x50
+ 863 038d 02       		.uleb128 0x2
+ 864 038e 74       		.byte	0x74
+ 865 038f 00       		.sleb128 0
+ 866 0390 0B       		.uleb128 0xb
+ 867 0391 01       		.uleb128 0x1
+ 868 0392 51       		.byte	0x51
+ 869 0393 05       		.uleb128 0x5
+ 870 0394 03       		.byte	0x3
+ 871 0395 E0000000 		.4byte	.LC15
+ 872 0399 0B       		.uleb128 0xb
+ 873 039a 01       		.uleb128 0x1
+ 874 039b 52       		.byte	0x52
+ 875 039c 01       		.uleb128 0x1
+ 876 039d 3A       		.byte	0x3a
+ 877 039e 00       		.byte	0
+ 878 039f 0A       		.uleb128 0xa
+ 879 03a0 B4000000 		.4byte	.LVL27
+ 880 03a4 61050000 		.4byte	0x561
+ 881 03a8 C5030000 		.4byte	0x3c5
+ 882 03ac 0B       		.uleb128 0xb
+ 883 03ad 01       		.uleb128 0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 23
+
+
+ 884 03ae 50       		.byte	0x50
+ 885 03af 02       		.uleb128 0x2
+ 886 03b0 75       		.byte	0x75
+ 887 03b1 00       		.sleb128 0
+ 888 03b2 0B       		.uleb128 0xb
+ 889 03b3 01       		.uleb128 0x1
+ 890 03b4 51       		.byte	0x51
+ 891 03b5 05       		.uleb128 0x5
+ 892 03b6 03       		.byte	0x3
+ 893 03b7 EC000000 		.4byte	.LC16
+ 894 03bb 0B       		.uleb128 0xb
+ 895 03bc 01       		.uleb128 0x1
+ 896 03bd 52       		.byte	0x52
+ 897 03be 05       		.uleb128 0x5
+ 898 03bf 03       		.byte	0x3
+ 899 03c0 00000000 		.4byte	.LANCHOR0
+ 900 03c4 00       		.byte	0
+ 901 03c5 0A       		.uleb128 0xa
+ 902 03c6 BA000000 		.4byte	.LVL28
+ 903 03ca 6C050000 		.4byte	0x56c
+ 904 03ce D9030000 		.4byte	0x3d9
+ 905 03d2 0B       		.uleb128 0xb
+ 906 03d3 01       		.uleb128 0x1
+ 907 03d4 50       		.byte	0x50
+ 908 03d5 02       		.uleb128 0x2
+ 909 03d6 75       		.byte	0x75
+ 910 03d7 00       		.sleb128 0
+ 911 03d8 00       		.byte	0
+ 912 03d9 0A       		.uleb128 0xa
+ 913 03da C2000000 		.4byte	.LVL29
+ 914 03de 6C050000 		.4byte	0x56c
+ 915 03e2 F0030000 		.4byte	0x3f0
+ 916 03e6 0B       		.uleb128 0xb
+ 917 03e7 01       		.uleb128 0x1
+ 918 03e8 50       		.byte	0x50
+ 919 03e9 05       		.uleb128 0x5
+ 920 03ea 03       		.byte	0x3
+ 921 03eb 10010000 		.4byte	.LC17
+ 922 03ef 00       		.byte	0
+ 923 03f0 0A       		.uleb128 0xa
+ 924 03f1 C8000000 		.4byte	.LVL30
+ 925 03f5 BF050000 		.4byte	0x5bf
+ 926 03f9 04040000 		.4byte	0x404
+ 927 03fd 0B       		.uleb128 0xb
+ 928 03fe 01       		.uleb128 0x1
+ 929 03ff 50       		.byte	0x50
+ 930 0400 02       		.uleb128 0x2
+ 931 0401 74       		.byte	0x74
+ 932 0402 00       		.sleb128 0
+ 933 0403 00       		.byte	0
+ 934 0404 0A       		.uleb128 0xa
+ 935 0405 D0000000 		.4byte	.LVL31
+ 936 0409 6C050000 		.4byte	0x56c
+ 937 040d 1B040000 		.4byte	0x41b
+ 938 0411 0B       		.uleb128 0xb
+ 939 0412 01       		.uleb128 0x1
+ 940 0413 50       		.byte	0x50
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 24
+
+
+ 941 0414 05       		.uleb128 0x5
+ 942 0415 03       		.byte	0x3
+ 943 0416 30010000 		.4byte	.LC18
+ 944 041a 00       		.byte	0
+ 945 041b 0A       		.uleb128 0xa
+ 946 041c D8000000 		.4byte	.LVL32
+ 947 0420 6C050000 		.4byte	0x56c
+ 948 0424 32040000 		.4byte	0x432
+ 949 0428 0B       		.uleb128 0xb
+ 950 0429 01       		.uleb128 0x1
+ 951 042a 50       		.byte	0x50
+ 952 042b 05       		.uleb128 0x5
+ 953 042c 03       		.byte	0x3
+ 954 042d 40010000 		.4byte	.LC19
+ 955 0431 00       		.byte	0
+ 956 0432 0A       		.uleb128 0xa
+ 957 0433 E0000000 		.4byte	.LVL35
+ 958 0437 6C050000 		.4byte	0x56c
+ 959 043b 49040000 		.4byte	0x449
+ 960 043f 0B       		.uleb128 0xb
+ 961 0440 01       		.uleb128 0x1
+ 962 0441 50       		.byte	0x50
+ 963 0442 05       		.uleb128 0x5
+ 964 0443 03       		.byte	0x3
+ 965 0444 58010000 		.4byte	.LC20
+ 966 0448 00       		.byte	0
+ 967 0449 0A       		.uleb128 0xa
+ 968 044a E8000000 		.4byte	.LVL36
+ 969 044e F7000000 		.4byte	0xf7
+ 970 0452 65040000 		.4byte	0x465
+ 971 0456 0B       		.uleb128 0xb
+ 972 0457 01       		.uleb128 0x1
+ 973 0458 50       		.byte	0x50
+ 974 0459 01       		.uleb128 0x1
+ 975 045a 35       		.byte	0x35
+ 976 045b 0B       		.uleb128 0xb
+ 977 045c 01       		.uleb128 0x1
+ 978 045d 51       		.byte	0x51
+ 979 045e 05       		.uleb128 0x5
+ 980 045f 03       		.byte	0x3
+ 981 0460 70010000 		.4byte	.LC21
+ 982 0464 00       		.byte	0
+ 983 0465 0A       		.uleb128 0xa
+ 984 0466 F0000000 		.4byte	.LVL37
+ 985 046a CB050000 		.4byte	0x5cb
+ 986 046e 85040000 		.4byte	0x485
+ 987 0472 0B       		.uleb128 0xb
+ 988 0473 01       		.uleb128 0x1
+ 989 0474 50       		.byte	0x50
+ 990 0475 05       		.uleb128 0x5
+ 991 0476 03       		.byte	0x3
+ 992 0477 00000000 		.4byte	.LANCHOR0
+ 993 047b 0B       		.uleb128 0xb
+ 994 047c 01       		.uleb128 0x1
+ 995 047d 51       		.byte	0x51
+ 996 047e 05       		.uleb128 0x5
+ 997 047f 03       		.byte	0x3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 25
+
+
+ 998 0480 78010000 		.4byte	.LC22
+ 999 0484 00       		.byte	0
+ 1000 0485 0A       		.uleb128 0xa
+ 1001 0486 F8000000 		.4byte	.LVL38
+ 1002 048a 6C050000 		.4byte	0x56c
+ 1003 048e 9C040000 		.4byte	0x49c
+ 1004 0492 0B       		.uleb128 0xb
+ 1005 0493 01       		.uleb128 0x1
+ 1006 0494 50       		.byte	0x50
+ 1007 0495 05       		.uleb128 0x5
+ 1008 0496 03       		.byte	0x3
+ 1009 0497 88010000 		.4byte	.LC23
+ 1010 049b 00       		.byte	0
+ 1011 049c 0A       		.uleb128 0xa
+ 1012 049d 00010000 		.4byte	.LVL39
+ 1013 04a1 6C050000 		.4byte	0x56c
+ 1014 04a5 B3040000 		.4byte	0x4b3
+ 1015 04a9 0B       		.uleb128 0xb
+ 1016 04aa 01       		.uleb128 0x1
+ 1017 04ab 50       		.byte	0x50
+ 1018 04ac 05       		.uleb128 0x5
+ 1019 04ad 03       		.byte	0x3
+ 1020 04ae A4010000 		.4byte	.LC24
+ 1021 04b2 00       		.byte	0
+ 1022 04b3 0C       		.uleb128 0xc
+ 1023 04b4 06010000 		.4byte	.LVL40
+ 1024 04b8 6C050000 		.4byte	0x56c
+ 1025 04bc 0B       		.uleb128 0xb
+ 1026 04bd 01       		.uleb128 0x1
+ 1027 04be 50       		.byte	0x50
+ 1028 04bf 05       		.uleb128 0x5
+ 1029 04c0 03       		.byte	0x3
+ 1030 04c1 BC010000 		.4byte	.LC25
+ 1031 04c5 00       		.byte	0
+ 1032 04c6 00       		.byte	0
+ 1033 04c7 11       		.uleb128 0x11
+ 1034 04c8 8F000000 		.4byte	0x8f
+ 1035 04cc D7040000 		.4byte	0x4d7
+ 1036 04d0 12       		.uleb128 0x12
+ 1037 04d1 D4000000 		.4byte	0xd4
+ 1038 04d5 09       		.byte	0x9
+ 1039 04d6 00       		.byte	0
+ 1040 04d7 13       		.uleb128 0x13
+ 1041 04d8 94010000 		.4byte	.LASF27
+ 1042 04dc 07       		.byte	0x7
+ 1043 04dd 40       		.byte	0x40
+ 1044 04de B3000000 		.4byte	0xb3
+ 1045 04e2 13       		.uleb128 0x13
+ 1046 04e3 7A000000 		.4byte	.LASF28
+ 1047 04e7 07       		.byte	0x7
+ 1048 04e8 47       		.byte	0x47
+ 1049 04e9 BE000000 		.4byte	0xbe
+ 1050 04ed 13       		.uleb128 0x13
+ 1051 04ee 0D020000 		.4byte	.LASF29
+ 1052 04f2 07       		.byte	0x7
+ 1053 04f3 4A       		.byte	0x4a
+ 1054 04f4 B3000000 		.4byte	0xb3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 26
+
+
+ 1055 04f8 13       		.uleb128 0x13
+ 1056 04f9 C9010000 		.4byte	.LASF30
+ 1057 04fd 08       		.byte	0x8
+ 1058 04fe 48       		.byte	0x48
+ 1059 04ff C9000000 		.4byte	0xc9
+ 1060 0503 13       		.uleb128 0x13
+ 1061 0504 47020000 		.4byte	.LASF31
+ 1062 0508 09       		.byte	0x9
+ 1063 0509 44       		.byte	0x44
+ 1064 050a B3000000 		.4byte	0xb3
+ 1065 050e 14       		.uleb128 0x14
+ 1066 050f AC010000 		.4byte	.LASF32
+ 1067 0513 0A       		.byte	0xa
+ 1068 0514 1207     		.2byte	0x712
+ 1069 0516 1A050000 		.4byte	0x51a
+ 1070 051a 15       		.uleb128 0x15
+ 1071 051b 76000000 		.4byte	0x76
+ 1072 051f 11       		.uleb128 0x11
+ 1073 0520 8F000000 		.4byte	0x8f
+ 1074 0524 2F050000 		.4byte	0x52f
+ 1075 0528 12       		.uleb128 0x12
+ 1076 0529 D4000000 		.4byte	0xd4
+ 1077 052d 08       		.byte	0x8
+ 1078 052e 00       		.byte	0
+ 1079 052f 16       		.uleb128 0x16
+ 1080 0530 9C020000 		.4byte	.LASF33
+ 1081 0534 01       		.byte	0x1
+ 1082 0535 32       		.byte	0x32
+ 1083 0536 1F050000 		.4byte	0x51f
+ 1084 053a 05       		.uleb128 0x5
+ 1085 053b 03       		.byte	0x3
+ 1086 053c 00000000 		.4byte	sdFile
+ 1087 0540 11       		.uleb128 0x11
+ 1088 0541 8F000000 		.4byte	0x8f
+ 1089 0545 50050000 		.4byte	0x550
+ 1090 0549 12       		.uleb128 0x12
+ 1091 054a D4000000 		.4byte	0xd4
+ 1092 054e 63       		.byte	0x63
+ 1093 054f 00       		.byte	0
+ 1094 0550 16       		.uleb128 0x16
+ 1095 0551 71000000 		.4byte	.LASF34
+ 1096 0555 01       		.byte	0x1
+ 1097 0556 35       		.byte	0x35
+ 1098 0557 40050000 		.4byte	0x540
+ 1099 055b 05       		.uleb128 0x5
+ 1100 055c 03       		.byte	0x3
+ 1101 055d 00000000 		.4byte	UART_BUF
+ 1102 0561 17       		.uleb128 0x17
+ 1103 0562 C7020000 		.4byte	.LASF35
+ 1104 0566 C7020000 		.4byte	.LASF35
+ 1105 056a 0B       		.byte	0xb
+ 1106 056b E7       		.byte	0xe7
+ 1107 056c 17       		.uleb128 0x17
+ 1108 056d A0000000 		.4byte	.LASF36
+ 1109 0571 A0000000 		.4byte	.LASF36
+ 1110 0575 0C       		.byte	0xc
+ 1111 0576 8B       		.byte	0x8b
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 27
+
+
+ 1112 0577 18       		.uleb128 0x18
+ 1113 0578 66020000 		.4byte	.LASF37
+ 1114 057c 66020000 		.4byte	.LASF37
+ 1115 0580 0D       		.byte	0xd
+ 1116 0581 DA01     		.2byte	0x1da
+ 1117 0583 18       		.uleb128 0x18
+ 1118 0584 83010000 		.4byte	.LASF38
+ 1119 0588 83010000 		.4byte	.LASF38
+ 1120 058c 0D       		.byte	0xd
+ 1121 058d 7001     		.2byte	0x170
+ 1122 058f 18       		.uleb128 0x18
+ 1123 0590 65000000 		.4byte	.LASF39
+ 1124 0594 65000000 		.4byte	.LASF39
+ 1125 0598 0D       		.byte	0xd
+ 1126 0599 E601     		.2byte	0x1e6
+ 1127 059b 18       		.uleb128 0x18
+ 1128 059c 00000000 		.4byte	.LASF40
+ 1129 05a0 00000000 		.4byte	.LASF40
+ 1130 05a4 0D       		.byte	0xd
+ 1131 05a5 B701     		.2byte	0x1b7
+ 1132 05a7 18       		.uleb128 0x18
+ 1133 05a8 B9010000 		.4byte	.LASF41
+ 1134 05ac B9010000 		.4byte	.LASF41
+ 1135 05b0 0D       		.byte	0xd
+ 1136 05b1 3A01     		.2byte	0x13a
+ 1137 05b3 18       		.uleb128 0x18
+ 1138 05b4 6E020000 		.4byte	.LASF42
+ 1139 05b8 6E020000 		.4byte	.LASF42
+ 1140 05bc 0D       		.byte	0xd
+ 1141 05bd 4401     		.2byte	0x144
+ 1142 05bf 18       		.uleb128 0x18
+ 1143 05c0 09000000 		.4byte	.LASF43
+ 1144 05c4 09000000 		.4byte	.LASF43
+ 1145 05c8 0D       		.byte	0xd
+ 1146 05c9 3B01     		.2byte	0x13b
+ 1147 05cb 18       		.uleb128 0x18
+ 1148 05cc BB020000 		.4byte	.LASF44
+ 1149 05d0 BB020000 		.4byte	.LASF44
+ 1150 05d4 0D       		.byte	0xd
+ 1151 05d5 5E01     		.2byte	0x15e
+ 1152 05d7 00       		.byte	0
+ 1153              		.section	.debug_abbrev,"",%progbits
+ 1154              	.Ldebug_abbrev0:
+ 1155 0000 01       		.uleb128 0x1
+ 1156 0001 11       		.uleb128 0x11
+ 1157 0002 01       		.byte	0x1
+ 1158 0003 25       		.uleb128 0x25
+ 1159 0004 0E       		.uleb128 0xe
+ 1160 0005 13       		.uleb128 0x13
+ 1161 0006 0B       		.uleb128 0xb
+ 1162 0007 03       		.uleb128 0x3
+ 1163 0008 0E       		.uleb128 0xe
+ 1164 0009 1B       		.uleb128 0x1b
+ 1165 000a 0E       		.uleb128 0xe
+ 1166 000b 55       		.uleb128 0x55
+ 1167 000c 17       		.uleb128 0x17
+ 1168 000d 11       		.uleb128 0x11
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 28
+
+
+ 1169 000e 01       		.uleb128 0x1
+ 1170 000f 10       		.uleb128 0x10
+ 1171 0010 17       		.uleb128 0x17
+ 1172 0011 00       		.byte	0
+ 1173 0012 00       		.byte	0
+ 1174 0013 02       		.uleb128 0x2
+ 1175 0014 24       		.uleb128 0x24
+ 1176 0015 00       		.byte	0
+ 1177 0016 0B       		.uleb128 0xb
+ 1178 0017 0B       		.uleb128 0xb
+ 1179 0018 3E       		.uleb128 0x3e
+ 1180 0019 0B       		.uleb128 0xb
+ 1181 001a 03       		.uleb128 0x3
+ 1182 001b 0E       		.uleb128 0xe
+ 1183 001c 00       		.byte	0
+ 1184 001d 00       		.byte	0
+ 1185 001e 03       		.uleb128 0x3
+ 1186 001f 16       		.uleb128 0x16
+ 1187 0020 00       		.byte	0
+ 1188 0021 03       		.uleb128 0x3
+ 1189 0022 0E       		.uleb128 0xe
+ 1190 0023 3A       		.uleb128 0x3a
+ 1191 0024 0B       		.uleb128 0xb
+ 1192 0025 3B       		.uleb128 0x3b
+ 1193 0026 0B       		.uleb128 0xb
+ 1194 0027 49       		.uleb128 0x49
+ 1195 0028 13       		.uleb128 0x13
+ 1196 0029 00       		.byte	0
+ 1197 002a 00       		.byte	0
+ 1198 002b 04       		.uleb128 0x4
+ 1199 002c 24       		.uleb128 0x24
+ 1200 002d 00       		.byte	0
+ 1201 002e 0B       		.uleb128 0xb
+ 1202 002f 0B       		.uleb128 0xb
+ 1203 0030 3E       		.uleb128 0x3e
+ 1204 0031 0B       		.uleb128 0xb
+ 1205 0032 03       		.uleb128 0x3
+ 1206 0033 08       		.uleb128 0x8
+ 1207 0034 00       		.byte	0
+ 1208 0035 00       		.byte	0
+ 1209 0036 05       		.uleb128 0x5
+ 1210 0037 0F       		.uleb128 0xf
+ 1211 0038 00       		.byte	0
+ 1212 0039 0B       		.uleb128 0xb
+ 1213 003a 0B       		.uleb128 0xb
+ 1214 003b 49       		.uleb128 0x49
+ 1215 003c 13       		.uleb128 0x13
+ 1216 003d 00       		.byte	0
+ 1217 003e 00       		.byte	0
+ 1218 003f 06       		.uleb128 0x6
+ 1219 0040 13       		.uleb128 0x13
+ 1220 0041 00       		.byte	0
+ 1221 0042 03       		.uleb128 0x3
+ 1222 0043 0E       		.uleb128 0xe
+ 1223 0044 3C       		.uleb128 0x3c
+ 1224 0045 19       		.uleb128 0x19
+ 1225 0046 00       		.byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 29
+
+
+ 1226 0047 00       		.byte	0
+ 1227 0048 07       		.uleb128 0x7
+ 1228 0049 2E       		.uleb128 0x2e
+ 1229 004a 01       		.byte	0x1
+ 1230 004b 3F       		.uleb128 0x3f
+ 1231 004c 19       		.uleb128 0x19
+ 1232 004d 03       		.uleb128 0x3
+ 1233 004e 0E       		.uleb128 0xe
+ 1234 004f 3A       		.uleb128 0x3a
+ 1235 0050 0B       		.uleb128 0xb
+ 1236 0051 3B       		.uleb128 0x3b
+ 1237 0052 0B       		.uleb128 0xb
+ 1238 0053 27       		.uleb128 0x27
+ 1239 0054 19       		.uleb128 0x19
+ 1240 0055 11       		.uleb128 0x11
+ 1241 0056 01       		.uleb128 0x1
+ 1242 0057 12       		.uleb128 0x12
+ 1243 0058 06       		.uleb128 0x6
+ 1244 0059 40       		.uleb128 0x40
+ 1245 005a 18       		.uleb128 0x18
+ 1246 005b 9742     		.uleb128 0x2117
+ 1247 005d 19       		.uleb128 0x19
+ 1248 005e 01       		.uleb128 0x1
+ 1249 005f 13       		.uleb128 0x13
+ 1250 0060 00       		.byte	0
+ 1251 0061 00       		.byte	0
+ 1252 0062 08       		.uleb128 0x8
+ 1253 0063 05       		.uleb128 0x5
+ 1254 0064 00       		.byte	0
+ 1255 0065 03       		.uleb128 0x3
+ 1256 0066 0E       		.uleb128 0xe
+ 1257 0067 3A       		.uleb128 0x3a
+ 1258 0068 0B       		.uleb128 0xb
+ 1259 0069 3B       		.uleb128 0x3b
+ 1260 006a 0B       		.uleb128 0xb
+ 1261 006b 49       		.uleb128 0x49
+ 1262 006c 13       		.uleb128 0x13
+ 1263 006d 02       		.uleb128 0x2
+ 1264 006e 17       		.uleb128 0x17
+ 1265 006f 00       		.byte	0
+ 1266 0070 00       		.byte	0
+ 1267 0071 09       		.uleb128 0x9
+ 1268 0072 05       		.uleb128 0x5
+ 1269 0073 00       		.byte	0
+ 1270 0074 03       		.uleb128 0x3
+ 1271 0075 08       		.uleb128 0x8
+ 1272 0076 3A       		.uleb128 0x3a
+ 1273 0077 0B       		.uleb128 0xb
+ 1274 0078 3B       		.uleb128 0x3b
+ 1275 0079 0B       		.uleb128 0xb
+ 1276 007a 49       		.uleb128 0x49
+ 1277 007b 13       		.uleb128 0x13
+ 1278 007c 02       		.uleb128 0x2
+ 1279 007d 17       		.uleb128 0x17
+ 1280 007e 00       		.byte	0
+ 1281 007f 00       		.byte	0
+ 1282 0080 0A       		.uleb128 0xa
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 30
+
+
+ 1283 0081 898201   		.uleb128 0x4109
+ 1284 0084 01       		.byte	0x1
+ 1285 0085 11       		.uleb128 0x11
+ 1286 0086 01       		.uleb128 0x1
+ 1287 0087 31       		.uleb128 0x31
+ 1288 0088 13       		.uleb128 0x13
+ 1289 0089 01       		.uleb128 0x1
+ 1290 008a 13       		.uleb128 0x13
+ 1291 008b 00       		.byte	0
+ 1292 008c 00       		.byte	0
+ 1293 008d 0B       		.uleb128 0xb
+ 1294 008e 8A8201   		.uleb128 0x410a
+ 1295 0091 00       		.byte	0
+ 1296 0092 02       		.uleb128 0x2
+ 1297 0093 18       		.uleb128 0x18
+ 1298 0094 9142     		.uleb128 0x2111
+ 1299 0096 18       		.uleb128 0x18
+ 1300 0097 00       		.byte	0
+ 1301 0098 00       		.byte	0
+ 1302 0099 0C       		.uleb128 0xc
+ 1303 009a 898201   		.uleb128 0x4109
+ 1304 009d 01       		.byte	0x1
+ 1305 009e 11       		.uleb128 0x11
+ 1306 009f 01       		.uleb128 0x1
+ 1307 00a0 31       		.uleb128 0x31
+ 1308 00a1 13       		.uleb128 0x13
+ 1309 00a2 00       		.byte	0
+ 1310 00a3 00       		.byte	0
+ 1311 00a4 0D       		.uleb128 0xd
+ 1312 00a5 2E       		.uleb128 0x2e
+ 1313 00a6 01       		.byte	0x1
+ 1314 00a7 3F       		.uleb128 0x3f
+ 1315 00a8 19       		.uleb128 0x19
+ 1316 00a9 03       		.uleb128 0x3
+ 1317 00aa 0E       		.uleb128 0xe
+ 1318 00ab 3A       		.uleb128 0x3a
+ 1319 00ac 0B       		.uleb128 0xb
+ 1320 00ad 3B       		.uleb128 0x3b
+ 1321 00ae 0B       		.uleb128 0xb
+ 1322 00af 8701     		.uleb128 0x87
+ 1323 00b1 19       		.uleb128 0x19
+ 1324 00b2 11       		.uleb128 0x11
+ 1325 00b3 01       		.uleb128 0x1
+ 1326 00b4 12       		.uleb128 0x12
+ 1327 00b5 06       		.uleb128 0x6
+ 1328 00b6 40       		.uleb128 0x40
+ 1329 00b7 18       		.uleb128 0x18
+ 1330 00b8 9742     		.uleb128 0x2117
+ 1331 00ba 19       		.uleb128 0x19
+ 1332 00bb 01       		.uleb128 0x1
+ 1333 00bc 13       		.uleb128 0x13
+ 1334 00bd 00       		.byte	0
+ 1335 00be 00       		.byte	0
+ 1336 00bf 0E       		.uleb128 0xe
+ 1337 00c0 34       		.uleb128 0x34
+ 1338 00c1 00       		.byte	0
+ 1339 00c2 03       		.uleb128 0x3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 31
+
+
+ 1340 00c3 0E       		.uleb128 0xe
+ 1341 00c4 3A       		.uleb128 0x3a
+ 1342 00c5 0B       		.uleb128 0xb
+ 1343 00c6 3B       		.uleb128 0x3b
+ 1344 00c7 0B       		.uleb128 0xb
+ 1345 00c8 49       		.uleb128 0x49
+ 1346 00c9 13       		.uleb128 0x13
+ 1347 00ca 02       		.uleb128 0x2
+ 1348 00cb 18       		.uleb128 0x18
+ 1349 00cc 00       		.byte	0
+ 1350 00cd 00       		.byte	0
+ 1351 00ce 0F       		.uleb128 0xf
+ 1352 00cf 34       		.uleb128 0x34
+ 1353 00d0 00       		.byte	0
+ 1354 00d1 03       		.uleb128 0x3
+ 1355 00d2 0E       		.uleb128 0xe
+ 1356 00d3 3A       		.uleb128 0x3a
+ 1357 00d4 0B       		.uleb128 0xb
+ 1358 00d5 3B       		.uleb128 0x3b
+ 1359 00d6 0B       		.uleb128 0xb
+ 1360 00d7 49       		.uleb128 0x49
+ 1361 00d8 13       		.uleb128 0x13
+ 1362 00d9 02       		.uleb128 0x2
+ 1363 00da 17       		.uleb128 0x17
+ 1364 00db 00       		.byte	0
+ 1365 00dc 00       		.byte	0
+ 1366 00dd 10       		.uleb128 0x10
+ 1367 00de 898201   		.uleb128 0x4109
+ 1368 00e1 00       		.byte	0
+ 1369 00e2 11       		.uleb128 0x11
+ 1370 00e3 01       		.uleb128 0x1
+ 1371 00e4 31       		.uleb128 0x31
+ 1372 00e5 13       		.uleb128 0x13
+ 1373 00e6 00       		.byte	0
+ 1374 00e7 00       		.byte	0
+ 1375 00e8 11       		.uleb128 0x11
+ 1376 00e9 01       		.uleb128 0x1
+ 1377 00ea 01       		.byte	0x1
+ 1378 00eb 49       		.uleb128 0x49
+ 1379 00ec 13       		.uleb128 0x13
+ 1380 00ed 01       		.uleb128 0x1
+ 1381 00ee 13       		.uleb128 0x13
+ 1382 00ef 00       		.byte	0
+ 1383 00f0 00       		.byte	0
+ 1384 00f1 12       		.uleb128 0x12
+ 1385 00f2 21       		.uleb128 0x21
+ 1386 00f3 00       		.byte	0
+ 1387 00f4 49       		.uleb128 0x49
+ 1388 00f5 13       		.uleb128 0x13
+ 1389 00f6 2F       		.uleb128 0x2f
+ 1390 00f7 0B       		.uleb128 0xb
+ 1391 00f8 00       		.byte	0
+ 1392 00f9 00       		.byte	0
+ 1393 00fa 13       		.uleb128 0x13
+ 1394 00fb 34       		.uleb128 0x34
+ 1395 00fc 00       		.byte	0
+ 1396 00fd 03       		.uleb128 0x3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 32
+
+
+ 1397 00fe 0E       		.uleb128 0xe
+ 1398 00ff 3A       		.uleb128 0x3a
+ 1399 0100 0B       		.uleb128 0xb
+ 1400 0101 3B       		.uleb128 0x3b
+ 1401 0102 0B       		.uleb128 0xb
+ 1402 0103 49       		.uleb128 0x49
+ 1403 0104 13       		.uleb128 0x13
+ 1404 0105 3F       		.uleb128 0x3f
+ 1405 0106 19       		.uleb128 0x19
+ 1406 0107 3C       		.uleb128 0x3c
+ 1407 0108 19       		.uleb128 0x19
+ 1408 0109 00       		.byte	0
+ 1409 010a 00       		.byte	0
+ 1410 010b 14       		.uleb128 0x14
+ 1411 010c 34       		.uleb128 0x34
+ 1412 010d 00       		.byte	0
+ 1413 010e 03       		.uleb128 0x3
+ 1414 010f 0E       		.uleb128 0xe
+ 1415 0110 3A       		.uleb128 0x3a
+ 1416 0111 0B       		.uleb128 0xb
+ 1417 0112 3B       		.uleb128 0x3b
+ 1418 0113 05       		.uleb128 0x5
+ 1419 0114 49       		.uleb128 0x49
+ 1420 0115 13       		.uleb128 0x13
+ 1421 0116 3F       		.uleb128 0x3f
+ 1422 0117 19       		.uleb128 0x19
+ 1423 0118 3C       		.uleb128 0x3c
+ 1424 0119 19       		.uleb128 0x19
+ 1425 011a 00       		.byte	0
+ 1426 011b 00       		.byte	0
+ 1427 011c 15       		.uleb128 0x15
+ 1428 011d 35       		.uleb128 0x35
+ 1429 011e 00       		.byte	0
+ 1430 011f 49       		.uleb128 0x49
+ 1431 0120 13       		.uleb128 0x13
+ 1432 0121 00       		.byte	0
+ 1433 0122 00       		.byte	0
+ 1434 0123 16       		.uleb128 0x16
+ 1435 0124 34       		.uleb128 0x34
+ 1436 0125 00       		.byte	0
+ 1437 0126 03       		.uleb128 0x3
+ 1438 0127 0E       		.uleb128 0xe
+ 1439 0128 3A       		.uleb128 0x3a
+ 1440 0129 0B       		.uleb128 0xb
+ 1441 012a 3B       		.uleb128 0x3b
+ 1442 012b 0B       		.uleb128 0xb
+ 1443 012c 49       		.uleb128 0x49
+ 1444 012d 13       		.uleb128 0x13
+ 1445 012e 3F       		.uleb128 0x3f
+ 1446 012f 19       		.uleb128 0x19
+ 1447 0130 02       		.uleb128 0x2
+ 1448 0131 18       		.uleb128 0x18
+ 1449 0132 00       		.byte	0
+ 1450 0133 00       		.byte	0
+ 1451 0134 17       		.uleb128 0x17
+ 1452 0135 2E       		.uleb128 0x2e
+ 1453 0136 00       		.byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 33
+
+
+ 1454 0137 3F       		.uleb128 0x3f
+ 1455 0138 19       		.uleb128 0x19
+ 1456 0139 3C       		.uleb128 0x3c
+ 1457 013a 19       		.uleb128 0x19
+ 1458 013b 6E       		.uleb128 0x6e
+ 1459 013c 0E       		.uleb128 0xe
+ 1460 013d 03       		.uleb128 0x3
+ 1461 013e 0E       		.uleb128 0xe
+ 1462 013f 3A       		.uleb128 0x3a
+ 1463 0140 0B       		.uleb128 0xb
+ 1464 0141 3B       		.uleb128 0x3b
+ 1465 0142 0B       		.uleb128 0xb
+ 1466 0143 00       		.byte	0
+ 1467 0144 00       		.byte	0
+ 1468 0145 18       		.uleb128 0x18
+ 1469 0146 2E       		.uleb128 0x2e
+ 1470 0147 00       		.byte	0
+ 1471 0148 3F       		.uleb128 0x3f
+ 1472 0149 19       		.uleb128 0x19
+ 1473 014a 3C       		.uleb128 0x3c
+ 1474 014b 19       		.uleb128 0x19
+ 1475 014c 6E       		.uleb128 0x6e
+ 1476 014d 0E       		.uleb128 0xe
+ 1477 014e 03       		.uleb128 0x3
+ 1478 014f 0E       		.uleb128 0xe
+ 1479 0150 3A       		.uleb128 0x3a
+ 1480 0151 0B       		.uleb128 0xb
+ 1481 0152 3B       		.uleb128 0x3b
+ 1482 0153 05       		.uleb128 0x5
+ 1483 0154 00       		.byte	0
+ 1484 0155 00       		.byte	0
+ 1485 0156 00       		.byte	0
+ 1486              		.section	.debug_loc,"",%progbits
+ 1487              	.Ldebug_loc0:
+ 1488              	.LLST0:
+ 1489 0000 00000000 		.4byte	.LVL0
+ 1490 0004 0C000000 		.4byte	.LVL2
+ 1491 0008 0100     		.2byte	0x1
+ 1492 000a 50       		.byte	0x50
+ 1493 000b 0C000000 		.4byte	.LVL2
+ 1494 000f 20000000 		.4byte	.LFE111
+ 1495 0013 0400     		.2byte	0x4
+ 1496 0015 F3       		.byte	0xf3
+ 1497 0016 01       		.uleb128 0x1
+ 1498 0017 50       		.byte	0x50
+ 1499 0018 9F       		.byte	0x9f
+ 1500 0019 00000000 		.4byte	0
+ 1501 001d 00000000 		.4byte	0
+ 1502              	.LLST1:
+ 1503 0021 00000000 		.4byte	.LVL0
+ 1504 0025 0A000000 		.4byte	.LVL1
+ 1505 0029 0100     		.2byte	0x1
+ 1506 002b 51       		.byte	0x51
+ 1507 002c 0A000000 		.4byte	.LVL1
+ 1508 0030 0F000000 		.4byte	.LVL3-1
+ 1509 0034 0100     		.2byte	0x1
+ 1510 0036 53       		.byte	0x53
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 34
+
+
+ 1511 0037 0F000000 		.4byte	.LVL3-1
+ 1512 003b 20000000 		.4byte	.LFE111
+ 1513 003f 0400     		.2byte	0x4
+ 1514 0041 F3       		.byte	0xf3
+ 1515 0042 01       		.uleb128 0x1
+ 1516 0043 51       		.byte	0x51
+ 1517 0044 9F       		.byte	0x9f
+ 1518 0045 00000000 		.4byte	0
+ 1519 0049 00000000 		.4byte	0
+ 1520              	.LLST2:
+ 1521 004d 04000000 		.4byte	.LVL5
+ 1522 0051 08000000 		.4byte	.LVL6
+ 1523 0055 0200     		.2byte	0x2
+ 1524 0057 31       		.byte	0x31
+ 1525 0058 9F       		.byte	0x9f
+ 1526 0059 08000000 		.4byte	.LVL6
+ 1527 005d 36000000 		.4byte	.LVL11
+ 1528 0061 0200     		.2byte	0x2
+ 1529 0063 32       		.byte	0x32
+ 1530 0064 9F       		.byte	0x9f
+ 1531 0065 36000000 		.4byte	.LVL11
+ 1532 0069 5A000000 		.4byte	.LVL16
+ 1533 006d 0200     		.2byte	0x2
+ 1534 006f 33       		.byte	0x33
+ 1535 0070 9F       		.byte	0x9f
+ 1536 0071 5A000000 		.4byte	.LVL16
+ 1537 0075 78000000 		.4byte	.LVL20
+ 1538 0079 0200     		.2byte	0x2
+ 1539 007b 34       		.byte	0x34
+ 1540 007c 9F       		.byte	0x9f
+ 1541 007d 78000000 		.4byte	.LVL20
+ 1542 0081 E0000000 		.4byte	.LVL35
+ 1543 0085 0200     		.2byte	0x2
+ 1544 0087 35       		.byte	0x35
+ 1545 0088 9F       		.byte	0x9f
+ 1546 0089 E0000000 		.4byte	.LVL35
+ 1547 008d 74010000 		.4byte	.LFE112
+ 1548 0091 0200     		.2byte	0x2
+ 1549 0093 36       		.byte	0x36
+ 1550 0094 9F       		.byte	0x9f
+ 1551 0095 00000000 		.4byte	0
+ 1552 0099 00000000 		.4byte	0
+ 1553              	.LLST3:
+ 1554 009d 88000000 		.4byte	.LVL22
+ 1555 00a1 94000000 		.4byte	.LVL23
+ 1556 00a5 0100     		.2byte	0x1
+ 1557 00a7 50       		.byte	0x50
+ 1558 00a8 94000000 		.4byte	.LVL23
+ 1559 00ac DA000000 		.4byte	.LVL33
+ 1560 00b0 0100     		.2byte	0x1
+ 1561 00b2 54       		.byte	0x54
+ 1562 00b3 DA000000 		.4byte	.LVL33
+ 1563 00b7 DC000000 		.4byte	.LVL34
+ 1564 00bb 0100     		.2byte	0x1
+ 1565 00bd 50       		.byte	0x50
+ 1566 00be DC000000 		.4byte	.LVL34
+ 1567 00c2 74010000 		.4byte	.LFE112
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 35
+
+
+ 1568 00c6 0100     		.2byte	0x1
+ 1569 00c8 54       		.byte	0x54
+ 1570 00c9 00000000 		.4byte	0
+ 1571 00cd 00000000 		.4byte	0
+ 1572              		.section	.debug_aranges,"",%progbits
+ 1573 0000 24000000 		.4byte	0x24
+ 1574 0004 0200     		.2byte	0x2
+ 1575 0006 00000000 		.4byte	.Ldebug_info0
+ 1576 000a 04       		.byte	0x4
+ 1577 000b 00       		.byte	0
+ 1578 000c 0000     		.2byte	0
+ 1579 000e 0000     		.2byte	0
+ 1580 0010 00000000 		.4byte	.LFB111
+ 1581 0014 20000000 		.4byte	.LFE111-.LFB111
+ 1582 0018 00000000 		.4byte	.LFB112
+ 1583 001c 74010000 		.4byte	.LFE112-.LFB112
+ 1584 0020 00000000 		.4byte	0
+ 1585 0024 00000000 		.4byte	0
+ 1586              		.section	.debug_ranges,"",%progbits
+ 1587              	.Ldebug_ranges0:
+ 1588 0000 00000000 		.4byte	.LFB111
+ 1589 0004 20000000 		.4byte	.LFE111
+ 1590 0008 00000000 		.4byte	.LFB112
+ 1591 000c 74010000 		.4byte	.LFE112
+ 1592 0010 00000000 		.4byte	0
+ 1593 0014 00000000 		.4byte	0
+ 1594              		.section	.debug_line,"",%progbits
+ 1595              	.Ldebug_line0:
+ 1596 0000 0F030000 		.section	.debug_str,"MS",%progbits,1
+ 1596      0200B102 
+ 1596      00000201 
+ 1596      FB0E0D00 
+ 1596      01010101 
+ 1597              	.LASF40:
+ 1598 0000 46535F4D 		.ascii	"FS_MkDir\000"
+ 1598      6B446972 
+ 1598      00
+ 1599              	.LASF43:
+ 1600 0009 46535F46 		.ascii	"FS_FClose\000"
+ 1600      436C6F73 
+ 1600      6500
+ 1601              	.LASF47:
+ 1602 0013 433A5C48 		.ascii	"C:\\H_da\\SS26\\Research Project\\Workspace01\\MP3_"
+ 1602      5F64615C 
+ 1602      53533236 
+ 1602      5C526573 
+ 1602      65617263 
+ 1603 0041 506C6179 		.ascii	"Player.cydsn\000"
+ 1603      65722E63 
+ 1603      7964736E 
+ 1603      00
+ 1604              	.LASF21:
+ 1605 004e 46535F46 		.ascii	"FS_FILE\000"
+ 1605      494C4500 
+ 1606              	.LASF9:
+ 1607 0056 5F5F696E 		.ascii	"__int32_t\000"
+ 1607      7433325F 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 36
+
+
+ 1607      7400
+ 1608              	.LASF22:
+ 1609 0060 73746570 		.ascii	"step\000"
+ 1609      00
+ 1610              	.LASF39:
+ 1611 0065 46535F46 		.ascii	"FS_FormatSD\000"
+ 1611      6F726D61 
+ 1611      74534400 
+ 1612              	.LASF34:
+ 1613 0071 55415254 		.ascii	"UART_BUF\000"
+ 1613      5F425546 
+ 1613      00
+ 1614              	.LASF28:
+ 1615 007a 45455F6F 		.ascii	"EE_oo_IRQ_suspend_status\000"
+ 1615      6F5F4952 
+ 1615      515F7375 
+ 1615      7370656E 
+ 1615      645F7374 
+ 1616              	.LASF19:
+ 1617 0093 45455F54 		.ascii	"EE_TID\000"
+ 1617      494400
+ 1618              	.LASF26:
+ 1619 009a 7046696C 		.ascii	"pFile\000"
+ 1619      6500
+ 1620              	.LASF36:
+ 1621 00a0 55415254 		.ascii	"UART_LOG_PutString\000"
+ 1621      5F4C4F47 
+ 1621      5F507574 
+ 1621      53747269 
+ 1621      6E6700
+ 1622              	.LASF11:
+ 1623 00b3 666C6F61 		.ascii	"float\000"
+ 1623      7400
+ 1624              	.LASF1:
+ 1625 00b9 756E7369 		.ascii	"unsigned char\000"
+ 1625      676E6564 
+ 1625      20636861 
+ 1625      7200
+ 1626              	.LASF45:
+ 1627 00c7 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1627      43313120 
+ 1627      352E342E 
+ 1627      31203230 
+ 1627      31363036 
+ 1628 00fa 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1628      20726576 
+ 1628      6973696F 
+ 1628      6E203233 
+ 1628      37373135 
+ 1629 012d 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1629      66756E63 
+ 1629      74696F6E 
+ 1629      2D736563 
+ 1629      74696F6E 
+ 1630              	.LASF15:
+ 1631 0155 45455F49 		.ascii	"EE_INT32\000"
+ 1631      4E543332 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 37
+
+
+ 1631      00
+ 1632              	.LASF5:
+ 1633 015e 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1633      20756E73 
+ 1633      69676E65 
+ 1633      6420696E 
+ 1633      7400
+ 1634              	.LASF3:
+ 1635 0170 73686F72 		.ascii	"short unsigned int\000"
+ 1635      7420756E 
+ 1635      7369676E 
+ 1635      65642069 
+ 1635      6E7400
+ 1636              	.LASF38:
+ 1637 0183 46535F47 		.ascii	"FS_GetVolumeName\000"
+ 1637      6574566F 
+ 1637      6C756D65 
+ 1637      4E616D65 
+ 1637      00
+ 1638              	.LASF27:
+ 1639 0194 45455F6F 		.ascii	"EE_oo_IRQ_disable_count\000"
+ 1639      6F5F4952 
+ 1639      515F6469 
+ 1639      7361626C 
+ 1639      655F636F 
+ 1640              	.LASF32:
+ 1641 01ac 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1641      52784275 
+ 1641      66666572 
+ 1641      00
+ 1642              	.LASF41:
+ 1643 01b9 46535F46 		.ascii	"FS_FOpen\000"
+ 1643      4F70656E 
+ 1643      00
+ 1644              	.LASF12:
+ 1645 01c2 646F7562 		.ascii	"double\000"
+ 1645      6C6500
+ 1646              	.LASF30:
+ 1647 01c9 45455F73 		.ascii	"EE_std_endcycle_next_tid\000"
+ 1647      74645F65 
+ 1647      6E646379 
+ 1647      636C655F 
+ 1647      6E657874 
+ 1648              	.LASF8:
+ 1649 01e2 756E7369 		.ascii	"unsigned int\000"
+ 1649      676E6564 
+ 1649      20696E74 
+ 1649      00
+ 1650              	.LASF18:
+ 1651 01ef 45455F46 		.ascii	"EE_FREG\000"
+ 1651      52454700 
+ 1652              	.LASF16:
+ 1653 01f7 45455F55 		.ascii	"EE_UINT32\000"
+ 1653      494E5433 
+ 1653      3200
+ 1654              	.LASF13:
+ 1655 0201 63686172 		.ascii	"char\000"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 38
+
+
+ 1655      00
+ 1656              	.LASF24:
+ 1657 0206 656D4669 		.ascii	"emFile\000"
+ 1657      6C6500
+ 1658              	.LASF29:
+ 1659 020d 45455F41 		.ascii	"EE_ApplicationMode\000"
+ 1659      70706C69 
+ 1659      63617469 
+ 1659      6F6E4D6F 
+ 1659      646500
+ 1660              	.LASF10:
+ 1661 0220 696E7433 		.ascii	"int32_t\000"
+ 1661      325F7400 
+ 1662              	.LASF20:
+ 1663 0228 73697A65 		.ascii	"sizetype\000"
+ 1663      74797065 
+ 1663      00
+ 1664              	.LASF6:
+ 1665 0231 6C6F6E67 		.ascii	"long long int\000"
+ 1665      206C6F6E 
+ 1665      6720696E 
+ 1665      7400
+ 1666              	.LASF17:
+ 1667 023f 45455F55 		.ascii	"EE_UREG\000"
+ 1667      52454700 
+ 1668              	.LASF31:
+ 1669 0247 45455F49 		.ascii	"EE_IRQ_nesting_level\000"
+ 1669      52515F6E 
+ 1669      65737469 
+ 1669      6E675F6C 
+ 1669      6576656C 
+ 1670              	.LASF2:
+ 1671 025c 73686F72 		.ascii	"short int\000"
+ 1671      7420696E 
+ 1671      7400
+ 1672              	.LASF37:
+ 1673 0266 46535F49 		.ascii	"FS_Init\000"
+ 1673      6E697400 
+ 1674              	.LASF42:
+ 1675 026e 46535F57 		.ascii	"FS_Write\000"
+ 1675      72697465 
+ 1675      00
+ 1676              	.LASF23:
+ 1677 0277 4E657874 		.ascii	"NextStep\000"
+ 1677      53746570 
+ 1677      00
+ 1678              	.LASF46:
+ 1679 0280 656D4669 		.ascii	"emFile.c\000"
+ 1679      6C652E63 
+ 1679      00
+ 1680              	.LASF25:
+ 1681 0289 7364566F 		.ascii	"sdVolName\000"
+ 1681      6C4E616D 
+ 1681      6500
+ 1682              	.LASF4:
+ 1683 0293 6C6F6E67 		.ascii	"long int\000"
+ 1683      20696E74 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccqF83hP.s 			page 39
+
+
+ 1683      00
+ 1684              	.LASF33:
+ 1685 029c 73644669 		.ascii	"sdFile\000"
+ 1685      6C6500
+ 1686              	.LASF14:
+ 1687 02a3 6C6F6E67 		.ascii	"long double\000"
+ 1687      20646F75 
+ 1687      626C6500 
+ 1688              	.LASF0:
+ 1689 02af 7369676E 		.ascii	"signed char\000"
+ 1689      65642063 
+ 1689      68617200 
+ 1690              	.LASF44:
+ 1691 02bb 46535F43 		.ascii	"FS_CopyFile\000"
+ 1691      6F707946 
+ 1691      696C6500 
+ 1692              	.LASF35:
+ 1693 02c7 73707269 		.ascii	"sprintf\000"
+ 1693      6E746600 
+ 1694              	.LASF7:
+ 1695 02cf 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1695      206C6F6E 
+ 1695      6720756E 
+ 1695      7369676E 
+ 1695      65642069 
+ 1696              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

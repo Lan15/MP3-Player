@@ -232,10 +232,33 @@
   <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\TFT_SPI_PM.c" value="SOURCE_C;CortexM3;;;;TFT_SPI" />
   <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\TFT_SPI_INT.c" value="SOURCE_C;CortexM3;;;;TFT_SPI" />
   <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\TFT_SPI_PVT.h" value="HEADER;;;;;TFT_SPI" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile.h" value="HEADER;;;;;emFile" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_ConfigMMC_SPI.c" value="SOURCE_C;CortexM3;;;;emFile" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_MMC_HW_SPI.c" value="SOURCE_C;CortexM3;;;;emFile" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_PM.c" value="SOURCE_C;CortexM3;;;;emFile" />
   <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\UART_LOG_IntClock.c" value="SOURCE_C;CortexM3;;;;UART_LOG_IntClock" />
   <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\UART_LOG_IntClock.h" value="HEADER;;;;;UART_LOG_IntClock" />
   <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\TFT_SPI_IntClock.c" value="SOURCE_C;CortexM3;;;;TFT_SPI_IntClock" />
   <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\TFT_SPI_IntClock.h" value="HEADER;;;;;TFT_SPI_IntClock" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_SPI0.c" value="SOURCE_C;CortexM3;;;;emFile_SPI0" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_SPI0.h" value="HEADER;;;;;emFile_SPI0" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_SPI0_PM.c" value="SOURCE_C;CortexM3;;;;emFile_SPI0" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_SPI0_INT.c" value="SOURCE_C;CortexM3;;;;emFile_SPI0" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_SPI0_PVT.h" value="HEADER;;;;;emFile_SPI0" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_mosi0_aliases.h" value="HEADER;;;;;emFile_mosi0" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_mosi0.c" value="SOURCE_C;CortexM3;;;;emFile_mosi0" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_mosi0.h" value="HEADER;;;;;emFile_mosi0" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_Clock_1.c" value="SOURCE_C;CortexM3;;;;emFile_Clock_1" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_Clock_1.h" value="HEADER;;;;;emFile_Clock_1" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_miso0_aliases.h" value="HEADER;;;;;emFile_miso0" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_miso0.c" value="SOURCE_C;CortexM3;;;;emFile_miso0" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_miso0.h" value="HEADER;;;;;emFile_miso0" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_sclk0_aliases.h" value="HEADER;;;;;emFile_sclk0" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_sclk0.c" value="SOURCE_C;CortexM3;;;;emFile_sclk0" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_sclk0.h" value="HEADER;;;;;emFile_sclk0" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_SPI0_CS_aliases.h" value="HEADER;;;;;emFile_SPI0_CS" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_SPI0_CS.c" value="SOURCE_C;CortexM3;;;;emFile_SPI0_CS" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_SPI0_CS.h" value="HEADER;;;;;emFile_SPI0_CS" />
   <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\cm3gcc.ld" value="LINKER_SCRIPT;;;b98f980c-3bd1-4fc7-a887-c56a20a46fdd;;cy_boot" />
   <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\Cm3RealView.scat" value="LINKER_SCRIPT;;;fdb8e1ae-f83a-46cf-9446-1d703716f38a;;cy_boot" />
   <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\Cm3Start.c" value="SOURCE_C;CortexM3;;;;cy_boot" />
