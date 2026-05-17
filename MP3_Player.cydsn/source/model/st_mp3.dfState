@@ -1,0 +1,225 @@
+package ide409pjor3r1ytjor3rhdw;
+
+/**
+@version 2.0
+@__modelType diagram 
+*/
+class diagram {
+/**
+@__ref <oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid2yw8ejor3r1ytjor3rjpj:oiref><oihard>
+@__modelType reference 
+*/
+class reference {
+}
+/**
+@__ref <oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid119u7jor3r1ytjor3romc:oiref><oihard>
+@__modelType reference 
+*/
+class reference1 {
+}
+/**
+@__ref <oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid38b7wjor3r1ytjor3rtj5:oiref><oihard>
+@__modelType reference 
+*/
+class reference2 {
+}
+/**
+@__ref <oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeidbdlgtjor3r1ytjor3s0jc:oiref><oihard>
+@__modelType reference 
+*/
+class reference3 {
+}
+}/**
+
+@__tags
+@shapeType StateDiagram 
+*/
+class __tags {
+}/**
+@__options 
+*/
+class __options {
+}/**
+@__positions <oigroup:Composite#$transitionInplaceEditing#<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid38b7wjor3r1ytjor3rtj5.linkid4ldgijor3r1ytjor42gke:oiref>=338,330,133,16,1:oigroup>
+<oigroup:<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid119u7jor3r1ytjor3romc.linkid9eb7qjor3r1ytjor428yz:oiref>=537,185,537,304:oigroup>
+<oigroup:Composite#$transitionInplaceEditing#<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid119u7jor3r1ytjor3romc.linkidazrbqjor3r1ytjor3z9o8:oiref>=680,50,170,16,1:oigroup>
+<oigroup:Composite#$transitionInplaceEditing#<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid119u7jor3r1ytjor3romc.linkidi2fxqjor3r1ytjor3y6jg:oiref>=627,215,146,16,1:oigroup>
+<oigroup:Composite#$transitionInplaceEditing#<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid119u7jor3r1ytjor3romc.linkide3q59jor3r1ytjor41d3x:oiref>=347,181,133,16,1:oigroup>
+<oigroup:Composite#$transitionInplaceEditing#<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid2yw8ejor3r1ytjor3rjpj.linkid6gxu6jor3r1ytjor3vx64:oiref>=310,130,131,16,1:oigroup>
+<oigroup:<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid38b7wjor3r1ytjor3rtj5.linkid4ldgijor3r1ytjor42gke:oiref>=496,320,250,320,250,183:oigroup>
+<oigroup:<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeidbdlgtjor3r1ytjor3s0jc.linkid2pfebjor3r1ytjor3s41j:oiref>=209,72,209,137:oigroup>
+<oigroup:Composite#$transitionInplaceEditing#<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid2yw8ejor3r1ytjor3rjpj.linkid6k1uvjor3r1ytjor3se3d:oiref>=20,90,166,16,1:oigroup>
+<oigroup:Composite#$transitionInplaceEditing#<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid119u7jor3r1ytjor3romc.linkidgc3h0jor3r1ytjor40nl9:oiref>=430,50,174,16,1:oigroup>
+<oigroup:Composite#$transitionInplaceEditing#<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid119u7jor3r1ytjor3romc.linkid3lmfnjor3r1ytjor46x6e:oiref>=760,157,200,32,1:oigroup>
+<oigroup:<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid119u7jor3r1ytjor3romc.linkidazrbqjor3r1ytjor3z9o8:oiref>=643,150,680,150,680,70,638,70,638,139:oigroup>
+<oigroup:<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid119u7jor3r1ytjor3romc:oiref>=481,139,162,46,1:oigroup>
+<oigroup:Composite#$transitionInplaceEditing#<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid119u7jor3r1ytjor3romc.linkid9eb7qjor3r1ytjor428yz:oiref>=547,236,144,16,1:oigroup>
+<oigroup:<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid119u7jor3r1ytjor3romc.linkidi2fxqjor3r1ytjor3y6jg:oiref>=643,175,663,175,663,205,633,205,633,185:oigroup>
+<oigroup:<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid2yw8ejor3r1ytjor3rjpj.linkid6gxu6jor3r1ytjor3vx64:oiref>=284,159,481,159:oigroup>
+<oigroup:<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid119u7jor3r1ytjor3romc.linkide3q59jor3r1ytjor41d3x:oiref>=481,171,284,171:oigroup>
+<oigroup:<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid2yw8ejor3r1ytjor3rjpj.linkid6k1uvjor3r1ytjor3se3d:oiref>=173,150,110,150,110,110,190,110,190,137:oigroup>
+<oigroup:Composite#$transitionInplaceEditing#<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid38b7wjor3r1ytjor3rtj5.linkid94rngjor3r1ytjor42d1g:oiref>=360,260,152,16,1:oigroup>
+<oigroup:<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid119u7jor3r1ytjor3romc.linkidgc3h0jor3r1ytjor40nl9:oiref>=530,139,530,70,590,70,590,139:oigroup>
+<oigroup:<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid119u7jor3r1ytjor3romc.linkid3lmfnjor3r1ytjor46x6e:oiref>=643,160,750,160,750,170,643,170:oigroup>
+<oigroup:Composite#$transitionInplaceEditing#<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid2yw8ejor3r1ytjor3rjpj.linkidadqjpjor3r1ytjor3tib4:oiref>=55,220,190,16,1:oigroup>
+<oigroup:<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeidbdlgtjor3r1ytjor3s0jc:oiref>=203,60,12,12,1:oigroup>
+<oigroup:<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid38b7wjor3r1ytjor3rtj5.linkid94rngjor3r1ytjor42d1g:oiref>=516,304,516,185:oigroup>
+<oigroup:<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid38b7wjor3r1ytjor3rtj5:oiref>=496,304,83,40,1:oigroup>
+<oigroup:<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid2yw8ejor3r1ytjor3rjpj.linkidadqjpjor3r1ytjor3tib4:oiref>=173,173,110,173,110,210,190,210,190,183:oigroup>
+<oigroup:<oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid2yw8ejor3r1ytjor3rjpj:oiref>=173,137,111,46,1:oigroup> 
+*/
+class __positions {
+}
+/**
+@shapeType State
+@__modelType node
+@name ISSTANDBY 
+*/
+class nodeid2yw8ejor3r1ytjor3rjpj {
+/**
+@shapeType TransitionLink
+@__modelType link
+@__ref <oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid2yw8ejor3r1ytjor3rjpj:oiref><oihard>
+@event ev_Button1
+@action selectNextSong() 
+*/
+class linkid6k1uvjor3r1ytjor3se3d {
+}
+/**
+@shapeType TransitionLink
+@__modelType link
+@__ref <oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid2yw8ejor3r1ytjor3rjpj:oiref><oihard>
+@event ev_Button2
+@action selectPreviousSong() 
+*/
+class linkidadqjpjor3r1ytjor3tib4 {
+}
+/**
+@shapeType InternalTransition
+@__modelType member
+@name entry
+@eventArguments
+@action showMenu 
+*/
+class memberid69mzjor3r1ytjor3vhj8 {
+}
+/**
+@shapeType TransitionLink
+@__modelType link
+@__ref <oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid119u7jor3r1ytjor3romc:oiref><oihard>
+@event ev_Button3
+@action playSong() 
+*/
+class linkid6gxu6jor3r1ytjor3vx64 {
+}
+}
+/**
+@shapeType State
+@__modelType node
+@name ISPLAYING 
+*/
+class nodeid119u7jor3r1ytjor3romc {
+/**
+@shapeType TransitionLink
+@__modelType link
+@__ref <oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid119u7jor3r1ytjor3romc:oiref><oihard>
+@event ev_1s
+@condition NOT songIsOver() 
+*/
+class linkidi2fxqjor3r1ytjor3y6jg {
+}
+/**
+@shapeType InternalTransition
+@__modelType member
+@name entry
+@action showRemainingTime 
+*/
+class memberid5s0dmjor3r1ytjor3yvo9 {
+}
+/**
+@shapeType TransitionLink
+@__modelType link
+@__ref <oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid119u7jor3r1ytjor3romc:oiref><oihard>
+@event ev_Button1
+@action increaseVolume() 
+*/
+class linkidazrbqjor3r1ytjor3z9o8 {
+}
+/**
+@shapeType TransitionLink
+@__modelType link
+@__ref <oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid119u7jor3r1ytjor3romc:oiref><oihard>
+@event ev_Button2
+@action decreaseVolume() 
+*/
+class linkidgc3h0jor3r1ytjor40nl9 {
+}
+/**
+@shapeType TransitionLink
+@__modelType link
+@__ref <oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid2yw8ejor3r1ytjor3rjpj:oiref><oihard>
+@event ev_Button4
+@action stopSong() 
+*/
+class linkide3q59jor3r1ytjor41d3x {
+}
+/**
+@shapeType TransitionLink
+@__modelType link
+@__ref <oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid38b7wjor3r1ytjor3rtj5:oiref><oihard>
+@event ev_Button3
+@action pauseSong() 
+*/
+class linkid9eb7qjor3r1ytjor428yz {
+}
+/**
+@shapeType TransitionLink
+@__modelType link
+@__ref <oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid119u7jor3r1ytjor3romc:oiref><oihard>
+@event ev_1s
+@condition songIsOver()
+@action stopSOng(), selectNextSong(), playSong() 
+*/
+class linkid3lmfnjor3r1ytjor46x6e {
+}
+}
+/**
+@shapeType State
+@__modelType node
+@name ISPAUSING 
+*/
+class nodeid38b7wjor3r1ytjor3rtj5 {
+/**
+@shapeType TransitionLink
+@__modelType link
+@__ref <oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid119u7jor3r1ytjor3romc:oiref><oihard>
+@event ev_Button3
+@action resumeSong() 
+*/
+class linkid94rngjor3r1ytjor42d1g {
+}
+/**
+@shapeType TransitionLink
+@__modelType link
+@__ref <oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid2yw8ejor3r1ytjor3rjpj:oiref><oihard>
+@event ev_Button4
+@action stopSong() 
+*/
+class linkid4ldgijor3r1ytjor42gke {
+}
+}
+/**
+@shapeType StartState
+@__modelType node
+@name StartState1
+@backgroundColor 0,0,0 
+*/
+class nodeidbdlgtjor3r1ytjor3s0jc {
+/**
+@shapeType TransitionLink
+@__modelType link
+@__ref <oiref:design#Class#ide409pjor3r1ytjor3rhdw.nodeid2yw8ejor3r1ytjor3rjpj:oiref><oihard> 
+*/
+class linkid2pfebjor3r1ytjor3s41j {
+}
+}

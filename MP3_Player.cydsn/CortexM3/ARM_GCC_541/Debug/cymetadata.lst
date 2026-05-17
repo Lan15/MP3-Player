@@ -1,0 +1,3271 @@
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"cymetadata.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	cy_metadata
+  20              		.global	cy_meta_flashprotect
+  21              		.global	cy_meta_wonvl
+  22              		.global	cy_meta_custnvl
+  23              		.global	cy_meta_configecc
+  24              		.section	.cyconfigecc,"a",%progbits
+  25              		.align	2
+  26              		.type	cy_meta_configecc, %object
+  27              		.size	cy_meta_configecc, 2628
+  28              	cy_meta_configecc:
+  29 0000 04       		.byte	4
+  30 0001 4F       		.byte	79
+  31 0002 00       		.byte	0
+  32 0003 40       		.byte	64
+  33 0004 04       		.byte	4
+  34 0005 52       		.byte	82
+  35 0006 00       		.byte	0
+  36 0007 40       		.byte	64
+  37 0008 04       		.byte	4
+  38 0009 64       		.byte	100
+  39 000a 00       		.byte	0
+  40 000b 40       		.byte	64
+  41 000c 01       		.byte	1
+  42 000d 65       		.byte	101
+  43 000e 00       		.byte	0
+  44 000f 40       		.byte	64
+  45 0010 0B       		.byte	11
+  46 0011 03       		.byte	3
+  47 0012 01       		.byte	1
+  48 0013 40       		.byte	64
+  49 0014 5B       		.byte	91
+  50 0015 04       		.byte	4
+  51 0016 01       		.byte	1
+  52 0017 40       		.byte	64
+  53 0018 43       		.byte	67
+  54 0019 05       		.byte	5
+  55 001a 01       		.byte	1
+  56 001b 40       		.byte	64
+  57 001c 03       		.byte	3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 2
+
+
+  58 001d 06       		.byte	6
+  59 001e 01       		.byte	1
+  60 001f 40       		.byte	64
+  61 0020 06       		.byte	6
+  62 0021 07       		.byte	7
+  63 0022 01       		.byte	1
+  64 0023 40       		.byte	64
+  65 0024 51       		.byte	81
+  66 0025 08       		.byte	8
+  67 0026 01       		.byte	1
+  68 0027 40       		.byte	64
+  69 0028 39       		.byte	57
+  70 0029 09       		.byte	9
+  71 002a 01       		.byte	1
+  72 002b 40       		.byte	64
+  73 002c 5D       		.byte	93
+  74 002d 0A       		.byte	10
+  75 002e 01       		.byte	1
+  76 002f 40       		.byte	64
+  77 0030 3C       		.byte	60
+  78 0031 0B       		.byte	11
+  79 0032 01       		.byte	1
+  80 0033 40       		.byte	64
+  81 0034 67       		.byte	103
+  82 0035 0C       		.byte	12
+  83 0036 01       		.byte	1
+  84 0037 40       		.byte	64
+  85 0038 49       		.byte	73
+  86 0039 0D       		.byte	13
+  87 003a 01       		.byte	1
+  88 003b 40       		.byte	64
+  89 003c 6D       		.byte	109
+  90 003d 0E       		.byte	14
+  91 003e 01       		.byte	1
+  92 003f 40       		.byte	64
+  93 0040 2D       		.byte	45
+  94 0041 0F       		.byte	15
+  95 0042 01       		.byte	1
+  96 0043 40       		.byte	64
+  97 0044 04       		.byte	4
+  98 0045 14       		.byte	20
+  99 0046 01       		.byte	1
+ 100 0047 40       		.byte	64
+ 101 0048 03       		.byte	3
+ 102 0049 15       		.byte	21
+ 103 004a 01       		.byte	1
+ 104 004b 40       		.byte	64
+ 105 004c 01       		.byte	1
+ 106 004d 17       		.byte	23
+ 107 004e 01       		.byte	1
+ 108 004f 40       		.byte	64
+ 109 0050 48       		.byte	72
+ 110 0051 18       		.byte	24
+ 111 0052 01       		.byte	1
+ 112 0053 40       		.byte	64
+ 113 0054 3E       		.byte	62
+ 114 0055 19       		.byte	25
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 3
+
+
+ 115 0056 01       		.byte	1
+ 116 0057 40       		.byte	64
+ 117 0058 4F       		.byte	79
+ 118 0059 1A       		.byte	26
+ 119 005a 01       		.byte	1
+ 120 005b 40       		.byte	64
+ 121 005c 4B       		.byte	75
+ 122 005d 1B       		.byte	27
+ 123 005e 01       		.byte	1
+ 124 005f 40       		.byte	64
+ 125 0060 03       		.byte	3
+ 126 0061 40       		.byte	64
+ 127 0062 01       		.byte	1
+ 128 0063 40       		.byte	64
+ 129 0064 09       		.byte	9
+ 130 0065 41       		.byte	65
+ 131 0066 01       		.byte	1
+ 132 0067 40       		.byte	64
+ 133 0068 09       		.byte	9
+ 134 0069 42       		.byte	66
+ 135 006a 01       		.byte	1
+ 136 006b 40       		.byte	64
+ 137 006c 08       		.byte	8
+ 138 006d 43       		.byte	67
+ 139 006e 01       		.byte	1
+ 140 006f 40       		.byte	64
+ 141 0070 06       		.byte	6
+ 142 0071 44       		.byte	68
+ 143 0072 01       		.byte	1
+ 144 0073 40       		.byte	64
+ 145 0074 12       		.byte	18
+ 146 0075 45       		.byte	69
+ 147 0076 01       		.byte	1
+ 148 0077 40       		.byte	64
+ 149 0078 06       		.byte	6
+ 150 0079 46       		.byte	70
+ 151 007a 01       		.byte	1
+ 152 007b 40       		.byte	64
+ 153 007c 06       		.byte	6
+ 154 007d 48       		.byte	72
+ 155 007e 01       		.byte	1
+ 156 007f 40       		.byte	64
+ 157 0080 07       		.byte	7
+ 158 0081 49       		.byte	73
+ 159 0082 01       		.byte	1
+ 160 0083 40       		.byte	64
+ 161 0084 10       		.byte	16
+ 162 0085 4C       		.byte	76
+ 163 0086 01       		.byte	1
+ 164 0087 40       		.byte	64
+ 165 0088 0B       		.byte	11
+ 166 0089 4D       		.byte	77
+ 167 008a 01       		.byte	1
+ 168 008b 40       		.byte	64
+ 169 008c 06       		.byte	6
+ 170 008d 50       		.byte	80
+ 171 008e 01       		.byte	1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 4
+
+
+ 172 008f 40       		.byte	64
+ 173 0090 01       		.byte	1
+ 174 0091 51       		.byte	81
+ 175 0092 01       		.byte	1
+ 176 0093 40       		.byte	64
+ 177 0094 01       		.byte	1
+ 178 0095 20       		.byte	32
+ 179 0096 0A       		.byte	10
+ 180 0097 27       		.byte	39
+ 181 0098 0D       		.byte	13
+ 182 0099 50       		.byte	80
+ 183 009a 16       		.byte	22
+ 184 009b 36       		.byte	54
+ 185 009c 08       		.byte	8
+ 186 009d C9       		.byte	-55
+ 187 009e 09       		.byte	9
+ 188 009f 53       		.byte	83
+ 189 00a0 10       		.byte	16
+ 190 00a1 92       		.byte	-110
+ 191 00a2 11       		.byte	17
+ 192 00a3 14       		.byte	20
+ 193 00a4 85       		.byte	-123
+ 194 00a5 0D       		.byte	13
+ 195 00a6 89       		.byte	-119
+ 196 00a7 72       		.byte	114
+ 197 00a8 8A       		.byte	-118
+ 198 00a9 0F       		.byte	15
+ 199 00aa 8D       		.byte	-115
+ 200 00ab 38       		.byte	56
+ 201 00ac 8B       		.byte	-117
+ 202 00ad 0F       		.byte	15
+ 203 00ae 80       		.byte	-128
+ 204 00af 02       		.byte	2
+ 205 00b0 84       		.byte	-124
+ 206 00b1 01       		.byte	1
+ 207 00b2 89       		.byte	-119
+ 208 00b3 20       		.byte	32
+ 209 00b4 99       		.byte	-103
+ 210 00b5 20       		.byte	32
+ 211 00b6 A1       		.byte	-95
+ 212 00b7 01       		.byte	1
+ 213 00b8 A5       		.byte	-91
+ 214 00b9 80       		.byte	-128
+ 215 00ba A9       		.byte	-87
+ 216 00bb 21       		.byte	33
+ 217 00bc B5       		.byte	-75
+ 218 00bd 80       		.byte	-128
+ 219 00be E6       		.byte	-26
+ 220 00bf 08       		.byte	8
+ 221 00c0 EA       		.byte	-22
+ 222 00c1 10       		.byte	16
+ 223 00c2 EE       		.byte	-18
+ 224 00c3 01       		.byte	1
+ 225 00c4 00       		.byte	0
+ 226 00c5 01       		.byte	1
+ 227 00c6 01       		.byte	1
+ 228 00c7 01       		.byte	1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 5
+
+
+ 229 00c8 19       		.byte	25
+ 230 00c9 01       		.byte	1
+ 231 00ca 1A       		.byte	26
+ 232 00cb 01       		.byte	1
+ 233 00cc 22       		.byte	34
+ 234 00cd 01       		.byte	1
+ 235 00ce 29       		.byte	41
+ 236 00cf 01       		.byte	1
+ 237 00d0 36       		.byte	54
+ 238 00d1 01       		.byte	1
+ 239 00d2 37       		.byte	55
+ 240 00d3 01       		.byte	1
+ 241 00d4 3E       		.byte	62
+ 242 00d5 40       		.byte	64
+ 243 00d6 3F       		.byte	63
+ 244 00d7 40       		.byte	64
+ 245 00d8 40       		.byte	64
+ 246 00d9 52       		.byte	82
+ 247 00da 41       		.byte	65
+ 248 00db 06       		.byte	6
+ 249 00dc 42       		.byte	66
+ 250 00dd 10       		.byte	16
+ 251 00de 45       		.byte	69
+ 252 00df DE       		.byte	-34
+ 253 00e0 46       		.byte	70
+ 254 00e1 CB       		.byte	-53
+ 255 00e2 47       		.byte	71
+ 256 00e3 F0       		.byte	-16
+ 257 00e4 48       		.byte	72
+ 258 00e5 2F       		.byte	47
+ 259 00e6 49       		.byte	73
+ 260 00e7 FF       		.byte	-1
+ 261 00e8 4A       		.byte	74
+ 262 00e9 FF       		.byte	-1
+ 263 00ea 4B       		.byte	75
+ 264 00eb FF       		.byte	-1
+ 265 00ec 4C       		.byte	76
+ 266 00ed 22       		.byte	34
+ 267 00ee 4E       		.byte	78
+ 268 00ef F0       		.byte	-16
+ 269 00f0 4F       		.byte	79
+ 270 00f1 08       		.byte	8
+ 271 00f2 50       		.byte	80
+ 272 00f3 04       		.byte	4
+ 273 00f4 54       		.byte	84
+ 274 00f5 09       		.byte	9
+ 275 00f6 58       		.byte	88
+ 276 00f7 04       		.byte	4
+ 277 00f8 59       		.byte	89
+ 278 00f9 04       		.byte	4
+ 279 00fa 5A       		.byte	90
+ 280 00fb 04       		.byte	4
+ 281 00fc 5B       		.byte	91
+ 282 00fd 04       		.byte	4
+ 283 00fe 5F       		.byte	95
+ 284 00ff 01       		.byte	1
+ 285 0100 62       		.byte	98
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 6
+
+
+ 286 0101 C0       		.byte	-64
+ 287 0102 64       		.byte	100
+ 288 0103 40       		.byte	64
+ 289 0104 65       		.byte	101
+ 290 0105 01       		.byte	1
+ 291 0106 66       		.byte	102
+ 292 0107 10       		.byte	16
+ 293 0108 67       		.byte	103
+ 294 0109 11       		.byte	17
+ 295 010a 68       		.byte	104
+ 296 010b C0       		.byte	-64
+ 297 010c 69       		.byte	105
+ 298 010d 01       		.byte	1
+ 299 010e 6B       		.byte	107
+ 300 010f 11       		.byte	17
+ 301 0110 6C       		.byte	108
+ 302 0111 40       		.byte	64
+ 303 0112 6D       		.byte	109
+ 304 0113 01       		.byte	1
+ 305 0114 6E       		.byte	110
+ 306 0115 40       		.byte	64
+ 307 0116 6F       		.byte	111
+ 308 0117 01       		.byte	1
+ 309 0118 80       		.byte	-128
+ 310 0119 04       		.byte	4
+ 311 011a 88       		.byte	-120
+ 312 011b 04       		.byte	4
+ 313 011c 8B       		.byte	-117
+ 314 011d 03       		.byte	3
+ 315 011e 8C       		.byte	-116
+ 316 011f 04       		.byte	4
+ 317 0120 90       		.byte	-112
+ 318 0121 04       		.byte	4
+ 319 0122 96       		.byte	-106
+ 320 0123 01       		.byte	1
+ 321 0124 9E       		.byte	-98
+ 322 0125 01       		.byte	1
+ 323 0126 A2       		.byte	-94
+ 324 0127 02       		.byte	2
+ 325 0128 A6       		.byte	-90
+ 326 0129 08       		.byte	8
+ 327 012a AB       		.byte	-85
+ 328 012b 02       		.byte	2
+ 329 012c AD       		.byte	-83
+ 330 012d 01       		.byte	1
+ 331 012e B0       		.byte	-80
+ 332 012f 08       		.byte	8
+ 333 0130 B2       		.byte	-78
+ 334 0131 02       		.byte	2
+ 335 0132 B4       		.byte	-76
+ 336 0133 01       		.byte	1
+ 337 0134 B5       		.byte	-75
+ 338 0135 02       		.byte	2
+ 339 0136 B6       		.byte	-74
+ 340 0137 04       		.byte	4
+ 341 0138 B7       		.byte	-73
+ 342 0139 01       		.byte	1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 7
+
+
+ 343 013a B8       		.byte	-72
+ 344 013b 80       		.byte	-128
+ 345 013c BE       		.byte	-66
+ 346 013d 50       		.byte	80
+ 347 013e C0       		.byte	-64
+ 348 013f 30       		.byte	48
+ 349 0140 C1       		.byte	-63
+ 350 0141 04       		.byte	4
+ 351 0142 C5       		.byte	-59
+ 352 0143 D0       		.byte	-48
+ 353 0144 C6       		.byte	-58
+ 354 0145 10       		.byte	16
+ 355 0146 C7       		.byte	-57
+ 356 0147 20       		.byte	32
+ 357 0148 C8       		.byte	-56
+ 358 0149 2A       		.byte	42
+ 359 014a C9       		.byte	-55
+ 360 014b FF       		.byte	-1
+ 361 014c CA       		.byte	-54
+ 362 014d FF       		.byte	-1
+ 363 014e CB       		.byte	-53
+ 364 014f FF       		.byte	-1
+ 365 0150 CD       		.byte	-51
+ 366 0151 A0       		.byte	-96
+ 367 0152 CF       		.byte	-49
+ 368 0153 04       		.byte	4
+ 369 0154 D0       		.byte	-48
+ 370 0155 18       		.byte	24
+ 371 0156 D2       		.byte	-46
+ 372 0157 80       		.byte	-128
+ 373 0158 D4       		.byte	-44
+ 374 0159 05       		.byte	5
+ 375 015a D8       		.byte	-40
+ 376 015b 04       		.byte	4
+ 377 015c D9       		.byte	-39
+ 378 015d 04       		.byte	4
+ 379 015e DA       		.byte	-38
+ 380 015f 04       		.byte	4
+ 381 0160 DB       		.byte	-37
+ 382 0161 04       		.byte	4
+ 383 0162 DC       		.byte	-36
+ 384 0163 11       		.byte	17
+ 385 0164 DD       		.byte	-35
+ 386 0165 11       		.byte	17
+ 387 0166 DF       		.byte	-33
+ 388 0167 01       		.byte	1
+ 389 0168 E0       		.byte	-32
+ 390 0169 40       		.byte	64
+ 391 016a E2       		.byte	-30
+ 392 016b C0       		.byte	-64
+ 393 016c E4       		.byte	-28
+ 394 016d 40       		.byte	64
+ 395 016e E5       		.byte	-27
+ 396 016f 40       		.byte	64
+ 397 0170 E6       		.byte	-26
+ 398 0171 C0       		.byte	-64
+ 399 0172 E8       		.byte	-24
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 8
+
+
+ 400 0173 C0       		.byte	-64
+ 401 0174 EA       		.byte	-22
+ 402 0175 C0       		.byte	-64
+ 403 0176 EC       		.byte	-20
+ 404 0177 C0       		.byte	-64
+ 405 0178 EE       		.byte	-18
+ 406 0179 C0       		.byte	-64
+ 407 017a 00       		.byte	0
+ 408 017b 02       		.byte	2
+ 409 017c 01       		.byte	1
+ 410 017d 01       		.byte	1
+ 411 017e 05       		.byte	5
+ 412 017f 02       		.byte	2
+ 413 0180 06       		.byte	6
+ 414 0181 08       		.byte	8
+ 415 0182 07       		.byte	7
+ 416 0183 02       		.byte	2
+ 417 0184 09       		.byte	9
+ 418 0185 20       		.byte	32
+ 419 0186 0C       		.byte	12
+ 420 0187 02       		.byte	2
+ 421 0188 0D       		.byte	13
+ 422 0189 08       		.byte	8
+ 423 018a 0F       		.byte	15
+ 424 018b 02       		.byte	2
+ 425 018c 10       		.byte	16
+ 426 018d 30       		.byte	48
+ 427 018e 11       		.byte	17
+ 428 018f 02       		.byte	2
+ 429 0190 16       		.byte	22
+ 430 0191 A0       		.byte	-96
+ 431 0192 19       		.byte	25
+ 432 0193 40       		.byte	64
+ 433 0194 1D       		.byte	29
+ 434 0195 88       		.byte	-120
+ 435 0196 1E       		.byte	30
+ 436 0197 08       		.byte	8
+ 437 0198 1F       		.byte	31
+ 438 0199 09       		.byte	9
+ 439 019a 20       		.byte	32
+ 440 019b 01       		.byte	1
+ 441 019c 25       		.byte	37
+ 442 019d 10       		.byte	16
+ 443 019e 26       		.byte	38
+ 444 019f 40       		.byte	64
+ 445 01a0 29       		.byte	41
+ 446 01a1 20       		.byte	32
+ 447 01a2 2F       		.byte	47
+ 448 01a3 09       		.byte	9
+ 449 01a4 31       		.byte	49
+ 450 01a5 20       		.byte	32
+ 451 01a6 39       		.byte	57
+ 452 01a7 01       		.byte	1
+ 453 01a8 3E       		.byte	62
+ 454 01a9 20       		.byte	32
+ 455 01aa 40       		.byte	64
+ 456 01ab 02       		.byte	2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 9
+
+
+ 457 01ac 41       		.byte	65
+ 458 01ad 20       		.byte	32
+ 459 01ae 45       		.byte	69
+ 460 01af 0A       		.byte	10
+ 461 01b0 48       		.byte	72
+ 462 01b1 81       		.byte	-127
+ 463 01b2 49       		.byte	73
+ 464 01b3 24       		.byte	36
+ 465 01b4 4F       		.byte	79
+ 466 01b5 01       		.byte	1
+ 467 01b6 50       		.byte	80
+ 468 01b7 21       		.byte	33
+ 469 01b8 51       		.byte	81
+ 470 01b9 40       		.byte	64
+ 471 01ba 55       		.byte	85
+ 472 01bb 02       		.byte	2
+ 473 01bc 56       		.byte	86
+ 474 01bd 20       		.byte	32
+ 475 01be 57       		.byte	87
+ 476 01bf 01       		.byte	1
+ 477 01c0 58       		.byte	88
+ 478 01c1 12       		.byte	18
+ 479 01c2 59       		.byte	89
+ 480 01c3 44       		.byte	68
+ 481 01c4 5E       		.byte	94
+ 482 01c5 88       		.byte	-120
+ 483 01c6 5F       		.byte	95
+ 484 01c7 01       		.byte	1
+ 485 01c8 60       		.byte	96
+ 486 01c9 01       		.byte	1
+ 487 01ca 76       		.byte	118
+ 488 01cb 80       		.byte	-128
+ 489 01cc 81       		.byte	-127
+ 490 01cd 40       		.byte	64
+ 491 01ce 84       		.byte	-124
+ 492 01cf 20       		.byte	32
+ 493 01d0 8D       		.byte	-115
+ 494 01d1 10       		.byte	16
+ 495 01d2 98       		.byte	-104
+ 496 01d3 02       		.byte	2
+ 497 01d4 99       		.byte	-103
+ 498 01d5 20       		.byte	32
+ 499 01d6 9A       		.byte	-102
+ 500 01d7 08       		.byte	8
+ 501 01d8 9B       		.byte	-101
+ 502 01d9 02       		.byte	2
+ 503 01da A0       		.byte	-96
+ 504 01db 03       		.byte	3
+ 505 01dc A1       		.byte	-95
+ 506 01dd 21       		.byte	33
+ 507 01de A5       		.byte	-91
+ 508 01df 80       		.byte	-128
+ 509 01e0 AC       		.byte	-84
+ 510 01e1 02       		.byte	2
+ 511 01e2 B3       		.byte	-77
+ 512 01e3 02       		.byte	2
+ 513 01e4 B6       		.byte	-74
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 10
+
+
+ 514 01e5 08       		.byte	8
+ 515 01e6 C0       		.byte	-64
+ 516 01e7 D8       		.byte	-40
+ 517 01e8 C2       		.byte	-62
+ 518 01e9 B2       		.byte	-78
+ 519 01ea C4       		.byte	-60
+ 520 01eb 38       		.byte	56
+ 521 01ec CA       		.byte	-54
+ 522 01ed 34       		.byte	52
+ 523 01ee CC       		.byte	-52
+ 524 01ef 04       		.byte	4
+ 525 01f0 CE       		.byte	-50
+ 526 01f1 21       		.byte	33
+ 527 01f2 D0       		.byte	-48
+ 528 01f3 CC       		.byte	-52
+ 529 01f4 D2       		.byte	-46
+ 530 01f5 0C       		.byte	12
+ 531 01f6 D6       		.byte	-42
+ 532 01f7 DF       		.byte	-33
+ 533 01f8 D8       		.byte	-40
+ 534 01f9 08       		.byte	8
+ 535 01fa E0       		.byte	-32
+ 536 01fb 03       		.byte	3
+ 537 01fc E8       		.byte	-24
+ 538 01fd 30       		.byte	48
+ 539 01fe EE       		.byte	-18
+ 540 01ff 02       		.byte	2
+ 541 0200 BF       		.byte	-65
+ 542 0201 01       		.byte	1
+ 543 0202 D9       		.byte	-39
+ 544 0203 04       		.byte	4
+ 545 0204 DF       		.byte	-33
+ 546 0205 01       		.byte	1
+ 547 0206 21       		.byte	33
+ 548 0207 02       		.byte	2
+ 549 0208 81       		.byte	-127
+ 550 0209 02       		.byte	2
+ 551 020a 9D       		.byte	-99
+ 552 020b 02       		.byte	2
+ 553 020c A8       		.byte	-88
+ 554 020d 01       		.byte	1
+ 555 020e B4       		.byte	-76
+ 556 020f 80       		.byte	-128
+ 557 0210 EC       		.byte	-20
+ 558 0211 04       		.byte	4
+ 559 0212 10       		.byte	16
+ 560 0213 02       		.byte	2
+ 561 0214 15       		.byte	21
+ 562 0215 03       		.byte	3
+ 563 0216 18       		.byte	24
+ 564 0217 01       		.byte	1
+ 565 0218 1D       		.byte	29
+ 566 0219 02       		.byte	2
+ 567 021a 24       		.byte	36
+ 568 021b 01       		.byte	1
+ 569 021c 29       		.byte	41
+ 570 021d 03       		.byte	3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 11
+
+
+ 571 021e 2E       		.byte	46
+ 572 021f 01       		.byte	1
+ 573 0220 2F       		.byte	47
+ 574 0221 01       		.byte	1
+ 575 0222 32       		.byte	50
+ 576 0223 03       		.byte	3
+ 577 0224 35       		.byte	53
+ 578 0225 03       		.byte	3
+ 579 0226 38       		.byte	56
+ 580 0227 08       		.byte	8
+ 581 0228 39       		.byte	57
+ 582 0229 20       		.byte	32
+ 583 022a 3F       		.byte	63
+ 584 022b 10       		.byte	16
+ 585 022c 52       		.byte	82
+ 586 022d 80       		.byte	-128
+ 587 022e 58       		.byte	88
+ 588 022f 04       		.byte	4
+ 589 0230 59       		.byte	89
+ 590 0231 04       		.byte	4
+ 591 0232 5B       		.byte	91
+ 592 0233 04       		.byte	4
+ 593 0234 5C       		.byte	92
+ 594 0235 04       		.byte	4
+ 595 0236 5D       		.byte	93
+ 596 0237 30       		.byte	48
+ 597 0238 5F       		.byte	95
+ 598 0239 01       		.byte	1
+ 599 023a 84       		.byte	-124
+ 600 023b 01       		.byte	1
+ 601 023c 85       		.byte	-123
+ 602 023d 06       		.byte	6
+ 603 023e 86       		.byte	-122
+ 604 023f 08       		.byte	8
+ 605 0240 88       		.byte	-120
+ 606 0241 02       		.byte	2
+ 607 0242 89       		.byte	-119
+ 608 0243 02       		.byte	2
+ 609 0244 8A       		.byte	-118
+ 610 0245 08       		.byte	8
+ 611 0246 8D       		.byte	-115
+ 612 0247 06       		.byte	6
+ 613 0248 8E       		.byte	-114
+ 614 0249 03       		.byte	3
+ 615 024a 8F       		.byte	-113
+ 616 024b 01       		.byte	1
+ 617 024c 93       		.byte	-109
+ 618 024d 08       		.byte	8
+ 619 024e 95       		.byte	-107
+ 620 024f 01       		.byte	1
+ 621 0250 97       		.byte	-105
+ 622 0251 06       		.byte	6
+ 623 0252 99       		.byte	-103
+ 624 0253 07       		.byte	7
+ 625 0254 9A       		.byte	-102
+ 626 0255 03       		.byte	3
+ 627 0256 9C       		.byte	-100
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 12
+
+
+ 628 0257 03       		.byte	3
+ 629 0258 9E       		.byte	-98
+ 630 0259 04       		.byte	4
+ 631 025a 9F       		.byte	-97
+ 632 025b 08       		.byte	8
+ 633 025c A1       		.byte	-95
+ 634 025d 04       		.byte	4
+ 635 025e A6       		.byte	-90
+ 636 025f 03       		.byte	3
+ 637 0260 A8       		.byte	-88
+ 638 0261 03       		.byte	3
+ 639 0262 AB       		.byte	-85
+ 640 0263 01       		.byte	1
+ 641 0264 AC       		.byte	-84
+ 642 0265 03       		.byte	3
+ 643 0266 AD       		.byte	-83
+ 644 0267 07       		.byte	7
+ 645 0268 B0       		.byte	-80
+ 646 0269 03       		.byte	3
+ 647 026a B1       		.byte	-79
+ 648 026b 07       		.byte	7
+ 649 026c B3       		.byte	-77
+ 650 026d 08       		.byte	8
+ 651 026e B4       		.byte	-76
+ 652 026f 0C       		.byte	12
+ 653 0270 BE       		.byte	-66
+ 654 0271 10       		.byte	16
+ 655 0272 BF       		.byte	-65
+ 656 0273 04       		.byte	4
+ 657 0274 C0       		.byte	-64
+ 658 0275 63       		.byte	99
+ 659 0276 C1       		.byte	-63
+ 660 0277 05       		.byte	5
+ 661 0278 C2       		.byte	-62
+ 662 0279 04       		.byte	4
+ 663 027a C4       		.byte	-60
+ 664 027b 02       		.byte	2
+ 665 027c C5       		.byte	-59
+ 666 027d E0       		.byte	-32
+ 667 027e C6       		.byte	-58
+ 668 027f 0C       		.byte	12
+ 669 0280 C8       		.byte	-56
+ 670 0281 06       		.byte	6
+ 671 0282 C9       		.byte	-55
+ 672 0283 FF       		.byte	-1
+ 673 0284 CA       		.byte	-54
+ 674 0285 FF       		.byte	-1
+ 675 0286 CB       		.byte	-53
+ 676 0287 FF       		.byte	-1
+ 677 0288 CC       		.byte	-52
+ 678 0289 62       		.byte	98
+ 679 028a CD       		.byte	-51
+ 680 028b A0       		.byte	-96
+ 681 028c CE       		.byte	-50
+ 682 028d F0       		.byte	-16
+ 683 028e CF       		.byte	-49
+ 684 028f 41       		.byte	65
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 13
+
+
+ 685 0290 D0       		.byte	-48
+ 686 0291 0C       		.byte	12
+ 687 0292 D6       		.byte	-42
+ 688 0293 02       		.byte	2
+ 689 0294 D7       		.byte	-41
+ 690 0295 13       		.byte	19
+ 691 0296 D8       		.byte	-40
+ 692 0297 04       		.byte	4
+ 693 0298 D9       		.byte	-39
+ 694 0299 04       		.byte	4
+ 695 029a DA       		.byte	-38
+ 696 029b 04       		.byte	4
+ 697 029c DB       		.byte	-37
+ 698 029d 04       		.byte	4
+ 699 029e DC       		.byte	-36
+ 700 029f 44       		.byte	68
+ 701 02a0 DD       		.byte	-35
+ 702 02a1 44       		.byte	68
+ 703 02a2 DF       		.byte	-33
+ 704 02a3 01       		.byte	1
+ 705 02a4 E6       		.byte	-26
+ 706 02a5 40       		.byte	64
+ 707 02a6 E7       		.byte	-25
+ 708 02a7 02       		.byte	2
+ 709 02a8 E9       		.byte	-23
+ 710 02a9 10       		.byte	16
+ 711 02aa EA       		.byte	-22
+ 712 02ab 30       		.byte	48
+ 713 02ac EB       		.byte	-21
+ 714 02ad 10       		.byte	16
+ 715 02ae ED       		.byte	-19
+ 716 02af 10       		.byte	16
+ 717 02b0 EE       		.byte	-18
+ 718 02b1 10       		.byte	16
+ 719 02b2 EF       		.byte	-17
+ 720 02b3 12       		.byte	18
+ 721 02b4 00       		.byte	0
+ 722 02b5 68       		.byte	104
+ 723 02b6 08       		.byte	8
+ 724 02b7 20       		.byte	32
+ 725 02b8 0A       		.byte	10
+ 726 02b9 02       		.byte	2
+ 727 02ba 0E       		.byte	14
+ 728 02bb 48       		.byte	72
+ 729 02bc 12       		.byte	18
+ 730 02bd 2A       		.byte	42
+ 731 02be 16       		.byte	22
+ 732 02bf 20       		.byte	32
+ 733 02c0 17       		.byte	23
+ 734 02c1 40       		.byte	64
+ 735 02c2 18       		.byte	24
+ 736 02c3 04       		.byte	4
+ 737 02c4 19       		.byte	25
+ 738 02c5 01       		.byte	1
+ 739 02c6 1E       		.byte	30
+ 740 02c7 10       		.byte	16
+ 741 02c8 20       		.byte	32
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 14
+
+
+ 742 02c9 10       		.byte	16
+ 743 02ca 21       		.byte	33
+ 744 02cb 02       		.byte	2
+ 745 02cc 27       		.byte	39
+ 746 02cd 08       		.byte	8
+ 747 02ce 29       		.byte	41
+ 748 02cf 80       		.byte	-128
+ 749 02d0 2A       		.byte	42
+ 750 02d1 02       		.byte	2
+ 751 02d2 2B       		.byte	43
+ 752 02d3 08       		.byte	8
+ 753 02d4 2E       		.byte	46
+ 754 02d5 60       		.byte	96
+ 755 02d6 2F       		.byte	47
+ 756 02d7 06       		.byte	6
+ 757 02d8 31       		.byte	49
+ 758 02d9 82       		.byte	-126
+ 759 02da 32       		.byte	50
+ 760 02db 28       		.byte	40
+ 761 02dc 36       		.byte	54
+ 762 02dd 04       		.byte	4
+ 763 02de 37       		.byte	55
+ 764 02df 40       		.byte	64
+ 765 02e0 38       		.byte	56
+ 766 02e1 68       		.byte	104
+ 767 02e2 40       		.byte	64
+ 768 02e3 24       		.byte	36
+ 769 02e4 41       		.byte	65
+ 770 02e5 02       		.byte	2
+ 771 02e6 43       		.byte	67
+ 772 02e7 08       		.byte	8
+ 773 02e8 49       		.byte	73
+ 774 02e9 80       		.byte	-128
+ 775 02ea 4A       		.byte	74
+ 776 02eb 8A       		.byte	-118
+ 777 02ec 4B       		.byte	75
+ 778 02ed 40       		.byte	64
+ 779 02ee 51       		.byte	81
+ 780 02ef 80       		.byte	-128
+ 781 02f0 5A       		.byte	90
+ 782 02f1 01       		.byte	1
+ 783 02f2 68       		.byte	104
+ 784 02f3 02       		.byte	2
+ 785 02f4 69       		.byte	105
+ 786 02f5 04       		.byte	4
+ 787 02f6 6A       		.byte	106
+ 788 02f7 20       		.byte	32
+ 789 02f8 70       		.byte	112
+ 790 02f9 B4       		.byte	-76
+ 791 02fa 72       		.byte	114
+ 792 02fb 02       		.byte	2
+ 793 02fc 76       		.byte	118
+ 794 02fd 80       		.byte	-128
+ 795 02fe 92       		.byte	-110
+ 796 02ff 01       		.byte	1
+ 797 0300 94       		.byte	-108
+ 798 0301 40       		.byte	64
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 15
+
+
+ 799 0302 9C       		.byte	-100
+ 800 0303 02       		.byte	2
+ 801 0304 9D       		.byte	-99
+ 802 0305 01       		.byte	1
+ 803 0306 9E       		.byte	-98
+ 804 0307 80       		.byte	-128
+ 805 0308 A2       		.byte	-94
+ 806 0309 02       		.byte	2
+ 807 030a A6       		.byte	-90
+ 808 030b A8       		.byte	-88
+ 809 030c A8       		.byte	-88
+ 810 030d 08       		.byte	8
+ 811 030e B5       		.byte	-75
+ 812 030f 80       		.byte	-128
+ 813 0310 B6       		.byte	-74
+ 814 0311 20       		.byte	32
+ 815 0312 C0       		.byte	-64
+ 816 0313 07       		.byte	7
+ 817 0314 C2       		.byte	-62
+ 818 0315 53       		.byte	83
+ 819 0316 C4       		.byte	-60
+ 820 0317 A7       		.byte	-89
+ 821 0318 CA       		.byte	-54
+ 822 0319 3D       		.byte	61
+ 823 031a CC       		.byte	-52
+ 824 031b 5F       		.byte	95
+ 825 031c CE       		.byte	-50
+ 826 031d 0E       		.byte	14
+ 827 031e D0       		.byte	-48
+ 828 031f 07       		.byte	7
+ 829 0320 D2       		.byte	-46
+ 830 0321 0C       		.byte	12
+ 831 0322 D6       		.byte	-42
+ 832 0323 01       		.byte	1
+ 833 0324 EC       		.byte	-20
+ 834 0325 40       		.byte	64
+ 835 0326 04       		.byte	4
+ 836 0327 0A       		.byte	10
+ 837 0328 06       		.byte	6
+ 838 0329 14       		.byte	20
+ 839 032a 08       		.byte	8
+ 840 032b 04       		.byte	4
+ 841 032c 0A       		.byte	10
+ 842 032d 1A       		.byte	26
+ 843 032e 0C       		.byte	12
+ 844 032f 20       		.byte	32
+ 845 0330 0F       		.byte	15
+ 846 0331 01       		.byte	1
+ 847 0332 10       		.byte	16
+ 848 0333 06       		.byte	6
+ 849 0334 11       		.byte	17
+ 850 0335 01       		.byte	1
+ 851 0336 12       		.byte	18
+ 852 0337 18       		.byte	24
+ 853 0338 14       		.byte	20
+ 854 0339 12       		.byte	18
+ 855 033a 15       		.byte	21
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 16
+
+
+ 856 033b 01       		.byte	1
+ 857 033c 16       		.byte	22
+ 858 033d 0C       		.byte	12
+ 859 033e 1B       		.byte	27
+ 860 033f 01       		.byte	1
+ 861 0340 1E       		.byte	30
+ 862 0341 01       		.byte	1
+ 863 0342 22       		.byte	34
+ 864 0343 01       		.byte	1
+ 865 0344 24       		.byte	36
+ 866 0345 20       		.byte	32
+ 867 0346 28       		.byte	40
+ 868 0347 20       		.byte	32
+ 869 0348 2C       		.byte	44
+ 870 0349 20       		.byte	32
+ 871 034a 32       		.byte	50
+ 872 034b 1E       		.byte	30
+ 873 034c 34       		.byte	52
+ 874 034d 01       		.byte	1
+ 875 034e 36       		.byte	54
+ 876 034f 20       		.byte	32
+ 877 0350 37       		.byte	55
+ 878 0351 01       		.byte	1
+ 879 0352 39       		.byte	57
+ 880 0353 80       		.byte	-128
+ 881 0354 3A       		.byte	58
+ 882 0355 08       		.byte	8
+ 883 0356 3B       		.byte	59
+ 884 0357 02       		.byte	2
+ 885 0358 3E       		.byte	62
+ 886 0359 50       		.byte	80
+ 887 035a 40       		.byte	64
+ 888 035b 50       		.byte	80
+ 889 035c 41       		.byte	65
+ 890 035d 01       		.byte	1
+ 891 035e 49       		.byte	73
+ 892 035f FF       		.byte	-1
+ 893 0360 4A       		.byte	74
+ 894 0361 FF       		.byte	-1
+ 895 0362 4B       		.byte	75
+ 896 0363 FF       		.byte	-1
+ 897 0364 4D       		.byte	77
+ 898 0365 A0       		.byte	-96
+ 899 0366 4F       		.byte	79
+ 900 0367 04       		.byte	4
+ 901 0368 50       		.byte	80
+ 902 0369 18       		.byte	24
+ 903 036a 56       		.byte	86
+ 904 036b 02       		.byte	2
+ 905 036c 57       		.byte	87
+ 906 036d 28       		.byte	40
+ 907 036e 58       		.byte	88
+ 908 036f 04       		.byte	4
+ 909 0370 59       		.byte	89
+ 910 0371 04       		.byte	4
+ 911 0372 5A       		.byte	90
+ 912 0373 04       		.byte	4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 17
+
+
+ 913 0374 5B       		.byte	91
+ 914 0375 04       		.byte	4
+ 915 0376 5C       		.byte	92
+ 916 0377 40       		.byte	64
+ 917 0378 5D       		.byte	93
+ 918 0379 03       		.byte	3
+ 919 037a 5F       		.byte	95
+ 920 037b 01       		.byte	1
+ 921 037c 60       		.byte	96
+ 922 037d 40       		.byte	64
+ 923 037e 62       		.byte	98
+ 924 037f C0       		.byte	-64
+ 925 0380 64       		.byte	100
+ 926 0381 40       		.byte	64
+ 927 0382 65       		.byte	101
+ 928 0383 40       		.byte	64
+ 929 0384 66       		.byte	102
+ 930 0385 C0       		.byte	-64
+ 931 0386 68       		.byte	104
+ 932 0387 C0       		.byte	-64
+ 933 0388 6A       		.byte	106
+ 934 0389 C0       		.byte	-64
+ 935 038a 6C       		.byte	108
+ 936 038b C0       		.byte	-64
+ 937 038c 6E       		.byte	110
+ 938 038d C0       		.byte	-64
+ 939 038e 82       		.byte	-126
+ 940 038f 02       		.byte	2
+ 941 0390 86       		.byte	-122
+ 942 0391 04       		.byte	4
+ 943 0392 8C       		.byte	-116
+ 944 0393 04       		.byte	4
+ 945 0394 92       		.byte	-110
+ 946 0395 04       		.byte	4
+ 947 0396 94       		.byte	-108
+ 948 0397 04       		.byte	4
+ 949 0398 9A       		.byte	-102
+ 950 0399 01       		.byte	1
+ 951 039a 9E       		.byte	-98
+ 952 039b 01       		.byte	1
+ 953 039c A0       		.byte	-96
+ 954 039d 04       		.byte	4
+ 955 039e A8       		.byte	-88
+ 956 039f 04       		.byte	4
+ 957 03a0 B0       		.byte	-80
+ 958 03a1 01       		.byte	1
+ 959 03a2 B2       		.byte	-78
+ 960 03a3 04       		.byte	4
+ 961 03a4 B6       		.byte	-74
+ 962 03a5 02       		.byte	2
+ 963 03a6 BE       		.byte	-66
+ 964 03a7 04       		.byte	4
+ 965 03a8 C0       		.byte	-64
+ 966 03a9 10       		.byte	16
+ 967 03aa C1       		.byte	-63
+ 968 03ab 05       		.byte	5
+ 969 03ac C5       		.byte	-59
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 18
+
+
+ 970 03ad 01       		.byte	1
+ 971 03ae C6       		.byte	-58
+ 972 03af 02       		.byte	2
+ 973 03b0 C8       		.byte	-56
+ 974 03b1 05       		.byte	5
+ 975 03b2 C9       		.byte	-55
+ 976 03b3 FF       		.byte	-1
+ 977 03b4 CA       		.byte	-54
+ 978 03b5 FF       		.byte	-1
+ 979 03b6 CB       		.byte	-53
+ 980 03b7 FF       		.byte	-1
+ 981 03b8 CD       		.byte	-51
+ 982 03b9 AF       		.byte	-81
+ 983 03ba CE       		.byte	-50
+ 984 03bb 0F       		.byte	15
+ 985 03bc CF       		.byte	-49
+ 986 03bd 04       		.byte	4
+ 987 03be D0       		.byte	-48
+ 988 03bf 18       		.byte	24
+ 989 03c0 D4       		.byte	-44
+ 990 03c1 40       		.byte	64
+ 991 03c2 D8       		.byte	-40
+ 992 03c3 04       		.byte	4
+ 993 03c4 DA       		.byte	-38
+ 994 03c5 04       		.byte	4
+ 995 03c6 DB       		.byte	-37
+ 996 03c7 04       		.byte	4
+ 997 03c8 DC       		.byte	-36
+ 998 03c9 03       		.byte	3
+ 999 03ca DD       		.byte	-35
+ 1000 03cb 03       		.byte	3
+ 1001 03cc DF       		.byte	-33
+ 1002 03cd 01       		.byte	1
+ 1003 03ce E0       		.byte	-32
+ 1004 03cf 40       		.byte	64
+ 1005 03d0 E2       		.byte	-30
+ 1006 03d1 C0       		.byte	-64
+ 1007 03d2 E4       		.byte	-28
+ 1008 03d3 40       		.byte	64
+ 1009 03d4 E5       		.byte	-27
+ 1010 03d5 40       		.byte	64
+ 1011 03d6 E6       		.byte	-26
+ 1012 03d7 C0       		.byte	-64
+ 1013 03d8 E8       		.byte	-24
+ 1014 03d9 C0       		.byte	-64
+ 1015 03da EA       		.byte	-22
+ 1016 03db C0       		.byte	-64
+ 1017 03dc EC       		.byte	-20
+ 1018 03dd C0       		.byte	-64
+ 1019 03de EE       		.byte	-18
+ 1020 03df C0       		.byte	-64
+ 1021 03e0 00       		.byte	0
+ 1022 03e1 50       		.byte	80
+ 1023 03e2 03       		.byte	3
+ 1024 03e3 20       		.byte	32
+ 1025 03e4 06       		.byte	6
+ 1026 03e5 63       		.byte	99
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 19
+
+
+ 1027 03e6 08       		.byte	8
+ 1028 03e7 01       		.byte	1
+ 1029 03e8 09       		.byte	9
+ 1030 03e9 08       		.byte	8
+ 1031 03ea 0B       		.byte	11
+ 1032 03eb 01       		.byte	1
+ 1033 03ec 0C       		.byte	12
+ 1034 03ed 08       		.byte	8
+ 1035 03ee 0D       		.byte	13
+ 1036 03ef 80       		.byte	-128
+ 1037 03f0 0E       		.byte	14
+ 1038 03f1 40       		.byte	64
+ 1039 03f2 0F       		.byte	15
+ 1040 03f3 08       		.byte	8
+ 1041 03f4 12       		.byte	18
+ 1042 03f5 AA       		.byte	-86
+ 1043 03f6 15       		.byte	21
+ 1044 03f7 01       		.byte	1
+ 1045 03f8 17       		.byte	23
+ 1046 03f9 20       		.byte	32
+ 1047 03fa 18       		.byte	24
+ 1048 03fb 14       		.byte	20
+ 1049 03fc 1A       		.byte	26
+ 1050 03fd 01       		.byte	1
+ 1051 03fe 1D       		.byte	29
+ 1052 03ff C4       		.byte	-60
+ 1053 0400 1F       		.byte	31
+ 1054 0401 02       		.byte	2
+ 1055 0402 22       		.byte	34
+ 1056 0403 02       		.byte	2
+ 1057 0404 23       		.byte	35
+ 1058 0405 01       		.byte	1
+ 1059 0406 32       		.byte	50
+ 1060 0407 2A       		.byte	42
+ 1061 0408 38       		.byte	56
+ 1062 0409 40       		.byte	64
+ 1063 040a 43       		.byte	67
+ 1064 040b 80       		.byte	-128
+ 1065 040c 45       		.byte	69
+ 1066 040d 80       		.byte	-128
+ 1067 040e 49       		.byte	73
+ 1068 040f 40       		.byte	64
+ 1069 0410 4F       		.byte	79
+ 1070 0411 88       		.byte	-120
+ 1071 0412 57       		.byte	87
+ 1072 0413 C0       		.byte	-64
+ 1073 0414 60       		.byte	96
+ 1074 0415 10       		.byte	16
+ 1075 0416 64       		.byte	100
+ 1076 0417 08       		.byte	8
+ 1077 0418 65       		.byte	101
+ 1078 0419 84       		.byte	-124
+ 1079 041a 68       		.byte	104
+ 1080 041b 08       		.byte	8
+ 1081 041c 69       		.byte	105
+ 1082 041d 01       		.byte	1
+ 1083 041e 6A       		.byte	106
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 20
+
+
+ 1084 041f 44       		.byte	68
+ 1085 0420 6B       		.byte	107
+ 1086 0421 20       		.byte	32
+ 1087 0422 72       		.byte	114
+ 1088 0423 02       		.byte	2
+ 1089 0424 82       		.byte	-126
+ 1090 0425 04       		.byte	4
+ 1091 0426 84       		.byte	-124
+ 1092 0427 40       		.byte	64
+ 1093 0428 85       		.byte	-123
+ 1094 0429 10       		.byte	16
+ 1095 042a 8B       		.byte	-117
+ 1096 042b 02       		.byte	2
+ 1097 042c 94       		.byte	-108
+ 1098 042d 04       		.byte	4
+ 1099 042e 95       		.byte	-107
+ 1100 042f 21       		.byte	33
+ 1101 0430 96       		.byte	-106
+ 1102 0431 44       		.byte	68
+ 1103 0432 98       		.byte	-104
+ 1104 0433 01       		.byte	1
+ 1105 0434 9A       		.byte	-102
+ 1106 0435 40       		.byte	64
+ 1107 0436 9C       		.byte	-100
+ 1108 0437 02       		.byte	2
+ 1109 0438 9D       		.byte	-99
+ 1110 0439 01       		.byte	1
+ 1111 043a 9E       		.byte	-98
+ 1112 043b 87       		.byte	-121
+ 1113 043c A1       		.byte	-95
+ 1114 043d 08       		.byte	8
+ 1115 043e A3       		.byte	-93
+ 1116 043f 20       		.byte	32
+ 1117 0440 A4       		.byte	-92
+ 1118 0441 48       		.byte	72
+ 1119 0442 AF       		.byte	-81
+ 1120 0443 02       		.byte	2
+ 1121 0444 B3       		.byte	-77
+ 1122 0445 10       		.byte	16
+ 1123 0446 C0       		.byte	-64
+ 1124 0447 B7       		.byte	-73
+ 1125 0448 C2       		.byte	-62
+ 1126 0449 FD       		.byte	-3
+ 1127 044a C4       		.byte	-60
+ 1128 044b 5F       		.byte	95
+ 1129 044c CC       		.byte	-52
+ 1130 044d 07       		.byte	7
+ 1131 044e CE       		.byte	-50
+ 1132 044f 08       		.byte	8
+ 1133 0450 D0       		.byte	-48
+ 1134 0451 18       		.byte	24
+ 1135 0452 D2       		.byte	-46
+ 1136 0453 18       		.byte	24
+ 1137 0454 D8       		.byte	-40
+ 1138 0455 72       		.byte	114
+ 1139 0456 E4       		.byte	-28
+ 1140 0457 10       		.byte	16
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 21
+
+
+ 1141 0458 01       		.byte	1
+ 1142 0459 02       		.byte	2
+ 1143 045a 04       		.byte	4
+ 1144 045b 64       		.byte	100
+ 1145 045c 06       		.byte	6
+ 1146 045d 18       		.byte	24
+ 1147 045e 07       		.byte	7
+ 1148 045f 04       		.byte	4
+ 1149 0460 08       		.byte	8
+ 1150 0461 0E       		.byte	14
+ 1151 0462 0A       		.byte	10
+ 1152 0463 41       		.byte	65
+ 1153 0464 0C       		.byte	12
+ 1154 0465 50       		.byte	80
+ 1155 0466 0F       		.byte	15
+ 1156 0467 08       		.byte	8
+ 1157 0468 10       		.byte	16
+ 1158 0469 40       		.byte	64
+ 1159 046a 12       		.byte	18
+ 1160 046b 10       		.byte	16
+ 1161 046c 13       		.byte	19
+ 1162 046d 01       		.byte	1
+ 1163 046e 14       		.byte	20
+ 1164 046f 10       		.byte	16
+ 1165 0470 16       		.byte	22
+ 1166 0471 40       		.byte	64
+ 1167 0472 17       		.byte	23
+ 1168 0473 04       		.byte	4
+ 1169 0474 18       		.byte	24
+ 1170 0475 40       		.byte	64
+ 1171 0476 20       		.byte	32
+ 1172 0477 50       		.byte	80
+ 1173 0478 21       		.byte	33
+ 1174 0479 02       		.byte	2
+ 1175 047a 24       		.byte	36
+ 1176 047b 40       		.byte	64
+ 1177 047c 25       		.byte	37
+ 1178 047d 02       		.byte	2
+ 1179 047e 26       		.byte	38
+ 1180 047f 10       		.byte	16
+ 1181 0480 28       		.byte	40
+ 1182 0481 14       		.byte	20
+ 1183 0482 29       		.byte	41
+ 1184 0483 02       		.byte	2
+ 1185 0484 2C       		.byte	44
+ 1186 0485 19       		.byte	25
+ 1187 0486 2E       		.byte	46
+ 1188 0487 22       		.byte	34
+ 1189 0488 2F       		.byte	47
+ 1190 0489 02       		.byte	2
+ 1191 048a 31       		.byte	49
+ 1192 048b 04       		.byte	4
+ 1193 048c 32       		.byte	50
+ 1194 048d 07       		.byte	7
+ 1195 048e 33       		.byte	51
+ 1196 048f 01       		.byte	1
+ 1197 0490 34       		.byte	52
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 22
+
+
+ 1198 0491 78       		.byte	120
+ 1199 0492 35       		.byte	53
+ 1200 0493 08       		.byte	8
+ 1201 0494 37       		.byte	55
+ 1202 0495 02       		.byte	2
+ 1203 0496 3A       		.byte	58
+ 1204 0497 28       		.byte	40
+ 1205 0498 3F       		.byte	63
+ 1206 0499 40       		.byte	64
+ 1207 049a 40       		.byte	64
+ 1208 049b 30       		.byte	48
+ 1209 049c 41       		.byte	65
+ 1210 049d 06       		.byte	6
+ 1211 049e 49       		.byte	73
+ 1212 049f FF       		.byte	-1
+ 1213 04a0 4A       		.byte	74
+ 1214 04a1 FF       		.byte	-1
+ 1215 04a2 4B       		.byte	75
+ 1216 04a3 FF       		.byte	-1
+ 1217 04a4 4D       		.byte	77
+ 1218 04a5 A0       		.byte	-96
+ 1219 04a6 4F       		.byte	79
+ 1220 04a7 04       		.byte	4
+ 1221 04a8 50       		.byte	80
+ 1222 04a9 18       		.byte	24
+ 1223 04aa 52       		.byte	82
+ 1224 04ab 80       		.byte	-128
+ 1225 04ac 58       		.byte	88
+ 1226 04ad 04       		.byte	4
+ 1227 04ae 59       		.byte	89
+ 1228 04af 04       		.byte	4
+ 1229 04b0 5A       		.byte	90
+ 1230 04b1 04       		.byte	4
+ 1231 04b2 5B       		.byte	91
+ 1232 04b3 04       		.byte	4
+ 1233 04b4 5C       		.byte	92
+ 1234 04b5 30       		.byte	48
+ 1235 04b6 5D       		.byte	93
+ 1236 04b7 33       		.byte	51
+ 1237 04b8 5F       		.byte	95
+ 1238 04b9 01       		.byte	1
+ 1239 04ba 60       		.byte	96
+ 1240 04bb 40       		.byte	64
+ 1241 04bc 62       		.byte	98
+ 1242 04bd C0       		.byte	-64
+ 1243 04be 64       		.byte	100
+ 1244 04bf 40       		.byte	64
+ 1245 04c0 65       		.byte	101
+ 1246 04c1 40       		.byte	64
+ 1247 04c2 66       		.byte	102
+ 1248 04c3 C0       		.byte	-64
+ 1249 04c4 68       		.byte	104
+ 1250 04c5 C0       		.byte	-64
+ 1251 04c6 6A       		.byte	106
+ 1252 04c7 C0       		.byte	-64
+ 1253 04c8 6C       		.byte	108
+ 1254 04c9 C0       		.byte	-64
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 23
+
+
+ 1255 04ca 6E       		.byte	110
+ 1256 04cb C0       		.byte	-64
+ 1257 04cc 82       		.byte	-126
+ 1258 04cd 03       		.byte	3
+ 1259 04ce 84       		.byte	-124
+ 1260 04cf 01       		.byte	1
+ 1261 04d0 86       		.byte	-122
+ 1262 04d1 06       		.byte	6
+ 1263 04d2 88       		.byte	-120
+ 1264 04d3 01       		.byte	1
+ 1265 04d4 8A       		.byte	-118
+ 1266 04d5 06       		.byte	6
+ 1267 04d6 8B       		.byte	-117
+ 1268 04d7 01       		.byte	1
+ 1269 04d8 8C       		.byte	-116
+ 1270 04d9 04       		.byte	4
+ 1271 04da 90       		.byte	-112
+ 1272 04db 04       		.byte	4
+ 1273 04dc 94       		.byte	-108
+ 1274 04dd 07       		.byte	7
+ 1275 04de 98       		.byte	-104
+ 1276 04df 04       		.byte	4
+ 1277 04e0 A0       		.byte	-96
+ 1278 04e1 04       		.byte	4
+ 1279 04e2 A7       		.byte	-89
+ 1280 04e3 01       		.byte	1
+ 1281 04e4 AA       		.byte	-86
+ 1282 04e5 04       		.byte	4
+ 1283 04e6 B2       		.byte	-78
+ 1284 04e7 07       		.byte	7
+ 1285 04e8 B3       		.byte	-77
+ 1286 04e9 01       		.byte	1
+ 1287 04ea BA       		.byte	-70
+ 1288 04eb 08       		.byte	8
+ 1289 04ec C0       		.byte	-64
+ 1290 04ed 30       		.byte	48
+ 1291 04ee C1       		.byte	-63
+ 1292 04ef 06       		.byte	6
+ 1293 04f0 C6       		.byte	-58
+ 1294 04f1 10       		.byte	16
+ 1295 04f2 C7       		.byte	-57
+ 1296 04f3 02       		.byte	2
+ 1297 04f4 C8       		.byte	-56
+ 1298 04f5 18       		.byte	24
+ 1299 04f6 C9       		.byte	-55
+ 1300 04f7 FF       		.byte	-1
+ 1301 04f8 CA       		.byte	-54
+ 1302 04f9 FF       		.byte	-1
+ 1303 04fa CB       		.byte	-53
+ 1304 04fb FF       		.byte	-1
+ 1305 04fc CD       		.byte	-51
+ 1306 04fd AF       		.byte	-81
+ 1307 04fe CE       		.byte	-50
+ 1308 04ff 0F       		.byte	15
+ 1309 0500 CF       		.byte	-49
+ 1310 0501 04       		.byte	4
+ 1311 0502 D0       		.byte	-48
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 24
+
+
+ 1312 0503 18       		.byte	24
+ 1313 0504 D4       		.byte	-44
+ 1314 0505 18       		.byte	24
+ 1315 0506 D8       		.byte	-40
+ 1316 0507 04       		.byte	4
+ 1317 0508 D9       		.byte	-39
+ 1318 0509 04       		.byte	4
+ 1319 050a DA       		.byte	-38
+ 1320 050b 04       		.byte	4
+ 1321 050c DB       		.byte	-37
+ 1322 050d 04       		.byte	4
+ 1323 050e DC       		.byte	-36
+ 1324 050f 30       		.byte	48
+ 1325 0510 DD       		.byte	-35
+ 1326 0511 43       		.byte	67
+ 1327 0512 DF       		.byte	-33
+ 1328 0513 01       		.byte	1
+ 1329 0514 E0       		.byte	-32
+ 1330 0515 40       		.byte	64
+ 1331 0516 E2       		.byte	-30
+ 1332 0517 C0       		.byte	-64
+ 1333 0518 E4       		.byte	-28
+ 1334 0519 40       		.byte	64
+ 1335 051a E5       		.byte	-27
+ 1336 051b 40       		.byte	64
+ 1337 051c E6       		.byte	-26
+ 1338 051d C0       		.byte	-64
+ 1339 051e E8       		.byte	-24
+ 1340 051f C0       		.byte	-64
+ 1341 0520 EA       		.byte	-22
+ 1342 0521 C0       		.byte	-64
+ 1343 0522 EC       		.byte	-20
+ 1344 0523 C0       		.byte	-64
+ 1345 0524 EE       		.byte	-18
+ 1346 0525 C0       		.byte	-64
+ 1347 0526 00       		.byte	0
+ 1348 0527 10       		.byte	16
+ 1349 0528 02       		.byte	2
+ 1350 0529 01       		.byte	1
+ 1351 052a 03       		.byte	3
+ 1352 052b 60       		.byte	96
+ 1353 052c 05       		.byte	5
+ 1354 052d 14       		.byte	20
+ 1355 052e 06       		.byte	6
+ 1356 052f 02       		.byte	2
+ 1357 0530 09       		.byte	9
+ 1358 0531 08       		.byte	8
+ 1359 0532 0A       		.byte	10
+ 1360 0533 44       		.byte	68
+ 1361 0534 0C       		.byte	12
+ 1362 0535 08       		.byte	8
+ 1363 0536 0E       		.byte	14
+ 1364 0537 40       		.byte	64
+ 1365 0538 0F       		.byte	15
+ 1366 0539 08       		.byte	8
+ 1367 053a 10       		.byte	16
+ 1368 053b 08       		.byte	8
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 25
+
+
+ 1369 053c 11       		.byte	17
+ 1370 053d 01       		.byte	1
+ 1371 053e 14       		.byte	20
+ 1372 053f 11       		.byte	17
+ 1373 0540 15       		.byte	21
+ 1374 0541 21       		.byte	33
+ 1375 0542 17       		.byte	23
+ 1376 0543 40       		.byte	64
+ 1377 0544 18       		.byte	24
+ 1378 0545 10       		.byte	16
+ 1379 0546 19       		.byte	25
+ 1380 0547 08       		.byte	8
+ 1381 0548 1B       		.byte	27
+ 1382 0549 04       		.byte	4
+ 1383 054a 1C       		.byte	28
+ 1384 054b 20       		.byte	32
+ 1385 054c 1D       		.byte	29
+ 1386 054d 1C       		.byte	28
+ 1387 054e 1F       		.byte	31
+ 1388 054f 28       		.byte	40
+ 1389 0550 23       		.byte	35
+ 1390 0551 10       		.byte	16
+ 1391 0552 25       		.byte	37
+ 1392 0553 05       		.byte	5
+ 1393 0554 27       		.byte	39
+ 1394 0555 06       		.byte	6
+ 1395 0556 28       		.byte	40
+ 1396 0557 20       		.byte	32
+ 1397 0558 2C       		.byte	44
+ 1398 0559 18       		.byte	24
+ 1399 055a 2D       		.byte	45
+ 1400 055b 01       		.byte	1
+ 1401 055c 2E       		.byte	46
+ 1402 055d 64       		.byte	100
+ 1403 055e 35       		.byte	53
+ 1404 055f 02       		.byte	2
+ 1405 0560 37       		.byte	55
+ 1406 0561 04       		.byte	4
+ 1407 0562 38       		.byte	56
+ 1408 0563 20       		.byte	32
+ 1409 0564 3E       		.byte	62
+ 1410 0565 8A       		.byte	-118
+ 1411 0566 40       		.byte	64
+ 1412 0567 20       		.byte	32
+ 1413 0568 44       		.byte	68
+ 1414 0569 20       		.byte	32
+ 1415 056a 45       		.byte	69
+ 1416 056b 04       		.byte	4
+ 1417 056c 4A       		.byte	74
+ 1418 056d 08       		.byte	8
+ 1419 056e 4E       		.byte	78
+ 1420 056f 08       		.byte	8
+ 1421 0570 50       		.byte	80
+ 1422 0571 10       		.byte	16
+ 1423 0572 52       		.byte	82
+ 1424 0573 08       		.byte	8
+ 1425 0574 59       		.byte	89
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 26
+
+
+ 1426 0575 01       		.byte	1
+ 1427 0576 60       		.byte	96
+ 1428 0577 06       		.byte	6
+ 1429 0578 76       		.byte	118
+ 1430 0579 40       		.byte	64
+ 1431 057a 87       		.byte	-121
+ 1432 057b 20       		.byte	32
+ 1433 057c 88       		.byte	-120
+ 1434 057d 10       		.byte	16
+ 1435 057e 8D       		.byte	-115
+ 1436 057f 01       		.byte	1
+ 1437 0580 95       		.byte	-107
+ 1438 0581 01       		.byte	1
+ 1439 0582 96       		.byte	-106
+ 1440 0583 44       		.byte	68
+ 1441 0584 99       		.byte	-103
+ 1442 0585 02       		.byte	2
+ 1443 0586 9A       		.byte	-102
+ 1444 0587 08       		.byte	8
+ 1445 0588 9B       		.byte	-101
+ 1446 0589 40       		.byte	64
+ 1447 058a 9C       		.byte	-100
+ 1448 058b 10       		.byte	16
+ 1449 058c 9D       		.byte	-99
+ 1450 058d 18       		.byte	24
+ 1451 058e 9E       		.byte	-98
+ 1452 058f 26       		.byte	38
+ 1453 0590 9F       		.byte	-97
+ 1454 0591 04       		.byte	4
+ 1455 0592 A4       		.byte	-92
+ 1456 0593 40       		.byte	64
+ 1457 0594 A5       		.byte	-91
+ 1458 0595 08       		.byte	8
+ 1459 0596 A7       		.byte	-89
+ 1460 0597 28       		.byte	40
+ 1461 0598 A9       		.byte	-87
+ 1462 0599 01       		.byte	1
+ 1463 059a AB       		.byte	-85
+ 1464 059b 40       		.byte	64
+ 1465 059c B2       		.byte	-78
+ 1466 059d 01       		.byte	1
+ 1467 059e B6       		.byte	-74
+ 1468 059f 40       		.byte	64
+ 1469 05a0 C0       		.byte	-64
+ 1470 05a1 EF       		.byte	-17
+ 1471 05a2 C2       		.byte	-62
+ 1472 05a3 7E       		.byte	126
+ 1473 05a4 C4       		.byte	-60
+ 1474 05a5 FA       		.byte	-6
+ 1475 05a6 CA       		.byte	-54
+ 1476 05a7 F2       		.byte	-14
+ 1477 05a8 CC       		.byte	-52
+ 1478 05a9 C0       		.byte	-64
+ 1479 05aa CE       		.byte	-50
+ 1480 05ab D4       		.byte	-44
+ 1481 05ac D0       		.byte	-48
+ 1482 05ad 42       		.byte	66
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 27
+
+
+ 1483 05ae D2       		.byte	-46
+ 1484 05af 24       		.byte	36
+ 1485 05b0 D6       		.byte	-42
+ 1486 05b1 01       		.byte	1
+ 1487 05b2 D8       		.byte	-40
+ 1488 05b3 0C       		.byte	12
+ 1489 05b4 E6       		.byte	-26
+ 1490 05b5 80       		.byte	-128
+ 1491 05b6 E8       		.byte	-24
+ 1492 05b7 04       		.byte	4
+ 1493 05b8 00       		.byte	0
+ 1494 05b9 0E       		.byte	14
+ 1495 05ba 01       		.byte	1
+ 1496 05bb 0D       		.byte	13
+ 1497 05bc 02       		.byte	2
+ 1498 05bd 10       		.byte	16
+ 1499 05be 04       		.byte	4
+ 1500 05bf 14       		.byte	20
+ 1501 05c0 05       		.byte	5
+ 1502 05c1 02       		.byte	2
+ 1503 05c2 06       		.byte	6
+ 1504 05c3 2B       		.byte	43
+ 1505 05c4 07       		.byte	7
+ 1506 05c5 0D       		.byte	13
+ 1507 05c6 08       		.byte	8
+ 1508 05c7 10       		.byte	16
+ 1509 05c8 09       		.byte	9
+ 1510 05c9 0D       		.byte	13
+ 1511 05ca 0A       		.byte	10
+ 1512 05cb 27       		.byte	39
+ 1513 05cc 0D       		.byte	13
+ 1514 05cd 0D       		.byte	13
+ 1515 05ce 18       		.byte	24
+ 1516 05cf 38       		.byte	56
+ 1517 05d0 19       		.byte	25
+ 1518 05d1 02       		.byte	2
+ 1519 05d2 1B       		.byte	27
+ 1520 05d3 04       		.byte	4
+ 1521 05d4 1D       		.byte	29
+ 1522 05d5 01       		.byte	1
+ 1523 05d6 1E       		.byte	30
+ 1524 05d7 01       		.byte	1
+ 1525 05d8 1F       		.byte	31
+ 1526 05d9 02       		.byte	2
+ 1527 05da 21       		.byte	33
+ 1528 05db 0D       		.byte	13
+ 1529 05dc 25       		.byte	37
+ 1530 05dd 0D       		.byte	13
+ 1531 05de 29       		.byte	41
+ 1532 05df 02       		.byte	2
+ 1533 05e0 2B       		.byte	43
+ 1534 05e1 08       		.byte	8
+ 1535 05e2 34       		.byte	52
+ 1536 05e3 3C       		.byte	60
+ 1537 05e4 35       		.byte	53
+ 1538 05e5 0F       		.byte	15
+ 1539 05e6 36       		.byte	54
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 28
+
+
+ 1540 05e7 03       		.byte	3
+ 1541 05e8 38       		.byte	56
+ 1542 05e9 20       		.byte	32
+ 1543 05ea 3B       		.byte	59
+ 1544 05eb 20       		.byte	32
+ 1545 05ec 40       		.byte	64
+ 1546 05ed 30       		.byte	48
+ 1547 05ee 41       		.byte	65
+ 1548 05ef 02       		.byte	2
+ 1549 05f0 49       		.byte	73
+ 1550 05f1 FF       		.byte	-1
+ 1551 05f2 4A       		.byte	74
+ 1552 05f3 FF       		.byte	-1
+ 1553 05f4 4B       		.byte	75
+ 1554 05f5 FF       		.byte	-1
+ 1555 05f6 4D       		.byte	77
+ 1556 05f7 A0       		.byte	-96
+ 1557 05f8 4F       		.byte	79
+ 1558 05f9 04       		.byte	4
+ 1559 05fa 50       		.byte	80
+ 1560 05fb 18       		.byte	24
+ 1561 05fc 58       		.byte	88
+ 1562 05fd 04       		.byte	4
+ 1563 05fe 59       		.byte	89
+ 1564 05ff 04       		.byte	4
+ 1565 0600 5A       		.byte	90
+ 1566 0601 04       		.byte	4
+ 1567 0602 5B       		.byte	91
+ 1568 0603 04       		.byte	4
+ 1569 0604 5D       		.byte	93
+ 1570 0605 03       		.byte	3
+ 1571 0606 5F       		.byte	95
+ 1572 0607 01       		.byte	1
+ 1573 0608 60       		.byte	96
+ 1574 0609 40       		.byte	64
+ 1575 060a 62       		.byte	98
+ 1576 060b C0       		.byte	-64
+ 1577 060c 64       		.byte	100
+ 1578 060d 40       		.byte	64
+ 1579 060e 65       		.byte	101
+ 1580 060f 40       		.byte	64
+ 1581 0610 66       		.byte	102
+ 1582 0611 C0       		.byte	-64
+ 1583 0612 68       		.byte	104
+ 1584 0613 C0       		.byte	-64
+ 1585 0614 6A       		.byte	106
+ 1586 0615 C0       		.byte	-64
+ 1587 0616 6C       		.byte	108
+ 1588 0617 C0       		.byte	-64
+ 1589 0618 6E       		.byte	110
+ 1590 0619 C0       		.byte	-64
+ 1591 061a 80       		.byte	-128
+ 1592 061b 01       		.byte	1
+ 1593 061c 81       		.byte	-127
+ 1594 061d 06       		.byte	6
+ 1595 061e 85       		.byte	-123
+ 1596 061f 02       		.byte	2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 29
+
+
+ 1597 0620 86       		.byte	-122
+ 1598 0621 04       		.byte	4
+ 1599 0622 87       		.byte	-121
+ 1600 0623 04       		.byte	4
+ 1601 0624 88       		.byte	-120
+ 1602 0625 0A       		.byte	10
+ 1603 0626 89       		.byte	-119
+ 1604 0627 04       		.byte	4
+ 1605 0628 8A       		.byte	-118
+ 1606 0629 10       		.byte	16
+ 1607 062a 8B       		.byte	-117
+ 1608 062b 02       		.byte	2
+ 1609 062c 8C       		.byte	-116
+ 1610 062d 04       		.byte	4
+ 1611 062e 8D       		.byte	-115
+ 1612 062f 04       		.byte	4
+ 1613 0630 90       		.byte	-112
+ 1614 0631 04       		.byte	4
+ 1615 0632 94       		.byte	-108
+ 1616 0633 56       		.byte	86
+ 1617 0634 95       		.byte	-107
+ 1618 0635 02       		.byte	2
+ 1619 0636 96       		.byte	-106
+ 1620 0637 09       		.byte	9
+ 1621 0638 98       		.byte	-104
+ 1622 0639 04       		.byte	4
+ 1623 063a 9D       		.byte	-99
+ 1624 063b 07       		.byte	7
+ 1625 063c A0       		.byte	-96
+ 1626 063d 04       		.byte	4
+ 1627 063e A1       		.byte	-95
+ 1628 063f 06       		.byte	6
+ 1629 0640 A4       		.byte	-92
+ 1630 0641 04       		.byte	4
+ 1631 0642 A5       		.byte	-91
+ 1632 0643 01       		.byte	1
+ 1633 0644 A7       		.byte	-89
+ 1634 0645 02       		.byte	2
+ 1635 0646 A8       		.byte	-88
+ 1636 0647 60       		.byte	96
+ 1637 0648 A9       		.byte	-87
+ 1638 0649 02       		.byte	2
+ 1639 064a AB       		.byte	-85
+ 1640 064b 05       		.byte	5
+ 1641 064c AC       		.byte	-84
+ 1642 064d 07       		.byte	7
+ 1643 064e AD       		.byte	-83
+ 1644 064f 02       		.byte	2
+ 1645 0650 AE       		.byte	-82
+ 1646 0651 38       		.byte	56
+ 1647 0652 AF       		.byte	-81
+ 1648 0653 04       		.byte	4
+ 1649 0654 B0       		.byte	-80
+ 1650 0655 7F       		.byte	127
+ 1651 0656 B1       		.byte	-79
+ 1652 0657 07       		.byte	7
+ 1653 0658 B8       		.byte	-72
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 30
+
+
+ 1654 0659 02       		.byte	2
+ 1655 065a C0       		.byte	-64
+ 1656 065b 30       		.byte	48
+ 1657 065c C1       		.byte	-63
+ 1658 065d 02       		.byte	2
+ 1659 065e C6       		.byte	-58
+ 1660 065f 20       		.byte	32
+ 1661 0660 C7       		.byte	-57
+ 1662 0661 01       		.byte	1
+ 1663 0662 C8       		.byte	-56
+ 1664 0663 18       		.byte	24
+ 1665 0664 C9       		.byte	-55
+ 1666 0665 FF       		.byte	-1
+ 1667 0666 CA       		.byte	-54
+ 1668 0667 FF       		.byte	-1
+ 1669 0668 CB       		.byte	-53
+ 1670 0669 FF       		.byte	-1
+ 1671 066a CD       		.byte	-51
+ 1672 066b AF       		.byte	-81
+ 1673 066c CE       		.byte	-50
+ 1674 066d 0F       		.byte	15
+ 1675 066e CF       		.byte	-49
+ 1676 066f 04       		.byte	4
+ 1677 0670 D0       		.byte	-48
+ 1678 0671 18       		.byte	24
+ 1679 0672 D2       		.byte	-46
+ 1680 0673 80       		.byte	-128
+ 1681 0674 D8       		.byte	-40
+ 1682 0675 04       		.byte	4
+ 1683 0676 D9       		.byte	-39
+ 1684 0677 04       		.byte	4
+ 1685 0678 DA       		.byte	-38
+ 1686 0679 04       		.byte	4
+ 1687 067a DB       		.byte	-37
+ 1688 067b 04       		.byte	4
+ 1689 067c DD       		.byte	-35
+ 1690 067d 33       		.byte	51
+ 1691 067e DF       		.byte	-33
+ 1692 067f 01       		.byte	1
+ 1693 0680 E0       		.byte	-32
+ 1694 0681 40       		.byte	64
+ 1695 0682 E2       		.byte	-30
+ 1696 0683 C0       		.byte	-64
+ 1697 0684 E4       		.byte	-28
+ 1698 0685 40       		.byte	64
+ 1699 0686 E5       		.byte	-27
+ 1700 0687 40       		.byte	64
+ 1701 0688 E6       		.byte	-26
+ 1702 0689 C0       		.byte	-64
+ 1703 068a E8       		.byte	-24
+ 1704 068b C0       		.byte	-64
+ 1705 068c EA       		.byte	-22
+ 1706 068d C0       		.byte	-64
+ 1707 068e EC       		.byte	-20
+ 1708 068f C0       		.byte	-64
+ 1709 0690 EE       		.byte	-18
+ 1710 0691 C0       		.byte	-64
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 31
+
+
+ 1711 0692 03       		.byte	3
+ 1712 0693 68       		.byte	104
+ 1713 0694 05       		.byte	5
+ 1714 0695 11       		.byte	17
+ 1715 0696 06       		.byte	6
+ 1716 0697 22       		.byte	34
+ 1717 0698 0A       		.byte	10
+ 1718 0699 09       		.byte	9
+ 1719 069a 0D       		.byte	13
+ 1720 069b 08       		.byte	8
+ 1721 069c 0E       		.byte	14
+ 1722 069d 44       		.byte	68
+ 1723 069e 15       		.byte	21
+ 1724 069f 01       		.byte	1
+ 1725 06a0 16       		.byte	22
+ 1726 06a1 04       		.byte	4
+ 1727 06a2 17       		.byte	23
+ 1728 06a3 48       		.byte	72
+ 1729 06a4 1A       		.byte	26
+ 1730 06a5 09       		.byte	9
+ 1731 06a6 1D       		.byte	29
+ 1732 06a7 01       		.byte	1
+ 1733 06a8 20       		.byte	32
+ 1734 06a9 04       		.byte	4
+ 1735 06aa 27       		.byte	39
+ 1736 06ab 40       		.byte	64
+ 1737 06ac 28       		.byte	40
+ 1738 06ad 10       		.byte	16
+ 1739 06ae 2A       		.byte	42
+ 1740 06af 02       		.byte	2
+ 1741 06b0 2B       		.byte	43
+ 1742 06b1 08       		.byte	8
+ 1743 06b2 2D       		.byte	45
+ 1744 06b3 40       		.byte	64
+ 1745 06b4 2E       		.byte	46
+ 1746 06b5 42       		.byte	66
+ 1747 06b6 2F       		.byte	47
+ 1748 06b7 28       		.byte	40
+ 1749 06b8 33       		.byte	51
+ 1750 06b9 60       		.byte	96
+ 1751 06ba 35       		.byte	53
+ 1752 06bb 08       		.byte	8
+ 1753 06bc 37       		.byte	55
+ 1754 06bd 48       		.byte	72
+ 1755 06be 38       		.byte	56
+ 1756 06bf 04       		.byte	4
+ 1757 06c0 39       		.byte	57
+ 1758 06c1 41       		.byte	65
+ 1759 06c2 3A       		.byte	58
+ 1760 06c3 20       		.byte	32
+ 1761 06c4 3C       		.byte	60
+ 1762 06c5 80       		.byte	-128
+ 1763 06c6 3D       		.byte	61
+ 1764 06c7 01       		.byte	1
+ 1765 06c8 3E       		.byte	62
+ 1766 06c9 24       		.byte	36
+ 1767 06ca 41       		.byte	65
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 32
+
+
+ 1768 06cb 20       		.byte	32
+ 1769 06cc 43       		.byte	67
+ 1770 06cd 04       		.byte	4
+ 1771 06ce 45       		.byte	69
+ 1772 06cf 20       		.byte	32
+ 1773 06d0 47       		.byte	71
+ 1774 06d1 04       		.byte	4
+ 1775 06d2 55       		.byte	85
+ 1776 06d3 20       		.byte	32
+ 1777 06d4 56       		.byte	86
+ 1778 06d5 08       		.byte	8
+ 1779 06d6 69       		.byte	105
+ 1780 06d7 10       		.byte	16
+ 1781 06d8 6A       		.byte	106
+ 1782 06d9 80       		.byte	-128
+ 1783 06da 75       		.byte	117
+ 1784 06db 02       		.byte	2
+ 1785 06dc 89       		.byte	-119
+ 1786 06dd 10       		.byte	16
+ 1787 06de C0       		.byte	-64
+ 1788 06df FE       		.byte	-2
+ 1789 06e0 C2       		.byte	-62
+ 1790 06e1 73       		.byte	115
+ 1791 06e2 C4       		.byte	-60
+ 1792 06e3 F0       		.byte	-16
+ 1793 06e4 CA       		.byte	-54
+ 1794 06e5 F7       		.byte	-9
+ 1795 06e6 CC       		.byte	-52
+ 1796 06e7 5C       		.byte	92
+ 1797 06e8 CE       		.byte	-50
+ 1798 06e9 FF       		.byte	-1
+ 1799 06ea D0       		.byte	-48
+ 1800 06eb 66       		.byte	102
+ 1801 06ec 39       		.byte	57
+ 1802 06ed 08       		.byte	8
+ 1803 06ee 3F       		.byte	63
+ 1804 06ef 04       		.byte	4
+ 1805 06f0 59       		.byte	89
+ 1806 06f1 04       		.byte	4
+ 1807 06f2 5F       		.byte	95
+ 1808 06f3 01       		.byte	1
+ 1809 06f4 23       		.byte	35
+ 1810 06f5 10       		.byte	16
+ 1811 06f6 8B       		.byte	-117
+ 1812 06f7 10       		.byte	16
+ 1813 06f8 E6       		.byte	-26
+ 1814 06f9 82       		.byte	-126
+ 1815 06fa A9       		.byte	-87
+ 1816 06fb 02       		.byte	2
+ 1817 06fc 0B       		.byte	11
+ 1818 06fd 0C       		.byte	12
+ 1819 06fe 13       		.byte	19
+ 1820 06ff 08       		.byte	8
+ 1821 0700 15       		.byte	21
+ 1822 0701 01       		.byte	1
+ 1823 0702 17       		.byte	23
+ 1824 0703 0E       		.byte	14
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 33
+
+
+ 1825 0704 1D       		.byte	29
+ 1826 0705 0C       		.byte	12
+ 1827 0706 1F       		.byte	31
+ 1828 0707 03       		.byte	3
+ 1829 0708 29       		.byte	41
+ 1830 0709 01       		.byte	1
+ 1831 070a 2B       		.byte	43
+ 1832 070b 06       		.byte	6
+ 1833 070c 2F       		.byte	47
+ 1834 070d 03       		.byte	3
+ 1835 070e 31       		.byte	49
+ 1836 070f 0F       		.byte	15
+ 1837 0710 3B       		.byte	59
+ 1838 0711 02       		.byte	2
+ 1839 0712 40       		.byte	64
+ 1840 0713 03       		.byte	3
+ 1841 0714 45       		.byte	69
+ 1842 0715 40       		.byte	64
+ 1843 0716 49       		.byte	73
+ 1844 0717 FF       		.byte	-1
+ 1845 0718 4A       		.byte	74
+ 1846 0719 07       		.byte	7
+ 1847 071a 4B       		.byte	75
+ 1848 071b FF       		.byte	-1
+ 1849 071c 4C       		.byte	76
+ 1850 071d 40       		.byte	64
+ 1851 071e 4D       		.byte	77
+ 1852 071f 20       		.byte	32
+ 1853 0720 4E       		.byte	78
+ 1854 0721 F0       		.byte	-16
+ 1855 0722 4F       		.byte	79
+ 1856 0723 05       		.byte	5
+ 1857 0724 50       		.byte	80
+ 1858 0725 08       		.byte	8
+ 1859 0726 59       		.byte	89
+ 1860 0727 04       		.byte	4
+ 1861 0728 5A       		.byte	90
+ 1862 0729 04       		.byte	4
+ 1863 072a 5C       		.byte	92
+ 1864 072b 40       		.byte	64
+ 1865 072c 5D       		.byte	93
+ 1866 072d 04       		.byte	4
+ 1867 072e 5F       		.byte	95
+ 1868 072f 01       		.byte	1
+ 1869 0730 60       		.byte	96
+ 1870 0731 40       		.byte	64
+ 1871 0732 61       		.byte	97
+ 1872 0733 A8       		.byte	-88
+ 1873 0734 62       		.byte	98
+ 1874 0735 40       		.byte	64
+ 1875 0736 63       		.byte	99
+ 1876 0737 20       		.byte	32
+ 1877 0738 80       		.byte	-128
+ 1878 0739 02       		.byte	2
+ 1879 073a 82       		.byte	-126
+ 1880 073b 0C       		.byte	12
+ 1881 073c 83       		.byte	-125
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 34
+
+
+ 1882 073d 40       		.byte	64
+ 1883 073e 84       		.byte	-124
+ 1884 073f 01       		.byte	1
+ 1885 0740 85       		.byte	-123
+ 1886 0741 0C       		.byte	12
+ 1887 0742 89       		.byte	-119
+ 1888 0743 04       		.byte	4
+ 1889 0744 8A       		.byte	-118
+ 1890 0745 02       		.byte	2
+ 1891 0746 8C       		.byte	-116
+ 1892 0747 0C       		.byte	12
+ 1893 0748 8D       		.byte	-115
+ 1894 0749 4F       		.byte	79
+ 1895 074a 8E       		.byte	-114
+ 1896 074b 02       		.byte	2
+ 1897 074c 8F       		.byte	-113
+ 1898 074d 10       		.byte	16
+ 1899 074e 90       		.byte	-112
+ 1900 074f 0E       		.byte	14
+ 1901 0750 91       		.byte	-111
+ 1902 0751 03       		.byte	3
+ 1903 0752 94       		.byte	-108
+ 1904 0753 01       		.byte	1
+ 1905 0754 97       		.byte	-105
+ 1906 0755 33       		.byte	51
+ 1907 0756 98       		.byte	-104
+ 1908 0757 0C       		.byte	12
+ 1909 0758 99       		.byte	-103
+ 1910 0759 4C       		.byte	76
+ 1911 075a 9A       		.byte	-102
+ 1912 075b 02       		.byte	2
+ 1913 075c 9B       		.byte	-101
+ 1914 075d 23       		.byte	35
+ 1915 075e 9D       		.byte	-99
+ 1916 075f 7F       		.byte	127
+ 1917 0760 A0       		.byte	-96
+ 1918 0761 08       		.byte	8
+ 1919 0762 A1       		.byte	-95
+ 1920 0763 08       		.byte	8
+ 1921 0764 A4       		.byte	-92
+ 1922 0765 04       		.byte	4
+ 1923 0766 A5       		.byte	-91
+ 1924 0767 41       		.byte	65
+ 1925 0768 A7       		.byte	-89
+ 1926 0769 80       		.byte	-128
+ 1927 076a A8       		.byte	-88
+ 1928 076b 0C       		.byte	12
+ 1929 076c A9       		.byte	-87
+ 1930 076d 02       		.byte	2
+ 1931 076e AC       		.byte	-84
+ 1932 076f 01       		.byte	1
+ 1933 0770 AD       		.byte	-83
+ 1934 0771 73       		.byte	115
+ 1935 0772 AF       		.byte	-81
+ 1936 0773 0C       		.byte	12
+ 1937 0774 B0       		.byte	-80
+ 1938 0775 0E       		.byte	14
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 35
+
+
+ 1939 0776 B2       		.byte	-78
+ 1940 0777 01       		.byte	1
+ 1941 0778 B3       		.byte	-77
+ 1942 0779 0F       		.byte	15
+ 1943 077a B5       		.byte	-75
+ 1944 077b 7C       		.byte	124
+ 1945 077c B7       		.byte	-73
+ 1946 077d 80       		.byte	-128
+ 1947 077e BA       		.byte	-70
+ 1948 077f 02       		.byte	2
+ 1949 0780 BB       		.byte	-69
+ 1950 0781 28       		.byte	40
+ 1951 0782 D8       		.byte	-40
+ 1952 0783 04       		.byte	4
+ 1953 0784 D9       		.byte	-39
+ 1954 0785 04       		.byte	4
+ 1955 0786 DB       		.byte	-37
+ 1956 0787 04       		.byte	4
+ 1957 0788 DC       		.byte	-36
+ 1958 0789 44       		.byte	68
+ 1959 078a DF       		.byte	-33
+ 1960 078b 01       		.byte	1
+ 1961 078c 00       		.byte	0
+ 1962 078d 40       		.byte	64
+ 1963 078e 01       		.byte	1
+ 1964 078f 04       		.byte	4
+ 1965 0790 02       		.byte	2
+ 1966 0791 40       		.byte	64
+ 1967 0792 03       		.byte	3
+ 1968 0793 08       		.byte	8
+ 1969 0794 0A       		.byte	10
+ 1970 0795 A0       		.byte	-96
+ 1971 0796 0B       		.byte	11
+ 1972 0797 44       		.byte	68
+ 1973 0798 10       		.byte	16
+ 1974 0799 E2       		.byte	-30
+ 1975 079a 12       		.byte	18
+ 1976 079b 14       		.byte	20
+ 1977 079c 18       		.byte	24
+ 1978 079d 40       		.byte	64
+ 1979 079e 1B       		.byte	27
+ 1980 079f 08       		.byte	8
+ 1981 07a0 22       		.byte	34
+ 1982 07a1 28       		.byte	40
+ 1983 07a2 23       		.byte	35
+ 1984 07a3 05       		.byte	5
+ 1985 07a4 25       		.byte	37
+ 1986 07a5 01       		.byte	1
+ 1987 07a6 27       		.byte	39
+ 1988 07a7 40       		.byte	64
+ 1989 07a8 28       		.byte	40
+ 1990 07a9 40       		.byte	64
+ 1991 07aa 2A       		.byte	42
+ 1992 07ab 68       		.byte	104
+ 1993 07ac 2F       		.byte	47
+ 1994 07ad 06       		.byte	6
+ 1995 07ae 32       		.byte	50
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 36
+
+
+ 1996 07af 61       		.byte	97
+ 1997 07b0 33       		.byte	51
+ 1998 07b1 08       		.byte	8
+ 1999 07b2 35       		.byte	53
+ 2000 07b3 02       		.byte	2
+ 2001 07b4 36       		.byte	54
+ 2002 07b5 04       		.byte	4
+ 2003 07b6 37       		.byte	55
+ 2004 07b7 40       		.byte	64
+ 2005 07b8 38       		.byte	56
+ 2006 07b9 48       		.byte	72
+ 2007 07ba 3A       		.byte	58
+ 2008 07bb 14       		.byte	20
+ 2009 07bc 3B       		.byte	59
+ 2010 07bd 01       		.byte	1
+ 2011 07be 3E       		.byte	62
+ 2012 07bf 10       		.byte	16
+ 2013 07c0 47       		.byte	71
+ 2014 07c1 08       		.byte	8
+ 2015 07c2 4D       		.byte	77
+ 2016 07c3 02       		.byte	2
+ 2017 07c4 57       		.byte	87
+ 2018 07c5 02       		.byte	2
+ 2019 07c6 69       		.byte	105
+ 2020 07c7 01       		.byte	1
+ 2021 07c8 6A       		.byte	106
+ 2022 07c9 08       		.byte	8
+ 2023 07ca 6B       		.byte	107
+ 2024 07cb 06       		.byte	6
+ 2025 07cc 70       		.byte	112
+ 2026 07cd 10       		.byte	16
+ 2027 07ce 71       		.byte	113
+ 2028 07cf 80       		.byte	-128
+ 2029 07d0 73       		.byte	115
+ 2030 07d1 A0       		.byte	-96
+ 2031 07d2 80       		.byte	-128
+ 2032 07d3 10       		.byte	16
+ 2033 07d4 87       		.byte	-121
+ 2034 07d5 20       		.byte	32
+ 2035 07d6 89       		.byte	-119
+ 2036 07d7 01       		.byte	1
+ 2037 07d8 8D       		.byte	-115
+ 2038 07d9 80       		.byte	-128
+ 2039 07da 8F       		.byte	-113
+ 2040 07db 80       		.byte	-128
+ 2041 07dc 90       		.byte	-112
+ 2042 07dd 08       		.byte	8
+ 2043 07de 91       		.byte	-111
+ 2044 07df 04       		.byte	4
+ 2045 07e0 92       		.byte	-110
+ 2046 07e1 30       		.byte	48
+ 2047 07e2 93       		.byte	-109
+ 2048 07e3 40       		.byte	64
+ 2049 07e4 94       		.byte	-108
+ 2050 07e5 40       		.byte	64
+ 2051 07e6 96       		.byte	-106
+ 2052 07e7 02       		.byte	2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 37
+
+
+ 2053 07e8 97       		.byte	-105
+ 2054 07e9 08       		.byte	8
+ 2055 07ea 9B       		.byte	-101
+ 2056 07eb 08       		.byte	8
+ 2057 07ec 9F       		.byte	-97
+ 2058 07ed 40       		.byte	64
+ 2059 07ee A0       		.byte	-96
+ 2060 07ef A2       		.byte	-94
+ 2061 07f0 A4       		.byte	-92
+ 2062 07f1 14       		.byte	20
+ 2063 07f2 A6       		.byte	-90
+ 2064 07f3 2C       		.byte	44
+ 2065 07f4 A7       		.byte	-89
+ 2066 07f5 0A       		.byte	10
+ 2067 07f6 B4       		.byte	-76
+ 2068 07f7 12       		.byte	18
+ 2069 07f8 C0       		.byte	-64
+ 2070 07f9 0F       		.byte	15
+ 2071 07fa C2       		.byte	-62
+ 2072 07fb 0E       		.byte	14
+ 2073 07fc C4       		.byte	-60
+ 2074 07fd 0F       		.byte	15
+ 2075 07fe CA       		.byte	-54
+ 2076 07ff 3F       		.byte	63
+ 2077 0800 CC       		.byte	-52
+ 2078 0801 DF       		.byte	-33
+ 2079 0802 CE       		.byte	-50
+ 2080 0803 2F       		.byte	47
+ 2081 0804 D0       		.byte	-48
+ 2082 0805 40       		.byte	64
+ 2083 0806 E0       		.byte	-32
+ 2084 0807 06       		.byte	6
+ 2085 0808 04       		.byte	4
+ 2086 0809 02       		.byte	2
+ 2087 080a 05       		.byte	5
+ 2088 080b 06       		.byte	6
+ 2089 080c 06       		.byte	6
+ 2090 080d 01       		.byte	1
+ 2091 080e 08       		.byte	8
+ 2092 080f 04       		.byte	4
+ 2093 0810 0A       		.byte	10
+ 2094 0811 01       		.byte	1
+ 2095 0812 14       		.byte	20
+ 2096 0813 07       		.byte	7
+ 2097 0814 15       		.byte	21
+ 2098 0815 04       		.byte	4
+ 2099 0816 17       		.byte	23
+ 2100 0817 02       		.byte	2
+ 2101 0818 19       		.byte	25
+ 2102 0819 06       		.byte	6
+ 2103 081a 1C       		.byte	28
+ 2104 081b 01       		.byte	1
+ 2105 081c 1D       		.byte	29
+ 2106 081d 01       		.byte	1
+ 2107 081e 1E       		.byte	30
+ 2108 081f 06       		.byte	6
+ 2109 0820 24       		.byte	36
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 38
+
+
+ 2110 0821 07       		.byte	7
+ 2111 0822 25       		.byte	37
+ 2112 0823 02       		.byte	2
+ 2113 0824 27       		.byte	39
+ 2114 0825 04       		.byte	4
+ 2115 0826 33       		.byte	51
+ 2116 0827 06       		.byte	6
+ 2117 0828 35       		.byte	53
+ 2118 0829 01       		.byte	1
+ 2119 082a 36       		.byte	54
+ 2120 082b 07       		.byte	7
+ 2121 082c 3F       		.byte	63
+ 2122 082d 10       		.byte	16
+ 2123 082e 58       		.byte	88
+ 2124 082f 04       		.byte	4
+ 2125 0830 59       		.byte	89
+ 2126 0831 04       		.byte	4
+ 2127 0832 5C       		.byte	92
+ 2128 0833 44       		.byte	68
+ 2129 0834 5F       		.byte	95
+ 2130 0835 01       		.byte	1
+ 2131 0836 81       		.byte	-127
+ 2132 0837 70       		.byte	112
+ 2133 0838 82       		.byte	-126
+ 2134 0839 02       		.byte	2
+ 2135 083a 83       		.byte	-125
+ 2136 083b 09       		.byte	9
+ 2137 083c 84       		.byte	-124
+ 2138 083d 18       		.byte	24
+ 2139 083e 86       		.byte	-122
+ 2140 083f 25       		.byte	37
+ 2141 0840 87       		.byte	-121
+ 2142 0841 01       		.byte	1
+ 2143 0842 88       		.byte	-120
+ 2144 0843 18       		.byte	24
+ 2145 0844 89       		.byte	-119
+ 2146 0845 24       		.byte	36
+ 2147 0846 8A       		.byte	-118
+ 2148 0847 23       		.byte	35
+ 2149 0848 8B       		.byte	-117
+ 2150 0849 40       		.byte	64
+ 2151 084a 91       		.byte	-111
+ 2152 084b 40       		.byte	64
+ 2153 084c 95       		.byte	-107
+ 2154 084d 31       		.byte	49
+ 2155 084e 97       		.byte	-105
+ 2156 084f 44       		.byte	68
+ 2157 0850 98       		.byte	-104
+ 2158 0851 18       		.byte	24
+ 2159 0852 9A       		.byte	-102
+ 2160 0853 20       		.byte	32
+ 2161 0854 9F       		.byte	-97
+ 2162 0855 0C       		.byte	12
+ 2163 0856 A1       		.byte	-95
+ 2164 0857 02       		.byte	2
+ 2165 0858 A2       		.byte	-94
+ 2166 0859 29       		.byte	41
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 39
+
+
+ 2167 085a A5       		.byte	-91
+ 2168 085b 50       		.byte	80
+ 2169 085c A6       		.byte	-90
+ 2170 085d 06       		.byte	6
+ 2171 085e A9       		.byte	-87
+ 2172 085f 41       		.byte	65
+ 2173 0860 AB       		.byte	-85
+ 2174 0861 30       		.byte	48
+ 2175 0862 AC       		.byte	-84
+ 2176 0863 16       		.byte	22
+ 2177 0864 AE       		.byte	-82
+ 2178 0865 21       		.byte	33
+ 2179 0866 AF       		.byte	-81
+ 2180 0867 01       		.byte	1
+ 2181 0868 B2       		.byte	-78
+ 2182 0869 3C       		.byte	60
+ 2183 086a B3       		.byte	-77
+ 2184 086b 01       		.byte	1
+ 2185 086c B4       		.byte	-76
+ 2186 086d 07       		.byte	7
+ 2187 086e B5       		.byte	-75
+ 2188 086f 02       		.byte	2
+ 2189 0870 B7       		.byte	-73
+ 2190 0871 7C       		.byte	124
+ 2191 0872 BA       		.byte	-70
+ 2192 0873 28       		.byte	40
+ 2193 0874 BF       		.byte	-65
+ 2194 0875 14       		.byte	20
+ 2195 0876 C0       		.byte	-64
+ 2196 0877 34       		.byte	52
+ 2197 0878 C1       		.byte	-63
+ 2198 0879 06       		.byte	6
+ 2199 087a C5       		.byte	-59
+ 2200 087b 0C       		.byte	12
+ 2201 087c C6       		.byte	-58
+ 2202 087d B0       		.byte	-80
+ 2203 087e C7       		.byte	-57
+ 2204 087f E0       		.byte	-32
+ 2205 0880 C8       		.byte	-56
+ 2206 0881 29       		.byte	41
+ 2207 0882 C9       		.byte	-55
+ 2208 0883 FF       		.byte	-1
+ 2209 0884 CA       		.byte	-54
+ 2210 0885 FF       		.byte	-1
+ 2211 0886 CB       		.byte	-53
+ 2212 0887 FF       		.byte	-1
+ 2213 0888 CE       		.byte	-50
+ 2214 0889 F0       		.byte	-16
+ 2215 088a CF       		.byte	-49
+ 2216 088b 44       		.byte	68
+ 2217 088c D0       		.byte	-48
+ 2218 088d 0C       		.byte	12
+ 2219 088e D4       		.byte	-44
+ 2220 088f 01       		.byte	1
+ 2221 0890 D6       		.byte	-42
+ 2222 0891 04       		.byte	4
+ 2223 0892 D8       		.byte	-40
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 40
+
+
+ 2224 0893 04       		.byte	4
+ 2225 0894 D9       		.byte	-39
+ 2226 0895 04       		.byte	4
+ 2227 0896 DA       		.byte	-38
+ 2228 0897 04       		.byte	4
+ 2229 0898 DB       		.byte	-37
+ 2230 0899 04       		.byte	4
+ 2231 089a DC       		.byte	-36
+ 2232 089b 44       		.byte	68
+ 2233 089c DD       		.byte	-35
+ 2234 089d 44       		.byte	68
+ 2235 089e DF       		.byte	-33
+ 2236 089f 01       		.byte	1
+ 2237 08a0 E6       		.byte	-26
+ 2238 08a1 C0       		.byte	-64
+ 2239 08a2 EA       		.byte	-22
+ 2240 08a3 40       		.byte	64
+ 2241 08a4 EB       		.byte	-21
+ 2242 08a5 02       		.byte	2
+ 2243 08a6 00       		.byte	0
+ 2244 08a7 28       		.byte	40
+ 2245 08a8 05       		.byte	5
+ 2246 08a9 16       		.byte	22
+ 2247 08aa 08       		.byte	8
+ 2248 08ab 20       		.byte	32
+ 2249 08ac 0A       		.byte	10
+ 2250 08ad 22       		.byte	34
+ 2251 08ae 0B       		.byte	11
+ 2252 08af 04       		.byte	4
+ 2253 08b0 0F       		.byte	15
+ 2254 08b1 04       		.byte	4
+ 2255 08b2 11       		.byte	17
+ 2256 08b3 04       		.byte	4
+ 2257 08b4 16       		.byte	22
+ 2258 08b5 A0       		.byte	-96
+ 2259 08b6 17       		.byte	23
+ 2260 08b7 40       		.byte	64
+ 2261 08b8 1A       		.byte	26
+ 2262 08b9 02       		.byte	2
+ 2263 08ba 1D       		.byte	29
+ 2264 08bb 1C       		.byte	28
+ 2265 08bc 1E       		.byte	30
+ 2266 08bd 08       		.byte	8
+ 2267 08be 1F       		.byte	31
+ 2268 08bf 04       		.byte	4
+ 2269 08c0 20       		.byte	32
+ 2270 08c1 20       		.byte	32
+ 2271 08c2 21       		.byte	33
+ 2272 08c3 20       		.byte	32
+ 2273 08c4 22       		.byte	34
+ 2274 08c5 04       		.byte	4
+ 2275 08c6 26       		.byte	38
+ 2276 08c7 80       		.byte	-128
+ 2277 08c8 27       		.byte	39
+ 2278 08c9 18       		.byte	24
+ 2279 08ca 2A       		.byte	42
+ 2280 08cb 08       		.byte	8
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 41
+
+
+ 2281 08cc 2D       		.byte	45
+ 2282 08cd 01       		.byte	1
+ 2283 08ce 2E       		.byte	46
+ 2284 08cf 82       		.byte	-126
+ 2285 08d0 2F       		.byte	47
+ 2286 08d1 26       		.byte	38
+ 2287 08d2 32       		.byte	50
+ 2288 08d3 94       		.byte	-108
+ 2289 08d4 35       		.byte	53
+ 2290 08d5 02       		.byte	2
+ 2291 08d6 36       		.byte	54
+ 2292 08d7 8C       		.byte	-116
+ 2293 08d8 39       		.byte	57
+ 2294 08d9 04       		.byte	4
+ 2295 08da 3D       		.byte	61
+ 2296 08db 02       		.byte	2
+ 2297 08dc 3E       		.byte	62
+ 2298 08dd 30       		.byte	48
+ 2299 08de 3F       		.byte	63
+ 2300 08df 04       		.byte	4
+ 2301 08e0 45       		.byte	69
+ 2302 08e1 08       		.byte	8
+ 2303 08e2 46       		.byte	70
+ 2304 08e3 80       		.byte	-128
+ 2305 08e4 4E       		.byte	78
+ 2306 08e5 08       		.byte	8
+ 2307 08e6 4F       		.byte	79
+ 2308 08e7 04       		.byte	4
+ 2309 08e8 56       		.byte	86
+ 2310 08e9 02       		.byte	2
+ 2311 08ea 57       		.byte	87
+ 2312 08eb 20       		.byte	32
+ 2313 08ec 5C       		.byte	92
+ 2314 08ed 20       		.byte	32
+ 2315 08ee 5D       		.byte	93
+ 2316 08ef 01       		.byte	1
+ 2317 08f0 5E       		.byte	94
+ 2318 08f1 40       		.byte	64
+ 2319 08f2 5F       		.byte	95
+ 2320 08f3 08       		.byte	8
+ 2321 08f4 67       		.byte	103
+ 2322 08f5 40       		.byte	64
+ 2323 08f6 82       		.byte	-126
+ 2324 08f7 40       		.byte	64
+ 2325 08f8 83       		.byte	-125
+ 2326 08f9 10       		.byte	16
+ 2327 08fa 85       		.byte	-123
+ 2328 08fb 20       		.byte	32
+ 2329 08fc 87       		.byte	-121
+ 2330 08fd 40       		.byte	64
+ 2331 08fe 88       		.byte	-120
+ 2332 08ff 04       		.byte	4
+ 2333 0900 8A       		.byte	-118
+ 2334 0901 08       		.byte	8
+ 2335 0902 91       		.byte	-111
+ 2336 0903 04       		.byte	4
+ 2337 0904 92       		.byte	-110
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 42
+
+
+ 2338 0905 30       		.byte	48
+ 2339 0906 96       		.byte	-106
+ 2340 0907 02       		.byte	2
+ 2341 0908 97       		.byte	-105
+ 2342 0909 08       		.byte	8
+ 2343 090a 99       		.byte	-103
+ 2344 090b 02       		.byte	2
+ 2345 090c 9B       		.byte	-101
+ 2346 090d 40       		.byte	64
+ 2347 090e 9E       		.byte	-98
+ 2348 090f 08       		.byte	8
+ 2349 0910 A1       		.byte	-95
+ 2350 0911 01       		.byte	1
+ 2351 0912 A3       		.byte	-93
+ 2352 0913 02       		.byte	2
+ 2353 0914 A4       		.byte	-92
+ 2354 0915 14       		.byte	20
+ 2355 0916 A6       		.byte	-90
+ 2356 0917 04       		.byte	4
+ 2357 0918 AB       		.byte	-85
+ 2358 0919 04       		.byte	4
+ 2359 091a AE       		.byte	-82
+ 2360 091b 4C       		.byte	76
+ 2361 091c B0       		.byte	-80
+ 2362 091d 10       		.byte	16
+ 2363 091e B2       		.byte	-78
+ 2364 091f 20       		.byte	32
+ 2365 0920 B3       		.byte	-77
+ 2366 0921 02       		.byte	2
+ 2367 0922 C0       		.byte	-64
+ 2368 0923 76       		.byte	118
+ 2369 0924 C2       		.byte	-62
+ 2370 0925 45       		.byte	69
+ 2371 0926 C4       		.byte	-60
+ 2372 0927 B4       		.byte	-76
+ 2373 0928 CA       		.byte	-54
+ 2374 0929 F2       		.byte	-14
+ 2375 092a CC       		.byte	-52
+ 2376 092b DE       		.byte	-34
+ 2377 092c CE       		.byte	-50
+ 2378 092d E2       		.byte	-30
+ 2379 092e D0       		.byte	-48
+ 2380 092f C0       		.byte	-64
+ 2381 0930 D2       		.byte	-46
+ 2382 0931 20       		.byte	32
+ 2383 0932 D6       		.byte	-42
+ 2384 0933 F0       		.byte	-16
+ 2385 0934 D8       		.byte	-40
+ 2386 0935 80       		.byte	-128
+ 2387 0936 E0       		.byte	-32
+ 2388 0937 08       		.byte	8
+ 2389 0938 E8       		.byte	-24
+ 2390 0939 01       		.byte	1
+ 2391 093a EC       		.byte	-20
+ 2392 093b 08       		.byte	8
+ 2393 093c 32       		.byte	50
+ 2394 093d 20       		.byte	32
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 43
+
+
+ 2395 093e 34       		.byte	52
+ 2396 093f 80       		.byte	-128
+ 2397 0940 CC       		.byte	-52
+ 2398 0941 30       		.byte	48
+ 2399 0942 04       		.byte	4
+ 2400 0943 10       		.byte	16
+ 2401 0944 0A       		.byte	10
+ 2402 0945 40       		.byte	64
+ 2403 0946 0F       		.byte	15
+ 2404 0947 40       		.byte	64
+ 2405 0948 82       		.byte	-126
+ 2406 0949 40       		.byte	64
+ 2407 094a A6       		.byte	-90
+ 2408 094b 20       		.byte	32
+ 2409 094c B4       		.byte	-76
+ 2410 094d 80       		.byte	-128
+ 2411 094e C0       		.byte	-64
+ 2412 094f 80       		.byte	-128
+ 2413 0950 C2       		.byte	-62
+ 2414 0951 30       		.byte	48
+ 2415 0952 E0       		.byte	-32
+ 2416 0953 20       		.byte	32
+ 2417 0954 13       		.byte	19
+ 2418 0955 08       		.byte	8
+ 2419 0956 53       		.byte	83
+ 2420 0957 08       		.byte	8
+ 2421 0958 5B       		.byte	91
+ 2422 0959 08       		.byte	8
+ 2423 095a A6       		.byte	-90
+ 2424 095b 20       		.byte	32
+ 2425 095c B3       		.byte	-77
+ 2426 095d 40       		.byte	64
+ 2427 095e B4       		.byte	-76
+ 2428 095f 10       		.byte	16
+ 2429 0960 C4       		.byte	-60
+ 2430 0961 10       		.byte	16
+ 2431 0962 D4       		.byte	-44
+ 2432 0963 20       		.byte	32
+ 2433 0964 D6       		.byte	-42
+ 2434 0965 40       		.byte	64
+ 2435 0966 1F       		.byte	31
+ 2436 0967 08       		.byte	8
+ 2437 0968 6B       		.byte	107
+ 2438 0969 80       		.byte	-128
+ 2439 096a 83       		.byte	-125
+ 2440 096b 80       		.byte	-128
+ 2441 096c A6       		.byte	-90
+ 2442 096d 20       		.byte	32
+ 2443 096e A7       		.byte	-89
+ 2444 096f 08       		.byte	8
+ 2445 0970 C6       		.byte	-58
+ 2446 0971 20       		.byte	32
+ 2447 0972 DC       		.byte	-36
+ 2448 0973 20       		.byte	32
+ 2449 0974 E2       		.byte	-30
+ 2450 0975 80       		.byte	-128
+ 2451 0976 73       		.byte	115
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 44
+
+
+ 2452 0977 10       		.byte	16
+ 2453 0978 76       		.byte	118
+ 2454 0979 20       		.byte	32
+ 2455 097a 89       		.byte	-119
+ 2456 097b 40       		.byte	64
+ 2457 097c DC       		.byte	-36
+ 2458 097d 01       		.byte	1
+ 2459 097e DE       		.byte	-34
+ 2460 097f 04       		.byte	4
+ 2461 0980 E0       		.byte	-32
+ 2462 0981 01       		.byte	1
+ 2463 0982 53       		.byte	83
+ 2464 0983 40       		.byte	64
+ 2465 0984 57       		.byte	87
+ 2466 0985 08       		.byte	8
+ 2467 0986 58       		.byte	88
+ 2468 0987 02       		.byte	2
+ 2469 0988 59       		.byte	89
+ 2470 0989 40       		.byte	64
+ 2471 098a 5F       		.byte	95
+ 2472 098b 01       		.byte	1
+ 2473 098c 66       		.byte	102
+ 2474 098d 20       		.byte	32
+ 2475 098e 8C       		.byte	-116
+ 2476 098f 02       		.byte	2
+ 2477 0990 99       		.byte	-103
+ 2478 0991 40       		.byte	64
+ 2479 0992 A3       		.byte	-93
+ 2480 0993 08       		.byte	8
+ 2481 0994 AA       		.byte	-86
+ 2482 0995 20       		.byte	32
+ 2483 0996 B3       		.byte	-77
+ 2484 0997 10       		.byte	16
+ 2485 0998 B7       		.byte	-73
+ 2486 0999 08       		.byte	8
+ 2487 099a D4       		.byte	-44
+ 2488 099b 07       		.byte	7
+ 2489 099c D6       		.byte	-42
+ 2490 099d 03       		.byte	3
+ 2491 099e D8       		.byte	-40
+ 2492 099f 01       		.byte	1
+ 2493 09a0 E0       		.byte	-32
+ 2494 09a1 08       		.byte	8
+ 2495 09a2 E8       		.byte	-24
+ 2496 09a3 08       		.byte	8
+ 2497 09a4 EC       		.byte	-20
+ 2498 09a5 01       		.byte	1
+ 2499 09a6 8B       		.byte	-117
+ 2500 09a7 40       		.byte	64
+ 2501 09a8 8F       		.byte	-113
+ 2502 09a9 01       		.byte	1
+ 2503 09aa 97       		.byte	-105
+ 2504 09ab 81       		.byte	-127
+ 2505 09ac B2       		.byte	-78
+ 2506 09ad 20       		.byte	32
+ 2507 09ae E4       		.byte	-28
+ 2508 09af 09       		.byte	9
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 45
+
+
+ 2509 09b0 EC       		.byte	-20
+ 2510 09b1 01       		.byte	1
+ 2511 09b2 69       		.byte	105
+ 2512 09b3 08       		.byte	8
+ 2513 09b4 95       		.byte	-107
+ 2514 09b5 40       		.byte	64
+ 2515 09b6 A6       		.byte	-90
+ 2516 09b7 20       		.byte	32
+ 2517 09b8 A9       		.byte	-87
+ 2518 09b9 40       		.byte	64
+ 2519 09ba DA       		.byte	-38
+ 2520 09bb 40       		.byte	64
+ 2521 09bc EC       		.byte	-20
+ 2522 09bd 20       		.byte	32
+ 2523 09be 01       		.byte	1
+ 2524 09bf 40       		.byte	64
+ 2525 09c0 86       		.byte	-122
+ 2526 09c1 20       		.byte	32
+ 2527 09c2 89       		.byte	-119
+ 2528 09c3 04       		.byte	4
+ 2529 09c4 95       		.byte	-107
+ 2530 09c5 48       		.byte	72
+ 2531 09c6 A6       		.byte	-90
+ 2532 09c7 20       		.byte	32
+ 2533 09c8 C0       		.byte	-64
+ 2534 09c9 40       		.byte	64
+ 2535 09ca E6       		.byte	-26
+ 2536 09cb 40       		.byte	64
+ 2537 09cc 53       		.byte	83
+ 2538 09cd 80       		.byte	-128
+ 2539 09ce 56       		.byte	86
+ 2540 09cf 20       		.byte	32
+ 2541 09d0 59       		.byte	89
+ 2542 09d1 01       		.byte	1
+ 2543 09d2 5B       		.byte	91
+ 2544 09d3 20       		.byte	32
+ 2545 09d4 5F       		.byte	95
+ 2546 09d5 41       		.byte	65
+ 2547 09d6 63       		.byte	99
+ 2548 09d7 20       		.byte	32
+ 2549 09d8 66       		.byte	102
+ 2550 09d9 10       		.byte	16
+ 2551 09da 81       		.byte	-127
+ 2552 09db 01       		.byte	1
+ 2553 09dc 86       		.byte	-122
+ 2554 09dd 10       		.byte	16
+ 2555 09de 8A       		.byte	-118
+ 2556 09df 20       		.byte	32
+ 2557 09e0 8F       		.byte	-113
+ 2558 09e1 11       		.byte	17
+ 2559 09e2 D4       		.byte	-44
+ 2560 09e3 07       		.byte	7
+ 2561 09e4 D6       		.byte	-42
+ 2562 09e5 07       		.byte	7
+ 2563 09e6 D8       		.byte	-40
+ 2564 09e7 03       		.byte	3
+ 2565 09e8 E0       		.byte	-32
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 46
+
+
+ 2566 09e9 08       		.byte	8
+ 2567 09ea E4       		.byte	-28
+ 2568 09eb 09       		.byte	9
+ 2569 09ec 10       		.byte	16
+ 2570 09ed 10       		.byte	16
+ 2571 09ee 72       		.byte	114
+ 2572 09ef 20       		.byte	32
+ 2573 09f0 86       		.byte	-122
+ 2574 09f1 20       		.byte	32
+ 2575 09f2 88       		.byte	-120
+ 2576 09f3 10       		.byte	16
+ 2577 09f4 AB       		.byte	-85
+ 2578 09f5 20       		.byte	32
+ 2579 09f6 AF       		.byte	-81
+ 2580 09f7 80       		.byte	-128
+ 2581 09f8 B3       		.byte	-77
+ 2582 09f9 40       		.byte	64
+ 2583 09fa C4       		.byte	-60
+ 2584 09fb 08       		.byte	8
+ 2585 09fc DC       		.byte	-36
+ 2586 09fd 01       		.byte	1
+ 2587 09fe E2       		.byte	-30
+ 2588 09ff 04       		.byte	4
+ 2589 0a00 E8       		.byte	-24
+ 2590 0a01 04       		.byte	4
+ 2591 0a02 00       		.byte	0
+ 2592 0a03 1B       		.byte	27
+ 2593 0a04 0A       		.byte	10
+ 2594 0a05 03       		.byte	3
+ 2595 0a06 0C       		.byte	12
+ 2596 0a07 19       		.byte	25
+ 2597 0a08 0E       		.byte	14
+ 2598 0a09 19       		.byte	25
+ 2599 0a0a 10       		.byte	16
+ 2600 0a0b 10       		.byte	16
+ 2601 0a0c 1C       		.byte	28
+ 2602 0a0d 10       		.byte	16
+ 2603 0a0e 00       		.byte	0
+ 2604 0a0f 0F       		.byte	15
+ 2605 0a10 20       		.byte	32
+ 2606 0a11 84       		.byte	-124
+ 2607 0a12 00       		.byte	0
+ 2608 0a13 00       		.byte	0
+ 2609 0a14 40       		.byte	64
+ 2610 0a15 00       		.byte	0
+ 2611 0a16 00       		.byte	0
+ 2612 0a17 00       		.byte	0
+ 2613 0a18 38       		.byte	56
+ 2614 0a19 C0       		.byte	-64
+ 2615 0a1a C0       		.byte	-64
+ 2616 0a1b 00       		.byte	0
+ 2617 0a1c 00       		.byte	0
+ 2618 0a1d 00       		.byte	0
+ 2619 0a1e 00       		.byte	0
+ 2620 0a1f 00       		.byte	0
+ 2621 0a20 80       		.byte	-128
+ 2622 0a21 00       		.byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 47
+
+
+ 2623 0a22 40       		.byte	64
+ 2624 0a23 BE       		.byte	-66
+ 2625 0a24 BE       		.byte	-66
+ 2626 0a25 00       		.byte	0
+ 2627 0a26 B4       		.byte	-76
+ 2628 0a27 00       		.byte	0
+ 2629 0a28 00       		.byte	0
+ 2630 0a29 00       		.byte	0
+ 2631 0a2a 00       		.byte	0
+ 2632 0a2b 00       		.byte	0
+ 2633 0a2c 00       		.byte	0
+ 2634 0a2d FF       		.byte	-1
+ 2635 0a2e FF       		.byte	-1
+ 2636 0a2f 00       		.byte	0
+ 2637 0a30 FF       		.byte	-1
+ 2638 0a31 00       		.byte	0
+ 2639 0a32 00       		.byte	0
+ 2640 0a33 00       		.byte	0
+ 2641 0a34 00       		.byte	0
+ 2642 0a35 BF       		.byte	-65
+ 2643 0a36 BF       		.byte	-65
+ 2644 0a37 00       		.byte	0
+ 2645 0a38 BE       		.byte	-66
+ 2646 0a39 00       		.byte	0
+ 2647 0a3a 00       		.byte	0
+ 2648 0a3b 00       		.byte	0
+ 2649 0a3c 04       		.byte	4
+ 2650 0a3d 38       		.byte	56
+ 2651 0a3e 38       		.byte	56
+ 2652 0a3f 00       		.byte	0
+ 2653 0a40 08       		.byte	8
+ 2654 0a41 00       		.byte	0
+ 2655 0a42 00       		.byte	0
+ 2656 0a43 00       		.byte	0
+ 2657              		.section	.cywolatch,"a",%progbits
+ 2658              		.align	2
+ 2659              		.type	cy_meta_wonvl, %object
+ 2660              		.size	cy_meta_wonvl, 4
+ 2661              	cy_meta_wonvl:
+ 2662 0000 BC       		.byte	-68
+ 2663 0001 90       		.byte	-112
+ 2664 0002 AC       		.byte	-84
+ 2665 0003 AF       		.byte	-81
+ 2666              		.section	.cycustnvl,"a",%progbits
+ 2667              		.align	2
+ 2668              		.type	cy_meta_custnvl, %object
+ 2669              		.size	cy_meta_custnvl, 4
+ 2670              	cy_meta_custnvl:
+ 2671 0000 00       		.byte	0
+ 2672 0001 00       		.byte	0
+ 2673 0002 40       		.byte	64
+ 2674 0003 07       		.byte	7
+ 2675              		.section	.cymeta,"a",%progbits
+ 2676              		.align	2
+ 2677              		.type	cy_metadata, %object
+ 2678              		.size	cy_metadata, 12
+ 2679              	cy_metadata:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 48
+
+
+ 2680 0000 00       		.byte	0
+ 2681 0001 01       		.byte	1
+ 2682 0002 2E       		.byte	46
+ 2683 0003 16       		.byte	22
+ 2684 0004 10       		.byte	16
+ 2685 0005 69       		.byte	105
+ 2686 0006 00       		.byte	0
+ 2687 0007 01       		.byte	1
+ 2688 0008 00       		.byte	0
+ 2689 0009 00       		.byte	0
+ 2690 000a 00       		.byte	0
+ 2691 000b 00       		.byte	0
+ 2692              		.section	.cyflashprotect,"a",%progbits
+ 2693              		.align	2
+ 2694              		.type	cy_meta_flashprotect, %object
+ 2695              		.size	cy_meta_flashprotect, 256
+ 2696              	cy_meta_flashprotect:
+ 2697 0000 00000000 		.space	256
+ 2697      00000000 
+ 2697      00000000 
+ 2697      00000000 
+ 2697      00000000 
+ 2698              		.text
+ 2699              	.Letext0:
+ 2700              		.file 1 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
+ 2701              		.file 2 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
+ 2702              		.file 3 "Generated_Source\\PSoC5\\cymetadata.c"
+ 2703              		.section	.debug_info,"",%progbits
+ 2704              	.Ldebug_info0:
+ 2705 0000 35010000 		.4byte	0x135
+ 2706 0004 0400     		.2byte	0x4
+ 2707 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 2708 000a 04       		.byte	0x4
+ 2709 000b 01       		.uleb128 0x1
+ 2710 000c 5F000000 		.4byte	.LASF17
+ 2711 0010 0C       		.byte	0xc
+ 2712 0011 B9010000 		.4byte	.LASF18
+ 2713 0015 0A000000 		.4byte	.LASF19
+ 2714 0019 00000000 		.4byte	.Ldebug_line0
+ 2715 001d 02       		.uleb128 0x2
+ 2716 001e 01       		.byte	0x1
+ 2717 001f 06       		.byte	0x6
+ 2718 0020 AD010000 		.4byte	.LASF0
+ 2719 0024 03       		.uleb128 0x3
+ 2720 0025 00000000 		.4byte	.LASF9
+ 2721 0029 01       		.byte	0x1
+ 2722 002a 1D       		.byte	0x1d
+ 2723 002b 2F000000 		.4byte	0x2f
+ 2724 002f 02       		.uleb128 0x2
+ 2725 0030 01       		.byte	0x1
+ 2726 0031 08       		.byte	0x8
+ 2727 0032 51000000 		.4byte	.LASF1
+ 2728 0036 02       		.uleb128 0x2
+ 2729 0037 02       		.byte	0x2
+ 2730 0038 05       		.byte	0x5
+ 2731 0039 9A010000 		.4byte	.LASF2
+ 2732 003d 02       		.uleb128 0x2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 49
+
+
+ 2733 003e 02       		.byte	0x2
+ 2734 003f 07       		.byte	0x7
+ 2735 0040 FF000000 		.4byte	.LASF3
+ 2736 0044 02       		.uleb128 0x2
+ 2737 0045 04       		.byte	0x4
+ 2738 0046 05       		.byte	0x5
+ 2739 0047 A4010000 		.4byte	.LASF4
+ 2740 004b 02       		.uleb128 0x2
+ 2741 004c 04       		.byte	0x4
+ 2742 004d 07       		.byte	0x7
+ 2743 004e ED000000 		.4byte	.LASF5
+ 2744 0052 02       		.uleb128 0x2
+ 2745 0053 08       		.byte	0x8
+ 2746 0054 05       		.byte	0x5
+ 2747 0055 8C010000 		.4byte	.LASF6
+ 2748 0059 02       		.uleb128 0x2
+ 2749 005a 08       		.byte	0x8
+ 2750 005b 07       		.byte	0x7
+ 2751 005c 41010000 		.4byte	.LASF7
+ 2752 0060 04       		.uleb128 0x4
+ 2753 0061 04       		.byte	0x4
+ 2754 0062 05       		.byte	0x5
+ 2755 0063 696E7400 		.ascii	"int\000"
+ 2756 0067 02       		.uleb128 0x2
+ 2757 0068 04       		.byte	0x4
+ 2758 0069 07       		.byte	0x7
+ 2759 006a 34010000 		.4byte	.LASF8
+ 2760 006e 03       		.uleb128 0x3
+ 2761 006f 58010000 		.4byte	.LASF10
+ 2762 0073 02       		.byte	0x2
+ 2763 0074 18       		.byte	0x18
+ 2764 0075 24000000 		.4byte	0x24
+ 2765 0079 05       		.uleb128 0x5
+ 2766 007a 91000000 		.4byte	0x91
+ 2767 007e 8A000000 		.4byte	0x8a
+ 2768 0082 06       		.uleb128 0x6
+ 2769 0083 8A000000 		.4byte	0x8a
+ 2770 0087 430A     		.2byte	0xa43
+ 2771 0089 00       		.byte	0
+ 2772 008a 02       		.uleb128 0x2
+ 2773 008b 04       		.byte	0x4
+ 2774 008c 07       		.byte	0x7
+ 2775 008d 83010000 		.4byte	.LASF11
+ 2776 0091 07       		.uleb128 0x7
+ 2777 0092 6E000000 		.4byte	0x6e
+ 2778 0096 08       		.uleb128 0x8
+ 2779 0097 22010000 		.4byte	.LASF12
+ 2780 009b 03       		.byte	0x3
+ 2781 009c 1F       		.byte	0x1f
+ 2782 009d A7000000 		.4byte	0xa7
+ 2783 00a1 05       		.uleb128 0x5
+ 2784 00a2 03       		.byte	0x3
+ 2785 00a3 00000000 		.4byte	cy_meta_configecc
+ 2786 00a7 07       		.uleb128 0x7
+ 2787 00a8 79000000 		.4byte	0x79
+ 2788 00ac 05       		.uleb128 0x5
+ 2789 00ad 91000000 		.4byte	0x91
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 50
+
+
+ 2790 00b1 BC000000 		.4byte	0xbc
+ 2791 00b5 09       		.uleb128 0x9
+ 2792 00b6 8A000000 		.4byte	0x8a
+ 2793 00ba 03       		.byte	0x3
+ 2794 00bb 00       		.byte	0
+ 2795 00bc 0A       		.uleb128 0xa
+ 2796 00bd 12010000 		.4byte	.LASF13
+ 2797 00c1 03       		.byte	0x3
+ 2798 00c2 7501     		.2byte	0x175
+ 2799 00c4 CE000000 		.4byte	0xce
+ 2800 00c8 05       		.uleb128 0x5
+ 2801 00c9 03       		.byte	0x3
+ 2802 00ca 00000000 		.4byte	cy_meta_custnvl
+ 2803 00ce 07       		.uleb128 0x7
+ 2804 00cf AC000000 		.4byte	0xac
+ 2805 00d3 0A       		.uleb128 0xa
+ 2806 00d4 75010000 		.4byte	.LASF14
+ 2807 00d8 03       		.byte	0x3
+ 2808 00d9 8301     		.2byte	0x183
+ 2809 00db E5000000 		.4byte	0xe5
+ 2810 00df 05       		.uleb128 0x5
+ 2811 00e0 03       		.byte	0x3
+ 2812 00e1 00000000 		.4byte	cy_meta_wonvl
+ 2813 00e5 07       		.uleb128 0x7
+ 2814 00e6 AC000000 		.4byte	0xac
+ 2815 00ea 05       		.uleb128 0x5
+ 2816 00eb 91000000 		.4byte	0x91
+ 2817 00ef FA000000 		.4byte	0xfa
+ 2818 00f3 09       		.uleb128 0x9
+ 2819 00f4 8A000000 		.4byte	0x8a
+ 2820 00f8 FF       		.byte	0xff
+ 2821 00f9 00       		.byte	0
+ 2822 00fa 0A       		.uleb128 0xa
+ 2823 00fb 60010000 		.4byte	.LASF15
+ 2824 00ff 03       		.byte	0x3
+ 2825 0100 9101     		.2byte	0x191
+ 2826 0102 0C010000 		.4byte	0x10c
+ 2827 0106 05       		.uleb128 0x5
+ 2828 0107 03       		.byte	0x3
+ 2829 0108 00000000 		.4byte	cy_meta_flashprotect
+ 2830 010c 07       		.uleb128 0x7
+ 2831 010d EA000000 		.4byte	0xea
+ 2832 0111 05       		.uleb128 0x5
+ 2833 0112 91000000 		.4byte	0x91
+ 2834 0116 21010000 		.4byte	0x121
+ 2835 011a 09       		.uleb128 0x9
+ 2836 011b 8A000000 		.4byte	0x8a
+ 2837 011f 0B       		.byte	0xb
+ 2838 0120 00       		.byte	0
+ 2839 0121 0A       		.uleb128 0xa
+ 2840 0122 45000000 		.4byte	.LASF16
+ 2841 0126 03       		.byte	0x3
+ 2842 0127 BE01     		.2byte	0x1be
+ 2843 0129 33010000 		.4byte	0x133
+ 2844 012d 05       		.uleb128 0x5
+ 2845 012e 03       		.byte	0x3
+ 2846 012f 00000000 		.4byte	cy_metadata
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 51
+
+
+ 2847 0133 07       		.uleb128 0x7
+ 2848 0134 11010000 		.4byte	0x111
+ 2849 0138 00       		.byte	0
+ 2850              		.section	.debug_abbrev,"",%progbits
+ 2851              	.Ldebug_abbrev0:
+ 2852 0000 01       		.uleb128 0x1
+ 2853 0001 11       		.uleb128 0x11
+ 2854 0002 01       		.byte	0x1
+ 2855 0003 25       		.uleb128 0x25
+ 2856 0004 0E       		.uleb128 0xe
+ 2857 0005 13       		.uleb128 0x13
+ 2858 0006 0B       		.uleb128 0xb
+ 2859 0007 03       		.uleb128 0x3
+ 2860 0008 0E       		.uleb128 0xe
+ 2861 0009 1B       		.uleb128 0x1b
+ 2862 000a 0E       		.uleb128 0xe
+ 2863 000b 10       		.uleb128 0x10
+ 2864 000c 17       		.uleb128 0x17
+ 2865 000d 00       		.byte	0
+ 2866 000e 00       		.byte	0
+ 2867 000f 02       		.uleb128 0x2
+ 2868 0010 24       		.uleb128 0x24
+ 2869 0011 00       		.byte	0
+ 2870 0012 0B       		.uleb128 0xb
+ 2871 0013 0B       		.uleb128 0xb
+ 2872 0014 3E       		.uleb128 0x3e
+ 2873 0015 0B       		.uleb128 0xb
+ 2874 0016 03       		.uleb128 0x3
+ 2875 0017 0E       		.uleb128 0xe
+ 2876 0018 00       		.byte	0
+ 2877 0019 00       		.byte	0
+ 2878 001a 03       		.uleb128 0x3
+ 2879 001b 16       		.uleb128 0x16
+ 2880 001c 00       		.byte	0
+ 2881 001d 03       		.uleb128 0x3
+ 2882 001e 0E       		.uleb128 0xe
+ 2883 001f 3A       		.uleb128 0x3a
+ 2884 0020 0B       		.uleb128 0xb
+ 2885 0021 3B       		.uleb128 0x3b
+ 2886 0022 0B       		.uleb128 0xb
+ 2887 0023 49       		.uleb128 0x49
+ 2888 0024 13       		.uleb128 0x13
+ 2889 0025 00       		.byte	0
+ 2890 0026 00       		.byte	0
+ 2891 0027 04       		.uleb128 0x4
+ 2892 0028 24       		.uleb128 0x24
+ 2893 0029 00       		.byte	0
+ 2894 002a 0B       		.uleb128 0xb
+ 2895 002b 0B       		.uleb128 0xb
+ 2896 002c 3E       		.uleb128 0x3e
+ 2897 002d 0B       		.uleb128 0xb
+ 2898 002e 03       		.uleb128 0x3
+ 2899 002f 08       		.uleb128 0x8
+ 2900 0030 00       		.byte	0
+ 2901 0031 00       		.byte	0
+ 2902 0032 05       		.uleb128 0x5
+ 2903 0033 01       		.uleb128 0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 52
+
+
+ 2904 0034 01       		.byte	0x1
+ 2905 0035 49       		.uleb128 0x49
+ 2906 0036 13       		.uleb128 0x13
+ 2907 0037 01       		.uleb128 0x1
+ 2908 0038 13       		.uleb128 0x13
+ 2909 0039 00       		.byte	0
+ 2910 003a 00       		.byte	0
+ 2911 003b 06       		.uleb128 0x6
+ 2912 003c 21       		.uleb128 0x21
+ 2913 003d 00       		.byte	0
+ 2914 003e 49       		.uleb128 0x49
+ 2915 003f 13       		.uleb128 0x13
+ 2916 0040 2F       		.uleb128 0x2f
+ 2917 0041 05       		.uleb128 0x5
+ 2918 0042 00       		.byte	0
+ 2919 0043 00       		.byte	0
+ 2920 0044 07       		.uleb128 0x7
+ 2921 0045 26       		.uleb128 0x26
+ 2922 0046 00       		.byte	0
+ 2923 0047 49       		.uleb128 0x49
+ 2924 0048 13       		.uleb128 0x13
+ 2925 0049 00       		.byte	0
+ 2926 004a 00       		.byte	0
+ 2927 004b 08       		.uleb128 0x8
+ 2928 004c 34       		.uleb128 0x34
+ 2929 004d 00       		.byte	0
+ 2930 004e 03       		.uleb128 0x3
+ 2931 004f 0E       		.uleb128 0xe
+ 2932 0050 3A       		.uleb128 0x3a
+ 2933 0051 0B       		.uleb128 0xb
+ 2934 0052 3B       		.uleb128 0x3b
+ 2935 0053 0B       		.uleb128 0xb
+ 2936 0054 49       		.uleb128 0x49
+ 2937 0055 13       		.uleb128 0x13
+ 2938 0056 3F       		.uleb128 0x3f
+ 2939 0057 19       		.uleb128 0x19
+ 2940 0058 02       		.uleb128 0x2
+ 2941 0059 18       		.uleb128 0x18
+ 2942 005a 00       		.byte	0
+ 2943 005b 00       		.byte	0
+ 2944 005c 09       		.uleb128 0x9
+ 2945 005d 21       		.uleb128 0x21
+ 2946 005e 00       		.byte	0
+ 2947 005f 49       		.uleb128 0x49
+ 2948 0060 13       		.uleb128 0x13
+ 2949 0061 2F       		.uleb128 0x2f
+ 2950 0062 0B       		.uleb128 0xb
+ 2951 0063 00       		.byte	0
+ 2952 0064 00       		.byte	0
+ 2953 0065 0A       		.uleb128 0xa
+ 2954 0066 34       		.uleb128 0x34
+ 2955 0067 00       		.byte	0
+ 2956 0068 03       		.uleb128 0x3
+ 2957 0069 0E       		.uleb128 0xe
+ 2958 006a 3A       		.uleb128 0x3a
+ 2959 006b 0B       		.uleb128 0xb
+ 2960 006c 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 53
+
+
+ 2961 006d 05       		.uleb128 0x5
+ 2962 006e 49       		.uleb128 0x49
+ 2963 006f 13       		.uleb128 0x13
+ 2964 0070 3F       		.uleb128 0x3f
+ 2965 0071 19       		.uleb128 0x19
+ 2966 0072 02       		.uleb128 0x2
+ 2967 0073 18       		.uleb128 0x18
+ 2968 0074 00       		.byte	0
+ 2969 0075 00       		.byte	0
+ 2970 0076 00       		.byte	0
+ 2971              		.section	.debug_aranges,"",%progbits
+ 2972 0000 14000000 		.4byte	0x14
+ 2973 0004 0200     		.2byte	0x2
+ 2974 0006 00000000 		.4byte	.Ldebug_info0
+ 2975 000a 04       		.byte	0x4
+ 2976 000b 00       		.byte	0
+ 2977 000c 0000     		.2byte	0
+ 2978 000e 0000     		.2byte	0
+ 2979 0010 00000000 		.4byte	0
+ 2980 0014 00000000 		.4byte	0
+ 2981              		.section	.debug_line,"",%progbits
+ 2982              	.Ldebug_line0:
+ 2983 0000 39010000 		.section	.debug_str,"MS",%progbits,1
+ 2983      02003301 
+ 2983      00000201 
+ 2983      FB0E0D00 
+ 2983      01010101 
+ 2984              	.LASF9:
+ 2985 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 2985      6E74385F 
+ 2985      7400
+ 2986              	.LASF19:
+ 2987 000a 433A5C48 		.ascii	"C:\\H_da\\SS26\\Research Project\\Workspace01\\MP3_"
+ 2987      5F64615C 
+ 2987      53533236 
+ 2987      5C526573 
+ 2987      65617263 
+ 2988 0038 506C6179 		.ascii	"Player.cydsn\000"
+ 2988      65722E63 
+ 2988      7964736E 
+ 2988      00
+ 2989              	.LASF16:
+ 2990 0045 63795F6D 		.ascii	"cy_metadata\000"
+ 2990      65746164 
+ 2990      61746100 
+ 2991              	.LASF1:
+ 2992 0051 756E7369 		.ascii	"unsigned char\000"
+ 2992      676E6564 
+ 2992      20636861 
+ 2992      7200
+ 2993              	.LASF17:
+ 2994 005f 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2994      43313120 
+ 2994      352E342E 
+ 2994      31203230 
+ 2994      31363036 
+ 2995 0092 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 54
+
+
+ 2995      20726576 
+ 2995      6973696F 
+ 2995      6E203233 
+ 2995      37373135 
+ 2996 00c5 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 2996      66756E63 
+ 2996      74696F6E 
+ 2996      2D736563 
+ 2996      74696F6E 
+ 2997              	.LASF5:
+ 2998 00ed 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2998      20756E73 
+ 2998      69676E65 
+ 2998      6420696E 
+ 2998      7400
+ 2999              	.LASF3:
+ 3000 00ff 73686F72 		.ascii	"short unsigned int\000"
+ 3000      7420756E 
+ 3000      7369676E 
+ 3000      65642069 
+ 3000      6E7400
+ 3001              	.LASF13:
+ 3002 0112 63795F6D 		.ascii	"cy_meta_custnvl\000"
+ 3002      6574615F 
+ 3002      63757374 
+ 3002      6E766C00 
+ 3003              	.LASF12:
+ 3004 0122 63795F6D 		.ascii	"cy_meta_configecc\000"
+ 3004      6574615F 
+ 3004      636F6E66 
+ 3004      69676563 
+ 3004      6300
+ 3005              	.LASF8:
+ 3006 0134 756E7369 		.ascii	"unsigned int\000"
+ 3006      676E6564 
+ 3006      20696E74 
+ 3006      00
+ 3007              	.LASF7:
+ 3008 0141 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 3008      206C6F6E 
+ 3008      6720756E 
+ 3008      7369676E 
+ 3008      65642069 
+ 3009              	.LASF10:
+ 3010 0158 75696E74 		.ascii	"uint8_t\000"
+ 3010      385F7400 
+ 3011              	.LASF15:
+ 3012 0160 63795F6D 		.ascii	"cy_meta_flashprotect\000"
+ 3012      6574615F 
+ 3012      666C6173 
+ 3012      6870726F 
+ 3012      74656374 
+ 3013              	.LASF14:
+ 3014 0175 63795F6D 		.ascii	"cy_meta_wonvl\000"
+ 3014      6574615F 
+ 3014      776F6E76 
+ 3014      6C00
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccBJXSOz.s 			page 55
+
+
+ 3015              	.LASF11:
+ 3016 0183 73697A65 		.ascii	"sizetype\000"
+ 3016      74797065 
+ 3016      00
+ 3017              	.LASF6:
+ 3018 018c 6C6F6E67 		.ascii	"long long int\000"
+ 3018      206C6F6E 
+ 3018      6720696E 
+ 3018      7400
+ 3019              	.LASF2:
+ 3020 019a 73686F72 		.ascii	"short int\000"
+ 3020      7420696E 
+ 3020      7400
+ 3021              	.LASF4:
+ 3022 01a4 6C6F6E67 		.ascii	"long int\000"
+ 3022      20696E74 
+ 3022      00
+ 3023              	.LASF0:
+ 3024 01ad 7369676E 		.ascii	"signed char\000"
+ 3024      65642063 
+ 3024      68617200 
+ 3025              	.LASF18:
+ 3026 01b9 47656E65 		.ascii	"Generated_Source\\PSoC5\\cymetadata.c\000"
+ 3026      72617465 
+ 3026      645F536F 
+ 3026      75726365 
+ 3026      5C50536F 
+ 3027              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
