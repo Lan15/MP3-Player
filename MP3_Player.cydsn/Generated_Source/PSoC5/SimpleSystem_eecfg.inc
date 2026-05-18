@@ -19,7 +19,7 @@
  **************************************************************************/
 
     /* TASK definition */
-    #define EE_MAX_TASK 3
+    #define EE_MAX_TASK 4
     #if EE_MAX_TASK > 0
     #define tsk_init 0
     #endif

@@ -1,4 +1,4 @@
---------------- Build Started: 05/17/2026 21:58:31 Project: MP3_Player, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+--------------- Build Started: 05/18/2026 07:55:12 Project: MP3_Player, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
 The code generation step is up to date.
 arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I.\source -I.\source\asw -I.\source\bsw -I.\source\bsw\LabBoard -I.\source\bsw\Services -I.\source\bsw\tft -I.\source\bsw\tft\fonts -I.\Libraries\FatFs_Library -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5\emf32OS -I.\emFile_V322c\Code\Include\PSoC5 -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/wav_parser.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c source\asw\wav_parser.c -o .\CortexM3\ARM_GCC_541\Debug\wav_parser.o
 In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
@@ -79,6 +79,6 @@ No ELF section .cychecksum found, creating one
 Application checksum calculated and stored in ELF section .cychecksum
 Checksum calculated and stored in ELF section .cymeta
 cyelftool.exe -S "C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\CortexM3\ARM_GCC_541\Debug\MP3_Player.elf"
-Flash used: 172254 of 262144 bytes (65.7%).
-SRAM used: 3849 of 65536 bytes (5.9%). Stack: 2048 bytes. Heap: 128 bytes.
---------------- Build Succeeded: 05/17/2026 21:58:32 ---------------
+Flash used: 184408 of 262144 bytes (70.3%).
+SRAM used: 8497 of 65536 bytes (13.0%). Stack: 2048 bytes. Heap: 128 bytes.
+--------------- Build Succeeded: 05/18/2026 07:55:13 ---------------
