@@ -1,0 +1,86 @@
+
+
+===================
+(*)Valerie - Amy Whinehouse
+( )Boxer - Simon & Garfunkel
+( )Castle of Glass - Linkin Park
+
+[SD] Init emFile...
+
+[SD] emFile OK
+
+[SD] Volume: mmc:0:
+
+[SD] Scanning root directory:
+
+[SD] <DIR>  SYSTEM~1
+
+[SD] FILE  EOB.WAV      597556 bytes
+
+[SD] Done. 1 file(s) found.
+
+[WAV] Opening: EOB.WAV
+
+[WAV] FS_FOpen OK
+[WAV] Chunk: 'data' size=597312
+
+--- WAV Header ---
+  FileID        : RIFF
+  Format        : WAVE
+  AudioFormat   : 1
+  Channels      : 1
+  SampleRate    : 22050 Hz
+  BitsPerSample : 8
+  DataSize      : 597312 bytes
+  Duration      : ~27 s
+------------------
+
+[WAV] Header OK - ready for streaming
+
+
+===================
+(*)Valerie - Amy Whinehouse
+( )Boxer - Simon & Garfunkel
+( )Castle of Glass - Linkin Park
+
+[SD] Init emFile...
+
+[SD] emFile OK
+
+[SD] Volume: mmc:0:
+
+[SD] Scanning root directory:
+
+[SD] <DIR>  SYSTEM~1
+
+[SD] FILE  EOB.WAV      597556 bytes
+
+[SD] Done. 1 file(s) found.
+
+[WAV] Opening: EOB.WAV
+
+[WAV] FS_FOpen OK
+
+[WAV] Chunk: 'data' size=597312
+
+
+--- WAV Header ---
+
+  FileID        : RIFF
+
+  Format        : WAVE
+
+  AudioFormat   : 1
+
+  Channels      : 1
+
+  SampleRate    : 22050 Hz
+
+  BitsPerSample : 8
+
+  DataSize      : 597312 bytes
+
+  Duration      : ~27 s
+------------------
+
+[WAV] Header OK - ready for streaming

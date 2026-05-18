@@ -18,19 +18,19 @@
 
 #include "sound.h"
 #include "sound_data.h"
-
 #include "mp3.h"
-#include "emFile.h"
 
+#include "emFile.h"
 #include "FS.h"
+#include "wav_parser.h"
 #include <stdio.h>
+#include <string.h>
 
 //HMI via UART
 // Button 1 : Increase Volume, Next Song
 // Button 2 : Decrease Volume, Prev Song
 // Button 3 : Play, Pause
 // Button 4 : Stop
-
 
 //ISR which will increment the systick counter every ms
 ISR(systick_handler)
@@ -170,36 +170,44 @@ TASK(tsk_init)
     TerminateTask();
     
 }
-
+#if 1
 TASK(tsk_sd)
 {
     char        sdVolName[10];
     FS_DIR    * pDir;
     FS_DIRENT * pDirEnt;
+    FS_FILE   * pFile;
     char        entryName[64];
+    char        firstWAV[64];
+    char        fullPath[80];
     char        logBuf[80];
     U8          attr;
     U32         fileSize;
     U8          fileCount = 0u;
+    WAVFile     wavFile;
  
+    /* ------------------------------------------------------------------ */
+    /* INC1 — Scan SD Card for Directory and files with size and count    */
+    /* ------------------------------------------------------------------ */
+    
     /* Step 1 — Init emFile */
-    UART_LOG_PutString("[SD] Init emFile...\n");
+    //UART_LOG_PutString("\r\n[SD] Init emFile...\n");
     FS_Init();
-    UART_LOG_PutString("[SD] emFile OK\n");
+    //UART_LOG_PutString("\r\n[SD] emFile OK\n");
  
     /* Step 2 — Get volume name */
     if (0 != FS_GetVolumeName(0u, &sdVolName[0], 9u))
     {
-        sprintf(logBuf, "[SD] Volume: %s\n", sdVolName);
+        //sprintf(logBuf, "\r\n[SD] Volume: %s\n", sdVolName);
         UART_LOG_PutString(logBuf);
     }
     else
     {
-        UART_LOG_PutString("[SD] Failed to get volume name\n");
+        UART_LOG_PutString("\n[SD] Failed to get volume name\n");
     }
  
     /* Step 3 — Open root directory */
-    UART_LOG_PutString("[SD] Scanning root directory:\n");
+    UART_LOG_PutString("\r\n[SD] Scanning root directory:\n");
     pDir = FS_OpenDir("\\");
     if (pDir != 0)
     {
@@ -216,11 +224,11 @@ TASK(tsk_sd)
  
             if (attr & FS_ATTR_DIRECTORY)
             {
-                sprintf(logBuf, "[SD] <DIR>  %s\n", entryName);
+                sprintf(logBuf, "\r\n[SD] <DIR>  %s\n", entryName);
             }
             else
             {
-                sprintf(logBuf, "[SD] FILE  %-12s %lu bytes\n",
+                sprintf(logBuf, "\r\n[SD] FILE  %-12s %lu bytes\n",
                         entryName, fileSize);
                 fileCount++;
             }
@@ -230,16 +238,164 @@ TASK(tsk_sd)
         /* Step 5 — Close directory */
         FS_CloseDir(pDir);
  
-        sprintf(logBuf, "[SD] Done. %u file(s) found.\n", fileCount);
+        sprintf(logBuf, "\r\n[SD] Done. %u file(s) found.\n", fileCount);
         UART_LOG_PutString(logBuf);
     }
     else
     {
-        UART_LOG_PutString("[SD] ERROR: cannot open root directory\n");
+        UART_LOG_PutString("\r\n[SD] ERROR: cannot open root directory\n");
+        TerminateTask();
+    }  
+    
+    /* ------------------------------------------------------------------ */
+    /* INC2 — open first WAV file and parse header                        */
+    /* ------------------------------------------------------------------ */
+    
+    if (firstWAV[0] == '\0')
+    {
+        UART_LOG_PutString("\r\n[WAV] No WAV file found\n");
+        TerminateTask();
     }
  
+    sprintf(logBuf, "\r\n[WAV] Opening: %s\n", firstWAV);
+    UART_LOG_PutString(logBuf);
+ 
+    /* T1 confirmed: plain filename works directly with FS_FOpen */
+    pFile = FS_FOpen(firstWAV, "r");
+    if (pFile == 0)
+    {
+        UART_LOG_PutString("\r\n[WAV] ERROR: FS_FOpen failed\n");
+        TerminateTask();
+    }
+    UART_LOG_PutString("\r\n[WAV] FS_FOpen OK\n");
+ 
+    /* Parse header — reads 44 bytes, validates, prints all fields */
+    if (WAV_ParseHeader(pFile, &wavFile) == RC_SUCCESS)
+    {
+        WAV_PrintHeader(&wavFile);
+        UART_LOG_PutString("\r\n[WAV] Header OK - ready for streaming\n");
+    }
+    else
+    {
+        UART_LOG_PutString("\r\n[WAV] ERROR: invalid header\n");
+    }
+ 
+    FS_FClose(pFile);
     TerminateTask();
 }
+#endif
+
+#if 0
+// Debug code for File path name
+TASK(tsk_sd)
+{
+    char        sdVolName[10];
+    FS_DIR    * pDir;
+    FS_DIRENT * pDirEnt;
+    FS_FILE   * pFile;
+    char        entryName[64];
+    char        firstWAV[64];
+    char        testPath[80];
+    char        logBuf[80];
+    U8          attr;
+    U32         fileSize;
+    U8          fileCount = 0u;
+
+    /* Init */
+    UART_LOG_PutString("\r\n[SD] Init emFile...\n");
+    FS_Init();
+    UART_LOG_PutString("\r\n[SD] emFile OK\n");
+
+    /* Get volume name */
+    if (0 != FS_GetVolumeName(0u, &sdVolName[0], 9u))
+    {
+        sprintf(logBuf, "\r\n[SD] Volume: '%s'\n", sdVolName);
+        UART_LOG_PutString(logBuf);
+    }
+
+    /* Scan and find first WAV */
+    firstWAV[0] = '\0';
+    pDir = FS_OpenDir("\\");
+    if (pDir != 0)
+    {
+        while (1)
+        {
+            pDirEnt = FS_ReadDir(pDir);
+            if (pDirEnt == 0) break;
+
+            FS_DirEnt2Name(pDirEnt, entryName);
+            FS_DirEnt2Attr(pDirEnt, &attr);
+            fileSize = FS_DirEnt2Size(pDirEnt);
+
+            if (attr & FS_ATTR_DIRECTORY)
+            {
+                sprintf(logBuf, "\r\n[SD] <DIR>  %s\n", entryName);
+            }
+            else
+            {
+                sprintf(logBuf, "\r\n[SD] FILE  %-12s %lu bytes\n",
+                        entryName, fileSize);
+                fileCount++;
+
+                if (firstWAV[0] == '\0' &&
+                    (strstr(entryName, ".WAV") != 0 ||
+                     strstr(entryName, ".wav") != 0))
+                {
+                    strcpy(firstWAV, entryName);
+                }
+            }
+            UART_LOG_PutString(logBuf);
+        }
+        FS_CloseDir(pDir);
+        sprintf(logBuf, "\r\n[SD] Done. %u file(s) found.\n", fileCount);
+        UART_LOG_PutString(logBuf);
+    }
+
+    if (firstWAV[0] == '\0')
+    {
+        UART_LOG_PutString("\r\n[WAV] No WAV file found\n");
+        TerminateTask();
+    }
+
+    sprintf(logBuf, "\r\n[WAV] First WAV found: '%s'\n", firstWAV);
+    UART_LOG_PutString(logBuf);
+
+    /* ------------------------------------------------------------------ */
+    /* Try all path formats using the actual filename from scan            */
+    /* ------------------------------------------------------------------ */
+
+    /* Test 1 — plain name */
+    sprintf(testPath, "%s", firstWAV);
+    pFile = FS_FOpen(testPath, "r");
+    sprintf(logBuf, "\r\nT1 '%s' : %s\n", testPath, pFile ? "OK" : "FAIL");
+    UART_LOG_PutString(logBuf);
+    if (pFile) { FS_FClose(pFile); TerminateTask(); }
+
+    /* Test 2 — volume + name */
+    sprintf(testPath, "%s%s", sdVolName, firstWAV);
+    pFile = FS_FOpen(testPath, "r");
+    sprintf(logBuf, "\r\nT2 '%s' : %s\n", testPath, pFile ? "OK" : "FAIL");
+    UART_LOG_PutString(logBuf);
+    if (pFile) { FS_FClose(pFile); TerminateTask(); }
+
+    /* Test 3 — backslash + name */
+    sprintf(testPath, "\\%s", firstWAV);
+    pFile = FS_FOpen(testPath, "r");
+    sprintf(logBuf, "\r\nT3 '%s' : %s\n", testPath, pFile ? "OK" : "FAIL");
+    UART_LOG_PutString(logBuf);
+    if (pFile) { FS_FClose(pFile); TerminateTask(); }
+
+    /* Test 4 — volume + backslash + name */
+    sprintf(testPath, "%s\\%s", sdVolName, firstWAV);
+    pFile = FS_FOpen(testPath, "r");
+    sprintf(logBuf, "\r\nT4 '%s' : %s\n", testPath, pFile ? "OK" : "FAIL");
+    UART_LOG_PutString(logBuf);
+    if (pFile) { FS_FClose(pFile); TerminateTask(); }
+
+    UART_LOG_PutString("\r\n[WAV] All formats failed\n");
+    TerminateTask();
+}
+#endif
 
 TASK(tsk_control)
 {

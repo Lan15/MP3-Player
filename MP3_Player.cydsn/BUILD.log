@@ -1,50 +1,5 @@
---------------- Build Started: 05/18/2026 07:55:12 Project: MP3_Player, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+--------------- Build Started: 05/18/2026 13:03:35 Project: MP3_Player, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
 The code generation step is up to date.
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I.\source -I.\source\asw -I.\source\bsw -I.\source\bsw\LabBoard -I.\source\bsw\Services -I.\source\bsw\tft -I.\source\bsw\tft\fonts -I.\Libraries\FatFs_Library -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5\emf32OS -I.\emFile_V322c\Code\Include\PSoC5 -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/wav_parser.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c source\asw\wav_parser.c -o .\CortexM3\ARM_GCC_541\Debug\wav_parser.o
-In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
-                 from Generated_Source\PSoC5/project.h:17,
-                 from source\asw\wav_parser.c:26:
-Generated_Source\PSoC5/cytypes.h:1377:0: warning: "LO8" redefined
- #define LO8(x)                  ((uint8) ((x) & 0xFFu))
- ^
-In file included from source\asw\wav_parser.h:39:0,
-                 from source\asw\wav_parser.c:25:
-.\source\bsw/global.h:306:0: note: this is the location of the previous definition
-  # define LO8(x)   ((uint8_t) ((x) & 0xFFu))
- ^
-In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
-                 from Generated_Source\PSoC5/project.h:17,
-                 from source\asw\wav_parser.c:26:
-Generated_Source\PSoC5/cytypes.h:1378:0: warning: "HI8" redefined
- #define HI8(x)                  ((uint8) ((uint16)(x) >> 8))
- ^
-In file included from source\asw\wav_parser.h:39:0,
-                 from source\asw\wav_parser.c:25:
-.\source\bsw/global.h:311:0: note: this is the location of the previous definition
-  # define HI8(x)   ((uint8_t) ((uint16_t)(x) >> 8))
- ^
-In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
-                 from Generated_Source\PSoC5/project.h:17,
-                 from source\asw\wav_parser.c:26:
-Generated_Source\PSoC5/cytypes.h:1381:0: warning: "LO16" redefined
- #define LO16(x)                 ((uint16) ((x) & 0xFFFFu))
- ^
-In file included from source\asw\wav_parser.h:39:0,
-                 from source\asw\wav_parser.c:25:
-.\source\bsw/global.h:316:0: note: this is the location of the previous definition
-  # define LO16(x)   ((uint16_t) ((x) & 0xFFFFu))
- ^
-In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
-                 from Generated_Source\PSoC5/project.h:17,
-                 from source\asw\wav_parser.c:26:
-Generated_Source\PSoC5/cytypes.h:1382:0: warning: "HI16" redefined
- #define HI16(x)                 ((uint16) ((uint32)(x) >> 16))
- ^
-In file included from source\asw\wav_parser.h:39:0,
-                 from source\asw\wav_parser.c:25:
-.\source\bsw/global.h:321:0: note: this is the location of the previous definition
-  # define HI16(x)   ((uint16_t) ((uint32_t)(x) >> 16))
- ^
 arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I.\source -I.\source\asw -I.\source\bsw -I.\source\bsw\LabBoard -I.\source\bsw\Services -I.\source\bsw\tft -I.\source\bsw\tft\fonts -I.\Libraries\FatFs_Library -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5\emf32OS -I.\emFile_V322c\Code\Include\PSoC5 -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/rtc.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Libraries\FatFs_Library\rtc.c -o .\CortexM3\ARM_GCC_541\Debug\rtc.o
 arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I.\source -I.\source\asw -I.\source\bsw -I.\source\bsw\LabBoard -I.\source\bsw\Services -I.\source\bsw\tft -I.\source\bsw\tft\fonts -I.\Libraries\FatFs_Library -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5\emf32OS -I.\emFile_V322c\Code\Include\PSoC5 -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/sdcard.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Libraries\FatFs_Library\sdcard.c -o .\CortexM3\ARM_GCC_541\Debug\sdcard.o
 Libraries\FatFs_Library\sdcard.c: In function 'xmit_mmc':
@@ -79,6 +34,6 @@ No ELF section .cychecksum found, creating one
 Application checksum calculated and stored in ELF section .cychecksum
 Checksum calculated and stored in ELF section .cymeta
 cyelftool.exe -S "C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\CortexM3\ARM_GCC_541\Debug\MP3_Player.elf"
-Flash used: 184408 of 262144 bytes (70.3%).
+Flash used: 188472 of 262144 bytes (71.9%).
 SRAM used: 8497 of 65536 bytes (13.0%). Stack: 2048 bytes. Heap: 128 bytes.
---------------- Build Succeeded: 05/18/2026 07:55:13 ---------------
+--------------- Build Succeeded: 05/18/2026 13:03:36 ---------------

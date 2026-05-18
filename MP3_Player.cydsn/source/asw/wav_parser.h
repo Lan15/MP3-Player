@@ -3,7 +3,7 @@
 * \author V S Agilan (original reference), refactored for SD card streaming
 * \date 2025
 *
-* \brief WAV file header parser for PSoC 5LP MP3 player
+* \brief WAV file header parser
 *
 * Parses the 44-byte RIFF/WAV header from a FatFs file handle.
 * After a successful parse the FIL read pointer is positioned at byte 44,
@@ -37,8 +37,7 @@
 #define WAV_PARSER_H
 
 #include "global.h"
-#include "Libraries\FatFs_Library\diskio.h"
-#include "Libraries\FatFs_Library\ff.h"     /* FatFs f_read / FIL                           */
+#include <FS.h>          /* emFile — FS_FILE, FS_Read */
 #include <stdint.h>
 #include <stddef.h>
 
@@ -46,136 +45,55 @@
 /* Global pre-processor symbols/macros and type declarations                 */
 /*****************************************************************************/
 
-/** \brief Expected value of WAVHeader.audio_format for uncompressed PCM */
-#define WAV_AUDIO_FORMAT_PCM        (1u)
-
-/** \brief Required number of channels (mono) */
-#define WAV_REQUIRED_CHANNELS       (1u)
-
-/** \brief Required bits per sample matching VDAC8 */
+#define WAV_AUDIO_FORMAT_PCM         (1u)
+#define WAV_REQUIRED_CHANNELS        (1u)
 #define WAV_REQUIRED_BITS_PER_SAMPLE (8u)
+#define WAV_HEADER_SIZE_BYTES        (44u)
 
-/** \brief Total size of the RIFF WAV header in bytes */
-#define WAV_HEADER_SIZE_BYTES       (44u)
-
-
-/**
- * \brief Normalised representation of the 44-byte RIFF WAV header.
- *
- * All multi-byte fields are stored in host byte order (little-endian on
- * Cortex-M3) after the little2big conversion performed during parsing.
- * String fields carry a null terminator so they can be used with strcmp().
- */
 typedef struct WAVHeader_t
 {
-    /** \brief "RIFF" — identifies RIFF container format               [0..3]  */
-    char     file_id[5];
-
-    /** \brief Total file size minus 8 (ChunkID + ChunkSize)           [4..7]  */
-    uint32_t file_size;
-
-    /** \brief "WAVE" — identifies WAV sub-format                      [8..11] */
-    char     format[5];
-
-    /** \brief "fmt " — format sub-chunk marker                        [12..15]*/
-    char     subchunk_id[5];
-
-    /** \brief Size of fmt sub-chunk body: 16 for PCM                  [16..19]*/
-    uint32_t subchunk_size;
-
-    /** \brief Audio format: 1 = PCM (uncompressed)                    [20..21]*/
-    uint16_t audio_format;
-
-    /** \brief Number of channels: 1 = mono, 2 = stereo                [22..23]*/
-    uint16_t number_of_channels;
-
-    /** \brief Samples per second, e.g. 22050                          [24..27]*/
-    uint32_t sample_rate;
-
-    /** \brief sample_rate * number_of_channels * bits_per_sample / 8  [28..31]*/
-    uint32_t byte_rate;
-
-    /** \brief number_of_channels * bits_per_sample / 8                [32..33]*/
-    uint16_t block_align;
-
-    /** \brief Bits per single sample (not bytes). Must be 8.          [34..35]*/
-    uint16_t bits_per_sample;
-
-    /** \brief "data" — data sub-chunk marker                          [36..39]*/
-    char     data_id[5];
-
-    /**
-     * \brief Exact byte count of the PCM data that follows.           [40..43]
-     *
-     * = number_of_samples * number_of_channels * bits_per_sample / 8
-     *
-     * Used by tsk_reader to detect the final (possibly partial) buffer
-     * fill at end-of-file.
-     */
-    uint32_t data_size;
-
+    char     file_id[5];         /* "RIFF"        [0..3]   */
+    uint32_t file_size;          /*               [4..7]   */
+    char     format[5];          /* "WAVE"        [8..11]  */
+    char     subchunk_id[5];     /* "fmt "        [12..15] */
+    uint32_t subchunk_size;      /* 16 for PCM   [16..19] */
+    uint16_t audio_format;       /* 1 = PCM      [20..21] */
+    uint16_t number_of_channels; /* 1 = mono     [22..23] */
+    uint32_t sample_rate;        /* e.g. 22050   [24..27] */
+    uint32_t byte_rate;          /*               [28..31] */
+    uint16_t block_align;        /*               [32..33] */
+    uint16_t bits_per_sample;    /* must be 8    [34..35] */
+    char     data_id[5];         /* "data"       [36..39] */
+    uint32_t data_size;          /* PCM bytes    [40..43] */
 } WAVHeader;
 
-
-/**
- * \brief Aggregated WAV file descriptor returned by WAV_ParseHeader().
- *
- * The header field contains a fully decoded copy of the 44-byte RIFF header.
- * After WAV_ParseHeader() returns RC_SUCCESS the associated FIL handle is
- * positioned at byte 44 (the first PCM sample) and may be passed directly
- * to f_read() for streaming.
- */
 typedef struct WAVFile_t
 {
-    /** \brief Decoded WAV header with all fields in host byte order */
     WAVHeader header;
-
-    /**
-     * \brief Total number of PCM bytes in the data chunk.
-     *
-     * Convenience copy of header.data_size.
-     * tsk_reader uses this to compute remaining bytes before each f_read()
-     * and to detect when the last buffer fill is partial.
-     */
-    uint32_t data_length;
-
+    uint32_t  data_length;   /* copy of header.data_size — used for EOF */
 } WAVFile;
-
 
 /*****************************************************************************/
 /* API functions                                                             */
 /*****************************************************************************/
 
 /**
- * \brief Parse the 44-byte RIFF/WAV header from an open FatFs file.
+ * \brief Parse the 44-byte RIFF/WAV header from an open emFile file.
  *
- * Reads exactly WAV_HEADER_SIZE_BYTES (44) bytes from the current position
- * of \p file (which must be at offset 0), decodes all fields using
- * little-endian conversion, validates format constraints required by the
- * VDAC8 hardware, and populates \p wav.
+ * Reads exactly 44 bytes from \p pFile (must be at offset 0),
+ * decodes all fields, validates format constraints for VDAC8 hardware.
+ * On success the file pointer is at byte 44 — first PCM sample.
  *
- * On success the FIL read pointer is advanced to byte 44, ready for
- * streaming PCM data directly into the dual buffer via f_read().
- *
- * \param[in]  file   Pointer to an open FatFs FIL handle (must be at offset 0)
- * \param[out] wav    Pointer to a WAVFile struct to populate
- *
- * \return RC_SUCCESS  Header valid, \p wav populated, FIL at byte 44
- * \return RC_ERROR    File read failed, magic bytes wrong, or format mismatch
- *                     (not PCM / not mono / not 8-bit)
+ * \param[in]  pFile  Open emFile FS_FILE handle (position must be 0)
+ * \param[out] wav    WAVFile struct to populate
+ * \return RC_SUCCESS — header valid, file at byte 44
+ * \return RC_ERROR   — read failed or format mismatch
  */
-RC_t WAV_ParseHeader(FIL * const file, WAVFile * const wav);
-
+RC_t WAV_ParseHeader(FS_FILE * const pFile, WAVFile * const wav);
 
 /**
- * \brief Print WAV header fields to UART for debugging.
- *
- * Outputs all decoded header fields via UART_LOG_PutString().
- * Call after WAV_ParseHeader() returns RC_SUCCESS.
- *
- * \param[in] wav  Pointer to a populated WAVFile struct
+ * \brief Print all WAV header fields to UART.
  */
 void WAV_PrintHeader(WAVFile const * const wav);
-
 
 #endif /* WAV_PARSER_H */

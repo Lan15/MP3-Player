@@ -571,18 +571,29 @@
 <dep name=".\Generated_Source\PSoC5\isr_Button.h" />
 <dep name=".\Generated_Source\PSoC5\isr_Timer.h" />
 <dep name=".\Generated_Source\PSoC5\project.h" />
+<dep name=".\emFile_V322c\Code\Include\PSoC5\FS.h" />
+<dep name=".\emFile_V322c\Code\Include\PSoC5\FS_ConfDefaults.h" />
+<dep name=".\emFile_V322c\Code\Include\PSoC5\FS_Dev.h" />
+<dep name=".\emFile_V322c\Code\Include\PSoC5\FS_Storage.h" />
+<dep name=".\emFile_V322c\Code\Include\PSoC5\FS_Types.h" />
+<dep name=".\emFile_V322c\Code\Include\PSoC5\SEGGER.h" />
+<dep name=".\emFile_V322c\Code\Include\PSoC5\emf32nOS\FS_Conf.h" />
+<dep name=".\source\bsw\Global.h" />
 <dep name=".\source\bsw\derivate.h" />
 <dep name=".\source\bsw\global.h" />
-<dep name=".\Libraries\FatFs_Library\diskio.h" />
-<dep name=".\Libraries\FatFs_Library\ff.h" />
 <dep name=".\emFile.h" />
 <dep name=".\source\asw\wav_parser.c" />
 <dep name=".\source\asw\wav_parser.h" />
-<dep name=".\CortexM3\ARM_GCC_541\Debug\Libraries\FatFs_Library\ffconf.h" />
-<dep name=".\CortexM3\ARM_GCC_541\Debug\Libraries\FatFs_Library\integer.h" />
 </file>
+<file name=".\emFile_V322c\Code\Include\PSoC5\FS.h" />
+<file name=".\emFile_V322c\Code\Include\PSoC5\FS_ConfDefaults.h" />
+<file name=".\emFile_V322c\Code\Include\PSoC5\FS_Dev.h" />
+<file name=".\emFile_V322c\Code\Include\PSoC5\FS_Storage.h" />
+<file name=".\emFile_V322c\Code\Include\PSoC5\FS_Types.h" />
+<file name=".\emFile_V322c\Code\Include\PSoC5\SEGGER.h" />
+<file name=".\emFile_V322c\Code\Include\PSoC5\emf32nOS\FS_Conf.h" />
+<file name=".\source\bsw\Global.h" />
 <file name=".\source\bsw\derivate.h" />
-<file name=".\source\bsw\global.h" />
 <file name=".\source\asw\wav_parser.c" />
 <file name=".\source\asw\wav_parser.h" />
 <file name=".\CortexM3\ARM_GCC_541\Debug\main.o">
@@ -738,14 +749,8 @@
 <dep name=".\source\asw\mp3.h" />
 <dep name=".\source\asw\sound.h" />
 <dep name=".\source\asw\sound_data.h" />
+<dep name=".\source\asw\wav_parser.h" />
 </file>
-<file name=".\emFile_V322c\Code\Include\PSoC5\FS.h" />
-<file name=".\emFile_V322c\Code\Include\PSoC5\FS_ConfDefaults.h" />
-<file name=".\emFile_V322c\Code\Include\PSoC5\FS_Dev.h" />
-<file name=".\emFile_V322c\Code\Include\PSoC5\FS_Storage.h" />
-<file name=".\emFile_V322c\Code\Include\PSoC5\FS_Types.h" />
-<file name=".\emFile_V322c\Code\Include\PSoC5\SEGGER.h" />
-<file name=".\emFile_V322c\Code\Include\PSoC5\emf32nOS\FS_Conf.h" />
 <file name=".\source\bsw\LabBoard\button.h" />
 <file name=".\source\bsw\LabBoard\led.h" />
 <file name=".\source\bsw\LabBoard\seven.h" />
@@ -5628,7 +5633,7 @@
 <dataGuid v="769d31ea-68b1-4f0c-b90a-7c10a43ee563">
 <CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563 type_name="CyDesigner.Common.ProjMgmt.Model.CyLinkCustomData" version="1">
 <link_deps_times>
-<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM3" v="134235573130745560" />
+<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM3" v="134235758160024925" />
 </link_deps_times>
 </CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563>
 </dataGuid>
