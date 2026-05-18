@@ -1570,7 +1570,7 @@
         {alrm_1s}
     #endif
     #if EE_MAX_ALARM > 1
-        ,{Alarm_2}
+        ,{Alarm_3}
     #endif
     #if EE_MAX_ALARM > 2
         ,{Alarm_3}
@@ -1600,7 +1600,7 @@ const char* EE_ALARM_NAME[EE_MAX_ALARM]=
          "alrm_1s"
     #endif
     #if EE_MAX_ALARM > 1
-        ,"Alarm_2"
+        ,"Alarm_3"
     #endif
     #if EE_MAX_ALARM > 2
         ,"Alarm_3"
@@ -1628,7 +1628,7 @@ const unsigned long EE_ALARM_ID[EE_MAX_ALARM]=
          alrm_1s
     #endif
     #if EE_MAX_ALARM > 1
-        ,Alarm_2
+        ,Alarm_3
     #endif
     #if EE_MAX_ALARM > 2
         ,Alarm_3
@@ -1655,7 +1655,7 @@ const unsigned long EE_ALARM_ID[EE_MAX_ALARM]=
     void alarm_callback_1(void);
 #endif
 #if (EE_MAX_ALARM > 1) && (0 == 3)
-    void alarm_callback_2(void);
+    void alarm_callback_3(void);
 #endif
 #if (EE_MAX_ALARM > 2) && (0 == 3)
     void alarm_callback_3(void);
@@ -1688,7 +1688,7 @@ const unsigned long EE_ALARM_ID[EE_MAX_ALARM]=
         {0, alrm_1s, EE_ALARM }
         #endif
         #if EE_MAX_ALARM > 1
-        ,{0, Alarm_2, EE_ALARM }
+        ,{0, Alarm_3, EE_ALARM }
         #endif
         #if EE_MAX_ALARM > 2
         ,{0, Alarm_3, EE_ALARM }
@@ -1754,7 +1754,7 @@ const unsigned long EE_ALARM_ID[EE_MAX_ALARM]=
             #if 0 != 3
              (EE_VOID_CALLBACK)NULL,
             #else
-                alarm_callback_2,
+                alarm_callback_3,
             #endif
             (EE_TYPECOUNTER)-1 }
     #endif

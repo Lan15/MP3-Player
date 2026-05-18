@@ -81,6 +81,7 @@
 /* Global pre-processor symbols/macros and type declarations                 */
 /*****************************************************************************/
 
+extern volatile uint32_t SOUND_isrTickCount;
 
 //####################### Enumerations
 /**

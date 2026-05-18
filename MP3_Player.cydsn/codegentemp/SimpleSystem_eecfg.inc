@@ -91,7 +91,7 @@
     #define alrm_1s 0U
     #endif
     #if EE_MAX_ALARM > 1
-    #define Alarm_2 1U
+    #define Alarm_3 1U
     #endif
     #if EE_MAX_ALARM > 2
     #define Alarm_3 2U

@@ -1,7 +1,7 @@
-C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\MP3_Player.cyprj|a6ef5eaf-3352-450c-9da0-91029898d582
-C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|049aabb1-1aef-496c-8e9c-4dbd93931518
-C:\Users\agila\OneDrive\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|3e00e291-f52c-4636-a940-8aec2c3ab33c
-C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|c62e023a-8ad0-4609-8895-7621451338f1
-C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|eeb7f8d7-42e4-43e2-8dff-a68547a5723f
-C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|52a53281-43e8-4aec-baad-57d21a31b35f
-C:\H_da\SS26\Research Project\Workspace01\MP3_start.cydsn\MP3_start.cyprj|ec64a692-7c40-4a79-a01c-42afe5a28c97
+C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\MP3_Player.cyprj|035abfa9-3736-4982-aaa3-1705a44169d4
+C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|7159010e-90fe-4c59-9c77-891d602c5915
+C:\Users\agila\OneDrive\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|fa359b49-2107-4009-8312-bf85519fc23a
+C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|583d1c84-42ef-41dc-b2ce-4c77561ae57a
+C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|bc350d79-ad1a-4f48-b145-a61f687027dc
+C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|125700f3-0797-4daa-acef-55bcad2ffe67
+C:\H_da\SS26\Research Project\Workspace01\MP3_start.cydsn\MP3_start.cyprj|1e35aa40-5e55-4769-9d76-3db865deeaee

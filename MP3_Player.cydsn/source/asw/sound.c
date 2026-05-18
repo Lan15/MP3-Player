@@ -31,6 +31,8 @@
 /* Global variable definitions (declared in header file with 'extern')       */
 /*****************************************************************************/
 
+volatile uint32_t SOUND_isrTickCount = 0u;
+
 /*****************************************************************************/
 /* Local type definitions ('typedef')                                        */
 /*****************************************************************************/
@@ -140,7 +142,8 @@ RC_t SOUND_SetVolume(uint8_t volume)
  */
 RC_t SOUND_isr()
 {
-    
+    /* INC3 — count every ISR tick to verify 22050 Hz rate */
+    SOUND_isrTickCount++;
     
     //Send the next PWM value to the PWM register
     if (0 != SOUND__currentSong.m_song)

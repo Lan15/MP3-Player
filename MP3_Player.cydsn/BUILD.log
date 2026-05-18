@@ -1,4 +1,4 @@
---------------- Build Started: 05/18/2026 13:03:35 Project: MP3_Player, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+--------------- Build Started: 05/18/2026 20:20:16 Project: MP3_Player, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
 The code generation step is up to date.
 arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I.\source -I.\source\asw -I.\source\bsw -I.\source\bsw\LabBoard -I.\source\bsw\Services -I.\source\bsw\tft -I.\source\bsw\tft\fonts -I.\Libraries\FatFs_Library -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5\emf32OS -I.\emFile_V322c\Code\Include\PSoC5 -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/rtc.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Libraries\FatFs_Library\rtc.c -o .\CortexM3\ARM_GCC_541\Debug\rtc.o
 arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I.\source -I.\source\asw -I.\source\bsw -I.\source\bsw\LabBoard -I.\source\bsw\Services -I.\source\bsw\tft -I.\source\bsw\tft\fonts -I.\Libraries\FatFs_Library -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5\emf32OS -I.\emFile_V322c\Code\Include\PSoC5 -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/sdcard.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Libraries\FatFs_Library\sdcard.c -o .\CortexM3\ARM_GCC_541\Debug\sdcard.o
@@ -34,6 +34,6 @@ No ELF section .cychecksum found, creating one
 Application checksum calculated and stored in ELF section .cychecksum
 Checksum calculated and stored in ELF section .cymeta
 cyelftool.exe -S "C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\CortexM3\ARM_GCC_541\Debug\MP3_Player.elf"
-Flash used: 188472 of 262144 bytes (71.9%).
-SRAM used: 8497 of 65536 bytes (13.0%). Stack: 2048 bytes. Heap: 128 bytes.
---------------- Build Succeeded: 05/18/2026 13:03:36 ---------------
+Flash used: 188768 of 262144 bytes (72.0%).
+SRAM used: 8521 of 65536 bytes (13.0%). Stack: 2048 bytes. Heap: 128 bytes.
+--------------- Build Succeeded: 05/18/2026 20:20:17 ---------------

@@ -164,7 +164,7 @@ TASK(tsk_init)
     SetRelAlarm(alrm_1s,1000,1000);
 
     ActivateTask(tsk_sd);
-    //ActivateTask(tsk_control);
+    ActivateTask(tsk_control);
     ActivateTask(tsk_background);
     
     TerminateTask();
@@ -186,6 +186,8 @@ TASK(tsk_sd)
     U8          fileCount = 0u;
     WAVFile     wavFile;
  
+    firstWAV[0] = '\0';  
+    
     /* ------------------------------------------------------------------ */
     /* INC1 — Scan SD Card for Directory and files with size and count    */
     /* ------------------------------------------------------------------ */
@@ -231,6 +233,11 @@ TASK(tsk_sd)
                 sprintf(logBuf, "\r\n[SD] FILE  %-12s %lu bytes\n",
                         entryName, fileSize);
                 fileCount++;
+                /* FIX 2 — populate firstWAV from scan results */
+                if (firstWAV[0] == '\0' && (strstr(entryName, ".WAV") != 0 || strstr(entryName, ".wav") != 0))
+                {
+                    strcpy(firstWAV, entryName);
+                }
             }
             UART_LOG_PutString(logBuf);
         }
@@ -421,6 +428,33 @@ TASK(tsk_control)
     }
 }
 
+/* ------------------------------------------------------------------ */
+/* INC3 — tsk_background                                              */
+/* Prints ISR tick count every 1 second                               */
+/* Stopped : 0 ticks/s                                                */
+/* Playing : ~22050 ticks/s                                           */
+/* ------------------------------------------------------------------ */
+TASK(tsk_background)
+{
+    static uint32_t lastCount = 0u;
+    char tickBuf[56];
+ 
+    while(1)
+    {
+        CyDelay(1000u);
+ 
+        uint32_t current = SOUND_isrTickCount;
+        uint32_t delta   = current - lastCount;
+        lastCount        = current;
+ 
+        sprintf(tickBuf, "\r\n[ISR] ticks/s: %lu (expected 22050)\n", delta); // 22050 ticks × (1000ms / 642ms) = 34,349 ticks/s measured
+        UART_LOG_PutString(tickBuf);
+        /* The CyDelay(1000) is not 1 second - the UART print in tsk_background takes ~358 ms extra time, 
+        making the measurement window only ~642 ms instead of 1000 ms. So 22050 ticks in 642 ms = 34,349 ticks/s */
+    }
+}
+
+#if 0
 TASK(tsk_background)
 {
     while(1)
@@ -429,7 +463,7 @@ TASK(tsk_background)
         asm("nop");
     }
 }
-
+#endif
 
 /********************************************************************************
  * ISR Definitions
