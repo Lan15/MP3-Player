@@ -317,7 +317,7 @@ RC_t SOUND_isr()
         {
             /* Buffer drained — output silence and wake tsk_reader */
             SOUND_PWM_WriteCompare(SOUND_SILENCE);
-       
+            
         }
 
         return RC_SUCCESS;

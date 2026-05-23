@@ -201,7 +201,7 @@ TASK(tsk_sd)
     if (0 != FS_GetVolumeName(0u, &sdVolName[0], 9u))
     {
         //sprintf(logBuf, "\r\n[SD] Volume: %s\n", sdVolName);
-        UART_LOG_PutString(logBuf);
+        //UART_LOG_PutString(logBuf);
     }
     else
     {

@@ -82,6 +82,8 @@
 /* Global pre-processor symbols/macros and type declarations                 */
 /*****************************************************************************/
 
+#define MP3_FILENAME_MAXLEN  (13u)
+#define MP3_MAX_SONGS        (10u)
 
 //####################### Enumerations
 /**
@@ -117,7 +119,16 @@ RC_t MP3_Init();
  */
 RC_t MP3_ProcessEvent(EventMaskType nextEvent);
 
-
+/**
+ * \brief SD card streaming task body — runs inside tsk_reader.
+ *
+ * Never returns. Contains the WaitEvent(ev_BufEmpty) loop.
+ * Opens WAV file, pre-fills dual buffer, streams PCM to VDAC8.
+ *
+ * \note Call only from TASK(tsk_reader).
+ * \note tsk_reader must be an extended task owning ev_BufEmpty.
+ */
+void MP3_Reader();
 
 /*****************************************************************************/
 /* Private stuff, only visible for Together, declared static in cpp - File   */
