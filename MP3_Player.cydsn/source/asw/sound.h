@@ -83,6 +83,18 @@
 
 extern volatile uint32_t SOUND_isrTickCount;
 
+/**
+ * \brief Size of each half of the dual buffer in bytes.
+ * 512 = one FAT sector = 23.2 ms of audio at 22050 Hz.
+ */
+#define SOUND_BUFFER_SIZE   (512u)
+ 
+/**
+ * \brief Mid-rail silence value for 8-bit unsigned PCM.
+ * 0x80 = 128 maps to 0V output on VDAC8.
+ */
+#define SOUND_SILENCE       (0x80u)    
+
 //####################### Enumerations
 /**
 *
@@ -96,6 +108,8 @@ extern volatile uint32_t SOUND_isrTickCount;
 } ;
 typedef enum eSOUND_Channel SOUND_Channel_t;
 
+/* INC3 — ISR tick counter for rate verification */
+extern volatile uint32_t SOUND_isrTickCount;
 
 // Wrapper to allow representing the file in Together as class
 #ifdef TOGETHER
@@ -143,7 +157,6 @@ RC_t SOUND_SetSong(uint8_t const *const song, uint32_t sizeOfSong);
  */
 RC_t SOUND_SetVolume(uint8_t volume);
 
-
 /**
  * isr code for timer interrupt
  * /return RC_SUCCESS
@@ -151,6 +164,20 @@ RC_t SOUND_SetVolume(uint8_t volume);
 RC_t SOUND_isr();
 
 
+/**
+ * \brief Fill the inactive dual buffer with PCM data from tsk_reader.
+ *
+ * \param[in] data  Pointer to PCM data read from SD card via FS_Read()
+ * \param[in] size  Number of valid bytes (1..SOUND_BUFFER_SIZE)
+ * \return RC_SUCCESS or RC_ERROR
+ */
+RC_t SOUND_FillBuffer(uint8_t const * const data, uint16_t size);
+ 
+/**
+ * \brief Atomically swap active and inactive buffers.
+ * Called by tsk_reader after SOUND_FillBuffer() completes.
+ */
+RC_t SOUND_SwapBuffers();
 
 /*****************************************************************************/
 /* Private stuff, only visible for Together, declared static in cpp - File   */

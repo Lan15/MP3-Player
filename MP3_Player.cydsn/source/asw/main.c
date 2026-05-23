@@ -447,8 +447,9 @@ TASK(tsk_background)
         uint32_t delta   = current - lastCount;
         lastCount        = current;
  
-        sprintf(tickBuf, "\r\n[ISR] ticks/s: %lu (expected 22050)\n", delta); // 22050 ticks × (1000ms / 642ms) = 34,349 ticks/s measured
-        UART_LOG_PutString(tickBuf);
+        //sprintf(tickBuf, "\r\n[ISR] ticks/s: %lu (expected 22050)\n", delta); // 22050 ticks × (1000ms / 642ms) = 34,349 ticks/s measured
+        //UART_LOG_PutString(tickBuf);
+        
         /* The CyDelay(1000) is not 1 second - the UART print in tsk_background takes ~358 ms extra time, 
         making the measurement window only ~642 ms instead of 1000 ms. So 22050 ticks in 642 ms = 34,349 ticks/s */
     }
