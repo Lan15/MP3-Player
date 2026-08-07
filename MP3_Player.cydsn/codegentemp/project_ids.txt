@@ -1,7 +1,6 @@
-C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\MP3_Player.cyprj|56c5949c-179f-4e03-9d48-7f56bc367fc1
-C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|a7db5a19-430b-4ee7-b703-6cf67185168c
-C:\Users\agila\OneDrive\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|4b88e461-d69e-44cf-9be5-029923b1f147
-C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|e64210bd-2458-4e94-be31-118a592069c5
-C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|180d56ba-8ac8-436b-8c15-47ce78af3fde
-C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|7b33ffd7-edf4-42e9-a327-a967e3818863
-C:\H_da\SS26\Research Project\Workspace01\MP3_start.cydsn\MP3_start.cyprj|dd5ec28a-b963-4ca4-af29-7934fb1c8c35
+C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\MP3_Player.cyprj|afe629ff-f182-439b-a0d2-00005f6ed83a
+C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|4c0647d8-32c3-4773-b67d-ebe531517504
+C:\Users\agila\OneDrive\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|7c37b5cd-2280-4c10-b3cc-564634bf3044
+C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|765d24e9-9496-42fa-9397-067cd428951c
+C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|09305eea-41f0-4c5e-9b11-b33ce8f37630
+C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|d80ba1fb-62af-4815-a76b-21073bba7ed4

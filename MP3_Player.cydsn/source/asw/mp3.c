@@ -161,14 +161,14 @@ RC_t MP3_Init()
     MP3__reader.m_newSongRequest = FALSE;
  
     /* Scan SD card for WAV files */
-    UART_LOG_PutString("[MP3] Scanning SD card...\n");
+    UART_LOG_PutString("\r\n[MP3] Scanning SD card...\n");
     
     FS_Init(); 
     
     pDir = FS_OpenDir(MP3__SD_ROOT);
     if (pDir == 0)
     {
-        UART_LOG_PutString("[MP3] ERROR: cannot open root dir\n");
+        UART_LOG_PutString("\r\n[MP3] ERROR: cannot open root dir\n");
         /* Fall back to flash songs */
         MP3__player.m_noSongs = SOUND_NoOfRecords;
         uint16_t i;
@@ -196,7 +196,7 @@ RC_t MP3_Init()
                 MP3__songList[songCount][MP3_FILENAME_MAXLEN - 1u] = '\0';
                 songCount++;
  
-                sprintf(logBuf, "[MP3] Found: %s\n", entryName);
+                sprintf(logBuf, "\r\n[MP3] Found: %s\n", entryName);
                 UART_LOG_PutString(logBuf);
             }
         }
@@ -208,7 +208,7 @@ RC_t MP3_Init()
     SOUND_SetVolume(MP3__player.m_volume * 20u);
     MP3__showSong();
  
-    sprintf(logBuf, "[MP3] Ready. %u song(s).\n", MP3__player.m_noSongs);
+    sprintf(logBuf, "\r\n[MP3] Ready. %u song(s).\n", MP3__player.m_noSongs);
     UART_LOG_PutString(logBuf);
  
     return RC_SUCCESS;
@@ -356,7 +356,7 @@ void MP3_Reader()
                 /* Start ISR clock — playback begins */
                 SOUND_StartPlay();
  
-                sprintf(logBuf, "[MP3] Playing. %lu bytes left\n",
+                sprintf(logBuf, "\r\n[MP3] Playing. %lu bytes left\n",
                         MP3__bytesRemaining);
                 UART_LOG_PutString(logBuf);
  
@@ -411,7 +411,7 @@ void MP3_Reader()
                 MP3__player.m_remainingPlayTime = 0u;
                 SEVEN_Set(SEVEN_0, 0u);
  
-                UART_LOG_PutString("[MP3] EOF — song complete\n");
+                UART_LOG_PutString("\r\n[MP3] EOF — song complete\n");
                 MP3__reader.m_state = MP3READER_IDLE;
                 break;
             }
@@ -480,24 +480,24 @@ void MP3__stopSong(void)
     SOUND_StopPlay();
     MP3__CloseWavFile();
     MP3__reader.m_state = MP3READER_IDLE;
-    UART_LOG_PutString("[MP3] Stopped\n");
+    UART_LOG_PutString("\r\n[MP3] Stopped\n");
 }
 
 void MP3__pauseSong()
 {
     SOUND_StopPlay();
-    UART_LOG_PutString("[MP3] Paused\n");
+    UART_LOG_PutString("\r\n[MP3] Paused\n");
 }
  
 void MP3__resumeSong()
 {
     SOUND_StartPlay();
-    UART_LOG_PutString("[MP3] Resumed\n");
+    UART_LOG_PutString("\r\n[MP3] Resumed\n");
 }
 
 void MP3__showSong()
 {
-    UART_LOG_PutString("\n\n===================\n");
+    UART_LOG_PutString("\r\n===================\n");
     
     for (uint16_t i = 0; i < MP3__player.m_noSongs; i++)
     {
@@ -569,7 +569,7 @@ static RC_t MP3__OpenWavFile(uint16_t songIndex)
     MP3__pFile = FS_FOpen(MP3__songList[songIndex], "r");
     if (MP3__pFile == 0)
     {
-        UART_LOG_PutString("[MP3] ERROR: FS_FOpen failed\n");
+        UART_LOG_PutString("\r\n[MP3] ERROR: FS_FOpen failed\n");
         return RC_ERROR;
     }
  
@@ -577,14 +577,14 @@ static RC_t MP3__OpenWavFile(uint16_t songIndex)
     {
         FS_FClose(MP3__pFile);
         MP3__pFile = 0;
-        UART_LOG_PutString("[MP3] ERROR: WAV header invalid\n");
+        UART_LOG_PutString("\r\n[MP3] ERROR: WAV header invalid\n");
         return RC_ERROR;
     }
  
     MP3__bytesRemaining = MP3__wavInfo.data_length;
  
     WAV_PrintHeader(&MP3__wavInfo);
-    sprintf(logBuf, "[MP3] Streaming: %lu bytes\n", MP3__bytesRemaining);
+    sprintf(logBuf, "\r\n[MP3] Streaming: %lu bytes\n", MP3__bytesRemaining);
     UART_LOG_PutString(logBuf);
  
     return RC_SUCCESS;

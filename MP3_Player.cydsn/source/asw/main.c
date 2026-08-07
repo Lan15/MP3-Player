@@ -205,7 +205,7 @@ TASK(tsk_sd)
     }
     else
     {
-        UART_LOG_PutString("\n[SD] Failed to get volume name\n");
+        UART_LOG_PutString("\r\n[SD] Failed to get volume name\n");
     }
  
     /* Step 3 — Open root directory */
@@ -276,12 +276,57 @@ TASK(tsk_sd)
     }
     UART_LOG_PutString("\r\n[WAV] FS_FOpen OK\n");
  
-    /* Parse header — reads 44 bytes, validates, prints all fields */
+    /* Parse header — reads 44 bytes, validates, prints all fields 
+    if (WAV_ParseHeader(pFile, &wavFile) == RC_SUCCESS)
+    {
+        //WAV_PrintHeader(&wavFile);
+        //UART_LOG_PutString("\r\n[WAV] ready for streaming\n"); 
+    } */
+    
+    /* -------------------------------------------------------- */
+    /* 4B2 — Read first block of PCM into dual buffer           */
+    /* -------------------------------------------------------- */
     if (WAV_ParseHeader(pFile, &wavFile) == RC_SUCCESS)
     {
         WAV_PrintHeader(&wavFile);
-        UART_LOG_PutString("\r\n[WAV] Header OK - ready for streaming\n");
+        UART_LOG_PutString("\r\n[WAV] Header OK\n");
+
+        /* File pointer now at byte 78 — first PCM sample      */
+        /* Read first 512 bytes into read buffer               */
+        static uint8_t readBuf[512];
+        U32 bytesRead = FS_Read(pFile, readBuf, 512u);
+
+        sprintf(logBuf, "\r\n[4B2] FS_Read: %lu bytes\n", bytesRead);
+        UART_LOG_PutString(logBuf);
+
+        /* Fill dual buffer */
+        if (SOUND_FillBuffer(readBuf, (uint16_t)bytesRead) == RC_SUCCESS)
+        {
+            UART_LOG_PutString("\r\n[4B2] FillBuffer OK\n");
+            SOUND_SwapBuffers();
+            UART_LOG_PutString("\r\n[4B2] SwapBuffers OK\n");
+        }
+        else
+        {
+            UART_LOG_PutString("\r\n[4B2] ERROR: FillBuffer failed\n");
+        }
+
+        /* Print first 32 bytes to verify PCM data             */
+        /* For 8-bit unsigned PCM silence = 0x80               */
+        /* Music samples should vary around 0x80               */
+        UART_LOG_PutString("\r\n[4B2] First 32 bytes: ");
+        uint8_t k;
+        for (k = 0u; k < 32u; k++)
+        {
+            sprintf(logBuf, "%02X ", readBuf[k]);
+            UART_LOG_PutString(logBuf);
+        }
+        UART_LOG_PutString("\n");
     }
+    
+    /*  The bytes should vary around 0x80 (128 decimal) which is the mid-rail for 8-bit unsigned PCM. 
+        If you see all 0x80 - the file pointer is wrong. If you see all 0x00 - the buffer was not filled. 
+        If you see values like 7E 80 82 7F varying around 0x80 - the PCM data is correct. */
     else
     {
         UART_LOG_PutString("\r\n[WAV] ERROR: invalid header\n");
