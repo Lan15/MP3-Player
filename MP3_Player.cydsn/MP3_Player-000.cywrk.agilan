@@ -18,7 +18,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="MP3_Player-000\MP3_Player\asw\wav_parser.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="MP3_Player-000\MP3_Player\asw\sound.c">
 <ExpandedNodeIds>
 <v>MP3_Player-000</v>
 <v>MP3_Player-000\MP3_Player</v>
@@ -63,7 +63,6 @@
 <v>MP3_Player-000\MP3_Player\bsw\Services\math_helper.h</v>
 <v>MP3_Player-000\MP3_Player\bsw\Services\ringbuffer.h</v>
 <v>MP3_Player-000\MP3_Player\bsw\tft</v>
-<v>MP3_Player-000\MP3_Player\bsw\tft\fonts</v>
 <v>MP3_Player-000\MP3_Player\bsw\tft\fonts\FreeMono12pt7b.h</v>
 <v>MP3_Player-000\MP3_Player\bsw\tft\fonts\FreeMono18pt7b.h</v>
 <v>MP3_Player-000\MP3_Player\bsw\tft\fonts\FreeMono24pt7b.h</v>
@@ -123,7 +122,6 @@
 <v>MP3_Player-000\MP3_Player\bsw\cyapicallbacks.h</v>
 <v>MP3_Player-000\MP3_Player\bsw\derivate.h</v>
 <v>MP3_Player-000\MP3_Player\bsw\global.h</v>
-<v>MP3_Player-000\MP3_Player\FatFs_Library</v>
 <v>MP3_Player-000\MP3_Player\FatFs_Library\diskio.h</v>
 <v>MP3_Player-000\MP3_Player\FatFs_Library\ff.c</v>
 <v>MP3_Player-000\MP3_Player\FatFs_Library\ff.h</v>
@@ -136,16 +134,6 @@
 <v>MP3_Player-000\MP3_Player\Generated_Source\PSoC5</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
-<v>MP3_Player-000</v>
-<v>MP3_Player-000\MP3_Player</v>
-<v>MP3_Player-000\MP3_Player\TopDesign</v>
-<v>MP3_Player-000\MP3_Player\MP3_Player.cydwr</v>
-<v>MP3_Player-000\MP3_Player\MP3_Player.cydwr\Pins</v>
-<v>MP3_Player-000\MP3_Player\MP3_Player.cydwr\Analog</v>
-<v>MP3_Player-000\MP3_Player\MP3_Player.cydwr\Clocks</v>
-<v>MP3_Player-000\MP3_Player\MP3_Player.cydwr\Interrupts</v>
-<v>MP3_Player-000\MP3_Player\MP3_Player.cydwr\DMA</v>
-<v>MP3_Player-000\MP3_Player\MP3_Player.cydwr\System</v>
 <v>MP3_Player-000\MP3_Player\MP3_Player.cydwr\Directives</v>
 <v>MP3_Player-000\MP3_Player\MP3_Player.cydwr\Flash Security</v>
 <v>MP3_Player-000\MP3_Player\MP3_Player.cydwr\EEPROM</v>
@@ -180,10 +168,20 @@
 <v>MP3_Player-000\MP3_Player\bsw\Services\ringbuffer.h</v>
 <v>MP3_Player-000\MP3_Player\bsw\tft</v>
 <v>MP3_Player-000\MP3_Player\bsw\tft\fonts</v>
-<v>MP3_Player-000\MP3_Player\bsw\tft\fonts\FreeMono12pt7b.h</v>
-<v>MP3_Player-000\MP3_Player\bsw\tft\fonts\FreeMono18pt7b.h</v>
-<v>MP3_Player-000\MP3_Player\bsw\tft\fonts\FreeMono24pt7b.h</v>
-<v>MP3_Player-000\MP3_Player\bsw\tft\fonts\FreeMono9pt7b.h</v>
+<v>MP3_Player-000\MP3_Player\bsw\tft\ST7735.h</v>
+<v>MP3_Player-000\MP3_Player\bsw\tft\tft.c</v>
+<v>MP3_Player-000\MP3_Player\bsw\tft\tft.h</v>
+<v>MP3_Player-000\MP3_Player\bsw\cyapicallbacks.h</v>
+<v>MP3_Player-000\MP3_Player\bsw\derivate.h</v>
+<v>MP3_Player-000\MP3_Player\bsw\global.h</v>
+<v>MP3_Player-000\MP3_Player\FatFs_Library</v>
+<v>MP3_Player-000\MP3_Player\Generated_Source</v>
+<v>MP3_Player-000\MP3_Player\Generated_Source\PSoC5</v>
+<v>MP3_Player-000\MP3_Player\Generated_Source\PSoC5\BUTTON_1</v>
+<v>MP3_Player-000\MP3_Player\Generated_Source\PSoC5\BUTTON_2</v>
+<v>MP3_Player-000\MP3_Player\Generated_Source\PSoC5\BUTTON_3</v>
+<v>MP3_Player-000\MP3_Player\Generated_Source\PSoC5\BUTTON_4</v>
+<v>MP3_Player-000\MP3_Player\Generated_Source\PSoC5\CLK_LED</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -633,6 +631,7 @@
 <name v=".\source\asw\main.c" />
 <name v=".\source\asw\mp3.c" />
 <name v=".\source\asw\wav_parser.c" />
+<name v=".\TopDesign\TopDesign.cysch" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -640,7 +639,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="1408, 657" SelectedTabbedMdiWindow="4e89c3b2-9ca2-4b26-a2b3-e873aeb1d1da"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="cb98b672-06dc-4884-8407-7d2e5bb839d7" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\main.c" Guid="4e89c3b2-9ca2-4b26-a2b3-e873aeb1d1da" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\mp3.c" Guid="19379a6f-2ac9-4711-a4a2-c732f3d7817d" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\wav_parser.c" Guid="5c02ee9e-352c-455d-8cde-96d131d3f919" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="1272, 657" SelectedTabbedMdiWindow="40d0e671-5744-45a2-8d2d-b642a33b8828"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="cb98b672-06dc-4884-8407-7d2e5bb839d7" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\main.c" Guid="4e89c3b2-9ca2-4b26-a2b3-e873aeb1d1da" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\mp3.c" Guid="19379a6f-2ac9-4711-a4a2-c732f3d7817d" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\wav_parser.c" Guid="5c02ee9e-352c-455d-8cde-96d131d3f919" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\TopDesign\TopDesign.cysch" Guid="40d0e671-5744-45a2-8d2d-b642a33b8828" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

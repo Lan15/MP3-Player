@@ -84,7 +84,6 @@ static SOUND__Driver_t SOUND__currentSong =
     .m_readPos      = 0,
     .m_volume       = 100u,
 };
-
 /*****************************************************************************/
 /* Local function prototypes ('static')                                      */
 /*****************************************************************************/
@@ -296,7 +295,7 @@ RC_t SOUND_SwapBuffers()
 
 RC_t SOUND_isr()
 {
-    /* INC3 — tick counter */
+    /* INC3 - tick counter */
     SOUND_isrTickCount++;
 
     /* ------------------------------------------------------------------ */
@@ -304,7 +303,7 @@ RC_t SOUND_isr()
     /* ------------------------------------------------------------------ */
     if (SOUND__currentSong.m_activeBuf != 0)
     {
-        if (SOUND__currentSong.m_readPos < SOUND__currentSong.m_activeFill)
+        /*if (SOUND__currentSong.m_readPos < SOUND__currentSong.m_activeFill)
         {
             uint16_t sample =
                 ((uint16_t)SOUND__currentSong.m_activeBuf[SOUND__currentSong.m_readPos]
@@ -314,12 +313,34 @@ RC_t SOUND_isr()
             SOUND__currentSong.m_readPos++;
         }
         else
-        {
-            /* Buffer drained — output silence and wake tsk_reader */
-            SOUND_PWM_WriteCompare(SOUND_SILENCE);
-            
-        }
+        {*/
+            /* Buffer drained - output silence and wake tsk_reader */
+            /*SOUND_PWM_WriteCompare(SOUND_SILENCE);
+            SetEvent(tsk_reader, ev_BufEmpty);
+        }*/
 
+        if (SOUND__currentSong.m_readPos < SOUND__currentSong.m_activeFill)
+        {
+            uint16_t sample =
+                ((uint16_t)SOUND__currentSong.m_activeBuf[SOUND__currentSong.m_readPos]
+                 * (uint16_t)SOUND__currentSong.m_volume) / 100u;
+
+            SOUND_PWM_WriteCompare((uint8_t)sample);
+            SOUND__currentSong.m_readPos++;
+
+            if (SOUND__currentSong.m_readPos ==
+                (SOUND__currentSong.m_activeFill / 2u))
+            {
+                SetEvent(tsk_reader, ev_BufEmpty);
+            }
+        }
+        else
+        {
+            SOUND_StopPlay();
+            SOUND_SwapBuffers();
+            SOUND_StartPlay();
+        }
+        
         return RC_SUCCESS;
     }
 

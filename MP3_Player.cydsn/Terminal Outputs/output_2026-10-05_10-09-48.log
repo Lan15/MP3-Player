@@ -1,0 +1,49 @@
+[MP3] Scanning SD card...
+
+[MP3] Found: EOB.WAV
+
+===================
+(*)EOB.WAV
+
+[MP3] Ready. 1 song(s).
+
+[READER] tsk_reader started
+
+[MP3] playSong called
+
+[READER] woke - calling MP3_Reader
+
+[READER] new song request -> OPEN
+
+[READER] state=OPEN
+
+[WAV] Chunk: 'data' size=597312
+
+
+--- WAV Header ---
+
+  FileID        : RIFF
+
+  Format        : WAVE
+
+  AudioFormat   : 1
+
+  Channels      : 1
+
+  SampleRate    : 22050 Hz
+
+  BitsPerSample : 8
+
+  DataSize      : 597312 bytes
+
+  Duration      : ~27 s
+
+------------------
+
+[MP3] Streaming: 597312 bytes
+
+[MP3] Playing. 596288 bytes left
+
+[READER] state=EOF
+
+[MP3] EOF - song complete

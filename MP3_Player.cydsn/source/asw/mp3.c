@@ -299,16 +299,16 @@ void MP3_Reader()
     uint16_t fillSize  = 0u;
     char     logBuf[48];
  
-    while (1)
-    {
         switch (MP3__reader.m_state)
         {
             /* ---------------------------------------------------------- */
             case MP3READER_IDLE:
             {
  
+                //UART_LOG_PutString("\r\n[READER] state=IDLE\n");
                 if (MP3__reader.m_newSongRequest == TRUE)
                 {
+                    //UART_LOG_PutString("\r\n[READER] new song request -> OPEN\n");
                     MP3__reader.m_newSongRequest = FALSE;
                     MP3__reader.m_state          = MP3READER_OPEN;
                 }
@@ -318,6 +318,7 @@ void MP3_Reader()
             /* ---------------------------------------------------------- */
             case MP3READER_OPEN:
             {
+                //UART_LOG_PutString("\r\n[READER] state=OPEN\n");
                 if (MP3__OpenWavFile(MP3__reader.m_songIndex) != RC_SUCCESS)
                 {
                     MP3__reader.m_state = MP3READER_IDLE;
@@ -331,7 +332,7 @@ void MP3_Reader()
                                / MP3__wavInfo.header.sample_rate);
                 SEVEN_Set(SEVEN_0, MP3__player.m_remainingPlayTime);
  
-                /* Pre-fill Buffer A — becomes active */
+                /* Pre-fill Buffer A - becomes active */
                 fillSize = (MP3__bytesRemaining >= SOUND_BUFFER_SIZE)
                            ? SOUND_BUFFER_SIZE
                            : (uint16_t)MP3__bytesRemaining;
@@ -341,7 +342,7 @@ void MP3_Reader()
                 SOUND_FillBuffer(MP3__readBuf, (uint16_t)bytesRead);
                 SOUND_SwapBuffers();
  
-                /* Pre-fill Buffer B — inactive, ready for first swap */
+                /* Pre-fill Buffer B - inactive, ready for first swap */
                 if (MP3__bytesRemaining > 0u)
                 {
                     fillSize = (MP3__bytesRemaining >= SOUND_BUFFER_SIZE)
@@ -367,7 +368,7 @@ void MP3_Reader()
             /* ---------------------------------------------------------- */
             case MP3READER_STREAMING:
             {
- 
+                //UART_LOG_PutString("\r\n[READER] state=STREAMING\n");
                 /* Stop/pause request from tsk_control */
                 if (MP3__reader.m_state == MP3READER_IDLE)
                     break;
@@ -396,8 +397,13 @@ void MP3_Reader()
                 bytesRead = FS_Read(MP3__pFile, MP3__readBuf, fillSize);
                 MP3__bytesRemaining -= (uint32_t)bytesRead;
  
+                /* Fill inactive buffer while ISR still runs on active buffer */
                 SOUND_FillBuffer(MP3__readBuf, (uint16_t)bytesRead);
+                
+                /* Stop ISR, swap atomically, restart ISR  // INC Noise
+                SOUND_StopPlay();
                 SOUND_SwapBuffers();
+                SOUND_StartPlay();*/
  
                 break;
             }
@@ -405,18 +411,18 @@ void MP3_Reader()
             /* ---------------------------------------------------------- */
             case MP3READER_EOF:
             {
+                //UART_LOG_PutString("\r\n[READER] state=EOF\n");
                 SOUND_StopPlay();
                 MP3__CloseWavFile();
  
                 MP3__player.m_remainingPlayTime = 0u;
                 SEVEN_Set(SEVEN_0, 0u);
  
-                UART_LOG_PutString("\r\n[MP3] EOF — song complete\n");
+                UART_LOG_PutString("\r\n[MP3] EOF - song complete\n");
                 MP3__reader.m_state = MP3READER_IDLE;
                 break;
             }
         }
-    }
 }
 
 /*****************************************************************************/
@@ -469,10 +475,13 @@ void MP3__stopSong()
 
 void MP3__playSong(void)
 {
+    //UART_LOG_PutString("\r\n[MP3] playSong called\n");
     MP3__player.m_remainingPlayTime  = 0u;
     MP3__reader.m_songIndex          = MP3__player.m_currentSong;
     MP3__reader.m_newSongRequest     = TRUE;
-    MP3__reader.m_state              = MP3READER_OPEN;
+    /* REMOVE: MP3__reader.m_state = MP3READER_OPEN; */
+    SetEvent(tsk_reader, ev_BufEmpty);
+    //UART_LOG_PutString("\r\n[MP3] SetEvent sent\n");
 }
 
 void MP3__stopSong(void)

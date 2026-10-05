@@ -163,14 +163,15 @@ TASK(tsk_init)
     //Start the alarm with 1000ms cycle time
     SetRelAlarm(alrm_1s,1000,1000);
 
-    ActivateTask(tsk_sd);
+    ActivateTask(tsk_reader);
     ActivateTask(tsk_control);
+    //ActivateTask(tsk_sd);
     ActivateTask(tsk_background);
     
     TerminateTask();
     
 }
-#if 1
+#if 0
 TASK(tsk_sd)
 {
     char        sdVolName[10];
@@ -448,6 +449,21 @@ TASK(tsk_sd)
     TerminateTask();
 }
 #endif
+
+TASK(tsk_reader)
+{
+    UART_LOG_PutString("\r\n[READER] tsk_reader started\n");
+    while (1)
+    {
+        WaitEvent(ev_BufEmpty);
+        ClearEvent(ev_BufEmpty);
+        //UART_LOG_PutString("\r\n[READER] woke - calling MP3_Reader\n");
+        MP3_Reader();
+        //UART_LOG_PutString("\r\n[READER] MP3_Reader returned\n");
+    }
+
+    TerminateTask();
+}
 
 TASK(tsk_control)
 {

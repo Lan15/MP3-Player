@@ -24,9 +24,9 @@
     #define TASK_3_STACK_SIZE 200/4 // size = 200 bytes
     int EE_cortex_mx_stack_3[TASK_3_STACK_SIZE];	/* Task 3 (tsk_control) */
     #endif
-    #if ((1 == 2) && (EE_MAX_TASK > 3))
-    #define TASK_4_STACK_SIZE 0/4 // size = 0 bytes
-    int EE_cortex_mx_stack_4[TASK_4_STACK_SIZE];	/* Task 4 (tsk_sd) */
+    #if ((2 == 2) && (EE_MAX_TASK > 3))
+    #define TASK_4_STACK_SIZE 2000/4 // size = 2000 bytes
+    int EE_cortex_mx_stack_4[TASK_4_STACK_SIZE];	/* Task 4 (tsk_reader) */
     #endif
     #if ((1 == 2) && (EE_MAX_TASK > 4))
     #define TASK_5_STACK_SIZE 0/4 // size = 0 bytes
@@ -122,7 +122,7 @@
         ,Tsk3	 /* tsk_control*/
     #endif
     #if EE_MAX_TASK > 3
-        ,Tsk4	 /* tsk_sd*/
+        ,Tsk4	 /* tsk_reader*/
     #endif
     #if EE_MAX_TASK > 4
         ,Tsk5	 /* Task_5*/
@@ -150,7 +150,7 @@
         ,{(EE_ADDR)(&EE_cortex_mx_stack_3[(TASK_3_STACK_SIZE) - CORTEX_MX_INIT_TOS_OFFSET])} 	/* tsk_control*/
         #endif
         #ifdef TASK_4_STACK_SIZE
-        ,{(EE_ADDR)(&EE_cortex_mx_stack_4[(TASK_4_STACK_SIZE) - CORTEX_MX_INIT_TOS_OFFSET])}    /* tsk_sd*/
+        ,{(EE_ADDR)(&EE_cortex_mx_stack_4[(TASK_4_STACK_SIZE) - CORTEX_MX_INIT_TOS_OFFSET])}    /* tsk_reader*/
         #endif
         #ifdef TASK_5_STACK_SIZE
         ,{(EE_ADDR)(&EE_cortex_mx_stack_5[(TASK_5_STACK_SIZE) - CORTEX_MX_INIT_TOS_OFFSET])}    /* Task_5*/
@@ -192,7 +192,7 @@
     DeclareTask(tsk_control);
     #endif
     #if EE_MAX_TASK > 3
-    DeclareTask(tsk_sd);
+    DeclareTask(tsk_reader);
     #endif
     #if EE_MAX_TASK > 4
     DeclareTask(Task_5);
@@ -218,7 +218,7 @@
         ,&EE_oo_thread_stub      /* thread tsk_control */
     #endif
     #if EE_MAX_TASK > 3
-        ,&EE_oo_thread_stub      /* thread tsk_sd */
+        ,&EE_oo_thread_stub      /* thread tsk_reader */
     #endif
     #if EE_MAX_TASK > 4
         ,&EE_oo_thread_stub      /* thread Task_5 */
@@ -248,7 +248,7 @@
         ,&Functsk_control
     #endif
     #if EE_MAX_TASK > 3
-        ,&Functsk_sd
+        ,&Functsk_reader
     #endif
     #if EE_MAX_TASK > 4
         ,&FuncTask_5
@@ -276,7 +276,7 @@
         ,32U
     #endif
     #if EE_MAX_TASK > 3
-        ,2U
+        ,64U
     #endif
     #if EE_MAX_TASK > 4
         ,0U
@@ -305,7 +305,7 @@
         ,"tsk_control"
     #endif
     #if EE_MAX_TASK > 3
-        ,"tsk_sd"
+        ,"tsk_reader"
     #endif
     #if EE_MAX_TASK > 4
         ,"Task_5"
@@ -400,7 +400,7 @@
          ,"ev_1s"
     #endif
     #if EE_MAX_EVENT > 5
-         ,"Event_6"
+         ,"ev_BufEmpty"
     #endif
     #if EE_MAX_EVENT > 6
          ,"Event_7"
@@ -497,7 +497,7 @@
         ,ev_1s
     #endif
     #if EE_MAX_EVENT > 5
-        ,Event_6
+        ,ev_BufEmpty
     #endif
     #if EE_MAX_EVENT > 6
         ,Event_7
@@ -602,7 +602,7 @@
     #endif
     #if EE_MAX_TASK > 3
         #if 0
-        ,2U
+        ,64U
         #else
         ,MAX_PRIORITY
         #endif
@@ -1027,7 +1027,7 @@
         #endif
     #endif
     #if EE_MAX_TASK > 3
-        #if 0
+        #if 1
         ,1U
         #else
         ,0U
@@ -1911,7 +1911,7 @@ const unsigned long EE_ALARM_ID[EE_MAX_ALARM]=
     #if 1 || 0 || 0
         ,
     #endif
-        tsk_sd
+        tsk_reader
     #endif
     #if (EE_MAX_TASK > 4) && 0
     #if 1 || 0 || 0 || 0
