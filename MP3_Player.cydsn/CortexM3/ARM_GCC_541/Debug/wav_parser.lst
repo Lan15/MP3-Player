@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
   29:source\asw/wav_parser.c **** #define WAV__OFF_SAMPLE_RATE     (24u)
   30:source\asw/wav_parser.c **** #define WAV__OFF_BYTE_RATE       (28u)
   31:source\asw/wav_parser.c **** #define WAV__OFF_BLOCK_ALIGN     (32u)
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 2
 
 
   32:source\asw/wav_parser.c **** #define WAV__OFF_BITS_PER_SAMPLE (34u)
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
   51              		.align	2
   52              		.thumb
   53              		.thumb_func
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 3
 
 
   54              		.type	WAV__ReadU16, %function
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
   79:source\asw/wav_parser.c ****     if (strcmp(hdr->file_id, "RIFF") != 0)
   91              		.loc 1 79 0
   92 0004 1F49     		ldr	r1, .L12
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 4
 
 
   93 0006 FFF7FEFF 		bl	strcmp
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
   94:source\asw/wav_parser.c ****     if (hdr->number_of_channels != WAV_REQUIRED_CHANNELS)
  133              		.loc 1 94 0
  134 0042 E38B     		ldrh	r3, [r4, #30]
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 5
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 5
 
 
  135 0044 012B     		cmp	r3, #1
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  114:source\asw/wav_parser.c ****         return RC_ERROR;
  170              		.loc 1 114 0
  171 0078 4FF0FF30 		mov	r0, #-1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 6
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 6
 
 
  172 007c 10BD     		pop	{r4, pc}
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
   74:source\asw/wav_parser.c **** }
  221              		.loc 1 74 0
  222 000e 0023     		movs	r3, #0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 7
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 7
 
 
  223 0010 6355     		strb	r3, [r4, r5]
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  263 0014 2428     		cmp	r0, #36
  264 0016 05D0     		beq	.L17
  132:source\asw/wav_parser.c ****     {
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 8
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 8
 
 
  133:source\asw/wav_parser.c ****         UART_LOG_PutString("\r\n[WAV] ERROR: header read failed\n");
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  306 005c FFF7FEFF 		bl	WAV__ReadU16
  307              	.LVL37:
  308 0060 A9F81C00 		strh	r0, [r9, #28]	@ movhi
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 9
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 9
 
 
  146:source\asw/wav_parser.c ****     hdr->number_of_channels = WAV__ReadU16(&raw[WAV__OFF_NUM_CHANNELS]);
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  163:source\asw/wav_parser.c ****     uint8_t  chunkHdr[8];
  164:source\asw/wav_parser.c ****     char     chunkID[5];
  165:source\asw/wav_parser.c ****     uint32_t chunkSize   = 0u;
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 10
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 10
 
 
  166:source\asw/wav_parser.c ****     uint32_t bytesScanned = 0u;
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  381 00dc 0123     		movs	r3, #1
  185:source\asw/wav_parser.c ****             break;
  382              		.loc 1 185 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 11
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 11
 
 
  383 00de 15E0     		b	.L23
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  423              	.LVL62:
  424 0104 02E0     		b	.L23
  425              	.LVL63:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 12
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 12
 
 
  426              	.L19:
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  466              		.align	2
  467              		.global	WAV_PrintHeader
  468              		.thumb
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 13
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 13
 
 
  469              		.thumb_func
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  513 0034 FFF7FEFF 		bl	sprintf
  514              	.LVL77:
  515 0038 6846     		mov	r0, sp
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 14
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 14
 
 
  516 003a FFF7FEFF 		bl	UART_LOG_PutString
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  563              		.loc 1 225 0
  564 008e 626B     		ldr	r2, [r4, #52]
  565 0090 236A     		ldr	r3, [r4, #32]
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 15
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 15
 
 
  566 0092 218D     		ldrh	r1, [r4, #40]
@@ -854,15 +854,13 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  575 00a4 6846     		mov	r0, sp
  576 00a6 FFF7FEFF 		bl	UART_LOG_PutString
  577              	.LVL90:
- 226:source\asw/wav_parser.c ****     /*sprintf(buf, "\r\n  Duration      : ~%lu s\n",
- 227:source\asw/wav_parser.c ****             hdr->data_size / hdr->sample_rate);                                UART_LOG_PutString(b
- 228:source\asw/wav_parser.c ****     UART_LOG_PutString("\r\n------------------\n");
- 578              		.loc 1 228 0
+ 226:source\asw/wav_parser.c ****     UART_LOG_PutString("\r\n------------------\n");
+ 578              		.loc 1 226 0
  579 00aa 0C48     		ldr	r0, .L33+40
  580 00ac FFF7FEFF 		bl	UART_LOG_PutString
  581              	.LVL91:
- 229:source\asw/wav_parser.c **** }...
- 582              		.loc 1 229 0
+ 227:source\asw/wav_parser.c **** }...
+ 582              		.loc 1 227 0
  583 00b0 10B0     		add	sp, sp, #64
  584              		.cfi_def_cfa_offset 8
  585              		@ sp needed
@@ -898,11 +896,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  611      523A206E 
  611      6F742052 
  612 0021 000000   		.space	3
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 16
-
-
  613              	.LC2:
  614 0024 57415645 		.ascii	"WAVE\000"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 16
+
+
  614      00
  615 0029 000000   		.space	3
  616              	.LC3:
@@ -958,11 +956,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  637 010d 000000   		.space	3
  638              	.LC11:
  639 0110 0D0A0A2D 		.ascii	"\015\012\012--- WAV Header ---\012\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 17
-
-
  639      2D2D2057 
  639      41562048 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 17
+
+
  639      65616465 
  639      72202D2D 
  640 0127 00       		.space	1
@@ -1018,11 +1016,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  658              	.LC20:
  659 01f4 0D0A2020 		.ascii	"\015\012  Duration      : ~%lu s\012\000"
  659      44757261 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 18
-
-
  659      74696F6E 
  659      20202020 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 18
+
+
  659      20203A20 
  660              	.LC21:
  661 0210 0D0A2D2D 		.ascii	"\015\012------------------\012\000"
@@ -1078,11 +1076,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  707 003e 02       		.uleb128 0x2
  708 003f 02       		.byte	0x2
  709 0040 05       		.byte	0x5
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 19
-
-
  710 0041 82010000 		.4byte	.LASF2
  711 0045 03       		.uleb128 0x3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 19
+
+
  712 0046 36030000 		.4byte	.LASF4
  713 004a 02       		.byte	0x2
  714 004b 93       		.byte	0x93
@@ -1138,11 +1136,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  764 00aa 7F       		.sleb128 -1
  765 00ab 06       		.uleb128 0x6
  766 00ac 48030000 		.4byte	.LASF16
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 20
-
-
  767 00b0 7E       		.sleb128 -2
  768 00b1 06       		.uleb128 0x6
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 20
+
+
  769 00b2 B2000000 		.4byte	.LASF17
  770 00b6 7D       		.sleb128 -3
  771 00b7 06       		.uleb128 0x6
@@ -1198,11 +1196,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  821 011c 6C       		.sleb128 -20
  822 011d 06       		.uleb128 0x6
  823 011e 5E020000 		.4byte	.LASF35
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 21
-
-
  824 0122 6B       		.sleb128 -21
  825 0123 06       		.uleb128 0x6
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 21
+
+
  826 0124 03050000 		.4byte	.LASF36
  827 0128 6A       		.sleb128 -22
  828 0129 06       		.uleb128 0x6
@@ -1258,11 +1256,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  878 018e 03       		.uleb128 0x3
  879 018f 6D000000 		.4byte	.LASF46
  880 0193 06       		.byte	0x6
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 22
-
-
  881 0194 D8       		.byte	0xd8
  882 0195 57010000 		.4byte	0x157
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 22
+
+
  883 0199 02       		.uleb128 0x2
  884 019a 08       		.byte	0x8
  885 019b 04       		.byte	0x4
@@ -1318,11 +1316,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  935 0200 0B       		.uleb128 0xb
  936 0201 8C010000 		.4byte	.LASF55
  937 0205 07       		.byte	0x7
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 23
-
-
  938 0206 3E       		.byte	0x3e
  939 0207 5E000000 		.4byte	0x5e
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 23
+
+
  940 020b 20       		.byte	0x20
  941 020c 0B       		.uleb128 0xb
  942 020d E4050000 		.4byte	.LASF56
@@ -1378,11 +1376,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  992 0275 07       		.byte	0x7
  993 0276 48       		.byte	0x48
  994 0277 59020000 		.4byte	0x259
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 24
-
-
  995 027b 00       		.byte	0
  996 027c 0B       		.uleb128 0xb
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 24
+
+
  997 027d 9C000000 		.4byte	.LASF65
  998 0281 07       		.byte	0x7
  999 0282 49       		.byte	0x49
@@ -1438,11 +1436,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  1049 02f3 00       		.byte	0
  1050 02f4 09       		.uleb128 0x9
  1051 02f5 04       		.byte	0x4
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 25
-
-
  1052 02f6 FA020000 		.4byte	0x2fa
  1053 02fa 10       		.uleb128 0x10
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 25
+
+
  1054 02fb 2C000000 		.4byte	0x2c
  1055 02ff 10       		.uleb128 0x10
  1056 0300 F4020000 		.4byte	0x2f4
@@ -1498,11 +1496,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  1106 0371 00       		.byte	0
  1107 0372 12       		.uleb128 0x12
  1108 0373 12000000 		.4byte	.LVL6
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 26
-
-
  1109 0377 770A0000 		.4byte	0xa77
  1110 037b 89030000 		.4byte	0x389
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 26
+
+
  1111 037f 13       		.uleb128 0x13
  1112 0380 01       		.uleb128 0x1
  1113 0381 50       		.byte	0x50
@@ -1558,11 +1556,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  1163 03e3 50       		.byte	0x50
  1164 03e4 05       		.uleb128 0x5
  1165 03e5 03       		.byte	0x3
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 27
-
-
  1166 03e6 60000000 		.4byte	.LC5
  1167 03ea 00       		.byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 27
+
+
  1168 03eb 12       		.uleb128 0x12
  1169 03ec 64000000 		.4byte	.LVL15
  1170 03f0 770A0000 		.4byte	0xa77
@@ -1618,11 +1616,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  1220 045c 01       		.byte	0x1
  1221 045d 47       		.byte	0x47
  1222 045e 8E010000 		.4byte	0x18e
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 28
-
-
  1223 0462 B8000000 		.4byte	.LLST5
  1224 0466 14       		.uleb128 0x14
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 28
+
+
  1225 0467 0E000000 		.4byte	.LVL23
  1226 046b 820A0000 		.4byte	0xa82
  1227 046f 13       		.uleb128 0x13
@@ -1678,11 +1676,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  1277 04cb 03       		.uleb128 0x3
  1278 04cc 91       		.byte	0x91
  1279 04cd BC7F     		.sleb128 -68
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 29
-
-
  1280 04cf 18       		.uleb128 0x18
  1281 04d0 AD030000 		.4byte	.LASF77
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 29
+
+
  1282 04d4 01       		.byte	0x1
  1283 04d5 7E       		.byte	0x7e
  1284 04d6 69000000 		.4byte	0x69
@@ -1738,11 +1736,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  1334 054c 19060000 		.4byte	0x619
  1335 0550 1B       		.uleb128 0x1b
  1336 0551 EA020000 		.4byte	.LASF83
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 30
-
-
  1337 0555 01       		.byte	0x1
  1338 0556 BD       		.byte	0xbd
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 30
+
+
  1339 0557 C2070000 		.4byte	0x7c2
  1340 055b 03       		.uleb128 0x3
  1341 055c 91       		.byte	0x91
@@ -1798,11 +1796,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  1391 05ba 00       		.sleb128 0
  1392 05bb 13       		.uleb128 0x13
  1393 05bc 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 31
-
-
  1394 05bd 51       		.byte	0x51
  1395 05be 03       		.uleb128 0x3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 31
+
+
  1396 05bf 91       		.byte	0x91
  1397 05c0 B47F     		.sleb128 -76
  1398 05c2 13       		.uleb128 0x13
@@ -1858,11 +1856,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  1448 0610 51       		.byte	0x51
  1449 0611 05       		.uleb128 0x5
  1450 0612 03       		.byte	0x3
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 32
-
-
  1451 0613 E0000000 		.4byte	.LC9
  1452 0617 00       		.byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 32
+
+
  1453 0618 00       		.byte	0
  1454 0619 12       		.uleb128 0x12
  1455 061a 14000000 		.4byte	.LVL27
@@ -1918,11 +1916,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  1505 066c 01       		.uleb128 0x1
  1506 066d 52       		.byte	0x52
  1507 066e 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 33
-
-
  1508 066f 34       		.byte	0x34
  1509 0670 00       		.byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 33
+
+
  1510 0671 12       		.uleb128 0x12
  1511 0672 34000000 		.4byte	.LVL33
  1512 0676 CB020000 		.4byte	0x2cb
@@ -1978,11 +1976,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  1562 06c0 01       		.uleb128 0x1
  1563 06c1 34       		.byte	0x34
  1564 06c2 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 34
-
-
  1565 06c3 12       		.uleb128 0x12
  1566 06c4 56000000 		.4byte	.LVL36
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 34
+
+
  1567 06c8 CB020000 		.4byte	0x2cb
  1568 06cc D7060000 		.4byte	0x6d7
  1569 06d0 13       		.uleb128 0x13
@@ -2038,11 +2036,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  1619 0726 00       		.byte	0
  1620 0727 12       		.uleb128 0x12
  1621 0728 8A000000 		.4byte	.LVL41
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 35
-
-
  1622 072c 04030000 		.4byte	0x304
  1623 0730 3B070000 		.4byte	0x73b
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 35
+
+
  1624 0734 13       		.uleb128 0x13
  1625 0735 01       		.uleb128 0x1
  1626 0736 50       		.byte	0x50
@@ -2098,11 +2096,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  1676 0795 23       		.byte	0x23
  1677 0796 00       		.byte	0
  1678 0797 0C       		.uleb128 0xc
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 36
-
-
  1679 0798 8C000000 		.4byte	0x8c
  1680 079c A7070000 		.4byte	0x7a7
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 36
+
+
  1681 07a0 0D       		.uleb128 0xd
  1682 07a1 65010000 		.4byte	0x165
  1683 07a5 2F       		.byte	0x2f
@@ -2158,11 +2156,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  1733 0814 12       		.uleb128 0x12
  1734 0815 0C000000 		.4byte	.LVL72
  1735 0819 770A0000 		.4byte	0xa77
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 37
-
-
  1736 081d 2B080000 		.4byte	0x82b
  1737 0821 13       		.uleb128 0x13
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 37
+
+
  1738 0822 01       		.uleb128 0x1
  1739 0823 50       		.byte	0x50
  1740 0824 05       		.uleb128 0x5
@@ -2218,11 +2216,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  1790 0877 51       		.byte	0x51
  1791 0878 05       		.uleb128 0x5
  1792 0879 03       		.byte	0x3
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 38
-
-
  1793 087a 40010000 		.4byte	.LC13
  1794 087e 13       		.uleb128 0x13
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 38
+
+
  1795 087f 01       		.uleb128 0x1
  1796 0880 52       		.byte	0x52
  1797 0881 02       		.uleb128 0x2
@@ -2278,11 +2276,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  1847 08da 02       		.uleb128 0x2
  1848 08db 7D       		.byte	0x7d
  1849 08dc 00       		.sleb128 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 39
-
-
  1850 08dd 13       		.uleb128 0x13
  1851 08de 01       		.uleb128 0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 39
+
+
  1852 08df 51       		.byte	0x51
  1853 08e0 05       		.uleb128 0x5
  1854 08e1 03       		.byte	0x3
@@ -2338,11 +2336,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  1904 093d 7D       		.byte	0x7d
  1905 093e 00       		.sleb128 0
  1906 093f 13       		.uleb128 0x13
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 40
-
-
  1907 0940 01       		.uleb128 0x1
  1908 0941 51       		.byte	0x51
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 40
+
+
  1909 0942 05       		.uleb128 0x5
  1910 0943 03       		.byte	0x3
  1911 0944 A4010000 		.4byte	.LC17
@@ -2398,11 +2396,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  1961 09a0 00       		.sleb128 0
  1962 09a1 13       		.uleb128 0x13
  1963 09a2 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 41
-
-
  1964 09a3 51       		.byte	0x51
  1965 09a4 05       		.uleb128 0x5
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 41
+
+
  1966 09a5 03       		.byte	0x3
  1967 09a6 D4010000 		.4byte	.LC19
  1968 09aa 00       		.byte	0
@@ -2458,11 +2456,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2018 0a03 00       		.byte	0
  2019 0a04 09       		.uleb128 0x9
  2020 0a05 04       		.byte	0x4
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 42
-
-
  2021 0a06 0A0A0000 		.4byte	0xa0a
  2022 0a0a 10       		.uleb128 0x10
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 42
+
+
  2023 0a0b 89020000 		.4byte	0x289
  2024 0a0f 10       		.uleb128 0x10
  2025 0a10 040A0000 		.4byte	0xa04
@@ -2518,11 +2516,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2075 0a82 22       		.uleb128 0x22
  2076 0a83 D6000000 		.4byte	.LASF103
  2077 0a87 D6000000 		.4byte	.LASF103
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 43
-
-
  2078 0a8b 23       		.uleb128 0x23
  2079 0a8c 65000000 		.4byte	.LASF94
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 43
+
+
  2080 0a90 65000000 		.4byte	.LASF94
  2081 0a94 10       		.byte	0x10
  2082 0a95 4301     		.2byte	0x143
@@ -2578,11 +2576,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2132 0029 00       		.byte	0
  2133 002a 00       		.byte	0
  2134 002b 04       		.uleb128 0x4
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 44
-
-
  2135 002c 04       		.uleb128 0x4
  2136 002d 01       		.byte	0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 44
+
+
  2137 002e 0B       		.uleb128 0xb
  2138 002f 0B       		.uleb128 0xb
  2139 0030 49       		.uleb128 0x49
@@ -2638,11 +2636,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2189 0062 00       		.byte	0
  2190 0063 0B       		.uleb128 0xb
  2191 0064 0B       		.uleb128 0xb
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 45
-
-
  2192 0065 49       		.uleb128 0x49
  2193 0066 13       		.uleb128 0x13
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 45
+
+
  2194 0067 00       		.byte	0
  2195 0068 00       		.byte	0
  2196 0069 0A       		.uleb128 0xa
@@ -2698,11 +2696,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2246 009b 01       		.byte	0x1
  2247 009c 03       		.uleb128 0x3
  2248 009d 0E       		.uleb128 0xe
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 46
-
-
  2249 009e 3A       		.uleb128 0x3a
  2250 009f 0B       		.uleb128 0xb
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 46
+
+
  2251 00a0 3B       		.uleb128 0x3b
  2252 00a1 0B       		.uleb128 0xb
  2253 00a2 27       		.uleb128 0x27
@@ -2758,11 +2756,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2303 00d5 17       		.uleb128 0x17
  2304 00d6 00       		.byte	0
  2305 00d7 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 47
-
-
  2306 00d8 12       		.uleb128 0x12
  2307 00d9 898201   		.uleb128 0x4109
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 47
+
+
  2308 00dc 01       		.byte	0x1
  2309 00dd 11       		.uleb128 0x11
  2310 00de 01       		.uleb128 0x1
@@ -2818,11 +2816,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2360 0116 01       		.byte	0x1
  2361 0117 3F       		.uleb128 0x3f
  2362 0118 19       		.uleb128 0x19
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 48
-
-
  2363 0119 03       		.uleb128 0x3
  2364 011a 0E       		.uleb128 0xe
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 48
+
+
  2365 011b 3A       		.uleb128 0x3a
  2366 011c 0B       		.uleb128 0xb
  2367 011d 3B       		.uleb128 0x3b
@@ -2878,11 +2876,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2417 0150 00       		.byte	0
  2418 0151 03       		.uleb128 0x3
  2419 0152 0E       		.uleb128 0xe
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 49
-
-
  2420 0153 3A       		.uleb128 0x3a
  2421 0154 0B       		.uleb128 0xb
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 49
+
+
  2422 0155 3B       		.uleb128 0x3b
  2423 0156 0B       		.uleb128 0xb
  2424 0157 49       		.uleb128 0x49
@@ -2938,11 +2936,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2474 0189 03       		.uleb128 0x3
  2475 018a 0E       		.uleb128 0xe
  2476 018b 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 50
-
-
  2477 018c 0B       		.uleb128 0xb
  2478 018d 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 50
+
+
  2479 018e 0B       		.uleb128 0xb
  2480 018f 27       		.uleb128 0x27
  2481 0190 19       		.uleb128 0x19
@@ -2998,11 +2996,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2531 01c3 49       		.uleb128 0x49
  2532 01c4 13       		.uleb128 0x13
  2533 01c5 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 51
-
-
  2534 01c6 00       		.byte	0
  2535 01c7 21       		.uleb128 0x21
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 51
+
+
  2536 01c8 2E       		.uleb128 0x2e
  2537 01c9 00       		.byte	0
  2538 01ca 3F       		.uleb128 0x3f
@@ -3058,11 +3056,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2588 0008 0100     		.2byte	0x1
  2589 000a 50       		.byte	0x50
  2590 000b 10000000 		.4byte	.LVL1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 52
-
-
  2591 000f 16000000 		.4byte	.LFE111
  2592 0013 0400     		.2byte	0x4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 52
+
+
  2593 0015 F3       		.byte	0xf3
  2594 0016 01       		.uleb128 0x1
  2595 0017 50       		.byte	0x50
@@ -3118,11 +3116,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2645 0090 50       		.byte	0x50
  2646 0091 9F       		.byte	0x9f
  2647 0092 00000000 		.4byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 53
-
-
  2648 0096 00000000 		.4byte	0
  2649              	.LLST4:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 53
+
+
  2650 009a 00000000 		.4byte	.LVL20
  2651 009e 08000000 		.4byte	.LVL21
  2652 00a2 0100     		.2byte	0x1
@@ -3178,11 +3176,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2702 0123 01       		.uleb128 0x1
  2703 0124 51       		.byte	0x51
  2704 0125 9F       		.byte	0x9f
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 54
-
-
  2705 0126 00000000 		.4byte	0
  2706 012a 00000000 		.4byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 54
+
+
  2707              	.LLST8:
  2708 012e 0A000000 		.4byte	.LVL25
  2709 0132 14000000 		.4byte	.LVL27
@@ -3238,11 +3236,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2759 01b9 00000000 		.4byte	0
  2760              	.LLST12:
  2761 01bd DC000000 		.4byte	.LVL52
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 55
-
-
  2762 01c1 E0000000 		.4byte	.LVL53
  2763 01c5 0200     		.2byte	0x2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 55
+
+
  2764 01c7 31       		.byte	0x31
  2765 01c8 9F       		.byte	0x9f
  2766 01c9 04010000 		.4byte	.LVL62
@@ -3298,11 +3296,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2816 024d 0100     		.2byte	0x1
  2817 024f 50       		.byte	0x50
  2818 0250 08000000 		.4byte	.LVL71
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 56
-
-
  2819 0254 B4000000 		.4byte	.LVL92
  2820 0258 0100     		.2byte	0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 56
+
+
  2821 025a 54       		.byte	0x54
  2822 025b B4000000 		.4byte	.LVL92
  2823 025f E0000000 		.4byte	.LFE116
@@ -3358,11 +3356,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2871      00000201 
  2871      FB0E0D00 
  2871      01010101 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 57
-
-
  2872              	.LASF47:
  2873 0000 6C6F6E67 		.ascii	"long double\000"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 57
+
+
  2873      20646F75 
  2873      626C6500 
  2874              	.LASF64:
@@ -3418,11 +3416,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2897      5F6C656E 
  2897      67746800 
  2898              	.LASF61:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 58
-
-
  2899 00a8 57415648 		.ascii	"WAVHeader\000"
  2899      65616465 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 58
+
+
  2899      7200
  2900              	.LASF17:
  2901 00b2 52435F45 		.ascii	"RC_ERROR_ZERO\000"
@@ -3478,11 +3476,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2925      52515F6E 
  2925      65737469 
  2925      6E675F6C 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 59
-
-
  2925      6576656C 
  2926              	.LASF7:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 59
+
+
  2927 0153 75696E74 		.ascii	"uint32_t\000"
  2927      33325F74 
  2927      00
@@ -3538,11 +3536,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2948              	.LASF38:
  2949 01fd 52435F45 		.ascii	"RC_ERROR_UNKNOWN\000"
  2949      52524F52 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 60
-
-
  2949      5F554E4B 
  2949      4E4F574E 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 60
+
+
  2949      00
  2950              	.LASF6:
  2951 020e 6C6F6E67 		.ascii	"long int\000"
@@ -3598,11 +3596,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2969      00
  2970              	.LASF93:
  2971 02a6 55415254 		.ascii	"UART_LOG_PutString\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 61
-
-
  2971      5F4C4F47 
  2971      5F507574 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 61
+
+
  2971      53747269 
  2971      6E6700
  2972              	.LASF95:
@@ -3658,11 +3656,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  2997 033f 6368756E 		.ascii	"chunkHdr\000"
  2997      6B486472 
  2997      00
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 62
-
-
  2998              	.LASF16:
  2999 0348 52435F45 		.ascii	"RC_ERROR_NULL\000"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 62
+
+
  2999      52524F52 
  2999      5F4E554C 
  2999      4C00
@@ -3718,11 +3716,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  3020      494C5300 
  3021              	.LASF101:
  3022 0405 6C6F6742 		.ascii	"logBuf\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 63
-
-
  3022      756600
  3023              	.LASF34:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 63
+
+
  3024 040c 52435F45 		.ascii	"RC_ERROR_BAD_PARAM\000"
  3024      52524F52 
  3024      5F424144 
@@ -3778,11 +3776,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  3044      00
  3045              	.LASF82:
  3046 04a7 666F756E 		.ascii	"found\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 64
-
-
  3046      6400
  3047              	.LASF85:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 64
+
+
  3048 04ad 746F5265 		.ascii	"toRead\000"
  3048      616400
  3049              	.LASF19:
@@ -3838,11 +3836,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 1
  3069      37373135 
  3070 0588 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
  3070      66756E63 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0TzTe4.s 			page 65
-
-
  3070      74696F6E 
  3070      2D736563 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco2WvdX.s 			page 65
+
+
  3070      74696F6E 
  3071              	.LASF51:
  3072 05b0 73756263 		.ascii	"subchunk_id\000"

@@ -170,20 +170,17 @@ RC_t MP3_ProcessEvent(EventMaskType nextEvent)
             {
                 MP3__prevSong();
                 MP3__showSong();
-                UART_LOG_PutString("1");
             }
             else if (nextEvent & ev_Button2)
             {
                 MP3__nextSong();
                 MP3__showSong();
-                UART_LOG_PutString("2");
             }
             else if (nextEvent & ev_Button3)
             {
                 MP3__playSong();
                 MP3__showSong();
                 MP3__player.m_state = MP3STATE_ISPLAYING;
-                UART_LOG_PutString("3");
             }
             break;
 
@@ -215,7 +212,6 @@ RC_t MP3_ProcessEvent(EventMaskType nextEvent)
                 MP3__nextSong(); 
                 MP3__playSong();
                 MP3__showSong();
-                UART_LOG_PutString("4");
             }
             break;
             
@@ -238,23 +234,27 @@ RC_t MP3_ProcessEvent(EventMaskType nextEvent)
 
 void MP3_Reader()
 {
-    char     logBuf[48];
- 
+    //char     logBuf[48];
+
     switch (MP3__reader.m_state)
     {
         case MP3READER_IDLE:
         {
-            if (MP3__reader.m_newSongRequest == TRUE)
+            /* INC 5E: the only place a new song request is accepted */
+            if (MP3__reader.m_newSongRequest == FALSE)
             {
-                //UART_LOG_PutString("\r\n[READER] new song request -> OPEN\n");
-                MP3__reader.m_newSongRequest = FALSE;
-                MP3__reader.m_state          = MP3READER_OPEN;
+                break;
             }
-            break;
+            MP3__reader.m_newSongRequest = FALSE;
+            MP3__reader.m_state          = MP3READER_OPEN;
+            /* fall through - open the new song with the same event */
         }
- 
+
         case MP3READER_OPEN:
         {
+            //UART_LOG_PutString("\r\n[MP3] Open: ");                     // INC 5E
+            //UART_LOG_PutString(MP3__songList[MP3__reader.m_songIndex]);
+
             if (MP3__OpenWavFile(MP3__reader.m_songIndex) != RC_SUCCESS)
             {
                 MP3__reader.m_state = MP3READER_IDLE;
@@ -262,7 +262,7 @@ void MP3_Reader()
                 break;
             }
 
-            /* Set remaining play time from WAV header                    */
+            /* Set remaining play time from WAV header                    */   // INC 5B
             /* seconds = data bytes / (samples per s * bytes per sample)  */
             MP3__player.m_remainingPlayTime =
                 (uint16_t)(MP3__wavInfo.data_length
@@ -270,12 +270,12 @@ void MP3_Reader()
                               * MP3__wavInfo.header.block_align));
             SEVEN_Set(SEVEN_0, MP3__player.m_remainingPlayTime);
 
-            sprintf(logBuf, "\r\n[MP3] Playtime: %u s (%u-bit)\n",
+            /*sprintf(logBuf, "\r\n[MP3] Playtime: %u s (%u-bit)\n",
                     MP3__player.m_remainingPlayTime,
                     MP3__wavInfo.header.bits_per_sample);
-            UART_LOG_PutString(logBuf);
+            UART_LOG_PutString(logBuf);*/
 
-            /* Pre-fill Buffer A - becomes active */                // INC 5C
+            /* Pre-fill Buffer A - becomes active */                       // INC 5C
             MP3__ReadBlock();
             /* DEBUG 5D: first 16 samples after conversion - expect values around 0x80 */
             /*{
@@ -301,48 +301,50 @@ void MP3_Reader()
             MP3__reader.m_state = MP3READER_STREAMING;
             break;
         }
- 
+
         case MP3READER_STREAMING:
         {
-            /* Stop/pause request from tsk_control */
-            if (MP3__reader.m_state == MP3READER_IDLE)
-            {
-                break;
-            }
-                
-            /* New song request */
+            /* INC 5E: new song request - leave current song, let IDLE handle it */
             if (MP3__reader.m_newSongRequest == TRUE)
             {
+                SOUND_StopPlay();
                 MP3__CloseWavFile();
-                MP3__reader.m_newSongRequest = FALSE;
-                MP3__reader.m_state          = MP3READER_OPEN;
+                MP3__reader.m_state = MP3READER_IDLE;
+                SetEvent(tsk_reader, ev_BufEmpty);  /* re-run reader now, IDLE opens new song */
                 break;
             }
- 
+
             /* EOF check */
             if (MP3__bytesRemaining == 0u)
             {
                 MP3__reader.m_state = MP3READER_EOF;
                 break;
             }
- 
-            /* Normal case - read next block into inactive buffer       // INC 5C
-            while ISR still runs on active buffer */
+
+            /* Normal case - read next block into inactive buffer         // INC 5C
+               while ISR still runs on active buffer */
             MP3__ReadBlock();
 
             break;
         }
- 
+
         case MP3READER_EOF:
         {
             SOUND_StopPlay();
             MP3__CloseWavFile();
- 
+
             MP3__player.m_remainingPlayTime = 0u;
             SEVEN_Set(SEVEN_0, 0u);
- 
+
             //UART_LOG_PutString("\r\n[MP3] EOF - song complete\n");
             MP3__reader.m_state = MP3READER_IDLE;
+
+            /* INC 5E: the event that brought us here may be a new song request
+               (from MP3__playSong) - let IDLE handle it right away */
+            if (MP3__reader.m_newSongRequest == TRUE)
+            {
+                SetEvent(tsk_reader, ev_BufEmpty);
+            }
             break;
         }
     }
@@ -568,30 +570,6 @@ static void MP3__CloseWavFile(void)
     }
     MP3__bytesRemaining = 0u;
 }
-
-/**
- * Read one block of PCM from the open WAV file and fill the inactive sound buffer. // INC 5C
- * 5C: 8-bit path only (1 byte = 1 sample). 16-bit conversion added in 5D.
- */
-/*static void MP3__ReadBlock(void)
-{
-    uint32_t toRead;    // fillSize
-    U32      bytesRead;
-
-    toRead = (MP3__bytesRemaining >= SOUND_BUFFER_SIZE)
-             ? SOUND_BUFFER_SIZE
-             : MP3__bytesRemaining;
-
-    bytesRead = FS_Read(MP3__pFile, MP3__readBuf, toRead);
-    if (bytesRead == 0u)
-    {
-        MP3__bytesRemaining = 0u;          // read error -> force EOF, avoid endless loop
-        return;
-    }
-    MP3__bytesRemaining -= (uint32_t)bytesRead;
-
-    SOUND_FillBuffer(MP3__readBuf, (uint16_t)bytesRead);
-}*/
 
 /**
  * Read one block of PCM from the open WAV file, convert to 8-bit unsigned

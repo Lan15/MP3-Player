@@ -223,7 +223,5 @@ void WAV_PrintHeader(WAVFile const * const wav)
     sprintf(buf, "\r\n  DataSize      : %lu bytes\n",hdr->data_size);          UART_LOG_PutString(buf);
     sprintf(buf, "\r\n  Duration      : ~%lu s\n",
             hdr->data_size / ((uint32_t)hdr->sample_rate * hdr->block_align)); UART_LOG_PutString(buf);
-    /*sprintf(buf, "\r\n  Duration      : ~%lu s\n",
-            hdr->data_size / hdr->sample_rate);                                UART_LOG_PutString(buf);*/
     UART_LOG_PutString("\r\n------------------\n");
 }
