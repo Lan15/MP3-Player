@@ -5,7 +5,7 @@
 *
 * \brief Sound driver
 *
-* \copyright Copyright �2016
+* \copyright Copyright ©2016
 * Department of electrical engineering and information technology, Hochschule Darmstadt - University of applied sciences (h_da). All Rights Reserved.
 * Permission to use, copy, modify, and distribute this software and its documentation for educational, and research purposes in the context of non-commercial
 * (unless permitted by h_da) and official h_da projects, is hereby granted for enrolled students of h_da, provided that the above copyright notice,
@@ -238,7 +238,7 @@ RC_t MP3_ProcessEvent(EventMaskType nextEvent)
 
 void MP3_Reader()
 {
-    //char     logBuf[48];
+    char     logBuf[48];
  
     switch (MP3__reader.m_state)
     {
@@ -270,13 +270,24 @@ void MP3_Reader()
                               * MP3__wavInfo.header.block_align));
             SEVEN_Set(SEVEN_0, MP3__player.m_remainingPlayTime);
 
-            /*sprintf(logBuf, "\r\n[MP3] Playtime: %u s (%u-bit)\n",
+            sprintf(logBuf, "\r\n[MP3] Playtime: %u s (%u-bit)\n",
                     MP3__player.m_remainingPlayTime,
                     MP3__wavInfo.header.bits_per_sample);
-            UART_LOG_PutString(logBuf);*/
+            UART_LOG_PutString(logBuf);
 
             /* Pre-fill Buffer A - becomes active */                // INC 5C
             MP3__ReadBlock();
+            /* DEBUG 5D: first 16 samples after conversion - expect values around 0x80 */
+            /*{
+                uint8_t k;
+                UART_LOG_PutString("\r\n[5D] First 16 samples: ");
+                for (k = 0u; k < 16u; k++)
+                {
+                    sprintf(logBuf, "%02X ", MP3__readBuf[k]);
+                    UART_LOG_PutString(logBuf);
+                }
+                UART_LOG_PutString("\n");
+            }*/
             SOUND_SwapBuffers();
 
             /* Pre-fill Buffer B - inactive, ready for first swap */
@@ -562,7 +573,7 @@ static void MP3__CloseWavFile(void)
  * Read one block of PCM from the open WAV file and fill the inactive sound buffer. // INC 5C
  * 5C: 8-bit path only (1 byte = 1 sample). 16-bit conversion added in 5D.
  */
-static void MP3__ReadBlock(void)
+/*static void MP3__ReadBlock(void)
 {
     uint32_t toRead;    // fillSize
     U32      bytesRead;
@@ -574,10 +585,75 @@ static void MP3__ReadBlock(void)
     bytesRead = FS_Read(MP3__pFile, MP3__readBuf, toRead);
     if (bytesRead == 0u)
     {
-        MP3__bytesRemaining = 0u;          /* read error -> force EOF, avoid endless loop */
+        MP3__bytesRemaining = 0u;          // read error -> force EOF, avoid endless loop
         return;
     }
     MP3__bytesRemaining -= (uint32_t)bytesRead;
 
     SOUND_FillBuffer(MP3__readBuf, (uint16_t)bytesRead);
+}*/
+
+/**
+ * Read one block of PCM from the open WAV file, convert to 8-bit unsigned
+ * if needed, and fill the inactive sound buffer.
+ * Always produces up to SOUND_BUFFER_SIZE samples, so ISR timing is
+ * identical for 8-bit and 16-bit files.
+ *   8-bit : read 512 bytes  -> 512 samples (used as-is)
+ *   16-bit: read 1024 bytes -> 512 samples (converted in place)
+ */
+static void MP3__ReadBlock(void)
+{
+    uint8_t  bytesPerSample = (uint8_t)MP3__wavInfo.header.block_align;
+    uint32_t maxBytes       = (uint32_t)SOUND_BUFFER_SIZE * bytesPerSample;
+    uint32_t toRead;
+    U32      bytesRead;
+    uint16_t samples;
+    uint16_t i;
+
+    toRead = (MP3__bytesRemaining >= maxBytes)
+             ? maxBytes
+             : MP3__bytesRemaining;
+
+    bytesRead = FS_Read(MP3__pFile, MP3__readBuf, toRead);
+    if (bytesRead == 0u)
+    {
+        MP3__bytesRemaining = 0u;          /* read error -> force EOF, avoid endless loop */
+        return;
+    }
+    MP3__bytesRemaining -= (uint32_t)bytesRead;
+
+    if (bytesPerSample == 2u)
+    {
+        /* 16-bit signed little-endian -> 8-bit unsigned for VDAC8           */ // N1
+        /* sample = ((int16_t)(lo | hi << 8) >> 8) + 128  ==  hi ^ 0x80      */
+        /* In-place is safe: write index i, read index 2i+1 >= i             */
+        samples = (uint16_t)(bytesRead / 2u);
+        for (i = 0u; i < samples; i++)
+        {
+            MP3__readBuf[i] = MP3__readBuf[(2u * i) + 1u] ^ 0x80u;
+        }
+    }
+    else
+    {
+        /* 8-bit unsigned: already VDAC8 format */
+        samples = (uint16_t)bytesRead;
+    }
+
+    if (samples > 0u)
+    {
+        SOUND_FillBuffer(MP3__readBuf, samples);
+    }
 }
+
+/*----------------------------------------------------------------------------------------
+* Notes:
+* N1 - hi ^ 0x80 because shifting a 16-bit sample right by 8 keeps only its high byte, which is 
+*      signed (−128…127). Adding 128 moves that range to 0…255, the unsigned range VDAC8 expects. 
+*      For a single byte, adding 128 is the same as flipping bit 7, so the whole conversion is 
+*      one XOR. That keeps it cheap: 512 XORs per block.
+*
+*
+*
+*
+*
+*/
