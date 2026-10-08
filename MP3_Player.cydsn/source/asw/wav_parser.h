@@ -37,7 +37,7 @@
 #define WAV_PARSER_H
 
 #include "global.h"
-#include <FS.h>          /* emFile — FS_FILE, FS_Read */
+#include <FS.h>          /* emFile - FS_FILE, FS_Read */
 #include <stdint.h>
 #include <stddef.h>
 

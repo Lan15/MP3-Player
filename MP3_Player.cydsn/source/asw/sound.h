@@ -158,13 +158,6 @@ RC_t SOUND_SetSong(uint8_t const *const song, uint32_t sizeOfSong);
 RC_t SOUND_SetVolume(uint8_t volume);
 
 /**
- * isr code for timer interrupt
- * /return RC_SUCCESS
- */
-RC_t SOUND_isr();
-
-
-/**
  * \brief Fill the inactive dual buffer with PCM data from tsk_reader.
  *
  * \param[in] data  Pointer to PCM data read from SD card via FS_Read()
@@ -179,13 +172,18 @@ RC_t SOUND_FillBuffer(uint8_t const * const data, uint16_t size);
  */
 RC_t SOUND_SwapBuffers();
 
+/**
+ * isr code for timer interrupt
+ * /return RC_SUCCESS
+ */
+RC_t SOUND_isr();
+
 /*****************************************************************************/
 /* Private stuff, only visible for Together, declared static in cpp - File   */
 /*****************************************************************************/
 
 
 #ifdef TOGETHER
-
 
 
 };

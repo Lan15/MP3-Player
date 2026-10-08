@@ -30,12 +30,8 @@
 #define WAV__OFF_BYTE_RATE       (28u)
 #define WAV__OFF_BLOCK_ALIGN     (32u)
 #define WAV__OFF_BITS_PER_SAMPLE (34u)
-
-/* First 36 bytes: RIFF header + fmt chunk */
-#define WAV__RIFF_FMT_SIZE       (36u)
-
-/* Max bytes to scan forward looking for data chunk */
-#define WAV__MAX_SCAN            (256u)
+#define WAV__RIFF_FMT_SIZE       (36u)  /* First 36 bytes: RIFF header + fmt chunk */
+#define WAV__MAX_SCAN            (256u) /* Max bytes to scan forward looking for data chunk */
 
 /*****************************************************************************/
 /* Local function prototypes                                                 */
@@ -162,8 +158,8 @@ RC_t WAV_ParseHeader(FS_FILE * const pFile, WAVFile * const wav)
         WAV__BytesToString(chunkHdr, chunkID, 4u);
         chunkSize = WAV__ReadU32(&chunkHdr[4]);
 
-        sprintf(logBuf, "\r\n[WAV] Chunk: '%s' size=%lu\n", chunkID, chunkSize);
-        UART_LOG_PutString(logBuf);
+        //sprintf(logBuf, "\r\n[WAV] Chunk: '%s' size=%lu\n", chunkID, chunkSize);
+        //UART_LOG_PutString(logBuf);
 
         if (strcmp(chunkID, "data") == 0)
         {

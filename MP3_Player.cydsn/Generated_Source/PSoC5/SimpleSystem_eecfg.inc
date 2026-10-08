@@ -33,7 +33,7 @@
     #define tsk_reader 3
     #endif
     #if EE_MAX_TASK > 4
-    #define Task_5 4
+    #define tsk_display 4
     #endif
     #if EE_MAX_TASK > 5
     #define Task_6 5
@@ -346,7 +346,7 @@ extern void ISR_16(void);
     #else
         #define TSK4_STCK 0
     #endif
-    #if (1 == 2) && (EE_MAX_TASK > 4)
+    #if (2 == 2) && (EE_MAX_TASK > 4)
         #define TSK5_STCK 1
     #else
         #define TSK5_STCK 0

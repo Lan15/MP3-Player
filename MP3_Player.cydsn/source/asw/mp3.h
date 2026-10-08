@@ -91,8 +91,6 @@
 * Detailed explaination of the enumeration.
 */
 
-
-
 // Wrapper to allow representing the file in Together as class
 #ifdef TOGETHER
 
@@ -130,13 +128,14 @@ RC_t MP3_ProcessEvent(EventMaskType nextEvent);
  */
 void MP3_Reader();
 
+void MP3_ShowSongListTFT();         /**< \brief Stub to fill with your TFT API */
+
 /*****************************************************************************/
 /* Private stuff, only visible for Together, declared static in cpp - File   */
 /*****************************************************************************/
 
 
 #ifdef TOGETHER
-
 
 
 };

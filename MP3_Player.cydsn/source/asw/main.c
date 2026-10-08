@@ -18,13 +18,8 @@
 
 #include "sound.h"
 #include "sound_data.h"
-#include "mp3.h"
 
-#include "emFile.h"
-#include "FS.h"
-#include "wav_parser.h"
-#include <stdio.h>
-#include <string.h>
+#include "mp3.h"
 
 //HMI via UART
 // Button 1 : Increase Volume, Next Song
@@ -80,8 +75,6 @@ void soundTest2()
     }
     while(1){;}
 }    
-
-  
 
 
 int main()
@@ -142,22 +135,15 @@ TASK(tsk_init)
     SEVEN_Init();
     SOUND_Init();
     
-    //UART_LOG_PutString("[INIT] SOUND_Init OK\n");
-    
     //Test
     //RC_t SOUND_StartPlay();
     //SOUND_SetSong(SOUND_Records[0].m_data, SOUND_Records[0].m_size);
-
     
     //Reconfigure ISRs with OS parameters.
     //This line MUST be called after the hardware driver initialisation!
     EE_system_init();
-    
-    //UART_LOG_PutString("MP3 Player started...\n");
 
     //Application Init
-    /* Original MP3_Init - still uses flash songs */
-    //emFile();
     MP3_Init();
     
     //Start the alarm with 1000ms cycle time
@@ -165,12 +151,85 @@ TASK(tsk_init)
 
     ActivateTask(tsk_reader);
     ActivateTask(tsk_control);
+    ActivateTask(tsk_background); 
     //ActivateTask(tsk_sd);
-    ActivateTask(tsk_background);
     
     TerminateTask();
     
 }
+
+TASK(tsk_control)
+{
+ 
+    static uint8_t count = 0;
+    
+    EventMaskType ev = 0;
+    EventMaskType nextEvent = 0;
+    
+    while(1)
+    {
+        //Wait, read and clear the event
+        WaitEvent(ev_1s | ev_Button1 | ev_Button2 | ev_Button3 | ev_Button4 );
+        GetEvent(tsk_control,&ev);
+        ClearEvent(ev);
+    
+        //Process all events from the mask
+        while(0 != ev)
+        {
+            nextEvent = GetAndClearHighestEvent(&ev);
+            RC_t result = MP3_ProcessEvent(nextEvent);
+        }
+    }
+}
+
+TASK(tsk_reader)
+{
+    while (1)
+    {
+        WaitEvent(ev_BufEmpty);
+        ClearEvent(ev_BufEmpty);
+        
+        //woke - calling MP3_Reader
+        MP3_Reader();
+    }
+
+    TerminateTask();
+}
+
+TASK(tsk_background)
+{
+    while(1)
+    {
+        //do something with low prioroty
+        asm("nop");
+    }
+}
+
+/********************************************************************************
+ * ISR Definitions
+ ********************************************************************************/
+
+ISR2(isr_Button)
+{
+    //Set the button bit
+    if (BUTTON_IsPressed(BUTTON_1)) SetEvent(tsk_control, ev_Button1);
+    if (BUTTON_IsPressed(BUTTON_2)) SetEvent(tsk_control, ev_Button2);
+    if (BUTTON_IsPressed(BUTTON_3)) SetEvent(tsk_control, ev_Button3);
+    if (BUTTON_IsPressed(BUTTON_4)) SetEvent(tsk_control, ev_Button4);
+}
+
+ISR2(isr_Timer)
+{
+    /*
+    static uint32_t a = 0;
+    a = (a+1) % 2;
+    SOUND_PWM_WriteCompare(a*255);
+    */
+    
+    SOUND_isr();
+}
+
+//Debugging aid
 #if 0
 TASK(tsk_sd)
 {
@@ -336,9 +395,7 @@ TASK(tsk_sd)
     FS_FClose(pFile);
     TerminateTask();
 }
-#endif
 
-#if 0
 // Debug code for File path name
 TASK(tsk_sd)
 {
@@ -448,49 +505,9 @@ TASK(tsk_sd)
     UART_LOG_PutString("\r\n[WAV] All formats failed\n");
     TerminateTask();
 }
-#endif
-
-TASK(tsk_reader)
-{
-    UART_LOG_PutString("\r\n[READER] tsk_reader started\n");
-    while (1)
-    {
-        WaitEvent(ev_BufEmpty);
-        ClearEvent(ev_BufEmpty);
-        //UART_LOG_PutString("\r\n[READER] woke - calling MP3_Reader\n");
-        MP3_Reader();
-        //UART_LOG_PutString("\r\n[READER] MP3_Reader returned\n");
-    }
-
-    TerminateTask();
-}
-
-TASK(tsk_control)
-{
- 
-    static uint8_t count = 0;
-    
-    EventMaskType ev = 0;
-    EventMaskType nextEvent = 0;
-    
-    while(1)
-    {
-        //Wait, read and clear the event
-        WaitEvent(ev_1s | ev_Button1 | ev_Button2 | ev_Button3 | ev_Button4 );
-        GetEvent(tsk_control,&ev);
-        ClearEvent(ev);
-    
-        //Process all events from the mask
-        while(0 != ev)
-        {
-            nextEvent = GetAndClearHighestEvent(&ev);
-            RC_t result = MP3_ProcessEvent(nextEvent);
-        }
-    }
-}
 
 /* ------------------------------------------------------------------ */
-/* INC3 — tsk_background                                              */
+/* INC3 - tsk_background                                              */
 /* Prints ISR tick count every 1 second                               */
 /* Stopped : 0 ticks/s                                                */
 /* Playing : ~22050 ticks/s                                           */
@@ -515,40 +532,6 @@ TASK(tsk_background)
         making the measurement window only ~642 ms instead of 1000 ms. So 22050 ticks in 642 ms = 34,349 ticks/s */
     }
 }
-
-#if 0
-TASK(tsk_background)
-{
-    while(1)
-    {
-        //do something with low prioroty
-        asm("nop");
-    }
-}
 #endif
-
-/********************************************************************************
- * ISR Definitions
- ********************************************************************************/
-
-ISR2(isr_Button)
-{
-    //Set the button bit
-    if (BUTTON_IsPressed(BUTTON_1)) SetEvent(tsk_control, ev_Button1);
-    if (BUTTON_IsPressed(BUTTON_2)) SetEvent(tsk_control, ev_Button2);
-    if (BUTTON_IsPressed(BUTTON_3)) SetEvent(tsk_control, ev_Button3);
-    if (BUTTON_IsPressed(BUTTON_4)) SetEvent(tsk_control, ev_Button4);
-}
-
-ISR2(isr_Timer)
-{
-    /*
-    static uint32_t a = 0;
-    a = (a+1) % 2;
-    SOUND_PWM_WriteCompare(a*255);
-    */
-    
-    SOUND_isr();
-}
 
 /* [main.c] END OF FILE */
