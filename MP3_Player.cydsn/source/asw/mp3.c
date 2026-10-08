@@ -266,12 +266,26 @@ void MP3_Reader()
                 break;
             }
  
-            /* Set remaining play time from WAV header */
-            MP3__player.m_remainingPlayTime =
+            /* Set remaining play time from WAV header */           
+            /*MP3__player.m_remainingPlayTime =
                 (uint16_t)(MP3__wavInfo.data_length
                             / MP3__wavInfo.header.sample_rate);
-            SEVEN_Set(SEVEN_0, MP3__player.m_remainingPlayTime);
+            SEVEN_Set(SEVEN_0, MP3__player.m_remainingPlayTime);*/
  
+            /* Set remaining play time from WAV header                    */    // INC 5B
+            /* seconds = data bytes / (samples per s * bytes per sample)  */
+            /* 8-bit mono: block_align = 1, 16-bit mono: block_align = 2  */
+            MP3__player.m_remainingPlayTime =
+                (uint16_t)(MP3__wavInfo.data_length
+                           / ((uint32_t)MP3__wavInfo.header.sample_rate
+                              * MP3__wavInfo.header.block_align));
+            SEVEN_Set(SEVEN_0, MP3__player.m_remainingPlayTime);
+            
+            sprintf(logBuf, "\r\n[MP3] Playtime: %u s (%u-bit)\n",
+                    MP3__player.m_remainingPlayTime,
+                    MP3__wavInfo.header.bits_per_sample);
+            UART_LOG_PutString(logBuf);
+            
             /* Pre-fill Buffer A - becomes active */
             fillSize = (MP3__bytesRemaining >= SOUND_BUFFER_SIZE)
                         ? SOUND_BUFFER_SIZE
@@ -491,10 +505,14 @@ void MP3__showSong()
 
 void MP3__showRemainingPlaytime()
 {
+    char logBuf[24];    // INC 5B
+    
     if (MP3__player.m_remainingPlayTime > 0u)
         MP3__player.m_remainingPlayTime--;
     SEVEN_Set(SEVEN_0,MP3__player.m_remainingPlayTime);
     
+    sprintf(logBuf, "\r\n[MP3] Remaining: %u s\n", MP3__player.m_remainingPlayTime);
+    UART_LOG_PutString(logBuf);
 }
 
 boolean_t MP3__songEnded()
@@ -556,7 +574,7 @@ static RC_t MP3__OpenWavFile(uint16_t songIndex)
  
     MP3__bytesRemaining = MP3__wavInfo.data_length;
  
-    WAV_PrintHeader(&MP3__wavInfo);
+    //WAV_PrintHeader(&MP3__wavInfo);
     //sprintf(logBuf, "\r\n[MP3] Streaming: %lu bytes\n", MP3__bytesRemaining);
     //UART_LOG_PutString(logBuf);
  
