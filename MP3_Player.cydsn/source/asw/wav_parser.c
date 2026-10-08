@@ -33,6 +33,10 @@
 #define WAV__RIFF_FMT_SIZE       (36u)  /* First 36 bytes: RIFF header + fmt chunk */
 #define WAV__MAX_SCAN            (256u) /* Max bytes to scan forward looking for data chunk */
 
+/* Supported PCM bit depths */  // INC 5A
+#define WAV__BITS_8              (8u)
+#define WAV__BITS_16             (16u)
+
 /*****************************************************************************/
 /* Local function prototypes                                                 */
 /*****************************************************************************/
@@ -92,9 +96,21 @@ static RC_t WAV__ValidateFormat(WAVHeader const * const hdr)
         UART_LOG_PutString("\r\n[WAV] ERROR: not mono\n");
         return RC_ERROR;
     }
-    if (hdr->bits_per_sample != WAV_REQUIRED_BITS_PER_SAMPLE)
+    /*if (hdr->bits_per_sample != WAV_REQUIRED_BITS_PER_SAMPLE)
     {
         UART_LOG_PutString("\r\n[WAV] ERROR: not 8-bit\n");
+        return RC_ERROR;
+    }*/
+    if ((hdr->bits_per_sample != WAV__BITS_8) &&
+        (hdr->bits_per_sample != WAV__BITS_16))
+    {
+        UART_LOG_PutString("\r\n[WAV] ERROR: not 8/16-bit\n");
+        return RC_ERROR;
+    }
+    /* Mono: 1 byte per frame for 8-bit, 2 bytes per frame for 16-bit */
+    if (hdr->block_align != (hdr->bits_per_sample / 8u))
+    {
+        UART_LOG_PutString("\r\n[WAV] ERROR: bad block_align\n");
         return RC_ERROR;
     }
     return RC_SUCCESS;
@@ -203,8 +219,11 @@ void WAV_PrintHeader(WAVFile const * const wav)
     sprintf(buf, "\r\n  Channels      : %u\n",       hdr->number_of_channels); UART_LOG_PutString(buf);
     sprintf(buf, "\r\n  SampleRate    : %lu Hz\n",   hdr->sample_rate);        UART_LOG_PutString(buf);
     sprintf(buf, "\r\n  BitsPerSample : %u\n",       hdr->bits_per_sample);    UART_LOG_PutString(buf);
+    sprintf(buf, "\r\n  BlockAlign    : %u\n",       hdr->block_align);        UART_LOG_PutString(buf); // INC 5A
     sprintf(buf, "\r\n  DataSize      : %lu bytes\n",hdr->data_size);          UART_LOG_PutString(buf);
     sprintf(buf, "\r\n  Duration      : ~%lu s\n",
-            hdr->data_size / hdr->sample_rate);                                UART_LOG_PutString(buf);
+            hdr->data_size / ((uint32_t)hdr->sample_rate * hdr->block_align)); UART_LOG_PutString(buf);
+    /*sprintf(buf, "\r\n  Duration      : ~%lu s\n",
+            hdr->data_size / hdr->sample_rate);                                UART_LOG_PutString(buf);*/
     UART_LOG_PutString("\r\n------------------\n");
 }

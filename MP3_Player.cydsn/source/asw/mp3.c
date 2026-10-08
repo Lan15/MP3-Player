@@ -556,7 +556,7 @@ static RC_t MP3__OpenWavFile(uint16_t songIndex)
  
     MP3__bytesRemaining = MP3__wavInfo.data_length;
  
-    //WAV_PrintHeader(&MP3__wavInfo);
+    WAV_PrintHeader(&MP3__wavInfo);
     //sprintf(logBuf, "\r\n[MP3] Streaming: %lu bytes\n", MP3__bytesRemaining);
     //UART_LOG_PutString(logBuf);
  
