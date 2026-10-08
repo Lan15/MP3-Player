@@ -83,13 +83,15 @@ static struct
 
 static char MP3__songList[MP3_MAX_SONGS][MP3_FILENAME_MAXLEN];  /* Song filename list built from SD card scan */
 
-static FS_FILE * MP3__pFile = 0;                    /* emFile file handle - static, not on stack */
+static FS_FILE * MP3__pFile = 0;                        /* emFile file handle - static, not on stack */
 
-static WAVFile MP3__wavInfo;                        /* Decoded WAV info */
+static WAVFile MP3__wavInfo;                            /* Decoded WAV info */
 
-static uint8_t MP3__readBuf[SOUND_BUFFER_SIZE];     /* Static read buffer - 512 bytes, kept off tsk_reader stack */
+//static uint8_t MP3__readBuf[SOUND_BUFFER_SIZE];     /* Static read buffer - 512 bytes, kept off tsk_reader stack */
  
-static uint32_t MP3__bytesRemaining = 0u;           /* Remaining PCM bytes not yet read from current file */
+static uint8_t MP3__readBuf[2u * SOUND_BUFFER_SIZE];    /* Static read buffer - 1024 bytes (16-bit needs 2 bytes/sample), kept off tsk_reader stack */ // INC 5C
+
+static uint32_t MP3__bytesRemaining = 0u;               /* Remaining PCM bytes not yet read from current file */
 
 
 /*****************************************************************************/
@@ -119,18 +121,14 @@ void MP3__showEventAndState(EventMaskType ev, MP3__State_t state);  /**< \brief 
 static RC_t MP3__OpenWavFile(uint16_t songIndex);
 static void MP3__CloseWavFile(void);
 
+static void MP3__ReadBlock(void);
+
 /*****************************************************************************/
 /* Function implementation - global ('extern') and local ('static')          */
 /*****************************************************************************/
 
 RC_t MP3_Init()
 {
-    FS_DIR    * pDir;
-    FS_DIRENT * pDirEnt;
-    char        entryName[64];
-    char        logBuf[48];
-    U8          attr;
-    uint16_t    songCount = 0u;
  
     MP3__player.m_state       = MP3STATE_ISSTOPPED;
     MP3__player.m_volume      = MP3__MAXVOLUME;
@@ -240,9 +238,7 @@ RC_t MP3_ProcessEvent(EventMaskType nextEvent)
 
 void MP3_Reader()
 {
-    U32      bytesRead = 0u;
-    uint16_t fillSize  = 0u;
-    char     logBuf[48];
+    //char     logBuf[48];
  
     switch (MP3__reader.m_state)
     {
@@ -265,54 +261,32 @@ void MP3_Reader()
                 MP3__player.m_state = MP3STATE_ISSTOPPED;
                 break;
             }
- 
-            /* Set remaining play time from WAV header */           
-            /*MP3__player.m_remainingPlayTime =
-                (uint16_t)(MP3__wavInfo.data_length
-                            / MP3__wavInfo.header.sample_rate);
-            SEVEN_Set(SEVEN_0, MP3__player.m_remainingPlayTime);*/
- 
-            /* Set remaining play time from WAV header                    */    // INC 5B
+
+            /* Set remaining play time from WAV header                    */
             /* seconds = data bytes / (samples per s * bytes per sample)  */
-            /* 8-bit mono: block_align = 1, 16-bit mono: block_align = 2  */
             MP3__player.m_remainingPlayTime =
                 (uint16_t)(MP3__wavInfo.data_length
                            / ((uint32_t)MP3__wavInfo.header.sample_rate
                               * MP3__wavInfo.header.block_align));
             SEVEN_Set(SEVEN_0, MP3__player.m_remainingPlayTime);
-            
-            sprintf(logBuf, "\r\n[MP3] Playtime: %u s (%u-bit)\n",
+
+            /*sprintf(logBuf, "\r\n[MP3] Playtime: %u s (%u-bit)\n",
                     MP3__player.m_remainingPlayTime,
                     MP3__wavInfo.header.bits_per_sample);
-            UART_LOG_PutString(logBuf);
-            
-            /* Pre-fill Buffer A - becomes active */
-            fillSize = (MP3__bytesRemaining >= SOUND_BUFFER_SIZE)
-                        ? SOUND_BUFFER_SIZE
-                        : (uint16_t)MP3__bytesRemaining;
- 
-            bytesRead = FS_Read(MP3__pFile, MP3__readBuf, fillSize);
-            MP3__bytesRemaining -= (uint32_t)bytesRead;
-            SOUND_FillBuffer(MP3__readBuf, (uint16_t)bytesRead);
+            UART_LOG_PutString(logBuf);*/
+
+            /* Pre-fill Buffer A - becomes active */                // INC 5C
+            MP3__ReadBlock();
             SOUND_SwapBuffers();
- 
+
             /* Pre-fill Buffer B - inactive, ready for first swap */
             if (MP3__bytesRemaining > 0u)
             {
-                fillSize = (MP3__bytesRemaining >= SOUND_BUFFER_SIZE)
-                            ? SOUND_BUFFER_SIZE
-                            : (uint16_t)MP3__bytesRemaining;
- 
-                bytesRead = FS_Read(MP3__pFile, MP3__readBuf, fillSize);
-                MP3__bytesRemaining -= (uint32_t)bytesRead;
-                SOUND_FillBuffer(MP3__readBuf, (uint16_t)bytesRead);
+                MP3__ReadBlock();
             }
- 
+
             SOUND_StartPlay();
- 
-            //sprintf(logBuf, "\r\n[MP3] Playing. %lu bytes left\n", MP3__bytesRemaining);
-            //UART_LOG_PutString(logBuf);
- 
+
             MP3__reader.m_state = MP3READER_STREAMING;
             break;
         }
@@ -341,17 +315,10 @@ void MP3_Reader()
                 break;
             }
  
-            /* Normal case - read next block */
-            fillSize = (MP3__bytesRemaining >= SOUND_BUFFER_SIZE)
-                        ? SOUND_BUFFER_SIZE
-                        : (uint16_t)MP3__bytesRemaining;
- 
-            bytesRead = FS_Read(MP3__pFile, MP3__readBuf, fillSize);
-            MP3__bytesRemaining -= (uint32_t)bytesRead;
- 
-            /* Fill inactive buffer while ISR still runs on active buffer */
-            SOUND_FillBuffer(MP3__readBuf, (uint16_t)bytesRead);
- 
+            /* Normal case - read next block into inactive buffer       // INC 5C
+            while ISR still runs on active buffer */
+            MP3__ReadBlock();
+
             break;
         }
  
@@ -379,7 +346,7 @@ void MP3__readCard()
     FS_DIR    * pDir;
     FS_DIRENT * pDirEnt;
     char        entryName[64];
-    char        logBuf[48];
+    //char        logBuf[48];
     U8          attr;
     uint16_t    songCount = 0;
     
@@ -505,14 +472,14 @@ void MP3__showSong()
 
 void MP3__showRemainingPlaytime()
 {
-    char logBuf[24];    // INC 5B
+    //char logBuf[24];    // INC 5B
     
     if (MP3__player.m_remainingPlayTime > 0u)
         MP3__player.m_remainingPlayTime--;
     SEVEN_Set(SEVEN_0,MP3__player.m_remainingPlayTime);
     
-    sprintf(logBuf, "\r\n[MP3] Remaining: %u s\n", MP3__player.m_remainingPlayTime);
-    UART_LOG_PutString(logBuf);
+    //sprintf(logBuf, "\r\n[MP3] Remaining: %u s\n", MP3__player.m_remainingPlayTime);
+    //UART_LOG_PutString(logBuf);
 }
 
 boolean_t MP3__songEnded()
@@ -555,7 +522,7 @@ void MP3__showEventAndState(EventMaskType ev, MP3__State_t state)
 
 static RC_t MP3__OpenWavFile(uint16_t songIndex)
 {
-    char logBuf[48];
+    //char logBuf[48];
  
     MP3__pFile = FS_FOpen(MP3__songList[songIndex], "r");
     if (MP3__pFile == 0)
@@ -589,4 +556,28 @@ static void MP3__CloseWavFile(void)
         MP3__pFile = 0;
     }
     MP3__bytesRemaining = 0u;
+}
+
+/**
+ * Read one block of PCM from the open WAV file and fill the inactive sound buffer. // INC 5C
+ * 5C: 8-bit path only (1 byte = 1 sample). 16-bit conversion added in 5D.
+ */
+static void MP3__ReadBlock(void)
+{
+    uint32_t toRead;    // fillSize
+    U32      bytesRead;
+
+    toRead = (MP3__bytesRemaining >= SOUND_BUFFER_SIZE)
+             ? SOUND_BUFFER_SIZE
+             : MP3__bytesRemaining;
+
+    bytesRead = FS_Read(MP3__pFile, MP3__readBuf, toRead);
+    if (bytesRead == 0u)
+    {
+        MP3__bytesRemaining = 0u;          /* read error -> force EOF, avoid endless loop */
+        return;
+    }
+    MP3__bytesRemaining -= (uint32_t)bytesRead;
+
+    SOUND_FillBuffer(MP3__readBuf, (uint16_t)bytesRead);
 }
