@@ -37,6 +37,7 @@
 
 #define MP3__MAXVOLUME   (5u)
 #define MP3__SD_ROOT     "\\"
+#define MP3__MAX_BLOCK_ALIGN (6u)     /* largest supported frame: 24-bit stereo = 2 ch * 3 bytes */
 
 /*****************************************************************************/
 /* Global variable definitions (declared in header file with 'extern')       */
@@ -86,10 +87,10 @@ static char MP3__songList[MP3_MAX_SONGS][MP3_FILENAME_MAXLEN];  /* Song filename
 static FS_FILE * MP3__pFile = 0;                        /* emFile file handle - static, not on stack */
 
 static WAVFile MP3__wavInfo;                            /* Decoded WAV info */
-
-//static uint8_t MP3__readBuf[SOUND_BUFFER_SIZE];     /* Static read buffer - 512 bytes, kept off tsk_reader stack */
  
-static uint8_t MP3__readBuf[2u * SOUND_BUFFER_SIZE];    /* Static read buffer - 1024 bytes (16-bit needs 2 bytes/sample), kept off tsk_reader stack */ // INC 5C
+//static uint8_t MP3__readBuf[2u * SOUND_BUFFER_SIZE];    /* Static read buffer - 1024 bytes (16-bit needs 2 bytes/sample), kept off tsk_reader stack */ // INC 5C
+
+static uint8_t MP3__readBuf[MP3__MAX_BLOCK_ALIGN * SOUND_BUFFER_SIZE];  /* 3072 bytes - one block of the largest frame format, kept off tsk_reader stack */ // INC 6B
 
 static uint32_t MP3__bytesRemaining = 0u;               /* Remaining PCM bytes not yet read from current file */
 
@@ -113,15 +114,16 @@ void MP3__resumeSong();             /**< \brief Start the clock for the timer IS
 
 void MP3__showSong();               /**< \brief Show the songs via uart */
 void MP3__showRemainingPlaytime();  /**< \brief Show the remaining play time via 7 segment */
+void MP3__setRemainingPlaytime();   /**< \brief Calculates and sets the initial play time once when the file opens */
 
 boolean_t MP3__songEnded();         /**< \brief Check if the remaining playtime has ended */
 
 void MP3__showEventAndState(EventMaskType ev, MP3__State_t state);  /**< \brief Helper function to show state and event */
 
-static RC_t MP3__OpenWavFile(uint16_t songIndex);
-static void MP3__CloseWavFile(void);
+static RC_t MP3__openWavFile(uint16_t songIndex);
+static void MP3__closeWavFile(void);
 
-static void MP3__ReadBlock(void);
+static void MP3__readBlock(void);
 
 /*****************************************************************************/
 /* Function implementation - global ('extern') and local ('static')          */
@@ -234,7 +236,7 @@ RC_t MP3_ProcessEvent(EventMaskType nextEvent)
 
 void MP3_Reader()
 {
-    //char     logBuf[48];
+    char     logBuf[48];
 
     switch (MP3__reader.m_state)
     {
@@ -255,30 +257,19 @@ void MP3_Reader()
             //UART_LOG_PutString("\r\n[MP3] Open: ");                     // INC 5E
             //UART_LOG_PutString(MP3__songList[MP3__reader.m_songIndex]);
 
-            if (MP3__OpenWavFile(MP3__reader.m_songIndex) != RC_SUCCESS)
+            if (MP3__openWavFile(MP3__reader.m_songIndex) != RC_SUCCESS)
             {
                 MP3__reader.m_state = MP3READER_IDLE;
                 MP3__player.m_state = MP3STATE_ISSTOPPED;
                 break;
             }
 
-            /* Set remaining play time from WAV header                    */   // INC 5B
-            /* seconds = data bytes / (samples per s * bytes per sample)  */
-            MP3__player.m_remainingPlayTime =
-                (uint16_t)(MP3__wavInfo.data_length
-                           / ((uint32_t)MP3__wavInfo.header.sample_rate
-                              * MP3__wavInfo.header.block_align));
-            SEVEN_Set(SEVEN_0, MP3__player.m_remainingPlayTime);
-
-            /*sprintf(logBuf, "\r\n[MP3] Playtime: %u s (%u-bit)\n",
-                    MP3__player.m_remainingPlayTime,
-                    MP3__wavInfo.header.bits_per_sample);
-            UART_LOG_PutString(logBuf);*/
-
+            MP3__setRemainingPlaytime();
+            
             /* Pre-fill Buffer A - becomes active */                       // INC 5C
-            MP3__ReadBlock();
+            MP3__readBlock();
             /* DEBUG 5D: first 16 samples after conversion - expect values around 0x80 */
-            /*{
+            {
                 uint8_t k;
                 UART_LOG_PutString("\r\n[5D] First 16 samples: ");
                 for (k = 0u; k < 16u; k++)
@@ -287,13 +278,13 @@ void MP3_Reader()
                     UART_LOG_PutString(logBuf);
                 }
                 UART_LOG_PutString("\n");
-            }*/
+            }
             SOUND_SwapBuffers();
 
             /* Pre-fill Buffer B - inactive, ready for first swap */
             if (MP3__bytesRemaining > 0u)
             {
-                MP3__ReadBlock();
+                MP3__readBlock();
             }
 
             SOUND_StartPlay();
@@ -308,7 +299,7 @@ void MP3_Reader()
             if (MP3__reader.m_newSongRequest == TRUE)
             {
                 SOUND_StopPlay();
-                MP3__CloseWavFile();
+                MP3__closeWavFile();
                 MP3__reader.m_state = MP3READER_IDLE;
                 SetEvent(tsk_reader, ev_BufEmpty);  /* re-run reader now, IDLE opens new song */
                 break;
@@ -323,7 +314,7 @@ void MP3_Reader()
 
             /* Normal case - read next block into inactive buffer         // INC 5C
                while ISR still runs on active buffer */
-            MP3__ReadBlock();
+            MP3__readBlock();
 
             break;
         }
@@ -331,7 +322,7 @@ void MP3_Reader()
         case MP3READER_EOF:
         {
             SOUND_StopPlay();
-            MP3__CloseWavFile();
+            MP3__closeWavFile();
 
             MP3__player.m_remainingPlayTime = 0u;
             SEVEN_Set(SEVEN_0, 0u);
@@ -446,7 +437,7 @@ void MP3__playSong(void)
 void MP3__stopSong(void)
 {
     SOUND_StopPlay();
-    MP3__CloseWavFile();
+    MP3__closeWavFile();
     MP3__reader.m_state = MP3READER_IDLE;
     UART_LOG_PutString("\r\n[MP3] Stopped\n");
 }
@@ -478,11 +469,11 @@ void MP3__showSong()
             UART_LOG_PutString("( )");
         }
         UART_LOG_PutString(MP3__songList[i]);
-        UART_LOG_PutString("\n");
+        UART_LOG_PutString("\r\n");
     }
 
 }
-
+// decrements and displays it every second while playing
 void MP3__showRemainingPlaytime()
 {
     //char logBuf[24];    // INC 5B
@@ -493,6 +484,24 @@ void MP3__showRemainingPlaytime()
     
     //sprintf(logBuf, "\r\n[MP3] Remaining: %u s\n", MP3__player.m_remainingPlayTime);
     //UART_LOG_PutString(logBuf);
+}
+
+/* Set remaining play time from WAV header                    */   // INC 5B
+/* seconds = data bytes / (samples per s * bytes per sample)  */
+void MP3__setRemainingPlaytime()
+{
+    //char     logBuf[48];
+    
+    MP3__player.m_remainingPlayTime =
+            (uint16_t)(MP3__wavInfo.data_length
+                / ((uint32_t)MP3__wavInfo.header.sample_rate
+                * MP3__wavInfo.header.block_align));
+    SEVEN_Set(SEVEN_0, MP3__player.m_remainingPlayTime);
+
+    /*sprintf(logBuf, "\r\n[MP3] Playtime: %u s (%u-bit)\n",
+            MP3__player.m_remainingPlayTime,
+            MP3__wavInfo.header.bits_per_sample);
+    UART_LOG_PutString(logBuf);*/
 }
 
 boolean_t MP3__songEnded()
@@ -533,7 +542,7 @@ void MP3__showEventAndState(EventMaskType ev, MP3__State_t state)
     UART_LOG_PutString("\n");
 }
 
-static RC_t MP3__OpenWavFile(uint16_t songIndex)
+static RC_t MP3__openWavFile(uint16_t songIndex)
 {
     //char logBuf[48];
  
@@ -554,14 +563,14 @@ static RC_t MP3__OpenWavFile(uint16_t songIndex)
  
     MP3__bytesRemaining = MP3__wavInfo.data_length;
  
-    //WAV_PrintHeader(&MP3__wavInfo);
+    WAV_PrintHeader(&MP3__wavInfo);
     //sprintf(logBuf, "\r\n[MP3] Streaming: %lu bytes\n", MP3__bytesRemaining);
     //UART_LOG_PutString(logBuf);
  
     return RC_SUCCESS;
 }
  
-static void MP3__CloseWavFile(void)
+static void MP3__closeWavFile(void)
 {
     if (MP3__pFile != 0)
     {
@@ -579,7 +588,7 @@ static void MP3__CloseWavFile(void)
  *   8-bit : read 512 bytes  -> 512 samples (used as-is)
  *   16-bit: read 1024 bytes -> 512 samples (converted in place)
  */
-static void MP3__ReadBlock(void)
+/*static void MP3__readBlock(void)
 {
     uint8_t  bytesPerSample = (uint8_t)MP3__wavInfo.header.block_align;
     uint32_t maxBytes       = (uint32_t)SOUND_BUFFER_SIZE * bytesPerSample;
@@ -587,6 +596,76 @@ static void MP3__ReadBlock(void)
     U32      bytesRead;
     uint16_t samples;
     uint16_t i;
+
+    // INC 6A: never read more than the buffer can hold 
+    if (maxBytes > sizeof(MP3__readBuf))
+    {
+        maxBytes = sizeof(MP3__readBuf);
+    }
+    
+    toRead = (MP3__bytesRemaining >= maxBytes)
+             ? maxBytes
+             : MP3__bytesRemaining;
+
+    bytesRead = FS_Read(MP3__pFile, MP3__readBuf, toRead);
+    if (bytesRead == 0u)
+    {
+        MP3__bytesRemaining = 0u;          // read error -> force EOF, avoid endless loop 
+        return;
+    }
+    MP3__bytesRemaining -= (uint32_t)bytesRead;
+
+    if (bytesPerSample == 2u)
+    {
+        // 16-bit signed little-endian -> 8-bit unsigned for VDAC8              // N1
+        // sample = ((int16_t)(lo | hi << 8) >> 8) + 128  ==  hi ^ 0x80        
+        // In-place is safe: write index i, read index 2i+1 >= i               
+        samples = (uint16_t)(bytesRead / 2u);
+        for (i = 0u; i < samples; i++)
+        {
+            MP3__readBuf[i] = MP3__readBuf[(2u * i) + 1u] ^ 0x80u;
+        }
+    }
+    else
+    {
+        // 8-bit unsigned: already VDAC8 format 
+        samples = (uint16_t)bytesRead;
+    }
+
+    if (samples > 0u)
+    {
+        SOUND_FillBuffer(MP3__readBuf, samples);
+    }
+}*/
+
+/**
+ * Read one block of PCM from the open WAV file, convert every frame to one
+ * 8-bit unsigned sample for VDAC8, and fill the inactive sound buffer.
+ * Always produces up to SOUND_BUFFER_SIZE samples, so ISR timing is
+ * identical for every format.
+ *
+ *   Format         block_align  bytes read   MSB offset in frame
+ *   8-bit  mono         1          512              0
+ *   16-bit mono         2         1024              1
+ *   24-bit mono         3         1536              2
+ *   stereo           2 x mono     2 x mono      left channel only (6B)
+ */
+static void MP3__readBlock(void)
+{
+    uint16_t blockAlign = MP3__wavInfo.header.block_align;                     /* bytes per frame, 1..6     */
+    uint8_t  bytesPerCh = (uint8_t)(MP3__wavInfo.header.bits_per_sample / 8u); /* bytes per channel, 1..3   */
+    uint8_t  msbOff     = bytesPerCh - 1u;                                     /* MSB is the last byte (LE) */
+    uint32_t maxBytes   = (uint32_t)SOUND_BUFFER_SIZE * blockAlign;
+    uint32_t toRead;
+    U32      bytesRead;
+    uint16_t frames;
+    uint16_t i;
+
+    /* INC 6A: never read more than the buffer can hold */
+    if (maxBytes > sizeof(MP3__readBuf))
+    {
+        maxBytes = sizeof(MP3__readBuf);
+    }
 
     toRead = (MP3__bytesRemaining >= maxBytes)
              ? maxBytes
@@ -600,26 +679,23 @@ static void MP3__ReadBlock(void)
     }
     MP3__bytesRemaining -= (uint32_t)bytesRead;
 
-    if (bytesPerSample == 2u)
+    frames = (uint16_t)(bytesRead / blockAlign);
+
+    if (blockAlign > 1u)                   /* 8-bit mono needs no conversion */
     {
-        /* 16-bit signed little-endian -> 8-bit unsigned for VDAC8           */ // N1
-        /* sample = ((int16_t)(lo | hi << 8) >> 8) + 128  ==  hi ^ 0x80      */
-        /* In-place is safe: write index i, read index 2i+1 >= i             */
-        samples = (uint16_t)(bytesRead / 2u);
-        for (i = 0u; i < samples; i++)
+        for (i = 0u; i < frames; i++)
         {
-            MP3__readBuf[i] = MP3__readBuf[(2u * i) + 1u] ^ 0x80u;
+            /* N2: in place is safe - write index i, read index i*blockAlign+msbOff >= i */
+            uint8_t msb = MP3__readBuf[(i * blockAlign) + msbOff];   /* 6B: channel 0 (left) only */
+
+            /* N1: 8-bit is already unsigned; 16/24-bit MSB is signed -> flip sign bit */
+            MP3__readBuf[i] = (bytesPerCh == 1u) ? msb : (uint8_t)(msb ^ 0x80u);
         }
     }
-    else
-    {
-        /* 8-bit unsigned: already VDAC8 format */
-        samples = (uint16_t)bytesRead;
-    }
 
-    if (samples > 0u)
+    if (frames > 0u)
     {
-        SOUND_FillBuffer(MP3__readBuf, samples);
+        SOUND_FillBuffer(MP3__readBuf, frames);
     }
 }
 
@@ -630,7 +706,16 @@ static void MP3__ReadBlock(void)
 *      For a single byte, adding 128 is the same as flipping bit 7, so the whole conversion is 
 *      one XOR. That keeps it cheap: 512 XORs per block.
 *
-*
+* N2 - Frame layout (little-endian): [ch0 LSB..MSB][ch1 LSB..MSB]. The MSB of ch0 sits at
+*      offset bytesPerCh-1. Lower bytes are dropped (VDAC8 resolution). In-place conversion
+*      is safe because the write index i never passes the read index i*blockAlign+msbOff.
+* 
+*Rejected files also expose an existing behavior, not part of 6A. When MP3__OpenWavFile() fails, 
+the reader sets MP3__player.m_state = MP3STATE_ISSTOPPED (mp3.c line 261). But MP3_ProcessEvent() 
+sets m_state = MP3STATE_ISPLAYING after calling MP3__playSong() (line 185). So depending on task 
+priorities, the player can show PLAYING on a file that failed to open, and then auto-advance a 
+second later. A clean fix would be to skip unplayable files automatically. I suggest doing that 
+as an optional increment after 6C, so 6B stays focused.
 *
 *
 *

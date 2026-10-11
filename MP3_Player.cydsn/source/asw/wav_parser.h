@@ -46,8 +46,8 @@
 /*****************************************************************************/
 
 #define WAV_AUDIO_FORMAT_PCM         (1u)
-#define WAV_REQUIRED_CHANNELS        (1u)
-#define WAV_REQUIRED_BITS_PER_SAMPLE (8u)
+//#define WAV_REQUIRED_CHANNELS        (1u)
+//#define WAV_REQUIRED_BITS_PER_SAMPLE (8u)
 #define WAV_HEADER_SIZE_BYTES        (44u)
 
 typedef struct WAVHeader_t

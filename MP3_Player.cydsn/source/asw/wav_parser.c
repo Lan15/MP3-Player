@@ -32,10 +32,22 @@
 #define WAV__OFF_BITS_PER_SAMPLE (34u)
 #define WAV__RIFF_FMT_SIZE       (36u)  /* First 36 bytes: RIFF header + fmt chunk */
 #define WAV__MAX_SCAN            (256u) /* Max bytes to scan forward looking for data chunk */
-
-/* Supported PCM bit depths */  // INC 5A
-#define WAV__BITS_8              (8u)
+#define WAV__BITS_8              (8u)   /* Supported PCM bit depths */  // INC 5A
 #define WAV__BITS_16             (16u)
+
+#define WAV__BITS_24             (24u)  // INC 6A
+
+#define WAV__CH_MONO             (1u)
+#define WAV__CH_STEREO           (2u)
+
+#define WAV__SAMPLE_RATE         (22050u)   /* fixed by SOUND_SAMPLE timer */
+
+/* fmt chunk extension (WAVE_FORMAT_EXTENSIBLE)                          */
+/* fmt layout: 16 base bytes | cbSize(2) validBits(2) chMask(4) GUID(16) */
+#define WAV__FMT_BASE_SIZE       (16u)
+#define WAV__FMT_EXT_MAX         (24u)      /* bytes of extension we read */
+#define WAV__FORMAT_EXTENSIBLE   (0xFFFEu)
+#define WAV__EXT_SUBFORMAT_OFF   (8u)       /* GUID starts here, first 2 bytes = real format tag */
 
 /*****************************************************************************/
 /* Local function prototypes                                                 */
@@ -74,8 +86,10 @@ static void WAV__BytesToString(uint8_t const * const src,
     dst[n] = '\0';
 }
 
-static RC_t WAV__ValidateFormat(WAVHeader const * const hdr)
+static RC_t WAV__ValidateFormat(WAVHeader const * const hdr)    // INC 6A
 {
+    char logBuf[56];
+
     if (strcmp(hdr->file_id, "RIFF") != 0)
     {
         UART_LOG_PutString("\r\n[WAV] ERROR: not RIFF\n");
@@ -86,31 +100,34 @@ static RC_t WAV__ValidateFormat(WAVHeader const * const hdr)
         UART_LOG_PutString("\r\n[WAV] ERROR: not WAVE\n");
         return RC_ERROR;
     }
-    if (hdr->audio_format != WAV_AUDIO_FORMAT_PCM)
+    if (hdr->audio_format != WAV_AUDIO_FORMAT_PCM)          /* EXTENSIBLE already resolved to SubFormat */
     {
         UART_LOG_PutString("\r\n[WAV] ERROR: not PCM\n");
         return RC_ERROR;
     }
-    if (hdr->number_of_channels != WAV_REQUIRED_CHANNELS)
+    if ((hdr->number_of_channels != WAV__CH_MONO) &&
+        (hdr->number_of_channels != WAV__CH_STEREO))
     {
-        UART_LOG_PutString("\r\n[WAV] ERROR: not mono\n");
+        UART_LOG_PutString("\r\n[WAV] ERROR: not mono/stereo\n");
         return RC_ERROR;
     }
-    /*if (hdr->bits_per_sample != WAV_REQUIRED_BITS_PER_SAMPLE)
+    if ((hdr->bits_per_sample != WAV__BITS_8)  &&
+        (hdr->bits_per_sample != WAV__BITS_16) &&
+        (hdr->bits_per_sample != WAV__BITS_24))
     {
-        UART_LOG_PutString("\r\n[WAV] ERROR: not 8-bit\n");
-        return RC_ERROR;
-    }*/
-    if ((hdr->bits_per_sample != WAV__BITS_8) &&
-        (hdr->bits_per_sample != WAV__BITS_16))
-    {
-        UART_LOG_PutString("\r\n[WAV] ERROR: not 8/16-bit\n");
+        UART_LOG_PutString("\r\n[WAV] ERROR: not 8/16/24-bit\n");
         return RC_ERROR;
     }
-    /* Mono: 1 byte per frame for 8-bit, 2 bytes per frame for 16-bit */
-    if (hdr->block_align != (hdr->bits_per_sample / 8u))
+    /* One frame = one sample for every channel */
+    if (hdr->block_align != (hdr->number_of_channels * (hdr->bits_per_sample / 8u)))
     {
         UART_LOG_PutString("\r\n[WAV] ERROR: bad block_align\n");
+        return RC_ERROR;
+    }
+    if (hdr->sample_rate != WAV__SAMPLE_RATE)
+    {
+        sprintf(logBuf, "\r\n[WAV] ERROR: %lu Hz, need 22050 Hz\n", (uint32_t)hdr->sample_rate);
+        UART_LOG_PutString(logBuf);
         return RC_ERROR;
     }
     return RC_SUCCESS;
@@ -149,6 +166,40 @@ RC_t WAV_ParseHeader(FS_FILE * const pFile, WAVFile * const wav)
     hdr->block_align        = WAV__ReadU16(&raw[WAV__OFF_BLOCK_ALIGN]);
     hdr->bits_per_sample    = WAV__ReadU16(&raw[WAV__OFF_BITS_PER_SAMPLE]);
 
+    /* ------------------------------------------------------------------ */
+    /* INC 6A: fmt chunk larger than 16 bytes (fmt extension)             */
+    /* Must be consumed here, otherwise the chunk search below starts     */
+    /* inside the fmt chunk. For WAVE_FORMAT_EXTENSIBLE the real format   */
+    /* tag is the first 2 bytes of the SubFormat GUID.                    */
+    /* ------------------------------------------------------------------ */
+    if (hdr->subchunk_size > WAV__FMT_BASE_SIZE)
+    {
+        uint8_t  ext[WAV__FMT_EXT_MAX];
+        uint32_t extSize = hdr->subchunk_size - WAV__FMT_BASE_SIZE;
+        uint32_t toRead  = (extSize > WAV__FMT_EXT_MAX) ? WAV__FMT_EXT_MAX : extSize;
+
+        if (FS_Read(pFile, ext, toRead) != toRead)
+        {
+            UART_LOG_PutString("\r\n[WAV] ERROR: fmt extension read failed\n");
+            return RC_ERROR;
+        }
+
+        if ((hdr->audio_format == WAV__FORMAT_EXTENSIBLE) &&
+            (toRead >= (WAV__EXT_SUBFORMAT_OFF + 2u)))
+        {
+            hdr->audio_format = WAV__ReadU16(&ext[WAV__EXT_SUBFORMAT_OFF]);
+        }
+
+        /* Skip any remaining extension bytes */
+        extSize -= toRead;
+        while (extSize > 0u)
+        {
+            toRead = (extSize > WAV__FMT_EXT_MAX) ? WAV__FMT_EXT_MAX : extSize;
+            FS_Read(pFile, ext, toRead);
+            extSize -= toRead;
+        }
+    }
+    
     /* Validate format constraints for VDAC8 hardware */
     if (WAV__ValidateFormat(hdr) != RC_SUCCESS)
     {
@@ -156,8 +207,8 @@ RC_t WAV_ParseHeader(FS_FILE * const pFile, WAVFile * const wav)
     }
 
     /* ------------------------------------------------------------------ */
-    /* Search dynamically for the 'data' chunk                             */
-    /* WAV files can have extra chunks (LIST, INFO) before 'data'          */
+    /* Search dynamically for the 'data' chunk                            */
+    /* WAV files can have extra chunks (LIST, INFO) before 'data'         */
     /* This file has: fmt(byte 12) -> LIST(byte 36) -> data(byte 70)      */
     /* ------------------------------------------------------------------ */
     uint8_t  chunkHdr[8];
@@ -215,6 +266,7 @@ void WAV_PrintHeader(WAVFile const * const wav)
     UART_LOG_PutString("\r\n\n--- WAV Header ---\n");
     sprintf(buf, "\r\n  FileID        : %s\n",       hdr->file_id);            UART_LOG_PutString(buf);
     sprintf(buf, "\r\n  Format        : %s\n",       hdr->format);             UART_LOG_PutString(buf);
+    sprintf(buf, "\r\n  FmtSize       : %lu\n",       hdr->subchunk_size);     UART_LOG_PutString(buf); // INC 6A
     sprintf(buf, "\r\n  AudioFormat   : %u\n",       hdr->audio_format);       UART_LOG_PutString(buf);
     sprintf(buf, "\r\n  Channels      : %u\n",       hdr->number_of_channels); UART_LOG_PutString(buf);
     sprintf(buf, "\r\n  SampleRate    : %lu Hz\n",   hdr->sample_rate);        UART_LOG_PutString(buf);
