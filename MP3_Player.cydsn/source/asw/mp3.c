@@ -269,7 +269,7 @@ void MP3_Reader()
             /* Pre-fill Buffer A - becomes active */                       // INC 5C
             MP3__readBlock();
             /* DEBUG 5D: first 16 samples after conversion - expect values around 0x80 */
-            {
+            /*{
                 uint8_t k;
                 UART_LOG_PutString("\r\n[5D] First 16 samples: ");
                 for (k = 0u; k < 16u; k++)
@@ -278,7 +278,7 @@ void MP3_Reader()
                     UART_LOG_PutString(logBuf);
                 }
                 UART_LOG_PutString("\n");
-            }
+            }*/
             SOUND_SwapBuffers();
 
             /* Pre-fill Buffer B - inactive, ready for first swap */
@@ -308,6 +308,8 @@ void MP3_Reader()
             /* EOF check */
             if (MP3__bytesRemaining == 0u)
             {
+                sprintf(logBuf, "\r\n[MP3] Underruns: %lu\n", SOUND_GetAndClearUnderruns());   // INC 6B.1
+                UART_LOG_PutString(logBuf);
                 MP3__reader.m_state = MP3READER_EOF;
                 break;
             }
@@ -579,64 +581,6 @@ static void MP3__closeWavFile(void)
     }
     MP3__bytesRemaining = 0u;
 }
-
-/**
- * Read one block of PCM from the open WAV file, convert to 8-bit unsigned
- * if needed, and fill the inactive sound buffer.
- * Always produces up to SOUND_BUFFER_SIZE samples, so ISR timing is
- * identical for 8-bit and 16-bit files.
- *   8-bit : read 512 bytes  -> 512 samples (used as-is)
- *   16-bit: read 1024 bytes -> 512 samples (converted in place)
- */
-/*static void MP3__readBlock(void)
-{
-    uint8_t  bytesPerSample = (uint8_t)MP3__wavInfo.header.block_align;
-    uint32_t maxBytes       = (uint32_t)SOUND_BUFFER_SIZE * bytesPerSample;
-    uint32_t toRead;
-    U32      bytesRead;
-    uint16_t samples;
-    uint16_t i;
-
-    // INC 6A: never read more than the buffer can hold 
-    if (maxBytes > sizeof(MP3__readBuf))
-    {
-        maxBytes = sizeof(MP3__readBuf);
-    }
-    
-    toRead = (MP3__bytesRemaining >= maxBytes)
-             ? maxBytes
-             : MP3__bytesRemaining;
-
-    bytesRead = FS_Read(MP3__pFile, MP3__readBuf, toRead);
-    if (bytesRead == 0u)
-    {
-        MP3__bytesRemaining = 0u;          // read error -> force EOF, avoid endless loop 
-        return;
-    }
-    MP3__bytesRemaining -= (uint32_t)bytesRead;
-
-    if (bytesPerSample == 2u)
-    {
-        // 16-bit signed little-endian -> 8-bit unsigned for VDAC8              // N1
-        // sample = ((int16_t)(lo | hi << 8) >> 8) + 128  ==  hi ^ 0x80        
-        // In-place is safe: write index i, read index 2i+1 >= i               
-        samples = (uint16_t)(bytesRead / 2u);
-        for (i = 0u; i < samples; i++)
-        {
-            MP3__readBuf[i] = MP3__readBuf[(2u * i) + 1u] ^ 0x80u;
-        }
-    }
-    else
-    {
-        // 8-bit unsigned: already VDAC8 format 
-        samples = (uint16_t)bytesRead;
-    }
-
-    if (samples > 0u)
-    {
-        SOUND_FillBuffer(MP3__readBuf, samples);
-    }
-}*/
 
 /**
  * Read one block of PCM from the open WAV file, convert every frame to one

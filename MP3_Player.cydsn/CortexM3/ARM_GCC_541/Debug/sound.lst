@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 1
 
 
    1              		.syntax unified
@@ -56,230 +56,232 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 1
   27:source\asw/sound.c **** /* Local pre-processor symbols/macros ('#define')                            */
   28:source\asw/sound.c **** /*****************************************************************************/
   29:source\asw/sound.c **** 
-  30:source\asw/sound.c **** /*****************************************************************************/
-  31:source\asw/sound.c **** /* Global variable definitions (declared in header file with 'extern')       */
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 2
+  30:source\asw/sound.c **** static volatile uint32_t SOUND__underruns = 0u;     /* INC 6B.1: ticks where no sample was ready */
+  31:source\asw/sound.c **** 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 2
 
 
   32:source\asw/sound.c **** /*****************************************************************************/
-  33:source\asw/sound.c **** 
+  33:source\asw/sound.c **** /* Global variable definitions (declared in header file with 'extern')       */
   34:source\asw/sound.c **** /*****************************************************************************/
-  35:source\asw/sound.c **** /* Local type definitions ('typedef')                                        */
+  35:source\asw/sound.c **** 
   36:source\asw/sound.c **** /*****************************************************************************/
-  37:source\asw/sound.c **** 
-  38:source\asw/sound.c **** typedef struct {
-  39:source\asw/sound.c ****     uint8_t const * m_song;             /* Legacy flash params */
-  40:source\asw/sound.c ****     uint32_t        m_size;
-  41:source\asw/sound.c ****     uint32_t        m_pos;
-  42:source\asw/sound.c ****     volatile uint8_t * m_activeBuf;     /* Dual buffer params */
-  43:source\asw/sound.c ****     volatile uint8_t * m_inactiveBuf;
-  44:source\asw/sound.c ****     volatile uint16_t  m_activeFill;
-  45:source\asw/sound.c ****     volatile uint16_t  m_inactiveFill;
-  46:source\asw/sound.c ****     volatile uint16_t  m_readPos;
-  47:source\asw/sound.c ****     uint8_t m_volume;                   /* Shared */
-  48:source\asw/sound.c **** } SOUND__Driver_t;
-  49:source\asw/sound.c **** 
-  50:source\asw/sound.c **** 
-  51:source\asw/sound.c **** /*****************************************************************************/
-  52:source\asw/sound.c **** /* Local variable definitions ('static')                                     */
+  37:source\asw/sound.c **** /* Local type definitions ('typedef')                                        */
+  38:source\asw/sound.c **** /*****************************************************************************/
+  39:source\asw/sound.c **** 
+  40:source\asw/sound.c **** typedef struct {
+  41:source\asw/sound.c ****     uint8_t const * m_song;             /* Legacy flash params */
+  42:source\asw/sound.c ****     uint32_t        m_size;
+  43:source\asw/sound.c ****     uint32_t        m_pos;
+  44:source\asw/sound.c ****     volatile uint8_t * m_activeBuf;     /* Dual buffer params */
+  45:source\asw/sound.c ****     volatile uint8_t * m_inactiveBuf;
+  46:source\asw/sound.c ****     volatile uint16_t  m_activeFill;
+  47:source\asw/sound.c ****     volatile uint16_t  m_inactiveFill;
+  48:source\asw/sound.c ****     volatile uint16_t  m_readPos;
+  49:source\asw/sound.c ****     uint8_t m_volume;                   /* Shared */
+  50:source\asw/sound.c **** } SOUND__Driver_t;
+  51:source\asw/sound.c **** 
+  52:source\asw/sound.c **** 
   53:source\asw/sound.c **** /*****************************************************************************/
-  54:source\asw/sound.c **** 
-  55:source\asw/sound.c **** static uint8_t SOUND__bufA[SOUND_BUFFER_SIZE];
-  56:source\asw/sound.c **** static uint8_t SOUND__bufB[SOUND_BUFFER_SIZE];
-  57:source\asw/sound.c **** 
-  58:source\asw/sound.c **** static SOUND__Driver_t SOUND__currentSong = {0,0,0,0,0,0,0,0,100u};
+  54:source\asw/sound.c **** /* Local variable definitions ('static')                                     */
+  55:source\asw/sound.c **** /*****************************************************************************/
+  56:source\asw/sound.c **** 
+  57:source\asw/sound.c **** static uint8_t SOUND__bufA[SOUND_BUFFER_SIZE];
+  58:source\asw/sound.c **** static uint8_t SOUND__bufB[SOUND_BUFFER_SIZE];
   59:source\asw/sound.c **** 
-  60:source\asw/sound.c **** /*****************************************************************************/
-  61:source\asw/sound.c **** /* Local function prototypes ('static')                                      */
+  60:source\asw/sound.c **** static SOUND__Driver_t SOUND__currentSong = {0,0,0,0,0,0,0,0,100u};
+  61:source\asw/sound.c **** 
   62:source\asw/sound.c **** /*****************************************************************************/
-  63:source\asw/sound.c **** 
-  64:source\asw/sound.c **** static volatile uint8_t * SOUND__GetInactiveBuf(void);
+  63:source\asw/sound.c **** /* Local function prototypes ('static')                                      */
+  64:source\asw/sound.c **** /*****************************************************************************/
   65:source\asw/sound.c **** 
-  66:source\asw/sound.c **** /*****************************************************************************/
-  67:source\asw/sound.c **** /* Function implementation - global ('extern') and local ('static')          */
+  66:source\asw/sound.c **** static volatile uint8_t * SOUND__GetInactiveBuf(void);
+  67:source\asw/sound.c **** 
   68:source\asw/sound.c **** /*****************************************************************************/
-  69:source\asw/sound.c **** 
-  70:source\asw/sound.c **** RC_t SOUND_Init()
-  71:source\asw/sound.c **** {
-  72:source\asw/sound.c ****     /* Pre-fill both buffers with silence - no click on start */
-  73:source\asw/sound.c ****     memset(SOUND__bufA, SOUND_SILENCE, SOUND_BUFFER_SIZE);
-  74:source\asw/sound.c ****     memset(SOUND__bufB, SOUND_SILENCE, SOUND_BUFFER_SIZE);
-  75:source\asw/sound.c **** 
-  76:source\asw/sound.c ****     /* Dual buffer: A active, B inactive */
-  77:source\asw/sound.c ****     SOUND__currentSong.m_activeBuf    = SOUND__bufA;
-  78:source\asw/sound.c ****     SOUND__currentSong.m_inactiveBuf  = SOUND__bufB;
-  79:source\asw/sound.c ****     SOUND__currentSong.m_activeFill   = SOUND_BUFFER_SIZE;
-  80:source\asw/sound.c ****     SOUND__currentSong.m_inactiveFill = 0u;
-  81:source\asw/sound.c ****     SOUND__currentSong.m_readPos      = 0u;
-  82:source\asw/sound.c **** 
-  83:source\asw/sound.c ****     /* Flash path: cleared */
-  84:source\asw/sound.c ****     SOUND__currentSong.m_song = 0;
-  85:source\asw/sound.c ****     SOUND__currentSong.m_size = 0;
-  86:source\asw/sound.c ****     SOUND__currentSong.m_pos  = 0;
-  87:source\asw/sound.c **** 
-  88:source\asw/sound.c ****     /* Hardware init */
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 3
+  69:source\asw/sound.c **** /* Function implementation - global ('extern') and local ('static')          */
+  70:source\asw/sound.c **** /*****************************************************************************/
+  71:source\asw/sound.c **** 
+  72:source\asw/sound.c **** RC_t SOUND_Init()
+  73:source\asw/sound.c **** {
+  74:source\asw/sound.c ****     /* Pre-fill both buffers with silence - no click on start */
+  75:source\asw/sound.c ****     memset(SOUND__bufA, SOUND_SILENCE, SOUND_BUFFER_SIZE);
+  76:source\asw/sound.c ****     memset(SOUND__bufB, SOUND_SILENCE, SOUND_BUFFER_SIZE);
+  77:source\asw/sound.c **** 
+  78:source\asw/sound.c ****     /* Dual buffer: A active, B inactive */
+  79:source\asw/sound.c ****     SOUND__currentSong.m_activeBuf    = SOUND__bufA;
+  80:source\asw/sound.c ****     SOUND__currentSong.m_inactiveBuf  = SOUND__bufB;
+  81:source\asw/sound.c ****     SOUND__currentSong.m_activeFill   = SOUND_BUFFER_SIZE;
+  82:source\asw/sound.c ****     SOUND__currentSong.m_inactiveFill = 0u;
+  83:source\asw/sound.c ****     SOUND__currentSong.m_readPos      = 0u;
+  84:source\asw/sound.c **** 
+  85:source\asw/sound.c ****     /* Flash path: cleared */
+  86:source\asw/sound.c ****     SOUND__currentSong.m_song = 0;
+  87:source\asw/sound.c ****     SOUND__currentSong.m_size = 0;
+  88:source\asw/sound.c ****     SOUND__currentSong.m_pos  = 0;
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 3
 
 
-  89:source\asw/sound.c ****     SOUND_Control_Write(SOUND_CH1);
-  90:source\asw/sound.c ****     SOUND_ENABLE_Write(1);
-  91:source\asw/sound.c ****     SOUND_StopPlay();
-  92:source\asw/sound.c ****     SOUND_PWM_CLOCK_Start();
-  93:source\asw/sound.c ****     SOUND_PWM_Start();
-  94:source\asw/sound.c ****     SOUND_PWM_WriteCompare(SOUND_SILENCE);
-  95:source\asw/sound.c **** 
-  96:source\asw/sound.c ****     return RC_SUCCESS;
-  97:source\asw/sound.c **** }
-  98:source\asw/sound.c **** 
-  99:source\asw/sound.c **** /**
- 100:source\asw/sound.c ****  * Activate the Timer ISR for playing a song
- 101:source\asw/sound.c ****  * /return RC_SUCCESS
- 102:source\asw/sound.c ****  */
- 103:source\asw/sound.c **** RC_t SOUND_StartPlay()
- 104:source\asw/sound.c **** {
- 105:source\asw/sound.c ****     SOUND_SAMPLE_CLOCK_Start();
- 106:source\asw/sound.c ****     
- 107:source\asw/sound.c ****     return RC_SUCCESS;
- 108:source\asw/sound.c **** }
- 109:source\asw/sound.c **** 
- 110:source\asw/sound.c **** /**
- 111:source\asw/sound.c ****  * DeActivate the Timer ISR for playing a song
- 112:source\asw/sound.c ****  * /return RC_SUCCESS
- 113:source\asw/sound.c ****  */
- 114:source\asw/sound.c **** RC_t SOUND_StopPlay()
- 115:source\asw/sound.c **** {
- 116:source\asw/sound.c ****     SOUND_SAMPLE_CLOCK_Stop();
- 117:source\asw/sound.c ****     
- 118:source\asw/sound.c ****     //isr_Timer_Disable seems not to work
- 119:source\asw/sound.c ****     //isr_Timer_Disable();
- 120:source\asw/sound.c ****     
- 121:source\asw/sound.c ****     return RC_SUCCESS;
- 122:source\asw/sound.c **** }
- 123:source\asw/sound.c **** 
- 124:source\asw/sound.c **** /**
- 125:source\asw/sound.c ****  * Set the song. This song will be played in an endless loop
- 126:source\asw/sound.c ****  * /param   uint8_t const *const song       : pointer to the song data [IN]
- 127:source\asw/sound.c ****  * /param   uint32_t sizeOfSong             : size of the song data [IN]
- 128:source\asw/sound.c ****  * /return RC_SUCCESS
- 129:source\asw/sound.c ****  */
- 130:source\asw/sound.c **** RC_t SOUND_SetSong(uint8_t const *const song, uint32_t sizeOfSong)
- 131:source\asw/sound.c **** {
- 132:source\asw/sound.c ****     /* Disable dual buffer path */
- 133:source\asw/sound.c ****     SOUND__currentSong.m_activeBuf = 0;
- 134:source\asw/sound.c **** 
- 135:source\asw/sound.c ****     /* Set flash path */
- 136:source\asw/sound.c ****     SOUND__currentSong.m_song = song;
- 137:source\asw/sound.c ****     SOUND__currentSong.m_size = sizeOfSong;
- 138:source\asw/sound.c ****     SOUND__currentSong.m_pos  = 0u;
- 139:source\asw/sound.c **** 
- 140:source\asw/sound.c ****     return RC_SUCCESS;
- 141:source\asw/sound.c **** }
- 142:source\asw/sound.c **** 
- 143:source\asw/sound.c **** /**
- 144:source\asw/sound.c ****  * Set the volume
- 145:source\asw/sound.c ****  * /param   uint8_t volume                 : volume in % 0...100
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 4
+  89:source\asw/sound.c **** 
+  90:source\asw/sound.c ****     /* Hardware init */
+  91:source\asw/sound.c ****     SOUND_Control_Write(SOUND_CH1);
+  92:source\asw/sound.c ****     SOUND_ENABLE_Write(1);
+  93:source\asw/sound.c ****     SOUND_StopPlay();
+  94:source\asw/sound.c ****     SOUND_PWM_CLOCK_Start();
+  95:source\asw/sound.c ****     SOUND_PWM_Start();
+  96:source\asw/sound.c ****     SOUND_PWM_WriteCompare(SOUND_SILENCE);
+  97:source\asw/sound.c **** 
+  98:source\asw/sound.c ****     return RC_SUCCESS;
+  99:source\asw/sound.c **** }
+ 100:source\asw/sound.c **** 
+ 101:source\asw/sound.c **** /**
+ 102:source\asw/sound.c ****  * Activate the Timer ISR for playing a song
+ 103:source\asw/sound.c ****  * /return RC_SUCCESS
+ 104:source\asw/sound.c ****  */
+ 105:source\asw/sound.c **** RC_t SOUND_StartPlay()
+ 106:source\asw/sound.c **** {
+ 107:source\asw/sound.c ****     SOUND_SAMPLE_CLOCK_Start();
+ 108:source\asw/sound.c ****     
+ 109:source\asw/sound.c ****     return RC_SUCCESS;
+ 110:source\asw/sound.c **** }
+ 111:source\asw/sound.c **** 
+ 112:source\asw/sound.c **** /**
+ 113:source\asw/sound.c ****  * DeActivate the Timer ISR for playing a song
+ 114:source\asw/sound.c ****  * /return RC_SUCCESS
+ 115:source\asw/sound.c ****  */
+ 116:source\asw/sound.c **** RC_t SOUND_StopPlay()
+ 117:source\asw/sound.c **** {
+ 118:source\asw/sound.c ****     SOUND_SAMPLE_CLOCK_Stop();
+ 119:source\asw/sound.c ****     
+ 120:source\asw/sound.c ****     //isr_Timer_Disable seems not to work
+ 121:source\asw/sound.c ****     //isr_Timer_Disable();
+ 122:source\asw/sound.c ****     
+ 123:source\asw/sound.c ****     return RC_SUCCESS;
+ 124:source\asw/sound.c **** }
+ 125:source\asw/sound.c **** 
+ 126:source\asw/sound.c **** /**
+ 127:source\asw/sound.c ****  * Set the song. This song will be played in an endless loop
+ 128:source\asw/sound.c ****  * /param   uint8_t const *const song       : pointer to the song data [IN]
+ 129:source\asw/sound.c ****  * /param   uint32_t sizeOfSong             : size of the song data [IN]
+ 130:source\asw/sound.c ****  * /return RC_SUCCESS
+ 131:source\asw/sound.c ****  */
+ 132:source\asw/sound.c **** RC_t SOUND_SetSong(uint8_t const *const song, uint32_t sizeOfSong)
+ 133:source\asw/sound.c **** {
+ 134:source\asw/sound.c ****     /* Disable dual buffer path */
+ 135:source\asw/sound.c ****     SOUND__currentSong.m_activeBuf = 0;
+ 136:source\asw/sound.c **** 
+ 137:source\asw/sound.c ****     /* Set flash path */
+ 138:source\asw/sound.c ****     SOUND__currentSong.m_song = song;
+ 139:source\asw/sound.c ****     SOUND__currentSong.m_size = sizeOfSong;
+ 140:source\asw/sound.c ****     SOUND__currentSong.m_pos  = 0u;
+ 141:source\asw/sound.c **** 
+ 142:source\asw/sound.c ****     return RC_SUCCESS;
+ 143:source\asw/sound.c **** }
+ 144:source\asw/sound.c **** 
+ 145:source\asw/sound.c **** /**
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 4
 
 
- 146:source\asw/sound.c ****  * /return RC_SUCCESS
- 147:source\asw/sound.c ****  */
- 148:source\asw/sound.c **** RC_t SOUND_SetVolume(uint8_t volume)
- 149:source\asw/sound.c **** {
- 150:source\asw/sound.c ****     if (volume > 100) volume = 100;
- 151:source\asw/sound.c ****     
- 152:source\asw/sound.c ****     SOUND__currentSong.m_volume = volume;
+ 146:source\asw/sound.c ****  * Set the volume
+ 147:source\asw/sound.c ****  * /param   uint8_t volume                 : volume in % 0...100
+ 148:source\asw/sound.c ****  * /return RC_SUCCESS
+ 149:source\asw/sound.c ****  */
+ 150:source\asw/sound.c **** RC_t SOUND_SetVolume(uint8_t volume)
+ 151:source\asw/sound.c **** {
+ 152:source\asw/sound.c ****     if (volume > 100) volume = 100;
  153:source\asw/sound.c ****     
- 154:source\asw/sound.c ****     return RC_SUCCESS;
- 155:source\asw/sound.c **** }
- 156:source\asw/sound.c **** 
- 157:source\asw/sound.c **** RC_t SOUND_FillBuffer(uint8_t const * const data, uint16_t size)
- 158:source\asw/sound.c **** {
- 159:source\asw/sound.c ****     uint16_t i;
- 160:source\asw/sound.c **** 
- 161:source\asw/sound.c ****     if ((size == 0u) || (size > SOUND_BUFFER_SIZE))
- 162:source\asw/sound.c ****     {
- 163:source\asw/sound.c ****         return RC_ERROR;
- 164:source\asw/sound.c ****     }
- 165:source\asw/sound.c **** 
- 166:source\asw/sound.c ****     /* Switch to dual buffer mode if not already */
- 167:source\asw/sound.c ****     if (SOUND__currentSong.m_activeBuf == 0)
- 168:source\asw/sound.c ****     {
- 169:source\asw/sound.c ****         SOUND__currentSong.m_activeBuf   = SOUND__bufA;
- 170:source\asw/sound.c ****         SOUND__currentSong.m_inactiveBuf = SOUND__bufB;
- 171:source\asw/sound.c ****         SOUND__currentSong.m_readPos     = 0u;
- 172:source\asw/sound.c ****         SOUND__currentSong.m_activeFill  = 0u;
- 173:source\asw/sound.c ****     }
- 174:source\asw/sound.c **** 
- 175:source\asw/sound.c ****     /* Write into inactive buffer — ISR never touches this one */
- 176:source\asw/sound.c ****     SOUND__currentSong.m_inactiveBuf = SOUND__GetInactiveBuf();
- 177:source\asw/sound.c **** 
- 178:source\asw/sound.c ****     for (i = 0u; i < size; i++)
- 179:source\asw/sound.c ****     {
- 180:source\asw/sound.c ****         SOUND__currentSong.m_inactiveBuf[i] = data[i];
- 181:source\asw/sound.c ****     }
- 182:source\asw/sound.c **** 
- 183:source\asw/sound.c ****     /* Pad remainder with silence for partial last buffer */
- 184:source\asw/sound.c ****     for (i = size; i < SOUND_BUFFER_SIZE; i++)
- 185:source\asw/sound.c ****     {
- 186:source\asw/sound.c ****         SOUND__currentSong.m_inactiveBuf[i] = SOUND_SILENCE;
- 187:source\asw/sound.c ****     }
- 188:source\asw/sound.c **** 
- 189:source\asw/sound.c ****     SOUND__currentSong.m_inactiveFill = size;
+ 154:source\asw/sound.c ****     SOUND__currentSong.m_volume = volume;
+ 155:source\asw/sound.c ****     
+ 156:source\asw/sound.c ****     return RC_SUCCESS;
+ 157:source\asw/sound.c **** }
+ 158:source\asw/sound.c **** 
+ 159:source\asw/sound.c **** RC_t SOUND_FillBuffer(uint8_t const * const data, uint16_t size)
+ 160:source\asw/sound.c **** {
+ 161:source\asw/sound.c ****     uint16_t i;
+ 162:source\asw/sound.c **** 
+ 163:source\asw/sound.c ****     if ((size == 0u) || (size > SOUND_BUFFER_SIZE))
+ 164:source\asw/sound.c ****     {
+ 165:source\asw/sound.c ****         return RC_ERROR;
+ 166:source\asw/sound.c ****     }
+ 167:source\asw/sound.c **** 
+ 168:source\asw/sound.c ****     /* Switch to dual buffer mode if not already */
+ 169:source\asw/sound.c ****     if (SOUND__currentSong.m_activeBuf == 0)
+ 170:source\asw/sound.c ****     {
+ 171:source\asw/sound.c ****         SOUND__currentSong.m_activeBuf   = SOUND__bufA;
+ 172:source\asw/sound.c ****         SOUND__currentSong.m_inactiveBuf = SOUND__bufB;
+ 173:source\asw/sound.c ****         SOUND__currentSong.m_readPos     = 0u;
+ 174:source\asw/sound.c ****         SOUND__currentSong.m_activeFill  = 0u;
+ 175:source\asw/sound.c ****     }
+ 176:source\asw/sound.c **** 
+ 177:source\asw/sound.c ****     /* Write into inactive buffer — ISR never touches this one */
+ 178:source\asw/sound.c ****     SOUND__currentSong.m_inactiveBuf = SOUND__GetInactiveBuf();
+ 179:source\asw/sound.c **** 
+ 180:source\asw/sound.c ****     for (i = 0u; i < size; i++)
+ 181:source\asw/sound.c ****     {
+ 182:source\asw/sound.c ****         SOUND__currentSong.m_inactiveBuf[i] = data[i];
+ 183:source\asw/sound.c ****     }
+ 184:source\asw/sound.c **** 
+ 185:source\asw/sound.c ****     /* Pad remainder with silence for partial last buffer */
+ 186:source\asw/sound.c ****     for (i = size; i < SOUND_BUFFER_SIZE; i++)
+ 187:source\asw/sound.c ****     {
+ 188:source\asw/sound.c ****         SOUND__currentSong.m_inactiveBuf[i] = SOUND_SILENCE;
+ 189:source\asw/sound.c ****     }
  190:source\asw/sound.c **** 
- 191:source\asw/sound.c ****     return RC_SUCCESS;
- 192:source\asw/sound.c **** }
- 193:source\asw/sound.c **** 
- 194:source\asw/sound.c **** RC_t SOUND_SwapBuffers()
- 195:source\asw/sound.c **** {
- 196:source\asw/sound.c ****     volatile uint8_t * tmpBuf;
- 197:source\asw/sound.c **** 
- 198:source\asw/sound.c ****     /* Single pointer swap — atomic on Cortex-M3 */
- 199:source\asw/sound.c ****     tmpBuf                            = SOUND__currentSong.m_activeBuf;
- 200:source\asw/sound.c ****     SOUND__currentSong.m_activeBuf    = SOUND__currentSong.m_inactiveBuf;
- 201:source\asw/sound.c ****     SOUND__currentSong.m_inactiveBuf  = tmpBuf;
- 202:source\asw/sound.c ****     SOUND__currentSong.m_activeFill   = SOUND__currentSong.m_inactiveFill;
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 5
+ 191:source\asw/sound.c ****     SOUND__currentSong.m_inactiveFill = size;
+ 192:source\asw/sound.c **** 
+ 193:source\asw/sound.c ****     return RC_SUCCESS;
+ 194:source\asw/sound.c **** }
+ 195:source\asw/sound.c **** 
+ 196:source\asw/sound.c **** RC_t SOUND_SwapBuffers()
+ 197:source\asw/sound.c **** {
+ 198:source\asw/sound.c ****     volatile uint8_t * tmpBuf;
+ 199:source\asw/sound.c **** 
+ 200:source\asw/sound.c ****     /* Single pointer swap — atomic on Cortex-M3 */
+ 201:source\asw/sound.c ****     tmpBuf                            = SOUND__currentSong.m_activeBuf;
+ 202:source\asw/sound.c ****     SOUND__currentSong.m_activeBuf    = SOUND__currentSong.m_inactiveBuf;
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 5
 
 
- 203:source\asw/sound.c ****     SOUND__currentSong.m_inactiveFill = 0u;
- 204:source\asw/sound.c ****     SOUND__currentSong.m_readPos      = 0u;
- 205:source\asw/sound.c **** 
- 206:source\asw/sound.c ****     return RC_SUCCESS;
- 207:source\asw/sound.c **** }
- 208:source\asw/sound.c **** 
- 209:source\asw/sound.c **** /*****************************************************************************/
- 210:source\asw/sound.c **** /* Private helpers                                                           */
+ 203:source\asw/sound.c ****     SOUND__currentSong.m_inactiveBuf  = tmpBuf;
+ 204:source\asw/sound.c ****     SOUND__currentSong.m_activeFill   = SOUND__currentSong.m_inactiveFill;
+ 205:source\asw/sound.c ****     SOUND__currentSong.m_inactiveFill = 0u;
+ 206:source\asw/sound.c ****     SOUND__currentSong.m_readPos      = 0u;
+ 207:source\asw/sound.c **** 
+ 208:source\asw/sound.c ****     return RC_SUCCESS;
+ 209:source\asw/sound.c **** }
+ 210:source\asw/sound.c **** 
  211:source\asw/sound.c **** /*****************************************************************************/
- 212:source\asw/sound.c **** 
- 213:source\asw/sound.c **** static volatile uint8_t * SOUND__GetInactiveBuf(void)
- 214:source\asw/sound.c **** {
-  27              		.loc 1 214 0
+ 212:source\asw/sound.c **** /* Private helpers                                                           */
+ 213:source\asw/sound.c **** /*****************************************************************************/
+ 214:source\asw/sound.c **** 
+ 215:source\asw/sound.c **** static volatile uint8_t * SOUND__GetInactiveBuf(void)
+ 216:source\asw/sound.c **** {
+  27              		.loc 1 216 0
   28              		.cfi_startproc
   29              		@ args = 0, pretend = 0, frame = 0
   30              		@ frame_needed = 0, uses_anonymous_args = 0
   31              		@ link register save eliminated.
- 215:source\asw/sound.c ****     if (SOUND__currentSong.m_activeBuf == SOUND__bufA)
-  32              		.loc 1 215 0
+ 217:source\asw/sound.c ****     if (SOUND__currentSong.m_activeBuf == SOUND__bufA)
+  32              		.loc 1 217 0
   33 0000 044B     		ldr	r3, .L4
   34 0002 DA68     		ldr	r2, [r3, #12]
   35 0004 044B     		ldr	r3, .L4+4
   36 0006 9A42     		cmp	r2, r3
   37 0008 02D1     		bne	.L3
- 216:source\asw/sound.c ****     {
- 217:source\asw/sound.c ****         return SOUND__bufB;
-  38              		.loc 1 217 0
+ 218:source\asw/sound.c ****     {
+ 219:source\asw/sound.c ****         return SOUND__bufB;
+  38              		.loc 1 219 0
   39 000a A3F50070 		sub	r0, r3, #512
   40 000e 7047     		bx	lr
   41              	.L3:
- 218:source\asw/sound.c ****     }
- 219:source\asw/sound.c ****     else
- 220:source\asw/sound.c ****     {
- 221:source\asw/sound.c ****         return SOUND__bufA;
-  42              		.loc 1 221 0
+ 220:source\asw/sound.c ****     }
+ 221:source\asw/sound.c ****     else
+ 222:source\asw/sound.c ****     {
+ 223:source\asw/sound.c ****         return SOUND__bufA;
+  42              		.loc 1 223 0
   43 0010 0148     		ldr	r0, .L4+4
- 222:source\asw/sound.c ****     }
- 223:source\asw/sound.c **** }
-  44              		.loc 1 223 0
+ 224:source\asw/sound.c ****     }
+ 225:source\asw/sound.c **** }
+  44              		.loc 1 225 0
   45 0012 7047     		bx	lr
   46              	.L5:
   47              		.align	2
@@ -296,12 +298,12 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 1
   58              		.thumb_func
   59              		.type	SOUND_StartPlay, %function
   60              	SOUND_StartPlay:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 6
+
+
   61              	.LFB111:
- 104:source\asw/sound.c ****     SOUND_SAMPLE_CLOCK_Start();
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 6
-
-
-  62              		.loc 1 104 0
+ 106:source\asw/sound.c ****     SOUND_SAMPLE_CLOCK_Start();
+  62              		.loc 1 106 0
   63              		.cfi_startproc
   64              		@ args = 0, pretend = 0, frame = 0
   65              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -309,12 +311,12 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 1
   67              		.cfi_def_cfa_offset 8
   68              		.cfi_offset 3, -8
   69              		.cfi_offset 14, -4
- 105:source\asw/sound.c ****     
-  70              		.loc 1 105 0
+ 107:source\asw/sound.c ****     
+  70              		.loc 1 107 0
   71 0002 FFF7FEFF 		bl	SOUND_SAMPLE_CLOCK_Start
   72              	.LVL0:
- 108:source\asw/sound.c **** 
-  73              		.loc 1 108 0
+ 110:source\asw/sound.c **** 
+  73              		.loc 1 110 0
   74 0006 0020     		movs	r0, #0
   75 0008 08BD     		pop	{r3, pc}
   76              		.cfi_endproc
@@ -328,8 +330,8 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 1
   84              		.type	SOUND_StopPlay, %function
   85              	SOUND_StopPlay:
   86              	.LFB112:
- 115:source\asw/sound.c ****     SOUND_SAMPLE_CLOCK_Stop();
-  87              		.loc 1 115 0
+ 117:source\asw/sound.c ****     SOUND_SAMPLE_CLOCK_Stop();
+  87              		.loc 1 117 0
   88              		.cfi_startproc
   89              		@ args = 0, pretend = 0, frame = 0
   90              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -337,12 +339,12 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 1
   92              		.cfi_def_cfa_offset 8
   93              		.cfi_offset 3, -8
   94              		.cfi_offset 14, -4
- 116:source\asw/sound.c ****     
-  95              		.loc 1 116 0
+ 118:source\asw/sound.c ****     
+  95              		.loc 1 118 0
   96 0002 FFF7FEFF 		bl	SOUND_SAMPLE_CLOCK_Stop
   97              	.LVL1:
- 122:source\asw/sound.c **** 
-  98              		.loc 1 122 0
+ 124:source\asw/sound.c **** 
+  98              		.loc 1 124 0
   99 0006 0020     		movs	r0, #0
  100 0008 08BD     		pop	{r3, pc}
  101              		.cfi_endproc
@@ -356,11 +358,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 1
  109              		.type	SOUND_Init, %function
  110              	SOUND_Init:
  111              	.LFB110:
-  71:source\asw/sound.c ****     /* Pre-fill both buffers with silence - no click on start */
- 112              		.loc 1 71 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 7
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 7
 
 
+  73:source\asw/sound.c ****     /* Pre-fill both buffers with silence - no click on start */
+ 112              		.loc 1 73 0
  113              		.cfi_startproc
  114              		@ args = 0, pretend = 0, frame = 0
  115              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -370,8 +372,8 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 1
  119              		.cfi_offset 4, -12
  120              		.cfi_offset 5, -8
  121              		.cfi_offset 14, -4
-  73:source\asw/sound.c ****     memset(SOUND__bufB, SOUND_SILENCE, SOUND_BUFFER_SIZE);
- 122              		.loc 1 73 0
+  75:source\asw/sound.c ****     memset(SOUND__bufB, SOUND_SILENCE, SOUND_BUFFER_SIZE);
+ 122              		.loc 1 75 0
  123 0002 164C     		ldr	r4, .L12
  124 0004 04F50075 		add	r5, r4, #512
  125 0008 4FF40072 		mov	r2, #512
@@ -379,72 +381,72 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 1
  127 000e 2846     		mov	r0, r5
  128 0010 FFF7FEFF 		bl	memset
  129              	.LVL2:
-  74:source\asw/sound.c **** 
- 130              		.loc 1 74 0
+  76:source\asw/sound.c **** 
+ 130              		.loc 1 76 0
  131 0014 4FF40072 		mov	r2, #512
  132 0018 8021     		movs	r1, #128
  133 001a 2046     		mov	r0, r4
  134 001c FFF7FEFF 		bl	memset
  135              	.LVL3:
-  77:source\asw/sound.c ****     SOUND__currentSong.m_inactiveBuf  = SOUND__bufB;
- 136              		.loc 1 77 0
+  79:source\asw/sound.c ****     SOUND__currentSong.m_inactiveBuf  = SOUND__bufB;
+ 136              		.loc 1 79 0
  137 0020 0F4B     		ldr	r3, .L12+4
  138 0022 DD60     		str	r5, [r3, #12]
-  78:source\asw/sound.c ****     SOUND__currentSong.m_activeFill   = SOUND_BUFFER_SIZE;
- 139              		.loc 1 78 0
+  80:source\asw/sound.c ****     SOUND__currentSong.m_activeFill   = SOUND_BUFFER_SIZE;
+ 139              		.loc 1 80 0
  140 0024 1C61     		str	r4, [r3, #16]
-  79:source\asw/sound.c ****     SOUND__currentSong.m_inactiveFill = 0u;
- 141              		.loc 1 79 0
+  81:source\asw/sound.c ****     SOUND__currentSong.m_inactiveFill = 0u;
+ 141              		.loc 1 81 0
  142 0026 4FF40072 		mov	r2, #512
  143 002a 9A82     		strh	r2, [r3, #20]	@ movhi
-  80:source\asw/sound.c ****     SOUND__currentSong.m_readPos      = 0u;
- 144              		.loc 1 80 0
+  82:source\asw/sound.c ****     SOUND__currentSong.m_readPos      = 0u;
+ 144              		.loc 1 82 0
  145 002c 0024     		movs	r4, #0
  146 002e DC82     		strh	r4, [r3, #22]	@ movhi
-  81:source\asw/sound.c **** 
- 147              		.loc 1 81 0
+  83:source\asw/sound.c **** 
+ 147              		.loc 1 83 0
  148 0030 1C83     		strh	r4, [r3, #24]	@ movhi
-  84:source\asw/sound.c ****     SOUND__currentSong.m_size = 0;
- 149              		.loc 1 84 0
+  86:source\asw/sound.c ****     SOUND__currentSong.m_size = 0;
+ 149              		.loc 1 86 0
  150 0032 1C60     		str	r4, [r3]
-  85:source\asw/sound.c ****     SOUND__currentSong.m_pos  = 0;
- 151              		.loc 1 85 0
+  87:source\asw/sound.c ****     SOUND__currentSong.m_pos  = 0;
+ 151              		.loc 1 87 0
  152 0034 5C60     		str	r4, [r3, #4]
-  86:source\asw/sound.c **** 
- 153              		.loc 1 86 0
+  88:source\asw/sound.c **** 
+ 153              		.loc 1 88 0
  154 0036 9C60     		str	r4, [r3, #8]
-  89:source\asw/sound.c ****     SOUND_ENABLE_Write(1);
- 155              		.loc 1 89 0
+  91:source\asw/sound.c ****     SOUND_ENABLE_Write(1);
+ 155              		.loc 1 91 0
  156 0038 0120     		movs	r0, #1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 8
+
+
  157 003a FFF7FEFF 		bl	SOUND_Control_Write
  158              	.LVL4:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 8
-
-
-  90:source\asw/sound.c ****     SOUND_StopPlay();
- 159              		.loc 1 90 0
+  92:source\asw/sound.c ****     SOUND_StopPlay();
+ 159              		.loc 1 92 0
  160 003e 0120     		movs	r0, #1
  161 0040 FFF7FEFF 		bl	SOUND_ENABLE_Write
  162              	.LVL5:
-  91:source\asw/sound.c ****     SOUND_PWM_CLOCK_Start();
- 163              		.loc 1 91 0
+  93:source\asw/sound.c ****     SOUND_PWM_CLOCK_Start();
+ 163              		.loc 1 93 0
  164 0044 FFF7FEFF 		bl	SOUND_StopPlay
  165              	.LVL6:
-  92:source\asw/sound.c ****     SOUND_PWM_Start();
- 166              		.loc 1 92 0
+  94:source\asw/sound.c ****     SOUND_PWM_Start();
+ 166              		.loc 1 94 0
  167 0048 FFF7FEFF 		bl	SOUND_PWM_CLOCK_Start
  168              	.LVL7:
-  93:source\asw/sound.c ****     SOUND_PWM_WriteCompare(SOUND_SILENCE);
- 169              		.loc 1 93 0
+  95:source\asw/sound.c ****     SOUND_PWM_WriteCompare(SOUND_SILENCE);
+ 169              		.loc 1 95 0
  170 004c FFF7FEFF 		bl	SOUND_PWM_Start
  171              	.LVL8:
-  94:source\asw/sound.c **** 
- 172              		.loc 1 94 0
+  96:source\asw/sound.c **** 
+ 172              		.loc 1 96 0
  173 0050 8020     		movs	r0, #128
  174 0052 FFF7FEFF 		bl	SOUND_PWM_WriteCompare
  175              	.LVL9:
-  97:source\asw/sound.c **** 
- 176              		.loc 1 97 0
+  99:source\asw/sound.c **** 
+ 176              		.loc 1 99 0
  177 0056 2046     		mov	r0, r4
  178 0058 38BD     		pop	{r3, r4, r5, pc}
  179              	.L13:
@@ -463,32 +465,32 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 1
  192              		.type	SOUND_SetSong, %function
  193              	SOUND_SetSong:
  194              	.LFB113:
- 131:source\asw/sound.c ****     /* Disable dual buffer path */
- 195              		.loc 1 131 0
+ 133:source\asw/sound.c ****     /* Disable dual buffer path */
+ 195              		.loc 1 133 0
  196              		.cfi_startproc
  197              		@ args = 0, pretend = 0, frame = 0
  198              		@ frame_needed = 0, uses_anonymous_args = 0
  199              		@ link register save eliminated.
  200              	.LVL10:
- 133:source\asw/sound.c **** 
- 201              		.loc 1 133 0
+ 135:source\asw/sound.c **** 
+ 201              		.loc 1 135 0
  202 0000 034B     		ldr	r3, .L15
  203 0002 0022     		movs	r2, #0
  204 0004 DA60     		str	r2, [r3, #12]
- 136:source\asw/sound.c ****     SOUND__currentSong.m_size = sizeOfSong;
- 205              		.loc 1 136 0
+ 138:source\asw/sound.c ****     SOUND__currentSong.m_size = sizeOfSong;
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 9
+
+
+ 205              		.loc 1 138 0
  206 0006 1860     		str	r0, [r3]
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 9
-
-
- 137:source\asw/sound.c ****     SOUND__currentSong.m_pos  = 0u;
- 207              		.loc 1 137 0
+ 139:source\asw/sound.c ****     SOUND__currentSong.m_pos  = 0u;
+ 207              		.loc 1 139 0
  208 0008 5960     		str	r1, [r3, #4]
- 138:source\asw/sound.c **** 
- 209              		.loc 1 138 0
+ 140:source\asw/sound.c **** 
+ 209              		.loc 1 140 0
  210 000a 9A60     		str	r2, [r3, #8]
- 141:source\asw/sound.c **** 
- 211              		.loc 1 141 0
+ 143:source\asw/sound.c **** 
+ 211              		.loc 1 143 0
  212 000c 1046     		mov	r0, r2
  213              	.LVL11:
  214 000e 7047     		bx	lr
@@ -507,26 +509,26 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 1
  227              		.type	SOUND_SetVolume, %function
  228              	SOUND_SetVolume:
  229              	.LFB114:
- 149:source\asw/sound.c ****     if (volume > 100) volume = 100;
- 230              		.loc 1 149 0
+ 151:source\asw/sound.c ****     if (volume > 100) volume = 100;
+ 230              		.loc 1 151 0
  231              		.cfi_startproc
  232              		@ args = 0, pretend = 0, frame = 0
  233              		@ frame_needed = 0, uses_anonymous_args = 0
  234              		@ link register save eliminated.
  235              	.LVL12:
- 150:source\asw/sound.c ****     
- 236              		.loc 1 150 0
+ 152:source\asw/sound.c ****     
+ 236              		.loc 1 152 0
  237 0000 6428     		cmp	r0, #100
  238 0002 00D9     		bls	.L18
  239 0004 6420     		movs	r0, #100
  240              	.LVL13:
  241              	.L18:
- 152:source\asw/sound.c ****     
- 242              		.loc 1 152 0
+ 154:source\asw/sound.c ****     
+ 242              		.loc 1 154 0
  243 0006 024B     		ldr	r3, .L20
  244 0008 9876     		strb	r0, [r3, #26]
- 155:source\asw/sound.c **** 
- 245              		.loc 1 155 0
+ 157:source\asw/sound.c **** 
+ 245              		.loc 1 157 0
  246 000a 0020     		movs	r0, #0
  247              	.LVL14:
  248 000c 7047     		bx	lr
@@ -536,11 +538,11 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 1
  252 0010 00000000 		.word	.LANCHOR1
  253              		.cfi_endproc
  254              	.LFE114:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 10
+
+
  255              		.size	SOUND_SetVolume, .-SOUND_SetVolume
  256              		.section	.text.SOUND_FillBuffer,"ax",%progbits
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 10
-
-
  257              		.align	2
  258              		.global	SOUND_FillBuffer
  259              		.thumb
@@ -548,8 +550,8 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 1
  261              		.type	SOUND_FillBuffer, %function
  262              	SOUND_FillBuffer:
  263              	.LFB115:
- 158:source\asw/sound.c ****     uint16_t i;
- 264              		.loc 1 158 0
+ 160:source\asw/sound.c ****     uint16_t i;
+ 264              		.loc 1 160 0
  265              		.cfi_startproc
  266              		@ args = 0, pretend = 0, frame = 0
  267              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -560,67 +562,67 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 1
  272              		.cfi_offset 4, -12
  273              		.cfi_offset 5, -8
  274              		.cfi_offset 14, -4
- 161:source\asw/sound.c ****     {
- 275              		.loc 1 161 0
+ 163:source\asw/sound.c ****     {
+ 275              		.loc 1 163 0
  276 0002 4B1E     		subs	r3, r1, #1
  277 0004 9BB2     		uxth	r3, r3
  278 0006 B3F5007F 		cmp	r3, #512
  279 000a 2AD2     		bcs	.L29
- 167:source\asw/sound.c ****     {
- 280              		.loc 1 167 0
+ 169:source\asw/sound.c ****     {
+ 280              		.loc 1 169 0
  281 000c 164B     		ldr	r3, .L31
  282 000e DB68     		ldr	r3, [r3, #12]
  283 0010 43B9     		cbnz	r3, .L24
- 169:source\asw/sound.c ****         SOUND__currentSong.m_inactiveBuf = SOUND__bufB;
- 284              		.loc 1 169 0
+ 171:source\asw/sound.c ****         SOUND__currentSong.m_inactiveBuf = SOUND__bufB;
+ 284              		.loc 1 171 0
  285 0012 154B     		ldr	r3, .L31
  286 0014 154A     		ldr	r2, .L31+4
  287 0016 02F50074 		add	r4, r2, #512
  288 001a DC60     		str	r4, [r3, #12]
- 170:source\asw/sound.c ****         SOUND__currentSong.m_readPos     = 0u;
- 289              		.loc 1 170 0
+ 172:source\asw/sound.c ****         SOUND__currentSong.m_readPos     = 0u;
+ 289              		.loc 1 172 0
  290 001c 1A61     		str	r2, [r3, #16]
- 171:source\asw/sound.c ****         SOUND__currentSong.m_activeFill  = 0u;
- 291              		.loc 1 171 0
+ 173:source\asw/sound.c ****         SOUND__currentSong.m_activeFill  = 0u;
+ 291              		.loc 1 173 0
  292 001e 0022     		movs	r2, #0
  293 0020 1A83     		strh	r2, [r3, #24]	@ movhi
- 172:source\asw/sound.c ****     }
- 294              		.loc 1 172 0
+ 174:source\asw/sound.c ****     }
+ 294              		.loc 1 174 0
  295 0022 9A82     		strh	r2, [r3, #20]	@ movhi
  296              	.L24:
  297 0024 0C46     		mov	r4, r1
  298 0026 0546     		mov	r5, r0
- 176:source\asw/sound.c **** 
- 299              		.loc 1 176 0
+ 178:source\asw/sound.c **** 
+ 299              		.loc 1 178 0
  300 0028 FFF7FEFF 		bl	SOUND__GetInactiveBuf
  301              	.LVL16:
  302 002c 0E4B     		ldr	r3, .L31
  303 002e 1861     		str	r0, [r3, #16]
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 11
+
+
  304              	.LVL17:
- 178:source\asw/sound.c ****     {
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 11
-
-
- 305              		.loc 1 178 0
+ 180:source\asw/sound.c ****     {
+ 305              		.loc 1 180 0
  306 0030 0023     		movs	r3, #0
  307 0032 05E0     		b	.L25
  308              	.LVL18:
  309              	.L26:
- 180:source\asw/sound.c ****     }
- 310              		.loc 1 180 0 discriminator 3
+ 182:source\asw/sound.c ****     }
+ 310              		.loc 1 182 0 discriminator 3
  311 0034 0C4A     		ldr	r2, .L31
  312 0036 1269     		ldr	r2, [r2, #16]
  313 0038 E95C     		ldrb	r1, [r5, r3]	@ zero_extendqisi2
  314 003a D154     		strb	r1, [r2, r3]
- 178:source\asw/sound.c ****     {
- 315              		.loc 1 178 0 discriminator 3
+ 180:source\asw/sound.c ****     {
+ 315              		.loc 1 180 0 discriminator 3
  316 003c 0133     		adds	r3, r3, #1
  317              	.LVL19:
  318 003e 9BB2     		uxth	r3, r3
  319              	.LVL20:
  320              	.L25:
- 178:source\asw/sound.c ****     {
- 321              		.loc 1 178 0 is_stmt 0 discriminator 1
+ 180:source\asw/sound.c ****     {
+ 321              		.loc 1 180 0 is_stmt 0 discriminator 1
  322 0040 A342     		cmp	r3, r4
  323 0042 F7D3     		bcc	.L26
  324 0044 2346     		mov	r3, r4
@@ -628,43 +630,43 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 1
  326 0046 05E0     		b	.L27
  327              	.LVL22:
  328              	.L28:
- 186:source\asw/sound.c ****     }
- 329              		.loc 1 186 0 is_stmt 1 discriminator 3
+ 188:source\asw/sound.c ****     }
+ 329              		.loc 1 188 0 is_stmt 1 discriminator 3
  330 0048 074A     		ldr	r2, .L31
  331 004a 1269     		ldr	r2, [r2, #16]
  332 004c 8020     		movs	r0, #128
  333 004e D054     		strb	r0, [r2, r3]
- 184:source\asw/sound.c ****     {
- 334              		.loc 1 184 0 discriminator 3
+ 186:source\asw/sound.c ****     {
+ 334              		.loc 1 186 0 discriminator 3
  335 0050 0133     		adds	r3, r3, #1
  336              	.LVL23:
  337 0052 9BB2     		uxth	r3, r3
  338              	.LVL24:
  339              	.L27:
- 184:source\asw/sound.c ****     {
- 340              		.loc 1 184 0 is_stmt 0 discriminator 1
+ 186:source\asw/sound.c ****     {
+ 340              		.loc 1 186 0 is_stmt 0 discriminator 1
  341 0054 B3F5007F 		cmp	r3, #512
  342 0058 F6D3     		bcc	.L28
- 189:source\asw/sound.c **** 
- 343              		.loc 1 189 0 is_stmt 1
+ 191:source\asw/sound.c **** 
+ 343              		.loc 1 191 0 is_stmt 1
  344 005a 034B     		ldr	r3, .L31
  345              	.LVL25:
  346 005c DC82     		strh	r4, [r3, #22]	@ movhi
- 191:source\asw/sound.c **** }
- 347              		.loc 1 191 0
+ 193:source\asw/sound.c **** }
+ 347              		.loc 1 193 0
  348 005e 0020     		movs	r0, #0
  349 0060 38BD     		pop	{r3, r4, r5, pc}
  350              	.LVL26:
  351              	.L29:
- 163:source\asw/sound.c ****     }
- 352              		.loc 1 163 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 12
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 12
 
 
+ 165:source\asw/sound.c ****     }
+ 352              		.loc 1 165 0
  353 0062 4FF0FF30 		mov	r0, #-1
  354              	.LVL27:
- 192:source\asw/sound.c **** 
- 355              		.loc 1 192 0
+ 194:source\asw/sound.c **** 
+ 355              		.loc 1 194 0
  356 0066 38BD     		pop	{r3, r4, r5, pc}
  357              	.L32:
  358              		.align	2
@@ -682,2155 +684,2281 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 1
  370              		.type	SOUND_SwapBuffers, %function
  371              	SOUND_SwapBuffers:
  372              	.LFB116:
- 195:source\asw/sound.c ****     volatile uint8_t * tmpBuf;
- 373              		.loc 1 195 0
+ 197:source\asw/sound.c ****     volatile uint8_t * tmpBuf;
+ 373              		.loc 1 197 0
  374              		.cfi_startproc
  375              		@ args = 0, pretend = 0, frame = 0
  376              		@ frame_needed = 0, uses_anonymous_args = 0
  377              		@ link register save eliminated.
- 199:source\asw/sound.c ****     SOUND__currentSong.m_activeBuf    = SOUND__currentSong.m_inactiveBuf;
- 378              		.loc 1 199 0
+ 201:source\asw/sound.c ****     SOUND__currentSong.m_activeBuf    = SOUND__currentSong.m_inactiveBuf;
+ 378              		.loc 1 201 0
  379 0000 054B     		ldr	r3, .L34
  380 0002 DA68     		ldr	r2, [r3, #12]
  381              	.LVL28:
- 200:source\asw/sound.c ****     SOUND__currentSong.m_inactiveBuf  = tmpBuf;
- 382              		.loc 1 200 0
+ 202:source\asw/sound.c ****     SOUND__currentSong.m_inactiveBuf  = tmpBuf;
+ 382              		.loc 1 202 0
  383 0004 1969     		ldr	r1, [r3, #16]
  384 0006 D960     		str	r1, [r3, #12]
- 201:source\asw/sound.c ****     SOUND__currentSong.m_activeFill   = SOUND__currentSong.m_inactiveFill;
- 385              		.loc 1 201 0
+ 203:source\asw/sound.c ****     SOUND__currentSong.m_activeFill   = SOUND__currentSong.m_inactiveFill;
+ 385              		.loc 1 203 0
  386 0008 1A61     		str	r2, [r3, #16]
- 202:source\asw/sound.c ****     SOUND__currentSong.m_inactiveFill = 0u;
- 387              		.loc 1 202 0
+ 204:source\asw/sound.c ****     SOUND__currentSong.m_inactiveFill = 0u;
+ 387              		.loc 1 204 0
  388 000a DA8A     		ldrh	r2, [r3, #22]
  389              	.LVL29:
  390 000c 92B2     		uxth	r2, r2
  391 000e 9A82     		strh	r2, [r3, #20]	@ movhi
- 203:source\asw/sound.c ****     SOUND__currentSong.m_readPos      = 0u;
- 392              		.loc 1 203 0
+ 205:source\asw/sound.c ****     SOUND__currentSong.m_readPos      = 0u;
+ 392              		.loc 1 205 0
  393 0010 0020     		movs	r0, #0
  394 0012 D882     		strh	r0, [r3, #22]	@ movhi
- 204:source\asw/sound.c **** 
- 395              		.loc 1 204 0
+ 206:source\asw/sound.c **** 
+ 395              		.loc 1 206 0
  396 0014 1883     		strh	r0, [r3, #24]	@ movhi
- 207:source\asw/sound.c **** 
- 397              		.loc 1 207 0
+ 209:source\asw/sound.c **** 
+ 397              		.loc 1 209 0
  398 0016 7047     		bx	lr
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 13
+
+
  399              	.L35:
  400              		.align	2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 13
-
-
  401              	.L34:
  402 0018 00000000 		.word	.LANCHOR1
  403              		.cfi_endproc
  404              	.LFE116:
  405              		.size	SOUND_SwapBuffers, .-SOUND_SwapBuffers
- 406              		.section	.text.SOUND_isr,"ax",%progbits
+ 406              		.section	.text.SOUND_GetAndClearUnderruns,"ax",%progbits
  407              		.align	2
- 408              		.global	SOUND_isr
+ 408              		.global	SOUND_GetAndClearUnderruns
  409              		.thumb
  410              		.thumb_func
- 411              		.type	SOUND_isr, %function
- 412              	SOUND_isr:
+ 411              		.type	SOUND_GetAndClearUnderruns, %function
+ 412              	SOUND_GetAndClearUnderruns:
  413              	.LFB118:
- 224:source\asw/sound.c **** 
- 225:source\asw/sound.c **** /********************************************************************************
- 226:source\asw/sound.c ****  * ISR Definitions
- 227:source\asw/sound.c ****  ********************************************************************************/
- 228:source\asw/sound.c **** 
- 229:source\asw/sound.c **** RC_t SOUND_isr()
- 230:source\asw/sound.c **** {
- 414              		.loc 1 230 0
+ 226:source\asw/sound.c **** 
+ 227:source\asw/sound.c **** /**
+ 228:source\asw/sound.c ****  * INC 6B.1: Return the number of underrun ticks since the last call, and reset it.
+ 229:source\asw/sound.c ****  * /return number of ISR ticks without a sample
+ 230:source\asw/sound.c ****  */
+ 231:source\asw/sound.c **** uint32_t SOUND_GetAndClearUnderruns(void)
+ 232:source\asw/sound.c **** {
+ 414              		.loc 1 232 0
  415              		.cfi_startproc
  416              		@ args = 0, pretend = 0, frame = 0
  417              		@ frame_needed = 0, uses_anonymous_args = 0
- 231:source\asw/sound.c **** 
- 232:source\asw/sound.c ****     // Dual buffer streaming
- 233:source\asw/sound.c ****     if (SOUND__currentSong.m_activeBuf != 0)
- 418              		.loc 1 233 0
- 419 0000 194B     		ldr	r3, .L41
- 420 0002 D968     		ldr	r1, [r3, #12]
- 421 0004 69B3     		cbz	r1, .L40
- 230:source\asw/sound.c **** 
- 422              		.loc 1 230 0
- 423 0006 10B5     		push	{r4, lr}
- 424              		.cfi_def_cfa_offset 8
- 425              		.cfi_offset 4, -8
- 426              		.cfi_offset 14, -4
- 234:source\asw/sound.c ****     {
- 235:source\asw/sound.c ****         if (SOUND__currentSong.m_readPos < SOUND__currentSong.m_activeFill)
- 427              		.loc 1 235 0
- 428 0008 1A8B     		ldrh	r2, [r3, #24]
- 429 000a 92B2     		uxth	r2, r2
- 430 000c 9B8A     		ldrh	r3, [r3, #20]
- 431 000e 9BB2     		uxth	r3, r3
- 432 0010 9A42     		cmp	r2, r3
- 433 0012 1ED2     		bcs	.L38
- 434              	.LBB2:
- 236:source\asw/sound.c ****         {
- 237:source\asw/sound.c ****             uint16_t sample =
- 238:source\asw/sound.c ****                 ((uint16_t)SOUND__currentSong.m_activeBuf[SOUND__currentSong.m_readPos]
- 435              		.loc 1 238 0
- 436 0014 144C     		ldr	r4, .L41
- 437 0016 238B     		ldrh	r3, [r4, #24]
- 438 0018 9BB2     		uxth	r3, r3
- 439 001a CB5C     		ldrb	r3, [r1, r3]	@ zero_extendqisi2
- 239:source\asw/sound.c ****                  * (uint16_t)SOUND__currentSong.m_volume) / 100u;
- 440              		.loc 1 239 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 14
+ 418              		@ link register save eliminated.
+ 233:source\asw/sound.c ****     uint32_t n = SOUND__underruns;
+ 419              		.loc 1 233 0
+ 420 0000 034B     		ldr	r3, .L37
+ 421 0002 D3F80004 		ldr	r0, [r3, #1024]
+ 422              	.LVL30:
+ 234:source\asw/sound.c ****     SOUND__underruns = 0u;
+ 423              		.loc 1 234 0
+ 424 0006 0022     		movs	r2, #0
+ 425 0008 C3F80024 		str	r2, [r3, #1024]
+ 235:source\asw/sound.c ****     return n;
+ 236:source\asw/sound.c **** }
+ 426              		.loc 1 236 0
+ 427 000c 7047     		bx	lr
+ 428              	.L38:
+ 429 000e 00BF     		.align	2
+ 430              	.L37:
+ 431 0010 00000000 		.word	.LANCHOR0
+ 432              		.cfi_endproc
+ 433              	.LFE118:
+ 434              		.size	SOUND_GetAndClearUnderruns, .-SOUND_GetAndClearUnderruns
+ 435              		.section	.text.SOUND_isr,"ax",%progbits
+ 436              		.align	2
+ 437              		.global	SOUND_isr
+ 438              		.thumb
+ 439              		.thumb_func
+ 440              		.type	SOUND_isr, %function
+ 441              	SOUND_isr:
+ 442              	.LFB119:
+ 237:source\asw/sound.c **** 
+ 238:source\asw/sound.c **** /********************************************************************************
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 14
 
 
- 441 001c A07E     		ldrb	r0, [r4, #26]	@ zero_extendqisi2
- 442 001e 03FB00F3 		mul	r3, r3, r0
- 443 0022 1248     		ldr	r0, .L41+4
- 444 0024 A0FB0330 		umull	r3, r0, r0, r3
- 445              	.LVL30:
- 240:source\asw/sound.c **** 
- 241:source\asw/sound.c ****             SOUND_PWM_WriteCompare((uint8_t)sample);
- 446              		.loc 1 241 0
- 447 0028 C0F34710 		ubfx	r0, r0, #5, #8
- 448              	.LVL31:
- 449 002c FFF7FEFF 		bl	SOUND_PWM_WriteCompare
- 450              	.LVL32:
- 242:source\asw/sound.c ****             SOUND__currentSong.m_readPos++;
- 451              		.loc 1 242 0
- 452 0030 238B     		ldrh	r3, [r4, #24]
- 453 0032 9BB2     		uxth	r3, r3
- 454 0034 0133     		adds	r3, r3, #1
- 455 0036 9BB2     		uxth	r3, r3
- 456 0038 2383     		strh	r3, [r4, #24]	@ movhi
+ 239:source\asw/sound.c ****  * ISR Definitions
+ 240:source\asw/sound.c ****  ********************************************************************************/
+ 241:source\asw/sound.c **** 
+ 242:source\asw/sound.c **** RC_t SOUND_isr()
+ 243:source\asw/sound.c **** {
+ 443              		.loc 1 243 0
+ 444              		.cfi_startproc
+ 445              		@ args = 0, pretend = 0, frame = 0
+ 446              		@ frame_needed = 0, uses_anonymous_args = 0
+ 244:source\asw/sound.c **** 
+ 245:source\asw/sound.c ****     // Dual buffer streaming
+ 246:source\asw/sound.c ****     if (SOUND__currentSong.m_activeBuf != 0)
+ 447              		.loc 1 246 0
+ 448 0000 1E4B     		ldr	r3, .L45
+ 449 0002 D968     		ldr	r1, [r3, #12]
+ 450 0004 0029     		cmp	r1, #0
+ 451 0006 37D0     		beq	.L44
  243:source\asw/sound.c **** 
- 244:source\asw/sound.c ****             if (SOUND__currentSong.m_readPos == (SOUND__currentSong.m_activeFill / 2u))
- 457              		.loc 1 244 0
- 458 003a 228B     		ldrh	r2, [r4, #24]
- 459 003c 92B2     		uxth	r2, r2
- 460 003e A38A     		ldrh	r3, [r4, #20]
- 461 0040 C3F34E03 		ubfx	r3, r3, #1, #15
- 462 0044 9A42     		cmp	r2, r3
- 463 0046 0AD1     		bne	.L37
- 245:source\asw/sound.c ****             {
- 246:source\asw/sound.c ****                 SetEvent(tsk_reader, ev_BufEmpty);
- 464              		.loc 1 246 0
- 465 0048 2021     		movs	r1, #32
- 466 004a 0320     		movs	r0, #3
- 467 004c FFF7FEFF 		bl	EE_oo_SetEvent
- 468              	.LVL33:
- 469 0050 05E0     		b	.L37
- 470              	.L38:
- 471              	.LBE2:
- 247:source\asw/sound.c ****             }
- 248:source\asw/sound.c ****         }
- 249:source\asw/sound.c ****         else
- 250:source\asw/sound.c ****         {
- 251:source\asw/sound.c ****             SOUND_StopPlay();
- 472              		.loc 1 251 0
- 473 0052 FFF7FEFF 		bl	SOUND_StopPlay
- 474              	.LVL34:
- 252:source\asw/sound.c ****             SOUND_SwapBuffers();
- 475              		.loc 1 252 0
- 476 0056 FFF7FEFF 		bl	SOUND_SwapBuffers
- 477              	.LVL35:
- 253:source\asw/sound.c ****             SOUND_StartPlay();
- 478              		.loc 1 253 0
- 479 005a FFF7FEFF 		bl	SOUND_StartPlay
- 480              	.LVL36:
- 481              	.L37:
- 254:source\asw/sound.c ****         }
- 255:source\asw/sound.c ****         
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 15
+ 452              		.loc 1 243 0
+ 453 0008 10B5     		push	{r4, lr}
+ 454              		.cfi_def_cfa_offset 8
+ 455              		.cfi_offset 4, -8
+ 456              		.cfi_offset 14, -4
+ 247:source\asw/sound.c ****     {
+ 248:source\asw/sound.c ****         if (SOUND__currentSong.m_readPos < SOUND__currentSong.m_activeFill)
+ 457              		.loc 1 248 0
+ 458 000a 1A8B     		ldrh	r2, [r3, #24]
+ 459 000c 92B2     		uxth	r2, r2
+ 460 000e 9B8A     		ldrh	r3, [r3, #20]
+ 461 0010 9BB2     		uxth	r3, r3
+ 462 0012 9A42     		cmp	r2, r3
+ 463 0014 1ED2     		bcs	.L41
+ 464              	.LBB2:
+ 249:source\asw/sound.c ****         {
+ 250:source\asw/sound.c ****             uint16_t sample =
+ 251:source\asw/sound.c ****                 ((uint16_t)SOUND__currentSong.m_activeBuf[SOUND__currentSong.m_readPos]
+ 465              		.loc 1 251 0
+ 466 0016 194C     		ldr	r4, .L45
+ 467 0018 238B     		ldrh	r3, [r4, #24]
+ 468 001a 9BB2     		uxth	r3, r3
+ 469 001c CB5C     		ldrb	r3, [r1, r3]	@ zero_extendqisi2
+ 252:source\asw/sound.c ****                  * (uint16_t)SOUND__currentSong.m_volume) / 100u;
+ 470              		.loc 1 252 0
+ 471 001e A07E     		ldrb	r0, [r4, #26]	@ zero_extendqisi2
+ 472 0020 03FB00F3 		mul	r3, r3, r0
+ 473 0024 1648     		ldr	r0, .L45+4
+ 474 0026 A0FB0330 		umull	r3, r0, r0, r3
+ 475              	.LVL31:
+ 253:source\asw/sound.c **** 
+ 254:source\asw/sound.c ****             SOUND_PWM_WriteCompare((uint8_t)sample);
+ 476              		.loc 1 254 0
+ 477 002a C0F34710 		ubfx	r0, r0, #5, #8
+ 478              	.LVL32:
+ 479 002e FFF7FEFF 		bl	SOUND_PWM_WriteCompare
+ 480              	.LVL33:
+ 255:source\asw/sound.c ****             SOUND__currentSong.m_readPos++;
+ 481              		.loc 1 255 0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 15
 
 
- 256:source\asw/sound.c ****         return RC_SUCCESS;
- 257:source\asw/sound.c ****     }
- 258:source\asw/sound.c ****     
- 259:source\asw/sound.c ****     return RC_SUCCESS;
- 260:source\asw/sound.c **** }...
- 482              		.loc 1 260 0
- 483 005e 0020     		movs	r0, #0
- 484 0060 10BD     		pop	{r4, pc}
- 485              	.L40:
- 486              		.cfi_def_cfa_offset 0
- 487              		.cfi_restore 4
- 488              		.cfi_restore 14
- 489 0062 0020     		movs	r0, #0
- 490 0064 7047     		bx	lr
- 491              	.L42:
- 492 0066 00BF     		.align	2
- 493              	.L41:
- 494 0068 00000000 		.word	.LANCHOR1
- 495 006c 1F85EB51 		.word	1374389535
- 496              		.cfi_endproc
- 497              	.LFE118:
- 498              		.size	SOUND_isr, .-SOUND_isr
- 499              		.data
- 500              		.align	2
- 501              		.set	.LANCHOR1,. + 0
- 502              		.type	SOUND__currentSong, %object
- 503              		.size	SOUND__currentSong, 28
- 504              	SOUND__currentSong:
- 505 0000 00000000 		.word	0
- 506 0004 00000000 		.word	0
- 507 0008 00000000 		.word	0
- 508 000c 00000000 		.word	0
- 509 0010 00000000 		.word	0
- 510 0014 0000     		.short	0
- 511 0016 0000     		.short	0
- 512 0018 0000     		.short	0
- 513 001a 64       		.byte	100
- 514 001b 00       		.space	1
- 515              		.bss
- 516              		.align	2
- 517              		.set	.LANCHOR0,. + 0
- 518              		.type	SOUND__bufB, %object
- 519              		.size	SOUND__bufB, 512
- 520              	SOUND__bufB:
- 521 0000 00000000 		.space	512
- 521      00000000 
- 521      00000000 
- 521      00000000 
- 521      00000000 
- 522              		.type	SOUND__bufA, %object
- 523              		.size	SOUND__bufA, 512
- 524              	SOUND__bufA:
- 525 0200 00000000 		.space	512
- 525      00000000 
- 525      00000000 
- 525      00000000 
- 525      00000000 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 16
+ 482 0032 238B     		ldrh	r3, [r4, #24]
+ 483 0034 9BB2     		uxth	r3, r3
+ 484 0036 0133     		adds	r3, r3, #1
+ 485 0038 9BB2     		uxth	r3, r3
+ 486 003a 2383     		strh	r3, [r4, #24]	@ movhi
+ 256:source\asw/sound.c **** 
+ 257:source\asw/sound.c ****             if (SOUND__currentSong.m_readPos == (SOUND__currentSong.m_activeFill / 2u))
+ 487              		.loc 1 257 0
+ 488 003c 228B     		ldrh	r2, [r4, #24]
+ 489 003e 92B2     		uxth	r2, r2
+ 490 0040 A38A     		ldrh	r3, [r4, #20]
+ 491 0042 C3F34E03 		ubfx	r3, r3, #1, #15
+ 492 0046 9A42     		cmp	r2, r3
+ 493 0048 14D1     		bne	.L40
+ 258:source\asw/sound.c ****             {
+ 259:source\asw/sound.c ****                 SetEvent(tsk_reader, ev_BufEmpty);
+ 494              		.loc 1 259 0
+ 495 004a 2021     		movs	r1, #32
+ 496 004c 0320     		movs	r0, #3
+ 497 004e FFF7FEFF 		bl	EE_oo_SetEvent
+ 498              	.LVL34:
+ 499 0052 0FE0     		b	.L40
+ 500              	.L41:
+ 501              	.LBE2:
+ 260:source\asw/sound.c ****             }
+ 261:source\asw/sound.c ****         }
+ 262:source\asw/sound.c ****         else
+ 263:source\asw/sound.c ****         {
+ 264:source\asw/sound.c ****             if (SOUND__currentSong.m_activeFill == 0u)
+ 502              		.loc 1 264 0
+ 503 0054 094B     		ldr	r3, .L45
+ 504 0056 9B8A     		ldrh	r3, [r3, #20]
+ 505 0058 9BB2     		uxth	r3, r3
+ 506 005a 2BB9     		cbnz	r3, .L42
+ 265:source\asw/sound.c ****             {
+ 266:source\asw/sound.c ****                 SOUND__underruns++;          /* INC 6B.1: reader missed the deadline */
+ 507              		.loc 1 266 0
+ 508 005c 094A     		ldr	r2, .L45+8
+ 509 005e D2F80034 		ldr	r3, [r2, #1024]
+ 510 0062 0133     		adds	r3, r3, #1
+ 511 0064 C2F80034 		str	r3, [r2, #1024]
+ 512              	.L42:
+ 267:source\asw/sound.c ****             }
+ 268:source\asw/sound.c ****             SOUND_StopPlay();
+ 513              		.loc 1 268 0
+ 514 0068 FFF7FEFF 		bl	SOUND_StopPlay
+ 515              	.LVL35:
+ 269:source\asw/sound.c ****             SOUND_SwapBuffers();
+ 516              		.loc 1 269 0
+ 517 006c FFF7FEFF 		bl	SOUND_SwapBuffers
+ 518              	.LVL36:
+ 270:source\asw/sound.c ****             SOUND_StartPlay();
+ 519              		.loc 1 270 0
+ 520 0070 FFF7FEFF 		bl	SOUND_StartPlay
+ 521              	.LVL37:
+ 522              	.L40:
+ 271:source\asw/sound.c ****         }
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 16
 
 
- 526              		.text
- 527              	.Letext0:
- 528              		.file 2 ".\\source\\bsw/global.h"
- 529              		.file 3 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
- 530              		.file 4 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
- 531              		.file 5 "Generated_Source\\PSoC5/SimpleSystem_common_ee_types.inc"
- 532              		.file 6 "Generated_Source\\PSoC5/SimpleSystem_cortex_mx_ee_cpu.inc"
- 533              		.file 7 "Generated_Source\\PSoC5/SimpleSystem_ee_oo_intfunc.inc"
- 534              		.file 8 "Generated_Source\\PSoC5/SimpleSystem_cortex_mx_ee_context.inc"
- 535              		.file 9 "Generated_Source\\PSoC5/SimpleSystem_common_ee_primitives.inc"
- 536              		.file 10 "Generated_Source\\PSoC5/core_cm3.h"
- 537              		.file 11 "Generated_Source\\PSoC5/SOUND_SAMPLE_CLOCK.h"
- 538              		.file 12 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\
- 539              		.file 13 "Generated_Source\\PSoC5/SOUND_Control.h"
- 540              		.file 14 "Generated_Source\\PSoC5/SOUND_ENABLE.h"
- 541              		.file 15 "Generated_Source\\PSoC5/SOUND_PWM_CLOCK.h"
- 542              		.file 16 "Generated_Source\\PSoC5/SOUND_PWM.h"
- 543              		.file 17 "Generated_Source\\PSoC5/SimpleSystem_ee_oo_kernel.inc"
- 544              		.file 18 "source\\asw\\sound.h"
- 545              		.section	.debug_info,"",%progbits
- 546              	.Ldebug_info0:
- 547 0000 B4050000 		.4byte	0x5b4
- 548 0004 0400     		.2byte	0x4
- 549 0006 00000000 		.4byte	.Ldebug_abbrev0
- 550 000a 04       		.byte	0x4
- 551 000b 01       		.uleb128 0x1
- 552 000c 13040000 		.4byte	.LASF98
- 553 0010 0C       		.byte	0xc
- 554 0011 AE050000 		.4byte	.LASF99
- 555 0015 89030000 		.4byte	.LASF100
- 556 0019 00000000 		.4byte	.Ldebug_ranges0+0
- 557 001d 00000000 		.4byte	0
- 558 0021 00000000 		.4byte	.Ldebug_line0
- 559 0025 02       		.uleb128 0x2
- 560 0026 01       		.byte	0x1
- 561 0027 06       		.byte	0x6
- 562 0028 08030000 		.4byte	.LASF0
- 563 002c 03       		.uleb128 0x3
- 564 002d 3A010000 		.4byte	.LASF3
- 565 0031 02       		.byte	0x2
- 566 0032 91       		.byte	0x91
- 567 0033 37000000 		.4byte	0x37
- 568 0037 02       		.uleb128 0x2
- 569 0038 01       		.byte	0x1
- 570 0039 08       		.byte	0x8
- 571 003a D3020000 		.4byte	.LASF1
- 572 003e 02       		.uleb128 0x2
- 573 003f 02       		.byte	0x2
- 574 0040 05       		.byte	0x5
- 575 0041 7D000000 		.4byte	.LASF2
- 576 0045 03       		.uleb128 0x3
- 577 0046 60030000 		.4byte	.LASF4
- 578 004a 02       		.byte	0x2
- 579 004b 93       		.byte	0x93
- 580 004c 50000000 		.4byte	0x50
- 581 0050 02       		.uleb128 0x2
- 582 0051 02       		.byte	0x2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 17
+ 272:source\asw/sound.c ****         
+ 273:source\asw/sound.c ****         return RC_SUCCESS;
+ 274:source\asw/sound.c ****     }
+ 275:source\asw/sound.c ****     
+ 276:source\asw/sound.c ****     return RC_SUCCESS;
+ 277:source\asw/sound.c **** }...
+ 523              		.loc 1 277 0
+ 524 0074 0020     		movs	r0, #0
+ 525 0076 10BD     		pop	{r4, pc}
+ 526              	.L44:
+ 527              		.cfi_def_cfa_offset 0
+ 528              		.cfi_restore 4
+ 529              		.cfi_restore 14
+ 530 0078 0020     		movs	r0, #0
+ 531 007a 7047     		bx	lr
+ 532              	.L46:
+ 533              		.align	2
+ 534              	.L45:
+ 535 007c 00000000 		.word	.LANCHOR1
+ 536 0080 1F85EB51 		.word	1374389535
+ 537 0084 00000000 		.word	.LANCHOR0
+ 538              		.cfi_endproc
+ 539              	.LFE119:
+ 540              		.size	SOUND_isr, .-SOUND_isr
+ 541              		.data
+ 542              		.align	2
+ 543              		.set	.LANCHOR1,. + 0
+ 544              		.type	SOUND__currentSong, %object
+ 545              		.size	SOUND__currentSong, 28
+ 546              	SOUND__currentSong:
+ 547 0000 00000000 		.word	0
+ 548 0004 00000000 		.word	0
+ 549 0008 00000000 		.word	0
+ 550 000c 00000000 		.word	0
+ 551 0010 00000000 		.word	0
+ 552 0014 0000     		.short	0
+ 553 0016 0000     		.short	0
+ 554 0018 0000     		.short	0
+ 555 001a 64       		.byte	100
+ 556 001b 00       		.space	1
+ 557              		.bss
+ 558              		.align	2
+ 559              		.set	.LANCHOR0,. + 0
+ 560              		.type	SOUND__bufB, %object
+ 561              		.size	SOUND__bufB, 512
+ 562              	SOUND__bufB:
+ 563 0000 00000000 		.space	512
+ 563      00000000 
+ 563      00000000 
+ 563      00000000 
+ 563      00000000 
+ 564              		.type	SOUND__bufA, %object
+ 565              		.size	SOUND__bufA, 512
+ 566              	SOUND__bufA:
+ 567 0200 00000000 		.space	512
+ 567      00000000 
+ 567      00000000 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 17
 
 
- 583 0052 07       		.byte	0x7
- 584 0053 09050000 		.4byte	.LASF5
- 585 0057 02       		.uleb128 0x2
- 586 0058 04       		.byte	0x4
- 587 0059 05       		.byte	0x5
- 588 005a 34020000 		.4byte	.LASF6
- 589 005e 03       		.uleb128 0x3
- 590 005f 2B030000 		.4byte	.LASF7
- 591 0063 02       		.byte	0x2
- 592 0064 96       		.byte	0x96
- 593 0065 69000000 		.4byte	0x69
- 594 0069 02       		.uleb128 0x2
- 595 006a 04       		.byte	0x4
- 596 006b 07       		.byte	0x7
- 597 006c 69030000 		.4byte	.LASF8
- 598 0070 02       		.uleb128 0x2
- 599 0071 04       		.byte	0x4
- 600 0072 04       		.byte	0x4
- 601 0073 B1010000 		.4byte	.LASF9
- 602 0077 02       		.uleb128 0x2
- 603 0078 08       		.byte	0x8
- 604 0079 04       		.byte	0x4
- 605 007a 3E050000 		.4byte	.LASF10
- 606 007e 02       		.uleb128 0x2
- 607 007f 08       		.byte	0x8
- 608 0080 05       		.byte	0x5
- 609 0081 D0010000 		.4byte	.LASF11
- 610 0085 02       		.uleb128 0x2
- 611 0086 08       		.byte	0x8
- 612 0087 07       		.byte	0x7
- 613 0088 14030000 		.4byte	.LASF12
- 614 008c 02       		.uleb128 0x2
- 615 008d 01       		.byte	0x1
- 616 008e 08       		.byte	0x8
- 617 008f A1040000 		.4byte	.LASF13
- 618 0093 04       		.uleb128 0x4
- 619 0094 01       		.byte	0x1
- 620 0095 25000000 		.4byte	0x25
- 621 0099 02       		.byte	0x2
- 622 009a CF       		.byte	0xcf
- 623 009b 3C010000 		.4byte	0x13c
- 624 009f 05       		.uleb128 0x5
- 625 00a0 42000000 		.4byte	.LASF14
- 626 00a4 00       		.byte	0
- 627 00a5 06       		.uleb128 0x6
- 628 00a6 E2050000 		.4byte	.LASF15
- 629 00aa 7F       		.sleb128 -1
- 630 00ab 06       		.uleb128 0x6
- 631 00ac 7B030000 		.4byte	.LASF16
- 632 00b0 7E       		.sleb128 -2
- 633 00b1 06       		.uleb128 0x6
- 634 00b2 FB000000 		.4byte	.LASF17
- 635 00b6 7D       		.sleb128 -3
- 636 00b7 06       		.uleb128 0x6
- 637 00b8 EB050000 		.4byte	.LASF18
- 638 00bc 7C       		.sleb128 -4
- 639 00bd 06       		.uleb128 0x6
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 18
+ 567      00000000 
+ 567      00000000 
+ 568              		.type	SOUND__underruns, %object
+ 569              		.size	SOUND__underruns, 4
+ 570              	SOUND__underruns:
+ 571 0400 00000000 		.space	4
+ 572              		.text
+ 573              	.Letext0:
+ 574              		.file 2 ".\\source\\bsw/global.h"
+ 575              		.file 3 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
+ 576              		.file 4 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
+ 577              		.file 5 "Generated_Source\\PSoC5/SimpleSystem_common_ee_types.inc"
+ 578              		.file 6 "Generated_Source\\PSoC5/SimpleSystem_cortex_mx_ee_cpu.inc"
+ 579              		.file 7 "Generated_Source\\PSoC5/SimpleSystem_ee_oo_intfunc.inc"
+ 580              		.file 8 "Generated_Source\\PSoC5/SimpleSystem_cortex_mx_ee_context.inc"
+ 581              		.file 9 "Generated_Source\\PSoC5/SimpleSystem_common_ee_primitives.inc"
+ 582              		.file 10 "Generated_Source\\PSoC5/core_cm3.h"
+ 583              		.file 11 "Generated_Source\\PSoC5/SOUND_SAMPLE_CLOCK.h"
+ 584              		.file 12 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\
+ 585              		.file 13 "Generated_Source\\PSoC5/SOUND_Control.h"
+ 586              		.file 14 "Generated_Source\\PSoC5/SOUND_ENABLE.h"
+ 587              		.file 15 "Generated_Source\\PSoC5/SOUND_PWM_CLOCK.h"
+ 588              		.file 16 "Generated_Source\\PSoC5/SOUND_PWM.h"
+ 589              		.file 17 "Generated_Source\\PSoC5/SimpleSystem_ee_oo_kernel.inc"
+ 590              		.file 18 "source\\asw\\sound.h"
+ 591              		.section	.debug_info,"",%progbits
+ 592              	.Ldebug_info0:
+ 593 0000 EF050000 		.4byte	0x5ef
+ 594 0004 0400     		.2byte	0x4
+ 595 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 596 000a 04       		.byte	0x4
+ 597 000b 01       		.uleb128 0x1
+ 598 000c 24040000 		.4byte	.LASF100
+ 599 0010 0C       		.byte	0xc
+ 600 0011 DA050000 		.4byte	.LASF101
+ 601 0015 9A030000 		.4byte	.LASF102
+ 602 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 603 001d 00000000 		.4byte	0
+ 604 0021 00000000 		.4byte	.Ldebug_line0
+ 605 0025 02       		.uleb128 0x2
+ 606 0026 01       		.byte	0x1
+ 607 0027 06       		.byte	0x6
+ 608 0028 19030000 		.4byte	.LASF0
+ 609 002c 03       		.uleb128 0x3
+ 610 002d 3A010000 		.4byte	.LASF3
+ 611 0031 02       		.byte	0x2
+ 612 0032 91       		.byte	0x91
+ 613 0033 37000000 		.4byte	0x37
+ 614 0037 02       		.uleb128 0x2
+ 615 0038 01       		.byte	0x1
+ 616 0039 08       		.byte	0x8
+ 617 003a E4020000 		.4byte	.LASF1
+ 618 003e 02       		.uleb128 0x2
+ 619 003f 02       		.byte	0x2
+ 620 0040 05       		.byte	0x5
+ 621 0041 7D000000 		.4byte	.LASF2
+ 622 0045 03       		.uleb128 0x3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 18
 
 
- 640 00be 98010000 		.4byte	.LASF19
- 641 00c2 7B       		.sleb128 -5
- 642 00c3 06       		.uleb128 0x6
- 643 00c4 87000000 		.4byte	.LASF20
- 644 00c8 7A       		.sleb128 -6
- 645 00c9 06       		.uleb128 0x6
- 646 00ca 3D020000 		.4byte	.LASF21
- 647 00ce 79       		.sleb128 -7
- 648 00cf 06       		.uleb128 0x6
- 649 00d0 A6040000 		.4byte	.LASF22
- 650 00d4 78       		.sleb128 -8
- 651 00d5 06       		.uleb128 0x6
- 652 00d6 31060000 		.4byte	.LASF23
- 653 00da 77       		.sleb128 -9
- 654 00db 06       		.uleb128 0x6
- 655 00dc 6A020000 		.4byte	.LASF24
- 656 00e0 76       		.sleb128 -10
- 657 00e1 06       		.uleb128 0x6
- 658 00e2 4C060000 		.4byte	.LASF25
- 659 00e6 75       		.sleb128 -11
- 660 00e7 06       		.uleb128 0x6
- 661 00e8 52030000 		.4byte	.LASF26
- 662 00ec 74       		.sleb128 -12
- 663 00ed 06       		.uleb128 0x6
- 664 00ee 54050000 		.4byte	.LASF27
- 665 00f2 73       		.sleb128 -13
- 666 00f3 06       		.uleb128 0x6
- 667 00f4 2F000000 		.4byte	.LASF28
- 668 00f8 72       		.sleb128 -14
- 669 00f9 06       		.uleb128 0x6
- 670 00fa 69000000 		.4byte	.LASF29
- 671 00fe 71       		.sleb128 -15
- 672 00ff 06       		.uleb128 0x6
- 673 0100 78020000 		.4byte	.LASF30
- 674 0104 70       		.sleb128 -16
- 675 0105 06       		.uleb128 0x6
- 676 0106 11010000 		.4byte	.LASF31
- 677 010a 6F       		.sleb128 -17
- 678 010b 06       		.uleb128 0x6
- 679 010c 98000000 		.4byte	.LASF32
- 680 0110 6E       		.sleb128 -18
- 681 0111 06       		.uleb128 0x6
- 682 0112 10020000 		.4byte	.LASF33
- 683 0116 6D       		.sleb128 -19
- 684 0117 06       		.uleb128 0x6
- 685 0118 D3040000 		.4byte	.LASF34
- 686 011c 6C       		.sleb128 -20
- 687 011d 06       		.uleb128 0x6
- 688 011e 8F020000 		.4byte	.LASF35
- 689 0122 6B       		.sleb128 -21
- 690 0123 06       		.uleb128 0x6
- 691 0124 9C050000 		.4byte	.LASF36
- 692 0128 6A       		.sleb128 -22
- 693 0129 06       		.uleb128 0x6
- 694 012a 42010000 		.4byte	.LASF37
- 695 012e 69       		.sleb128 -23
- 696 012f 06       		.uleb128 0x6
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 19
+ 623 0046 71030000 		.4byte	.LASF4
+ 624 004a 02       		.byte	0x2
+ 625 004b 93       		.byte	0x93
+ 626 004c 50000000 		.4byte	0x50
+ 627 0050 02       		.uleb128 0x2
+ 628 0051 02       		.byte	0x2
+ 629 0052 07       		.byte	0x7
+ 630 0053 35050000 		.4byte	.LASF5
+ 631 0057 02       		.uleb128 0x2
+ 632 0058 04       		.byte	0x4
+ 633 0059 05       		.byte	0x5
+ 634 005a 45020000 		.4byte	.LASF6
+ 635 005e 03       		.uleb128 0x3
+ 636 005f 3C030000 		.4byte	.LASF7
+ 637 0063 02       		.byte	0x2
+ 638 0064 96       		.byte	0x96
+ 639 0065 69000000 		.4byte	0x69
+ 640 0069 02       		.uleb128 0x2
+ 641 006a 04       		.byte	0x4
+ 642 006b 07       		.byte	0x7
+ 643 006c 7A030000 		.4byte	.LASF8
+ 644 0070 02       		.uleb128 0x2
+ 645 0071 04       		.byte	0x4
+ 646 0072 04       		.byte	0x4
+ 647 0073 B1010000 		.4byte	.LASF9
+ 648 0077 02       		.uleb128 0x2
+ 649 0078 08       		.byte	0x8
+ 650 0079 04       		.byte	0x4
+ 651 007a 6A050000 		.4byte	.LASF10
+ 652 007e 02       		.uleb128 0x2
+ 653 007f 08       		.byte	0x8
+ 654 0080 05       		.byte	0x5
+ 655 0081 E9010000 		.4byte	.LASF11
+ 656 0085 02       		.uleb128 0x2
+ 657 0086 08       		.byte	0x8
+ 658 0087 07       		.byte	0x7
+ 659 0088 25030000 		.4byte	.LASF12
+ 660 008c 02       		.uleb128 0x2
+ 661 008d 01       		.byte	0x1
+ 662 008e 08       		.byte	0x8
+ 663 008f B2040000 		.4byte	.LASF13
+ 664 0093 04       		.uleb128 0x4
+ 665 0094 01       		.byte	0x1
+ 666 0095 25000000 		.4byte	0x25
+ 667 0099 02       		.byte	0x2
+ 668 009a CF       		.byte	0xcf
+ 669 009b 3C010000 		.4byte	0x13c
+ 670 009f 05       		.uleb128 0x5
+ 671 00a0 42000000 		.4byte	.LASF14
+ 672 00a4 00       		.byte	0
+ 673 00a5 06       		.uleb128 0x6
+ 674 00a6 0E060000 		.4byte	.LASF15
+ 675 00aa 7F       		.sleb128 -1
+ 676 00ab 06       		.uleb128 0x6
+ 677 00ac 8C030000 		.4byte	.LASF16
+ 678 00b0 7E       		.sleb128 -2
+ 679 00b1 06       		.uleb128 0x6
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 19
 
 
- 697 0130 23020000 		.4byte	.LASF38
- 698 0134 68       		.sleb128 -24
- 699 0135 06       		.uleb128 0x6
- 700 0136 B7010000 		.4byte	.LASF39
- 701 013a 67       		.sleb128 -25
- 702 013b 00       		.byte	0
- 703 013c 03       		.uleb128 0x3
- 704 013d 47060000 		.4byte	.LASF40
- 705 0141 02       		.byte	0x2
- 706 0142 EA       		.byte	0xea
- 707 0143 93000000 		.4byte	0x93
- 708 0147 07       		.uleb128 0x7
- 709 0148 89010000 		.4byte	.LASF101
- 710 014c 01       		.byte	0x1
- 711 014d 37000000 		.4byte	0x37
- 712 0151 12       		.byte	0x12
- 713 0152 67       		.byte	0x67
- 714 0153 70010000 		.4byte	0x170
- 715 0157 05       		.uleb128 0x5
- 716 0158 25000000 		.4byte	.LASF41
- 717 015c 00       		.byte	0
- 718 015d 05       		.uleb128 0x5
- 719 015e 13060000 		.4byte	.LASF42
- 720 0162 01       		.byte	0x1
- 721 0163 05       		.uleb128 0x5
- 722 0164 1D060000 		.4byte	.LASF43
- 723 0168 02       		.byte	0x2
- 724 0169 05       		.uleb128 0x5
- 725 016a 27060000 		.4byte	.LASF44
- 726 016e 03       		.byte	0x3
- 727 016f 00       		.byte	0
- 728 0170 03       		.uleb128 0x3
- 729 0171 7B050000 		.4byte	.LASF45
- 730 0175 03       		.byte	0x3
- 731 0176 3F       		.byte	0x3f
- 732 0177 57000000 		.4byte	0x57
- 733 017b 08       		.uleb128 0x8
- 734 017c 04       		.byte	0x4
- 735 017d 05       		.byte	0x5
- 736 017e 696E7400 		.ascii	"int\000"
- 737 0182 02       		.uleb128 0x2
- 738 0183 04       		.byte	0x4
- 739 0184 07       		.byte	0x7
- 740 0185 45030000 		.4byte	.LASF46
- 741 0189 03       		.uleb128 0x3
- 742 018a BB040000 		.4byte	.LASF47
- 743 018e 04       		.byte	0x4
- 744 018f 2C       		.byte	0x2c
- 745 0190 70010000 		.4byte	0x170
- 746 0194 02       		.uleb128 0x2
- 747 0195 08       		.byte	0x8
- 748 0196 04       		.byte	0x4
- 749 0197 B7020000 		.4byte	.LASF48
- 750 019b 03       		.uleb128 0x3
- 751 019c C4030000 		.4byte	.LASF49
- 752 01a0 05       		.byte	0x5
- 753 01a1 53       		.byte	0x53
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 20
+ 680 00b2 FB000000 		.4byte	.LASF17
+ 681 00b6 7D       		.sleb128 -3
+ 682 00b7 06       		.uleb128 0x6
+ 683 00b8 17060000 		.4byte	.LASF18
+ 684 00bc 7C       		.sleb128 -4
+ 685 00bd 06       		.uleb128 0x6
+ 686 00be 98010000 		.4byte	.LASF19
+ 687 00c2 7B       		.sleb128 -5
+ 688 00c3 06       		.uleb128 0x6
+ 689 00c4 87000000 		.4byte	.LASF20
+ 690 00c8 7A       		.sleb128 -6
+ 691 00c9 06       		.uleb128 0x6
+ 692 00ca 4E020000 		.4byte	.LASF21
+ 693 00ce 79       		.sleb128 -7
+ 694 00cf 06       		.uleb128 0x6
+ 695 00d0 D2040000 		.4byte	.LASF22
+ 696 00d4 78       		.sleb128 -8
+ 697 00d5 06       		.uleb128 0x6
+ 698 00d6 5D060000 		.4byte	.LASF23
+ 699 00da 77       		.sleb128 -9
+ 700 00db 06       		.uleb128 0x6
+ 701 00dc 7B020000 		.4byte	.LASF24
+ 702 00e0 76       		.sleb128 -10
+ 703 00e1 06       		.uleb128 0x6
+ 704 00e2 78060000 		.4byte	.LASF25
+ 705 00e6 75       		.sleb128 -11
+ 706 00e7 06       		.uleb128 0x6
+ 707 00e8 63030000 		.4byte	.LASF26
+ 708 00ec 74       		.sleb128 -12
+ 709 00ed 06       		.uleb128 0x6
+ 710 00ee 80050000 		.4byte	.LASF27
+ 711 00f2 73       		.sleb128 -13
+ 712 00f3 06       		.uleb128 0x6
+ 713 00f4 2F000000 		.4byte	.LASF28
+ 714 00f8 72       		.sleb128 -14
+ 715 00f9 06       		.uleb128 0x6
+ 716 00fa 69000000 		.4byte	.LASF29
+ 717 00fe 71       		.sleb128 -15
+ 718 00ff 06       		.uleb128 0x6
+ 719 0100 89020000 		.4byte	.LASF30
+ 720 0104 70       		.sleb128 -16
+ 721 0105 06       		.uleb128 0x6
+ 722 0106 11010000 		.4byte	.LASF31
+ 723 010a 6F       		.sleb128 -17
+ 724 010b 06       		.uleb128 0x6
+ 725 010c 98000000 		.4byte	.LASF32
+ 726 0110 6E       		.sleb128 -18
+ 727 0111 06       		.uleb128 0x6
+ 728 0112 21020000 		.4byte	.LASF33
+ 729 0116 6D       		.sleb128 -19
+ 730 0117 06       		.uleb128 0x6
+ 731 0118 FF040000 		.4byte	.LASF34
+ 732 011c 6C       		.sleb128 -20
+ 733 011d 06       		.uleb128 0x6
+ 734 011e A0020000 		.4byte	.LASF35
+ 735 0122 6B       		.sleb128 -21
+ 736 0123 06       		.uleb128 0x6
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 20
 
 
- 754 01a2 7B010000 		.4byte	0x17b
- 755 01a6 03       		.uleb128 0x3
- 756 01a7 FE020000 		.4byte	.LASF50
- 757 01ab 05       		.byte	0x5
- 758 01ac 54       		.byte	0x54
- 759 01ad 82010000 		.4byte	0x182
- 760 01b1 03       		.uleb128 0x3
- 761 01b2 5A000000 		.4byte	.LASF51
- 762 01b6 06       		.byte	0x6
- 763 01b7 4D       		.byte	0x4d
- 764 01b8 A6010000 		.4byte	0x1a6
- 765 01bc 03       		.uleb128 0x3
- 766 01bd 09010000 		.4byte	.LASF52
- 767 01c1 06       		.byte	0x6
- 768 01c2 4F       		.byte	0x4f
- 769 01c3 A6010000 		.4byte	0x1a6
- 770 01c7 03       		.uleb128 0x3
- 771 01c8 33010000 		.4byte	.LASF53
- 772 01cc 06       		.byte	0x6
- 773 01cd 78       		.byte	0x78
- 774 01ce 9B010000 		.4byte	0x19b
- 775 01d2 02       		.uleb128 0x2
- 776 01d3 04       		.byte	0x4
- 777 01d4 07       		.byte	0x7
- 778 01d5 AD000000 		.4byte	.LASF54
- 779 01d9 09       		.uleb128 0x9
- 780 01da 2C000000 		.4byte	0x2c
- 781 01de 09       		.uleb128 0x9
- 782 01df 45000000 		.4byte	0x45
- 783 01e3 0A       		.uleb128 0xa
- 784 01e4 1C       		.byte	0x1c
- 785 01e5 01       		.byte	0x1
- 786 01e6 26       		.byte	0x26
- 787 01e7 58020000 		.4byte	0x258
- 788 01eb 0B       		.uleb128 0xb
- 789 01ec 0C040000 		.4byte	.LASF55
- 790 01f0 01       		.byte	0x1
- 791 01f1 27       		.byte	0x27
- 792 01f2 58020000 		.4byte	0x258
- 793 01f6 00       		.byte	0
- 794 01f7 0B       		.uleb128 0xb
- 795 01f8 F7020000 		.4byte	.LASF56
- 796 01fc 01       		.byte	0x1
- 797 01fd 28       		.byte	0x28
- 798 01fe 5E000000 		.4byte	0x5e
- 799 0202 04       		.byte	0x4
- 800 0203 0B       		.uleb128 0xb
- 801 0204 89020000 		.4byte	.LASF57
- 802 0208 01       		.byte	0x1
- 803 0209 29       		.byte	0x29
- 804 020a 5E000000 		.4byte	0x5e
- 805 020e 08       		.byte	0x8
- 806 020f 0B       		.uleb128 0xb
- 807 0210 19000000 		.4byte	.LASF58
- 808 0214 01       		.byte	0x1
- 809 0215 2A       		.byte	0x2a
- 810 0216 63020000 		.4byte	0x263
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 21
+ 737 0124 C8050000 		.4byte	.LASF36
+ 738 0128 6A       		.sleb128 -22
+ 739 0129 06       		.uleb128 0x6
+ 740 012a 42010000 		.4byte	.LASF37
+ 741 012e 69       		.sleb128 -23
+ 742 012f 06       		.uleb128 0x6
+ 743 0130 34020000 		.4byte	.LASF38
+ 744 0134 68       		.sleb128 -24
+ 745 0135 06       		.uleb128 0x6
+ 746 0136 D0010000 		.4byte	.LASF39
+ 747 013a 67       		.sleb128 -25
+ 748 013b 00       		.byte	0
+ 749 013c 03       		.uleb128 0x3
+ 750 013d 73060000 		.4byte	.LASF40
+ 751 0141 02       		.byte	0x2
+ 752 0142 EA       		.byte	0xea
+ 753 0143 93000000 		.4byte	0x93
+ 754 0147 07       		.uleb128 0x7
+ 755 0148 89010000 		.4byte	.LASF103
+ 756 014c 01       		.byte	0x1
+ 757 014d 37000000 		.4byte	0x37
+ 758 0151 12       		.byte	0x12
+ 759 0152 67       		.byte	0x67
+ 760 0153 70010000 		.4byte	0x170
+ 761 0157 05       		.uleb128 0x5
+ 762 0158 25000000 		.4byte	.LASF41
+ 763 015c 00       		.byte	0
+ 764 015d 05       		.uleb128 0x5
+ 765 015e 3F060000 		.4byte	.LASF42
+ 766 0162 01       		.byte	0x1
+ 767 0163 05       		.uleb128 0x5
+ 768 0164 49060000 		.4byte	.LASF43
+ 769 0168 02       		.byte	0x2
+ 770 0169 05       		.uleb128 0x5
+ 771 016a 53060000 		.4byte	.LASF44
+ 772 016e 03       		.byte	0x3
+ 773 016f 00       		.byte	0
+ 774 0170 03       		.uleb128 0x3
+ 775 0171 A7050000 		.4byte	.LASF45
+ 776 0175 03       		.byte	0x3
+ 777 0176 3F       		.byte	0x3f
+ 778 0177 57000000 		.4byte	0x57
+ 779 017b 08       		.uleb128 0x8
+ 780 017c 04       		.byte	0x4
+ 781 017d 05       		.byte	0x5
+ 782 017e 696E7400 		.ascii	"int\000"
+ 783 0182 02       		.uleb128 0x2
+ 784 0183 04       		.byte	0x4
+ 785 0184 07       		.byte	0x7
+ 786 0185 56030000 		.4byte	.LASF46
+ 787 0189 03       		.uleb128 0x3
+ 788 018a E7040000 		.4byte	.LASF47
+ 789 018e 04       		.byte	0x4
+ 790 018f 2C       		.byte	0x2c
+ 791 0190 70010000 		.4byte	0x170
+ 792 0194 02       		.uleb128 0x2
+ 793 0195 08       		.byte	0x8
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 21
 
 
- 811 021a 0C       		.byte	0xc
- 812 021b 0B       		.uleb128 0xb
- 813 021c 7B010000 		.4byte	.LASF59
- 814 0220 01       		.byte	0x1
- 815 0221 2B       		.byte	0x2b
- 816 0222 63020000 		.4byte	0x263
- 817 0226 10       		.byte	0x10
- 818 0227 0B       		.uleb128 0xb
- 819 0228 4D000000 		.4byte	.LASF60
- 820 022c 01       		.byte	0x1
- 821 022d 2C       		.byte	0x2c
- 822 022e DE010000 		.4byte	0x1de
- 823 0232 14       		.byte	0x14
- 824 0233 0B       		.uleb128 0xb
- 825 0234 2F050000 		.4byte	.LASF61
- 826 0238 01       		.byte	0x1
- 827 0239 2D       		.byte	0x2d
- 828 023a DE010000 		.4byte	0x1de
- 829 023e 16       		.byte	0x16
- 830 023f 0B       		.uleb128 0xb
- 831 0240 EB030000 		.4byte	.LASF62
- 832 0244 01       		.byte	0x1
- 833 0245 2E       		.byte	0x2e
- 834 0246 DE010000 		.4byte	0x1de
- 835 024a 18       		.byte	0x18
- 836 024b 0B       		.uleb128 0xb
- 837 024c 59010000 		.4byte	.LASF63
- 838 0250 01       		.byte	0x1
- 839 0251 2F       		.byte	0x2f
- 840 0252 2C000000 		.4byte	0x2c
- 841 0256 1A       		.byte	0x1a
- 842 0257 00       		.byte	0
- 843 0258 0C       		.uleb128 0xc
- 844 0259 04       		.byte	0x4
- 845 025a 5E020000 		.4byte	0x25e
- 846 025e 0D       		.uleb128 0xd
- 847 025f 2C000000 		.4byte	0x2c
- 848 0263 0C       		.uleb128 0xc
- 849 0264 04       		.byte	0x4
- 850 0265 D9010000 		.4byte	0x1d9
- 851 0269 03       		.uleb128 0x3
- 852 026a C3020000 		.4byte	.LASF64
- 853 026e 01       		.byte	0x1
- 854 026f 30       		.byte	0x30
- 855 0270 E3010000 		.4byte	0x1e3
- 856 0274 0E       		.uleb128 0xe
- 857 0275 E1020000 		.4byte	.LASF102
- 858 0279 01       		.byte	0x1
- 859 027a D5       		.byte	0xd5
- 860 027b 63020000 		.4byte	0x263
- 861 027f 00000000 		.4byte	.LFB117
- 862 0283 1C000000 		.4byte	.LFE117-.LFB117
- 863 0287 01       		.uleb128 0x1
- 864 0288 9C       		.byte	0x9c
- 865 0289 0F       		.uleb128 0xf
- 866 028a 8C050000 		.4byte	.LASF65
- 867 028e 01       		.byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 22
+ 794 0196 04       		.byte	0x4
+ 795 0197 C8020000 		.4byte	.LASF48
+ 796 019b 03       		.uleb128 0x3
+ 797 019c D5030000 		.4byte	.LASF49
+ 798 01a0 05       		.byte	0x5
+ 799 01a1 53       		.byte	0x53
+ 800 01a2 7B010000 		.4byte	0x17b
+ 801 01a6 03       		.uleb128 0x3
+ 802 01a7 0F030000 		.4byte	.LASF50
+ 803 01ab 05       		.byte	0x5
+ 804 01ac 54       		.byte	0x54
+ 805 01ad 82010000 		.4byte	0x182
+ 806 01b1 03       		.uleb128 0x3
+ 807 01b2 5A000000 		.4byte	.LASF51
+ 808 01b6 06       		.byte	0x6
+ 809 01b7 4D       		.byte	0x4d
+ 810 01b8 A6010000 		.4byte	0x1a6
+ 811 01bc 03       		.uleb128 0x3
+ 812 01bd 09010000 		.4byte	.LASF52
+ 813 01c1 06       		.byte	0x6
+ 814 01c2 4F       		.byte	0x4f
+ 815 01c3 A6010000 		.4byte	0x1a6
+ 816 01c7 03       		.uleb128 0x3
+ 817 01c8 33010000 		.4byte	.LASF53
+ 818 01cc 06       		.byte	0x6
+ 819 01cd 78       		.byte	0x78
+ 820 01ce 9B010000 		.4byte	0x19b
+ 821 01d2 02       		.uleb128 0x2
+ 822 01d3 04       		.byte	0x4
+ 823 01d4 07       		.byte	0x7
+ 824 01d5 AD000000 		.4byte	.LASF54
+ 825 01d9 09       		.uleb128 0x9
+ 826 01da 5E000000 		.4byte	0x5e
+ 827 01de 09       		.uleb128 0x9
+ 828 01df 2C000000 		.4byte	0x2c
+ 829 01e3 09       		.uleb128 0x9
+ 830 01e4 45000000 		.4byte	0x45
+ 831 01e8 0A       		.uleb128 0xa
+ 832 01e9 1C       		.byte	0x1c
+ 833 01ea 01       		.byte	0x1
+ 834 01eb 28       		.byte	0x28
+ 835 01ec 5D020000 		.4byte	0x25d
+ 836 01f0 0B       		.uleb128 0xb
+ 837 01f1 1D040000 		.4byte	.LASF55
+ 838 01f5 01       		.byte	0x1
+ 839 01f6 29       		.byte	0x29
+ 840 01f7 5D020000 		.4byte	0x25d
+ 841 01fb 00       		.byte	0
+ 842 01fc 0B       		.uleb128 0xb
+ 843 01fd 08030000 		.4byte	.LASF56
+ 844 0201 01       		.byte	0x1
+ 845 0202 2A       		.byte	0x2a
+ 846 0203 5E000000 		.4byte	0x5e
+ 847 0207 04       		.byte	0x4
+ 848 0208 0B       		.uleb128 0xb
+ 849 0209 9A020000 		.4byte	.LASF57
+ 850 020d 01       		.byte	0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 22
 
 
- 868 028f 67       		.byte	0x67
- 869 0290 3C010000 		.4byte	0x13c
- 870 0294 00000000 		.4byte	.LFB111
- 871 0298 0A000000 		.4byte	.LFE111-.LFB111
- 872 029c 01       		.uleb128 0x1
- 873 029d 9C       		.byte	0x9c
- 874 029e AC020000 		.4byte	0x2ac
- 875 02a2 10       		.uleb128 0x10
- 876 02a3 06000000 		.4byte	.LVL0
- 877 02a7 53050000 		.4byte	0x553
- 878 02ab 00       		.byte	0
- 879 02ac 0F       		.uleb128 0xf
- 880 02ad 45050000 		.4byte	.LASF66
- 881 02b1 01       		.byte	0x1
- 882 02b2 72       		.byte	0x72
- 883 02b3 3C010000 		.4byte	0x13c
- 884 02b7 00000000 		.4byte	.LFB112
- 885 02bb 0A000000 		.4byte	.LFE112-.LFB112
- 886 02bf 01       		.uleb128 0x1
- 887 02c0 9C       		.byte	0x9c
- 888 02c1 CF020000 		.4byte	0x2cf
- 889 02c5 10       		.uleb128 0x10
- 890 02c6 06000000 		.4byte	.LVL1
- 891 02ca 5E050000 		.4byte	0x55e
- 892 02ce 00       		.byte	0
- 893 02cf 0F       		.uleb128 0xf
- 894 02d0 EB040000 		.4byte	.LASF67
- 895 02d4 01       		.byte	0x1
- 896 02d5 46       		.byte	0x46
- 897 02d6 3C010000 		.4byte	0x13c
- 898 02da 00000000 		.4byte	.LFB110
- 899 02de 64000000 		.4byte	.LFE110-.LFB110
- 900 02e2 01       		.uleb128 0x1
- 901 02e3 9C       		.byte	0x9c
- 902 02e4 7C030000 		.4byte	0x37c
- 903 02e8 11       		.uleb128 0x11
- 904 02e9 14000000 		.4byte	.LVL2
- 905 02ed 69050000 		.4byte	0x569
- 906 02f1 09030000 		.4byte	0x309
- 907 02f5 12       		.uleb128 0x12
- 908 02f6 01       		.uleb128 0x1
- 909 02f7 50       		.byte	0x50
- 910 02f8 02       		.uleb128 0x2
- 911 02f9 75       		.byte	0x75
- 912 02fa 00       		.sleb128 0
- 913 02fb 12       		.uleb128 0x12
- 914 02fc 01       		.uleb128 0x1
- 915 02fd 51       		.byte	0x51
- 916 02fe 02       		.uleb128 0x2
- 917 02ff 08       		.byte	0x8
- 918 0300 80       		.byte	0x80
- 919 0301 12       		.uleb128 0x12
- 920 0302 01       		.uleb128 0x1
- 921 0303 52       		.byte	0x52
- 922 0304 03       		.uleb128 0x3
- 923 0305 0A       		.byte	0xa
- 924 0306 0002     		.2byte	0x200
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 23
+ 851 020e 2B       		.byte	0x2b
+ 852 020f 5E000000 		.4byte	0x5e
+ 853 0213 08       		.byte	0x8
+ 854 0214 0B       		.uleb128 0xb
+ 855 0215 19000000 		.4byte	.LASF58
+ 856 0219 01       		.byte	0x1
+ 857 021a 2C       		.byte	0x2c
+ 858 021b 68020000 		.4byte	0x268
+ 859 021f 0C       		.byte	0xc
+ 860 0220 0B       		.uleb128 0xb
+ 861 0221 7B010000 		.4byte	.LASF59
+ 862 0225 01       		.byte	0x1
+ 863 0226 2D       		.byte	0x2d
+ 864 0227 68020000 		.4byte	0x268
+ 865 022b 10       		.byte	0x10
+ 866 022c 0B       		.uleb128 0xb
+ 867 022d 4D000000 		.4byte	.LASF60
+ 868 0231 01       		.byte	0x1
+ 869 0232 2E       		.byte	0x2e
+ 870 0233 E3010000 		.4byte	0x1e3
+ 871 0237 14       		.byte	0x14
+ 872 0238 0B       		.uleb128 0xb
+ 873 0239 5B050000 		.4byte	.LASF61
+ 874 023d 01       		.byte	0x1
+ 875 023e 2F       		.byte	0x2f
+ 876 023f E3010000 		.4byte	0x1e3
+ 877 0243 16       		.byte	0x16
+ 878 0244 0B       		.uleb128 0xb
+ 879 0245 FC030000 		.4byte	.LASF62
+ 880 0249 01       		.byte	0x1
+ 881 024a 30       		.byte	0x30
+ 882 024b E3010000 		.4byte	0x1e3
+ 883 024f 18       		.byte	0x18
+ 884 0250 0B       		.uleb128 0xb
+ 885 0251 59010000 		.4byte	.LASF63
+ 886 0255 01       		.byte	0x1
+ 887 0256 31       		.byte	0x31
+ 888 0257 2C000000 		.4byte	0x2c
+ 889 025b 1A       		.byte	0x1a
+ 890 025c 00       		.byte	0
+ 891 025d 0C       		.uleb128 0xc
+ 892 025e 04       		.byte	0x4
+ 893 025f 63020000 		.4byte	0x263
+ 894 0263 0D       		.uleb128 0xd
+ 895 0264 2C000000 		.4byte	0x2c
+ 896 0268 0C       		.uleb128 0xc
+ 897 0269 04       		.byte	0x4
+ 898 026a DE010000 		.4byte	0x1de
+ 899 026e 03       		.uleb128 0x3
+ 900 026f D4020000 		.4byte	.LASF64
+ 901 0273 01       		.byte	0x1
+ 902 0274 32       		.byte	0x32
+ 903 0275 E8010000 		.4byte	0x1e8
+ 904 0279 0E       		.uleb128 0xe
+ 905 027a F2020000 		.4byte	.LASF104
+ 906 027e 01       		.byte	0x1
+ 907 027f D7       		.byte	0xd7
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 23
 
 
- 925 0308 00       		.byte	0
- 926 0309 11       		.uleb128 0x11
- 927 030a 20000000 		.4byte	.LVL3
- 928 030e 69050000 		.4byte	0x569
- 929 0312 2A030000 		.4byte	0x32a
- 930 0316 12       		.uleb128 0x12
- 931 0317 01       		.uleb128 0x1
- 932 0318 50       		.byte	0x50
- 933 0319 02       		.uleb128 0x2
- 934 031a 74       		.byte	0x74
- 935 031b 00       		.sleb128 0
- 936 031c 12       		.uleb128 0x12
- 937 031d 01       		.uleb128 0x1
- 938 031e 51       		.byte	0x51
- 939 031f 02       		.uleb128 0x2
- 940 0320 08       		.byte	0x8
- 941 0321 80       		.byte	0x80
- 942 0322 12       		.uleb128 0x12
- 943 0323 01       		.uleb128 0x1
- 944 0324 52       		.byte	0x52
- 945 0325 03       		.uleb128 0x3
- 946 0326 0A       		.byte	0xa
- 947 0327 0002     		.2byte	0x200
- 948 0329 00       		.byte	0
- 949 032a 11       		.uleb128 0x11
- 950 032b 3E000000 		.4byte	.LVL4
- 951 032f 74050000 		.4byte	0x574
- 952 0333 3D030000 		.4byte	0x33d
- 953 0337 12       		.uleb128 0x12
- 954 0338 01       		.uleb128 0x1
- 955 0339 50       		.byte	0x50
- 956 033a 01       		.uleb128 0x1
- 957 033b 31       		.byte	0x31
- 958 033c 00       		.byte	0
- 959 033d 11       		.uleb128 0x11
- 960 033e 44000000 		.4byte	.LVL5
- 961 0342 7F050000 		.4byte	0x57f
- 962 0346 50030000 		.4byte	0x350
- 963 034a 12       		.uleb128 0x12
- 964 034b 01       		.uleb128 0x1
- 965 034c 50       		.byte	0x50
- 966 034d 01       		.uleb128 0x1
- 967 034e 31       		.byte	0x31
- 968 034f 00       		.byte	0
- 969 0350 10       		.uleb128 0x10
- 970 0351 48000000 		.4byte	.LVL6
- 971 0355 AC020000 		.4byte	0x2ac
- 972 0359 10       		.uleb128 0x10
- 973 035a 4C000000 		.4byte	.LVL7
- 974 035e 8A050000 		.4byte	0x58a
- 975 0362 10       		.uleb128 0x10
- 976 0363 50000000 		.4byte	.LVL8
- 977 0367 95050000 		.4byte	0x595
- 978 036b 13       		.uleb128 0x13
- 979 036c 56000000 		.4byte	.LVL9
- 980 0370 A0050000 		.4byte	0x5a0
- 981 0374 12       		.uleb128 0x12
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 24
+ 908 0280 68020000 		.4byte	0x268
+ 909 0284 00000000 		.4byte	.LFB117
+ 910 0288 1C000000 		.4byte	.LFE117-.LFB117
+ 911 028c 01       		.uleb128 0x1
+ 912 028d 9C       		.byte	0x9c
+ 913 028e 0F       		.uleb128 0xf
+ 914 028f B8050000 		.4byte	.LASF65
+ 915 0293 01       		.byte	0x1
+ 916 0294 69       		.byte	0x69
+ 917 0295 3C010000 		.4byte	0x13c
+ 918 0299 00000000 		.4byte	.LFB111
+ 919 029d 0A000000 		.4byte	.LFE111-.LFB111
+ 920 02a1 01       		.uleb128 0x1
+ 921 02a2 9C       		.byte	0x9c
+ 922 02a3 B1020000 		.4byte	0x2b1
+ 923 02a7 10       		.uleb128 0x10
+ 924 02a8 06000000 		.4byte	.LVL0
+ 925 02ac 8E050000 		.4byte	0x58e
+ 926 02b0 00       		.byte	0
+ 927 02b1 0F       		.uleb128 0xf
+ 928 02b2 71050000 		.4byte	.LASF66
+ 929 02b6 01       		.byte	0x1
+ 930 02b7 74       		.byte	0x74
+ 931 02b8 3C010000 		.4byte	0x13c
+ 932 02bc 00000000 		.4byte	.LFB112
+ 933 02c0 0A000000 		.4byte	.LFE112-.LFB112
+ 934 02c4 01       		.uleb128 0x1
+ 935 02c5 9C       		.byte	0x9c
+ 936 02c6 D4020000 		.4byte	0x2d4
+ 937 02ca 10       		.uleb128 0x10
+ 938 02cb 06000000 		.4byte	.LVL1
+ 939 02cf 99050000 		.4byte	0x599
+ 940 02d3 00       		.byte	0
+ 941 02d4 0F       		.uleb128 0xf
+ 942 02d5 17050000 		.4byte	.LASF67
+ 943 02d9 01       		.byte	0x1
+ 944 02da 48       		.byte	0x48
+ 945 02db 3C010000 		.4byte	0x13c
+ 946 02df 00000000 		.4byte	.LFB110
+ 947 02e3 64000000 		.4byte	.LFE110-.LFB110
+ 948 02e7 01       		.uleb128 0x1
+ 949 02e8 9C       		.byte	0x9c
+ 950 02e9 81030000 		.4byte	0x381
+ 951 02ed 11       		.uleb128 0x11
+ 952 02ee 14000000 		.4byte	.LVL2
+ 953 02f2 A4050000 		.4byte	0x5a4
+ 954 02f6 0E030000 		.4byte	0x30e
+ 955 02fa 12       		.uleb128 0x12
+ 956 02fb 01       		.uleb128 0x1
+ 957 02fc 50       		.byte	0x50
+ 958 02fd 02       		.uleb128 0x2
+ 959 02fe 75       		.byte	0x75
+ 960 02ff 00       		.sleb128 0
+ 961 0300 12       		.uleb128 0x12
+ 962 0301 01       		.uleb128 0x1
+ 963 0302 51       		.byte	0x51
+ 964 0303 02       		.uleb128 0x2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 24
 
 
- 982 0375 01       		.uleb128 0x1
- 983 0376 50       		.byte	0x50
- 984 0377 02       		.uleb128 0x2
- 985 0378 09       		.byte	0x9
- 986 0379 80       		.byte	0x80
- 987 037a 00       		.byte	0
- 988 037b 00       		.byte	0
- 989 037c 14       		.uleb128 0x14
- 990 037d 25010000 		.4byte	.LASF70
- 991 0381 01       		.byte	0x1
- 992 0382 82       		.byte	0x82
- 993 0383 3C010000 		.4byte	0x13c
- 994 0387 00000000 		.4byte	.LFB113
- 995 038b 14000000 		.4byte	.LFE113-.LFB113
- 996 038f 01       		.uleb128 0x1
- 997 0390 9C       		.byte	0x9c
- 998 0391 B2030000 		.4byte	0x3b2
- 999 0395 15       		.uleb128 0x15
- 1000 0396 C1050000 		.4byte	.LASF68
- 1001 039a 01       		.byte	0x1
- 1002 039b 82       		.byte	0x82
- 1003 039c B2030000 		.4byte	0x3b2
- 1004 03a0 00000000 		.4byte	.LLST0
- 1005 03a4 16       		.uleb128 0x16
- 1006 03a5 CD030000 		.4byte	.LASF69
- 1007 03a9 01       		.byte	0x1
- 1008 03aa 82       		.byte	0x82
- 1009 03ab 5E000000 		.4byte	0x5e
- 1010 03af 01       		.uleb128 0x1
- 1011 03b0 51       		.byte	0x51
- 1012 03b1 00       		.byte	0
- 1013 03b2 0D       		.uleb128 0xd
- 1014 03b3 58020000 		.4byte	0x258
- 1015 03b7 14       		.uleb128 0x14
- 1016 03b8 66050000 		.4byte	.LASF71
- 1017 03bc 01       		.byte	0x1
- 1018 03bd 94       		.byte	0x94
- 1019 03be 3C010000 		.4byte	0x13c
- 1020 03c2 00000000 		.4byte	.LFB114
- 1021 03c6 14000000 		.4byte	.LFE114-.LFB114
- 1022 03ca 01       		.uleb128 0x1
- 1023 03cb 9C       		.byte	0x9c
- 1024 03cc E0030000 		.4byte	0x3e0
- 1025 03d0 15       		.uleb128 0x15
- 1026 03d1 63020000 		.4byte	.LASF72
- 1027 03d5 01       		.byte	0x1
- 1028 03d6 94       		.byte	0x94
- 1029 03d7 2C000000 		.4byte	0x2c
- 1030 03db 22000000 		.4byte	.LLST1
- 1031 03df 00       		.byte	0
- 1032 03e0 14       		.uleb128 0x14
- 1033 03e1 34030000 		.4byte	.LASF73
- 1034 03e5 01       		.byte	0x1
- 1035 03e6 9D       		.byte	0x9d
- 1036 03e7 3C010000 		.4byte	0x13c
- 1037 03eb 00000000 		.4byte	.LFB115
- 1038 03ef 70000000 		.4byte	.LFE115-.LFB115
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 25
+ 965 0304 08       		.byte	0x8
+ 966 0305 80       		.byte	0x80
+ 967 0306 12       		.uleb128 0x12
+ 968 0307 01       		.uleb128 0x1
+ 969 0308 52       		.byte	0x52
+ 970 0309 03       		.uleb128 0x3
+ 971 030a 0A       		.byte	0xa
+ 972 030b 0002     		.2byte	0x200
+ 973 030d 00       		.byte	0
+ 974 030e 11       		.uleb128 0x11
+ 975 030f 20000000 		.4byte	.LVL3
+ 976 0313 A4050000 		.4byte	0x5a4
+ 977 0317 2F030000 		.4byte	0x32f
+ 978 031b 12       		.uleb128 0x12
+ 979 031c 01       		.uleb128 0x1
+ 980 031d 50       		.byte	0x50
+ 981 031e 02       		.uleb128 0x2
+ 982 031f 74       		.byte	0x74
+ 983 0320 00       		.sleb128 0
+ 984 0321 12       		.uleb128 0x12
+ 985 0322 01       		.uleb128 0x1
+ 986 0323 51       		.byte	0x51
+ 987 0324 02       		.uleb128 0x2
+ 988 0325 08       		.byte	0x8
+ 989 0326 80       		.byte	0x80
+ 990 0327 12       		.uleb128 0x12
+ 991 0328 01       		.uleb128 0x1
+ 992 0329 52       		.byte	0x52
+ 993 032a 03       		.uleb128 0x3
+ 994 032b 0A       		.byte	0xa
+ 995 032c 0002     		.2byte	0x200
+ 996 032e 00       		.byte	0
+ 997 032f 11       		.uleb128 0x11
+ 998 0330 3E000000 		.4byte	.LVL4
+ 999 0334 AF050000 		.4byte	0x5af
+ 1000 0338 42030000 		.4byte	0x342
+ 1001 033c 12       		.uleb128 0x12
+ 1002 033d 01       		.uleb128 0x1
+ 1003 033e 50       		.byte	0x50
+ 1004 033f 01       		.uleb128 0x1
+ 1005 0340 31       		.byte	0x31
+ 1006 0341 00       		.byte	0
+ 1007 0342 11       		.uleb128 0x11
+ 1008 0343 44000000 		.4byte	.LVL5
+ 1009 0347 BA050000 		.4byte	0x5ba
+ 1010 034b 55030000 		.4byte	0x355
+ 1011 034f 12       		.uleb128 0x12
+ 1012 0350 01       		.uleb128 0x1
+ 1013 0351 50       		.byte	0x50
+ 1014 0352 01       		.uleb128 0x1
+ 1015 0353 31       		.byte	0x31
+ 1016 0354 00       		.byte	0
+ 1017 0355 10       		.uleb128 0x10
+ 1018 0356 48000000 		.4byte	.LVL6
+ 1019 035a B1020000 		.4byte	0x2b1
+ 1020 035e 10       		.uleb128 0x10
+ 1021 035f 4C000000 		.4byte	.LVL7
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 25
 
 
- 1039 03f3 01       		.uleb128 0x1
- 1040 03f4 9C       		.byte	0x9c
- 1041 03f5 2E040000 		.4byte	0x42e
- 1042 03f9 15       		.uleb128 0x15
- 1043 03fa E6040000 		.4byte	.LASF74
- 1044 03fe 01       		.byte	0x1
- 1045 03ff 9D       		.byte	0x9d
- 1046 0400 B2030000 		.4byte	0x3b2
- 1047 0404 4F000000 		.4byte	.LLST2
- 1048 0408 15       		.uleb128 0x15
- 1049 0409 76050000 		.4byte	.LASF75
- 1050 040d 01       		.byte	0x1
- 1051 040e 9D       		.byte	0x9d
- 1052 040f 45000000 		.4byte	0x45
- 1053 0413 86000000 		.4byte	.LLST3
- 1054 0417 17       		.uleb128 0x17
- 1055 0418 6900     		.ascii	"i\000"
- 1056 041a 01       		.byte	0x1
- 1057 041b 9F       		.byte	0x9f
- 1058 041c 45000000 		.4byte	0x45
- 1059 0420 B2000000 		.4byte	.LLST4
- 1060 0424 10       		.uleb128 0x10
- 1061 0425 2C000000 		.4byte	.LVL16
- 1062 0429 74020000 		.4byte	0x274
- 1063 042d 00       		.byte	0
- 1064 042e 0F       		.uleb128 0xf
- 1065 042f 69010000 		.4byte	.LASF76
- 1066 0433 01       		.byte	0x1
- 1067 0434 C2       		.byte	0xc2
- 1068 0435 3C010000 		.4byte	0x13c
- 1069 0439 00000000 		.4byte	.LFB116
- 1070 043d 1C000000 		.4byte	.LFE116-.LFB116
- 1071 0441 01       		.uleb128 0x1
- 1072 0442 9C       		.byte	0x9c
- 1073 0443 57040000 		.4byte	0x457
- 1074 0447 18       		.uleb128 0x18
- 1075 0448 62010000 		.4byte	.LASF77
- 1076 044c 01       		.byte	0x1
- 1077 044d C4       		.byte	0xc4
- 1078 044e 63020000 		.4byte	0x263
- 1079 0452 F2000000 		.4byte	.LLST5
- 1080 0456 00       		.byte	0
- 1081 0457 0F       		.uleb128 0xf
- 1082 0458 A7010000 		.4byte	.LASF78
- 1083 045c 01       		.byte	0x1
- 1084 045d E5       		.byte	0xe5
- 1085 045e 3C010000 		.4byte	0x13c
- 1086 0462 00000000 		.4byte	.LFB118
- 1087 0466 70000000 		.4byte	.LFE118-.LFB118
- 1088 046a 01       		.uleb128 0x1
- 1089 046b 9C       		.byte	0x9c
- 1090 046c C7040000 		.4byte	0x4c7
- 1091 0470 19       		.uleb128 0x19
- 1092 0471 14000000 		.4byte	.LBB2
- 1093 0475 3E000000 		.4byte	.LBE2-.LBB2
- 1094 0479 AB040000 		.4byte	0x4ab
- 1095 047d 18       		.uleb128 0x18
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 26
+ 1022 0363 C5050000 		.4byte	0x5c5
+ 1023 0367 10       		.uleb128 0x10
+ 1024 0368 50000000 		.4byte	.LVL8
+ 1025 036c D0050000 		.4byte	0x5d0
+ 1026 0370 13       		.uleb128 0x13
+ 1027 0371 56000000 		.4byte	.LVL9
+ 1028 0375 DB050000 		.4byte	0x5db
+ 1029 0379 12       		.uleb128 0x12
+ 1030 037a 01       		.uleb128 0x1
+ 1031 037b 50       		.byte	0x50
+ 1032 037c 02       		.uleb128 0x2
+ 1033 037d 09       		.byte	0x9
+ 1034 037e 80       		.byte	0x80
+ 1035 037f 00       		.byte	0
+ 1036 0380 00       		.byte	0
+ 1037 0381 14       		.uleb128 0x14
+ 1038 0382 25010000 		.4byte	.LASF70
+ 1039 0386 01       		.byte	0x1
+ 1040 0387 84       		.byte	0x84
+ 1041 0388 3C010000 		.4byte	0x13c
+ 1042 038c 00000000 		.4byte	.LFB113
+ 1043 0390 14000000 		.4byte	.LFE113-.LFB113
+ 1044 0394 01       		.uleb128 0x1
+ 1045 0395 9C       		.byte	0x9c
+ 1046 0396 B7030000 		.4byte	0x3b7
+ 1047 039a 15       		.uleb128 0x15
+ 1048 039b ED050000 		.4byte	.LASF68
+ 1049 039f 01       		.byte	0x1
+ 1050 03a0 84       		.byte	0x84
+ 1051 03a1 B7030000 		.4byte	0x3b7
+ 1052 03a5 00000000 		.4byte	.LLST0
+ 1053 03a9 16       		.uleb128 0x16
+ 1054 03aa DE030000 		.4byte	.LASF69
+ 1055 03ae 01       		.byte	0x1
+ 1056 03af 84       		.byte	0x84
+ 1057 03b0 5E000000 		.4byte	0x5e
+ 1058 03b4 01       		.uleb128 0x1
+ 1059 03b5 51       		.byte	0x51
+ 1060 03b6 00       		.byte	0
+ 1061 03b7 0D       		.uleb128 0xd
+ 1062 03b8 5D020000 		.4byte	0x25d
+ 1063 03bc 14       		.uleb128 0x14
+ 1064 03bd 92050000 		.4byte	.LASF71
+ 1065 03c1 01       		.byte	0x1
+ 1066 03c2 96       		.byte	0x96
+ 1067 03c3 3C010000 		.4byte	0x13c
+ 1068 03c7 00000000 		.4byte	.LFB114
+ 1069 03cb 14000000 		.4byte	.LFE114-.LFB114
+ 1070 03cf 01       		.uleb128 0x1
+ 1071 03d0 9C       		.byte	0x9c
+ 1072 03d1 E5030000 		.4byte	0x3e5
+ 1073 03d5 15       		.uleb128 0x15
+ 1074 03d6 74020000 		.4byte	.LASF72
+ 1075 03da 01       		.byte	0x1
+ 1076 03db 96       		.byte	0x96
+ 1077 03dc 2C000000 		.4byte	0x2c
+ 1078 03e0 22000000 		.4byte	.LLST1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 26
 
 
- 1096 047e 62000000 		.4byte	.LASF79
- 1097 0482 01       		.byte	0x1
- 1098 0483 ED       		.byte	0xed
- 1099 0484 45000000 		.4byte	0x45
- 1100 0488 14010000 		.4byte	.LLST6
- 1101 048c 10       		.uleb128 0x10
- 1102 048d 30000000 		.4byte	.LVL32
- 1103 0491 A0050000 		.4byte	0x5a0
- 1104 0495 13       		.uleb128 0x13
- 1105 0496 50000000 		.4byte	.LVL33
- 1106 049a AB050000 		.4byte	0x5ab
- 1107 049e 12       		.uleb128 0x12
- 1108 049f 01       		.uleb128 0x1
- 1109 04a0 50       		.byte	0x50
- 1110 04a1 01       		.uleb128 0x1
- 1111 04a2 33       		.byte	0x33
- 1112 04a3 12       		.uleb128 0x12
- 1113 04a4 01       		.uleb128 0x1
- 1114 04a5 51       		.byte	0x51
- 1115 04a6 02       		.uleb128 0x2
- 1116 04a7 08       		.byte	0x8
- 1117 04a8 20       		.byte	0x20
- 1118 04a9 00       		.byte	0
- 1119 04aa 00       		.byte	0
- 1120 04ab 10       		.uleb128 0x10
- 1121 04ac 56000000 		.4byte	.LVL34
- 1122 04b0 AC020000 		.4byte	0x2ac
- 1123 04b4 10       		.uleb128 0x10
- 1124 04b5 5A000000 		.4byte	.LVL35
- 1125 04b9 2E040000 		.4byte	0x42e
- 1126 04bd 10       		.uleb128 0x10
- 1127 04be 5E000000 		.4byte	.LVL36
- 1128 04c2 89020000 		.4byte	0x289
- 1129 04c6 00       		.byte	0
- 1130 04c7 1A       		.uleb128 0x1a
- 1131 04c8 2C000000 		.4byte	0x2c
- 1132 04cc D8040000 		.4byte	0x4d8
- 1133 04d0 1B       		.uleb128 0x1b
- 1134 04d1 D2010000 		.4byte	0x1d2
- 1135 04d5 FF01     		.2byte	0x1ff
- 1136 04d7 00       		.byte	0
- 1137 04d8 1C       		.uleb128 0x1c
- 1138 04d9 B6000000 		.4byte	.LASF80
- 1139 04dd 01       		.byte	0x1
- 1140 04de 37       		.byte	0x37
- 1141 04df C7040000 		.4byte	0x4c7
- 1142 04e3 05       		.uleb128 0x5
- 1143 04e4 03       		.byte	0x3
- 1144 04e5 00020000 		.4byte	SOUND__bufA
- 1145 04e9 1C       		.uleb128 0x1c
- 1146 04ea C2000000 		.4byte	.LASF81
- 1147 04ee 01       		.byte	0x1
- 1148 04ef 38       		.byte	0x38
- 1149 04f0 C7040000 		.4byte	0x4c7
- 1150 04f4 05       		.uleb128 0x5
- 1151 04f5 03       		.byte	0x3
- 1152 04f6 00000000 		.4byte	SOUND__bufB
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 27
+ 1079 03e4 00       		.byte	0
+ 1080 03e5 14       		.uleb128 0x14
+ 1081 03e6 45030000 		.4byte	.LASF73
+ 1082 03ea 01       		.byte	0x1
+ 1083 03eb 9F       		.byte	0x9f
+ 1084 03ec 3C010000 		.4byte	0x13c
+ 1085 03f0 00000000 		.4byte	.LFB115
+ 1086 03f4 70000000 		.4byte	.LFE115-.LFB115
+ 1087 03f8 01       		.uleb128 0x1
+ 1088 03f9 9C       		.byte	0x9c
+ 1089 03fa 33040000 		.4byte	0x433
+ 1090 03fe 15       		.uleb128 0x15
+ 1091 03ff 12050000 		.4byte	.LASF74
+ 1092 0403 01       		.byte	0x1
+ 1093 0404 9F       		.byte	0x9f
+ 1094 0405 B7030000 		.4byte	0x3b7
+ 1095 0409 4F000000 		.4byte	.LLST2
+ 1096 040d 15       		.uleb128 0x15
+ 1097 040e A2050000 		.4byte	.LASF75
+ 1098 0412 01       		.byte	0x1
+ 1099 0413 9F       		.byte	0x9f
+ 1100 0414 45000000 		.4byte	0x45
+ 1101 0418 86000000 		.4byte	.LLST3
+ 1102 041c 17       		.uleb128 0x17
+ 1103 041d 6900     		.ascii	"i\000"
+ 1104 041f 01       		.byte	0x1
+ 1105 0420 A1       		.byte	0xa1
+ 1106 0421 45000000 		.4byte	0x45
+ 1107 0425 B2000000 		.4byte	.LLST4
+ 1108 0429 10       		.uleb128 0x10
+ 1109 042a 2C000000 		.4byte	.LVL16
+ 1110 042e 79020000 		.4byte	0x279
+ 1111 0432 00       		.byte	0
+ 1112 0433 0F       		.uleb128 0xf
+ 1113 0434 69010000 		.4byte	.LASF76
+ 1114 0438 01       		.byte	0x1
+ 1115 0439 C4       		.byte	0xc4
+ 1116 043a 3C010000 		.4byte	0x13c
+ 1117 043e 00000000 		.4byte	.LFB116
+ 1118 0442 1C000000 		.4byte	.LFE116-.LFB116
+ 1119 0446 01       		.uleb128 0x1
+ 1120 0447 9C       		.byte	0x9c
+ 1121 0448 5C040000 		.4byte	0x45c
+ 1122 044c 18       		.uleb128 0x18
+ 1123 044d 62010000 		.4byte	.LASF77
+ 1124 0451 01       		.byte	0x1
+ 1125 0452 C6       		.byte	0xc6
+ 1126 0453 68020000 		.4byte	0x268
+ 1127 0457 F2000000 		.4byte	.LLST5
+ 1128 045b 00       		.byte	0
+ 1129 045c 14       		.uleb128 0x14
+ 1130 045d B7040000 		.4byte	.LASF78
+ 1131 0461 01       		.byte	0x1
+ 1132 0462 E7       		.byte	0xe7
+ 1133 0463 5E000000 		.4byte	0x5e
+ 1134 0467 00000000 		.4byte	.LFB118
+ 1135 046b 14000000 		.4byte	.LFE118-.LFB118
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 27
 
 
- 1153 04fa 1C       		.uleb128 0x1c
- 1154 04fb F6040000 		.4byte	.LASF82
- 1155 04ff 01       		.byte	0x1
- 1156 0500 3A       		.byte	0x3a
- 1157 0501 69020000 		.4byte	0x269
- 1158 0505 05       		.uleb128 0x5
- 1159 0506 03       		.byte	0x3
- 1160 0507 00000000 		.4byte	SOUND__currentSong
- 1161 050b 1D       		.uleb128 0x1d
- 1162 050c FB050000 		.4byte	.LASF83
- 1163 0510 07       		.byte	0x7
- 1164 0511 40       		.byte	0x40
- 1165 0512 B1010000 		.4byte	0x1b1
- 1166 0516 1D       		.uleb128 0x1d
- 1167 0517 DE010000 		.4byte	.LASF84
- 1168 051b 07       		.byte	0x7
- 1169 051c 47       		.byte	0x47
- 1170 051d BC010000 		.4byte	0x1bc
- 1171 0521 1D       		.uleb128 0x1d
- 1172 0522 1C050000 		.4byte	.LASF85
- 1173 0526 07       		.byte	0x7
- 1174 0527 4A       		.byte	0x4a
- 1175 0528 B1010000 		.4byte	0x1b1
- 1176 052c 1D       		.uleb128 0x1d
- 1177 052d 00000000 		.4byte	.LASF86
- 1178 0531 08       		.byte	0x8
- 1179 0532 48       		.byte	0x48
- 1180 0533 C7010000 		.4byte	0x1c7
- 1181 0537 1D       		.uleb128 0x1d
- 1182 0538 CE000000 		.4byte	.LASF87
- 1183 053c 09       		.byte	0x9
- 1184 053d 44       		.byte	0x44
- 1185 053e B1010000 		.4byte	0x1b1
- 1186 0542 1E       		.uleb128 0x1e
- 1187 0543 D5050000 		.4byte	.LASF88
- 1188 0547 0A       		.byte	0xa
- 1189 0548 1207     		.2byte	0x712
- 1190 054a 4E050000 		.4byte	0x54e
- 1191 054e 09       		.uleb128 0x9
- 1192 054f 89010000 		.4byte	0x189
- 1193 0553 1F       		.uleb128 0x1f
- 1194 0554 F7010000 		.4byte	.LASF89
- 1195 0558 F7010000 		.4byte	.LASF89
- 1196 055c 0B       		.byte	0xb
- 1197 055d 27       		.byte	0x27
- 1198 055e 1F       		.uleb128 0x1f
- 1199 055f E3000000 		.4byte	.LASF90
- 1200 0563 E3000000 		.4byte	.LASF90
- 1201 0567 0B       		.byte	0xb
- 1202 0568 28       		.byte	0x28
- 1203 0569 1F       		.uleb128 0x1f
- 1204 056a 85050000 		.4byte	.LASF91
- 1205 056e 85050000 		.4byte	.LASF91
- 1206 0572 0C       		.byte	0xc
- 1207 0573 19       		.byte	0x19
- 1208 0574 1F       		.uleb128 0x1f
- 1209 0575 4F020000 		.4byte	.LASF92
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 28
+ 1136 046f 01       		.uleb128 0x1
+ 1137 0470 9C       		.byte	0x9c
+ 1138 0471 81040000 		.4byte	0x481
+ 1139 0475 19       		.uleb128 0x19
+ 1140 0476 6E00     		.ascii	"n\000"
+ 1141 0478 01       		.byte	0x1
+ 1142 0479 E9       		.byte	0xe9
+ 1143 047a 5E000000 		.4byte	0x5e
+ 1144 047e 01       		.uleb128 0x1
+ 1145 047f 50       		.byte	0x50
+ 1146 0480 00       		.byte	0
+ 1147 0481 0F       		.uleb128 0xf
+ 1148 0482 A7010000 		.4byte	.LASF79
+ 1149 0486 01       		.byte	0x1
+ 1150 0487 F2       		.byte	0xf2
+ 1151 0488 3C010000 		.4byte	0x13c
+ 1152 048c 00000000 		.4byte	.LFB119
+ 1153 0490 88000000 		.4byte	.LFE119-.LFB119
+ 1154 0494 01       		.uleb128 0x1
+ 1155 0495 9C       		.byte	0x9c
+ 1156 0496 F1040000 		.4byte	0x4f1
+ 1157 049a 1A       		.uleb128 0x1a
+ 1158 049b 16000000 		.4byte	.LBB2
+ 1159 049f 3E000000 		.4byte	.LBE2-.LBB2
+ 1160 04a3 D5040000 		.4byte	0x4d5
+ 1161 04a7 18       		.uleb128 0x18
+ 1162 04a8 62000000 		.4byte	.LASF80
+ 1163 04ac 01       		.byte	0x1
+ 1164 04ad FA       		.byte	0xfa
+ 1165 04ae 45000000 		.4byte	0x45
+ 1166 04b2 14010000 		.4byte	.LLST6
+ 1167 04b6 10       		.uleb128 0x10
+ 1168 04b7 32000000 		.4byte	.LVL33
+ 1169 04bb DB050000 		.4byte	0x5db
+ 1170 04bf 13       		.uleb128 0x13
+ 1171 04c0 52000000 		.4byte	.LVL34
+ 1172 04c4 E6050000 		.4byte	0x5e6
+ 1173 04c8 12       		.uleb128 0x12
+ 1174 04c9 01       		.uleb128 0x1
+ 1175 04ca 50       		.byte	0x50
+ 1176 04cb 01       		.uleb128 0x1
+ 1177 04cc 33       		.byte	0x33
+ 1178 04cd 12       		.uleb128 0x12
+ 1179 04ce 01       		.uleb128 0x1
+ 1180 04cf 51       		.byte	0x51
+ 1181 04d0 02       		.uleb128 0x2
+ 1182 04d1 08       		.byte	0x8
+ 1183 04d2 20       		.byte	0x20
+ 1184 04d3 00       		.byte	0
+ 1185 04d4 00       		.byte	0
+ 1186 04d5 10       		.uleb128 0x10
+ 1187 04d6 6C000000 		.4byte	.LVL35
+ 1188 04da B1020000 		.4byte	0x2b1
+ 1189 04de 10       		.uleb128 0x10
+ 1190 04df 70000000 		.4byte	.LVL36
+ 1191 04e3 33040000 		.4byte	0x433
+ 1192 04e7 10       		.uleb128 0x10
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 28
 
 
- 1210 0579 4F020000 		.4byte	.LASF92
- 1211 057d 0D       		.byte	0xd
- 1212 057e 2F       		.byte	0x2f
- 1213 057f 1F       		.uleb128 0x1f
- 1214 0580 D8030000 		.4byte	.LASF93
- 1215 0584 D8030000 		.4byte	.LASF93
- 1216 0588 0E       		.byte	0xe
- 1217 0589 26       		.byte	0x26
- 1218 058a 1F       		.uleb128 0x1f
- 1219 058b A1020000 		.4byte	.LASF94
- 1220 058f A1020000 		.4byte	.LASF94
- 1221 0593 0F       		.byte	0xf
- 1222 0594 27       		.byte	0x27
- 1223 0595 1F       		.uleb128 0x1f
- 1224 0596 C3040000 		.4byte	.LASF95
- 1225 059a C3040000 		.4byte	.LASF95
- 1226 059e 10       		.byte	0x10
- 1227 059f 92       		.byte	0x92
- 1228 05a0 1F       		.uleb128 0x1f
- 1229 05a1 F5030000 		.4byte	.LASF96
- 1230 05a5 F5030000 		.4byte	.LASF96
- 1231 05a9 10       		.byte	0x10
- 1232 05aa C3       		.byte	0xc3
- 1233 05ab 20       		.uleb128 0x20
- 1234 05ac C6050000 		.4byte	.LASF97
- 1235 05b0 C6050000 		.4byte	.LASF97
- 1236 05b4 11       		.byte	0x11
- 1237 05b5 4A01     		.2byte	0x14a
- 1238 05b7 00       		.byte	0
- 1239              		.section	.debug_abbrev,"",%progbits
- 1240              	.Ldebug_abbrev0:
- 1241 0000 01       		.uleb128 0x1
- 1242 0001 11       		.uleb128 0x11
- 1243 0002 01       		.byte	0x1
- 1244 0003 25       		.uleb128 0x25
- 1245 0004 0E       		.uleb128 0xe
- 1246 0005 13       		.uleb128 0x13
- 1247 0006 0B       		.uleb128 0xb
- 1248 0007 03       		.uleb128 0x3
- 1249 0008 0E       		.uleb128 0xe
- 1250 0009 1B       		.uleb128 0x1b
- 1251 000a 0E       		.uleb128 0xe
- 1252 000b 55       		.uleb128 0x55
- 1253 000c 17       		.uleb128 0x17
- 1254 000d 11       		.uleb128 0x11
- 1255 000e 01       		.uleb128 0x1
- 1256 000f 10       		.uleb128 0x10
- 1257 0010 17       		.uleb128 0x17
- 1258 0011 00       		.byte	0
- 1259 0012 00       		.byte	0
- 1260 0013 02       		.uleb128 0x2
- 1261 0014 24       		.uleb128 0x24
- 1262 0015 00       		.byte	0
- 1263 0016 0B       		.uleb128 0xb
- 1264 0017 0B       		.uleb128 0xb
- 1265 0018 3E       		.uleb128 0x3e
- 1266 0019 0B       		.uleb128 0xb
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 29
+ 1193 04e8 74000000 		.4byte	.LVL37
+ 1194 04ec 8E020000 		.4byte	0x28e
+ 1195 04f0 00       		.byte	0
+ 1196 04f1 1B       		.uleb128 0x1b
+ 1197 04f2 F7010000 		.4byte	.LASF81
+ 1198 04f6 01       		.byte	0x1
+ 1199 04f7 1E       		.byte	0x1e
+ 1200 04f8 D9010000 		.4byte	0x1d9
+ 1201 04fc 05       		.uleb128 0x5
+ 1202 04fd 03       		.byte	0x3
+ 1203 04fe 00040000 		.4byte	SOUND__underruns
+ 1204 0502 1C       		.uleb128 0x1c
+ 1205 0503 2C000000 		.4byte	0x2c
+ 1206 0507 13050000 		.4byte	0x513
+ 1207 050b 1D       		.uleb128 0x1d
+ 1208 050c D2010000 		.4byte	0x1d2
+ 1209 0510 FF01     		.2byte	0x1ff
+ 1210 0512 00       		.byte	0
+ 1211 0513 1B       		.uleb128 0x1b
+ 1212 0514 B6000000 		.4byte	.LASF82
+ 1213 0518 01       		.byte	0x1
+ 1214 0519 39       		.byte	0x39
+ 1215 051a 02050000 		.4byte	0x502
+ 1216 051e 05       		.uleb128 0x5
+ 1217 051f 03       		.byte	0x3
+ 1218 0520 00020000 		.4byte	SOUND__bufA
+ 1219 0524 1B       		.uleb128 0x1b
+ 1220 0525 C2000000 		.4byte	.LASF83
+ 1221 0529 01       		.byte	0x1
+ 1222 052a 3A       		.byte	0x3a
+ 1223 052b 02050000 		.4byte	0x502
+ 1224 052f 05       		.uleb128 0x5
+ 1225 0530 03       		.byte	0x3
+ 1226 0531 00000000 		.4byte	SOUND__bufB
+ 1227 0535 1B       		.uleb128 0x1b
+ 1228 0536 22050000 		.4byte	.LASF84
+ 1229 053a 01       		.byte	0x1
+ 1230 053b 3C       		.byte	0x3c
+ 1231 053c 6E020000 		.4byte	0x26e
+ 1232 0540 05       		.uleb128 0x5
+ 1233 0541 03       		.byte	0x3
+ 1234 0542 00000000 		.4byte	SOUND__currentSong
+ 1235 0546 1E       		.uleb128 0x1e
+ 1236 0547 27060000 		.4byte	.LASF85
+ 1237 054b 07       		.byte	0x7
+ 1238 054c 40       		.byte	0x40
+ 1239 054d B1010000 		.4byte	0x1b1
+ 1240 0551 1E       		.uleb128 0x1e
+ 1241 0552 B7010000 		.4byte	.LASF86
+ 1242 0556 07       		.byte	0x7
+ 1243 0557 47       		.byte	0x47
+ 1244 0558 BC010000 		.4byte	0x1bc
+ 1245 055c 1E       		.uleb128 0x1e
+ 1246 055d 48050000 		.4byte	.LASF87
+ 1247 0561 07       		.byte	0x7
+ 1248 0562 4A       		.byte	0x4a
+ 1249 0563 B1010000 		.4byte	0x1b1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 29
 
 
- 1267 001a 03       		.uleb128 0x3
- 1268 001b 0E       		.uleb128 0xe
- 1269 001c 00       		.byte	0
- 1270 001d 00       		.byte	0
- 1271 001e 03       		.uleb128 0x3
- 1272 001f 16       		.uleb128 0x16
- 1273 0020 00       		.byte	0
- 1274 0021 03       		.uleb128 0x3
- 1275 0022 0E       		.uleb128 0xe
- 1276 0023 3A       		.uleb128 0x3a
- 1277 0024 0B       		.uleb128 0xb
- 1278 0025 3B       		.uleb128 0x3b
- 1279 0026 0B       		.uleb128 0xb
- 1280 0027 49       		.uleb128 0x49
- 1281 0028 13       		.uleb128 0x13
- 1282 0029 00       		.byte	0
- 1283 002a 00       		.byte	0
- 1284 002b 04       		.uleb128 0x4
- 1285 002c 04       		.uleb128 0x4
- 1286 002d 01       		.byte	0x1
- 1287 002e 0B       		.uleb128 0xb
- 1288 002f 0B       		.uleb128 0xb
- 1289 0030 49       		.uleb128 0x49
- 1290 0031 13       		.uleb128 0x13
- 1291 0032 3A       		.uleb128 0x3a
- 1292 0033 0B       		.uleb128 0xb
- 1293 0034 3B       		.uleb128 0x3b
- 1294 0035 0B       		.uleb128 0xb
- 1295 0036 01       		.uleb128 0x1
- 1296 0037 13       		.uleb128 0x13
- 1297 0038 00       		.byte	0
- 1298 0039 00       		.byte	0
- 1299 003a 05       		.uleb128 0x5
- 1300 003b 28       		.uleb128 0x28
- 1301 003c 00       		.byte	0
- 1302 003d 03       		.uleb128 0x3
- 1303 003e 0E       		.uleb128 0xe
- 1304 003f 1C       		.uleb128 0x1c
- 1305 0040 0B       		.uleb128 0xb
- 1306 0041 00       		.byte	0
- 1307 0042 00       		.byte	0
- 1308 0043 06       		.uleb128 0x6
- 1309 0044 28       		.uleb128 0x28
- 1310 0045 00       		.byte	0
- 1311 0046 03       		.uleb128 0x3
- 1312 0047 0E       		.uleb128 0xe
- 1313 0048 1C       		.uleb128 0x1c
- 1314 0049 0D       		.uleb128 0xd
- 1315 004a 00       		.byte	0
- 1316 004b 00       		.byte	0
- 1317 004c 07       		.uleb128 0x7
- 1318 004d 04       		.uleb128 0x4
- 1319 004e 01       		.byte	0x1
- 1320 004f 03       		.uleb128 0x3
- 1321 0050 0E       		.uleb128 0xe
- 1322 0051 0B       		.uleb128 0xb
- 1323 0052 0B       		.uleb128 0xb
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 30
+ 1250 0567 1E       		.uleb128 0x1e
+ 1251 0568 00000000 		.4byte	.LASF88
+ 1252 056c 08       		.byte	0x8
+ 1253 056d 48       		.byte	0x48
+ 1254 056e C7010000 		.4byte	0x1c7
+ 1255 0572 1E       		.uleb128 0x1e
+ 1256 0573 CE000000 		.4byte	.LASF89
+ 1257 0577 09       		.byte	0x9
+ 1258 0578 44       		.byte	0x44
+ 1259 0579 B1010000 		.4byte	0x1b1
+ 1260 057d 1F       		.uleb128 0x1f
+ 1261 057e 01060000 		.4byte	.LASF90
+ 1262 0582 0A       		.byte	0xa
+ 1263 0583 1207     		.2byte	0x712
+ 1264 0585 89050000 		.4byte	0x589
+ 1265 0589 09       		.uleb128 0x9
+ 1266 058a 89010000 		.4byte	0x189
+ 1267 058e 20       		.uleb128 0x20
+ 1268 058f 08020000 		.4byte	.LASF91
+ 1269 0593 08020000 		.4byte	.LASF91
+ 1270 0597 0B       		.byte	0xb
+ 1271 0598 27       		.byte	0x27
+ 1272 0599 20       		.uleb128 0x20
+ 1273 059a E3000000 		.4byte	.LASF92
+ 1274 059e E3000000 		.4byte	.LASF92
+ 1275 05a2 0B       		.byte	0xb
+ 1276 05a3 28       		.byte	0x28
+ 1277 05a4 20       		.uleb128 0x20
+ 1278 05a5 B1050000 		.4byte	.LASF93
+ 1279 05a9 B1050000 		.4byte	.LASF93
+ 1280 05ad 0C       		.byte	0xc
+ 1281 05ae 19       		.byte	0x19
+ 1282 05af 20       		.uleb128 0x20
+ 1283 05b0 60020000 		.4byte	.LASF94
+ 1284 05b4 60020000 		.4byte	.LASF94
+ 1285 05b8 0D       		.byte	0xd
+ 1286 05b9 2F       		.byte	0x2f
+ 1287 05ba 20       		.uleb128 0x20
+ 1288 05bb E9030000 		.4byte	.LASF95
+ 1289 05bf E9030000 		.4byte	.LASF95
+ 1290 05c3 0E       		.byte	0xe
+ 1291 05c4 26       		.byte	0x26
+ 1292 05c5 20       		.uleb128 0x20
+ 1293 05c6 B2020000 		.4byte	.LASF96
+ 1294 05ca B2020000 		.4byte	.LASF96
+ 1295 05ce 0F       		.byte	0xf
+ 1296 05cf 27       		.byte	0x27
+ 1297 05d0 20       		.uleb128 0x20
+ 1298 05d1 EF040000 		.4byte	.LASF97
+ 1299 05d5 EF040000 		.4byte	.LASF97
+ 1300 05d9 10       		.byte	0x10
+ 1301 05da 92       		.byte	0x92
+ 1302 05db 20       		.uleb128 0x20
+ 1303 05dc 06040000 		.4byte	.LASF98
+ 1304 05e0 06040000 		.4byte	.LASF98
+ 1305 05e4 10       		.byte	0x10
+ 1306 05e5 C3       		.byte	0xc3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 30
 
 
- 1324 0053 49       		.uleb128 0x49
- 1325 0054 13       		.uleb128 0x13
- 1326 0055 3A       		.uleb128 0x3a
- 1327 0056 0B       		.uleb128 0xb
- 1328 0057 3B       		.uleb128 0x3b
- 1329 0058 0B       		.uleb128 0xb
- 1330 0059 01       		.uleb128 0x1
- 1331 005a 13       		.uleb128 0x13
- 1332 005b 00       		.byte	0
- 1333 005c 00       		.byte	0
- 1334 005d 08       		.uleb128 0x8
- 1335 005e 24       		.uleb128 0x24
- 1336 005f 00       		.byte	0
- 1337 0060 0B       		.uleb128 0xb
- 1338 0061 0B       		.uleb128 0xb
- 1339 0062 3E       		.uleb128 0x3e
- 1340 0063 0B       		.uleb128 0xb
- 1341 0064 03       		.uleb128 0x3
- 1342 0065 08       		.uleb128 0x8
- 1343 0066 00       		.byte	0
- 1344 0067 00       		.byte	0
- 1345 0068 09       		.uleb128 0x9
- 1346 0069 35       		.uleb128 0x35
- 1347 006a 00       		.byte	0
- 1348 006b 49       		.uleb128 0x49
- 1349 006c 13       		.uleb128 0x13
- 1350 006d 00       		.byte	0
- 1351 006e 00       		.byte	0
- 1352 006f 0A       		.uleb128 0xa
- 1353 0070 13       		.uleb128 0x13
- 1354 0071 01       		.byte	0x1
- 1355 0072 0B       		.uleb128 0xb
- 1356 0073 0B       		.uleb128 0xb
- 1357 0074 3A       		.uleb128 0x3a
- 1358 0075 0B       		.uleb128 0xb
- 1359 0076 3B       		.uleb128 0x3b
- 1360 0077 0B       		.uleb128 0xb
- 1361 0078 01       		.uleb128 0x1
- 1362 0079 13       		.uleb128 0x13
- 1363 007a 00       		.byte	0
- 1364 007b 00       		.byte	0
- 1365 007c 0B       		.uleb128 0xb
- 1366 007d 0D       		.uleb128 0xd
- 1367 007e 00       		.byte	0
- 1368 007f 03       		.uleb128 0x3
- 1369 0080 0E       		.uleb128 0xe
- 1370 0081 3A       		.uleb128 0x3a
- 1371 0082 0B       		.uleb128 0xb
- 1372 0083 3B       		.uleb128 0x3b
- 1373 0084 0B       		.uleb128 0xb
- 1374 0085 49       		.uleb128 0x49
- 1375 0086 13       		.uleb128 0x13
- 1376 0087 38       		.uleb128 0x38
- 1377 0088 0B       		.uleb128 0xb
- 1378 0089 00       		.byte	0
- 1379 008a 00       		.byte	0
- 1380 008b 0C       		.uleb128 0xc
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 31
+ 1307 05e6 21       		.uleb128 0x21
+ 1308 05e7 F2050000 		.4byte	.LASF99
+ 1309 05eb F2050000 		.4byte	.LASF99
+ 1310 05ef 11       		.byte	0x11
+ 1311 05f0 4A01     		.2byte	0x14a
+ 1312 05f2 00       		.byte	0
+ 1313              		.section	.debug_abbrev,"",%progbits
+ 1314              	.Ldebug_abbrev0:
+ 1315 0000 01       		.uleb128 0x1
+ 1316 0001 11       		.uleb128 0x11
+ 1317 0002 01       		.byte	0x1
+ 1318 0003 25       		.uleb128 0x25
+ 1319 0004 0E       		.uleb128 0xe
+ 1320 0005 13       		.uleb128 0x13
+ 1321 0006 0B       		.uleb128 0xb
+ 1322 0007 03       		.uleb128 0x3
+ 1323 0008 0E       		.uleb128 0xe
+ 1324 0009 1B       		.uleb128 0x1b
+ 1325 000a 0E       		.uleb128 0xe
+ 1326 000b 55       		.uleb128 0x55
+ 1327 000c 17       		.uleb128 0x17
+ 1328 000d 11       		.uleb128 0x11
+ 1329 000e 01       		.uleb128 0x1
+ 1330 000f 10       		.uleb128 0x10
+ 1331 0010 17       		.uleb128 0x17
+ 1332 0011 00       		.byte	0
+ 1333 0012 00       		.byte	0
+ 1334 0013 02       		.uleb128 0x2
+ 1335 0014 24       		.uleb128 0x24
+ 1336 0015 00       		.byte	0
+ 1337 0016 0B       		.uleb128 0xb
+ 1338 0017 0B       		.uleb128 0xb
+ 1339 0018 3E       		.uleb128 0x3e
+ 1340 0019 0B       		.uleb128 0xb
+ 1341 001a 03       		.uleb128 0x3
+ 1342 001b 0E       		.uleb128 0xe
+ 1343 001c 00       		.byte	0
+ 1344 001d 00       		.byte	0
+ 1345 001e 03       		.uleb128 0x3
+ 1346 001f 16       		.uleb128 0x16
+ 1347 0020 00       		.byte	0
+ 1348 0021 03       		.uleb128 0x3
+ 1349 0022 0E       		.uleb128 0xe
+ 1350 0023 3A       		.uleb128 0x3a
+ 1351 0024 0B       		.uleb128 0xb
+ 1352 0025 3B       		.uleb128 0x3b
+ 1353 0026 0B       		.uleb128 0xb
+ 1354 0027 49       		.uleb128 0x49
+ 1355 0028 13       		.uleb128 0x13
+ 1356 0029 00       		.byte	0
+ 1357 002a 00       		.byte	0
+ 1358 002b 04       		.uleb128 0x4
+ 1359 002c 04       		.uleb128 0x4
+ 1360 002d 01       		.byte	0x1
+ 1361 002e 0B       		.uleb128 0xb
+ 1362 002f 0B       		.uleb128 0xb
+ 1363 0030 49       		.uleb128 0x49
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 31
 
 
- 1381 008c 0F       		.uleb128 0xf
- 1382 008d 00       		.byte	0
- 1383 008e 0B       		.uleb128 0xb
- 1384 008f 0B       		.uleb128 0xb
- 1385 0090 49       		.uleb128 0x49
- 1386 0091 13       		.uleb128 0x13
- 1387 0092 00       		.byte	0
- 1388 0093 00       		.byte	0
- 1389 0094 0D       		.uleb128 0xd
- 1390 0095 26       		.uleb128 0x26
- 1391 0096 00       		.byte	0
- 1392 0097 49       		.uleb128 0x49
- 1393 0098 13       		.uleb128 0x13
- 1394 0099 00       		.byte	0
- 1395 009a 00       		.byte	0
- 1396 009b 0E       		.uleb128 0xe
- 1397 009c 2E       		.uleb128 0x2e
- 1398 009d 00       		.byte	0
- 1399 009e 03       		.uleb128 0x3
- 1400 009f 0E       		.uleb128 0xe
- 1401 00a0 3A       		.uleb128 0x3a
- 1402 00a1 0B       		.uleb128 0xb
- 1403 00a2 3B       		.uleb128 0x3b
- 1404 00a3 0B       		.uleb128 0xb
- 1405 00a4 27       		.uleb128 0x27
- 1406 00a5 19       		.uleb128 0x19
- 1407 00a6 49       		.uleb128 0x49
- 1408 00a7 13       		.uleb128 0x13
- 1409 00a8 11       		.uleb128 0x11
- 1410 00a9 01       		.uleb128 0x1
- 1411 00aa 12       		.uleb128 0x12
- 1412 00ab 06       		.uleb128 0x6
- 1413 00ac 40       		.uleb128 0x40
- 1414 00ad 18       		.uleb128 0x18
- 1415 00ae 9742     		.uleb128 0x2117
- 1416 00b0 19       		.uleb128 0x19
- 1417 00b1 00       		.byte	0
- 1418 00b2 00       		.byte	0
- 1419 00b3 0F       		.uleb128 0xf
- 1420 00b4 2E       		.uleb128 0x2e
- 1421 00b5 01       		.byte	0x1
- 1422 00b6 3F       		.uleb128 0x3f
- 1423 00b7 19       		.uleb128 0x19
- 1424 00b8 03       		.uleb128 0x3
- 1425 00b9 0E       		.uleb128 0xe
- 1426 00ba 3A       		.uleb128 0x3a
- 1427 00bb 0B       		.uleb128 0xb
- 1428 00bc 3B       		.uleb128 0x3b
- 1429 00bd 0B       		.uleb128 0xb
- 1430 00be 49       		.uleb128 0x49
- 1431 00bf 13       		.uleb128 0x13
- 1432 00c0 11       		.uleb128 0x11
- 1433 00c1 01       		.uleb128 0x1
- 1434 00c2 12       		.uleb128 0x12
- 1435 00c3 06       		.uleb128 0x6
- 1436 00c4 40       		.uleb128 0x40
- 1437 00c5 18       		.uleb128 0x18
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 32
+ 1364 0031 13       		.uleb128 0x13
+ 1365 0032 3A       		.uleb128 0x3a
+ 1366 0033 0B       		.uleb128 0xb
+ 1367 0034 3B       		.uleb128 0x3b
+ 1368 0035 0B       		.uleb128 0xb
+ 1369 0036 01       		.uleb128 0x1
+ 1370 0037 13       		.uleb128 0x13
+ 1371 0038 00       		.byte	0
+ 1372 0039 00       		.byte	0
+ 1373 003a 05       		.uleb128 0x5
+ 1374 003b 28       		.uleb128 0x28
+ 1375 003c 00       		.byte	0
+ 1376 003d 03       		.uleb128 0x3
+ 1377 003e 0E       		.uleb128 0xe
+ 1378 003f 1C       		.uleb128 0x1c
+ 1379 0040 0B       		.uleb128 0xb
+ 1380 0041 00       		.byte	0
+ 1381 0042 00       		.byte	0
+ 1382 0043 06       		.uleb128 0x6
+ 1383 0044 28       		.uleb128 0x28
+ 1384 0045 00       		.byte	0
+ 1385 0046 03       		.uleb128 0x3
+ 1386 0047 0E       		.uleb128 0xe
+ 1387 0048 1C       		.uleb128 0x1c
+ 1388 0049 0D       		.uleb128 0xd
+ 1389 004a 00       		.byte	0
+ 1390 004b 00       		.byte	0
+ 1391 004c 07       		.uleb128 0x7
+ 1392 004d 04       		.uleb128 0x4
+ 1393 004e 01       		.byte	0x1
+ 1394 004f 03       		.uleb128 0x3
+ 1395 0050 0E       		.uleb128 0xe
+ 1396 0051 0B       		.uleb128 0xb
+ 1397 0052 0B       		.uleb128 0xb
+ 1398 0053 49       		.uleb128 0x49
+ 1399 0054 13       		.uleb128 0x13
+ 1400 0055 3A       		.uleb128 0x3a
+ 1401 0056 0B       		.uleb128 0xb
+ 1402 0057 3B       		.uleb128 0x3b
+ 1403 0058 0B       		.uleb128 0xb
+ 1404 0059 01       		.uleb128 0x1
+ 1405 005a 13       		.uleb128 0x13
+ 1406 005b 00       		.byte	0
+ 1407 005c 00       		.byte	0
+ 1408 005d 08       		.uleb128 0x8
+ 1409 005e 24       		.uleb128 0x24
+ 1410 005f 00       		.byte	0
+ 1411 0060 0B       		.uleb128 0xb
+ 1412 0061 0B       		.uleb128 0xb
+ 1413 0062 3E       		.uleb128 0x3e
+ 1414 0063 0B       		.uleb128 0xb
+ 1415 0064 03       		.uleb128 0x3
+ 1416 0065 08       		.uleb128 0x8
+ 1417 0066 00       		.byte	0
+ 1418 0067 00       		.byte	0
+ 1419 0068 09       		.uleb128 0x9
+ 1420 0069 35       		.uleb128 0x35
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 32
 
 
- 1438 00c6 9742     		.uleb128 0x2117
- 1439 00c8 19       		.uleb128 0x19
- 1440 00c9 01       		.uleb128 0x1
- 1441 00ca 13       		.uleb128 0x13
- 1442 00cb 00       		.byte	0
- 1443 00cc 00       		.byte	0
- 1444 00cd 10       		.uleb128 0x10
- 1445 00ce 898201   		.uleb128 0x4109
- 1446 00d1 00       		.byte	0
- 1447 00d2 11       		.uleb128 0x11
- 1448 00d3 01       		.uleb128 0x1
- 1449 00d4 31       		.uleb128 0x31
- 1450 00d5 13       		.uleb128 0x13
- 1451 00d6 00       		.byte	0
- 1452 00d7 00       		.byte	0
- 1453 00d8 11       		.uleb128 0x11
- 1454 00d9 898201   		.uleb128 0x4109
- 1455 00dc 01       		.byte	0x1
- 1456 00dd 11       		.uleb128 0x11
- 1457 00de 01       		.uleb128 0x1
- 1458 00df 31       		.uleb128 0x31
- 1459 00e0 13       		.uleb128 0x13
- 1460 00e1 01       		.uleb128 0x1
- 1461 00e2 13       		.uleb128 0x13
- 1462 00e3 00       		.byte	0
- 1463 00e4 00       		.byte	0
- 1464 00e5 12       		.uleb128 0x12
- 1465 00e6 8A8201   		.uleb128 0x410a
- 1466 00e9 00       		.byte	0
- 1467 00ea 02       		.uleb128 0x2
- 1468 00eb 18       		.uleb128 0x18
- 1469 00ec 9142     		.uleb128 0x2111
- 1470 00ee 18       		.uleb128 0x18
- 1471 00ef 00       		.byte	0
- 1472 00f0 00       		.byte	0
- 1473 00f1 13       		.uleb128 0x13
- 1474 00f2 898201   		.uleb128 0x4109
- 1475 00f5 01       		.byte	0x1
- 1476 00f6 11       		.uleb128 0x11
- 1477 00f7 01       		.uleb128 0x1
- 1478 00f8 31       		.uleb128 0x31
- 1479 00f9 13       		.uleb128 0x13
- 1480 00fa 00       		.byte	0
- 1481 00fb 00       		.byte	0
- 1482 00fc 14       		.uleb128 0x14
- 1483 00fd 2E       		.uleb128 0x2e
- 1484 00fe 01       		.byte	0x1
- 1485 00ff 3F       		.uleb128 0x3f
- 1486 0100 19       		.uleb128 0x19
- 1487 0101 03       		.uleb128 0x3
- 1488 0102 0E       		.uleb128 0xe
- 1489 0103 3A       		.uleb128 0x3a
- 1490 0104 0B       		.uleb128 0xb
- 1491 0105 3B       		.uleb128 0x3b
- 1492 0106 0B       		.uleb128 0xb
- 1493 0107 27       		.uleb128 0x27
- 1494 0108 19       		.uleb128 0x19
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 33
+ 1421 006a 00       		.byte	0
+ 1422 006b 49       		.uleb128 0x49
+ 1423 006c 13       		.uleb128 0x13
+ 1424 006d 00       		.byte	0
+ 1425 006e 00       		.byte	0
+ 1426 006f 0A       		.uleb128 0xa
+ 1427 0070 13       		.uleb128 0x13
+ 1428 0071 01       		.byte	0x1
+ 1429 0072 0B       		.uleb128 0xb
+ 1430 0073 0B       		.uleb128 0xb
+ 1431 0074 3A       		.uleb128 0x3a
+ 1432 0075 0B       		.uleb128 0xb
+ 1433 0076 3B       		.uleb128 0x3b
+ 1434 0077 0B       		.uleb128 0xb
+ 1435 0078 01       		.uleb128 0x1
+ 1436 0079 13       		.uleb128 0x13
+ 1437 007a 00       		.byte	0
+ 1438 007b 00       		.byte	0
+ 1439 007c 0B       		.uleb128 0xb
+ 1440 007d 0D       		.uleb128 0xd
+ 1441 007e 00       		.byte	0
+ 1442 007f 03       		.uleb128 0x3
+ 1443 0080 0E       		.uleb128 0xe
+ 1444 0081 3A       		.uleb128 0x3a
+ 1445 0082 0B       		.uleb128 0xb
+ 1446 0083 3B       		.uleb128 0x3b
+ 1447 0084 0B       		.uleb128 0xb
+ 1448 0085 49       		.uleb128 0x49
+ 1449 0086 13       		.uleb128 0x13
+ 1450 0087 38       		.uleb128 0x38
+ 1451 0088 0B       		.uleb128 0xb
+ 1452 0089 00       		.byte	0
+ 1453 008a 00       		.byte	0
+ 1454 008b 0C       		.uleb128 0xc
+ 1455 008c 0F       		.uleb128 0xf
+ 1456 008d 00       		.byte	0
+ 1457 008e 0B       		.uleb128 0xb
+ 1458 008f 0B       		.uleb128 0xb
+ 1459 0090 49       		.uleb128 0x49
+ 1460 0091 13       		.uleb128 0x13
+ 1461 0092 00       		.byte	0
+ 1462 0093 00       		.byte	0
+ 1463 0094 0D       		.uleb128 0xd
+ 1464 0095 26       		.uleb128 0x26
+ 1465 0096 00       		.byte	0
+ 1466 0097 49       		.uleb128 0x49
+ 1467 0098 13       		.uleb128 0x13
+ 1468 0099 00       		.byte	0
+ 1469 009a 00       		.byte	0
+ 1470 009b 0E       		.uleb128 0xe
+ 1471 009c 2E       		.uleb128 0x2e
+ 1472 009d 00       		.byte	0
+ 1473 009e 03       		.uleb128 0x3
+ 1474 009f 0E       		.uleb128 0xe
+ 1475 00a0 3A       		.uleb128 0x3a
+ 1476 00a1 0B       		.uleb128 0xb
+ 1477 00a2 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 33
 
 
- 1495 0109 49       		.uleb128 0x49
- 1496 010a 13       		.uleb128 0x13
- 1497 010b 11       		.uleb128 0x11
- 1498 010c 01       		.uleb128 0x1
- 1499 010d 12       		.uleb128 0x12
- 1500 010e 06       		.uleb128 0x6
- 1501 010f 40       		.uleb128 0x40
- 1502 0110 18       		.uleb128 0x18
- 1503 0111 9742     		.uleb128 0x2117
- 1504 0113 19       		.uleb128 0x19
- 1505 0114 01       		.uleb128 0x1
- 1506 0115 13       		.uleb128 0x13
- 1507 0116 00       		.byte	0
- 1508 0117 00       		.byte	0
- 1509 0118 15       		.uleb128 0x15
- 1510 0119 05       		.uleb128 0x5
- 1511 011a 00       		.byte	0
- 1512 011b 03       		.uleb128 0x3
- 1513 011c 0E       		.uleb128 0xe
- 1514 011d 3A       		.uleb128 0x3a
- 1515 011e 0B       		.uleb128 0xb
- 1516 011f 3B       		.uleb128 0x3b
- 1517 0120 0B       		.uleb128 0xb
- 1518 0121 49       		.uleb128 0x49
- 1519 0122 13       		.uleb128 0x13
- 1520 0123 02       		.uleb128 0x2
- 1521 0124 17       		.uleb128 0x17
- 1522 0125 00       		.byte	0
- 1523 0126 00       		.byte	0
- 1524 0127 16       		.uleb128 0x16
- 1525 0128 05       		.uleb128 0x5
- 1526 0129 00       		.byte	0
- 1527 012a 03       		.uleb128 0x3
- 1528 012b 0E       		.uleb128 0xe
- 1529 012c 3A       		.uleb128 0x3a
- 1530 012d 0B       		.uleb128 0xb
- 1531 012e 3B       		.uleb128 0x3b
- 1532 012f 0B       		.uleb128 0xb
- 1533 0130 49       		.uleb128 0x49
- 1534 0131 13       		.uleb128 0x13
- 1535 0132 02       		.uleb128 0x2
- 1536 0133 18       		.uleb128 0x18
- 1537 0134 00       		.byte	0
- 1538 0135 00       		.byte	0
- 1539 0136 17       		.uleb128 0x17
- 1540 0137 34       		.uleb128 0x34
- 1541 0138 00       		.byte	0
- 1542 0139 03       		.uleb128 0x3
- 1543 013a 08       		.uleb128 0x8
- 1544 013b 3A       		.uleb128 0x3a
- 1545 013c 0B       		.uleb128 0xb
- 1546 013d 3B       		.uleb128 0x3b
- 1547 013e 0B       		.uleb128 0xb
- 1548 013f 49       		.uleb128 0x49
- 1549 0140 13       		.uleb128 0x13
- 1550 0141 02       		.uleb128 0x2
- 1551 0142 17       		.uleb128 0x17
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 34
+ 1478 00a3 0B       		.uleb128 0xb
+ 1479 00a4 27       		.uleb128 0x27
+ 1480 00a5 19       		.uleb128 0x19
+ 1481 00a6 49       		.uleb128 0x49
+ 1482 00a7 13       		.uleb128 0x13
+ 1483 00a8 11       		.uleb128 0x11
+ 1484 00a9 01       		.uleb128 0x1
+ 1485 00aa 12       		.uleb128 0x12
+ 1486 00ab 06       		.uleb128 0x6
+ 1487 00ac 40       		.uleb128 0x40
+ 1488 00ad 18       		.uleb128 0x18
+ 1489 00ae 9742     		.uleb128 0x2117
+ 1490 00b0 19       		.uleb128 0x19
+ 1491 00b1 00       		.byte	0
+ 1492 00b2 00       		.byte	0
+ 1493 00b3 0F       		.uleb128 0xf
+ 1494 00b4 2E       		.uleb128 0x2e
+ 1495 00b5 01       		.byte	0x1
+ 1496 00b6 3F       		.uleb128 0x3f
+ 1497 00b7 19       		.uleb128 0x19
+ 1498 00b8 03       		.uleb128 0x3
+ 1499 00b9 0E       		.uleb128 0xe
+ 1500 00ba 3A       		.uleb128 0x3a
+ 1501 00bb 0B       		.uleb128 0xb
+ 1502 00bc 3B       		.uleb128 0x3b
+ 1503 00bd 0B       		.uleb128 0xb
+ 1504 00be 49       		.uleb128 0x49
+ 1505 00bf 13       		.uleb128 0x13
+ 1506 00c0 11       		.uleb128 0x11
+ 1507 00c1 01       		.uleb128 0x1
+ 1508 00c2 12       		.uleb128 0x12
+ 1509 00c3 06       		.uleb128 0x6
+ 1510 00c4 40       		.uleb128 0x40
+ 1511 00c5 18       		.uleb128 0x18
+ 1512 00c6 9742     		.uleb128 0x2117
+ 1513 00c8 19       		.uleb128 0x19
+ 1514 00c9 01       		.uleb128 0x1
+ 1515 00ca 13       		.uleb128 0x13
+ 1516 00cb 00       		.byte	0
+ 1517 00cc 00       		.byte	0
+ 1518 00cd 10       		.uleb128 0x10
+ 1519 00ce 898201   		.uleb128 0x4109
+ 1520 00d1 00       		.byte	0
+ 1521 00d2 11       		.uleb128 0x11
+ 1522 00d3 01       		.uleb128 0x1
+ 1523 00d4 31       		.uleb128 0x31
+ 1524 00d5 13       		.uleb128 0x13
+ 1525 00d6 00       		.byte	0
+ 1526 00d7 00       		.byte	0
+ 1527 00d8 11       		.uleb128 0x11
+ 1528 00d9 898201   		.uleb128 0x4109
+ 1529 00dc 01       		.byte	0x1
+ 1530 00dd 11       		.uleb128 0x11
+ 1531 00de 01       		.uleb128 0x1
+ 1532 00df 31       		.uleb128 0x31
+ 1533 00e0 13       		.uleb128 0x13
+ 1534 00e1 01       		.uleb128 0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 34
 
 
- 1552 0143 00       		.byte	0
- 1553 0144 00       		.byte	0
- 1554 0145 18       		.uleb128 0x18
- 1555 0146 34       		.uleb128 0x34
- 1556 0147 00       		.byte	0
- 1557 0148 03       		.uleb128 0x3
- 1558 0149 0E       		.uleb128 0xe
- 1559 014a 3A       		.uleb128 0x3a
- 1560 014b 0B       		.uleb128 0xb
- 1561 014c 3B       		.uleb128 0x3b
- 1562 014d 0B       		.uleb128 0xb
- 1563 014e 49       		.uleb128 0x49
- 1564 014f 13       		.uleb128 0x13
- 1565 0150 02       		.uleb128 0x2
- 1566 0151 17       		.uleb128 0x17
- 1567 0152 00       		.byte	0
- 1568 0153 00       		.byte	0
- 1569 0154 19       		.uleb128 0x19
- 1570 0155 0B       		.uleb128 0xb
- 1571 0156 01       		.byte	0x1
- 1572 0157 11       		.uleb128 0x11
- 1573 0158 01       		.uleb128 0x1
- 1574 0159 12       		.uleb128 0x12
- 1575 015a 06       		.uleb128 0x6
- 1576 015b 01       		.uleb128 0x1
- 1577 015c 13       		.uleb128 0x13
- 1578 015d 00       		.byte	0
- 1579 015e 00       		.byte	0
- 1580 015f 1A       		.uleb128 0x1a
- 1581 0160 01       		.uleb128 0x1
- 1582 0161 01       		.byte	0x1
- 1583 0162 49       		.uleb128 0x49
- 1584 0163 13       		.uleb128 0x13
- 1585 0164 01       		.uleb128 0x1
- 1586 0165 13       		.uleb128 0x13
- 1587 0166 00       		.byte	0
- 1588 0167 00       		.byte	0
- 1589 0168 1B       		.uleb128 0x1b
- 1590 0169 21       		.uleb128 0x21
- 1591 016a 00       		.byte	0
- 1592 016b 49       		.uleb128 0x49
- 1593 016c 13       		.uleb128 0x13
- 1594 016d 2F       		.uleb128 0x2f
- 1595 016e 05       		.uleb128 0x5
- 1596 016f 00       		.byte	0
- 1597 0170 00       		.byte	0
- 1598 0171 1C       		.uleb128 0x1c
- 1599 0172 34       		.uleb128 0x34
- 1600 0173 00       		.byte	0
- 1601 0174 03       		.uleb128 0x3
- 1602 0175 0E       		.uleb128 0xe
- 1603 0176 3A       		.uleb128 0x3a
- 1604 0177 0B       		.uleb128 0xb
- 1605 0178 3B       		.uleb128 0x3b
- 1606 0179 0B       		.uleb128 0xb
- 1607 017a 49       		.uleb128 0x49
- 1608 017b 13       		.uleb128 0x13
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 35
+ 1535 00e2 13       		.uleb128 0x13
+ 1536 00e3 00       		.byte	0
+ 1537 00e4 00       		.byte	0
+ 1538 00e5 12       		.uleb128 0x12
+ 1539 00e6 8A8201   		.uleb128 0x410a
+ 1540 00e9 00       		.byte	0
+ 1541 00ea 02       		.uleb128 0x2
+ 1542 00eb 18       		.uleb128 0x18
+ 1543 00ec 9142     		.uleb128 0x2111
+ 1544 00ee 18       		.uleb128 0x18
+ 1545 00ef 00       		.byte	0
+ 1546 00f0 00       		.byte	0
+ 1547 00f1 13       		.uleb128 0x13
+ 1548 00f2 898201   		.uleb128 0x4109
+ 1549 00f5 01       		.byte	0x1
+ 1550 00f6 11       		.uleb128 0x11
+ 1551 00f7 01       		.uleb128 0x1
+ 1552 00f8 31       		.uleb128 0x31
+ 1553 00f9 13       		.uleb128 0x13
+ 1554 00fa 00       		.byte	0
+ 1555 00fb 00       		.byte	0
+ 1556 00fc 14       		.uleb128 0x14
+ 1557 00fd 2E       		.uleb128 0x2e
+ 1558 00fe 01       		.byte	0x1
+ 1559 00ff 3F       		.uleb128 0x3f
+ 1560 0100 19       		.uleb128 0x19
+ 1561 0101 03       		.uleb128 0x3
+ 1562 0102 0E       		.uleb128 0xe
+ 1563 0103 3A       		.uleb128 0x3a
+ 1564 0104 0B       		.uleb128 0xb
+ 1565 0105 3B       		.uleb128 0x3b
+ 1566 0106 0B       		.uleb128 0xb
+ 1567 0107 27       		.uleb128 0x27
+ 1568 0108 19       		.uleb128 0x19
+ 1569 0109 49       		.uleb128 0x49
+ 1570 010a 13       		.uleb128 0x13
+ 1571 010b 11       		.uleb128 0x11
+ 1572 010c 01       		.uleb128 0x1
+ 1573 010d 12       		.uleb128 0x12
+ 1574 010e 06       		.uleb128 0x6
+ 1575 010f 40       		.uleb128 0x40
+ 1576 0110 18       		.uleb128 0x18
+ 1577 0111 9742     		.uleb128 0x2117
+ 1578 0113 19       		.uleb128 0x19
+ 1579 0114 01       		.uleb128 0x1
+ 1580 0115 13       		.uleb128 0x13
+ 1581 0116 00       		.byte	0
+ 1582 0117 00       		.byte	0
+ 1583 0118 15       		.uleb128 0x15
+ 1584 0119 05       		.uleb128 0x5
+ 1585 011a 00       		.byte	0
+ 1586 011b 03       		.uleb128 0x3
+ 1587 011c 0E       		.uleb128 0xe
+ 1588 011d 3A       		.uleb128 0x3a
+ 1589 011e 0B       		.uleb128 0xb
+ 1590 011f 3B       		.uleb128 0x3b
+ 1591 0120 0B       		.uleb128 0xb
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 35
 
 
- 1609 017c 02       		.uleb128 0x2
- 1610 017d 18       		.uleb128 0x18
- 1611 017e 00       		.byte	0
- 1612 017f 00       		.byte	0
- 1613 0180 1D       		.uleb128 0x1d
- 1614 0181 34       		.uleb128 0x34
- 1615 0182 00       		.byte	0
- 1616 0183 03       		.uleb128 0x3
- 1617 0184 0E       		.uleb128 0xe
- 1618 0185 3A       		.uleb128 0x3a
- 1619 0186 0B       		.uleb128 0xb
- 1620 0187 3B       		.uleb128 0x3b
- 1621 0188 0B       		.uleb128 0xb
- 1622 0189 49       		.uleb128 0x49
- 1623 018a 13       		.uleb128 0x13
- 1624 018b 3F       		.uleb128 0x3f
- 1625 018c 19       		.uleb128 0x19
- 1626 018d 3C       		.uleb128 0x3c
- 1627 018e 19       		.uleb128 0x19
- 1628 018f 00       		.byte	0
- 1629 0190 00       		.byte	0
- 1630 0191 1E       		.uleb128 0x1e
- 1631 0192 34       		.uleb128 0x34
- 1632 0193 00       		.byte	0
- 1633 0194 03       		.uleb128 0x3
- 1634 0195 0E       		.uleb128 0xe
- 1635 0196 3A       		.uleb128 0x3a
- 1636 0197 0B       		.uleb128 0xb
- 1637 0198 3B       		.uleb128 0x3b
- 1638 0199 05       		.uleb128 0x5
- 1639 019a 49       		.uleb128 0x49
- 1640 019b 13       		.uleb128 0x13
- 1641 019c 3F       		.uleb128 0x3f
- 1642 019d 19       		.uleb128 0x19
- 1643 019e 3C       		.uleb128 0x3c
- 1644 019f 19       		.uleb128 0x19
- 1645 01a0 00       		.byte	0
- 1646 01a1 00       		.byte	0
- 1647 01a2 1F       		.uleb128 0x1f
- 1648 01a3 2E       		.uleb128 0x2e
- 1649 01a4 00       		.byte	0
- 1650 01a5 3F       		.uleb128 0x3f
- 1651 01a6 19       		.uleb128 0x19
- 1652 01a7 3C       		.uleb128 0x3c
- 1653 01a8 19       		.uleb128 0x19
- 1654 01a9 6E       		.uleb128 0x6e
- 1655 01aa 0E       		.uleb128 0xe
- 1656 01ab 03       		.uleb128 0x3
- 1657 01ac 0E       		.uleb128 0xe
- 1658 01ad 3A       		.uleb128 0x3a
- 1659 01ae 0B       		.uleb128 0xb
- 1660 01af 3B       		.uleb128 0x3b
- 1661 01b0 0B       		.uleb128 0xb
- 1662 01b1 00       		.byte	0
- 1663 01b2 00       		.byte	0
- 1664 01b3 20       		.uleb128 0x20
- 1665 01b4 2E       		.uleb128 0x2e
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 36
+ 1592 0121 49       		.uleb128 0x49
+ 1593 0122 13       		.uleb128 0x13
+ 1594 0123 02       		.uleb128 0x2
+ 1595 0124 17       		.uleb128 0x17
+ 1596 0125 00       		.byte	0
+ 1597 0126 00       		.byte	0
+ 1598 0127 16       		.uleb128 0x16
+ 1599 0128 05       		.uleb128 0x5
+ 1600 0129 00       		.byte	0
+ 1601 012a 03       		.uleb128 0x3
+ 1602 012b 0E       		.uleb128 0xe
+ 1603 012c 3A       		.uleb128 0x3a
+ 1604 012d 0B       		.uleb128 0xb
+ 1605 012e 3B       		.uleb128 0x3b
+ 1606 012f 0B       		.uleb128 0xb
+ 1607 0130 49       		.uleb128 0x49
+ 1608 0131 13       		.uleb128 0x13
+ 1609 0132 02       		.uleb128 0x2
+ 1610 0133 18       		.uleb128 0x18
+ 1611 0134 00       		.byte	0
+ 1612 0135 00       		.byte	0
+ 1613 0136 17       		.uleb128 0x17
+ 1614 0137 34       		.uleb128 0x34
+ 1615 0138 00       		.byte	0
+ 1616 0139 03       		.uleb128 0x3
+ 1617 013a 08       		.uleb128 0x8
+ 1618 013b 3A       		.uleb128 0x3a
+ 1619 013c 0B       		.uleb128 0xb
+ 1620 013d 3B       		.uleb128 0x3b
+ 1621 013e 0B       		.uleb128 0xb
+ 1622 013f 49       		.uleb128 0x49
+ 1623 0140 13       		.uleb128 0x13
+ 1624 0141 02       		.uleb128 0x2
+ 1625 0142 17       		.uleb128 0x17
+ 1626 0143 00       		.byte	0
+ 1627 0144 00       		.byte	0
+ 1628 0145 18       		.uleb128 0x18
+ 1629 0146 34       		.uleb128 0x34
+ 1630 0147 00       		.byte	0
+ 1631 0148 03       		.uleb128 0x3
+ 1632 0149 0E       		.uleb128 0xe
+ 1633 014a 3A       		.uleb128 0x3a
+ 1634 014b 0B       		.uleb128 0xb
+ 1635 014c 3B       		.uleb128 0x3b
+ 1636 014d 0B       		.uleb128 0xb
+ 1637 014e 49       		.uleb128 0x49
+ 1638 014f 13       		.uleb128 0x13
+ 1639 0150 02       		.uleb128 0x2
+ 1640 0151 17       		.uleb128 0x17
+ 1641 0152 00       		.byte	0
+ 1642 0153 00       		.byte	0
+ 1643 0154 19       		.uleb128 0x19
+ 1644 0155 34       		.uleb128 0x34
+ 1645 0156 00       		.byte	0
+ 1646 0157 03       		.uleb128 0x3
+ 1647 0158 08       		.uleb128 0x8
+ 1648 0159 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 36
 
 
- 1666 01b5 00       		.byte	0
- 1667 01b6 3F       		.uleb128 0x3f
- 1668 01b7 19       		.uleb128 0x19
- 1669 01b8 3C       		.uleb128 0x3c
- 1670 01b9 19       		.uleb128 0x19
- 1671 01ba 6E       		.uleb128 0x6e
- 1672 01bb 0E       		.uleb128 0xe
- 1673 01bc 03       		.uleb128 0x3
- 1674 01bd 0E       		.uleb128 0xe
- 1675 01be 3A       		.uleb128 0x3a
- 1676 01bf 0B       		.uleb128 0xb
- 1677 01c0 3B       		.uleb128 0x3b
- 1678 01c1 05       		.uleb128 0x5
- 1679 01c2 00       		.byte	0
- 1680 01c3 00       		.byte	0
- 1681 01c4 00       		.byte	0
- 1682              		.section	.debug_loc,"",%progbits
- 1683              	.Ldebug_loc0:
- 1684              	.LLST0:
- 1685 0000 00000000 		.4byte	.LVL10
- 1686 0004 0E000000 		.4byte	.LVL11
- 1687 0008 0100     		.2byte	0x1
- 1688 000a 50       		.byte	0x50
- 1689 000b 0E000000 		.4byte	.LVL11
- 1690 000f 14000000 		.4byte	.LFE113
- 1691 0013 0500     		.2byte	0x5
- 1692 0015 03       		.byte	0x3
- 1693 0016 00000000 		.4byte	SOUND__currentSong
- 1694 001a 00000000 		.4byte	0
- 1695 001e 00000000 		.4byte	0
- 1696              	.LLST1:
- 1697 0022 00000000 		.4byte	.LVL12
- 1698 0026 06000000 		.4byte	.LVL13
- 1699 002a 0100     		.2byte	0x1
- 1700 002c 50       		.byte	0x50
- 1701 002d 06000000 		.4byte	.LVL13
- 1702 0031 0C000000 		.4byte	.LVL14
- 1703 0035 0100     		.2byte	0x1
- 1704 0037 50       		.byte	0x50
- 1705 0038 0C000000 		.4byte	.LVL14
- 1706 003c 14000000 		.4byte	.LFE114
- 1707 0040 0500     		.2byte	0x5
- 1708 0042 03       		.byte	0x3
- 1709 0043 1A000000 		.4byte	SOUND__currentSong+26
- 1710 0047 00000000 		.4byte	0
- 1711 004b 00000000 		.4byte	0
- 1712              	.LLST2:
- 1713 004f 00000000 		.4byte	.LVL15
- 1714 0053 2B000000 		.4byte	.LVL16-1
- 1715 0057 0100     		.2byte	0x1
- 1716 0059 50       		.byte	0x50
- 1717 005a 2B000000 		.4byte	.LVL16-1
- 1718 005e 62000000 		.4byte	.LVL26
- 1719 0062 0100     		.2byte	0x1
- 1720 0064 55       		.byte	0x55
- 1721 0065 62000000 		.4byte	.LVL26
- 1722 0069 66000000 		.4byte	.LVL27
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 37
+ 1649 015a 0B       		.uleb128 0xb
+ 1650 015b 3B       		.uleb128 0x3b
+ 1651 015c 0B       		.uleb128 0xb
+ 1652 015d 49       		.uleb128 0x49
+ 1653 015e 13       		.uleb128 0x13
+ 1654 015f 02       		.uleb128 0x2
+ 1655 0160 18       		.uleb128 0x18
+ 1656 0161 00       		.byte	0
+ 1657 0162 00       		.byte	0
+ 1658 0163 1A       		.uleb128 0x1a
+ 1659 0164 0B       		.uleb128 0xb
+ 1660 0165 01       		.byte	0x1
+ 1661 0166 11       		.uleb128 0x11
+ 1662 0167 01       		.uleb128 0x1
+ 1663 0168 12       		.uleb128 0x12
+ 1664 0169 06       		.uleb128 0x6
+ 1665 016a 01       		.uleb128 0x1
+ 1666 016b 13       		.uleb128 0x13
+ 1667 016c 00       		.byte	0
+ 1668 016d 00       		.byte	0
+ 1669 016e 1B       		.uleb128 0x1b
+ 1670 016f 34       		.uleb128 0x34
+ 1671 0170 00       		.byte	0
+ 1672 0171 03       		.uleb128 0x3
+ 1673 0172 0E       		.uleb128 0xe
+ 1674 0173 3A       		.uleb128 0x3a
+ 1675 0174 0B       		.uleb128 0xb
+ 1676 0175 3B       		.uleb128 0x3b
+ 1677 0176 0B       		.uleb128 0xb
+ 1678 0177 49       		.uleb128 0x49
+ 1679 0178 13       		.uleb128 0x13
+ 1680 0179 02       		.uleb128 0x2
+ 1681 017a 18       		.uleb128 0x18
+ 1682 017b 00       		.byte	0
+ 1683 017c 00       		.byte	0
+ 1684 017d 1C       		.uleb128 0x1c
+ 1685 017e 01       		.uleb128 0x1
+ 1686 017f 01       		.byte	0x1
+ 1687 0180 49       		.uleb128 0x49
+ 1688 0181 13       		.uleb128 0x13
+ 1689 0182 01       		.uleb128 0x1
+ 1690 0183 13       		.uleb128 0x13
+ 1691 0184 00       		.byte	0
+ 1692 0185 00       		.byte	0
+ 1693 0186 1D       		.uleb128 0x1d
+ 1694 0187 21       		.uleb128 0x21
+ 1695 0188 00       		.byte	0
+ 1696 0189 49       		.uleb128 0x49
+ 1697 018a 13       		.uleb128 0x13
+ 1698 018b 2F       		.uleb128 0x2f
+ 1699 018c 05       		.uleb128 0x5
+ 1700 018d 00       		.byte	0
+ 1701 018e 00       		.byte	0
+ 1702 018f 1E       		.uleb128 0x1e
+ 1703 0190 34       		.uleb128 0x34
+ 1704 0191 00       		.byte	0
+ 1705 0192 03       		.uleb128 0x3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 37
 
 
- 1723 006d 0100     		.2byte	0x1
- 1724 006f 50       		.byte	0x50
- 1725 0070 66000000 		.4byte	.LVL27
- 1726 0074 70000000 		.4byte	.LFE115
- 1727 0078 0400     		.2byte	0x4
- 1728 007a F3       		.byte	0xf3
- 1729 007b 01       		.uleb128 0x1
- 1730 007c 50       		.byte	0x50
- 1731 007d 9F       		.byte	0x9f
- 1732 007e 00000000 		.4byte	0
- 1733 0082 00000000 		.4byte	0
- 1734              	.LLST3:
- 1735 0086 00000000 		.4byte	.LVL15
- 1736 008a 2B000000 		.4byte	.LVL16-1
- 1737 008e 0100     		.2byte	0x1
- 1738 0090 51       		.byte	0x51
- 1739 0091 2B000000 		.4byte	.LVL16-1
- 1740 0095 62000000 		.4byte	.LVL26
- 1741 0099 0400     		.2byte	0x4
- 1742 009b F3       		.byte	0xf3
- 1743 009c 01       		.uleb128 0x1
- 1744 009d 51       		.byte	0x51
- 1745 009e 9F       		.byte	0x9f
- 1746 009f 62000000 		.4byte	.LVL26
- 1747 00a3 70000000 		.4byte	.LFE115
- 1748 00a7 0100     		.2byte	0x1
- 1749 00a9 51       		.byte	0x51
- 1750 00aa 00000000 		.4byte	0
- 1751 00ae 00000000 		.4byte	0
- 1752              	.LLST4:
- 1753 00b2 30000000 		.4byte	.LVL17
- 1754 00b6 34000000 		.4byte	.LVL18
- 1755 00ba 0200     		.2byte	0x2
- 1756 00bc 30       		.byte	0x30
- 1757 00bd 9F       		.byte	0x9f
- 1758 00be 34000000 		.4byte	.LVL18
- 1759 00c2 3E000000 		.4byte	.LVL19
- 1760 00c6 0100     		.2byte	0x1
- 1761 00c8 53       		.byte	0x53
- 1762 00c9 40000000 		.4byte	.LVL20
- 1763 00cd 46000000 		.4byte	.LVL21
- 1764 00d1 0100     		.2byte	0x1
- 1765 00d3 53       		.byte	0x53
- 1766 00d4 48000000 		.4byte	.LVL22
- 1767 00d8 52000000 		.4byte	.LVL23
- 1768 00dc 0100     		.2byte	0x1
- 1769 00de 53       		.byte	0x53
- 1770 00df 54000000 		.4byte	.LVL24
- 1771 00e3 5C000000 		.4byte	.LVL25
- 1772 00e7 0100     		.2byte	0x1
- 1773 00e9 53       		.byte	0x53
- 1774 00ea 00000000 		.4byte	0
- 1775 00ee 00000000 		.4byte	0
- 1776              	.LLST5:
- 1777 00f2 04000000 		.4byte	.LVL28
- 1778 00f6 0C000000 		.4byte	.LVL29
- 1779 00fa 0100     		.2byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 38
+ 1706 0193 0E       		.uleb128 0xe
+ 1707 0194 3A       		.uleb128 0x3a
+ 1708 0195 0B       		.uleb128 0xb
+ 1709 0196 3B       		.uleb128 0x3b
+ 1710 0197 0B       		.uleb128 0xb
+ 1711 0198 49       		.uleb128 0x49
+ 1712 0199 13       		.uleb128 0x13
+ 1713 019a 3F       		.uleb128 0x3f
+ 1714 019b 19       		.uleb128 0x19
+ 1715 019c 3C       		.uleb128 0x3c
+ 1716 019d 19       		.uleb128 0x19
+ 1717 019e 00       		.byte	0
+ 1718 019f 00       		.byte	0
+ 1719 01a0 1F       		.uleb128 0x1f
+ 1720 01a1 34       		.uleb128 0x34
+ 1721 01a2 00       		.byte	0
+ 1722 01a3 03       		.uleb128 0x3
+ 1723 01a4 0E       		.uleb128 0xe
+ 1724 01a5 3A       		.uleb128 0x3a
+ 1725 01a6 0B       		.uleb128 0xb
+ 1726 01a7 3B       		.uleb128 0x3b
+ 1727 01a8 05       		.uleb128 0x5
+ 1728 01a9 49       		.uleb128 0x49
+ 1729 01aa 13       		.uleb128 0x13
+ 1730 01ab 3F       		.uleb128 0x3f
+ 1731 01ac 19       		.uleb128 0x19
+ 1732 01ad 3C       		.uleb128 0x3c
+ 1733 01ae 19       		.uleb128 0x19
+ 1734 01af 00       		.byte	0
+ 1735 01b0 00       		.byte	0
+ 1736 01b1 20       		.uleb128 0x20
+ 1737 01b2 2E       		.uleb128 0x2e
+ 1738 01b3 00       		.byte	0
+ 1739 01b4 3F       		.uleb128 0x3f
+ 1740 01b5 19       		.uleb128 0x19
+ 1741 01b6 3C       		.uleb128 0x3c
+ 1742 01b7 19       		.uleb128 0x19
+ 1743 01b8 6E       		.uleb128 0x6e
+ 1744 01b9 0E       		.uleb128 0xe
+ 1745 01ba 03       		.uleb128 0x3
+ 1746 01bb 0E       		.uleb128 0xe
+ 1747 01bc 3A       		.uleb128 0x3a
+ 1748 01bd 0B       		.uleb128 0xb
+ 1749 01be 3B       		.uleb128 0x3b
+ 1750 01bf 0B       		.uleb128 0xb
+ 1751 01c0 00       		.byte	0
+ 1752 01c1 00       		.byte	0
+ 1753 01c2 21       		.uleb128 0x21
+ 1754 01c3 2E       		.uleb128 0x2e
+ 1755 01c4 00       		.byte	0
+ 1756 01c5 3F       		.uleb128 0x3f
+ 1757 01c6 19       		.uleb128 0x19
+ 1758 01c7 3C       		.uleb128 0x3c
+ 1759 01c8 19       		.uleb128 0x19
+ 1760 01c9 6E       		.uleb128 0x6e
+ 1761 01ca 0E       		.uleb128 0xe
+ 1762 01cb 03       		.uleb128 0x3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 38
 
 
- 1780 00fc 52       		.byte	0x52
- 1781 00fd 0C000000 		.4byte	.LVL29
- 1782 0101 1C000000 		.4byte	.LFE116
- 1783 0105 0500     		.2byte	0x5
- 1784 0107 03       		.byte	0x3
- 1785 0108 0C000000 		.4byte	SOUND__currentSong+12
- 1786 010c 00000000 		.4byte	0
- 1787 0110 00000000 		.4byte	0
- 1788              	.LLST6:
- 1789 0114 28000000 		.4byte	.LVL30
- 1790 0118 2C000000 		.4byte	.LVL31
- 1791 011c 0500     		.2byte	0x5
- 1792 011e 70       		.byte	0x70
- 1793 011f 00       		.sleb128 0
- 1794 0120 35       		.byte	0x35
- 1795 0121 25       		.byte	0x25
- 1796 0122 9F       		.byte	0x9f
- 1797 0123 00000000 		.4byte	0
- 1798 0127 00000000 		.4byte	0
- 1799              		.section	.debug_aranges,"",%progbits
- 1800 0000 5C000000 		.4byte	0x5c
- 1801 0004 0200     		.2byte	0x2
- 1802 0006 00000000 		.4byte	.Ldebug_info0
- 1803 000a 04       		.byte	0x4
- 1804 000b 00       		.byte	0
- 1805 000c 0000     		.2byte	0
- 1806 000e 0000     		.2byte	0
- 1807 0010 00000000 		.4byte	.LFB117
- 1808 0014 1C000000 		.4byte	.LFE117-.LFB117
- 1809 0018 00000000 		.4byte	.LFB111
- 1810 001c 0A000000 		.4byte	.LFE111-.LFB111
- 1811 0020 00000000 		.4byte	.LFB112
- 1812 0024 0A000000 		.4byte	.LFE112-.LFB112
- 1813 0028 00000000 		.4byte	.LFB110
- 1814 002c 64000000 		.4byte	.LFE110-.LFB110
- 1815 0030 00000000 		.4byte	.LFB113
- 1816 0034 14000000 		.4byte	.LFE113-.LFB113
- 1817 0038 00000000 		.4byte	.LFB114
- 1818 003c 14000000 		.4byte	.LFE114-.LFB114
- 1819 0040 00000000 		.4byte	.LFB115
- 1820 0044 70000000 		.4byte	.LFE115-.LFB115
- 1821 0048 00000000 		.4byte	.LFB116
- 1822 004c 1C000000 		.4byte	.LFE116-.LFB116
- 1823 0050 00000000 		.4byte	.LFB118
- 1824 0054 70000000 		.4byte	.LFE118-.LFB118
- 1825 0058 00000000 		.4byte	0
- 1826 005c 00000000 		.4byte	0
- 1827              		.section	.debug_ranges,"",%progbits
- 1828              	.Ldebug_ranges0:
- 1829 0000 00000000 		.4byte	.LFB117
- 1830 0004 1C000000 		.4byte	.LFE117
- 1831 0008 00000000 		.4byte	.LFB111
- 1832 000c 0A000000 		.4byte	.LFE111
- 1833 0010 00000000 		.4byte	.LFB112
- 1834 0014 0A000000 		.4byte	.LFE112
- 1835 0018 00000000 		.4byte	.LFB110
- 1836 001c 64000000 		.4byte	.LFE110
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 39
+ 1763 01cc 0E       		.uleb128 0xe
+ 1764 01cd 3A       		.uleb128 0x3a
+ 1765 01ce 0B       		.uleb128 0xb
+ 1766 01cf 3B       		.uleb128 0x3b
+ 1767 01d0 05       		.uleb128 0x5
+ 1768 01d1 00       		.byte	0
+ 1769 01d2 00       		.byte	0
+ 1770 01d3 00       		.byte	0
+ 1771              		.section	.debug_loc,"",%progbits
+ 1772              	.Ldebug_loc0:
+ 1773              	.LLST0:
+ 1774 0000 00000000 		.4byte	.LVL10
+ 1775 0004 0E000000 		.4byte	.LVL11
+ 1776 0008 0100     		.2byte	0x1
+ 1777 000a 50       		.byte	0x50
+ 1778 000b 0E000000 		.4byte	.LVL11
+ 1779 000f 14000000 		.4byte	.LFE113
+ 1780 0013 0500     		.2byte	0x5
+ 1781 0015 03       		.byte	0x3
+ 1782 0016 00000000 		.4byte	SOUND__currentSong
+ 1783 001a 00000000 		.4byte	0
+ 1784 001e 00000000 		.4byte	0
+ 1785              	.LLST1:
+ 1786 0022 00000000 		.4byte	.LVL12
+ 1787 0026 06000000 		.4byte	.LVL13
+ 1788 002a 0100     		.2byte	0x1
+ 1789 002c 50       		.byte	0x50
+ 1790 002d 06000000 		.4byte	.LVL13
+ 1791 0031 0C000000 		.4byte	.LVL14
+ 1792 0035 0100     		.2byte	0x1
+ 1793 0037 50       		.byte	0x50
+ 1794 0038 0C000000 		.4byte	.LVL14
+ 1795 003c 14000000 		.4byte	.LFE114
+ 1796 0040 0500     		.2byte	0x5
+ 1797 0042 03       		.byte	0x3
+ 1798 0043 1A000000 		.4byte	SOUND__currentSong+26
+ 1799 0047 00000000 		.4byte	0
+ 1800 004b 00000000 		.4byte	0
+ 1801              	.LLST2:
+ 1802 004f 00000000 		.4byte	.LVL15
+ 1803 0053 2B000000 		.4byte	.LVL16-1
+ 1804 0057 0100     		.2byte	0x1
+ 1805 0059 50       		.byte	0x50
+ 1806 005a 2B000000 		.4byte	.LVL16-1
+ 1807 005e 62000000 		.4byte	.LVL26
+ 1808 0062 0100     		.2byte	0x1
+ 1809 0064 55       		.byte	0x55
+ 1810 0065 62000000 		.4byte	.LVL26
+ 1811 0069 66000000 		.4byte	.LVL27
+ 1812 006d 0100     		.2byte	0x1
+ 1813 006f 50       		.byte	0x50
+ 1814 0070 66000000 		.4byte	.LVL27
+ 1815 0074 70000000 		.4byte	.LFE115
+ 1816 0078 0400     		.2byte	0x4
+ 1817 007a F3       		.byte	0xf3
+ 1818 007b 01       		.uleb128 0x1
+ 1819 007c 50       		.byte	0x50
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 39
 
 
- 1837 0020 00000000 		.4byte	.LFB113
- 1838 0024 14000000 		.4byte	.LFE113
- 1839 0028 00000000 		.4byte	.LFB114
- 1840 002c 14000000 		.4byte	.LFE114
- 1841 0030 00000000 		.4byte	.LFB115
- 1842 0034 70000000 		.4byte	.LFE115
- 1843 0038 00000000 		.4byte	.LFB116
- 1844 003c 1C000000 		.4byte	.LFE116
- 1845 0040 00000000 		.4byte	.LFB118
- 1846 0044 70000000 		.4byte	.LFE118
- 1847 0048 00000000 		.4byte	0
- 1848 004c 00000000 		.4byte	0
- 1849              		.section	.debug_line,"",%progbits
- 1850              	.Ldebug_line0:
- 1851 0000 19040000 		.section	.debug_str,"MS",%progbits,1
- 1851      02001C03 
- 1851      00000201 
- 1851      FB0E0D00 
- 1851      01010101 
- 1852              	.LASF86:
- 1853 0000 45455F73 		.ascii	"EE_std_endcycle_next_tid\000"
- 1853      74645F65 
- 1853      6E646379 
- 1853      636C655F 
- 1853      6E657874 
- 1854              	.LASF58:
- 1855 0019 6D5F6163 		.ascii	"m_activeBuf\000"
- 1855      74697665 
- 1855      42756600 
- 1856              	.LASF41:
- 1857 0025 534F554E 		.ascii	"SOUND_OFF\000"
- 1857      445F4F46 
- 1857      4600
- 1858              	.LASF28:
- 1859 002f 52435F45 		.ascii	"RC_ERROR_READ_ONLY\000"
- 1859      52524F52 
- 1859      5F524541 
- 1859      445F4F4E 
- 1859      4C5900
- 1860              	.LASF14:
- 1861 0042 52435F53 		.ascii	"RC_SUCCESS\000"
- 1861      55434345 
- 1861      535300
- 1862              	.LASF60:
- 1863 004d 6D5F6163 		.ascii	"m_activeFill\000"
- 1863      74697665 
- 1863      46696C6C 
- 1863      00
- 1864              	.LASF51:
- 1865 005a 45455F55 		.ascii	"EE_UREG\000"
- 1865      52454700 
- 1866              	.LASF79:
- 1867 0062 73616D70 		.ascii	"sample\000"
- 1867      6C6500
- 1868              	.LASF29:
- 1869 0069 52435F45 		.ascii	"RC_ERROR_WRITE_ONLY\000"
- 1869      52524F52 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 40
+ 1820 007d 9F       		.byte	0x9f
+ 1821 007e 00000000 		.4byte	0
+ 1822 0082 00000000 		.4byte	0
+ 1823              	.LLST3:
+ 1824 0086 00000000 		.4byte	.LVL15
+ 1825 008a 2B000000 		.4byte	.LVL16-1
+ 1826 008e 0100     		.2byte	0x1
+ 1827 0090 51       		.byte	0x51
+ 1828 0091 2B000000 		.4byte	.LVL16-1
+ 1829 0095 62000000 		.4byte	.LVL26
+ 1830 0099 0400     		.2byte	0x4
+ 1831 009b F3       		.byte	0xf3
+ 1832 009c 01       		.uleb128 0x1
+ 1833 009d 51       		.byte	0x51
+ 1834 009e 9F       		.byte	0x9f
+ 1835 009f 62000000 		.4byte	.LVL26
+ 1836 00a3 70000000 		.4byte	.LFE115
+ 1837 00a7 0100     		.2byte	0x1
+ 1838 00a9 51       		.byte	0x51
+ 1839 00aa 00000000 		.4byte	0
+ 1840 00ae 00000000 		.4byte	0
+ 1841              	.LLST4:
+ 1842 00b2 30000000 		.4byte	.LVL17
+ 1843 00b6 34000000 		.4byte	.LVL18
+ 1844 00ba 0200     		.2byte	0x2
+ 1845 00bc 30       		.byte	0x30
+ 1846 00bd 9F       		.byte	0x9f
+ 1847 00be 34000000 		.4byte	.LVL18
+ 1848 00c2 3E000000 		.4byte	.LVL19
+ 1849 00c6 0100     		.2byte	0x1
+ 1850 00c8 53       		.byte	0x53
+ 1851 00c9 40000000 		.4byte	.LVL20
+ 1852 00cd 46000000 		.4byte	.LVL21
+ 1853 00d1 0100     		.2byte	0x1
+ 1854 00d3 53       		.byte	0x53
+ 1855 00d4 48000000 		.4byte	.LVL22
+ 1856 00d8 52000000 		.4byte	.LVL23
+ 1857 00dc 0100     		.2byte	0x1
+ 1858 00de 53       		.byte	0x53
+ 1859 00df 54000000 		.4byte	.LVL24
+ 1860 00e3 5C000000 		.4byte	.LVL25
+ 1861 00e7 0100     		.2byte	0x1
+ 1862 00e9 53       		.byte	0x53
+ 1863 00ea 00000000 		.4byte	0
+ 1864 00ee 00000000 		.4byte	0
+ 1865              	.LLST5:
+ 1866 00f2 04000000 		.4byte	.LVL28
+ 1867 00f6 0C000000 		.4byte	.LVL29
+ 1868 00fa 0100     		.2byte	0x1
+ 1869 00fc 52       		.byte	0x52
+ 1870 00fd 0C000000 		.4byte	.LVL29
+ 1871 0101 1C000000 		.4byte	.LFE116
+ 1872 0105 0500     		.2byte	0x5
+ 1873 0107 03       		.byte	0x3
+ 1874 0108 0C000000 		.4byte	SOUND__currentSong+12
+ 1875 010c 00000000 		.4byte	0
+ 1876 0110 00000000 		.4byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 40
 
 
- 1869      5F575249 
- 1869      54455F4F 
- 1869      4E4C5900 
- 1870              	.LASF2:
- 1871 007d 73686F72 		.ascii	"short int\000"
- 1871      7420696E 
- 1871      7400
- 1872              	.LASF20:
- 1873 0087 52435F45 		.ascii	"RC_ERROR_OVERRUN\000"
- 1873      52524F52 
- 1873      5F4F5645 
- 1873      5252554E 
- 1873      00
- 1874              	.LASF32:
- 1875 0098 52435F45 		.ascii	"RC_ERROR_WRITE_FAILS\000"
- 1875      52524F52 
- 1875      5F575249 
- 1875      54455F46 
- 1875      41494C53 
- 1876              	.LASF54:
- 1877 00ad 73697A65 		.ascii	"sizetype\000"
- 1877      74797065 
- 1877      00
- 1878              	.LASF80:
- 1879 00b6 534F554E 		.ascii	"SOUND__bufA\000"
- 1879      445F5F62 
- 1879      75664100 
- 1880              	.LASF81:
- 1881 00c2 534F554E 		.ascii	"SOUND__bufB\000"
- 1881      445F5F62 
- 1881      75664200 
- 1882              	.LASF87:
- 1883 00ce 45455F49 		.ascii	"EE_IRQ_nesting_level\000"
- 1883      52515F6E 
- 1883      65737469 
- 1883      6E675F6C 
- 1883      6576656C 
- 1884              	.LASF90:
- 1885 00e3 534F554E 		.ascii	"SOUND_SAMPLE_CLOCK_Stop\000"
- 1885      445F5341 
- 1885      4D504C45 
- 1885      5F434C4F 
- 1885      434B5F53 
- 1886              	.LASF17:
- 1887 00fb 52435F45 		.ascii	"RC_ERROR_ZERO\000"
- 1887      52524F52 
- 1887      5F5A4552 
- 1887      4F00
- 1888              	.LASF52:
- 1889 0109 45455F46 		.ascii	"EE_FREG\000"
- 1889      52454700 
- 1890              	.LASF31:
- 1891 0111 52435F45 		.ascii	"RC_ERROR_READ_FAILS\000"
- 1891      52524F52 
- 1891      5F524541 
- 1891      445F4641 
- 1891      494C5300 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 41
+ 1877              	.LLST6:
+ 1878 0114 2A000000 		.4byte	.LVL31
+ 1879 0118 2E000000 		.4byte	.LVL32
+ 1880 011c 0500     		.2byte	0x5
+ 1881 011e 70       		.byte	0x70
+ 1882 011f 00       		.sleb128 0
+ 1883 0120 35       		.byte	0x35
+ 1884 0121 25       		.byte	0x25
+ 1885 0122 9F       		.byte	0x9f
+ 1886 0123 00000000 		.4byte	0
+ 1887 0127 00000000 		.4byte	0
+ 1888              		.section	.debug_aranges,"",%progbits
+ 1889 0000 64000000 		.4byte	0x64
+ 1890 0004 0200     		.2byte	0x2
+ 1891 0006 00000000 		.4byte	.Ldebug_info0
+ 1892 000a 04       		.byte	0x4
+ 1893 000b 00       		.byte	0
+ 1894 000c 0000     		.2byte	0
+ 1895 000e 0000     		.2byte	0
+ 1896 0010 00000000 		.4byte	.LFB117
+ 1897 0014 1C000000 		.4byte	.LFE117-.LFB117
+ 1898 0018 00000000 		.4byte	.LFB111
+ 1899 001c 0A000000 		.4byte	.LFE111-.LFB111
+ 1900 0020 00000000 		.4byte	.LFB112
+ 1901 0024 0A000000 		.4byte	.LFE112-.LFB112
+ 1902 0028 00000000 		.4byte	.LFB110
+ 1903 002c 64000000 		.4byte	.LFE110-.LFB110
+ 1904 0030 00000000 		.4byte	.LFB113
+ 1905 0034 14000000 		.4byte	.LFE113-.LFB113
+ 1906 0038 00000000 		.4byte	.LFB114
+ 1907 003c 14000000 		.4byte	.LFE114-.LFB114
+ 1908 0040 00000000 		.4byte	.LFB115
+ 1909 0044 70000000 		.4byte	.LFE115-.LFB115
+ 1910 0048 00000000 		.4byte	.LFB116
+ 1911 004c 1C000000 		.4byte	.LFE116-.LFB116
+ 1912 0050 00000000 		.4byte	.LFB118
+ 1913 0054 14000000 		.4byte	.LFE118-.LFB118
+ 1914 0058 00000000 		.4byte	.LFB119
+ 1915 005c 88000000 		.4byte	.LFE119-.LFB119
+ 1916 0060 00000000 		.4byte	0
+ 1917 0064 00000000 		.4byte	0
+ 1918              		.section	.debug_ranges,"",%progbits
+ 1919              	.Ldebug_ranges0:
+ 1920 0000 00000000 		.4byte	.LFB117
+ 1921 0004 1C000000 		.4byte	.LFE117
+ 1922 0008 00000000 		.4byte	.LFB111
+ 1923 000c 0A000000 		.4byte	.LFE111
+ 1924 0010 00000000 		.4byte	.LFB112
+ 1925 0014 0A000000 		.4byte	.LFE112
+ 1926 0018 00000000 		.4byte	.LFB110
+ 1927 001c 64000000 		.4byte	.LFE110
+ 1928 0020 00000000 		.4byte	.LFB113
+ 1929 0024 14000000 		.4byte	.LFE113
+ 1930 0028 00000000 		.4byte	.LFB114
+ 1931 002c 14000000 		.4byte	.LFE114
+ 1932 0030 00000000 		.4byte	.LFB115
+ 1933 0034 70000000 		.4byte	.LFE115
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 41
 
 
- 1892              	.LASF70:
- 1893 0125 534F554E 		.ascii	"SOUND_SetSong\000"
- 1893      445F5365 
- 1893      74536F6E 
- 1893      6700
- 1894              	.LASF53:
- 1895 0133 45455F54 		.ascii	"EE_TID\000"
- 1895      494400
- 1896              	.LASF3:
- 1897 013a 75696E74 		.ascii	"uint8_t\000"
- 1897      385F7400 
- 1898              	.LASF37:
- 1899 0142 52435F45 		.ascii	"RC_ERROR_INVALID_STATE\000"
- 1899      52524F52 
- 1899      5F494E56 
- 1899      414C4944 
- 1899      5F535441 
- 1900              	.LASF63:
- 1901 0159 6D5F766F 		.ascii	"m_volume\000"
- 1901      6C756D65 
- 1901      00
- 1902              	.LASF77:
- 1903 0162 746D7042 		.ascii	"tmpBuf\000"
- 1903      756600
- 1904              	.LASF76:
- 1905 0169 534F554E 		.ascii	"SOUND_SwapBuffers\000"
- 1905      445F5377 
- 1905      61704275 
- 1905      66666572 
- 1905      7300
- 1906              	.LASF59:
- 1907 017b 6D5F696E 		.ascii	"m_inactiveBuf\000"
- 1907      61637469 
- 1907      76654275 
- 1907      6600
- 1908              	.LASF101:
- 1909 0189 65534F55 		.ascii	"eSOUND_Channel\000"
- 1909      4E445F43 
- 1909      68616E6E 
- 1909      656C00
- 1910              	.LASF19:
- 1911 0198 52435F45 		.ascii	"RC_ERROR_RANGE\000"
- 1911      52524F52 
- 1911      5F52414E 
- 1911      474500
- 1912              	.LASF78:
- 1913 01a7 534F554E 		.ascii	"SOUND_isr\000"
- 1913      445F6973 
- 1913      7200
- 1914              	.LASF9:
- 1915 01b1 666C6F61 		.ascii	"float\000"
- 1915      7400
- 1916              	.LASF39:
- 1917 01b7 52435F45 		.ascii	"RC_ERROR_NOT_IMPLEMENTED\000"
- 1917      52524F52 
- 1917      5F4E4F54 
- 1917      5F494D50 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 42
+ 1934 0038 00000000 		.4byte	.LFB116
+ 1935 003c 1C000000 		.4byte	.LFE116
+ 1936 0040 00000000 		.4byte	.LFB118
+ 1937 0044 14000000 		.4byte	.LFE118
+ 1938 0048 00000000 		.4byte	.LFB119
+ 1939 004c 88000000 		.4byte	.LFE119
+ 1940 0050 00000000 		.4byte	0
+ 1941 0054 00000000 		.4byte	0
+ 1942              		.section	.debug_line,"",%progbits
+ 1943              	.Ldebug_line0:
+ 1944 0000 2E040000 		.section	.debug_str,"MS",%progbits,1
+ 1944      02001C03 
+ 1944      00000201 
+ 1944      FB0E0D00 
+ 1944      01010101 
+ 1945              	.LASF88:
+ 1946 0000 45455F73 		.ascii	"EE_std_endcycle_next_tid\000"
+ 1946      74645F65 
+ 1946      6E646379 
+ 1946      636C655F 
+ 1946      6E657874 
+ 1947              	.LASF58:
+ 1948 0019 6D5F6163 		.ascii	"m_activeBuf\000"
+ 1948      74697665 
+ 1948      42756600 
+ 1949              	.LASF41:
+ 1950 0025 534F554E 		.ascii	"SOUND_OFF\000"
+ 1950      445F4F46 
+ 1950      4600
+ 1951              	.LASF28:
+ 1952 002f 52435F45 		.ascii	"RC_ERROR_READ_ONLY\000"
+ 1952      52524F52 
+ 1952      5F524541 
+ 1952      445F4F4E 
+ 1952      4C5900
+ 1953              	.LASF14:
+ 1954 0042 52435F53 		.ascii	"RC_SUCCESS\000"
+ 1954      55434345 
+ 1954      535300
+ 1955              	.LASF60:
+ 1956 004d 6D5F6163 		.ascii	"m_activeFill\000"
+ 1956      74697665 
+ 1956      46696C6C 
+ 1956      00
+ 1957              	.LASF51:
+ 1958 005a 45455F55 		.ascii	"EE_UREG\000"
+ 1958      52454700 
+ 1959              	.LASF80:
+ 1960 0062 73616D70 		.ascii	"sample\000"
+ 1960      6C6500
+ 1961              	.LASF29:
+ 1962 0069 52435F45 		.ascii	"RC_ERROR_WRITE_ONLY\000"
+ 1962      52524F52 
+ 1962      5F575249 
+ 1962      54455F4F 
+ 1962      4E4C5900 
+ 1963              	.LASF2:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 42
 
 
- 1917      4C454D45 
- 1918              	.LASF11:
- 1919 01d0 6C6F6E67 		.ascii	"long long int\000"
- 1919      206C6F6E 
- 1919      6720696E 
- 1919      7400
- 1920              	.LASF84:
- 1921 01de 45455F6F 		.ascii	"EE_oo_IRQ_suspend_status\000"
- 1921      6F5F4952 
- 1921      515F7375 
- 1921      7370656E 
- 1921      645F7374 
- 1922              	.LASF89:
- 1923 01f7 534F554E 		.ascii	"SOUND_SAMPLE_CLOCK_Start\000"
- 1923      445F5341 
- 1923      4D504C45 
- 1923      5F434C4F 
- 1923      434B5F53 
- 1924              	.LASF33:
- 1925 0210 52435F45 		.ascii	"RC_ERROR_NOT_MATCH\000"
- 1925      52524F52 
- 1925      5F4E4F54 
- 1925      5F4D4154 
- 1925      434800
- 1926              	.LASF38:
- 1927 0223 52435F45 		.ascii	"RC_ERROR_UNKNOWN\000"
- 1927      52524F52 
- 1927      5F554E4B 
- 1927      4E4F574E 
- 1927      00
- 1928              	.LASF6:
- 1929 0234 6C6F6E67 		.ascii	"long int\000"
- 1929      20696E74 
- 1929      00
- 1930              	.LASF21:
- 1931 023d 52435F45 		.ascii	"RC_ERROR_UNDERRUN\000"
- 1931      52524F52 
- 1931      5F554E44 
- 1931      45525255 
- 1931      4E00
- 1932              	.LASF92:
- 1933 024f 534F554E 		.ascii	"SOUND_Control_Write\000"
- 1933      445F436F 
- 1933      6E74726F 
- 1933      6C5F5772 
- 1933      69746500 
- 1934              	.LASF72:
- 1935 0263 766F6C75 		.ascii	"volume\000"
- 1935      6D6500
- 1936              	.LASF24:
- 1937 026a 52435F45 		.ascii	"RC_ERROR_BUSY\000"
- 1937      52524F52 
- 1937      5F425553 
- 1937      5900
- 1938              	.LASF30:
- 1939 0278 52435F45 		.ascii	"RC_ERROR_INVALID\000"
- 1939      52524F52 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 43
+ 1964 007d 73686F72 		.ascii	"short int\000"
+ 1964      7420696E 
+ 1964      7400
+ 1965              	.LASF20:
+ 1966 0087 52435F45 		.ascii	"RC_ERROR_OVERRUN\000"
+ 1966      52524F52 
+ 1966      5F4F5645 
+ 1966      5252554E 
+ 1966      00
+ 1967              	.LASF32:
+ 1968 0098 52435F45 		.ascii	"RC_ERROR_WRITE_FAILS\000"
+ 1968      52524F52 
+ 1968      5F575249 
+ 1968      54455F46 
+ 1968      41494C53 
+ 1969              	.LASF54:
+ 1970 00ad 73697A65 		.ascii	"sizetype\000"
+ 1970      74797065 
+ 1970      00
+ 1971              	.LASF82:
+ 1972 00b6 534F554E 		.ascii	"SOUND__bufA\000"
+ 1972      445F5F62 
+ 1972      75664100 
+ 1973              	.LASF83:
+ 1974 00c2 534F554E 		.ascii	"SOUND__bufB\000"
+ 1974      445F5F62 
+ 1974      75664200 
+ 1975              	.LASF89:
+ 1976 00ce 45455F49 		.ascii	"EE_IRQ_nesting_level\000"
+ 1976      52515F6E 
+ 1976      65737469 
+ 1976      6E675F6C 
+ 1976      6576656C 
+ 1977              	.LASF92:
+ 1978 00e3 534F554E 		.ascii	"SOUND_SAMPLE_CLOCK_Stop\000"
+ 1978      445F5341 
+ 1978      4D504C45 
+ 1978      5F434C4F 
+ 1978      434B5F53 
+ 1979              	.LASF17:
+ 1980 00fb 52435F45 		.ascii	"RC_ERROR_ZERO\000"
+ 1980      52524F52 
+ 1980      5F5A4552 
+ 1980      4F00
+ 1981              	.LASF52:
+ 1982 0109 45455F46 		.ascii	"EE_FREG\000"
+ 1982      52454700 
+ 1983              	.LASF31:
+ 1984 0111 52435F45 		.ascii	"RC_ERROR_READ_FAILS\000"
+ 1984      52524F52 
+ 1984      5F524541 
+ 1984      445F4641 
+ 1984      494C5300 
+ 1985              	.LASF70:
+ 1986 0125 534F554E 		.ascii	"SOUND_SetSong\000"
+ 1986      445F5365 
+ 1986      74536F6E 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 43
 
 
- 1939      5F494E56 
- 1939      414C4944 
- 1939      00
- 1940              	.LASF57:
- 1941 0289 6D5F706F 		.ascii	"m_pos\000"
- 1941      7300
- 1942              	.LASF35:
- 1943 028f 52435F45 		.ascii	"RC_ERROR_BAD_DATA\000"
- 1943      52524F52 
- 1943      5F424144 
- 1943      5F444154 
- 1943      4100
- 1944              	.LASF94:
- 1945 02a1 534F554E 		.ascii	"SOUND_PWM_CLOCK_Start\000"
- 1945      445F5057 
- 1945      4D5F434C 
- 1945      4F434B5F 
- 1945      53746172 
- 1946              	.LASF48:
- 1947 02b7 6C6F6E67 		.ascii	"long double\000"
- 1947      20646F75 
- 1947      626C6500 
- 1948              	.LASF64:
- 1949 02c3 534F554E 		.ascii	"SOUND__Driver_t\000"
- 1949      445F5F44 
- 1949      72697665 
- 1949      725F7400 
- 1950              	.LASF1:
- 1951 02d3 756E7369 		.ascii	"unsigned char\000"
- 1951      676E6564 
- 1951      20636861 
- 1951      7200
- 1952              	.LASF102:
- 1953 02e1 534F554E 		.ascii	"SOUND__GetInactiveBuf\000"
- 1953      445F5F47 
- 1953      6574496E 
- 1953      61637469 
- 1953      76654275 
- 1954              	.LASF56:
- 1955 02f7 6D5F7369 		.ascii	"m_size\000"
- 1955      7A6500
- 1956              	.LASF50:
- 1957 02fe 45455F55 		.ascii	"EE_UINT32\000"
- 1957      494E5433 
- 1957      3200
- 1958              	.LASF0:
- 1959 0308 7369676E 		.ascii	"signed char\000"
- 1959      65642063 
- 1959      68617200 
- 1960              	.LASF12:
- 1961 0314 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1961      206C6F6E 
- 1961      6720756E 
- 1961      7369676E 
- 1961      65642069 
- 1962              	.LASF7:
- 1963 032b 75696E74 		.ascii	"uint32_t\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 44
-
-
- 1963      33325F74 
- 1963      00
- 1964              	.LASF73:
- 1965 0334 534F554E 		.ascii	"SOUND_FillBuffer\000"
- 1965      445F4669 
- 1965      6C6C4275 
- 1965      66666572 
- 1965      00
- 1966              	.LASF46:
- 1967 0345 756E7369 		.ascii	"unsigned int\000"
- 1967      676E6564 
- 1967      20696E74 
- 1967      00
- 1968              	.LASF26:
- 1969 0352 52435F45 		.ascii	"RC_ERROR_OPEN\000"
- 1969      52524F52 
- 1969      5F4F5045 
- 1969      4E00
- 1970              	.LASF4:
- 1971 0360 75696E74 		.ascii	"uint16_t\000"
- 1971      31365F74 
- 1971      00
- 1972              	.LASF8:
- 1973 0369 6C6F6E67 		.ascii	"long unsigned int\000"
- 1973      20756E73 
- 1973      69676E65 
- 1973      6420696E 
- 1973      7400
- 1974              	.LASF16:
- 1975 037b 52435F45 		.ascii	"RC_ERROR_NULL\000"
- 1975      52524F52 
- 1975      5F4E554C 
- 1975      4C00
- 1976              	.LASF100:
- 1977 0389 433A5C48 		.ascii	"C:\\H_da\\SS26\\Research Project\\Workspace01\\MP3_"
- 1977      5F64615C 
- 1977      53533236 
- 1977      5C526573 
- 1977      65617263 
- 1978 03b7 506C6179 		.ascii	"Player.cydsn\000"
- 1978      65722E63 
- 1978      7964736E 
- 1978      00
- 1979              	.LASF49:
- 1980 03c4 45455F49 		.ascii	"EE_INT32\000"
- 1980      4E543332 
- 1980      00
- 1981              	.LASF69:
- 1982 03cd 73697A65 		.ascii	"sizeOfSong\000"
- 1982      4F66536F 
- 1982      6E6700
- 1983              	.LASF93:
- 1984 03d8 534F554E 		.ascii	"SOUND_ENABLE_Write\000"
- 1984      445F454E 
- 1984      41424C45 
- 1984      5F577269 
- 1984      746500
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 45
-
-
- 1985              	.LASF62:
- 1986 03eb 6D5F7265 		.ascii	"m_readPos\000"
- 1986      6164506F 
- 1986      7300
- 1987              	.LASF96:
- 1988 03f5 534F554E 		.ascii	"SOUND_PWM_WriteCompare\000"
- 1988      445F5057 
- 1988      4D5F5772 
- 1988      69746543 
- 1988      6F6D7061 
- 1989              	.LASF55:
- 1990 040c 6D5F736F 		.ascii	"m_song\000"
- 1990      6E6700
- 1991              	.LASF98:
- 1992 0413 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 1992      43313120 
- 1992      352E342E 
- 1992      31203230 
- 1992      31363036 
- 1993 0446 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 1993      20726576 
- 1993      6973696F 
- 1993      6E203233 
- 1993      37373135 
- 1994 0479 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 1994      66756E63 
- 1994      74696F6E 
- 1994      2D736563 
- 1994      74696F6E 
- 1995              	.LASF13:
- 1996 04a1 63686172 		.ascii	"char\000"
- 1996      00
- 1997              	.LASF22:
- 1998 04a6 52435F45 		.ascii	"RC_ERROR_BUFFER_FULL\000"
- 1998      52524F52 
- 1998      5F425546 
- 1998      4645525F 
- 1998      46554C4C 
- 1999              	.LASF47:
- 2000 04bb 696E7433 		.ascii	"int32_t\000"
- 2000      325F7400 
- 2001              	.LASF95:
- 2002 04c3 534F554E 		.ascii	"SOUND_PWM_Start\000"
- 2002      445F5057 
- 2002      4D5F5374 
- 2002      61727400 
- 2003              	.LASF34:
- 2004 04d3 52435F45 		.ascii	"RC_ERROR_BAD_PARAM\000"
+ 1986      6700
+ 1987              	.LASF53:
+ 1988 0133 45455F54 		.ascii	"EE_TID\000"
+ 1988      494400
+ 1989              	.LASF3:
+ 1990 013a 75696E74 		.ascii	"uint8_t\000"
+ 1990      385F7400 
+ 1991              	.LASF37:
+ 1992 0142 52435F45 		.ascii	"RC_ERROR_INVALID_STATE\000"
+ 1992      52524F52 
+ 1992      5F494E56 
+ 1992      414C4944 
+ 1992      5F535441 
+ 1993              	.LASF63:
+ 1994 0159 6D5F766F 		.ascii	"m_volume\000"
+ 1994      6C756D65 
+ 1994      00
+ 1995              	.LASF77:
+ 1996 0162 746D7042 		.ascii	"tmpBuf\000"
+ 1996      756600
+ 1997              	.LASF76:
+ 1998 0169 534F554E 		.ascii	"SOUND_SwapBuffers\000"
+ 1998      445F5377 
+ 1998      61704275 
+ 1998      66666572 
+ 1998      7300
+ 1999              	.LASF59:
+ 2000 017b 6D5F696E 		.ascii	"m_inactiveBuf\000"
+ 2000      61637469 
+ 2000      76654275 
+ 2000      6600
+ 2001              	.LASF103:
+ 2002 0189 65534F55 		.ascii	"eSOUND_Channel\000"
+ 2002      4E445F43 
+ 2002      68616E6E 
+ 2002      656C00
+ 2003              	.LASF19:
+ 2004 0198 52435F45 		.ascii	"RC_ERROR_RANGE\000"
  2004      52524F52 
- 2004      5F424144 
- 2004      5F504152 
- 2004      414D00
- 2005              	.LASF74:
- 2006 04e6 64617461 		.ascii	"data\000"
- 2006      00
- 2007              	.LASF67:
- 2008 04eb 534F554E 		.ascii	"SOUND_Init\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 46
+ 2004      5F52414E 
+ 2004      474500
+ 2005              	.LASF79:
+ 2006 01a7 534F554E 		.ascii	"SOUND_isr\000"
+ 2006      445F6973 
+ 2006      7200
+ 2007              	.LASF9:
+ 2008 01b1 666C6F61 		.ascii	"float\000"
+ 2008      7400
+ 2009              	.LASF86:
+ 2010 01b7 45455F6F 		.ascii	"EE_oo_IRQ_suspend_status\000"
+ 2010      6F5F4952 
+ 2010      515F7375 
+ 2010      7370656E 
+ 2010      645F7374 
+ 2011              	.LASF39:
+ 2012 01d0 52435F45 		.ascii	"RC_ERROR_NOT_IMPLEMENTED\000"
+ 2012      52524F52 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 44
 
 
- 2008      445F496E 
- 2008      697400
- 2009              	.LASF82:
- 2010 04f6 534F554E 		.ascii	"SOUND__currentSong\000"
- 2010      445F5F63 
- 2010      75727265 
- 2010      6E74536F 
- 2010      6E6700
- 2011              	.LASF5:
- 2012 0509 73686F72 		.ascii	"short unsigned int\000"
- 2012      7420756E 
- 2012      7369676E 
- 2012      65642069 
- 2012      6E7400
- 2013              	.LASF85:
- 2014 051c 45455F41 		.ascii	"EE_ApplicationMode\000"
- 2014      70706C69 
- 2014      63617469 
- 2014      6F6E4D6F 
- 2014      646500
- 2015              	.LASF61:
- 2016 052f 6D5F696E 		.ascii	"m_inactiveFill\000"
- 2016      61637469 
- 2016      76654669 
- 2016      6C6C00
- 2017              	.LASF10:
- 2018 053e 646F7562 		.ascii	"double\000"
- 2018      6C6500
- 2019              	.LASF66:
- 2020 0545 534F554E 		.ascii	"SOUND_StopPlay\000"
- 2020      445F5374 
- 2020      6F70506C 
- 2020      617900
- 2021              	.LASF27:
- 2022 0554 52435F45 		.ascii	"RC_ERROR_CHECKSUM\000"
+ 2012      5F4E4F54 
+ 2012      5F494D50 
+ 2012      4C454D45 
+ 2013              	.LASF11:
+ 2014 01e9 6C6F6E67 		.ascii	"long long int\000"
+ 2014      206C6F6E 
+ 2014      6720696E 
+ 2014      7400
+ 2015              	.LASF81:
+ 2016 01f7 534F554E 		.ascii	"SOUND__underruns\000"
+ 2016      445F5F75 
+ 2016      6E646572 
+ 2016      72756E73 
+ 2016      00
+ 2017              	.LASF91:
+ 2018 0208 534F554E 		.ascii	"SOUND_SAMPLE_CLOCK_Start\000"
+ 2018      445F5341 
+ 2018      4D504C45 
+ 2018      5F434C4F 
+ 2018      434B5F53 
+ 2019              	.LASF33:
+ 2020 0221 52435F45 		.ascii	"RC_ERROR_NOT_MATCH\000"
+ 2020      52524F52 
+ 2020      5F4E4F54 
+ 2020      5F4D4154 
+ 2020      434800
+ 2021              	.LASF38:
+ 2022 0234 52435F45 		.ascii	"RC_ERROR_UNKNOWN\000"
  2022      52524F52 
- 2022      5F434845 
- 2022      434B5355 
- 2022      4D00
- 2023              	.LASF71:
- 2024 0566 534F554E 		.ascii	"SOUND_SetVolume\000"
- 2024      445F5365 
- 2024      74566F6C 
- 2024      756D6500 
- 2025              	.LASF75:
- 2026 0576 73697A65 		.ascii	"size\000"
- 2026      00
- 2027              	.LASF45:
- 2028 057b 5F5F696E 		.ascii	"__int32_t\000"
- 2028      7433325F 
- 2028      7400
- 2029              	.LASF91:
- 2030 0585 6D656D73 		.ascii	"memset\000"
- 2030      657400
- 2031              	.LASF65:
- 2032 058c 534F554E 		.ascii	"SOUND_StartPlay\000"
- 2032      445F5374 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 47
+ 2022      5F554E4B 
+ 2022      4E4F574E 
+ 2022      00
+ 2023              	.LASF6:
+ 2024 0245 6C6F6E67 		.ascii	"long int\000"
+ 2024      20696E74 
+ 2024      00
+ 2025              	.LASF21:
+ 2026 024e 52435F45 		.ascii	"RC_ERROR_UNDERRUN\000"
+ 2026      52524F52 
+ 2026      5F554E44 
+ 2026      45525255 
+ 2026      4E00
+ 2027              	.LASF94:
+ 2028 0260 534F554E 		.ascii	"SOUND_Control_Write\000"
+ 2028      445F436F 
+ 2028      6E74726F 
+ 2028      6C5F5772 
+ 2028      69746500 
+ 2029              	.LASF72:
+ 2030 0274 766F6C75 		.ascii	"volume\000"
+ 2030      6D6500
+ 2031              	.LASF24:
+ 2032 027b 52435F45 		.ascii	"RC_ERROR_BUSY\000"
+ 2032      52524F52 
+ 2032      5F425553 
+ 2032      5900
+ 2033              	.LASF30:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 45
 
 
- 2032      61727450 
- 2032      6C617900 
- 2033              	.LASF36:
- 2034 059c 52435F45 		.ascii	"RC_ERROR_CANCELED\000"
+ 2034 0289 52435F45 		.ascii	"RC_ERROR_INVALID\000"
  2034      52524F52 
- 2034      5F43414E 
- 2034      43454C45 
- 2034      4400
- 2035              	.LASF99:
- 2036 05ae 736F7572 		.ascii	"source\\asw\\sound.c\000"
- 2036      63655C61 
- 2036      73775C73 
- 2036      6F756E64 
- 2036      2E6300
- 2037              	.LASF68:
- 2038 05c1 736F6E67 		.ascii	"song\000"
- 2038      00
- 2039              	.LASF97:
- 2040 05c6 45455F6F 		.ascii	"EE_oo_SetEvent\000"
- 2040      6F5F5365 
- 2040      74457665 
- 2040      6E7400
- 2041              	.LASF88:
- 2042 05d5 49544D5F 		.ascii	"ITM_RxBuffer\000"
- 2042      52784275 
- 2042      66666572 
- 2042      00
- 2043              	.LASF15:
- 2044 05e2 52435F45 		.ascii	"RC_ERROR\000"
- 2044      52524F52 
- 2044      00
- 2045              	.LASF18:
- 2046 05eb 52435F45 		.ascii	"RC_ERROR_MEMORY\000"
- 2046      52524F52 
- 2046      5F4D454D 
- 2046      4F525900 
- 2047              	.LASF83:
- 2048 05fb 45455F6F 		.ascii	"EE_oo_IRQ_disable_count\000"
- 2048      6F5F4952 
- 2048      515F6469 
- 2048      7361626C 
- 2048      655F636F 
- 2049              	.LASF42:
- 2050 0613 534F554E 		.ascii	"SOUND_CH1\000"
- 2050      445F4348 
- 2050      3100
- 2051              	.LASF43:
- 2052 061d 534F554E 		.ascii	"SOUND_CH2\000"
- 2052      445F4348 
+ 2034      5F494E56 
+ 2034      414C4944 
+ 2034      00
+ 2035              	.LASF57:
+ 2036 029a 6D5F706F 		.ascii	"m_pos\000"
+ 2036      7300
+ 2037              	.LASF35:
+ 2038 02a0 52435F45 		.ascii	"RC_ERROR_BAD_DATA\000"
+ 2038      52524F52 
+ 2038      5F424144 
+ 2038      5F444154 
+ 2038      4100
+ 2039              	.LASF96:
+ 2040 02b2 534F554E 		.ascii	"SOUND_PWM_CLOCK_Start\000"
+ 2040      445F5057 
+ 2040      4D5F434C 
+ 2040      4F434B5F 
+ 2040      53746172 
+ 2041              	.LASF48:
+ 2042 02c8 6C6F6E67 		.ascii	"long double\000"
+ 2042      20646F75 
+ 2042      626C6500 
+ 2043              	.LASF64:
+ 2044 02d4 534F554E 		.ascii	"SOUND__Driver_t\000"
+ 2044      445F5F44 
+ 2044      72697665 
+ 2044      725F7400 
+ 2045              	.LASF1:
+ 2046 02e4 756E7369 		.ascii	"unsigned char\000"
+ 2046      676E6564 
+ 2046      20636861 
+ 2046      7200
+ 2047              	.LASF104:
+ 2048 02f2 534F554E 		.ascii	"SOUND__GetInactiveBuf\000"
+ 2048      445F5F47 
+ 2048      6574496E 
+ 2048      61637469 
+ 2048      76654275 
+ 2049              	.LASF56:
+ 2050 0308 6D5F7369 		.ascii	"m_size\000"
+ 2050      7A6500
+ 2051              	.LASF50:
+ 2052 030f 45455F55 		.ascii	"EE_UINT32\000"
+ 2052      494E5433 
  2052      3200
- 2053              	.LASF44:
- 2054 0627 534F554E 		.ascii	"SOUND_CH3\000"
- 2054      445F4348 
- 2054      3300
- 2055              	.LASF23:
- 2056 0631 52435F45 		.ascii	"RC_ERROR_BUFFER_EMTPY\000"
- 2056      52524F52 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc7u6LU4.s 			page 48
+ 2053              	.LASF0:
+ 2054 0319 7369676E 		.ascii	"signed char\000"
+ 2054      65642063 
+ 2054      68617200 
+ 2055              	.LASF12:
+ 2056 0325 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2056      206C6F6E 
+ 2056      6720756E 
+ 2056      7369676E 
+ 2056      65642069 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 46
 
 
- 2056      5F425546 
- 2056      4645525F 
- 2056      454D5450 
- 2057              	.LASF40:
- 2058 0647 52435F74 		.ascii	"RC_t\000"
+ 2057              	.LASF7:
+ 2058 033c 75696E74 		.ascii	"uint32_t\000"
+ 2058      33325F74 
  2058      00
- 2059              	.LASF25:
- 2060 064c 52435F45 		.ascii	"RC_ERROR_TIME_OUT\000"
- 2060      52524F52 
- 2060      5F54494D 
- 2060      455F4F55 
- 2060      5400
- 2061              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 2059              	.LASF73:
+ 2060 0345 534F554E 		.ascii	"SOUND_FillBuffer\000"
+ 2060      445F4669 
+ 2060      6C6C4275 
+ 2060      66666572 
+ 2060      00
+ 2061              	.LASF46:
+ 2062 0356 756E7369 		.ascii	"unsigned int\000"
+ 2062      676E6564 
+ 2062      20696E74 
+ 2062      00
+ 2063              	.LASF26:
+ 2064 0363 52435F45 		.ascii	"RC_ERROR_OPEN\000"
+ 2064      52524F52 
+ 2064      5F4F5045 
+ 2064      4E00
+ 2065              	.LASF4:
+ 2066 0371 75696E74 		.ascii	"uint16_t\000"
+ 2066      31365F74 
+ 2066      00
+ 2067              	.LASF8:
+ 2068 037a 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2068      20756E73 
+ 2068      69676E65 
+ 2068      6420696E 
+ 2068      7400
+ 2069              	.LASF16:
+ 2070 038c 52435F45 		.ascii	"RC_ERROR_NULL\000"
+ 2070      52524F52 
+ 2070      5F4E554C 
+ 2070      4C00
+ 2071              	.LASF102:
+ 2072 039a 433A5C48 		.ascii	"C:\\H_da\\SS26\\Research Project\\Workspace01\\MP3_"
+ 2072      5F64615C 
+ 2072      53533236 
+ 2072      5C526573 
+ 2072      65617263 
+ 2073 03c8 506C6179 		.ascii	"Player.cydsn\000"
+ 2073      65722E63 
+ 2073      7964736E 
+ 2073      00
+ 2074              	.LASF49:
+ 2075 03d5 45455F49 		.ascii	"EE_INT32\000"
+ 2075      4E543332 
+ 2075      00
+ 2076              	.LASF69:
+ 2077 03de 73697A65 		.ascii	"sizeOfSong\000"
+ 2077      4F66536F 
+ 2077      6E6700
+ 2078              	.LASF95:
+ 2079 03e9 534F554E 		.ascii	"SOUND_ENABLE_Write\000"
+ 2079      445F454E 
+ 2079      41424C45 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 47
+
+
+ 2079      5F577269 
+ 2079      746500
+ 2080              	.LASF62:
+ 2081 03fc 6D5F7265 		.ascii	"m_readPos\000"
+ 2081      6164506F 
+ 2081      7300
+ 2082              	.LASF98:
+ 2083 0406 534F554E 		.ascii	"SOUND_PWM_WriteCompare\000"
+ 2083      445F5057 
+ 2083      4D5F5772 
+ 2083      69746543 
+ 2083      6F6D7061 
+ 2084              	.LASF55:
+ 2085 041d 6D5F736F 		.ascii	"m_song\000"
+ 2085      6E6700
+ 2086              	.LASF100:
+ 2087 0424 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2087      43313120 
+ 2087      352E342E 
+ 2087      31203230 
+ 2087      31363036 
+ 2088 0457 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2088      20726576 
+ 2088      6973696F 
+ 2088      6E203233 
+ 2088      37373135 
+ 2089 048a 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 2089      66756E63 
+ 2089      74696F6E 
+ 2089      2D736563 
+ 2089      74696F6E 
+ 2090              	.LASF13:
+ 2091 04b2 63686172 		.ascii	"char\000"
+ 2091      00
+ 2092              	.LASF78:
+ 2093 04b7 534F554E 		.ascii	"SOUND_GetAndClearUnderruns\000"
+ 2093      445F4765 
+ 2093      74416E64 
+ 2093      436C6561 
+ 2093      72556E64 
+ 2094              	.LASF22:
+ 2095 04d2 52435F45 		.ascii	"RC_ERROR_BUFFER_FULL\000"
+ 2095      52524F52 
+ 2095      5F425546 
+ 2095      4645525F 
+ 2095      46554C4C 
+ 2096              	.LASF47:
+ 2097 04e7 696E7433 		.ascii	"int32_t\000"
+ 2097      325F7400 
+ 2098              	.LASF97:
+ 2099 04ef 534F554E 		.ascii	"SOUND_PWM_Start\000"
+ 2099      445F5057 
+ 2099      4D5F5374 
+ 2099      61727400 
+ 2100              	.LASF34:
+ 2101 04ff 52435F45 		.ascii	"RC_ERROR_BAD_PARAM\000"
+ 2101      52524F52 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 48
+
+
+ 2101      5F424144 
+ 2101      5F504152 
+ 2101      414D00
+ 2102              	.LASF74:
+ 2103 0512 64617461 		.ascii	"data\000"
+ 2103      00
+ 2104              	.LASF67:
+ 2105 0517 534F554E 		.ascii	"SOUND_Init\000"
+ 2105      445F496E 
+ 2105      697400
+ 2106              	.LASF84:
+ 2107 0522 534F554E 		.ascii	"SOUND__currentSong\000"
+ 2107      445F5F63 
+ 2107      75727265 
+ 2107      6E74536F 
+ 2107      6E6700
+ 2108              	.LASF5:
+ 2109 0535 73686F72 		.ascii	"short unsigned int\000"
+ 2109      7420756E 
+ 2109      7369676E 
+ 2109      65642069 
+ 2109      6E7400
+ 2110              	.LASF87:
+ 2111 0548 45455F41 		.ascii	"EE_ApplicationMode\000"
+ 2111      70706C69 
+ 2111      63617469 
+ 2111      6F6E4D6F 
+ 2111      646500
+ 2112              	.LASF61:
+ 2113 055b 6D5F696E 		.ascii	"m_inactiveFill\000"
+ 2113      61637469 
+ 2113      76654669 
+ 2113      6C6C00
+ 2114              	.LASF10:
+ 2115 056a 646F7562 		.ascii	"double\000"
+ 2115      6C6500
+ 2116              	.LASF66:
+ 2117 0571 534F554E 		.ascii	"SOUND_StopPlay\000"
+ 2117      445F5374 
+ 2117      6F70506C 
+ 2117      617900
+ 2118              	.LASF27:
+ 2119 0580 52435F45 		.ascii	"RC_ERROR_CHECKSUM\000"
+ 2119      52524F52 
+ 2119      5F434845 
+ 2119      434B5355 
+ 2119      4D00
+ 2120              	.LASF71:
+ 2121 0592 534F554E 		.ascii	"SOUND_SetVolume\000"
+ 2121      445F5365 
+ 2121      74566F6C 
+ 2121      756D6500 
+ 2122              	.LASF75:
+ 2123 05a2 73697A65 		.ascii	"size\000"
+ 2123      00
+ 2124              	.LASF45:
+ 2125 05a7 5F5F696E 		.ascii	"__int32_t\000"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 49
+
+
+ 2125      7433325F 
+ 2125      7400
+ 2126              	.LASF93:
+ 2127 05b1 6D656D73 		.ascii	"memset\000"
+ 2127      657400
+ 2128              	.LASF65:
+ 2129 05b8 534F554E 		.ascii	"SOUND_StartPlay\000"
+ 2129      445F5374 
+ 2129      61727450 
+ 2129      6C617900 
+ 2130              	.LASF36:
+ 2131 05c8 52435F45 		.ascii	"RC_ERROR_CANCELED\000"
+ 2131      52524F52 
+ 2131      5F43414E 
+ 2131      43454C45 
+ 2131      4400
+ 2132              	.LASF101:
+ 2133 05da 736F7572 		.ascii	"source\\asw\\sound.c\000"
+ 2133      63655C61 
+ 2133      73775C73 
+ 2133      6F756E64 
+ 2133      2E6300
+ 2134              	.LASF68:
+ 2135 05ed 736F6E67 		.ascii	"song\000"
+ 2135      00
+ 2136              	.LASF99:
+ 2137 05f2 45455F6F 		.ascii	"EE_oo_SetEvent\000"
+ 2137      6F5F5365 
+ 2137      74457665 
+ 2137      6E7400
+ 2138              	.LASF90:
+ 2139 0601 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 2139      52784275 
+ 2139      66666572 
+ 2139      00
+ 2140              	.LASF15:
+ 2141 060e 52435F45 		.ascii	"RC_ERROR\000"
+ 2141      52524F52 
+ 2141      00
+ 2142              	.LASF18:
+ 2143 0617 52435F45 		.ascii	"RC_ERROR_MEMORY\000"
+ 2143      52524F52 
+ 2143      5F4D454D 
+ 2143      4F525900 
+ 2144              	.LASF85:
+ 2145 0627 45455F6F 		.ascii	"EE_oo_IRQ_disable_count\000"
+ 2145      6F5F4952 
+ 2145      515F6469 
+ 2145      7361626C 
+ 2145      655F636F 
+ 2146              	.LASF42:
+ 2147 063f 534F554E 		.ascii	"SOUND_CH1\000"
+ 2147      445F4348 
+ 2147      3100
+ 2148              	.LASF43:
+ 2149 0649 534F554E 		.ascii	"SOUND_CH2\000"
+ 2149      445F4348 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc0X1o1f.s 			page 50
+
+
+ 2149      3200
+ 2150              	.LASF44:
+ 2151 0653 534F554E 		.ascii	"SOUND_CH3\000"
+ 2151      445F4348 
+ 2151      3300
+ 2152              	.LASF23:
+ 2153 065d 52435F45 		.ascii	"RC_ERROR_BUFFER_EMTPY\000"
+ 2153      52524F52 
+ 2153      5F425546 
+ 2153      4645525F 
+ 2153      454D5450 
+ 2154              	.LASF40:
+ 2155 0673 52435F74 		.ascii	"RC_t\000"
+ 2155      00
+ 2156              	.LASF25:
+ 2157 0678 52435F45 		.ascii	"RC_ERROR_TIME_OUT\000"
+ 2157      52524F52 
+ 2157      5F54494D 
+ 2157      455F4F55 
+ 2157      5400
+ 2158              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

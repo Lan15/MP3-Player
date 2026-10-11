@@ -172,6 +172,8 @@ RC_t SOUND_FillBuffer(uint8_t const * const data, uint16_t size);
  */
 RC_t SOUND_SwapBuffers();
 
+uint32_t SOUND_GetAndClearUnderruns(void);
+
 /**
  * isr code for timer interrupt
  * /return RC_SUCCESS
