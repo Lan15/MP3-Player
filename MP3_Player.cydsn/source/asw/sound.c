@@ -239,7 +239,7 @@ uint32_t SOUND_GetAndClearUnderruns(void)
  * ISR Definitions
  ********************************************************************************/
 
-RC_t SOUND_isr()
+/*RC_t SOUND_isr()
 {
 
     // Dual buffer streaming
@@ -263,7 +263,7 @@ RC_t SOUND_isr()
         {
             if (SOUND__currentSong.m_activeFill == 0u)
             {
-                SOUND__underruns++;          /* INC 6B.1: reader missed the deadline */
+                SOUND__underruns++;          // INC 6B.1: reader missed the deadline 
             }
             SOUND_StopPlay();
             SOUND_SwapBuffers();
@@ -273,5 +273,42 @@ RC_t SOUND_isr()
         return RC_SUCCESS;
     }
     
+    return RC_SUCCESS;
+}*/
+
+RC_t SOUND_isr()
+{
+    // Dual buffer streaming
+    if (SOUND__currentSong.m_activeBuf != 0)
+    {
+        if (SOUND__currentSong.m_readPos < SOUND__currentSong.m_activeFill)
+        {
+            uint16_t sample =
+                ((uint16_t)SOUND__currentSong.m_activeBuf[SOUND__currentSong.m_readPos]
+                 * (uint16_t)SOUND__currentSong.m_volume) / 100u;
+
+            SOUND_PWM_WriteCompare((uint8_t)sample);
+            SOUND__currentSong.m_readPos++;
+        }
+        else if (SOUND__currentSong.m_inactiveFill > 0u)
+        {
+            /* INC 6B.2: active buffer finished and the next one is ready.
+               Swap, then ask the reader to refill the buffer just freed.
+               The reader now has a full buffer time (512 samples = 23.2 ms)
+               instead of half. */
+            SOUND_SwapBuffers();
+            SetEvent(tsk_reader, ev_BufEmpty);
+        }
+        else
+        {
+            /* Reader late (or end of song): hold last output, do not swap.
+               Swapping only a filled buffer means FillBuffer can never write
+               into the buffer the ISR is playing. */
+            SOUND__underruns++;
+        }
+
+        return RC_SUCCESS;
+    }
+
     return RC_SUCCESS;
 }
