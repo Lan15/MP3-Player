@@ -287,6 +287,9 @@ void MP3_Reader()
                 MP3__readBlock();
             }
 
+            sprintf(logBuf, "\r\n[MP3] Underruns before start: %lu\n", SOUND_GetAndClearUnderruns());  // INC 6B.3 DIAG
+            UART_LOG_PutString(logBuf);
+            
             SOUND_StartPlay();
 
             MP3__reader.m_state = MP3READER_STREAMING;
@@ -308,7 +311,7 @@ void MP3_Reader()
             /* EOF check */
             if (MP3__bytesRemaining == 0u)
             {
-                sprintf(logBuf, "\r\n[MP3] Underruns: %lu\n", SOUND_GetAndClearUnderruns());   // INC 6B.1
+                sprintf(logBuf, "\r\n[MP3] Underruns in song: %lu\n", SOUND_GetAndClearUnderruns());  // INC 6B.3 DIAG
                 UART_LOG_PutString(logBuf);
                 MP3__reader.m_state = MP3READER_EOF;
                 break;

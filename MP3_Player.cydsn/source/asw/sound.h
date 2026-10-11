@@ -87,7 +87,8 @@ extern volatile uint32_t SOUND_isrTickCount;
  * \brief Size of each half of the dual buffer in bytes.
  * 512 = one FAT sector = 23.2 ms of audio at 22050 Hz.
  */
-#define SOUND_BUFFER_SIZE   (512u)
+//#define SOUND_BUFFER_SIZE   (512u)
+#define SOUND_BUFFER_SIZE   (1024u)     /* INC 6B.3: fewer, larger SD reads */
  
 /**
  * \brief Mid-rail silence value for 8-bit unsigned PCM.

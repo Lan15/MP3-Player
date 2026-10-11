@@ -18,7 +18,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="MP3_Player-000\MP3_Player\asw\wav_parser.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="MP3_Player-000\MP3_Player\TopDesign">
 <ExpandedNodeIds>
 <v>MP3_Player-000</v>
 <v>MP3_Player-000\MP3_Player</v>
@@ -175,6 +175,7 @@
 <v>MP3_Player-000\MP3_Player\bsw\tft\tft.c</v>
 <v>MP3_Player-000\MP3_Player\bsw\tft\tft.h</v>
 <v>MP3_Player-000\MP3_Player\bsw\cyapicallbacks.h</v>
+<v>MP3_Player-000\MP3_Player\bsw\derivate.h</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -336,6 +337,7 @@
 <v>MP3_Player-000\MP3_Player\ErikaOS_v2_5_3\API\ee_gnu_multi_context.s</v>
 <v>MP3_Player-000\MP3_Player\ErikaOS_v2_5_3\API\ee_gnu_oo.s</v>
 <v>MP3_Player-000\MP3_Player\ErikaOS_v2_5_3\API\ee_internal.inc</v>
+<v>MP3_Player-000\MP3_Player\ErikaOS_v2_5_3\API\ee_iparam.c</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -544,6 +546,7 @@
 <v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\mp3.lst</v>
 <v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_Clock.lst</v>
 <v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\RGB_B.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\RGB_G.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>

@@ -156,8 +156,8 @@ void SOUND_SAMPLE_Wakeup(void)        ;
  *  Initialization Values
  **************************************/
 #define SOUND_SAMPLE_CAPTURE_MODE_CONF       0u
-#define SOUND_SAMPLE_INIT_PERIOD_VALUE       500u
-#define SOUND_SAMPLE_INIT_COUNTER_VALUE      500u
+#define SOUND_SAMPLE_INIT_PERIOD_VALUE       543u
+#define SOUND_SAMPLE_INIT_COUNTER_VALUE      543u
 #if (SOUND_SAMPLE_UsingFixedFunction)
 #define SOUND_SAMPLE_INIT_INTERRUPTS_MASK    ((uint8)((uint8)1u << SOUND_SAMPLE_STATUS_ZERO_INT_EN_MASK_SHIFT))
 #else
