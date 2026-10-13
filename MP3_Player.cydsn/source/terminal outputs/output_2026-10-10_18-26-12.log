@@ -1,0 +1,303 @@
+// Increment 6D
+
+[MP3] Scanning SD card...
+
+===================
+(*)EOB.WAV
+( )C08S.WAV
+( )C16E.WAV
+( )C16S.WAV
+( )C24M.WAV
+( )C24S.WAV
+( )C32M.WAV
+( )C44M.WAV
+
+
+--- WAV Header ---
+
+  FileID        : RIFF
+
+  Format        : WAVE
+
+  FmtSize       : 16
+
+  AudioFormat   : 1
+
+  Channels      : 1
+
+  SampleRate    : 22050 Hz
+
+  BitsPerSample : 8
+
+  BlockAlign    : 1
+
+  DataSize      : 597312 bytes
+
+  Duration      : ~27 s
+
+------------------
+
+[MP3] Underruns before start: 0
+
+===================
+(*)EOB.WAV
+( )C08S.WAV
+( )C16E.WAV
+( )C16S.WAV
+( )C24M.WAV
+( )C24S.WAV
+( )C32M.WAV
+( )C44M.WAV
+
+[MP3] Underruns in song: 0
+
+
+--- WAV Header ---
+
+  FileID        : RIFF
+
+  Format        : WAVE
+
+  FmtSize       : 16
+
+  AudioFormat   : 1
+
+  Channels      : 2
+
+  SampleRate    : 22050 Hz
+
+  BitsPerSample : 8
+
+  BlockAlign    : 2
+
+  DataSize      : 918320 bytes
+
+  Duration      : ~20 s
+
+------------------
+
+[MP3] Underruns before start: 12536
+
+===================
+( )EOB.WAV
+(*)C08S.WAV
+( )C16E.WAV
+( )C16S.WAV
+( )C24M.WAV
+( )C24S.WAV
+( )C32M.WAV
+( )C44M.WAV
+
+
+--- WAV Header ---
+
+  FileID        : RIFF
+
+  Format        : WAVE
+
+  FmtSize       : 40
+
+  AudioFormat   : 1
+
+  Channels      : 1
+
+  SampleRate    : 22050 Hz
+
+  BitsPerSample : 16
+
+  BlockAlign    : 2
+
+  DataSize      : 918320 bytes
+
+  Duration      : ~20 s
+
+------------------
+
+[MP3] Underruns before start: 0
+
+===================
+( )EOB.WAV
+( )C08S.WAV
+(*)C16E.WAV
+( )C16S.WAV
+( )C24M.WAV
+( )C24S.WAV
+( )C32M.WAV
+( )C44M.WAV
+
+
+--- WAV Header ---
+
+  FileID        : RIFF
+
+  Format        : WAVE
+
+  FmtSize       : 16
+
+  AudioFormat   : 1
+
+  Channels      : 2
+
+  SampleRate    : 22050 Hz
+
+  BitsPerSample : 16
+
+  BlockAlign    : 4
+
+  DataSize      : 1836640 bytes
+
+  Duration      : ~20 s
+
+------------------
+
+[MP3] Underruns before start: 0
+
+===================
+( )EOB.WAV
+( )C08S.WAV
+( )C16E.WAV
+(*)C16S.WAV
+( )C24M.WAV
+( )C24S.WAV
+( )C32M.WAV
+( )C44M.WAV
+
+
+--- WAV Header ---
+
+  FileID        : RIFF
+
+  Format        : WAVE
+
+  FmtSize       : 40
+
+  AudioFormat   : 1
+
+  Channels      : 1
+
+  SampleRate    : 22050 Hz
+
+  BitsPerSample : 24
+
+  BlockAlign    : 3
+
+  DataSize      : 1377480 bytes
+
+  Duration      : ~20 s
+
+------------------
+
+[MP3] Underruns before start: 20
+
+===================
+( )EOB.WAV
+( )C08S.WAV
+( )C16E.WAV
+( )C16S.WAV
+(*)C24M.WAV
+( )C24S.WAV
+( )C32M.WAV
+( )C44M.WAV
+
+
+--- WAV Header ---
+
+  FileID        : RIFF
+
+  Format        : WAVE
+
+  FmtSize       : 40
+
+  AudioFormat   : 1
+
+  Channels      : 2
+
+  SampleRate    : 22050 Hz
+
+  BitsPerSample : 24
+
+  BlockAlign    : 6
+
+  DataSize      : 2754960 bytes
+
+  Duration      : ~20 s
+
+------------------
+
+[MP3] Underruns before start: 0
+
+===================
+( )EOB.WAV
+( )C08S.WAV
+( )C16E.WAV
+( )C16S.WAV
+( )C24M.WAV
+(*)C24S.WAV
+( )C32M.WAV
+( )C44M.WAV
+
+[WAV] ERROR: not 8/16/24-bit
+
+[MP3] ERROR: WAV header invalid
+
+===================
+( )EOB.WAV
+( )C08S.WAV
+( )C16E.WAV
+( )C16S.WAV
+( )C24M.WAV
+( )C24S.WAV
+(*)C32M.WAV
+( )C44M.WAV
+
+[WAV] ERROR: not 8/16/24-bit
+
+[MP3] ERROR: WAV header invalid
+
+===================
+( )EOB.WAV
+( )C08S.WAV
+( )C16E.WAV
+( )C16S.WAV
+( )C24M.WAV
+( )C24S.WAV
+(*)C32M.WAV
+( )C44M.WAV
+
+
+--- WAV Header ---
+
+  FileID        : RIFF
+
+  Format        : WAVE
+
+  FmtSize       : 16
+
+  AudioFormat   : 1
+
+  Channels      : 1
+
+  SampleRate    : 44100 Hz
+
+  BitsPerSample : 16
+
+  BlockAlign    : 2
+
+  DataSize      : 1836640 bytes
+
+  Duration      : ~20 s
+
+------------------
+
+[MP3] Underruns before start: 80407
+
+===================
+( )EOB.WAV
+( )C08S.WAV
+( )C16E.WAV
+( )C16S.WAV
+( )C24M.WAV
+( )C24S.WAV
+( )C32M.WAV
+(*)C44M.WAV
+
