@@ -269,7 +269,7 @@ void MP3_Reader()
             /* Pre-fill Buffer A - becomes active */                       // INC 5C
             MP3__readBlock();
             /* DEBUG 5D: first 16 samples after conversion - expect values around 0x80 */
-            /*{
+            {
                 uint8_t k;
                 UART_LOG_PutString("\r\n[5D] First 16 samples: ");
                 for (k = 0u; k < 16u; k++)
@@ -278,7 +278,7 @@ void MP3_Reader()
                     UART_LOG_PutString(logBuf);
                 }
                 UART_LOG_PutString("\n");
-            }*/
+            }
             SOUND_SwapBuffers();
 
             /* Pre-fill Buffer B - inactive, ready for first swap */
@@ -287,8 +287,8 @@ void MP3_Reader()
                 MP3__readBlock();
             }
 
-            sprintf(logBuf, "\r\n[MP3] Underruns before start: %lu\n", SOUND_GetAndClearUnderruns());  // INC 6B.3 DIAG
-            UART_LOG_PutString(logBuf);
+            //sprintf(logBuf, "\r\n[MP3] Underruns before start: %lu\n", SOUND_GetAndClearUnderruns());  // INC 6B.3 DIAG
+            //UART_LOG_PutString(logBuf);
             
             SOUND_StartPlay();
 
@@ -311,8 +311,8 @@ void MP3_Reader()
             /* EOF check */
             if (MP3__bytesRemaining == 0u)
             {
-                sprintf(logBuf, "\r\n[MP3] Underruns in song: %lu\n", SOUND_GetAndClearUnderruns());  // INC 6B.3 DIAG
-                UART_LOG_PutString(logBuf);
+                //sprintf(logBuf, "\r\n[MP3] Underruns in song: %lu\n", SOUND_GetAndClearUnderruns());  // INC 6B.3 DIAG
+                //UART_LOG_PutString(logBuf);
                 MP3__reader.m_state = MP3READER_EOF;
                 break;
             }
@@ -597,9 +597,69 @@ static void MP3__closeWavFile(void)
  *   24-bit mono         3         1536              2
  *   stereo           2 x mono     2 x mono      left channel only (6B)
  */
+/*static void MP3__readBlock(void)
+{
+    uint16_t blockAlign = MP3__wavInfo.header.block_align;                     // bytes per frame, 1..6     
+    uint8_t  bytesPerCh = (uint8_t)(MP3__wavInfo.header.bits_per_sample / 8u); // bytes per channel, 1..3   
+    uint8_t  msbOff     = bytesPerCh - 1u;                                     // MSB is the last byte (LE) 
+    uint32_t maxBytes   = (uint32_t)SOUND_BUFFER_SIZE * blockAlign;
+    uint32_t toRead;
+    U32      bytesRead;
+    uint16_t frames;
+    uint16_t i;
+
+    // INC 6A: never read more than the buffer can hold 
+    if (maxBytes > sizeof(MP3__readBuf))
+    {
+        maxBytes = sizeof(MP3__readBuf);
+    }
+
+    toRead = (MP3__bytesRemaining >= maxBytes)
+             ? maxBytes
+             : MP3__bytesRemaining;
+
+    bytesRead = FS_Read(MP3__pFile, MP3__readBuf, toRead);
+    if (bytesRead == 0u)
+    {
+        MP3__bytesRemaining = 0u;          // read error -> force EOF, avoid endless loop 
+        return;
+    }
+    MP3__bytesRemaining -= (uint32_t)bytesRead;
+
+    frames = (uint16_t)(bytesRead / blockAlign);
+
+    if (blockAlign > 1u)                   // 8-bit mono needs no conversion 
+    {
+        for (i = 0u; i < frames; i++)
+        {
+            // N2: in place is safe - write index i, read index i*blockAlign+msbOff >= i 
+            uint8_t msb = MP3__readBuf[(i * blockAlign) + msbOff];   // 6B: channel 0 (left) only 
+
+            // N1: 8-bit is already unsigned; 16/24-bit MSB is signed -> flip sign bit
+            MP3__readBuf[i] = (bytesPerCh == 1u) ? msb : (uint8_t)(msb ^ 0x80u);
+        }
+    }
+
+    if (frames > 0u)
+    {
+        SOUND_FillBuffer(MP3__readBuf, frames);
+    }
+}*/
+
+/**
+ * Read one block of PCM, convert every frame to one 8-bit unsigned sample
+ * for VDAC8 (MSB of each channel, stereo mixed to mono), fill inactive buffer.
+ *
+ *   Format         block_align  bytes/block (SOUND_BUFFER_SIZE = 1024)
+ *   8-bit  mono         1          1024   (no conversion)
+ *   16-bit mono         2          2048
+ *   24-bit mono         3          3072
+ *   stereo           2 x mono   2 x mono   (L+R averaged)
+ */
 static void MP3__readBlock(void)
 {
     uint16_t blockAlign = MP3__wavInfo.header.block_align;                     /* bytes per frame, 1..6     */
+    uint8_t  channels   = (uint8_t)MP3__wavInfo.header.number_of_channels;     /* 1 or 2, validated in 6A   */
     uint8_t  bytesPerCh = (uint8_t)(MP3__wavInfo.header.bits_per_sample / 8u); /* bytes per channel, 1..3   */
     uint8_t  msbOff     = bytesPerCh - 1u;                                     /* MSB is the last byte (LE) */
     uint32_t maxBytes   = (uint32_t)SOUND_BUFFER_SIZE * blockAlign;
@@ -632,11 +692,22 @@ static void MP3__readBlock(void)
     {
         for (i = 0u; i < frames; i++)
         {
-            /* N2: in place is safe - write index i, read index i*blockAlign+msbOff >= i */
-            uint8_t msb = MP3__readBuf[(i * blockAlign) + msbOff];   /* 6B: channel 0 (left) only */
+            /* N2: in place is safe - frame i is read completely before index i is written,
+                   and i <= i*blockAlign */
+            uint8_t const * const frame = &MP3__readBuf[(uint32_t)i * blockAlign];
+            int16_t acc = 0;
+            uint8_t c;
 
-            /* N1: 8-bit is already unsigned; 16/24-bit MSB is signed -> flip sign bit */
-            MP3__readBuf[i] = (bytesPerCh == 1u) ? msb : (uint8_t)(msb ^ 0x80u);
+            for (c = 0u; c < channels; c++)
+            {
+                uint8_t msb = frame[(c * bytesPerCh) + msbOff];
+
+                /* N1: to signed -128..127. 8-bit is unsigned (offset 128), 16/24-bit MSB is signed */
+                acc += (bytesPerCh == 1u) ? ((int16_t)msb - 128) : (int16_t)(int8_t)msb;
+            }
+
+            /* N3: average channels (stereo -> mono), back to unsigned 0..255 for VDAC8 */
+            MP3__readBuf[i] = (uint8_t)((acc / (int16_t)channels) + 128);
         }
     }
 
@@ -656,7 +727,10 @@ static void MP3__readBlock(void)
 * N2 - Frame layout (little-endian): [ch0 LSB..MSB][ch1 LSB..MSB]. The MSB of ch0 sits at
 *      offset bytesPerCh-1. Lower bytes are dropped (VDAC8 resolution). In-place conversion
 *      is safe because the write index i never passes the read index i*blockAlign+msbOff.
-* 
+*
+* N3 - Stereo is mixed to mono by averaging the signed L and R MSBs. Averaging (not summing)
+*      keeps the result in -128..127, so it cannot clip. C integer division truncates toward 0.
+*  
 *Rejected files also expose an existing behavior, not part of 6A. When MP3__OpenWavFile() fails, 
 the reader sets MP3__player.m_state = MP3STATE_ISSTOPPED (mp3.c line 261). But MP3_ProcessEvent() 
 sets m_state = MP3STATE_ISPLAYING after calling MP3__playSong() (line 185). So depending on task 

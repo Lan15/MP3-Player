@@ -1,0 +1,221 @@
+// Increment 6C
+
+[MP3] Scanning SD card...
+
+===================
+(*)EOB.WAV
+( )C08S.WAV
+( )C16E.WAV
+( )C16S.WAV
+( )C24M.WAV
+( )C24S.WAV
+
+
+--- WAV Header ---
+
+  FileID        : RIFF
+
+  Format        : WAVE
+
+  FmtSize       : 16
+
+  AudioFormat   : 1
+
+  Channels      : 1
+
+  SampleRate    : 22050 Hz
+
+  BitsPerSample : 8
+
+  BlockAlign    : 1
+
+  DataSize      : 597312 bytes
+
+  Duration      : ~27 s
+
+------------------
+
+[5D] First 16 samples: 80 80 7F 80 7F 7F 80 7F 80 7F 80 80 80 7F 80 7F 
+
+===================
+(*)EOB.WAV
+( )C08S.WAV
+( )C16E.WAV
+( )C16S.WAV
+( )C24M.WAV
+( )C24S.WAV
+
+
+--- WAV Header ---
+
+  FileID        : RIFF
+
+  Format        : WAVE
+
+  FmtSize       : 16
+
+  AudioFormat   : 1
+
+  Channels      : 2
+
+  SampleRate    : 22050 Hz
+
+  BitsPerSample : 8
+
+  BlockAlign    : 2
+
+  DataSize      : 918320 bytes
+
+  Duration      : ~20 s
+
+------------------
+
+[5D] First 16 samples: 80 82 84 89 8D 8F 90 8F 8F 92 92 90 8E 8C 8C 8C 
+
+===================
+( )EOB.WAV
+(*)C08S.WAV
+( )C16E.WAV
+( )C16S.WAV
+( )C24M.WAV
+( )C24S.WAV
+
+
+--- WAV Header ---
+
+  FileID        : RIFF
+
+  Format        : WAVE
+
+  FmtSize       : 40
+
+  AudioFormat   : 1
+
+  Channels      : 1
+
+  SampleRate    : 22050 Hz
+
+  BitsPerSample : 16
+
+  BlockAlign    : 2
+
+  DataSize      : 918320 bytes
+
+  Duration      : ~20 s
+
+------------------
+
+[5D] First 16 samples: 81 83 86 8C 92 95 96 95 95 98 98 96 93 91 91 91 
+
+===================
+( )EOB.WAV
+( )C08S.WAV
+(*)C16E.WAV
+( )C16S.WAV
+( )C24M.WAV
+( )C24S.WAV
+
+
+--- WAV Header ---
+
+  FileID        : RIFF
+
+  Format        : WAVE
+
+  FmtSize       : 16
+
+  AudioFormat   : 1
+
+  Channels      : 2
+
+  SampleRate    : 22050 Hz
+
+  BitsPerSample : 16
+
+  BlockAlign    : 4
+
+  DataSize      : 1836640 bytes
+
+  Duration      : ~20 s
+
+------------------
+
+[5D] First 16 samples: 80 82 84 89 8D 8F 90 8F 8F 92 92 90 8E 8C 8C 8C 
+
+===================
+( )EOB.WAV
+( )C08S.WAV
+( )C16E.WAV
+(*)C16S.WAV
+( )C24M.WAV
+( )C24S.WAV
+
+
+--- WAV Header ---
+
+  FileID        : RIFF
+
+  Format        : WAVE
+
+  FmtSize       : 40
+
+  AudioFormat   : 1
+
+  Channels      : 1
+
+  SampleRate    : 22050 Hz
+
+  BitsPerSample : 24
+
+  BlockAlign    : 3
+
+  DataSize      : 1377480 bytes
+
+  Duration      : ~20 s
+
+------------------
+
+[5D] First 16 samples: 81 83 86 8C 92 95 96 95 95 98 98 96 93 91 91 91 
+
+===================
+( )EOB.WAV
+( )C08S.WAV
+( )C16E.WAV
+( )C16S.WAV
+(*)C24M.WAV
+( )C24S.WAV
+
+
+--- WAV Header ---
+
+  FileID        : RIFF
+
+  Format        : WAVE
+
+  FmtSize       : 40
+
+  AudioFormat   : 1
+
+  Channels      : 2
+
+  SampleRate    : 22050 Hz
+
+  BitsPerSample : 24
+
+  BlockAlign    : 6
+
+  DataSize      : 2754960 bytes
+
+  Duration      : ~20 s
+
+------------------
+
+[5D] First 16 samples: 80 82 84 89 8D 8F 90 8F 8F 92 92 90 8E 8C 8C 8C 
+
+===================
+( )EOB.WAV
+( )C08S.WAV
+( )C16E.WAV
+( )C16S.WAV
+( )C24M.WAV
+(*)C24S.WAV
