@@ -175,7 +175,6 @@
 <v>MP3_Player-000\MP3_Player\bsw\tft\tft.c</v>
 <v>MP3_Player-000\MP3_Player\bsw\tft\tft.h</v>
 <v>MP3_Player-000\MP3_Player\bsw\cyapicallbacks.h</v>
-<v>MP3_Player-000\MP3_Player\bsw\derivate.h</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -337,7 +336,6 @@
 <v>MP3_Player-000\MP3_Player\ErikaOS_v2_5_3\API\ee_gnu_multi_context.s</v>
 <v>MP3_Player-000\MP3_Player\ErikaOS_v2_5_3\API\ee_gnu_oo.s</v>
 <v>MP3_Player-000\MP3_Player\ErikaOS_v2_5_3\API\ee_internal.inc</v>
-<v>MP3_Player-000\MP3_Player\ErikaOS_v2_5_3\API\ee_iparam.c</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -546,7 +544,6 @@
 <v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\mp3.lst</v>
 <v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_Clock.lst</v>
 <v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\RGB_B.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\RGB_G.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -629,6 +626,9 @@
 <name v=".\Generated_Source\PSoC5\emFile.h" />
 <name v=".\source\asw\sound.h" />
 <name v=".\source\asw\wav_parser.h" />
+<name v=".\TopDesign\TopDesign.cysch" />
+<name v=".\Generated_Source\PSoC5\SimpleSystem_ee_oo_api.inc" />
+<name v=".\MP3_Player.cydwr" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -636,7 +636,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="1408, 657" SelectedTabbedMdiWindow="525503df-8eb2-48b3-b123-1abbc8211ff1"><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\main.c" Guid="4e89c3b2-9ca2-4b26-a2b3-e873aeb1d1da" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\wav_parser.c" Guid="5c02ee9e-352c-455d-8cde-96d131d3f919" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\sound.c" Guid="44dfe1f7-7208-41ac-97ae-700625f61d45" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\mp3.h" Guid="97816ec0-d079-4080-a860-c9566d3d8924" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\mp3.c" Guid="525503df-8eb2-48b3-b123-1abbc8211ff1" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\Generated_Source\PSoC5\emFile.h" Guid="1f01afba-20fd-47b3-8244-8a80116d5795" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\sound.h" Guid="79306ad8-12ab-469d-b8c6-9538c8f480b0" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\wav_parser.h" Guid="746e6696-c3c6-4a89-8a2c-939ad4a962e1" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="cb98b672-06dc-4884-8407-7d2e5bb839d7" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="1621, 670" SelectedTabbedMdiWindow="525503df-8eb2-48b3-b123-1abbc8211ff1"><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\main.c" Guid="4e89c3b2-9ca2-4b26-a2b3-e873aeb1d1da" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\wav_parser.c" Guid="5c02ee9e-352c-455d-8cde-96d131d3f919" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\sound.c" Guid="44dfe1f7-7208-41ac-97ae-700625f61d45" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\mp3.h" Guid="97816ec0-d079-4080-a860-c9566d3d8924" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\mp3.c" Guid="525503df-8eb2-48b3-b123-1abbc8211ff1" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\Generated_Source\PSoC5\emFile.h" Guid="1f01afba-20fd-47b3-8244-8a80116d5795" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\sound.h" Guid="79306ad8-12ab-469d-b8c6-9538c8f480b0" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\wav_parser.h" Guid="746e6696-c3c6-4a89-8a2c-939ad4a962e1" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="cb98b672-06dc-4884-8407-7d2e5bb839d7" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\TopDesign\TopDesign.cysch" Guid="1afe0f7b-764c-4b6b-a275-1a6c53af08a4" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\Generated_Source\PSoC5\SimpleSystem_ee_oo_api.inc" Guid="e3379b98-068e-439c-a0f6-4a0a647231c8" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\MP3_Player.cydwr" Guid="22163901-4c60-420b-9b86-bffd6d60a66a" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

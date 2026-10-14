@@ -81,7 +81,8 @@ static struct
     MP3__ReaderState_t  m_state;
     uint16_t            m_songIndex;
     boolean_t           m_newSongRequest;
-} MP3__reader = {MP3READER_IDLE, 0u, FALSE};
+    uint16_t            m_failCount;        /* INC 7: consecutive files that failed to open */
+} MP3__reader = {MP3READER_IDLE, 0u, FALSE, 0u};
 
 static char MP3__songList[MP3_MAX_SONGS][MP3_FILENAME_MAXLEN];  /* Song filename list built from SD card scan */
 
@@ -181,6 +182,7 @@ RC_t MP3_ProcessEvent(EventMaskType nextEvent)
             }
             else if (nextEvent & ev_Button3)
             {
+                MP3__reader.m_failCount = 0u;               /* INC 7: fresh start (reader is IDLE here) */
                 MP3__playSong();
                 MP3__showSong();
                 MP3__player.m_state = MP3STATE_ISPLAYING;
@@ -212,9 +214,18 @@ RC_t MP3_ProcessEvent(EventMaskType nextEvent)
             }
             else if (nextEvent & ev_1s && MP3__songEnded())
             {
-                MP3__nextSong(); 
-                MP3__playSong();
-                MP3__showSong();
+                if (MP3__reader.m_failCount >= MP3__player.m_noSongs)
+                {
+                    /* INC 7: every file failed - stop instead of looping forever */
+                    UART_LOG_PutString("\r\n[MP3] No playable song\n");
+                    MP3__player.m_state = MP3STATE_ISSTOPPED;
+                }
+                else
+                {
+                    MP3__nextSong();
+                    MP3__playSong();
+                    MP3__showSong();
+                }
             }
             break;
             
@@ -260,10 +271,13 @@ void MP3_Reader()
 
             if (MP3__openWavFile(MP3__reader.m_songIndex) != RC_SUCCESS)
             {
+                MP3__reader.m_failCount++;                  /* INC 7 */
                 MP3__reader.m_state = MP3READER_IDLE;
-                MP3__player.m_state = MP3STATE_ISSTOPPED;
+                /* INC 7: player stays PLAYING. MP3__songEnded() is now true, so the
+                   next ev_1s in tsk_control moves on to the next song. */
                 break;
             }
+            MP3__reader.m_failCount = 0u;                   /* INC 7: playable file found */
 
             MP3__setRemainingPlaytime();
             
@@ -288,7 +302,7 @@ void MP3_Reader()
                 MP3__readBlock();
             }
 
-            sprintf(logBuf, "\r\n[MP3] Underruns before start: %lu\n", SOUND_GetAndClearUnderruns());  // INC 6B.3 DIAG
+            sprintf(logBuf, "\r\n[MP3] Underruns before start: %lu\n", SOUND__GetAndClearUnderruns());  // INC 6B.3 DIAG
             UART_LOG_PutString(logBuf);
             
             SOUND_StartPlay();
@@ -312,7 +326,7 @@ void MP3_Reader()
             /* EOF check */
             if (MP3__bytesRemaining == 0u)
             {
-                sprintf(logBuf, "\r\n[MP3] Underruns in song: %lu\n", SOUND_GetAndClearUnderruns());  // INC 6B.3 DIAG
+                sprintf(logBuf, "\r\n[MP3] Underruns in song: %lu\n", SOUND__GetAndClearUnderruns());  // INC 6B.3 DIAG
                 UART_LOG_PutString(logBuf);
                 MP3__reader.m_state = MP3READER_EOF;
                 break;
@@ -512,7 +526,8 @@ void MP3__setRemainingPlaytime()
 
 boolean_t MP3__songEnded()
 {
-    return MP3__player.m_remainingPlayTime == 0;
+    /* INC 7: a file that failed to open counts as ended, regardless of remaining time */
+    return (MP3__player.m_remainingPlayTime == 0u) || (MP3__reader.m_failCount > 0u);
 }
 
 void MP3__showEventAndState(EventMaskType ev, MP3__State_t state)

@@ -403,7 +403,7 @@
          ,"ev_BufEmpty"
     #endif
     #if EE_MAX_EVENT > 6
-         ,"ev_DisplayUpdate"
+         ,"ev_SongEnd"
     #endif
     #if EE_MAX_EVENT > 7
          ,"Event_8"
@@ -500,7 +500,7 @@
         ,ev_BufEmpty
     #endif
     #if EE_MAX_EVENT > 6
-        ,ev_DisplayUpdate
+        ,ev_SongEnd
     #endif
     #if EE_MAX_EVENT > 7
         ,Event_8
@@ -1034,7 +1034,7 @@
         #endif
     #endif
     #if EE_MAX_TASK > 4
-        #if 1
+        #if 0
         ,1U
         #else
         ,0U

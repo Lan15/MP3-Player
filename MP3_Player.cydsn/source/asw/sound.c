@@ -27,7 +27,7 @@
 /* Local pre-processor symbols/macros ('#define')                            */
 /*****************************************************************************/
 
-static volatile uint32_t SOUND__underruns = 0u;     /* INC 6B.1: ticks where no sample was ready */ // INC 6B.1
+static volatile uint32_t SOUND__underruns = 0u;     /* INC 6B.1: ticks where no sample was ready */
 
 /*****************************************************************************/
 /* Global variable definitions (declared in header file with 'extern')       */
@@ -228,7 +228,7 @@ static volatile uint8_t * SOUND__GetInactiveBuf(void)
  * INC 6B.1: Return the number of underrun ticks since the last call, and reset it.
  * /return number of ISR ticks without a sample
  */
-uint32_t SOUND_GetAndClearUnderruns(void)
+uint32_t SOUND__GetAndClearUnderruns(void)
 {
     uint32_t n = SOUND__underruns;
     SOUND__underruns = 0u;
