@@ -1,6 +1,6 @@
-C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\MP3_Player.cyprj|15a64a1f-6d74-48cf-97ab-e3c3afd82051
-C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|a4ef7965-6ae7-4488-91fd-455fcacd499c
-C:\Users\agila\OneDrive\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|89e80dd6-9f01-4c2d-b313-f69177742099
-C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|4a1f034d-4805-4122-995b-899c9c0a99b7
-C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|1a30762d-0f75-424d-9469-184cb4bcad2d
-C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|bf8a5152-b40e-48de-9e44-52688d07317d
+C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\MP3_Player.cyprj|a554567c-08e7-47c9-8d68-fee94ca9672e
+C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|ad9ba7dc-1fdc-4d23-9de4-0d2f732a9ff4
+C:\Users\agila\OneDrive\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|e86e71ab-7d35-427c-8523-4f7cfb1ca925
+C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|6e33f625-982b-49df-a34c-616dbcd43002
+C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|87051a16-85ef-4ae6-9d49-1eedab04138b
+C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|931de227-44e0-4ee7-bf98-fe2be4850abf

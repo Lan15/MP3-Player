@@ -24,6 +24,10 @@
 #include "sound.h"
 #include "sound_data.h"
 #include "seven.h"
+#include "DBG_FS.h"
+#include "DBG_CONV.h"
+#include "DBG_FILL.h"
+#include "DBG_DEAD.h"
 
 #include "wav_parser.h"
 #include "FS.h"
@@ -39,6 +43,13 @@
 #define MP3__SD_ROOT            "\\"
 #define MP3__MAX_BLOCK_ALIGN    (6u)        /* largest supported frame: 24-bit stereo = 2 ch * 3 bytes */
 #define MP3__OUTPUT_RATE        (22050u)    /* SOUND_SAMPLE ISR rate - one output sample per tick */
+#define MP3__SECTOR_SIZE        (512u)      /* SD sector size - reads are kept sector-aligned (INC 8) */
+#define MP3__MAX_INBYTES        (12u)       /* largest input bytes per output sample: 24-bit stereo, step 2 */
+#define MP3__MAX_READ           ((uint32_t)MP3__MAX_BLOCK_ALIGN * SOUND_BUFFER_SIZE)  /* largest raw read per block */
+
+// Testing  
+#define DBG_HI(pin)  pin##_Write(1u)
+#define DBG_LO(pin)  pin##_Write(0u)
 
 /*****************************************************************************/
 /* Global variable definitions (declared in header file with 'extern')       */
@@ -86,15 +97,21 @@ static struct
 
 static char MP3__songList[MP3_MAX_SONGS][MP3_FILENAME_MAXLEN];  /* Song filename list built from SD card scan */
 
-static FS_FILE * MP3__pFile = 0;                        /* emFile file handle - static, not on stack */
+static FS_FILE * MP3__pFile = 0;                                /* emFile file handle - static, not on stack */
 
-static WAVFile MP3__wavInfo;                            /* Decoded WAV info */
- 
-//static uint8_t MP3__readBuf[2u * SOUND_BUFFER_SIZE];    /* Static read buffer - 1024 bytes (16-bit needs 2 bytes/sample), kept off tsk_reader stack */ // INC 5C
+static WAVFile MP3__wavInfo;                                    /* Decoded WAV info */
 
-static uint8_t MP3__readBuf[MP3__MAX_BLOCK_ALIGN * SOUND_BUFFER_SIZE];  /* 3072 bytes - one block of the largest frame format, kept off tsk_reader stack */ // INC 6B
+//static uint8_t MP3__readBuf[MP3__MAX_BLOCK_ALIGN * SOUND_BUFFER_SIZE];  /* 3072 bytes - one block of the largest frame format, kept off tsk_reader stack */ // INC 6B
 
-static uint32_t MP3__bytesRemaining = 0u;               /* Remaining PCM bytes not yet read from current file */
+/* INC 8: + MP3__MAX_INBYTES so a carried partial frame fits in front of a full-size read */
+static uint8_t MP3__readBuf[MP3__MAX_READ + MP3__MAX_INBYTES];
+
+static uint32_t MP3__bytesRemaining = 0u;                       /* Remaining PCM bytes not yet read from current file */
+
+/* INC 8: sector alignment */
+static uint16_t MP3__alignBytes = 0u;                           /* raw bytes up to the next sector boundary, 0 = aligned */
+static uint8_t  MP3__carry[MP3__MAX_INBYTES];                   /* partial output sample left over after the first read */
+static uint8_t  MP3__carryLen = 0u;
 
 
 /*****************************************************************************/
@@ -583,6 +600,15 @@ static RC_t MP3__openWavFile(uint16_t songIndex)
     }
  
     MP3__bytesRemaining = MP3__wavInfo.data_length;
+    
+    /* INC 8: WAV_ParseHeader leaves the file position on the first PCM byte. */
+    {
+        I32      dataPos = FS_FTell(MP3__pFile);
+        uint32_t rem     = (dataPos > 0) ? ((uint32_t)dataPos % MP3__SECTOR_SIZE) : 0u;
+
+        MP3__alignBytes = (rem == 0u) ? 0u : (uint16_t)(MP3__SECTOR_SIZE - rem);
+        MP3__carryLen   = 0u;
+    }
  
     WAV_PrintHeader(&MP3__wavInfo);
     //sprintf(logBuf, "\r\n[MP3] Streaming: %lu bytes\n", MP3__bytesRemaining);
@@ -599,77 +625,10 @@ static void MP3__closeWavFile(void)
         MP3__pFile = 0;
     }
     MP3__bytesRemaining = 0u;
+    
+    MP3__alignBytes     = 0u;                  // INC 8
+    MP3__carryLen       = 0u;
 }
-
-/**
- * Read one block of PCM, convert every frame to one 8-bit unsigned sample
- * for VDAC8 (MSB of each channel, stereo mixed to mono), fill inactive buffer.
- *
- *   Format         block_align  bytes/block (SOUND_BUFFER_SIZE = 1024)
- *   8-bit  mono         1          1024   (no conversion)
- *   16-bit mono         2          2048
- *   24-bit mono         3          3072
- *   stereo           2 x mono   2 x mono   (L+R averaged)
- */
-/*static void MP3__readBlock(void)
-{
-    uint16_t blockAlign = MP3__wavInfo.header.block_align;                     // bytes per frame, 1..6     
-    uint8_t  channels   = (uint8_t)MP3__wavInfo.header.number_of_channels;     // 1 or 2, validated in 6A   
-    uint8_t  bytesPerCh = (uint8_t)(MP3__wavInfo.header.bits_per_sample / 8u); // bytes per channel, 1..3   
-    uint8_t  msbOff     = bytesPerCh - 1u;                                     // MSB is the last byte (LE) 
-    uint32_t maxBytes   = (uint32_t)SOUND_BUFFER_SIZE * blockAlign;
-    uint32_t toRead;
-    U32      bytesRead;
-    uint16_t frames;
-    uint16_t i;
-
-    // INC 6A: never read more than the buffer can hold
-    if (maxBytes > sizeof(MP3__readBuf))
-    {
-        maxBytes = sizeof(MP3__readBuf);
-    }
-
-    toRead = (MP3__bytesRemaining >= maxBytes)
-             ? maxBytes
-             : MP3__bytesRemaining;
-
-    bytesRead = FS_Read(MP3__pFile, MP3__readBuf, toRead);
-    if (bytesRead == 0u)
-    {
-        MP3__bytesRemaining = 0u;          // read error -> force EOF, avoid endless loop
-        return;
-    }
-    MP3__bytesRemaining -= (uint32_t)bytesRead;
-
-    frames = (uint16_t)(bytesRead / blockAlign);
-
-    if (blockAlign > 1u)                   // 8-bit mono needs no conversion
-    {
-        for (i = 0u; i < frames; i++)
-        {
-            // N2: in place is safe - frame i is read completely before index i is written, and i <= i*blockAlign
-            uint8_t const * const frame = &MP3__readBuf[(uint32_t)i * blockAlign];
-            int16_t acc = 0;
-            uint8_t c;
-
-            for (c = 0u; c < channels; c++)
-            {
-                uint8_t msb = frame[(c * bytesPerCh) + msbOff];
-
-                // N1: to signed -128..127. 8-bit is unsigned (offset 128), 16/24-bit MSB is signed
-                acc += (bytesPerCh == 1u) ? ((int16_t)msb - 128) : (int16_t)(int8_t)msb;
-            }
-
-            // N3: average channels (stereo -> mono), back to unsigned 0..255 for VDAC8
-            MP3__readBuf[i] = (uint8_t)((acc / (int16_t)channels) + 128);
-        }
-    }
-
-    if (frames > 0u)
-    {
-        SOUND_FillBuffer(MP3__readBuf, frames);
-    }
-}*/
 
 /**
  * Read one block of PCM, convert every frame to one 8-bit unsigned sample
@@ -702,29 +661,59 @@ static void MP3__readBlock(void)
     U32      bytesRead;
     uint16_t samples;
     uint16_t i;
+    uint32_t total;
 
-    /* INC 6A: never read more than the buffer can hold */
-    if (maxBytes > sizeof(MP3__readBuf))
+        /* INC 6A: never read more than the buffer can hold */
+    if (maxBytes > MP3__MAX_READ)
     {
-        maxBytes = sizeof(MP3__readBuf);
+        maxBytes = MP3__MAX_READ;
     }
-    /* INC 6D: read whole output samples only, so frames never split across blocks */
+    /* INC 6D: read whole output samples only */
     maxBytes -= (maxBytes % inBytes);
 
-    toRead = (MP3__bytesRemaining >= maxBytes)
-             ? maxBytes
-             : MP3__bytesRemaining;
+    /* INC 8: first read stops on a sector boundary, later reads are maxBytes (multiple of 512) */
+    if (MP3__alignBytes != 0u)
+    {
+        toRead          = MP3__alignBytes;
+        MP3__alignBytes = 0u;
+    }
+    else
+    {
+        toRead = maxBytes;
+    }
+    if (toRead > MP3__bytesRemaining)
+    {
+        toRead = MP3__bytesRemaining;
+    }
 
-    bytesRead = FS_Read(MP3__pFile, MP3__readBuf, toRead);
+    /* INC 8: put back the partial output sample kept from the previous call */
+    if (MP3__carryLen > 0u)
+    {
+        memcpy(MP3__readBuf, MP3__carry, MP3__carryLen);
+    }
+
+    DBG_HI(DBG_FS); // Shows total SD read time
+    bytesRead = FS_Read(MP3__pFile, &MP3__readBuf[MP3__carryLen], toRead);
+    DBG_LO(DBG_FS);
+    
     if (bytesRead == 0u)
     {
         MP3__bytesRemaining = 0u;          /* read error -> force EOF, avoid endless loop */
+        MP3__carryLen       = 0u;
         return;
     }
     MP3__bytesRemaining -= (uint32_t)bytesRead;
 
-    samples = (uint16_t)(bytesRead / inBytes);
+    total         = (uint32_t)MP3__carryLen + bytesRead;
+    samples       = (uint16_t)(total / inBytes);
+    MP3__carryLen = (uint8_t)(total - ((uint32_t)samples * inBytes));
+    
+    if (MP3__carryLen > 0u)
+    {
+        memcpy(MP3__carry, &MP3__readBuf[(uint32_t)samples * inBytes], MP3__carryLen);
+    }
 
+    DBG_HI(DBG_CONV); // Shows the conversion loop run/compute time
     if (inBytes > 1u)                      /* 8-bit mono 22050 Hz needs no conversion */
     {
         for (i = 0u; i < samples; i++)
@@ -749,11 +738,15 @@ static void MP3__readBlock(void)
             MP3__readBuf[i] = (uint8_t)((acc / divisor) + 128);
         }
     }
+    DBG_LO(DBG_CONV);
 
     if (samples > 0u)
     {
+        DBG_HI(DBG_FILL); // Shows copy and padding time
         SOUND_FillBuffer(MP3__readBuf, samples);
+        DBG_LO(DBG_FILL);
     }
+    DBG_LO(DBG_DEAD); // Shows the actual deadline margin (from buffer swap in the ISR until readBlock returns)
 }
 
 /*----------------------------------------------------------------------------------------
@@ -774,10 +767,49 @@ static void MP3__readBlock(void)
 *      (a simple low-pass that reduces aliasing vs. dropping every 2nd frame). The read size
 *      is rounded down to whole output samples so a frame pair never splits across blocks.
 * 
+* Time:
+* SPI       SCLK                4MHz
+* DBG_FS    FS_Read             9.2ms   19.5% of 47.06ms (shared)
+*               SPI             8.9ms
+*               other           0.3
+* DBG_FILL  SOUND_FillBuffer    0.3ms   1.00% of 47.06ms (shared)
+* DBG_DEAD  swap to refill done 9.7ms   20.6% of 47.06ms (shared)
+* 
+* Refil period: 47.06
+* Free time: 47.06 − 9.7 ≈ 37.4 ms (about 79%) per refill.
+* 
+* 
+* SEGGER - Forum says “DMA is heavily used and preferred” for SD card mode on PSoC 5LP. That 
+* is true for PSoC 6 with its dedicated SDHC peripheral, where the hardware block has DMA 
+* built in. On PSoC 5LP specifically, there is no dedicated SD/MMC hardware block. We are 
+* using the SPIM component over a general-purpose SPI bus. The Cypress AppNote AN73854 
+* (the standard reference implementation for emFile + PSoC 5LP) implements FS_MMC_HW_X_Read 
+* as a CPU polling loop over the SPIM RX FIFO - not DMA. DMA is possible with the PSoC 5LP 
+* DMA controller, but it requires custom HAL work and is not the default out-of-the-box 
+* configuration. So for we specific hardware, polling in the 512-byte read is the most 
+* likely reality unless we explicitly added DMA to your HAL.
 *
-*(1) advance to the next song on the actual end of the data instead of the countdown, and skip files that fail to open; 
-*(2) for C24S and the 44.1 kHz high-bandwidth formats, increase SOUND_BUFFER_SIZE to 2048 (readBuf 12 KB) or raise the SD SPI clock.
+> The ISR fires once per sample, every 1 ÷ 22050 Hz = 45.35 µs, and outputs one sample to the PWM.
+> A buffer holds 1024 samples, so playing it takes 1024 × 45.35 µs ≈ 46.4 ms. We measured 47.06 ms.
+> So 47 ms is just 1024 samples at 22.05 kHz, the time the ISR needs to run through one buffer.
+> The reader takes about 9.7 ms to refill the buffer inactive buffer.
 *
-*
+*Format             Bytes per refill    Sectors     Samples per refill      SD time now         Share of budget     Free
+ C8M 22k            1024	            2	        1024	                9.2 ms (measured)	20%	                80%
+ 
+ C16M, C8S 22k;     2048	            4	        1024	                16.6 ms	            35%	                65% 	
+ C8M 44k 
+
+ C24M 22k	        3072	            6	        1024	                24.0 ms	            51%	                49%
+ 
+ C16S 22k;          4096	            8	        1024	                31.4 ms	            67%	                33%
+ C16M, C8S 44k	
+ 
+ C24S 22k;          6144	            12	        1024	                46.2 ms	            98%	                2%
+ C24M 44k	
+ 
+ C16S 44k	        6144	            12	        768	                    46.2 ms	            131% of 35 ms	    underrun
+ 
+ C24S 44k	        6144	            12	        512	                    46.2 ms	            197% of 23.5 ms	    underrun
 *
 */

@@ -236,6 +236,21 @@
   <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_ConfigMMC_SPI.c" value="SOURCE_C;CortexM3;;;;emFile" />
   <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_MMC_HW_SPI.c" value="SOURCE_C;CortexM3;;;;emFile" />
   <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\emFile_PM.c" value="SOURCE_C;CortexM3;;;;emFile" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\DBG_FS_aliases.h" value="HEADER;;;;;DBG_FS" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\DBG_FS.c" value="SOURCE_C;CortexM3;;;;DBG_FS" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\DBG_FS.h" value="HEADER;;;;;DBG_FS" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\DBG_TOK_aliases.h" value="HEADER;;;;;DBG_TOK" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\DBG_TOK.c" value="SOURCE_C;CortexM3;;;;DBG_TOK" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\DBG_TOK.h" value="HEADER;;;;;DBG_TOK" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\DBG_CONV_aliases.h" value="HEADER;;;;;DBG_CONV" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\DBG_CONV.c" value="SOURCE_C;CortexM3;;;;DBG_CONV" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\DBG_CONV.h" value="HEADER;;;;;DBG_CONV" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\DBG_FILL_aliases.h" value="HEADER;;;;;DBG_FILL" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\DBG_FILL.c" value="SOURCE_C;CortexM3;;;;DBG_FILL" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\DBG_FILL.h" value="HEADER;;;;;DBG_FILL" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\DBG_DEAD_aliases.h" value="HEADER;;;;;DBG_DEAD" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\DBG_DEAD.c" value="SOURCE_C;CortexM3;;;;DBG_DEAD" />
+  <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\DBG_DEAD.h" value="HEADER;;;;;DBG_DEAD" />
   <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\UART_LOG_IntClock.c" value="SOURCE_C;CortexM3;;;;UART_LOG_IntClock" />
   <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\UART_LOG_IntClock.h" value="HEADER;;;;;UART_LOG_IntClock" />
   <file name="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\codegentemp\TFT_SPI_IntClock.c" value="SOURCE_C;CortexM3;;;;TFT_SPI_IntClock" />

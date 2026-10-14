@@ -1,0 +1,489 @@
+==============================================================================
+  emFile V3.22C  —  FS_Read() Complete Analysis
+  Reconstructed from: libemf32nosnlfn.a  (ARM Thumb-2, Cortex-M3)
+  Objects:  FS_Read.o  FAT_Read.o  MMC_Drv.o  FS_FRead.o
+==============================================================================
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  CALL CHAIN OVERVIEW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  FS_Read()          [FS_Read.o  — 4 bytes   — public API, pure tail-call]
+      └─► FS__Read() [FS_Read.o  — 46 bytes  — null/permission guard]
+              └─► FS_FAT_Read() [FAT_Read.o — 404 bytes — FAT cluster loop]
+                      ├─► FS_FAT_GotoCluster()      (FAT chain walk)
+                      ├─► FS__SB_Create/Read/Delete  (sector buffer)
+                      │       └─► FS_LB_ReadBurstPart()
+                      │               └─► _MMC_Read() [MMC_Drv.o — 304 bytes]
+                      │                       ├── polling loop for 0xFE token
+                      │                       └── FS_MMC_HW_X_Read()  ← YOUR HAL
+                      └─► FS_memcpy()               (copy sector → caller buf)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SECTION 1 — FS_Read()  [FS_Read.o  .text.FS_Read — 4 bytes]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ASSEMBLY:
+  0000: fff7febf   b.w  FS__Read      ; unconditional tail-call — no stack frame
+
+C EQUIVALENT:
+  U32 FS_Read(FS_FILE *pFile, void *pData, U32 NumBytes)
+  {
+      return FS__Read(pFile, pData, NumBytes);
+      /* The compiler emitted a single branch instruction.
+         FS_Read() itself has zero logic. It exists only as the
+         public API name; all work is in FS__Read. */
+  }
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SECTION 2 — FS__Read()  [FS_Read.o  .text.FS__Read — 46 bytes]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ASSEMBLY (annotated):
+  ; --- prologue ---
+  0000: 30b5          push    {r4, r5, lr}
+  ; r0=pFile  r1=pData  r2=NumBytes
+
+  ; --- guard: NumBytes == 0? ---
+  0002: 92b1          cbz     r2, #0x2a         ; if NumBytes==0  → return 0
+
+  ; --- guard: pFile == NULL? ---
+  0004: 88b1          cbz     r0, #0x2a         ; if pFile==NULL  → return 0
+
+  ; --- load pFile->Driver (byte at offset 0x0A) ---
+  0006: 857a          ldrb    r5, [r0, #0xa]    ; r5 = pFile->Driver
+
+  ; --- load pFile->pFileObj (pointer at offset 0x00) ---
+  0008: 0468          ldr     r4, [r0]          ; r4 = pFile->pFileObj
+
+  ; --- guard: Driver == 0? ---
+  000a: 75b1          cbz     r5, #0x2a         ; if Driver==0    → return 0
+
+  ; --- guard: pFileObj == NULL? ---
+  000c: 6cb1          cbz     r4, #0x2a         ; if pFileObj==NULL → return 0
+
+  ; --- permission check: byte at offset 0x0B, bit 3 = FILE_ACCESS_FLAG_R ---
+  000e: 90f80bc0      ldrb.w  ip, [r0, #0xb]   ; ip = pFile->Flags
+  0012: 1cf0080c      ands    ip, ip, #8        ; test bit 3 (read-permission)
+  0016: 04d1          bne     #0x22             ; bit set → file is readable → go
+
+  ; --- error path: file not opened for reading ---
+  0018: 4ff6fb72      movw    r2, #0xfffb       ; -5 = FS_ERR_NOTOPEN_FOR_READ
+  001c: 0281          strh    r2, [r0, #8]      ; pFile->ErrCode = -5
+  001e: 6046          mov     r0, ip            ; r0 = 0 (ip was anded to 0)
+  0020: 30bd          pop     {r4, r5, pc}      ; return 0
+
+  ; --- happy path: tail-call to FAT layer ---
+  0022: bde83040      pop.w   {r4, r5, lr}      ; restore, keep return addr in lr
+  0026: fff7febf      b.w     FS_FAT_Read        ; tail-call — returns directly to caller
+
+  ; --- null/zero return path ---
+  002a: 0020          movs    r0, #0            ; return value = 0
+  002c: 30bd          pop     {r4, r5, pc}      ; return 0
+
+C EQUIVALENT:
+  /*
+   * Internal FS_FILE layout (offsets confirmed from assembly):
+   *   +0x00  void   *pFileObj      pointer to file object
+   *   +0x08  I16     ErrCode       last error  (I16 = signed 16-bit)
+   *   +0x0A  U8      Driver        driver index (0 = invalid)
+   *   +0x0B  U8      Flags         bit 3 = opened-for-reading
+   */
+  #define FS_FILE_ACCESS_FLAG_R   (1u << 3)   /* 0x08 */
+  #define FS_ERR_NOTOPEN_FOR_READ (-5)
+
+  static U32 FS__Read(FS_FILE *pFile, void *pData, U32 NumBytes)
+  {
+      /* Guard: all inputs must be non-null/non-zero */
+      if (NumBytes == 0u)       return 0u;
+      if (pFile    == NULL)     return 0u;
+
+      U8    driver  = *(U8  *)((U8 *)pFile + 0x0A);  /* pFile->Driver   */
+      void *pFileObj = *(void **)pFile;               /* pFile->pFileObj */
+
+      if (driver   == 0u)       return 0u;
+      if (pFileObj == NULL)     return 0u;
+
+      /* Permission check — was the file opened for reading? */
+      U8 flags = *(U8 *)((U8 *)pFile + 0x0B);        /* pFile->Flags    */
+      if ((flags & FS_FILE_ACCESS_FLAG_R) == 0u) {
+          *(I16 *)((U8 *)pFile + 0x08) = FS_ERR_NOTOPEN_FOR_READ;
+          return 0u;
+      }
+
+      /* All checks passed — dispatch to FAT layer */
+      return FS_FAT_Read(pFile, pData, NumBytes);
+  }
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SECTION 3 — THE POLLING LOOP  (inside _MMC_Read, MMC_Drv.o)
+  This is the SPI-mode SD card driver. The polling loop is at offsets
+  0x68–0x96 inside _MMC_Read.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CONTEXT:
+  Before the polling loop, _MMC_Read has already:
+    - Looked up the hardware instance (r4 = device struct, r5 = hw_unit)
+    - Computed the byte address / block address to read  (r6 = byte count left)
+    - Called FS_MMC_HW_X_DisableCS / _SendEmptyCycles   (SPI bus flush)
+    - Called FS_MMC_HW_X_EnableCS                       (assert CS)
+    - Called _ExecCmdR1 with CMD17 (single) or CMD18 (multi-block read)
+    - Checked R1 response == 0 (no error)
+  r7 = destination buffer pointer
+  r6 = block count remaining
+  r8 = poll retry counter (starts at 0)
+  [sp+0x10] = timeout (max retries, from device struct pFile->pFileObj->MaxReadRetries)
+
+POLLING LOOP ASSEMBLY (offsets 0x68–0x96, annotated):
+
+  ; --- setup before loop ---
+  0068: 4ff00008      mov.w   r8, #0            ; r8 = retry_counter = 0
+  006c: 1e46          mov     r6, r3            ; r6 = hw_unit
+  006e: 0fe0          b       #0x90             ; jump to timeout-check first
+
+  ; ┌─────────────────────────────────────────────────────────────────────┐
+  ; │                    POLLING LOOP BODY                                │
+  ; │  Purpose: wait for the SD card to send the 0xFE data-start token.  │
+  ; │  The SD card holds MISO high (0xFF) while it is busy reading from  │
+  ; │  its internal flash. When ready, it sends 0xFE then 512 data bytes.│
+  ; └─────────────────────────────────────────────────────────────────────┘
+
+  0070: 0122          movs    r2, #1            ; NumBytes = 1 (read 1 byte)
+  0072: 3046          mov     r0, r6            ; arg0 = hw_unit
+  0074: 0df11f01      add.w   r1, sp, #0x1f    ; arg1 = &stack_byte (1-byte buf)
+  0078: cdf804c0      str.w   ip, [sp, #4]     ; save ip (block-count) across call
+  007c: fff7feff      bl      FS_MMC_HW_X_Read  ; READ 1 BYTE FROM SPI → stack_byte
+                                                ; (blocking call to your HAL)
+  0080: 9df81f20      ldrb.w  r2, [sp, #0x1f]  ; r2 = byte just received
+  0084: ddf804c0      ldr.w   ip, [sp, #4]     ; restore ip
+  0088: fe2a          cmp     r2, #0xfe         ; is it the SD data-start token?
+  008a: 05d0          beq     #0x98             ; YES → exit loop, read 512 bytes
+  008c: 08f10108      add.w   r8, r8, #1        ; NO  → retry_counter++
+
+  ; --- timeout check (jumped to on first iteration too) ---
+  0090: 049b          ldr     r3, [sp, #0x10]   ; r3 = max_retries (from device cfg)
+  0092: 9845          cmp     r8, r3            ; retry_counter >= max_retries?
+  0094: ecd3          blo     #0x70             ; NO  → go back to loop body
+  0096: 33e0          b       #0x100            ; YES → timeout, set error, return -1
+
+  ; --- token received: read the actual 512-byte sector ---
+  0098: 2846          mov     r0, r5            ; arg0 = hw_unit
+  009a: 3946          mov     r1, r7            ; arg1 = pData (destination buffer)
+  009c: 4ff40072      mov.w   r2, #0x200        ; arg2 = 512 bytes
+  00a0: 6646          mov     r6, ip            ; save block count
+  00a2: fff7feff      bl      FS_MMC_HW_X_Read  ; READ 512 BYTES FROM SPI → pData
+                                                ; (this is YOUR HAL — DMA or polling)
+
+  ; --- read 2-byte CRC16 that follows the sector ---
+  00a6: 0222          movs    r2, #2            ; NumBytes = 2
+  00a8: 2846          mov     r0, r5            ; arg0 = hw_unit
+  00aa: 07a9          add     r1, sp, #0x1c     ; arg1 = &crc_buf[2] on stack
+  00ac: fff7feff      bl      FS_MMC_HW_X_Read  ; READ 2-BYTE CRC16
+
+  ; --- CRC check (if CRC enabled) ---
+  00b0: 9df81c30      ldrb.w  r3, [sp, #0x1c]  ; crc_received high byte
+  00b4: 3846          mov     r0, r7            ; arg0 = data buffer
+  00b6: 0193          str     r3, [sp, #4]
+  00b8: 9df81d80      ldrb.w  r8, [sp, #0x1d]  ; crc_received low byte
+  00bc: fff7feff      bl      T.53              ; compute CRC16 of received data
+  00c0: 4ff6ff72      movw    r2, #0xffff       ; 0xFFFF = CRC disabled sentinel
+  00c4: 9042          cmp     r0, r2            ; CRC check disabled?
+  00c6: 019b          ldr     r3, [sp, #4]
+  00c8: 0cd0          beq     #0xe4             ; yes → skip CRC validation
+  00ca: 48ea0328      orr.w   r8, r8, r3, lsl #8  ; reconstruct received CRC16
+  00ce: 4045          cmp     r0, r8            ; computed == received?
+  00d0: 08d0          beq     #0xe4             ; match → sector OK
+  ; CRC mismatch → retry with CMD18 stop or flag error
+  00d2: baf1120f      cmp.w   sl, #0x12
+  00d6: 13d1          bne     #0x100
+  00d8: 2046          mov     r0, r4
+  00da: 0c21          movs    r1, #0xc
+  00dc: 0022          movs    r2, #0
+  00de: fff7feff      bl      _ExecCmdR1        ; CMD12: stop transmission
+  00e2: 0de0          b       #0x100            ; return error
+
+  ; --- sector read OK: advance pointer, loop for next block ---
+  00e4: 013e          subs    r6, #1            ; blocks_remaining--
+  00e6: 02d0          beq     #0xee             ; all blocks done → finish
+  00e8: 07f50077      add.w   r7, r7, #0x200    ; pData += 512
+  00ec: b8e7          b       #0x60             ; back to top (next block's token poll)
+
+
+C EQUIVALENT OF THE POLLING LOOP:
+  /*
+   * Excerpt from _MMC_Read() — wait for SD card data-start token, then
+   * read the sector. Called once per 512-byte sector needed.
+   *
+   * hw_unit    = SPI hardware channel index
+   * pData      = destination buffer
+   * maxRetries = configured timeout (e.g. 1000–65535 iterations)
+   */
+
+  static int _WaitAndReadSector(U8 hw_unit, U8 *pData, U32 maxRetries)
+  {
+      U8  token;
+      U32 retryCount = 0;
+
+      /* ── POLLING LOOP ───────────────────────────────────────────────────
+       * The SD card holds MISO = 0xFF while its internal controller is
+       * busy reading from flash cells. We must poll one byte at a time
+       * until we see the data-start token 0xFE, then read the sector.
+       *
+       * CPU is 100% occupied here — no sleep, no yield, no DMA.
+       * At 1 MHz SPI: each iteration takes ~8 µs (1 byte × 8 bits).
+       * Typical SD card latency: 1–10 ms → 125–1250 iterations.
+       * ─────────────────────────────────────────────────────────────────*/
+      do {
+          FS_MMC_HW_X_Read(hw_unit, &token, 1);   /* read 1 byte over SPI */
+
+          if (token == 0xFEu) {
+              goto token_received;                 /* data-start token found */
+          }
+
+          retryCount++;
+
+      } while (retryCount < maxRetries);
+
+      return -1;    /* timeout: SD card never sent the token */
+
+  token_received:
+      /* Read 512 bytes of sector payload — one call to your HAL */
+      FS_MMC_HW_X_Read(hw_unit, pData, 512);      /* 0x200 bytes */
+
+      /* Read 2-byte CRC16 that trails every sector on the SPI bus */
+      U8 crcBuf[2];
+      FS_MMC_HW_X_Read(hw_unit, crcBuf, 2);
+
+      /* Verify CRC if enabled (0xFFFF = disabled sentinel) */
+      U16 crcReceived = ((U16)crcBuf[0] << 8) | crcBuf[1];
+      U16 crcComputed = _CalcDataCRC16(pData, 512);   /* T.53 in binary */
+      if (crcComputed != 0xFFFFu && crcComputed != crcReceived) {
+          return -1;   /* CRC mismatch */
+      }
+
+      return 0;   /* success */
+  }
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SECTION 4 — _MMC_Read() FULL ASSEMBLY  [MMC_Drv.o  — 304 bytes]
+  (complete SPI-mode SD card read, with all call targets annotated)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ; Signature (reconstructed):
+  ;   static int _MMC_Read(U8 unit, U32 SectorIndex, U32 NumSectors, void *pBuffer)
+  ; ARM calling convention: r0=unit  r1=SectorIndex  r2=NumSectors  r3=pBuffer
+
+  0000: 2de9f04f      push.w  {r4,r5,r6,r7,r8,sb,sl,fp,lr}  ; save all callee-saved
+  0004: 9b46          mov     fp, r3            ; fp = pBuffer
+  0006: 494b          ldr     r3, [pc, #0x124]  ; r3 = &_MMC_DeviceTable (PC-relative)
+  0008: 89b0          sub     sp, #0x24         ; allocate 36 bytes stack frame
+  000a: 03eb8003      add.w   r3, r3, r0, lsl #2 ; r3 = &_MMC_DeviceTable[unit]
+  000e: 0592          str     r2, [sp, #0x14]   ; [sp+0x14] = NumSectors
+  0010: 5c68          ldr     r4, [r3, #4]      ; r4 = device_struct ptr
+  0012: 4a02          lsls    r2, r1, #9        ; r2 = SectorIndex * 512 (byte addr)
+  0014: 0291          str     r1, [sp, #8]      ; [sp+0x08] = SectorIndex
+  0016: 0392          str     r2, [sp, #0xc]    ; [sp+0x0c] = byte_address
+  0018: 4ff00309      mov.w   sb, #3            ; sb = retry_limit = 3
+  001c: 029a          ldr     r2, [sp, #8]      ; r2 = SectorIndex
+  001e: a578          ldrb    r5, [r4, #2]      ; r5 = device->hw_unit
+  0020: e678          ldrb    r6, [r4, #3]      ; r6 = device->card_type
+  0022: 039b          ldr     r3, [sp, #0xc]    ; r3 = byte_address
+  0024: 2846          mov     r0, r5            ; arg0 = hw_unit
+  0026: 022e          cmp     r6, #2            ; card_type == SDHC/SDXC (type 2)?
+  0028: 08bf          it      eq
+  002a: 1346          moveq   r3, r2            ; SDHC: address = sector index (block addr)
+  002c: 1e46          mov     r6, r3            ; r6 = final address to send in command
+  002e: fff7feff      bl      FS_MMC_HW_X_DisableCS  ; deassert CS (bus reset)
+  0032: 0121          movs    r1, #1            ; arg1 = 1 empty byte
+  0034: 2846          mov     r0, r5
+  0036: fff7feff      bl      _SendEmptyCycles  ; clock 8 empty cycles (SD spec req)
+  003a: bbf1010f      cmp.w   fp, #1            ; NumSectors == 1?
+  003e: 0cbf          ite     eq
+  0040: 4ff0110a      moveq.w sl, #0x11         ; yes: CMD17 = single-block read
+  0044: 4ff0120a      movne.w sl, #0x12         ; no:  CMD18 = multi-block read
+  0048: 2846          mov     r0, r5
+  004a: fff7feff      bl      FS_MMC_HW_X_EnableCS   ; assert CS
+  004e: 2046          mov     r0, r4            ; arg0 = device struct
+  0050: 5146          mov     r1, sl            ; arg1 = CMD17 or CMD18
+  0052: 3246          mov     r2, r6            ; arg2 = address
+  0054: fff7feff      bl      _ExecCmdR1        ; send command, get R1 response
+  0058: 0028          cmp     r0, #0            ; R1 == 0 means no error
+  005a: 51d1          bne     #0x100            ; R1 != 0 → error, abort
+
+  ; --- setup for sector-read loop ---
+  005c: 059f          ldr     r7, [sp, #0x14]   ; r7 = NumSectors (block count left)
+                                                ; Wait — actually fp=pBuffer was saved
+                                                ; r7 here = destination pointer
+                                                ; (reassigning from sp+0x14 = orig r3=pBuffer)
+  005e: 5e46          mov     r6, fp            ; r6 = block_count_remaining
+  0060: a378          ldrb    r3, [r4, #2]      ; r3 = hw_unit (reload)
+  0062: e268          ldr     r2, [r4, #0xc]    ; r2 = device->MaxReadRetries
+  0064: b446          mov     ip, r6            ; ip = block_count copy
+  0066: 0492          str     r2, [sp, #0x10]   ; [sp+0x10] = MaxReadRetries (timeout)
+  0068: 4ff00008      mov.w   r8, #0            ; r8 = poll_retry_counter = 0
+  006c: 1e46          mov     r6, r3            ; r6 = hw_unit
+  006e: 0fe0          b       #0x90             ; jump to timeout check (first iter)
+
+  ; ══════════════════════════════════════════════════════════════════════
+  ;  POLLING LOOP — wait for SD data-start token 0xFE
+  ; ══════════════════════════════════════════════════════════════════════
+  0070: 0122          movs    r2, #1            ; read 1 byte
+  0072: 3046          mov     r0, r6            ; hw_unit
+  0074: 0df11f01      add.w   r1, sp, #0x1f    ; &token (1 byte on stack)
+  0078: cdf804c0      str.w   ip, [sp, #4]     ; save block_count across call
+  007c: fff7feff      bl      FS_MMC_HW_X_Read  ; ← READ 1 BYTE (HAL call)
+  0080: 9df81f20      ldrb.w  r2, [sp, #0x1f]  ; r2 = token byte received
+  0084: ddf804c0      ldr.w   ip, [sp, #4]     ; restore block_count
+  0088: fe2a          cmp     r2, #0xfe         ; token == 0xFE (data start)?
+  008a: 05d0          beq     #0x98             ; YES → go read sector data
+  008c: 08f10108      add.w   r8, r8, #1        ; NO  → poll_retry++
+  ; timeout check
+  0090: 049b          ldr     r3, [sp, #0x10]   ; r3 = MaxReadRetries
+  0092: 9845          cmp     r8, r3            ; poll_retry >= MaxReadRetries?
+  0094: ecd3          blo     #0x70             ; NO  → loop back (poll again)
+  0096: 33e0          b       #0x100            ; YES → timeout error
+  ; ══════════════════════════════════════════════════════════════════════
+
+  ; --- token received: read 512 bytes ---
+  0098: 2846          mov     r0, r5            ; hw_unit
+  009a: 3946          mov     r1, r7            ; pData (destination buffer)
+  009c: 4ff40072      mov.w   r2, #0x200        ; 512 bytes
+  00a0: 6646          mov     r6, ip            ; save block_count
+  00a2: fff7feff      bl      FS_MMC_HW_X_Read  ; ← READ 512 BYTES (HAL call)
+
+  ; --- read trailing CRC16 (2 bytes always present on SPI bus) ---
+  00a6: 0222          movs    r2, #2
+  00a8: 2846          mov     r0, r5
+  00aa: 07a9          add     r1, sp, #0x1c     ; &crc_buf on stack
+  00ac: fff7feff      bl      FS_MMC_HW_X_Read  ; ← READ 2-BYTE CRC
+
+  ; --- CRC validation ---
+  00b0: 9df81c30      ldrb.w  r3, [sp, #0x1c]  ; crc_hi byte
+  00b4: 3846          mov     r0, r7            ; arg: data buffer
+  00b6: 0193          str     r3, [sp, #4]
+  00b8: 9df81d80      ldrb.w  r8, [sp, #0x1d]  ; crc_lo byte
+  00bc: fff7feff      bl      T.53              ; _CalcDataCRC16(pData, 512)
+  00c0: 4ff6ff72      movw    r2, #0xffff       ; sentinel = CRC checking disabled
+  00c4: 9042          cmp     r0, r2            ; CRC disabled?
+  00c6: 019b          ldr     r3, [sp, #4]
+  00c8: 0cd0          beq     #0xe4             ; yes → skip CRC check
+  00ca: 48ea0328      orr.w   r8, r8, r3, lsl #8  ; crc_received = (hi<<8)|lo
+  00ce: 4045          cmp     r0, r8            ; computed == received?
+  00d0: 08d0          beq     #0xe4             ; match → sector good
+  ; CRC mismatch
+  00d2: baf1120f      cmp.w   sl, #0x12         ; was it CMD18 (multi-block)?
+  00d6: 13d1          bne     #0x100            ; no (CMD17) → just error out
+  00d8: 2046          mov     r0, r4
+  00da: 0c21          movs    r1, #0xc          ; CMD12 = STOP_TRANSMISSION
+  00dc: 0022          movs    r2, #0
+  00de: fff7feff      bl      _ExecCmdR1        ; send CMD12
+  00e2: 0de0          b       #0x100            ; return error
+
+  ; --- sector done: check if more blocks needed ---
+  00e4: 013e          subs    r6, #1            ; blocks_remaining--
+  00e6: 02d0          beq     #0xee             ; all done → end transfer
+  00e8: 07f50077      add.w   r7, r7, #0x200    ; pData += 512 (next sector buffer)
+  00ec: b8e7          b       #0x60             ; loop: poll for next sector's token
+
+  ; --- end of multi-block: send CMD12 STOP_TRANSMISSION ---
+  00ee: baf1120f      cmp.w   sl, #0x12
+  00f2: 07d1          bne     #0x104            ; CMD17 needs no stop
+  00f4: 2046          mov     r0, r4
+  00f6: 0c21          movs    r1, #0xc          ; CMD12
+  00f8: 3246          mov     r2, r6            ; arg = 0 (blocks_remaining)
+  00fa: fff7feff      bl      _ExecCmdR1
+  00fe: 01e0          b       #0x104
+
+  ; --- error path: set return = -1 ---
+  0100: 4ff0ff36      mov.w   r6, #-1           ; r6 = -1 (error)
+
+  ; --- common exit ---
+  0104: 2846          mov     r0, r5            ; hw_unit
+  0106: fff7feff      bl      FS_MMC_HW_X_DisableCS  ; deassert CS
+  010a: 2846          mov     r0, r5
+  010c: 0121          movs    r1, #1
+  010e: fff7feff      bl      _SendEmptyCycles  ; 8 post-transfer clock cycles
+  0112: 3eb1          cbz     r6, #0x124        ; r6==0 → success, done
+  0114: b9f1000f      cmp.w   sb, #0            ; retry_limit == 0?
+  0118: 02d0          beq     #0x120            ; yes → permanent failure
+  011a: 09f1ff39      add.w   sb, sb, #-1       ; retry_limit-- (sb started at 3)
+  011e: 7de7          b       #0x1c             ; retry entire command from top
+  0120: 4ff0ff36      mov.w   r6, #-1           ; final failure
+  0124: 3046          mov     r0, r6            ; return value = 0 (ok) or -1 (err)
+  0126: 09b0          add     sp, #0x24         ; free stack frame
+  0128: bde8f08f      pop.w   {r4,r5,r6,r7,r8,sb,sl,fp,pc}  ; return
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SECTION 5 — FS_FRead()  [FS_FRead.o  — 28 bytes]
+  (the C stdlib-style fread() equivalent — separate from FS_Read)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ; Signature: U32 FS_FRead(void *pData, U32 ItemSize, U32 NumItems, FS_FILE *pFile)
+  ; ARM: r0=pData  r1=ItemSize  r2=NumItems  r3=pFile
+
+ASSEMBLY:
+  0000: 10b5          push    {r4, lr}
+  0002: 8446          mov     ip, r0            ; ip = pData
+  0004: 0c46          mov     r4, r1            ; r4 = ItemSize
+  0006: 09b9          cbnz    r1, #0xc          ; ItemSize != 0 → proceed
+  0008: 0846          mov     r0, r1            ; ItemSize == 0 → return 0
+  000a: 10bd          pop     {r4, pc}
+  000c: 1846          mov     r0, r3            ; arg0 = pFile
+  000e: 6146          mov     r1, ip            ; arg1 = pData
+  0010: 6243          muls    r2, r4, r2        ; r2 = ItemSize * NumItems (total bytes)
+  0012: fff7feff      bl      FS__Read          ; call internal FS__Read
+  0016: b0fbf4f0      udiv    r0, r0, r4        ; return = bytesRead / ItemSize
+  001a: 10bd          pop     {r4, pc}
+
+C EQUIVALENT:
+  /* Note: FS_FRead calls FS__Read directly, bypassing FS_Read's wrapper */
+  U32 FS_FRead(void *pData, U32 ItemSize, U32 NumItems, FS_FILE *pFile)
+  {
+      if (ItemSize == 0u) return 0u;
+
+      U32 totalBytes = ItemSize * NumItems;
+      U32 bytesRead  = FS__Read(pFile, pData, totalBytes);
+
+      return bytesRead / ItemSize;   /* returns number of complete items read */
+  }
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  KEY FINDINGS SUMMARY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  1. FS_Read() has ZERO logic — it is a 4-byte tail-call to FS__Read().
+
+  2. FS__Read() does only null/permission guards (46 bytes), then
+     tail-calls FS_FAT_Read() for all actual work.
+
+  3. The polling loop is inside _MMC_Read() (SPI driver layer), NOT
+     inside FS_Read/FS__Read/FS_FAT_Read. It polls FS_MMC_HW_X_Read(1)
+     in a tight loop until byte 0xFE (SD data-start token) is received.
+
+  4. The CPU is 100% busy during:
+       (a) the polling loop  — waiting for 0xFE  (~1–10 ms typical)
+       (b) the 512-byte read — FS_MMC_HW_X_Read(512) — depends on YOUR HAL
+     Whether (b) uses DMA is entirely determined by your FS_MMC_HW_X_Read
+     implementation, not by emFile itself.
+
+  5. _MMC_Read retries the entire command up to 3 times (sb register
+     starts at 3, decremented on each failure) before returning -1.
+
+  6. CRC16 checking is supported but disabled by default
+     (sentinel value 0xFFFF from T.53 / _CalcDataCRC16Dummy).
+
+  7. FS_FRead() calls FS__Read() directly (not FS_Read), multiplies
+     ItemSize×NumItems before the call, divides bytesRead/ItemSize after.
+
+==============================================================================
+  END OF ANALYSIS
+  Source: binary reconstruction from libemf32nosnlfn.a
+  Tool:   capstone ARM Thumb-2 disassembler + pyelftools
+==============================================================================

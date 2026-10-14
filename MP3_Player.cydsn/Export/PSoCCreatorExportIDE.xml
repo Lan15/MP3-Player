@@ -434,6 +434,21 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_SPI0_CS_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_SPI0_CS.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\emFile_SPI0_CS.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_FS_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_FS.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_FS.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_TOK_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_TOK.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_TOK.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_CONV_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_CONV.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_CONV.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_FILL_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_FILL.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_FILL.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_DEAD_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_DEAD.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_DEAD.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\Export\ARM_GCC_Generic">

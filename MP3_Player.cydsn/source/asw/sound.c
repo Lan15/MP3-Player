@@ -23,11 +23,18 @@
 #include "sound.h"
 #include "project.h"
 
+#include "DBG_DEAD.h"
+
+
 /*****************************************************************************/
 /* Local pre-processor symbols/macros ('#define')                            */
 /*****************************************************************************/
 
 static volatile uint32_t SOUND__underruns = 0u;     /* INC 6B.1: ticks where no sample was ready */
+
+// Testing  
+#define DBG_HI(pin)  pin##_Write(1u)
+#define DBG_LO(pin)  pin##_Write(0u)
 
 /*****************************************************************************/
 /* Global variable definitions (declared in header file with 'extern')       */
@@ -298,6 +305,7 @@ RC_t SOUND_isr()
                instead of half. */
             SOUND_SwapBuffers();
             SetEvent(tsk_reader, ev_BufEmpty);
+            DBG_HI(DBG_DEAD);
         }
         else
         {
