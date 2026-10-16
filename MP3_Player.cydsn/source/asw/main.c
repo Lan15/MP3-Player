@@ -15,6 +15,7 @@
 #include "button.h"
 #include "led.h"
 #include "seven.h"
+#include "tft.h"
 
 #include "sound.h"
 #include "sound_data.h"
@@ -152,7 +153,6 @@ TASK(tsk_init)
     ActivateTask(tsk_reader);
     ActivateTask(tsk_control);
     ActivateTask(tsk_background); 
-    //ActivateTask(tsk_sd);
     
     TerminateTask();
     

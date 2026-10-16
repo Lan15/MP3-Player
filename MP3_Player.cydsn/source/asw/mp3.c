@@ -22,8 +22,9 @@
 /*****************************************************************************/
 #include "mp3.h"
 #include "sound.h"
-#include "sound_data.h"
 #include "seven.h"
+#include "tft.h"
+
 #include "DBG_FS.h"
 #include "DBG_CONV.h"
 #include "DBG_FILL.h"
@@ -40,7 +41,7 @@
 /*****************************************************************************/
 
 #define MP3__MAXVOLUME          (5u)
-#define MP3__SD_ROOT            "\\"
+#define MP3__SD_ROOT            "\\"        /* MP3__PATH_SEP */
 #define MP3__MAX_BLOCK_ALIGN    (6u)        /* largest supported frame: 24-bit stereo = 2 ch * 3 bytes */
 #define MP3__OUTPUT_RATE        (22050u)    /* SOUND_SAMPLE ISR rate - one output sample per tick */
 #define MP3__SECTOR_SIZE        (512u)      /* SD sector size - reads are kept sector-aligned (INC 8) */
@@ -118,37 +119,36 @@ static uint8_t  MP3__carryLen = 0u;
 /* Local function prototypes ('static')                                      */
 /*****************************************************************************/
 
-void MP3__readCard();               /**< \brief Read the card conetents */
+static void MP3__scanDir(const char * path);                /**< \brief recursive helper */
+static const char * MP3__shortName(const char * fullPath);  /**< \brief short name for display */
 
-void MP3__nextSong();               /**< \brief select the next song. Go to first in case of EOL */
-void MP3__prevSong();               /**< \brief select the previous song. Go to last in case of EOL */
+void MP3__nextSong();                                       /**< \brief select the next song. Go to first in case of EOL */
+void MP3__prevSong();                                       /**< \brief select the previous song. Go to last in case of EOL */
 
-void MP3__increaseVolume();         /**< \brief increase the volume by one */
-void MP3__decreaseVolume();         /**< \brief decrease the volume by one */
+void MP3__increaseVolume();                                 /**< \brief increase the volume by one */
+void MP3__decreaseVolume();                                 /**< \brief decrease the volume by one */
 
-void MP3__playSong();               /**< \brief set the sound record pointer to the current song and activate the clock */
-void MP3__stopSong();               /**< \brief Stop the clock for the timer ISR */
-void MP3__pauseSong();              /**< \brief Stop the clock for the timer ISR */
-void MP3__resumeSong();             /**< \brief Start the clock for the timer ISR */
+void MP3__playSong();                                       /**< \brief set the sound record pointer to the current song and activate the clock */
+void MP3__stopSong();                                       /**< \brief Stop the clock for the timer ISR */
+void MP3__pauseSong();                                      /**< \brief Stop the clock for the timer ISR */
+void MP3__resumeSong();                                     /**< \brief Start the clock for the timer ISR */
 
-void MP3__showSong();               /**< \brief Show the songs via uart */
-void MP3__showRemainingPlaytime();  /**< \brief Show the remaining play time via 7 segment */
-void MP3__setRemainingPlaytime();   /**< \brief Calculates and sets the initial play time once when the file opens */
+void MP3__showRemainingPlaytime();                          /**< \brief Show the remaining play time via 7 segment */
+void MP3__setRemainingPlaytime();                           /**< \brief Calculates and sets the initial play time once when the file opens */
 
-boolean_t MP3__songEnded();         /**< \brief Check if the remaining playtime has ended */
+boolean_t MP3__songEnded();                                 /**< \brief Check if the remaining playtime has ended */
 
 void MP3__showEventAndState(EventMaskType ev, MP3__State_t state);  /**< \brief Helper function to show state and event */
 
 static RC_t MP3__openWavFile(uint16_t songIndex);
 static void MP3__closeWavFile(void);
-
 static void MP3__readBlock(void);
 
 /*****************************************************************************/
 /* Function implementation - global ('extern') and local ('static')          */
 /*****************************************************************************/
 
-RC_t MP3_Init()
+/*RC_t MP3_Init()
 {
  
     MP3__player.m_state       = MP3STATE_ISSTOPPED;
@@ -158,7 +158,7 @@ RC_t MP3_Init()
     MP3__reader.m_state          = MP3READER_IDLE;
     MP3__reader.m_newSongRequest = FALSE;
  
-    /* Scan SD card for WAV files */
+    // Scan SD card for WAV files
     UART_LOG_PutString("\r\n[MP3] Scanning SD card...\n");
     
     FS_Init();
@@ -167,10 +167,36 @@ RC_t MP3_Init()
     SEVEN_Set(SEVEN_1, MP3__player.m_volume);
     SOUND_SetVolume(MP3__player.m_volume * 20u);
     MP3__showSong();
- 
+    
     //sprintf(logBuf, "\r\n[MP3] Ready. %u song(s).\n", MP3__player.m_noSongs);
     //UART_LOG_PutString(logBuf);
  
+    return RC_SUCCESS;
+}*/
+
+RC_t MP3_Init(void)
+{
+    MP3__player.m_state       = MP3STATE_ISSTOPPED;
+    MP3__player.m_volume      = MP3__MAXVOLUME;
+    MP3__player.m_currentSong = 0u;
+ 
+    MP3__reader.m_state          = MP3READER_IDLE;
+    MP3__reader.m_newSongRequest = FALSE;
+    
+    MP3__player.m_noSongs     = 0u;
+    MP3__player.m_currentSong = 0u;
+ 
+    // Scan SD card for WAV files
+    UART_LOG_PutString("\r\n[MP3] Scanning SD card...\r\n");
+    
+    FS_Init();
+    /* INC 9 — recursive scan from root */
+    MP3__scanDir(MP3__SD_ROOT);
+    
+    SEVEN_Set(SEVEN_1, MP3__player.m_volume);
+    SOUND_SetVolume(MP3__player.m_volume * 20u);
+    MP3__showSong();
+
     return RC_SUCCESS;
 }
 
@@ -234,7 +260,7 @@ RC_t MP3_ProcessEvent(EventMaskType nextEvent)
                 if (MP3__reader.m_failCount >= MP3__player.m_noSongs)
                 {
                     /* INC 7: every file failed - stop instead of looping forever */
-                    UART_LOG_PutString("\r\n[MP3] No playable song\n");
+                    UART_LOG_PutString("[MP3] No playable song\r\n");
                     MP3__player.m_state = MP3STATE_ISSTOPPED;
                 }
                 else
@@ -319,8 +345,8 @@ void MP3_Reader()
                 MP3__readBlock();
             }
 
-            sprintf(logBuf, "\r\n[MP3] Underruns before start: %lu\n", SOUND__GetAndClearUnderruns());  // INC 6B.3 DIAG
-            UART_LOG_PutString(logBuf);
+            //sprintf(logBuf, "\r\n[MP3] Underruns before start: %lu\n", SOUND__GetAndClearUnderruns());  // INC 6B.3 DIAG
+            //UART_LOG_PutString(logBuf);
             
             SOUND_StartPlay();
 
@@ -343,8 +369,8 @@ void MP3_Reader()
             /* EOF check */
             if (MP3__bytesRemaining == 0u)
             {
-                sprintf(logBuf, "\r\n[MP3] Underruns in song: %lu\n", SOUND__GetAndClearUnderruns());  // INC 6B.3 DIAG
-                UART_LOG_PutString(logBuf);
+                //sprintf(logBuf, "\r\n[MP3] Underruns in song: %lu\n", SOUND__GetAndClearUnderruns());  // INC 6B.3 DIAG
+                //UART_LOG_PutString(logBuf);
                 MP3__reader.m_state = MP3READER_EOF;
                 break;
             }
@@ -382,53 +408,100 @@ void MP3_Reader()
 /* Private helpers                                                           */
 /*****************************************************************************/
 
-void MP3__readCard()
+/* INC 9 - recursive SD card scan, stores full paths for subfolder support */
+static void MP3__scanDir(const char * path)
 {
     FS_DIR    * pDir;
     FS_DIRENT * pDirEnt;
-    char        entryName[64];
-    //char        logBuf[48];
+    char        entryName[32];
+    char        fullPath[MP3_FILENAME_MAXLEN];
     U8          attr;
-    uint16_t    songCount = 0;
-    
-    pDir = FS_OpenDir(MP3__SD_ROOT);
+    char        logBuf[80];
+    U16         idx = 0u;      /* entries consumed so far in this dir */
+    U16         skip;
+
+    pDir = FS_OpenDir(path);
     if (pDir == 0)
     {
-        UART_LOG_PutString("\r\n[MP3] ERROR: cannot open root dir\n");
-        /* Fall back to flash songs */
-        MP3__player.m_noSongs = SOUND_NoOfRecords;
-        uint16_t i;
-        for (i = 0u; i < SOUND_NoOfRecords && i < MP3_MAX_SONGS; i++)
-            strncpy(MP3__songList[i], SOUND_Records[i].m_title,
-                    MP3_FILENAME_MAXLEN - 1u);
+        sprintf(logBuf, "[SCAN] Cannot open dir: '%s'\r\n", path);
+        UART_LOG_PutString(logBuf);
+        return;
+    }
+
+    while (MP3__player.m_noSongs < MP3_MAX_SONGS)
+    {
+        pDirEnt = FS_ReadDir(pDir);
+        if (pDirEnt == 0) break;
+        idx++;
+
+        FS_DirEnt2Name(pDirEnt, entryName);
+        FS_DirEnt2Attr(pDirEnt, &attr);
+
+        if (entryName[0] == '.')   continue;
+        if (attr & FS_ATTR_HIDDEN) continue;
+        if (attr & FS_ATTR_SYSTEM) continue;
+
+        /* Full path with leading backslash: "\SONG.WAV" or "\MUSIC\SONG.WAV" */
+        if (path[0] == '\\' && path[1] == '\0')
+            snprintf(fullPath, MP3_FILENAME_MAXLEN, "\\%s", entryName);
+        else
+            snprintf(fullPath, MP3_FILENAME_MAXLEN, "%s\\%s", path, entryName);
+        fullPath[MP3_FILENAME_MAXLEN - 1u] = '\0';
+
+        if (attr & FS_ATTR_DIRECTORY)
+        {
+            //sprintf(logBuf, "[SCAN] <DIR> '%s'\r\n", fullPath);
+            //UART_LOG_PutString(logBuf);
+
+            /* Release the handle BEFORE opening the subdir */
+            FS_CloseDir(pDir);
+            MP3__scanDir(fullPath);
+
+            /* Reopen the parent and skip what was already consumed */
+            pDir = FS_OpenDir(path);
+            if (pDir == 0) return;
+            for (skip = 0u; skip < idx; skip++)
+            {
+                if (FS_ReadDir(pDir) == 0) break;
+            }
+        }
+        else
+        {
+            uint8_t len = (uint8_t)strlen(entryName);
+            if (len > 4u &&
+                (strcmp(&entryName[len - 4u], ".WAV") == 0 ||
+                 strcmp(&entryName[len - 4u], ".wav") == 0))
+            {
+                strncpy(MP3__songList[MP3__player.m_noSongs],
+                        fullPath, MP3_FILENAME_MAXLEN - 1u);
+                MP3__songList[MP3__player.m_noSongs][MP3_FILENAME_MAXLEN - 1u] = '\0';
+                /*sprintf(logBuf, "[SCAN] [%u] '%s'\r\n",
+                        MP3__player.m_noSongs + 1u, fullPath);
+                UART_LOG_PutString(logBuf);*/
+                MP3__player.m_noSongs++;
+            }
+        }
+    }
+    FS_CloseDir(pDir);
+    
+    if (MP3__player.m_noSongs == 0u)
+    {
+        UART_LOG_PutString("[MP3] No WAV files found\r\n");
+        /* fallback to flash songs if defined */
     }
     else
     {
-        while (songCount < MP3_MAX_SONGS)
-        {
-            pDirEnt = FS_ReadDir(pDir);
-            if (pDirEnt == 0) break;
- 
-            FS_DirEnt2Name(pDirEnt, entryName);
-            FS_DirEnt2Attr(pDirEnt, &attr);
- 
-            if (attr & FS_ATTR_DIRECTORY) continue;
- 
-            if (strstr(entryName, ".WAV") != 0 ||
-                strstr(entryName, ".wav") != 0)
-            {
-                strncpy(MP3__songList[songCount], entryName,
-                        MP3_FILENAME_MAXLEN - 1u);
-                MP3__songList[songCount][MP3_FILENAME_MAXLEN - 1u] = '\0';
-                songCount++;
- 
-                //sprintf(logBuf, "\r\n[MP3] Found: %s\n", entryName);
-                //UART_LOG_PutString(logBuf);
-            }
-        }
-        FS_CloseDir(pDir);
-        MP3__player.m_noSongs = songCount;
+        char logBuf[40];
+        //sprintf(logBuf, "[MP3] %u song(s) found\n", MP3__player.m_noSongs);
+        //UART_LOG_PutString(logBuf);
     }
+}
+
+/* INC 9 — extract filename from full path for display (TFT/UART) */
+static const char * MP3__shortName(const char * fullPath)
+{
+    const char * p = strrchr(fullPath, '\\');
+    return (p != 0) ? (p + 1u) : fullPath;
 }
 
 void MP3__nextSong()
@@ -462,7 +535,7 @@ void MP3__decreaseVolume()
 
 }
 
-void MP3__playSong(void)
+void MP3__playSong()
 {
     MP3__player.m_remainingPlayTime  = 0u;
     MP3__reader.m_songIndex          = MP3__player.m_currentSong;
@@ -471,7 +544,7 @@ void MP3__playSong(void)
     SetEvent(tsk_reader, ev_BufEmpty);
 }
 
-void MP3__stopSong(void)
+void MP3__stopSong()
 {
     SOUND_StopPlay();
     MP3__closeWavFile();
@@ -505,11 +578,13 @@ void MP3__showSong()
         {
             UART_LOG_PutString("( )");
         }
-        UART_LOG_PutString(MP3__songList[i]);
+        //UART_LOG_PutString(MP3__songList[i]);
+        /* INC 9 - show short filename, full path in brackets */
+        UART_LOG_PutString(MP3__shortName(MP3__songList[i]));
         UART_LOG_PutString("\r\n");
     }
-
 }
+
 // decrements and displays it every second while playing
 void MP3__showRemainingPlaytime()
 {
@@ -582,14 +657,19 @@ void MP3__showEventAndState(EventMaskType ev, MP3__State_t state)
 
 static RC_t MP3__openWavFile(uint16_t songIndex)
 {
-    //char logBuf[48];
+    char logBuf[48];
  
+    /* INC 9 verify: log the exact path string passed to FS_FOpen */
+    //sprintf(logBuf, "\r\n[MP3] FOpen: '%s'\n", MP3__songList[songIndex]);
+    //UART_LOG_PutString(logBuf);
+    
     MP3__pFile = FS_FOpen(MP3__songList[songIndex], "r");
     if (MP3__pFile == 0)
     {
         UART_LOG_PutString("\r\n[MP3] ERROR: FS_FOpen failed\n");
         return RC_ERROR;
     }
+    //UART_LOG_PutString("\r\n[MP3] FS_FOpen OK\n");
  
     if (WAV_ParseHeader(MP3__pFile, &MP3__wavInfo) != RC_SUCCESS)
     {
@@ -610,7 +690,7 @@ static RC_t MP3__openWavFile(uint16_t songIndex)
         MP3__carryLen   = 0u;
     }
  
-    WAV_PrintHeader(&MP3__wavInfo);
+    //WAV_PrintHeader(&MP3__wavInfo);
     //sprintf(logBuf, "\r\n[MP3] Streaming: %lu bytes\n", MP3__bytesRemaining);
     //UART_LOG_PutString(logBuf);
  

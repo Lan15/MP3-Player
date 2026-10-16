@@ -124,12 +124,6 @@ static RC_t WAV__ValidateFormat(WAVHeader const * const hdr)    // INC 6A
         UART_LOG_PutString("\r\n[WAV] ERROR: bad block_align\n");
         return RC_ERROR;
     }
-    /*if (hdr->sample_rate != WAV__SAMPLE_RATE)
-    {
-        sprintf(logBuf, "\r\n[WAV] ERROR: %lu Hz, need 22050 Hz\n", (uint32_t)hdr->sample_rate);
-        UART_LOG_PutString(logBuf);
-        return RC_ERROR;
-    }*/
     /* INC 6D: 22050 Hz played directly, 44100 Hz decimated by 2 in MP3__ReadBlock() */
     if ((hdr->sample_rate != WAV__SAMPLE_RATE) &&
         (hdr->sample_rate != (2u * WAV__SAMPLE_RATE)))

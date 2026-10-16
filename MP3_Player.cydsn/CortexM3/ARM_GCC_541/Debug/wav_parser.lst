@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
   29:source\asw/wav_parser.c **** #define WAV__OFF_SAMPLE_RATE     (24u)
   30:source\asw/wav_parser.c **** #define WAV__OFF_BYTE_RATE       (28u)
   31:source\asw/wav_parser.c **** #define WAV__OFF_BLOCK_ALIGN     (32u)
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 2
 
 
   32:source\asw/wav_parser.c **** #define WAV__OFF_BITS_PER_SAMPLE (34u)
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
   72:source\asw/wav_parser.c ****          | ((uint32_t)data[3] << 24u);
   41              		.loc 1 72 0
   42 000e C078     		ldrb	r0, [r0, #3]	@ zero_extendqisi2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 3
 
 
   43              	.LVL1:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
   89:source\asw/wav_parser.c **** static RC_t WAV__ValidateFormat(WAVHeader const * const hdr)    // INC 6A
   90:source\asw/wav_parser.c **** {
   81              		.loc 1 90 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 4
 
 
   82              		.cfi_startproc
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  123 0036 05D0     		beq	.L7
  104:source\asw/wav_parser.c ****     {
  105:source\asw/wav_parser.c ****         UART_LOG_PutString("\r\n[WAV] ERROR: not PCM\n");
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 5
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 5
 
 
  124              		.loc 1 105 0
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  120:source\asw/wav_parser.c ****     }
  121:source\asw/wav_parser.c ****     /* One frame = one sample for every channel */
  122:source\asw/wav_parser.c ****     if (hdr->block_align != (hdr->number_of_channels * (hdr->bits_per_sample / 8u)))
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 6
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 6
 
 
  164              		.loc 1 122 0
@@ -319,54 +319,48 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  176 008a 15E0     		b	.L5
  177              	.L10:
  126:source\asw/wav_parser.c ****     }
- 127:source\asw/wav_parser.c ****     /*if (hdr->sample_rate != WAV__SAMPLE_RATE)
- 128:source\asw/wav_parser.c ****     {
- 129:source\asw/wav_parser.c ****         sprintf(logBuf, "\r\n[WAV] ERROR: %lu Hz, need 22050 Hz\n", (uint32_t)hdr->sample_rate);
- 130:source\asw/wav_parser.c ****         UART_LOG_PutString(logBuf);
- 131:source\asw/wav_parser.c ****         return RC_ERROR;
- 132:source\asw/wav_parser.c ****     }*/
- 133:source\asw/wav_parser.c ****     /* INC 6D: 22050 Hz played directly, 44100 Hz decimated by 2 in MP3__ReadBlock() */
- 134:source\asw/wav_parser.c ****     if ((hdr->sample_rate != WAV__SAMPLE_RATE) &&
- 178              		.loc 1 134 0
+ 127:source\asw/wav_parser.c ****     /* INC 6D: 22050 Hz played directly, 44100 Hz decimated by 2 in MP3__ReadBlock() */
+ 128:source\asw/wav_parser.c ****     if ((hdr->sample_rate != WAV__SAMPLE_RATE) &&
+ 178              		.loc 1 128 0
  179 008c 226A     		ldr	r2, [r4, #32]
  180 008e 45F22263 		movw	r3, #22050
  181 0092 9A42     		cmp	r2, r3
  182 0094 0DD0     		beq	.L11
- 183              		.loc 1 134 0 is_stmt 0 discriminator 1
+ 183              		.loc 1 128 0 is_stmt 0 discriminator 1
  184 0096 4AF64443 		movw	r3, #44100
  185 009a 9A42     		cmp	r2, r3
  186 009c 0BD0     		beq	.L12
- 135:source\asw/wav_parser.c ****         (hdr->sample_rate != (2u * WAV__SAMPLE_RATE)))
- 136:source\asw/wav_parser.c ****     {
- 137:source\asw/wav_parser.c ****         sprintf(logBuf, "\r\n[WAV] ERROR: %lu Hz, need 22050/44100\n", (uint32_t)hdr->sample_rate);
- 187              		.loc 1 137 0 is_stmt 1
+ 129:source\asw/wav_parser.c ****         (hdr->sample_rate != (2u * WAV__SAMPLE_RATE)))
+ 130:source\asw/wav_parser.c ****     {
+ 131:source\asw/wav_parser.c ****         sprintf(logBuf, "\r\n[WAV] ERROR: %lu Hz, need 22050/44100\n", (uint32_t)hdr->sample_rate);
+ 187              		.loc 1 131 0 is_stmt 1
  188 009e 0F49     		ldr	r1, .L14+32
  189 00a0 6846     		mov	r0, sp
  190 00a2 FFF7FEFF 		bl	sprintf
  191              	.LVL13:
- 138:source\asw/wav_parser.c ****         UART_LOG_PutString(logBuf);
- 192              		.loc 1 138 0
+ 132:source\asw/wav_parser.c ****         UART_LOG_PutString(logBuf);
+ 192              		.loc 1 132 0
  193 00a6 6846     		mov	r0, sp
  194 00a8 FFF7FEFF 		bl	UART_LOG_PutString
  195              	.LVL14:
- 139:source\asw/wav_parser.c ****         return RC_ERROR;
- 196              		.loc 1 139 0
+ 133:source\asw/wav_parser.c ****         return RC_ERROR;
+ 196              		.loc 1 133 0
  197 00ac 4FF0FF30 		mov	r0, #-1
  198 00b0 02E0     		b	.L5
  199              	.L11:
- 140:source\asw/wav_parser.c ****     }
- 141:source\asw/wav_parser.c ****     return RC_SUCCESS;
- 200              		.loc 1 141 0
+ 134:source\asw/wav_parser.c ****     }
+ 135:source\asw/wav_parser.c ****     return RC_SUCCESS;
+ 200              		.loc 1 135 0
  201 00b2 0020     		movs	r0, #0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 7
-
-
  202 00b4 00E0     		b	.L5
  203              	.L12:
  204 00b6 0020     		movs	r0, #0
  205              	.L5:
- 142:source\asw/wav_parser.c **** }
- 206              		.loc 1 142 0
+ 136:source\asw/wav_parser.c **** }
+ 206              		.loc 1 136 0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 7
+
+
  207 00b8 0EB0     		add	sp, sp, #56
  208              		.cfi_def_cfa_offset 8
  209              		@ sp needed
@@ -418,15 +412,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  253              	.LVL19:
   86:source\asw/wav_parser.c **** }
  254              		.loc 1 86 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 8
-
-
  255 000e 0023     		movs	r3, #0
  256 0010 6355     		strb	r3, [r4, r5]
  257 0012 38BD     		pop	{r3, r4, r5, pc}
  258              		.cfi_endproc
  259              	.LFE113:
  260              		.size	WAV__BytesToString, .-WAV__BytesToString
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 8
+
+
  261              		.section	.text.WAV_ParseHeader,"ax",%progbits
  262              		.align	2
  263              		.global	WAV_ParseHeader
@@ -435,14 +429,14 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  266              		.type	WAV_ParseHeader, %function
  267              	WAV_ParseHeader:
  268              	.LFB115:
- 143:source\asw/wav_parser.c **** 
- 144:source\asw/wav_parser.c **** /*****************************************************************************/
- 145:source\asw/wav_parser.c **** /* Public API                                                                */
- 146:source\asw/wav_parser.c **** /*****************************************************************************/
- 147:source\asw/wav_parser.c **** 
- 148:source\asw/wav_parser.c **** RC_t WAV_ParseHeader(FS_FILE * const pFile, WAVFile * const wav)
- 149:source\asw/wav_parser.c **** {
- 269              		.loc 1 149 0
+ 137:source\asw/wav_parser.c **** 
+ 138:source\asw/wav_parser.c **** /*****************************************************************************/
+ 139:source\asw/wav_parser.c **** /* Public API                                                                */
+ 140:source\asw/wav_parser.c **** /*****************************************************************************/
+ 141:source\asw/wav_parser.c **** 
+ 142:source\asw/wav_parser.c **** RC_t WAV_ParseHeader(FS_FILE * const pFile, WAVFile * const wav)
+ 143:source\asw/wav_parser.c **** {
+ 269              		.loc 1 143 0
  270              		.cfi_startproc
  271              		@ args = 0, pretend = 0, frame = 80
  272              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -462,234 +456,234 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  286 0006 0646     		mov	r6, r0
  287 0008 8946     		mov	r9, r1
  288              	.LVL21:
- 150:source\asw/wav_parser.c ****     uint8_t  raw[WAV__RIFF_FMT_SIZE];
- 151:source\asw/wav_parser.c ****     U32      bytesRead = 0u;
- 152:source\asw/wav_parser.c ****     char     logBuf[48];
- 153:source\asw/wav_parser.c **** 
- 154:source\asw/wav_parser.c ****     /* Read first 36 bytes — RIFF header + fmt chunk */
- 155:source\asw/wav_parser.c ****     bytesRead = FS_Read(pFile, raw, WAV__RIFF_FMT_SIZE);
- 289              		.loc 1 155 0
+ 144:source\asw/wav_parser.c ****     uint8_t  raw[WAV__RIFF_FMT_SIZE];
+ 145:source\asw/wav_parser.c ****     U32      bytesRead = 0u;
+ 146:source\asw/wav_parser.c ****     char     logBuf[48];
+ 147:source\asw/wav_parser.c **** 
+ 148:source\asw/wav_parser.c ****     /* Read first 36 bytes — RIFF header + fmt chunk */
+ 149:source\asw/wav_parser.c ****     bytesRead = FS_Read(pFile, raw, WAV__RIFF_FMT_SIZE);
+ 289              		.loc 1 149 0
  290 000a 2422     		movs	r2, #36
  291 000c 0BA9     		add	r1, sp, #44
  292              	.LVL22:
  293 000e FFF7FEFF 		bl	FS_Read
  294              	.LVL23:
- 156:source\asw/wav_parser.c ****     if (bytesRead != WAV__RIFF_FMT_SIZE)
- 295              		.loc 1 156 0
+ 150:source\asw/wav_parser.c ****     if (bytesRead != WAV__RIFF_FMT_SIZE)
+ 295              		.loc 1 150 0
  296 0012 2428     		cmp	r0, #36
  297 0014 05D0     		beq	.L19
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 9
-
-
- 157:source\asw/wav_parser.c ****     {
- 158:source\asw/wav_parser.c ****         UART_LOG_PutString("\r\n[WAV] ERROR: header read failed\n");
- 298              		.loc 1 158 0
+ 151:source\asw/wav_parser.c ****     {
+ 152:source\asw/wav_parser.c ****         UART_LOG_PutString("\r\n[WAV] ERROR: header read failed\n");
+ 298              		.loc 1 152 0
  299 0016 5B48     		ldr	r0, .L36
  300              	.LVL24:
  301 0018 FFF7FEFF 		bl	UART_LOG_PutString
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 9
+
+
  302              	.LVL25:
- 159:source\asw/wav_parser.c ****         return RC_ERROR;
- 303              		.loc 1 159 0
+ 153:source\asw/wav_parser.c ****         return RC_ERROR;
+ 303              		.loc 1 153 0
  304 001c 4FF0FF3A 		mov	r10, #-1
  305 0020 ACE0     		b	.L20
  306              	.LVL26:
  307              	.L19:
- 160:source\asw/wav_parser.c ****     }
- 161:source\asw/wav_parser.c **** 
- 162:source\asw/wav_parser.c ****     /* Decode fixed fields */
- 163:source\asw/wav_parser.c ****     WAVHeader * const hdr = &wav->header;
- 164:source\asw/wav_parser.c **** 
- 165:source\asw/wav_parser.c ****     WAV__BytesToString(&raw[WAV__OFF_FILE_ID],     hdr->file_id,     4u);
- 308              		.loc 1 165 0
+ 154:source\asw/wav_parser.c ****     }
+ 155:source\asw/wav_parser.c **** 
+ 156:source\asw/wav_parser.c ****     /* Decode fixed fields */
+ 157:source\asw/wav_parser.c ****     WAVHeader * const hdr = &wav->header;
+ 158:source\asw/wav_parser.c **** 
+ 159:source\asw/wav_parser.c ****     WAV__BytesToString(&raw[WAV__OFF_FILE_ID],     hdr->file_id,     4u);
+ 308              		.loc 1 159 0
  309 0022 0422     		movs	r2, #4
  310 0024 4946     		mov	r1, r9
  311 0026 0BA8     		add	r0, sp, #44
  312              	.LVL27:
  313 0028 FFF7FEFF 		bl	WAV__BytesToString
  314              	.LVL28:
- 166:source\asw/wav_parser.c ****     hdr->file_size          = WAV__ReadU32(&raw[WAV__OFF_FILE_SIZE]);
- 315              		.loc 1 166 0
+ 160:source\asw/wav_parser.c ****     hdr->file_size          = WAV__ReadU32(&raw[WAV__OFF_FILE_SIZE]);
+ 315              		.loc 1 160 0
  316 002c 0CA8     		add	r0, sp, #48
  317 002e FFF7FEFF 		bl	WAV__ReadU32
  318              	.LVL29:
  319 0032 C9F80800 		str	r0, [r9, #8]
- 167:source\asw/wav_parser.c ****     WAV__BytesToString(&raw[WAV__OFF_FORMAT],      hdr->format,      4u);
- 320              		.loc 1 167 0
+ 161:source\asw/wav_parser.c ****     WAV__BytesToString(&raw[WAV__OFF_FORMAT],      hdr->format,      4u);
+ 320              		.loc 1 161 0
  321 0036 0422     		movs	r2, #4
  322 0038 09F10C01 		add	r1, r9, #12
  323 003c 0DA8     		add	r0, sp, #52
  324 003e FFF7FEFF 		bl	WAV__BytesToString
  325              	.LVL30:
- 168:source\asw/wav_parser.c ****     WAV__BytesToString(&raw[WAV__OFF_SUBCHUNK_ID], hdr->subchunk_id, 4u);
- 326              		.loc 1 168 0
+ 162:source\asw/wav_parser.c ****     WAV__BytesToString(&raw[WAV__OFF_SUBCHUNK_ID], hdr->subchunk_id, 4u);
+ 326              		.loc 1 162 0
  327 0042 0422     		movs	r2, #4
  328 0044 09F11101 		add	r1, r9, #17
  329 0048 0EA8     		add	r0, sp, #56
  330 004a FFF7FEFF 		bl	WAV__BytesToString
  331              	.LVL31:
- 169:source\asw/wav_parser.c ****     hdr->subchunk_size      = WAV__ReadU32(&raw[WAV__OFF_SUBCHUNK_SIZE]);
- 332              		.loc 1 169 0
+ 163:source\asw/wav_parser.c ****     hdr->subchunk_size      = WAV__ReadU32(&raw[WAV__OFF_SUBCHUNK_SIZE]);
+ 332              		.loc 1 163 0
  333 004e 0FA8     		add	r0, sp, #60
  334 0050 FFF7FEFF 		bl	WAV__ReadU32
  335              	.LVL32:
  336 0054 0446     		mov	r4, r0
  337 0056 C9F81800 		str	r0, [r9, #24]
- 170:source\asw/wav_parser.c ****     hdr->audio_format       = WAV__ReadU16(&raw[WAV__OFF_AUDIO_FORMAT]);
- 338              		.loc 1 170 0
+ 164:source\asw/wav_parser.c ****     hdr->audio_format       = WAV__ReadU16(&raw[WAV__OFF_AUDIO_FORMAT]);
+ 338              		.loc 1 164 0
  339 005a 10A8     		add	r0, sp, #64
  340 005c FFF7FEFF 		bl	WAV__ReadU16
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 10
-
-
  341              	.LVL33:
  342 0060 A9F81C00 		strh	r0, [r9, #28]	@ movhi
- 171:source\asw/wav_parser.c ****     hdr->number_of_channels = WAV__ReadU16(&raw[WAV__OFF_NUM_CHANNELS]);
- 343              		.loc 1 171 0
+ 165:source\asw/wav_parser.c ****     hdr->number_of_channels = WAV__ReadU16(&raw[WAV__OFF_NUM_CHANNELS]);
+ 343              		.loc 1 165 0
  344 0064 0DF14200 		add	r0, sp, #66
  345 0068 FFF7FEFF 		bl	WAV__ReadU16
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 10
+
+
  346              	.LVL34:
  347 006c A9F81E00 		strh	r0, [r9, #30]	@ movhi
- 172:source\asw/wav_parser.c ****     hdr->sample_rate        = WAV__ReadU32(&raw[WAV__OFF_SAMPLE_RATE]);
- 348              		.loc 1 172 0
+ 166:source\asw/wav_parser.c ****     hdr->sample_rate        = WAV__ReadU32(&raw[WAV__OFF_SAMPLE_RATE]);
+ 348              		.loc 1 166 0
  349 0070 11A8     		add	r0, sp, #68
  350 0072 FFF7FEFF 		bl	WAV__ReadU32
  351              	.LVL35:
  352 0076 C9F82000 		str	r0, [r9, #32]
- 173:source\asw/wav_parser.c ****     hdr->byte_rate          = WAV__ReadU32(&raw[WAV__OFF_BYTE_RATE]);
- 353              		.loc 1 173 0
+ 167:source\asw/wav_parser.c ****     hdr->byte_rate          = WAV__ReadU32(&raw[WAV__OFF_BYTE_RATE]);
+ 353              		.loc 1 167 0
  354 007a 12A8     		add	r0, sp, #72
  355 007c FFF7FEFF 		bl	WAV__ReadU32
  356              	.LVL36:
  357 0080 C9F82400 		str	r0, [r9, #36]
- 174:source\asw/wav_parser.c ****     hdr->block_align        = WAV__ReadU16(&raw[WAV__OFF_BLOCK_ALIGN]);
- 358              		.loc 1 174 0
+ 168:source\asw/wav_parser.c ****     hdr->block_align        = WAV__ReadU16(&raw[WAV__OFF_BLOCK_ALIGN]);
+ 358              		.loc 1 168 0
  359 0084 13A8     		add	r0, sp, #76
  360 0086 FFF7FEFF 		bl	WAV__ReadU16
  361              	.LVL37:
  362 008a A9F82800 		strh	r0, [r9, #40]	@ movhi
- 175:source\asw/wav_parser.c ****     hdr->bits_per_sample    = WAV__ReadU16(&raw[WAV__OFF_BITS_PER_SAMPLE]);
- 363              		.loc 1 175 0
+ 169:source\asw/wav_parser.c ****     hdr->bits_per_sample    = WAV__ReadU16(&raw[WAV__OFF_BITS_PER_SAMPLE]);
+ 363              		.loc 1 169 0
  364 008e 0DF14E00 		add	r0, sp, #78
  365 0092 FFF7FEFF 		bl	WAV__ReadU16
  366              	.LVL38:
  367 0096 A9F82A00 		strh	r0, [r9, #42]	@ movhi
- 176:source\asw/wav_parser.c **** 
- 177:source\asw/wav_parser.c ****     /* ------------------------------------------------------------------ */
- 178:source\asw/wav_parser.c ****     /* INC 6A: fmt chunk larger than 16 bytes (fmt extension)             */
- 179:source\asw/wav_parser.c ****     /* Must be consumed here, otherwise the chunk search below starts     */
- 180:source\asw/wav_parser.c ****     /* inside the fmt chunk. For WAVE_FORMAT_EXTENSIBLE the real format   */
- 181:source\asw/wav_parser.c ****     /* tag is the first 2 bytes of the SubFormat GUID.                    */
- 182:source\asw/wav_parser.c ****     /* ------------------------------------------------------------------ */
- 183:source\asw/wav_parser.c ****     if (hdr->subchunk_size > WAV__FMT_BASE_SIZE)
- 368              		.loc 1 183 0
+ 170:source\asw/wav_parser.c **** 
+ 171:source\asw/wav_parser.c ****     /* ------------------------------------------------------------------ */
+ 172:source\asw/wav_parser.c ****     /* INC 6A: fmt chunk larger than 16 bytes (fmt extension)             */
+ 173:source\asw/wav_parser.c ****     /* Must be consumed here, otherwise the chunk search below starts     */
+ 174:source\asw/wav_parser.c ****     /* inside the fmt chunk. For WAVE_FORMAT_EXTENSIBLE the real format   */
+ 175:source\asw/wav_parser.c ****     /* tag is the first 2 bytes of the SubFormat GUID.                    */
+ 176:source\asw/wav_parser.c ****     /* ------------------------------------------------------------------ */
+ 177:source\asw/wav_parser.c ****     if (hdr->subchunk_size > WAV__FMT_BASE_SIZE)
+ 368              		.loc 1 177 0
  369 009a 102C     		cmp	r4, #16
  370 009c 2CD9     		bls	.L21
  371              	.LBB2:
- 184:source\asw/wav_parser.c ****     {
- 185:source\asw/wav_parser.c ****         uint8_t  ext[WAV__FMT_EXT_MAX];
- 186:source\asw/wav_parser.c ****         uint32_t extSize = hdr->subchunk_size - WAV__FMT_BASE_SIZE;
- 372              		.loc 1 186 0
+ 178:source\asw/wav_parser.c ****     {
+ 179:source\asw/wav_parser.c ****         uint8_t  ext[WAV__FMT_EXT_MAX];
+ 180:source\asw/wav_parser.c ****         uint32_t extSize = hdr->subchunk_size - WAV__FMT_BASE_SIZE;
+ 372              		.loc 1 180 0
  373 009e 103C     		subs	r4, r4, #16
  374              	.LVL39:
- 187:source\asw/wav_parser.c ****         uint32_t toRead  = (extSize > WAV__FMT_EXT_MAX) ? WAV__FMT_EXT_MAX : extSize;
- 375              		.loc 1 187 0
+ 181:source\asw/wav_parser.c ****         uint32_t toRead  = (extSize > WAV__FMT_EXT_MAX) ? WAV__FMT_EXT_MAX : extSize;
+ 375              		.loc 1 181 0
  376 00a0 2546     		mov	r5, r4
  377 00a2 182C     		cmp	r4, #24
  378 00a4 28BF     		it	cs
  379 00a6 1825     		movcs	r5, #24
  380              	.LVL40:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 11
-
-
- 188:source\asw/wav_parser.c **** 
- 189:source\asw/wav_parser.c ****         if (FS_Read(pFile, ext, toRead) != toRead)
- 381              		.loc 1 189 0
+ 182:source\asw/wav_parser.c **** 
+ 183:source\asw/wav_parser.c ****         if (FS_Read(pFile, ext, toRead) != toRead)
+ 381              		.loc 1 183 0
  382 00a8 2A46     		mov	r2, r5
  383 00aa 01A9     		add	r1, sp, #4
  384 00ac 3046     		mov	r0, r6
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 11
+
+
  385 00ae FFF7FEFF 		bl	FS_Read
  386              	.LVL41:
  387 00b2 8542     		cmp	r5, r0
  388 00b4 05D0     		beq	.L22
- 190:source\asw/wav_parser.c ****         {
- 191:source\asw/wav_parser.c ****             UART_LOG_PutString("\r\n[WAV] ERROR: fmt extension read failed\n");
- 389              		.loc 1 191 0
+ 184:source\asw/wav_parser.c ****         {
+ 185:source\asw/wav_parser.c ****             UART_LOG_PutString("\r\n[WAV] ERROR: fmt extension read failed\n");
+ 389              		.loc 1 185 0
  390 00b6 3448     		ldr	r0, .L36+4
  391 00b8 FFF7FEFF 		bl	UART_LOG_PutString
  392              	.LVL42:
- 192:source\asw/wav_parser.c ****             return RC_ERROR;
- 393              		.loc 1 192 0
+ 186:source\asw/wav_parser.c ****             return RC_ERROR;
+ 393              		.loc 1 186 0
  394 00bc 4FF0FF3A 		mov	r10, #-1
  395 00c0 5CE0     		b	.L20
  396              	.L22:
- 193:source\asw/wav_parser.c ****         }
- 194:source\asw/wav_parser.c **** 
- 195:source\asw/wav_parser.c ****         if ((hdr->audio_format == WAV__FORMAT_EXTENSIBLE) &&
- 397              		.loc 1 195 0
+ 187:source\asw/wav_parser.c ****         }
+ 188:source\asw/wav_parser.c **** 
+ 189:source\asw/wav_parser.c ****         if ((hdr->audio_format == WAV__FORMAT_EXTENSIBLE) &&
+ 397              		.loc 1 189 0
  398 00c2 B9F81C20 		ldrh	r2, [r9, #28]
  399 00c6 4FF6FE73 		movw	r3, #65534
  400 00ca 9A42     		cmp	r2, r3
  401 00cc 06D1     		bne	.L23
- 402              		.loc 1 195 0 is_stmt 0 discriminator 1
+ 402              		.loc 1 189 0 is_stmt 0 discriminator 1
  403 00ce 092D     		cmp	r5, #9
  404 00d0 04D9     		bls	.L23
- 196:source\asw/wav_parser.c ****             (toRead >= (WAV__EXT_SUBFORMAT_OFF + 2u)))
- 197:source\asw/wav_parser.c ****         {
- 198:source\asw/wav_parser.c ****             hdr->audio_format = WAV__ReadU16(&ext[WAV__EXT_SUBFORMAT_OFF]);
- 405              		.loc 1 198 0 is_stmt 1
+ 190:source\asw/wav_parser.c ****             (toRead >= (WAV__EXT_SUBFORMAT_OFF + 2u)))
+ 191:source\asw/wav_parser.c ****         {
+ 192:source\asw/wav_parser.c ****             hdr->audio_format = WAV__ReadU16(&ext[WAV__EXT_SUBFORMAT_OFF]);
+ 405              		.loc 1 192 0 is_stmt 1
  406 00d2 03A8     		add	r0, sp, #12
  407 00d4 FFF7FEFF 		bl	WAV__ReadU16
  408              	.LVL43:
  409 00d8 A9F81C00 		strh	r0, [r9, #28]	@ movhi
  410              	.L23:
- 199:source\asw/wav_parser.c ****         }
- 200:source\asw/wav_parser.c **** 
- 201:source\asw/wav_parser.c ****         /* Skip any remaining extension bytes */
- 202:source\asw/wav_parser.c ****         extSize -= toRead;
- 411              		.loc 1 202 0
+ 193:source\asw/wav_parser.c ****         }
+ 194:source\asw/wav_parser.c **** 
+ 195:source\asw/wav_parser.c ****         /* Skip any remaining extension bytes */
+ 196:source\asw/wav_parser.c ****         extSize -= toRead;
+ 411              		.loc 1 196 0
  412 00dc 641B     		subs	r4, r4, r5
  413              	.LVL44:
- 203:source\asw/wav_parser.c ****         while (extSize > 0u)
- 414              		.loc 1 203 0
+ 197:source\asw/wav_parser.c ****         while (extSize > 0u)
+ 414              		.loc 1 197 0
  415 00de 09E0     		b	.L24
  416              	.L25:
- 204:source\asw/wav_parser.c ****         {
- 205:source\asw/wav_parser.c ****             toRead = (extSize > WAV__FMT_EXT_MAX) ? WAV__FMT_EXT_MAX : extSize;
- 417              		.loc 1 205 0
+ 198:source\asw/wav_parser.c ****         {
+ 199:source\asw/wav_parser.c ****             toRead = (extSize > WAV__FMT_EXT_MAX) ? WAV__FMT_EXT_MAX : extSize;
+ 417              		.loc 1 199 0
  418 00e0 2546     		mov	r5, r4
  419              	.LVL45:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 12
-
-
  420 00e2 182C     		cmp	r4, #24
  421 00e4 28BF     		it	cs
  422 00e6 1825     		movcs	r5, #24
  423              	.LVL46:
- 206:source\asw/wav_parser.c ****             FS_Read(pFile, ext, toRead);
- 424              		.loc 1 206 0
+ 200:source\asw/wav_parser.c ****             FS_Read(pFile, ext, toRead);
+ 424              		.loc 1 200 0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 12
+
+
  425 00e8 2A46     		mov	r2, r5
  426 00ea 01A9     		add	r1, sp, #4
  427 00ec 3046     		mov	r0, r6
  428 00ee FFF7FEFF 		bl	FS_Read
  429              	.LVL47:
- 207:source\asw/wav_parser.c ****             extSize -= toRead;
- 430              		.loc 1 207 0
+ 201:source\asw/wav_parser.c ****             extSize -= toRead;
+ 430              		.loc 1 201 0
  431 00f2 641B     		subs	r4, r4, r5
  432              	.LVL48:
  433              	.L24:
- 203:source\asw/wav_parser.c ****         {
- 434              		.loc 1 203 0
+ 197:source\asw/wav_parser.c ****         {
+ 434              		.loc 1 197 0
  435 00f4 002C     		cmp	r4, #0
  436 00f6 F3D1     		bne	.L25
  437              	.LVL49:
  438              	.L21:
  439              	.LBE2:
- 208:source\asw/wav_parser.c ****         }
- 209:source\asw/wav_parser.c ****     }
- 210:source\asw/wav_parser.c ****     
- 211:source\asw/wav_parser.c ****     /* Validate format constraints for VDAC8 hardware */
- 212:source\asw/wav_parser.c ****     if (WAV__ValidateFormat(hdr) != RC_SUCCESS)
- 440              		.loc 1 212 0
+ 202:source\asw/wav_parser.c ****         }
+ 203:source\asw/wav_parser.c ****     }
+ 204:source\asw/wav_parser.c ****     
+ 205:source\asw/wav_parser.c ****     /* Validate format constraints for VDAC8 hardware */
+ 206:source\asw/wav_parser.c ****     if (WAV__ValidateFormat(hdr) != RC_SUCCESS)
+ 440              		.loc 1 206 0
  441 00f8 4846     		mov	r0, r9
  442 00fa FFF7FEFF 		bl	WAV__ValidateFormat
  443              	.LVL50:
@@ -701,108 +695,108 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  449              	.LVL51:
  450              	.L31:
  451              	.LBB3:
- 213:source\asw/wav_parser.c ****     {
- 214:source\asw/wav_parser.c ****         return RC_ERROR;
- 215:source\asw/wav_parser.c ****     }
- 216:source\asw/wav_parser.c **** 
- 217:source\asw/wav_parser.c ****     /* ------------------------------------------------------------------ */
- 218:source\asw/wav_parser.c ****     /* Search dynamically for the 'data' chunk                            */
- 219:source\asw/wav_parser.c ****     /* WAV files can have extra chunks (LIST, INFO) before 'data'         */
- 220:source\asw/wav_parser.c ****     /* This file has: fmt(byte 12) -> LIST(byte 36) -> data(byte 70)      */
- 221:source\asw/wav_parser.c ****     /* ------------------------------------------------------------------ */
- 222:source\asw/wav_parser.c ****     uint8_t  chunkHdr[8];
- 223:source\asw/wav_parser.c ****     char     chunkID[5];
- 224:source\asw/wav_parser.c ****     uint32_t chunkSize   = 0u;
- 225:source\asw/wav_parser.c ****     uint32_t bytesScanned = 0u;
- 226:source\asw/wav_parser.c ****     uint8_t  found       = 0u;
- 227:source\asw/wav_parser.c **** 
- 228:source\asw/wav_parser.c ****     while (bytesScanned < WAV__MAX_SCAN)
- 229:source\asw/wav_parser.c ****     {
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 13
-
-
- 230:source\asw/wav_parser.c ****         bytesRead = FS_Read(pFile, chunkHdr, 8u);
- 452              		.loc 1 230 0
+ 207:source\asw/wav_parser.c ****     {
+ 208:source\asw/wav_parser.c ****         return RC_ERROR;
+ 209:source\asw/wav_parser.c ****     }
+ 210:source\asw/wav_parser.c **** 
+ 211:source\asw/wav_parser.c ****     /* ------------------------------------------------------------------ */
+ 212:source\asw/wav_parser.c ****     /* Search dynamically for the 'data' chunk                            */
+ 213:source\asw/wav_parser.c ****     /* WAV files can have extra chunks (LIST, INFO) before 'data'         */
+ 214:source\asw/wav_parser.c ****     /* This file has: fmt(byte 12) -> LIST(byte 36) -> data(byte 70)      */
+ 215:source\asw/wav_parser.c ****     /* ------------------------------------------------------------------ */
+ 216:source\asw/wav_parser.c ****     uint8_t  chunkHdr[8];
+ 217:source\asw/wav_parser.c ****     char     chunkID[5];
+ 218:source\asw/wav_parser.c ****     uint32_t chunkSize   = 0u;
+ 219:source\asw/wav_parser.c ****     uint32_t bytesScanned = 0u;
+ 220:source\asw/wav_parser.c ****     uint8_t  found       = 0u;
+ 221:source\asw/wav_parser.c **** 
+ 222:source\asw/wav_parser.c ****     while (bytesScanned < WAV__MAX_SCAN)
+ 223:source\asw/wav_parser.c ****     {
+ 224:source\asw/wav_parser.c ****         bytesRead = FS_Read(pFile, chunkHdr, 8u);
+ 452              		.loc 1 224 0
  453 0108 0822     		movs	r2, #8
  454 010a 09A9     		add	r1, sp, #36
  455 010c 3046     		mov	r0, r6
  456 010e FFF7FEFF 		bl	FS_Read
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 13
+
+
  457              	.LVL52:
- 231:source\asw/wav_parser.c ****         if (bytesRead != 8u) break;
- 458              		.loc 1 231 0
+ 225:source\asw/wav_parser.c ****         if (bytesRead != 8u) break;
+ 458              		.loc 1 225 0
  459 0112 0828     		cmp	r0, #8
  460 0114 24D1     		bne	.L33
- 232:source\asw/wav_parser.c **** 
- 233:source\asw/wav_parser.c ****         WAV__BytesToString(chunkHdr, chunkID, 4u);
- 461              		.loc 1 233 0
+ 226:source\asw/wav_parser.c **** 
+ 227:source\asw/wav_parser.c ****         WAV__BytesToString(chunkHdr, chunkID, 4u);
+ 461              		.loc 1 227 0
  462 0116 0422     		movs	r2, #4
  463 0118 07A9     		add	r1, sp, #28
  464 011a 09A8     		add	r0, sp, #36
  465              	.LVL53:
  466 011c FFF7FEFF 		bl	WAV__BytesToString
  467              	.LVL54:
- 234:source\asw/wav_parser.c ****         chunkSize = WAV__ReadU32(&chunkHdr[4]);
- 468              		.loc 1 234 0
+ 228:source\asw/wav_parser.c ****         chunkSize = WAV__ReadU32(&chunkHdr[4]);
+ 468              		.loc 1 228 0
  469 0120 0AA8     		add	r0, sp, #40
  470 0122 FFF7FEFF 		bl	WAV__ReadU32
  471              	.LVL55:
  472 0126 8046     		mov	r8, r0
  473              	.LVL56:
- 235:source\asw/wav_parser.c **** 
- 236:source\asw/wav_parser.c ****         //sprintf(logBuf, "\r\n[WAV] Chunk: '%s' size=%lu\n", chunkID, chunkSize);
- 237:source\asw/wav_parser.c ****         //UART_LOG_PutString(logBuf);
- 238:source\asw/wav_parser.c **** 
- 239:source\asw/wav_parser.c ****         if (strcmp(chunkID, "data") == 0)
- 474              		.loc 1 239 0
+ 229:source\asw/wav_parser.c **** 
+ 230:source\asw/wav_parser.c ****         //sprintf(logBuf, "\r\n[WAV] Chunk: '%s' size=%lu\n", chunkID, chunkSize);
+ 231:source\asw/wav_parser.c ****         //UART_LOG_PutString(logBuf);
+ 232:source\asw/wav_parser.c **** 
+ 233:source\asw/wav_parser.c ****         if (strcmp(chunkID, "data") == 0)
+ 474              		.loc 1 233 0
  475 0128 1849     		ldr	r1, .L36+8
  476 012a 07A8     		add	r0, sp, #28
  477              	.LVL57:
  478 012c FFF7FEFF 		bl	strcmp
  479              	.LVL58:
  480 0130 80B9     		cbnz	r0, .L34
- 240:source\asw/wav_parser.c ****         {
- 241:source\asw/wav_parser.c ****             hdr->data_size   = chunkSize;
- 481              		.loc 1 241 0
+ 234:source\asw/wav_parser.c ****         {
+ 235:source\asw/wav_parser.c ****             hdr->data_size   = chunkSize;
+ 481              		.loc 1 235 0
  482 0132 C9F83480 		str	r8, [r9, #52]
- 242:source\asw/wav_parser.c ****             wav->data_length = chunkSize;
- 483              		.loc 1 242 0
+ 236:source\asw/wav_parser.c ****             wav->data_length = chunkSize;
+ 483              		.loc 1 236 0
  484 0136 C9F83880 		str	r8, [r9, #56]
  485              	.LVL59:
- 243:source\asw/wav_parser.c ****             found = 1u;
- 486              		.loc 1 243 0
+ 237:source\asw/wav_parser.c ****             found = 1u;
+ 486              		.loc 1 237 0
  487 013a 0123     		movs	r3, #1
- 244:source\asw/wav_parser.c ****             break;
- 488              		.loc 1 244 0
+ 238:source\asw/wav_parser.c ****             break;
+ 488              		.loc 1 238 0
  489 013c 15E0     		b	.L30
  490              	.LVL60:
  491              	.L29:
  492              	.LBB4:
- 245:source\asw/wav_parser.c ****         }
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 14
+ 239:source\asw/wav_parser.c ****         }
+ 240:source\asw/wav_parser.c **** 
+ 241:source\asw/wav_parser.c ****         /* Skip this chunk — not 'data' */
+ 242:source\asw/wav_parser.c ****         uint8_t  skipBuf[16];
+ 243:source\asw/wav_parser.c ****         uint32_t remaining = chunkSize;
+ 244:source\asw/wav_parser.c ****         while (remaining > 0u)
+ 245:source\asw/wav_parser.c ****         {
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 14
 
 
- 246:source\asw/wav_parser.c **** 
- 247:source\asw/wav_parser.c ****         /* Skip this chunk — not 'data' */
- 248:source\asw/wav_parser.c ****         uint8_t  skipBuf[16];
- 249:source\asw/wav_parser.c ****         uint32_t remaining = chunkSize;
- 250:source\asw/wav_parser.c ****         while (remaining > 0u)
- 251:source\asw/wav_parser.c ****         {
- 252:source\asw/wav_parser.c ****             uint32_t toRead = (remaining > 16u) ? 16u : remaining;
- 493              		.loc 1 252 0
+ 246:source\asw/wav_parser.c ****             uint32_t toRead = (remaining > 16u) ? 16u : remaining;
+ 493              		.loc 1 246 0
  494 013e 2546     		mov	r5, r4
  495 0140 102C     		cmp	r4, #16
  496 0142 28BF     		it	cs
  497 0144 1025     		movcs	r5, #16
  498              	.LVL61:
- 253:source\asw/wav_parser.c ****             FS_Read(pFile, skipBuf, toRead);
- 499              		.loc 1 253 0
+ 247:source\asw/wav_parser.c ****             FS_Read(pFile, skipBuf, toRead);
+ 499              		.loc 1 247 0
  500 0146 2A46     		mov	r2, r5
  501 0148 01A9     		add	r1, sp, #4
  502 014a 3046     		mov	r0, r6
  503 014c FFF7FEFF 		bl	FS_Read
  504              	.LVL62:
- 254:source\asw/wav_parser.c ****             remaining -= toRead;
- 505              		.loc 1 254 0
+ 248:source\asw/wav_parser.c ****             remaining -= toRead;
+ 505              		.loc 1 248 0
  506 0150 641B     		subs	r4, r4, r5
  507              	.LVL63:
  508 0152 00E0     		b	.L28
@@ -812,13 +806,13 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  512 0154 4446     		mov	r4, r8
  513              	.L28:
  514              	.LVL65:
- 250:source\asw/wav_parser.c ****         {
- 515              		.loc 1 250 0
+ 244:source\asw/wav_parser.c ****         {
+ 515              		.loc 1 244 0
  516 0156 002C     		cmp	r4, #0
  517 0158 F1D1     		bne	.L29
- 255:source\asw/wav_parser.c ****         }
- 256:source\asw/wav_parser.c ****         bytesScanned += 8u + chunkSize;
- 518              		.loc 1 256 0
+ 249:source\asw/wav_parser.c ****         }
+ 250:source\asw/wav_parser.c ****         bytesScanned += 8u + chunkSize;
+ 518              		.loc 1 250 0
  519 015a 4744     		add	r7, r7, r8
  520              	.LVL66:
  521 015c 0837     		adds	r7, r7, #8
@@ -827,53 +821,53 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  524              	.LVL68:
  525              	.L33:
  526              	.LBE3:
- 226:source\asw/wav_parser.c **** 
- 527              		.loc 1 226 0
+ 220:source\asw/wav_parser.c **** 
+ 527              		.loc 1 220 0
  528 0160 0023     		movs	r3, #0
  529              	.LVL69:
  530 0162 02E0     		b	.L30
  531              	.LVL70:
  532              	.L26:
- 228:source\asw/wav_parser.c ****     {
- 533              		.loc 1 228 0
+ 222:source\asw/wav_parser.c ****     {
+ 533              		.loc 1 222 0
  534 0164 FF2F     		cmp	r7, #255
  535 0166 CFD9     		bls	.L31
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 15
-
-
- 226:source\asw/wav_parser.c **** 
- 536              		.loc 1 226 0
+ 220:source\asw/wav_parser.c **** 
+ 536              		.loc 1 220 0
  537 0168 0023     		movs	r3, #0
  538              	.L30:
  539              	.LVL71:
- 257:source\asw/wav_parser.c ****     }
- 258:source\asw/wav_parser.c **** 
- 259:source\asw/wav_parser.c ****     if (found == 0u)
- 540              		.loc 1 259 0
+ 251:source\asw/wav_parser.c ****     }
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 15
+
+
+ 252:source\asw/wav_parser.c **** 
+ 253:source\asw/wav_parser.c ****     if (found == 0u)
+ 540              		.loc 1 253 0
  541 016a 3BB9     		cbnz	r3, .L20
- 260:source\asw/wav_parser.c ****     {
- 261:source\asw/wav_parser.c ****         UART_LOG_PutString("\r\n[WAV] ERROR: data chunk not found\n");
- 542              		.loc 1 261 0
+ 254:source\asw/wav_parser.c ****     {
+ 255:source\asw/wav_parser.c ****         UART_LOG_PutString("\r\n[WAV] ERROR: data chunk not found\n");
+ 542              		.loc 1 255 0
  543 016c 0848     		ldr	r0, .L36+12
  544 016e FFF7FEFF 		bl	UART_LOG_PutString
  545              	.LVL72:
- 262:source\asw/wav_parser.c ****         return RC_ERROR;
- 546              		.loc 1 262 0
+ 256:source\asw/wav_parser.c ****         return RC_ERROR;
+ 546              		.loc 1 256 0
  547 0172 4FF0FF3A 		mov	r10, #-1
  548 0176 01E0     		b	.L20
  549              	.LVL73:
  550              	.L32:
- 214:source\asw/wav_parser.c ****     }
- 551              		.loc 1 214 0
+ 208:source\asw/wav_parser.c ****     }
+ 551              		.loc 1 208 0
  552 0178 4FF0FF3A 		mov	r10, #-1
  553              	.LVL74:
  554              	.L20:
- 263:source\asw/wav_parser.c ****     }
- 264:source\asw/wav_parser.c **** 
- 265:source\asw/wav_parser.c ****     /* File pointer now sits at first PCM sample — ready for streaming */
- 266:source\asw/wav_parser.c ****     return RC_SUCCESS;
- 267:source\asw/wav_parser.c **** }
- 555              		.loc 1 267 0
+ 257:source\asw/wav_parser.c ****     }
+ 258:source\asw/wav_parser.c **** 
+ 259:source\asw/wav_parser.c ****     /* File pointer now sits at first PCM sample — ready for streaming */
+ 260:source\asw/wav_parser.c ****     return RC_SUCCESS;
+ 261:source\asw/wav_parser.c **** }
+ 555              		.loc 1 261 0
  556 017c 5046     		mov	r0, r10
  557 017e 14B0     		add	sp, sp, #80
  558              		.cfi_def_cfa_offset 32
@@ -898,15 +892,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  577              		.type	WAV_PrintHeader, %function
  578              	WAV_PrintHeader:
  579              	.LFB116:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 16
-
-
- 268:source\asw/wav_parser.c **** 
- 269:source\asw/wav_parser.c **** void WAV_PrintHeader(WAVFile const * const wav)
- 270:source\asw/wav_parser.c **** {
- 580              		.loc 1 270 0
+ 262:source\asw/wav_parser.c **** 
+ 263:source\asw/wav_parser.c **** void WAV_PrintHeader(WAVFile const * const wav)
+ 264:source\asw/wav_parser.c **** {
+ 580              		.loc 1 264 0
  581              		.cfi_startproc
  582              		@ args = 0, pretend = 0, frame = 64
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 16
+
+
  583              		@ frame_needed = 0, uses_anonymous_args = 0
  584              	.LVL76:
  585 0000 10B5     		push	{r4, lr}
@@ -917,17 +911,17 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  590              		.cfi_def_cfa_offset 72
  591 0004 0446     		mov	r4, r0
  592              	.LVL77:
- 271:source\asw/wav_parser.c ****     char buf[64];
- 272:source\asw/wav_parser.c ****     WAVHeader const * const hdr = &wav->header;
- 273:source\asw/wav_parser.c **** 
- 274:source\asw/wav_parser.c ****     UART_LOG_PutString("\r\n\n--- WAV Header ---\n");
- 593              		.loc 1 274 0
+ 265:source\asw/wav_parser.c ****     char buf[64];
+ 266:source\asw/wav_parser.c ****     WAVHeader const * const hdr = &wav->header;
+ 267:source\asw/wav_parser.c **** 
+ 268:source\asw/wav_parser.c ****     UART_LOG_PutString("\r\n\n--- WAV Header ---\n");
+ 593              		.loc 1 268 0
  594 0006 2F48     		ldr	r0, .L40
  595              	.LVL78:
  596 0008 FFF7FEFF 		bl	UART_LOG_PutString
  597              	.LVL79:
- 275:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  FileID        : %s\n",       hdr->file_id);            UART_LOG_PutString(b
- 598              		.loc 1 275 0
+ 269:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  FileID        : %s\n",       hdr->file_id);            UART_LOG_PutString(b
+ 598              		.loc 1 269 0
  599 000c 2246     		mov	r2, r4
  600 000e 2E49     		ldr	r1, .L40+4
  601 0010 6846     		mov	r0, sp
@@ -936,8 +930,8 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  604 0016 6846     		mov	r0, sp
  605 0018 FFF7FEFF 		bl	UART_LOG_PutString
  606              	.LVL81:
- 276:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  Format        : %s\n",       hdr->format);             UART_LOG_PutString(b
- 607              		.loc 1 276 0
+ 270:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  Format        : %s\n",       hdr->format);             UART_LOG_PutString(b
+ 607              		.loc 1 270 0
  608 001c 04F10C02 		add	r2, r4, #12
  609 0020 2A49     		ldr	r1, .L40+8
  610 0022 6846     		mov	r0, sp
@@ -946,8 +940,8 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  613 0028 6846     		mov	r0, sp
  614 002a FFF7FEFF 		bl	UART_LOG_PutString
  615              	.LVL83:
- 277:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  FmtSize       : %lu\n",       hdr->subchunk_size);     UART_LOG_PutString(b
- 616              		.loc 1 277 0
+ 271:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  FmtSize       : %lu\n",       hdr->subchunk_size);     UART_LOG_PutString(b
+ 616              		.loc 1 271 0
  617 002e A269     		ldr	r2, [r4, #24]
  618 0030 2749     		ldr	r1, .L40+12
  619 0032 6846     		mov	r0, sp
@@ -956,21 +950,21 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  622 0038 6846     		mov	r0, sp
  623 003a FFF7FEFF 		bl	UART_LOG_PutString
  624              	.LVL85:
- 278:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  AudioFormat   : %u\n",       hdr->audio_format);       UART_LOG_PutString(b
- 625              		.loc 1 278 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 17
-
-
+ 272:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  AudioFormat   : %u\n",       hdr->audio_format);       UART_LOG_PutString(b
+ 625              		.loc 1 272 0
  626 003e A28B     		ldrh	r2, [r4, #28]
  627 0040 2449     		ldr	r1, .L40+16
  628 0042 6846     		mov	r0, sp
  629 0044 FFF7FEFF 		bl	sprintf
  630              	.LVL86:
  631 0048 6846     		mov	r0, sp
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 17
+
+
  632 004a FFF7FEFF 		bl	UART_LOG_PutString
  633              	.LVL87:
- 279:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  Channels      : %u\n",       hdr->number_of_channels); UART_LOG_PutString(b
- 634              		.loc 1 279 0
+ 273:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  Channels      : %u\n",       hdr->number_of_channels); UART_LOG_PutString(b
+ 634              		.loc 1 273 0
  635 004e E28B     		ldrh	r2, [r4, #30]
  636 0050 2149     		ldr	r1, .L40+20
  637 0052 6846     		mov	r0, sp
@@ -979,8 +973,8 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  640 0058 6846     		mov	r0, sp
  641 005a FFF7FEFF 		bl	UART_LOG_PutString
  642              	.LVL89:
- 280:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  SampleRate    : %lu Hz\n",   hdr->sample_rate);        UART_LOG_PutString(b
- 643              		.loc 1 280 0
+ 274:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  SampleRate    : %lu Hz\n",   hdr->sample_rate);        UART_LOG_PutString(b
+ 643              		.loc 1 274 0
  644 005e 226A     		ldr	r2, [r4, #32]
  645 0060 1E49     		ldr	r1, .L40+24
  646 0062 6846     		mov	r0, sp
@@ -989,8 +983,8 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  649 0068 6846     		mov	r0, sp
  650 006a FFF7FEFF 		bl	UART_LOG_PutString
  651              	.LVL91:
- 281:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  BitsPerSample : %u\n",       hdr->bits_per_sample);    UART_LOG_PutString(b
- 652              		.loc 1 281 0
+ 275:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  BitsPerSample : %u\n",       hdr->bits_per_sample);    UART_LOG_PutString(b
+ 652              		.loc 1 275 0
  653 006e 628D     		ldrh	r2, [r4, #42]
  654 0070 1B49     		ldr	r1, .L40+28
  655 0072 6846     		mov	r0, sp
@@ -999,8 +993,8 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  658 0078 6846     		mov	r0, sp
  659 007a FFF7FEFF 		bl	UART_LOG_PutString
  660              	.LVL93:
- 282:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  BlockAlign    : %u\n",       hdr->block_align);        UART_LOG_PutString(b
- 661              		.loc 1 282 0
+ 276:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  BlockAlign    : %u\n",       hdr->block_align);        UART_LOG_PutString(b
+ 661              		.loc 1 276 0
  662 007e 228D     		ldrh	r2, [r4, #40]
  663 0080 1849     		ldr	r1, .L40+32
  664 0082 6846     		mov	r0, sp
@@ -1009,8 +1003,8 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  667 0088 6846     		mov	r0, sp
  668 008a FFF7FEFF 		bl	UART_LOG_PutString
  669              	.LVL95:
- 283:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  DataSize      : %lu bytes\n",hdr->data_size);          UART_LOG_PutString(b
- 670              		.loc 1 283 0
+ 277:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  DataSize      : %lu bytes\n",hdr->data_size);          UART_LOG_PutString(b
+ 670              		.loc 1 277 0
  671 008e 626B     		ldr	r2, [r4, #52]
  672 0090 1549     		ldr	r1, .L40+36
  673 0092 6846     		mov	r0, sp
@@ -1018,35 +1012,35 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  675              	.LVL96:
  676 0098 6846     		mov	r0, sp
  677 009a FFF7FEFF 		bl	UART_LOG_PutString
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 18
-
-
  678              	.LVL97:
- 284:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  Duration      : ~%lu s\n",
- 285:source\asw/wav_parser.c ****             hdr->data_size / ((uint32_t)hdr->sample_rate * hdr->block_align)); UART_LOG_PutString(b
- 679              		.loc 1 285 0
+ 278:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  Duration      : ~%lu s\n",
+ 279:source\asw/wav_parser.c ****             hdr->data_size / ((uint32_t)hdr->sample_rate * hdr->block_align)); UART_LOG_PutString(b
+ 679              		.loc 1 279 0
  680 009e 626B     		ldr	r2, [r4, #52]
  681 00a0 236A     		ldr	r3, [r4, #32]
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 18
+
+
  682 00a2 218D     		ldrh	r1, [r4, #40]
  683 00a4 03FB01F3 		mul	r3, r3, r1
- 284:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  Duration      : ~%lu s\n",
- 684              		.loc 1 284 0
+ 278:source\asw/wav_parser.c ****     sprintf(buf, "\r\n  Duration      : ~%lu s\n",
+ 684              		.loc 1 278 0
  685 00a8 B2FBF3F2 		udiv	r2, r2, r3
  686 00ac 0F49     		ldr	r1, .L40+40
  687 00ae 6846     		mov	r0, sp
  688 00b0 FFF7FEFF 		bl	sprintf
  689              	.LVL98:
- 690              		.loc 1 285 0
+ 690              		.loc 1 279 0
  691 00b4 6846     		mov	r0, sp
  692 00b6 FFF7FEFF 		bl	UART_LOG_PutString
  693              	.LVL99:
- 286:source\asw/wav_parser.c ****     UART_LOG_PutString("\r\n------------------\n");
- 694              		.loc 1 286 0
+ 280:source\asw/wav_parser.c ****     UART_LOG_PutString("\r\n------------------\n");
+ 694              		.loc 1 280 0
  695 00ba 0D48     		ldr	r0, .L40+44
  696 00bc FFF7FEFF 		bl	UART_LOG_PutString
  697              	.LVL100:
- 287:source\asw/wav_parser.c **** }...
- 698              		.loc 1 287 0
+ 281:source\asw/wav_parser.c **** }...
+ 698              		.loc 1 281 0
  699 00c0 10B0     		add	sp, sp, #64
  700              		.cfi_def_cfa_offset 8
  701              		@ sp needed
@@ -1078,15 +1072,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  726 0005 000000   		.space	3
  727              	.LC1:
  728 0008 0D0A5B57 		.ascii	"\015\012[WAV] ERROR: not RIFF\012\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 19
-
-
  728      41565D20 
  728      4552524F 
  728      523A206E 
  728      6F742052 
  729 0021 000000   		.space	3
  730              	.LC2:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 19
+
+
  731 0024 57415645 		.ascii	"WAVE\000"
  731      00
  732 0029 000000   		.space	3
@@ -1138,15 +1132,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  750              	.LC10:
  751 0110 0D0A5B57 		.ascii	"\015\012[WAV] ERROR: fmt extension read failed\012\000"
  751      41565D20 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 20
-
-
  751      4552524F 
  751      523A2066 
  751      6D742065 
  752 013a 0000     		.space	2
  753              	.LC11:
  754 013c 64617461 		.ascii	"data\000"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 20
+
+
  754      00
  755 0141 000000   		.space	3
  756              	.LC12:
@@ -1198,15 +1192,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  774 0200 0D0A2020 		.ascii	"\015\012  SampleRate    : %lu Hz\012\000"
  774      53616D70 
  774      6C655261 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 21
-
-
  774      74652020 
  774      20203A20 
  775              	.LC20:
  776 021c 0D0A2020 		.ascii	"\015\012  BitsPerSample : %u\012\000"
  776      42697473 
  776      50657253 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 21
+
+
  776      616D706C 
  776      65203A20 
  777              	.LC21:
@@ -1258,15 +1252,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  807 0004 0400     		.2byte	0x4
  808 0006 00000000 		.4byte	.Ldebug_abbrev0
  809 000a 04       		.byte	0x4
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 22
-
-
  810 000b 01       		.uleb128 0x1
  811 000c 2A050000 		.4byte	.LASF98
  812 0010 0C       		.byte	0xc
  813 0011 49000000 		.4byte	.LASF99
  814 0015 52030000 		.4byte	.LASF100
  815 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 22
+
+
  816 001d 00000000 		.4byte	0
  817 0021 00000000 		.4byte	.Ldebug_line0
  818 0025 02       		.uleb128 0x2
@@ -1318,15 +1312,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  864 007a 7D040000 		.4byte	.LASF10
  865 007e 02       		.uleb128 0x2
  866 007f 08       		.byte	0x8
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 23
-
-
  867 0080 05       		.byte	0x5
  868 0081 C4000000 		.4byte	.LASF11
  869 0085 02       		.uleb128 0x2
  870 0086 08       		.byte	0x8
  871 0087 07       		.byte	0x7
  872 0088 FA020000 		.4byte	.LASF12
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 23
+
+
  873 008c 02       		.uleb128 0x2
  874 008d 01       		.byte	0x1
  875 008e 08       		.byte	0x8
@@ -1378,15 +1372,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  921 00ec 74       		.sleb128 -12
  922 00ed 06       		.uleb128 0x6
  923 00ee 84040000 		.4byte	.LASF27
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 24
-
-
  924 00f2 73       		.sleb128 -13
  925 00f3 06       		.uleb128 0x6
  926 00f4 74020000 		.4byte	.LASF28
  927 00f8 72       		.sleb128 -14
  928 00f9 06       		.uleb128 0x6
  929 00fa 35000000 		.4byte	.LASF29
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 24
+
+
  930 00fe 71       		.sleb128 -15
  931 00ff 06       		.uleb128 0x6
  932 0100 49020000 		.4byte	.LASF30
@@ -1438,15 +1432,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  978 015e 08       		.uleb128 0x8
  979 015f 04       		.byte	0x4
  980 0160 05       		.byte	0x5
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 25
-
-
  981 0161 696E7400 		.ascii	"int\000"
  982 0165 02       		.uleb128 0x2
  983 0166 04       		.byte	0x4
  984 0167 07       		.byte	0x7
  985 0168 85000000 		.4byte	.LASF43
  986 016c 09       		.uleb128 0x9
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 25
+
+
  987 016d 04       		.byte	0x4
  988 016e 8C000000 		.4byte	0x8c
  989 0172 09       		.uleb128 0x9
@@ -1498,15 +1492,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1035 01d0 0B       		.uleb128 0xb
  1036 01d1 B8050000 		.4byte	.LASF51
  1037 01d5 07       		.byte	0x7
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 26
-
-
  1038 01d6 3A       		.byte	0x3a
  1039 01d7 49020000 		.4byte	0x249
  1040 01db 11       		.byte	0x11
  1041 01dc 0B       		.uleb128 0xb
  1042 01dd 87020000 		.4byte	.LASF52
  1043 01e1 07       		.byte	0x7
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 26
+
+
  1044 01e2 3B       		.byte	0x3b
  1045 01e3 5E000000 		.4byte	0x5e
  1046 01e7 18       		.byte	0x18
@@ -1558,15 +1552,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1092 0242 43       		.byte	0x43
  1093 0243 5E000000 		.4byte	0x5e
  1094 0247 34       		.byte	0x34
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 27
-
-
  1095 0248 00       		.byte	0
  1096 0249 0C       		.uleb128 0xc
  1097 024a 8C000000 		.4byte	0x8c
  1098 024e 59020000 		.4byte	0x259
  1099 0252 0D       		.uleb128 0xd
  1100 0253 65010000 		.4byte	0x165
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 27
+
+
  1101 0257 04       		.byte	0x4
  1102 0258 00       		.byte	0
  1103 0259 03       		.uleb128 0x3
@@ -1618,15 +1612,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1149 02ba 09       		.byte	0x9
  1150 02bb 4F       		.byte	0x4f
  1151 02bc 9F020000 		.4byte	0x29f
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 28
-
-
  1152 02c0 03       		.uleb128 0x3
  1153 02c1 EB000000 		.4byte	.LASF71
  1154 02c5 09       		.byte	0x9
  1155 02c6 78       		.byte	0x78
  1156 02c7 94020000 		.4byte	0x294
  1157 02cb 0E       		.uleb128 0xe
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 28
+
+
  1158 02cc 96040000 		.4byte	.LASF72
  1159 02d0 01       		.byte	0x1
  1160 02d1 43       		.byte	0x43
@@ -1678,15 +1672,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1206 0341 9C       		.byte	0x9c
  1207 0342 55040000 		.4byte	0x455
  1208 0346 11       		.uleb128 0x11
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 29
-
-
  1209 0347 68647200 		.ascii	"hdr\000"
  1210 034b 01       		.byte	0x1
  1211 034c 59       		.byte	0x59
  1212 034d 60040000 		.4byte	0x460
  1213 0351 42000000 		.4byte	.LLST2
  1214 0355 12       		.uleb128 0x12
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 29
+
+
  1215 0356 01040000 		.4byte	.LASF77
  1216 035a 01       		.byte	0x1
  1217 035b 5B       		.byte	0x5b
@@ -1738,15 +1732,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1263 03ad 05       		.uleb128 0x5
  1264 03ae 03       		.byte	0x3
  1265 03af 24000000 		.4byte	.LC2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 30
-
-
  1266 03b3 00       		.byte	0
  1267 03b4 13       		.uleb128 0x13
  1268 03b5 2C000000 		.4byte	.LVL8
  1269 03b9 B00B0000 		.4byte	0xbb0
  1270 03bd CB030000 		.4byte	0x3cb
  1271 03c1 14       		.uleb128 0x14
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 30
+
+
  1272 03c2 01       		.uleb128 0x1
  1273 03c3 50       		.byte	0x50
  1274 03c4 05       		.uleb128 0x5
@@ -1798,15 +1792,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1320 0422 A0000000 		.4byte	.LC7
  1321 0426 00       		.byte	0
  1322 0427 13       		.uleb128 0x13
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 31
-
-
  1323 0428 A6000000 		.4byte	.LVL13
  1324 042c BB0B0000 		.4byte	0xbbb
  1325 0430 44040000 		.4byte	0x444
  1326 0434 14       		.uleb128 0x14
  1327 0435 01       		.uleb128 0x1
  1328 0436 50       		.byte	0x50
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 31
+
+
  1329 0437 02       		.uleb128 0x2
  1330 0438 7D       		.byte	0x7d
  1331 0439 00       		.sleb128 0
@@ -1858,15 +1852,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1377 0491 FF020000 		.4byte	0x2ff
  1378 0495 6E000000 		.4byte	.LLST3
  1379 0499 11       		.uleb128 0x11
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 32
-
-
  1380 049a 64737400 		.ascii	"dst\000"
  1381 049e 01       		.byte	0x1
  1382 049f 52       		.byte	0x52
  1383 04a0 D3040000 		.4byte	0x4d3
  1384 04a4 9A000000 		.4byte	.LLST4
  1385 04a8 11       		.uleb128 0x11
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 32
+
+
  1386 04a9 6E00     		.ascii	"n\000"
  1387 04ab 01       		.byte	0x1
  1388 04ac 53       		.byte	0x53
@@ -1901,7 +1895,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1417 04d8 17       		.uleb128 0x17
  1418 04d9 1E010000 		.4byte	.LASF102
  1419 04dd 01       		.byte	0x1
- 1420 04de 94       		.byte	0x94
+ 1420 04de 8E       		.byte	0x8e
  1421 04df 3C010000 		.4byte	0x13c
  1422 04e3 00000000 		.4byte	.LFB115
  1423 04e7 94010000 		.4byte	.LFE115-.LFB115
@@ -1911,22 +1905,22 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1427 04f1 0F       		.uleb128 0xf
  1428 04f2 11030000 		.4byte	.LASF76
  1429 04f6 01       		.byte	0x1
- 1430 04f7 94       		.byte	0x94
+ 1430 04f7 8E       		.byte	0x8e
  1431 04f8 6B080000 		.4byte	0x86b
  1432 04fc D6000000 		.4byte	.LLST6
  1433 0500 11       		.uleb128 0x11
  1434 0501 77617600 		.ascii	"wav\000"
  1435 0505 01       		.byte	0x1
- 1436 0506 94       		.byte	0x94
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 33
-
-
+ 1436 0506 8E       		.byte	0x8e
  1437 0507 76080000 		.4byte	0x876
  1438 050b 02010000 		.4byte	.LLST7
  1439 050f 18       		.uleb128 0x18
  1440 0510 72617700 		.ascii	"raw\000"
  1441 0514 01       		.byte	0x1
- 1442 0515 96       		.byte	0x96
+ 1442 0515 90       		.byte	0x90
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 33
+
+
  1443 0516 7B080000 		.4byte	0x87b
  1444 051a 03       		.uleb128 0x3
  1445 051b 91       		.byte	0x91
@@ -1934,24 +1928,24 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1447 051e 19       		.uleb128 0x19
  1448 051f A9030000 		.4byte	.LASF78
  1449 0523 01       		.byte	0x1
- 1450 0524 97       		.byte	0x97
+ 1450 0524 91       		.byte	0x91
  1451 0525 69000000 		.4byte	0x69
  1452 0529 2E010000 		.4byte	.LLST8
  1453 052d 1A       		.uleb128 0x1a
  1454 052e 01040000 		.4byte	.LASF77
  1455 0532 01       		.byte	0x1
- 1456 0533 98       		.byte	0x98
+ 1456 0533 92       		.byte	0x92
  1457 0534 8B080000 		.4byte	0x88b
  1458 0538 1B       		.uleb128 0x1b
  1459 0539 68647200 		.ascii	"hdr\000"
  1460 053d 01       		.byte	0x1
- 1461 053e A3       		.byte	0xa3
+ 1461 053e 9D       		.byte	0x9d
  1462 053f A1080000 		.4byte	0x8a1
  1463 0543 6E010000 		.4byte	.LLST9
  1464 0547 12       		.uleb128 0x12
  1465 0548 3B030000 		.4byte	.LASF79
  1466 054c 01       		.byte	0x1
- 1467 054d DE       		.byte	0xde
+ 1467 054d D8       		.byte	0xd8
  1468 054e A6080000 		.4byte	0x8a6
  1469 0552 03       		.uleb128 0x3
  1470 0553 91       		.byte	0x91
@@ -1959,7 +1953,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1472 0556 12       		.uleb128 0x12
  1473 0557 6C020000 		.4byte	.LASF80
  1474 055b 01       		.byte	0x1
- 1475 055c DF       		.byte	0xdf
+ 1475 055c D9       		.byte	0xd9
  1476 055d 49020000 		.4byte	0x249
  1477 0561 03       		.uleb128 0x3
  1478 0562 91       		.byte	0x91
@@ -1967,32 +1961,32 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1480 0565 19       		.uleb128 0x19
  1481 0566 DC020000 		.4byte	.LASF81
  1482 056a 01       		.byte	0x1
- 1483 056b E0       		.byte	0xe0
+ 1483 056b DA       		.byte	0xda
  1484 056c 5E000000 		.4byte	0x5e
  1485 0570 81010000 		.4byte	.LLST10
  1486 0574 19       		.uleb128 0x19
  1487 0575 F2000000 		.4byte	.LASF82
  1488 0579 01       		.byte	0x1
- 1489 057a E1       		.byte	0xe1
+ 1489 057a DB       		.byte	0xdb
  1490 057b 5E000000 		.4byte	0x5e
  1491 057f 9F010000 		.4byte	.LLST11
  1492 0583 19       		.uleb128 0x19
  1493 0584 A3040000 		.4byte	.LASF83
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 34
-
-
  1494 0588 01       		.byte	0x1
- 1495 0589 E2       		.byte	0xe2
+ 1495 0589 DC       		.byte	0xdc
  1496 058a 2C000000 		.4byte	0x2c
  1497 058e BD010000 		.4byte	.LLST12
  1498 0592 1C       		.uleb128 0x1c
  1499 0593 9E000000 		.4byte	.LBB2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 34
+
+
  1500 0597 5A000000 		.4byte	.LBE2-.LBB2
  1501 059b 37060000 		.4byte	0x637
  1502 059f 18       		.uleb128 0x18
  1503 05a0 65787400 		.ascii	"ext\000"
  1504 05a4 01       		.byte	0x1
- 1505 05a5 B9       		.byte	0xb9
+ 1505 05a5 B3       		.byte	0xb3
  1506 05a6 B6080000 		.4byte	0x8b6
  1507 05aa 03       		.uleb128 0x3
  1508 05ab 91       		.byte	0x91
@@ -2000,13 +1994,13 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1510 05ae 19       		.uleb128 0x19
  1511 05af 00000000 		.4byte	.LASF84
  1512 05b3 01       		.byte	0x1
- 1513 05b4 BA       		.byte	0xba
+ 1513 05b4 B4       		.byte	0xb4
  1514 05b5 5E000000 		.4byte	0x5e
  1515 05b9 E8010000 		.4byte	.LLST13
  1516 05bd 19       		.uleb128 0x19
  1517 05be A9040000 		.4byte	.LASF85
  1518 05c2 01       		.byte	0x1
- 1519 05c3 BB       		.byte	0xbb
+ 1519 05c3 B5       		.byte	0xb5
  1520 05c4 5E000000 		.4byte	0x5e
  1521 05c8 FB010000 		.4byte	.LLST14
  1522 05cc 13       		.uleb128 0x13
@@ -2038,15 +2032,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1548 05f6 04060000 		.4byte	0x604
  1549 05fa 14       		.uleb128 0x14
  1550 05fb 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 35
-
-
  1551 05fc 50       		.byte	0x50
  1552 05fd 05       		.uleb128 0x5
  1553 05fe 03       		.byte	0x3
  1554 05ff 10010000 		.4byte	.LC10
  1555 0603 00       		.byte	0
  1556 0604 13       		.uleb128 0x13
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 35
+
+
  1557 0605 D8000000 		.4byte	.LVL43
  1558 0609 04030000 		.4byte	0x304
  1559 060d 19060000 		.4byte	0x619
@@ -2087,7 +2081,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1594 0644 12       		.uleb128 0x12
  1595 0645 E6020000 		.4byte	.LASF86
  1596 0649 01       		.byte	0x1
- 1597 064a F8       		.byte	0xf8
+ 1597 064a F2       		.byte	0xf2
  1598 064b C6080000 		.4byte	0x8c6
  1599 064f 03       		.uleb128 0x3
  1600 0650 91       		.byte	0x91
@@ -2095,20 +2089,20 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1602 0653 19       		.uleb128 0x19
  1603 0654 F9040000 		.4byte	.LASF87
  1604 0658 01       		.byte	0x1
- 1605 0659 F9       		.byte	0xf9
+ 1605 0659 F3       		.byte	0xf3
  1606 065a 5E000000 		.4byte	0x5e
  1607 065e 19020000 		.4byte	.LLST15
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 36
-
-
  1608 0662 1C       		.uleb128 0x1c
  1609 0663 3E010000 		.4byte	.LBB4
  1610 0667 16000000 		.4byte	.LBE4-.LBB4
  1611 066b 9C060000 		.4byte	0x69c
  1612 066f 19       		.uleb128 0x19
  1613 0670 A9040000 		.4byte	.LASF85
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 36
+
+
  1614 0674 01       		.byte	0x1
- 1615 0675 FC       		.byte	0xfc
+ 1615 0675 F6       		.byte	0xf6
  1616 0676 5E000000 		.4byte	0x5e
  1617 067a 37020000 		.4byte	.LLST16
  1618 067e 15       		.uleb128 0x15
@@ -2158,15 +2152,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1662 06bb 00       		.byte	0
  1663 06bc 13       		.uleb128 0x13
  1664 06bd 20010000 		.4byte	.LVL54
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 37
-
-
  1665 06c1 75040000 		.4byte	0x475
  1666 06c5 DD060000 		.4byte	0x6dd
  1667 06c9 14       		.uleb128 0x14
  1668 06ca 01       		.uleb128 0x1
  1669 06cb 50       		.byte	0x50
  1670 06cc 03       		.uleb128 0x3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 37
+
+
  1671 06cd 91       		.byte	0x91
  1672 06ce B47F     		.sleb128 -76
  1673 06d0 14       		.uleb128 0x14
@@ -2218,15 +2212,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1719 071c 50       		.byte	0x50
  1720 071d 02       		.uleb128 0x2
  1721 071e 76       		.byte	0x76
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 38
-
-
  1722 071f 00       		.sleb128 0
  1723 0720 14       		.uleb128 0x14
  1724 0721 01       		.uleb128 0x1
  1725 0722 51       		.byte	0x51
  1726 0723 03       		.uleb128 0x3
  1727 0724 91       		.byte	0x91
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 38
+
+
  1728 0725 BC7F     		.sleb128 -68
  1729 0727 14       		.uleb128 0x14
  1730 0728 01       		.uleb128 0x1
@@ -2278,15 +2272,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1776 0775 02       		.uleb128 0x2
  1777 0776 91       		.byte	0x91
  1778 0777 40       		.sleb128 -64
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 39
-
-
  1779 0778 00       		.byte	0
  1780 0779 13       		.uleb128 0x13
  1781 077a 42000000 		.4byte	.LVL30
  1782 077e 75040000 		.4byte	0x475
  1783 0782 98070000 		.4byte	0x798
  1784 0786 14       		.uleb128 0x14
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 39
+
+
  1785 0787 01       		.uleb128 0x1
  1786 0788 50       		.byte	0x50
  1787 0789 02       		.uleb128 0x2
@@ -2338,15 +2332,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1833 07c9 4C       		.sleb128 -52
  1834 07ca 00       		.byte	0
  1835 07cb 13       		.uleb128 0x13
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 40
-
-
  1836 07cc 60000000 		.4byte	.LVL33
  1837 07d0 04030000 		.4byte	0x304
  1838 07d4 DF070000 		.4byte	0x7df
  1839 07d8 14       		.uleb128 0x14
  1840 07d9 01       		.uleb128 0x1
  1841 07da 50       		.byte	0x50
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 40
+
+
  1842 07db 02       		.uleb128 0x2
  1843 07dc 91       		.byte	0x91
  1844 07dd 50       		.sleb128 -48
@@ -2398,15 +2392,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1890 082f 13       		.uleb128 0x13
  1891 0830 96000000 		.4byte	.LVL38
  1892 0834 04030000 		.4byte	0x304
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 41
-
-
  1893 0838 43080000 		.4byte	0x843
  1894 083c 14       		.uleb128 0x14
  1895 083d 01       		.uleb128 0x1
  1896 083e 50       		.byte	0x50
  1897 083f 02       		.uleb128 0x2
  1898 0840 91       		.byte	0x91
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 41
+
+
  1899 0841 5E       		.sleb128 -34
  1900 0842 00       		.byte	0
  1901 0843 13       		.uleb128 0x13
@@ -2458,15 +2452,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1947 08a1 10       		.uleb128 0x10
  1948 08a2 9B080000 		.4byte	0x89b
  1949 08a6 0C       		.uleb128 0xc
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 42
-
-
  1950 08a7 2C000000 		.4byte	0x2c
  1951 08ab B6080000 		.4byte	0x8b6
  1952 08af 0D       		.uleb128 0xd
  1953 08b0 65010000 		.4byte	0x165
  1954 08b4 07       		.byte	0x7
  1955 08b5 00       		.byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 42
+
+
  1956 08b6 0C       		.uleb128 0xc
  1957 08b7 2C000000 		.4byte	0x2c
  1958 08bb C6080000 		.4byte	0x8c6
@@ -2484,7 +2478,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1970 08d6 1D       		.uleb128 0x1d
  1971 08d7 DD030000 		.4byte	.LASF103
  1972 08db 01       		.byte	0x1
- 1973 08dc 0D01     		.2byte	0x10d
+ 1973 08dc 0701     		.2byte	0x107
  1974 08de 00000000 		.4byte	.LFB116
  1975 08e2 F4000000 		.4byte	.LFE116-.LFB116
  1976 08e6 01       		.uleb128 0x1
@@ -2493,13 +2487,13 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1979 08ec 1E       		.uleb128 0x1e
  1980 08ed 77617600 		.ascii	"wav\000"
  1981 08f1 01       		.byte	0x1
- 1982 08f2 0D01     		.2byte	0x10d
+ 1982 08f2 0701     		.2byte	0x107
  1983 08f4 480B0000 		.4byte	0xb48
  1984 08f8 4A020000 		.4byte	.LLST17
  1985 08fc 1F       		.uleb128 0x1f
  1986 08fd 62756600 		.ascii	"buf\000"
  1987 0901 01       		.byte	0x1
- 1988 0902 0F01     		.2byte	0x10f
+ 1988 0902 0901     		.2byte	0x109
  1989 0904 4D0B0000 		.4byte	0xb4d
  1990 0908 03       		.uleb128 0x3
  1991 0909 91       		.byte	0x91
@@ -2507,7 +2501,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  1993 090c 20       		.uleb128 0x20
  1994 090d 68647200 		.ascii	"hdr\000"
  1995 0911 01       		.byte	0x1
- 1996 0912 1001     		.2byte	0x110
+ 1996 0912 0A01     		.2byte	0x10a
  1997 0914 60040000 		.4byte	0x460
  1998 0918 76020000 		.4byte	.LLST18
  1999 091c 13       		.uleb128 0x13
@@ -2518,15 +2512,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  2004 092a 01       		.uleb128 0x1
  2005 092b 50       		.byte	0x50
  2006 092c 05       		.uleb128 0x5
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 43
-
-
  2007 092d 03       		.byte	0x3
  2008 092e 6C010000 		.4byte	.LC13
  2009 0932 00       		.byte	0
  2010 0933 13       		.uleb128 0x13
  2011 0934 16000000 		.4byte	.LVL80
  2012 0938 BB0B0000 		.4byte	0xbbb
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 43
+
+
  2013 093c 56090000 		.4byte	0x956
  2014 0940 14       		.uleb128 0x14
  2015 0941 01       		.uleb128 0x1
@@ -2578,15 +2572,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  2061 0987 01       		.uleb128 0x1
  2062 0988 52       		.byte	0x52
  2063 0989 02       		.uleb128 0x2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 44
-
-
  2064 098a 74       		.byte	0x74
  2065 098b 0C       		.sleb128 12
  2066 098c 00       		.byte	0
  2067 098d 13       		.uleb128 0x13
  2068 098e 2E000000 		.4byte	.LVL83
  2069 0992 B00B0000 		.4byte	0xbb0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 44
+
+
  2070 0996 A1090000 		.4byte	0x9a1
  2071 099a 14       		.uleb128 0x14
  2072 099b 01       		.uleb128 0x1
@@ -2638,15 +2632,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  2118 09e7 51       		.byte	0x51
  2119 09e8 05       		.uleb128 0x5
  2120 09e9 03       		.byte	0x3
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 45
-
-
  2121 09ea D0010000 		.4byte	.LC17
  2122 09ee 00       		.byte	0
  2123 09ef 13       		.uleb128 0x13
  2124 09f0 4E000000 		.4byte	.LVL87
  2125 09f4 B00B0000 		.4byte	0xbb0
  2126 09f8 030A0000 		.4byte	0xa03
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 45
+
+
  2127 09fc 14       		.uleb128 0x14
  2128 09fd 01       		.uleb128 0x1
  2129 09fe 50       		.byte	0x50
@@ -2698,15 +2692,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  2175 0a4a 05       		.uleb128 0x5
  2176 0a4b 03       		.byte	0x3
  2177 0a4c 00020000 		.4byte	.LC19
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 46
-
-
  2178 0a50 00       		.byte	0
  2179 0a51 13       		.uleb128 0x13
  2180 0a52 6E000000 		.4byte	.LVL91
  2181 0a56 B00B0000 		.4byte	0xbb0
  2182 0a5a 650A0000 		.4byte	0xa65
  2183 0a5e 14       		.uleb128 0x14
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 46
+
+
  2184 0a5f 01       		.uleb128 0x1
  2185 0a60 50       		.byte	0x50
  2186 0a61 02       		.uleb128 0x2
@@ -2758,15 +2752,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  2232 0aad 03       		.byte	0x3
  2233 0aae 34020000 		.4byte	.LC21
  2234 0ab2 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 47
-
-
  2235 0ab3 13       		.uleb128 0x13
  2236 0ab4 8E000000 		.4byte	.LVL95
  2237 0ab8 B00B0000 		.4byte	0xbb0
  2238 0abc C70A0000 		.4byte	0xac7
  2239 0ac0 14       		.uleb128 0x14
  2240 0ac1 01       		.uleb128 0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 47
+
+
  2241 0ac2 50       		.byte	0x50
  2242 0ac3 02       		.uleb128 0x2
  2243 0ac4 7D       		.byte	0x7d
@@ -2818,15 +2812,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  2289 0b10 6C020000 		.4byte	.LC23
  2290 0b14 00       		.byte	0
  2291 0b15 13       		.uleb128 0x13
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 48
-
-
  2292 0b16 BA000000 		.4byte	.LVL99
  2293 0b1a B00B0000 		.4byte	0xbb0
  2294 0b1e 290B0000 		.4byte	0xb29
  2295 0b22 14       		.uleb128 0x14
  2296 0b23 01       		.uleb128 0x1
  2297 0b24 50       		.byte	0x50
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 48
+
+
  2298 0b25 02       		.uleb128 0x2
  2299 0b26 7D       		.byte	0x7d
  2300 0b27 00       		.sleb128 0
@@ -2878,15 +2872,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  2346 0b85 C0020000 		.4byte	0x2c0
  2347 0b89 21       		.uleb128 0x21
  2348 0b8a 3A010000 		.4byte	.LASF92
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 49
-
-
  2349 0b8e 0C       		.byte	0xc
  2350 0b8f 44       		.byte	0x44
  2351 0b90 AA020000 		.4byte	0x2aa
  2352 0b94 22       		.uleb128 0x22
  2353 0b95 1D050000 		.4byte	.LASF93
  2354 0b99 0D       		.byte	0xd
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 49
+
+
  2355 0b9a 1207     		.2byte	0x712
  2356 0b9c A00B0000 		.4byte	0xba0
  2357 0ba0 23       		.uleb128 0x23
@@ -2938,15 +2932,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  2403 0012 00       		.byte	0
  2404 0013 02       		.uleb128 0x2
  2405 0014 24       		.uleb128 0x24
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 50
-
-
  2406 0015 00       		.byte	0
  2407 0016 0B       		.uleb128 0xb
  2408 0017 0B       		.uleb128 0xb
  2409 0018 3E       		.uleb128 0x3e
  2410 0019 0B       		.uleb128 0xb
  2411 001a 03       		.uleb128 0x3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 50
+
+
  2412 001b 0E       		.uleb128 0xe
  2413 001c 00       		.byte	0
  2414 001d 00       		.byte	0
@@ -2998,15 +2992,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  2460 004b 00       		.byte	0
  2461 004c 07       		.uleb128 0x7
  2462 004d 13       		.uleb128 0x13
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 51
-
-
  2463 004e 00       		.byte	0
  2464 004f 03       		.uleb128 0x3
  2465 0050 0E       		.uleb128 0xe
  2466 0051 3C       		.uleb128 0x3c
  2467 0052 19       		.uleb128 0x19
  2468 0053 00       		.byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 51
+
+
  2469 0054 00       		.byte	0
  2470 0055 08       		.uleb128 0x8
  2471 0056 24       		.uleb128 0x24
@@ -3058,15 +3052,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  2517 0084 0B       		.uleb128 0xb
  2518 0085 00       		.byte	0
  2519 0086 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 52
-
-
  2520 0087 0C       		.uleb128 0xc
  2521 0088 01       		.uleb128 0x1
  2522 0089 01       		.byte	0x1
  2523 008a 49       		.uleb128 0x49
  2524 008b 13       		.uleb128 0x13
  2525 008c 01       		.uleb128 0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 52
+
+
  2526 008d 13       		.uleb128 0x13
  2527 008e 00       		.byte	0
  2528 008f 00       		.byte	0
@@ -3118,15 +3112,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  2574 00be 02       		.uleb128 0x2
  2575 00bf 17       		.uleb128 0x17
  2576 00c0 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 53
-
-
  2577 00c1 00       		.byte	0
  2578 00c2 10       		.uleb128 0x10
  2579 00c3 26       		.uleb128 0x26
  2580 00c4 00       		.byte	0
  2581 00c5 49       		.uleb128 0x49
  2582 00c6 13       		.uleb128 0x13
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 53
+
+
  2583 00c7 00       		.byte	0
  2584 00c8 00       		.byte	0
  2585 00c9 11       		.uleb128 0x11
@@ -3178,15 +3172,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  2631 00fb 9142     		.uleb128 0x2111
  2632 00fd 18       		.uleb128 0x18
  2633 00fe 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 54
-
-
  2634 00ff 00       		.byte	0
  2635 0100 15       		.uleb128 0x15
  2636 0101 898201   		.uleb128 0x4109
  2637 0104 01       		.byte	0x1
  2638 0105 11       		.uleb128 0x11
  2639 0106 01       		.uleb128 0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 54
+
+
  2640 0107 31       		.uleb128 0x31
  2641 0108 13       		.uleb128 0x13
  2642 0109 00       		.byte	0
@@ -3238,15 +3232,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  2688 0138 9742     		.uleb128 0x2117
  2689 013a 19       		.uleb128 0x19
  2690 013b 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 55
-
-
  2691 013c 13       		.uleb128 0x13
  2692 013d 00       		.byte	0
  2693 013e 00       		.byte	0
  2694 013f 18       		.uleb128 0x18
  2695 0140 34       		.uleb128 0x34
  2696 0141 00       		.byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 55
+
+
  2697 0142 03       		.uleb128 0x3
  2698 0143 08       		.uleb128 0x8
  2699 0144 3A       		.uleb128 0x3a
@@ -3298,15 +3292,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  2745 0172 0B       		.uleb128 0xb
  2746 0173 49       		.uleb128 0x49
  2747 0174 13       		.uleb128 0x13
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 56
-
-
  2748 0175 02       		.uleb128 0x2
  2749 0176 17       		.uleb128 0x17
  2750 0177 00       		.byte	0
  2751 0178 00       		.byte	0
  2752 0179 1C       		.uleb128 0x1c
  2753 017a 0B       		.uleb128 0xb
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 56
+
+
  2754 017b 01       		.byte	0x1
  2755 017c 11       		.uleb128 0x11
  2756 017d 01       		.uleb128 0x1
@@ -3358,15 +3352,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  2802 01ac 00       		.byte	0
  2803 01ad 1F       		.uleb128 0x1f
  2804 01ae 34       		.uleb128 0x34
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 57
-
-
  2805 01af 00       		.byte	0
  2806 01b0 03       		.uleb128 0x3
  2807 01b1 08       		.uleb128 0x8
  2808 01b2 3A       		.uleb128 0x3a
  2809 01b3 0B       		.uleb128 0xb
  2810 01b4 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 57
+
+
  2811 01b5 05       		.uleb128 0x5
  2812 01b6 49       		.uleb128 0x49
  2813 01b7 13       		.uleb128 0x13
@@ -3418,15 +3412,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  2859 01e5 49       		.uleb128 0x49
  2860 01e6 13       		.uleb128 0x13
  2861 01e7 3F       		.uleb128 0x3f
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 58
-
-
  2862 01e8 19       		.uleb128 0x19
  2863 01e9 3C       		.uleb128 0x3c
  2864 01ea 19       		.uleb128 0x19
  2865 01eb 00       		.byte	0
  2866 01ec 00       		.byte	0
  2867 01ed 23       		.uleb128 0x23
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 58
+
+
  2868 01ee 35       		.uleb128 0x35
  2869 01ef 00       		.byte	0
  2870 01f0 49       		.uleb128 0x49
@@ -3478,15 +3472,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  2916 021e 0B       		.uleb128 0xb
  2917 021f 3B       		.uleb128 0x3b
  2918 0220 05       		.uleb128 0x5
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 59
-
-
  2919 0221 00       		.byte	0
  2920 0222 00       		.byte	0
  2921 0223 00       		.byte	0
  2922              		.section	.debug_loc,"",%progbits
  2923              	.Ldebug_loc0:
  2924              	.LLST0:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 59
+
+
  2925 0000 00000000 		.4byte	.LVL0
  2926 0004 10000000 		.4byte	.LVL1
  2927 0008 0100     		.2byte	0x1
@@ -3538,15 +3532,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  2973 0076 0100     		.2byte	0x1
  2974 0078 50       		.byte	0x50
  2975 0079 0A000000 		.4byte	.LVL18
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 60
-
-
  2976 007d 0D000000 		.4byte	.LVL19-1
  2977 0081 0100     		.2byte	0x1
  2978 0083 51       		.byte	0x51
  2979 0084 0D000000 		.4byte	.LVL19-1
  2980 0088 14000000 		.4byte	.LFE113
  2981 008c 0400     		.2byte	0x4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 60
+
+
  2982 008e F3       		.byte	0xf3
  2983 008f 01       		.uleb128 0x1
  2984 0090 50       		.byte	0x50
@@ -3598,15 +3592,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  3030 0106 0E000000 		.4byte	.LVL22
  3031 010a 0100     		.2byte	0x1
  3032 010c 51       		.byte	0x51
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 61
-
-
  3033 010d 0E000000 		.4byte	.LVL22
  3034 0111 84010000 		.4byte	.LVL75
  3035 0115 0100     		.2byte	0x1
  3036 0117 59       		.byte	0x59
  3037 0118 84010000 		.4byte	.LVL75
  3038 011c 94010000 		.4byte	.LFE115
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 61
+
+
  3039 0120 0400     		.2byte	0x4
  3040 0122 F3       		.byte	0xf3
  3041 0123 01       		.uleb128 0x1
@@ -3658,15 +3652,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  3087 019b 00000000 		.4byte	0
  3088              	.LLST11:
  3089 019f 08010000 		.4byte	.LVL51
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 62
-
-
  3090 01a3 5C010000 		.4byte	.LVL66
  3091 01a7 0100     		.2byte	0x1
  3092 01a9 57       		.byte	0x57
  3093 01aa 5E010000 		.4byte	.LVL67
  3094 01ae 78010000 		.4byte	.LVL73
  3095 01b2 0100     		.2byte	0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 62
+
+
  3096 01b4 57       		.byte	0x57
  3097 01b5 00000000 		.4byte	0
  3098 01b9 00000000 		.4byte	0
@@ -3718,15 +3712,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  3144 0233 00000000 		.4byte	0
  3145              	.LLST16:
  3146 0237 46010000 		.4byte	.LVL61
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 63
-
-
  3147 023b 54010000 		.4byte	.LVL64
  3148 023f 0100     		.2byte	0x1
  3149 0241 55       		.byte	0x55
  3150 0242 00000000 		.4byte	0
  3151 0246 00000000 		.4byte	0
  3152              	.LLST17:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 63
+
+
  3153 024a 00000000 		.4byte	.LVL76
  3154 024e 08000000 		.4byte	.LVL78
  3155 0252 0100     		.2byte	0x1
@@ -3778,15 +3772,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  3201 0024 E0000000 		.4byte	.LFE114-.LFB114
  3202 0028 00000000 		.4byte	.LFB113
  3203 002c 14000000 		.4byte	.LFE113-.LFB113
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 64
-
-
  3204 0030 00000000 		.4byte	.LFB115
  3205 0034 94010000 		.4byte	.LFE115-.LFB115
  3206 0038 00000000 		.4byte	.LFB116
  3207 003c F4000000 		.4byte	.LFE116-.LFB116
  3208 0040 00000000 		.4byte	0
  3209 0044 00000000 		.4byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 64
+
+
  3210              		.section	.debug_ranges,"",%progbits
  3211              	.Ldebug_ranges0:
  3212 0000 00000000 		.4byte	.LFB111
@@ -3805,7 +3799,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  3225 0034 00000000 		.4byte	0
  3226              		.section	.debug_line,"",%progbits
  3227              	.Ldebug_line0:
- 3228 0000 73040000 		.section	.debug_str,"MS",%progbits,1
+ 3228 0000 71040000 		.section	.debug_str,"MS",%progbits,1
  3228      02008403 
  3228      00000201 
  3228      FB0E0D00 
@@ -3838,15 +3832,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  3241              	.LASF99:
  3242 0049 736F7572 		.ascii	"source\\asw\\wav_parser.c\000"
  3242      63655C61 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 65
-
-
  3242      73775C77 
  3242      61765F70 
  3242      61727365 
  3243              	.LASF97:
  3244 0061 46535F52 		.ascii	"FS_Read\000"
  3244      65616400 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 65
+
+
  3245              	.LASF46:
  3246 0069 73697A65 		.ascii	"size_t\000"
  3246      5F7400
@@ -3898,15 +3892,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  3269              	.LASF71:
  3270 00eb 45455F54 		.ascii	"EE_TID\000"
  3270      494400
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 66
-
-
  3271              	.LASF82:
  3272 00f2 62797465 		.ascii	"bytesScanned\000"
  3272      73536361 
  3272      6E6E6564 
  3272      00
  3273              	.LASF3:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 66
+
+
  3274 00ff 75696E74 		.ascii	"uint8_t\000"
  3274      385F7400 
  3275              	.LASF37:
@@ -3958,15 +3952,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  3294      7400
  3295              	.LASF54:
  3296 019a 6E756D62 		.ascii	"number_of_channels\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 67
-
-
  3296      65725F6F 
  3296      665F6368 
  3296      616E6E65 
  3296      6C7300
  3297              	.LASF39:
  3298 01ad 52435F45 		.ascii	"RC_ERROR_NOT_IMPLEMENTED\000"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 67
+
+
  3298      52524F52 
  3298      5F4E4F54 
  3298      5F494D50 
@@ -4018,15 +4012,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  3316      52524F52 
  3316      5F494E56 
  3316      414C4944 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 68
-
-
  3316      00
  3317              	.LASF35:
  3318 025a 52435F45 		.ascii	"RC_ERROR_BAD_DATA\000"
  3318      52524F52 
  3318      5F424144 
  3318      5F444154 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 68
+
+
  3318      4100
  3319              	.LASF80:
  3320 026c 6368756E 		.ascii	"chunkID\000"
@@ -4078,15 +4072,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  3341              	.LASF0:
  3342 02ee 7369676E 		.ascii	"signed char\000"
  3342      65642063 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 69
-
-
  3342      68617200 
  3343              	.LASF12:
  3344 02fa 6C6F6E67 		.ascii	"long long unsigned int\000"
  3344      206C6F6E 
  3344      6720756E 
  3344      7369676E 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 69
+
+
  3344      65642069 
  3345              	.LASF76:
  3346 0311 7046696C 		.ascii	"pFile\000"
@@ -4138,15 +4132,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  3365 03a9 62797465 		.ascii	"bytesRead\000"
  3365      73526561 
  3365      6400
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 70
-
-
  3366              	.LASF13:
  3367 03b3 63686172 		.ascii	"char\000"
  3367      00
  3368              	.LASF22:
  3369 03b8 52435F45 		.ascii	"RC_ERROR_BUFFER_FULL\000"
  3369      52524F52 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 70
+
+
  3369      5F425546 
  3369      4645525F 
  3369      46554C4C 
@@ -4198,15 +4192,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  3391      70706C69 
  3391      63617469 
  3391      6F6E4D6F 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 71
-
-
  3391      646500
  3392              	.LASF8:
  3393 045b 6C6F6E67 		.ascii	"long unsigned int\000"
  3393      20756E73 
  3393      69676E65 
  3393      6420696E 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 71
+
+
  3393      7400
  3394              	.LASF58:
  3395 046d 62697473 		.ascii	"bits_per_sample\000"
@@ -4258,15 +4252,15 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  3416              	.LASF47:
  3417 04ed 6C6F6E67 		.ascii	"long double\000"
  3417      20646F75 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 72
-
-
  3417      626C6500 
  3418              	.LASF87:
  3419 04f9 72656D61 		.ascii	"remaining\000"
  3419      696E696E 
  3419      6700
  3420              	.LASF59:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 72
+
+
  3421 0503 64617461 		.ascii	"data_id\000"
  3421      5F696400 
  3422              	.LASF36:
@@ -4318,13 +4312,13 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 1
  3438              	.LASF40:
  3439 05f6 52435F74 		.ascii	"RC_t\000"
  3439      00
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccNFqWXh.s 			page 73
-
-
  3440              	.LASF25:
  3441 05fb 52435F45 		.ascii	"RC_ERROR_TIME_OUT\000"
  3441      52524F52 
  3441      5F54494D 
  3441      455F4F55 
  3441      5400
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc4gD58g.s 			page 73
+
+
  3442              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

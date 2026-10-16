@@ -82,8 +82,9 @@
 /* Global pre-processor symbols/macros and type declarations                 */
 /*****************************************************************************/
 
-#define MP3_FILENAME_MAXLEN  (13u)
-#define MP3_MAX_SONGS        (10u)
+/* INC 9 — full path needed for subfolder support */
+#define MP3_FILENAME_MAXLEN   64u    /* holds "MUSIC\\SUBFOLDER\\SONG.WAV" */
+#define MP3_MAX_SONGS         10u
 
 //####################### Enumerations
 /**
@@ -128,7 +129,7 @@ RC_t MP3_ProcessEvent(EventMaskType nextEvent);
  */
 void MP3_Reader();
 
-void MP3_ShowSongListTFT();         /**< \brief Stub to fill with your TFT API */
+void MP3__showSong();        /**< \brief Show the songs via uart and TFT*/
 
 /*****************************************************************************/
 /* Private stuff, only visible for Together, declared static in cpp - File   */
