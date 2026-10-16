@@ -47,6 +47,7 @@
 #define MP3__SECTOR_SIZE        (512u)      /* SD sector size - reads are kept sector-aligned (INC 8) */
 #define MP3__MAX_INBYTES        (12u)       /* largest input bytes per output sample: 24-bit stereo, step 2 */
 #define MP3__MAX_READ           ((uint32_t)MP3__MAX_BLOCK_ALIGN * SOUND_BUFFER_SIZE)  /* largest raw read per block */
+#define MP3__DISP_NONE  (0xFFFFu)           /* "nothing drawn yet" - forces the first full draw */
 
 // Testing  
 #define DBG_HI(pin)  pin##_Write(1u)
@@ -114,6 +115,10 @@ static uint16_t MP3__alignBytes = 0u;                           /* raw bytes up 
 static uint8_t  MP3__carry[MP3__MAX_INBYTES];                   /* partial output sample left over after the first read */
 static uint8_t  MP3__carryLen = 0u;
 
+/* INC 10B: what is currently drawn on the TFT, so only changes are redrawn */
+static uint16_t MP3__dispCount = MP3__DISP_NONE;        /* number of song rows currently drawn */
+static uint16_t MP3__dispSong  = MP3__DISP_NONE;        /* row currently drawn as selected (*) */
+
 
 /*****************************************************************************/
 /* Local function prototypes ('static')                                      */
@@ -136,6 +141,7 @@ void MP3__pauseSong();                                      /**< \brief Stop the
 void MP3__resumeSong();                                     /**< \brief Start the clock for the timer ISR */
 
 void MP3__showRemainingPlaytime();                          /**< \brief Show the remaining play time via 7 segment */
+static void MP3__drawRow(uint16_t i, uint16_t selected);    /**< \brief INC 10B: draw ONE song row */
 void MP3__setRemainingPlaytime();                           /**< \brief Calculates and sets the initial play time once when the file opens */
 
 boolean_t MP3__songEnded();                                 /**< \brief Check if the remaining playtime has ended */
@@ -144,6 +150,7 @@ void MP3__showEventAndState(EventMaskType ev, MP3__State_t state);  /**< \brief 
 
 static RC_t MP3__openWavFile(uint16_t songIndex);
 static void MP3__closeWavFile(void);
+
 static void MP3__readBlock(void);
 
 /*****************************************************************************/
@@ -182,6 +189,8 @@ RC_t MP3_Init(void)
 void MP3__initDisplay()
 {
     TFT_fillScreen(BLACK);
+    MP3__dispCount = MP3__DISP_NONE;    /* INC 10B: screen was wiped -> next MP3__showSong() redraws all rows */
+    MP3__dispSong  = MP3__DISP_NONE;
     TFT_setTextSize(1);
     TFT_setTextWrap(FALSE);
     TFT_setColors(RED, BLACK);
@@ -546,64 +555,68 @@ void MP3__pauseSong()
     SOUND_StopPlay();
     UART_LOG_PutString("\r\n[MP3] Paused\n");
 }
- 
+
 void MP3__resumeSong()
 {
     SOUND_StartPlay();
     UART_LOG_PutString("\r\n[MP3] Resumed\n");
 }
 
-/*void MP3__showSong()
+/* INC 10B — draw ONE song row. Same look as INC 10A:
+ * selected = BLACK on DARKBLUE with "(*)", others = GREEN on BLACK with "( )". */
+static void MP3__drawRow(uint16_t i, uint16_t selected)
 {
-    UART_LOG_PutString("\r\n===================\r\n");
-    
-    for (uint16_t i = 0; i < MP3__player.m_noSongs; i++)
-    {
-        if (i == MP3__player.m_currentSong)
-        {
-            UART_LOG_PutString("(*)");
-        }
-        else
-        {
-            UART_LOG_PutString("( )");
-        }
-        //UART_LOG_PutString(MP3__songList[i]);
-        // INC 9 - show short filename, full path in brackets
-        UART_LOG_PutString(MP3__shortName(MP3__songList[i]));
-        UART_LOG_PutString("\r\n");
-    }
-}*/
+    boolean_t sel = (i == selected);
 
-/* INC 9 — partial refresh: only song rows, header untouched */
-void MP3__showSong()
-{
-    uint16_t i;
+    /* Clear only this row's area - no full screen clear */
+    TFT_fillRect(0, 18 + i * 12, CFG_TFT_WIDTH, 11, sel ? DARKBLUE : BLACK);
 
-    //UART_LOG_PutString("\r\n===================\r\n");
+    TFT_setTextSize(1);
+    TFT_setTextWrap(FALSE);
+    TFT_setColors(sel ? BLACK : GREEN, sel ? DARKBLUE : BLACK);
 
-    for (i = 0u; i < MP3__player.m_noSongs; i++)
-    {
-        // Clear only this row's area — no full screen clear 
-        TFT_fillRect(0, 18 + i * 12, CFG_TFT_WIDTH, 11,
-                     (i == MP3__player.m_currentSong) ? DARKBLUE : BLACK);
-
-        TFT_setTextSize(1);
-        TFT_setTextWrap(FALSE);
-        TFT_setColors(
-            (i == MP3__player.m_currentSong) ? BLACK : GREEN,
-            (i == MP3__player.m_currentSong) ? DARKBLUE : BLACK);
-
-        TFT_setCursor(2, 20 + i * 12);
-        TFT_printf("%s %s",
-                   (i == MP3__player.m_currentSong) ? "(*)" : "( )",
-                   MP3__songList[i]);
-
-        //UART_LOG_PutString((i == MP3__player.m_currentSong) ? "(*) " : "( ) ");
-        //UART_LOG_PutString(MP3__songList[i]);
-        //UART_LOG_PutString("\r\n");
-    }
+    TFT_setCursor(2, 20 + i * 12);
+    TFT_printf("%s %s", sel ? "(*)" : "( )", MP3__songList[i]);
 }
 
+/* INC 10B — partial refresh: touch the TFT only when something changed.
+ *   - nothing changed           -> no TFT access at all
+ *   - selection moved           -> redraw the old row and the new row (2 rows)
+ *   - first call / list changed -> redraw all rows once
+ * The header is drawn once by MP3__initDisplay() and is never touched here. */
+void MP3__showSong()
+{
+    uint16_t cur = MP3__player.m_currentSong;   /* snapshot once: a button press mid-call */
+    uint16_t no  = MP3__player.m_noSongs;       /* is picked up by the next cycle         */
+    uint16_t i;
+
+    if (no != MP3__dispCount)
+    {
+        /* First call after init (or list changed): draw every row once */
+        for (i = 0u; i < no; i++)
+        {
+            MP3__drawRow(i, cur);
+        }
+        /* List got shorter: blank the rows that no longer exist */
+        if (MP3__dispCount != MP3__DISP_NONE)
+        {
+            for (i = no; i < MP3__dispCount; i++)
+            {
+                TFT_fillRect(0, 18 + i * 12, CFG_TFT_WIDTH, 11, BLACK);
+            }
+        }
+        MP3__dispCount = no;
+        MP3__dispSong  = cur;
+    }
+    else if (cur != MP3__dispSong)
+    {
+        /* Selection moved: only the old and the new row change */
+        if (MP3__dispSong < no) { MP3__drawRow(MP3__dispSong, cur); }   /* old row -> unselected */
+        if (cur           < no) { MP3__drawRow(cur,           cur); }   /* new row -> selected   */
+        MP3__dispSong = cur;
+    }
+    /* else: identical to what is on the screen -> do nothing */
+}
 
 // decrements and displays it every second while playing
 void MP3__showRemainingPlaytime()

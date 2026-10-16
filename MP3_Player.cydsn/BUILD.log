@@ -1,13 +1,70 @@
---------------- Build Started: 10/15/2026 21:53:39 Project: MP3_Player, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+--------------- Build Started: 10/15/2026 22:11:02 Project: MP3_Player, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
 The code generation step is up to date.
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I.\source -I.\source\asw -I.\source\bsw -I.\source\bsw\LabBoard -I.\source\bsw\Services -I.\source\bsw\tft -I.\source\bsw\tft\fonts -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5\emf32OS -I.\emFile_V322c\Code\Include\PSoC5 -I.\source\library\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\source\library\emFile_V322c\Code\Include\PSoC5\emf32OS -I.\source\library\emFile_V322c\Code\Include\PSoC5 -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/main.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c source\asw\main.c -o .\CortexM3\ARM_GCC_541\Debug\main.o
-source\asw\main.c: In function 'Functsk_control':
-source\asw\main.c:182:18: warning: unused variable 'result' [-Wunused-variable]
-             RC_t result = MP3_ProcessEvent(nextEvent);
-                  ^
-source\asw\main.c:166:20: warning: unused variable 'count' [-Wunused-variable]
-     static uint8_t count = 0;
-                    ^
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I.\source -I.\source\asw -I.\source\bsw -I.\source\bsw\LabBoard -I.\source\bsw\Services -I.\source\bsw\tft -I.\source\bsw\tft\fonts -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5\emf32OS -I.\emFile_V322c\Code\Include\PSoC5 -I.\source\library\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\source\library\emFile_V322c\Code\Include\PSoC5\emf32OS -I.\source\library\emFile_V322c\Code\Include\PSoC5 -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/mp3.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c source\asw\mp3.c -o .\CortexM3\ARM_GCC_541\Debug\mp3.o
+In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
+                 from Generated_Source\PSoC5/project.h:17,
+                 from source\asw\mp3.h:79,
+                 from source\asw\mp3.c:23:
+Generated_Source\PSoC5/cytypes.h:1377:0: warning: "LO8" redefined
+ #define LO8(x)                  ((uint8) ((x) & 0xFFu))
+ ^
+In file included from source\asw\mp3.h:78:0,
+                 from source\asw\mp3.c:23:
+.\source\bsw/global.h:306:0: note: this is the location of the previous definition
+  # define LO8(x)   ((uint8_t) ((x) & 0xFFu))
+ ^
+In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
+                 from Generated_Source\PSoC5/project.h:17,
+                 from source\asw\mp3.h:79,
+                 from source\asw\mp3.c:23:
+Generated_Source\PSoC5/cytypes.h:1378:0: warning: "HI8" redefined
+ #define HI8(x)                  ((uint8) ((uint16)(x) >> 8))
+ ^
+In file included from source\asw\mp3.h:78:0,
+                 from source\asw\mp3.c:23:
+.\source\bsw/global.h:311:0: note: this is the location of the previous definition
+  # define HI8(x)   ((uint8_t) ((uint16_t)(x) >> 8))
+ ^
+In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
+                 from Generated_Source\PSoC5/project.h:17,
+                 from source\asw\mp3.h:79,
+                 from source\asw\mp3.c:23:
+Generated_Source\PSoC5/cytypes.h:1381:0: warning: "LO16" redefined
+ #define LO16(x)                 ((uint16) ((x) & 0xFFFFu))
+ ^
+In file included from source\asw\mp3.h:78:0,
+                 from source\asw\mp3.c:23:
+.\source\bsw/global.h:316:0: note: this is the location of the previous definition
+  # define LO16(x)   ((uint16_t) ((x) & 0xFFFFu))
+ ^
+In file included from Generated_Source\PSoC5/cyfitter_cfg.h:20:0,
+                 from Generated_Source\PSoC5/project.h:17,
+                 from source\asw\mp3.h:79,
+                 from source\asw\mp3.c:23:
+Generated_Source\PSoC5/cytypes.h:1382:0: warning: "HI16" redefined
+ #define HI16(x)                 ((uint16) ((uint32)(x) >> 16))
+ ^
+In file included from source\asw\mp3.h:78:0,
+                 from source\asw\mp3.c:23:
+.\source\bsw/global.h:321:0: note: this is the location of the previous definition
+  # define HI16(x)   ((uint16_t) ((uint32_t)(x) >> 16))
+ ^
+source\asw\mp3.c: In function 'MP3_Reader':
+source\asw\mp3.c:292:14: warning: unused variable 'logBuf' [-Wunused-variable]
+     char     logBuf[48];
+              ^
+source\asw\mp3.c: In function 'MP3__scanDir':
+source\asw\mp3.c:492:14: warning: unused variable 'logBuf' [-Wunused-variable]
+         char logBuf[40];
+              ^
+source\asw\mp3.c: In function 'MP3__openWavFile':
+source\asw\mp3.c:693:10: warning: unused variable 'logBuf' [-Wunused-variable]
+     char logBuf[48];
+          ^
+source\asw\mp3.c: At top level:
+source\asw\mp3.c:499:21: warning: 'MP3__shortName' defined but not used [-Wunused-function]
+ static const char * MP3__shortName(const char * fullPath)
+                     ^
 arm-none-eabi-ar.exe -rs .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a .\CortexM3\ARM_GCC_541\Debug\CyDmac.o .\CortexM3\ARM_GCC_541\Debug\CyFlash.o .\CortexM3\ARM_GCC_541\Debug\CyLib.o .\CortexM3\ARM_GCC_541\Debug\cyPm.o .\CortexM3\ARM_GCC_541\Debug\CySpc.o .\CortexM3\ARM_GCC_541\Debug\cyutils.o .\CortexM3\ARM_GCC_541\Debug\cy_em_eeprom.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_activate.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_alcancel.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_alget.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_algetbase.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_alsetabs.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_alsetrel.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_altick.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_chaintas.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_evclear.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_evget.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_evset.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_evwait.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_force_schedule.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_getcountervalue.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_getelapsedvalue.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_gettaskid.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_gettaskstate.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_iparam.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_irqendin.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_lockres.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_lookup.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_rq_exchg.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_rq_first.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_rq_inser.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_schedule.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_semgetvalue.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_sempost.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_semtrywait.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_semwait.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_shtdown.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_startos.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_terminat.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_thendin.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_tnterm.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_tstub.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_ulockallres.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_ulockres.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_cortex_mx_ee_context.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_cortex_mx_ee_system_timer.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_cortex_mx_ee_utils.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_common_ee_hal_structs.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_eecfg.o .\CortexM3\ARM_GCC_541\Debug\SEVEN_A.o .\CortexM3\ARM_GCC_541\Debug\SEVEN_B.o .\CortexM3\ARM_GCC_541\Debug\SEVEN_C.o .\CortexM3\ARM_GCC_541\Debug\SEVEN_D.o .\CortexM3\ARM_GCC_541\Debug\SEVEN_E.o .\CortexM3\ARM_GCC_541\Debug\SEVEN_F.o .\CortexM3\ARM_GCC_541\Debug\SEVEN_G.o .\CortexM3\ARM_GCC_541\Debug\SEVEN_DP.o .\CortexM3\ARM_GCC_541\Debug\SEVEN_SELECT.o .\CortexM3\ARM_GCC_541\Debug\SEVEN_reg.o .\CortexM3\ARM_GCC_541\Debug\SEVEN_reg_PM.o .\CortexM3\ARM_GCC_541\Debug\BUTTON_1.o .\CortexM3\ARM_GCC_541\Debug\isr_Button.o .\CortexM3\ARM_GCC_541\Debug\BUTTON_2.o .\CortexM3\ARM_GCC_541\Debug\BUTTON_3.o .\CortexM3\ARM_GCC_541\Debug\BUTTON_4.o .\CortexM3\ARM_GCC_541\Debug\LED_red.o .\CortexM3\ARM_GCC_541\Debug\LED_yellow.o .\CortexM3\ARM_GCC_541\Debug\LED_green.o .\CortexM3\ARM_GCC_541\Debug\UART_LOG.o .\CortexM3\ARM_GCC_541\Debug\UART_LOG_PM.o .\CortexM3\ARM_GCC_541\Debug\UART_LOG_INT.o .\CortexM3\ARM_GCC_541\Debug\UART_LOG_BOOT.o .\CortexM3\ARM_GCC_541\Debug\RGB_PWM_red.o .\CortexM3\ARM_GCC_541\Debug\RGB_PWM_red_PM.o .\CortexM3\ARM_GCC_541\Debug\PWM_Clock.o .\CortexM3\ARM_GCC_541\Debug\RGB_PWM_green.o .\CortexM3\ARM_GCC_541\Debug\RGB_PWM_green_PM.o .\CortexM3\ARM_GCC_541\Debug\RGB_PWM_blue.o .\CortexM3\ARM_GCC_541\Debug\RGB_PWM_blue_PM.o .\CortexM3\ARM_GCC_541\Debug\RGB_R.o .\CortexM3\ARM_GCC_541\Debug\RGB_G.o .\CortexM3\ARM_GCC_541\Debug\RGB_B.o .\CortexM3\ARM_GCC_541\Debug\SOUND_PWM.o .\CortexM3\ARM_GCC_541\Debug\SOUND_PWM_PM.o .\CortexM3\ARM_GCC_541\Debug\SOUND_PWM_CLOCK.o .\CortexM3\ARM_GCC_541\Debug\SOUND_MUX_0.o .\CortexM3\ARM_GCC_541\Debug\SOUND_MUX_1.o .\CortexM3\ARM_GCC_541\Debug\SOUND_Control.o .\CortexM3\ARM_GCC_541\Debug\SOUND_Control_PM.o .\CortexM3\ARM_GCC_541\Debug\SOUND_OUT.o .\CortexM3\ARM_GCC_541\Debug\SOUND_ENABLE.o .\CortexM3\ARM_GCC_541\Debug\SOUND_SAMPLE.o .\CortexM3\ARM_GCC_541\Debug\SOUND_SAMPLE_PM.o .\CortexM3\ARM_GCC_541\Debug\SOUND_SAMPLE_CLOCK.o .\CortexM3\ARM_GCC_541\Debug\isr_Timer.o .\CortexM3\ARM_GCC_541\Debug\UART_LOG_IntClock.o .\CortexM3\ARM_GCC_541\Debug\TFT_SPI.o .\CortexM3\ARM_GCC_541\Debug\TFT_SPI_PM.o .\CortexM3\ARM_GCC_541\Debug\TFT_SPI_INT.o .\CortexM3\ARM_GCC_541\Debug\TFT_SCL.o .\CortexM3\ARM_GCC_541\Debug\TFT_DC.o .\CortexM3\ARM_GCC_541\Debug\TFT_RES.o .\CortexM3\ARM_GCC_541\Debug\TFT_CS.o .\CortexM3\ARM_GCC_541\Debug\TFT_LED.o .\CortexM3\ARM_GCC_541\Debug\TFT_SDA.o .\CortexM3\ARM_GCC_541\Debug\TFT_BackLight.o .\CortexM3\ARM_GCC_541\Debug\TFT_BackLight_PM.o .\CortexM3\ARM_GCC_541\Debug\CLK_LED.o .\CortexM3\ARM_GCC_541\Debug\TFT_SPI_IntClock.o .\CortexM3\ARM_GCC_541\Debug\emFile_ConfigMMC_SPI.o .\CortexM3\ARM_GCC_541\Debug\emFile_MMC_HW_SPI.o .\CortexM3\ARM_GCC_541\Debug\emFile_PM.o .\CortexM3\ARM_GCC_541\Debug\emFile_SPI0.o .\CortexM3\ARM_GCC_541\Debug\emFile_SPI0_PM.o .\CortexM3\ARM_GCC_541\Debug\emFile_SPI0_INT.o .\CortexM3\ARM_GCC_541\Debug\emFile_mosi0.o .\CortexM3\ARM_GCC_541\Debug\emFile_Clock_1.o .\CortexM3\ARM_GCC_541\Debug\emFile_miso0.o .\CortexM3\ARM_GCC_541\Debug\emFile_sclk0.o .\CortexM3\ARM_GCC_541\Debug\emFile_SPI0_CS.o .\CortexM3\ARM_GCC_541\Debug\DBG_FS.o .\CortexM3\ARM_GCC_541\Debug\DBG_TOK.o .\CortexM3\ARM_GCC_541\Debug\DBG_CONV.o .\CortexM3\ARM_GCC_541\Debug\DBG_FILL.o .\CortexM3\ARM_GCC_541\Debug\DBG_DEAD.o .\CortexM3\ARM_GCC_541\Debug\CyBootAsmGnu.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_gnu_change_context_isr.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_gnu_irq_stack.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_gnu_multi_context.o .\CortexM3\ARM_GCC_541\Debug\SimpleSystem_ee_gnu_oo.o
 arm-none-eabi-ar.exe: creating .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a
 arm-none-eabi-gcc.exe -Wl,--start-group -o "C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\CortexM3\ARM_GCC_541\Debug\MP3_Player.elf" .\CortexM3\ARM_GCC_541\Debug\button.o .\CortexM3\ARM_GCC_541\Debug\led.o .\CortexM3\ARM_GCC_541\Debug\seven.o .\CortexM3\ARM_GCC_541\Debug\logging.o .\CortexM3\ARM_GCC_541\Debug\tft.o .\CortexM3\ARM_GCC_541\Debug\Boxer.o .\CortexM3\ARM_GCC_541\Debug\CastleOfGlass.o .\CortexM3\ARM_GCC_541\Debug\mp3.o .\CortexM3\ARM_GCC_541\Debug\sound.o .\CortexM3\ARM_GCC_541\Debug\sound_data.o .\CortexM3\ARM_GCC_541\Debug\valerie.o .\CortexM3\ARM_GCC_541\Debug\main.o .\CortexM3\ARM_GCC_541\Debug\wav_parser.o .\CortexM3\ARM_GCC_541\Debug\emFile.o .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o .\CortexM3\ARM_GCC_541\Debug\cymetadata.o .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a "C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CortexM3\ARM_GCC_541\Debug\CyComponentLibrary.a" -mcpu=cortex-m3 -mthumb -l emf32noslfn -l emf32nosnlfn -l emf32oslfn -l emf32osnlfn -L Generated_Source\PSoC5 -L .\emFile_V322c\LinkLibrary\PSoC5\GCC -L .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC -Wl,-Map,.\CortexM3\ARM_GCC_541\Debug/MP3_Player.map -T Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -Wl,--gc-sections -g -ffunction-sections -Og -ffat-lto-objects -Wl,--end-group
@@ -16,6 +73,6 @@ No ELF section .cychecksum found, creating one
 Application checksum calculated and stored in ELF section .cychecksum
 Checksum calculated and stored in ELF section .cymeta
 cyelftool.exe -S "C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\CortexM3\ARM_GCC_541\Debug\MP3_Player.elf"
-Flash used: 31744 of 262144 bytes (12.1%).
-SRAM used: 18769 of 65536 bytes (28.6%). Stack: 2048 bytes. Heap: 128 bytes.
---------------- Build Succeeded: 10/15/2026 21:53:40 ---------------
+Flash used: 31888 of 262144 bytes (12.2%).
+SRAM used: 18777 of 65536 bytes (28.7%). Stack: 2048 bytes. Heap: 128 bytes.
+--------------- Build Succeeded: 10/15/2026 22:11:04 ---------------
