@@ -48,6 +48,11 @@
 #define MP3__MAX_INBYTES        (12u)       /* largest input bytes per output sample: 24-bit stereo, step 2 */
 #define MP3__MAX_READ           ((uint32_t)MP3__MAX_BLOCK_ALIGN * SOUND_BUFFER_SIZE)  /* largest raw read per block */
 #define MP3__DISP_NONE  (0xFFFFu)           /* "nothing drawn yet" - forces the first full draw */
+/* INC 10C: what kind of content is on screen, and the system error flag */
+#define MP3__DISP_MODE_NONE     (0xFFu)
+#define MP3__DISP_MODE_LIST     (0u)
+#define MP3__DISP_MODE_NOSONGS  (1u)
+#define MP3__DISP_MODE_ERROR    (2u)
 
 // Testing  
 #define DBG_HI(pin)  pin##_Write(1u)
@@ -119,6 +124,11 @@ static uint8_t  MP3__carryLen = 0u;
 static uint16_t MP3__dispCount = MP3__DISP_NONE;        /* number of song rows currently drawn */
 static uint16_t MP3__dispSong  = MP3__DISP_NONE;        /* row currently drawn as selected (*) */
 
+/* INC 10C: what kind of content is on screen, and the system error flag */
+
+static uint8_t            MP3__dispMode = MP3__DISP_MODE_NONE;
+static volatile boolean_t MP3__error    = FALSE;    /* set by any task, cleared on a button press */
+
 
 /*****************************************************************************/
 /* Local function prototypes ('static')                                      */
@@ -142,6 +152,8 @@ void MP3__resumeSong();                                     /**< \brief Start th
 
 void MP3__showRemainingPlaytime();                          /**< \brief Show the remaining play time via 7 segment */
 static void MP3__drawRow(uint16_t i, uint16_t selected);    /**< \brief INC 10B: draw ONE song row */
+static void MP3__drawMessage(uint8_t mode);                 /**< \brief INC 10C: "No songs" / "Error - See UART Log" */
+
 void MP3__setRemainingPlaytime();                           /**< \brief Calculates and sets the initial play time once when the file opens */
 
 boolean_t MP3__songEnded();                                 /**< \brief Check if the remaining playtime has ended */
@@ -191,11 +203,12 @@ void MP3__initDisplay()
     TFT_fillScreen(BLACK);
     MP3__dispCount = MP3__DISP_NONE;    /* INC 10B: screen was wiped -> next MP3__showSong() redraws all rows */
     MP3__dispSong  = MP3__DISP_NONE;
+    MP3__dispMode  = MP3__DISP_MODE_NONE;   /* INC 10C */
     TFT_setTextSize(1);
     TFT_setTextWrap(FALSE);
-    TFT_setColors(RED, BLACK);
+    TFT_setColors(CYAN, BLACK);
     TFT_setCursor(2, 2);
-    TFT_println("== MP3 Player ==");
+    TFT_println("==== MP3 Player ====");
 }
 
 /**
@@ -207,6 +220,18 @@ RC_t MP3_ProcessEvent(EventMaskType nextEvent)
 {
     //Debugging aid
     //MP3__showEventAndState(nextEvent, MP3__player.m_state);
+    
+    /* INC 10C: nothing to play -> ignore buttons (also avoids "% m_noSongs" = division by zero) */
+    if ((MP3__player.m_noSongs == 0u) && (MP3__player.m_state == MP3STATE_ISSTOPPED))
+    {
+        return RC_SUCCESS;
+    }
+
+    /* INC 10C: any button press acknowledges a shown error */
+    if (nextEvent & (ev_Button1 | ev_Button2 | ev_Button3 | ev_Button4))
+    {
+        MP3__error = FALSE;
+    }
     
     switch (MP3__player.m_state)
     {
@@ -259,6 +284,7 @@ RC_t MP3_ProcessEvent(EventMaskType nextEvent)
                 {
                     /* INC 7: every file failed - stop instead of looping forever */
                     UART_LOG_PutString("[MP3] No playable song\r\n");
+                    MP3__error = TRUE;                                  /* INC 10C */
                     MP3__player.m_state = MP3STATE_ISSTOPPED;
                 }
                 else
@@ -423,6 +449,7 @@ static void MP3__scanDir(const char * path)
     {
         sprintf(logBuf, "[SCAN] Cannot open dir: '%s'\r\n", path);
         UART_LOG_PutString(logBuf);
+        MP3__error = TRUE;                                  /* INC 10C */
         return;
     }
 
@@ -547,19 +574,19 @@ void MP3__stopSong()
     SOUND_StopPlay();
     MP3__closeWavFile();
     MP3__reader.m_state = MP3READER_IDLE;
-    UART_LOG_PutString("\r\n[MP3] Stopped\n");
+    //UART_LOG_PutString("\r\n[MP3] Stopped\n");
 }
 
 void MP3__pauseSong()
 {
     SOUND_StopPlay();
-    UART_LOG_PutString("\r\n[MP3] Paused\n");
+    //UART_LOG_PutString("\r\n[MP3] Paused\n");
 }
 
 void MP3__resumeSong()
 {
     SOUND_StartPlay();
-    UART_LOG_PutString("\r\n[MP3] Resumed\n");
+    //UART_LOG_PutString("\r\n[MP3] Resumed\n");
 }
 
 /* INC 10B — draw ONE song row. Same look as INC 10A:
@@ -579,25 +606,70 @@ static void MP3__drawRow(uint16_t i, uint16_t selected)
     TFT_printf("%s %s", sel ? "(*)" : "( )", MP3__songList[i]);
 }
 
-/* INC 10B — partial refresh: touch the TFT only when something changed.
- *   - nothing changed           -> no TFT access at all
- *   - selection moved           -> redraw the old row and the new row (2 rows)
- *   - first call / list changed -> redraw all rows once
- * The header is drawn once by MP3__initDisplay() and is never touched here. */
+/* INC 10C — one-line message in the first list row */
+static void MP3__drawMessage(uint8_t mode)
+{
+    TFT_setTextSize(1);
+    TFT_setTextWrap(FALSE);
+    TFT_setCursor(2, 20);
+    if (mode == MP3__DISP_MODE_ERROR)
+    {
+        TFT_setColors(RED, BLACK);
+        TFT_printf("Error: See UART Log");
+    }
+    else
+    {
+        TFT_setColors(YELLOW, BLACK);
+        TFT_printf("No Song Detected :(");
+    }
+}
+
+/* INC 10C — list / "No songs" / error, redrawing only on change */
 void MP3__showSong()
 {
-    uint16_t cur = MP3__player.m_currentSong;   /* snapshot once: a button press mid-call */
-    uint16_t no  = MP3__player.m_noSongs;       /* is picked up by the next cycle         */
+    uint16_t cur  = MP3__player.m_currentSong;     /* snapshot once */
+    uint16_t no   = MP3__player.m_noSongs;
+    uint8_t  mode = MP3__error ? MP3__DISP_MODE_ERROR
+                  : ((no == 0u) ? MP3__DISP_MODE_NOSONGS : MP3__DISP_MODE_LIST);
     uint16_t i;
 
+    if (mode != MP3__dispMode)
+    {
+        /* Kind of content changed: wipe only the rows the old content used */
+        if (MP3__dispMode != MP3__DISP_MODE_NONE)
+        {
+            uint16_t used = (MP3__dispMode == MP3__DISP_MODE_LIST && MP3__dispCount != MP3__DISP_NONE)
+                            ? MP3__dispCount : 1u;
+            for (i = 0u; i < used; i++)
+            {
+                TFT_fillRect(0, 18 + i * 12, CFG_TFT_WIDTH, 11, BLACK);
+            }
+        }
+        if (mode == MP3__DISP_MODE_LIST)
+        {
+            MP3__dispCount = MP3__DISP_NONE;        /* force a full list draw below */
+            MP3__dispSong  = MP3__DISP_NONE;
+        }
+        else
+        {
+            MP3__drawMessage(mode);
+            MP3__dispCount = 0u;
+        }
+        MP3__dispMode = mode;
+    }
+
+    if (mode != MP3__DISP_MODE_LIST)
+    {
+        return;                                     /* message modes: nothing more to draw */
+    }
+
+    /* ---- list mode: identical to INC 10B ---- */
     if (no != MP3__dispCount)
     {
-        /* First call after init (or list changed): draw every row once */
         for (i = 0u; i < no; i++)
         {
             MP3__drawRow(i, cur);
         }
-        /* List got shorter: blank the rows that no longer exist */
         if (MP3__dispCount != MP3__DISP_NONE)
         {
             for (i = no; i < MP3__dispCount; i++)
@@ -610,12 +682,10 @@ void MP3__showSong()
     }
     else if (cur != MP3__dispSong)
     {
-        /* Selection moved: only the old and the new row change */
-        if (MP3__dispSong < no) { MP3__drawRow(MP3__dispSong, cur); }   /* old row -> unselected */
-        if (cur           < no) { MP3__drawRow(cur,           cur); }   /* new row -> selected   */
+        if (MP3__dispSong < no) { MP3__drawRow(MP3__dispSong, cur); }
+        if (cur           < no) { MP3__drawRow(cur,           cur); }
         MP3__dispSong = cur;
     }
-    /* else: identical to what is on the screen -> do nothing */
 }
 
 // decrements and displays it every second while playing
@@ -700,6 +770,7 @@ static RC_t MP3__openWavFile(uint16_t songIndex)
     if (MP3__pFile == 0)
     {
         UART_LOG_PutString("\r\n[MP3] ERROR: FS_FOpen failed\n");
+        MP3__error = TRUE;                                  /* INC 10C */
         return RC_ERROR;
     }
     //UART_LOG_PutString("\r\n[MP3] FS_FOpen OK\n");
@@ -709,6 +780,7 @@ static RC_t MP3__openWavFile(uint16_t songIndex)
         FS_FClose(MP3__pFile);
         MP3__pFile = 0;
         UART_LOG_PutString("\r\n[MP3] ERROR: WAV header invalid\n");
+        MP3__error = TRUE;                                  /* INC 10C */
         return RC_ERROR;
     }
  
@@ -811,6 +883,11 @@ static void MP3__readBlock(void)
     
     if (bytesRead == 0u)
     {
+        if (toRead > 0u)                                    /* INC 10C: asked for data, got none = read error */
+        {
+            UART_LOG_PutString("\r\n[MP3] ERROR: SD read failed\n");
+            MP3__error = TRUE;
+        }
         MP3__bytesRemaining = 0u;          /* read error -> force EOF, avoid endless loop */
         MP3__carryLen       = 0u;
         return;
