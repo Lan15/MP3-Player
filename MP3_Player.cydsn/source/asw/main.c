@@ -134,6 +134,7 @@ TASK(tsk_init)
     
     LED_Init();
     SEVEN_Init();
+    TFT_init(); /* INC 10 — init TFT before MP3_Init so display is ready for song list */
     SOUND_Init();
     
     //Test
@@ -149,6 +150,7 @@ TASK(tsk_init)
     
     //Start the alarm with 1000ms cycle time
     SetRelAlarm(alrm_1s,1000,1000);
+    SetRelAlarm(alrm_display,1100,200);   /* INC 10 */
 
     ActivateTask(tsk_reader);
     ActivateTask(tsk_control);
@@ -192,6 +194,16 @@ TASK(tsk_reader)
         //woke - calling MP3_Reader
         MP3_Reader();
     }
+
+    TerminateTask();
+}
+
+/* INC 10 - dedicated TFT display task */
+TASK(tsk_display)
+{
+    //UART_LOG_PutString("\r\n[DISPLAY] tsk_display started\n");
+
+    MP3__showSong();          // renders song list to TFT + UART
 
     TerminateTask();
 }

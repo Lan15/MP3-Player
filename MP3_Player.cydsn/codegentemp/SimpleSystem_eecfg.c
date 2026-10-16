@@ -28,7 +28,7 @@
     #define TASK_4_STACK_SIZE 1000/4 // size = 1000 bytes
     int EE_cortex_mx_stack_4[TASK_4_STACK_SIZE];	/* Task 4 (tsk_reader) */
     #endif
-    #if ((2 == 2) && (EE_MAX_TASK > 4))
+    #if ((1 == 2) && (EE_MAX_TASK > 4))
     #define TASK_5_STACK_SIZE 200/4 // size = 200 bytes
     int EE_cortex_mx_stack_5[TASK_5_STACK_SIZE];	/* Task 5 (tsk_display) */
     #endif
@@ -1034,7 +1034,7 @@
         #endif
     #endif
     #if EE_MAX_TASK > 4
-        #if 1
+        #if 0
         ,1U
         #else
         ,0U
@@ -1570,7 +1570,7 @@
         {alrm_1s}
     #endif
     #if EE_MAX_ALARM > 1
-        ,{Alarm_3}
+        ,{alrm_display}
     #endif
     #if EE_MAX_ALARM > 2
         ,{Alarm_3}
@@ -1600,7 +1600,7 @@ const char* EE_ALARM_NAME[EE_MAX_ALARM]=
          "alrm_1s"
     #endif
     #if EE_MAX_ALARM > 1
-        ,"Alarm_3"
+        ,"alrm_display"
     #endif
     #if EE_MAX_ALARM > 2
         ,"Alarm_3"
@@ -1628,7 +1628,7 @@ const unsigned long EE_ALARM_ID[EE_MAX_ALARM]=
          alrm_1s
     #endif
     #if EE_MAX_ALARM > 1
-        ,Alarm_3
+        ,alrm_display
     #endif
     #if EE_MAX_ALARM > 2
         ,Alarm_3
@@ -1688,7 +1688,7 @@ const unsigned long EE_ALARM_ID[EE_MAX_ALARM]=
         {0, alrm_1s, EE_ALARM }
         #endif
         #if EE_MAX_ALARM > 1
-        ,{0, Alarm_3, EE_ALARM }
+        ,{0, alrm_display, EE_ALARM }
         #endif
         #if EE_MAX_ALARM > 2
         ,{0, Alarm_3, EE_ALARM }
@@ -1742,7 +1742,7 @@ const unsigned long EE_ALARM_ID[EE_MAX_ALARM]=
     #if EE_ACTION_ROM_SIZE > 1
         ,{0    , 
             #if 0 != 3 
-                0,
+                4,
             #else
                 0,
             #endif

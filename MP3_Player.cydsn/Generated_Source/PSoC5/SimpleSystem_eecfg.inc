@@ -19,7 +19,7 @@
  **************************************************************************/
 
     /* TASK definition */
-    #define EE_MAX_TASK 4
+    #define EE_MAX_TASK 5
     #if EE_MAX_TASK > 0
     #define tsk_init 0
     #endif
@@ -86,12 +86,12 @@
     #endif
     
     /* ALARM definition */
-    #define EE_MAX_ALARM 1U
+    #define EE_MAX_ALARM 2U
     #if EE_MAX_ALARM > 0
     #define alrm_1s 0U
     #endif
     #if EE_MAX_ALARM > 1
-    #define Alarm_3 1U
+    #define alrm_display 1U
     #endif
     #if EE_MAX_ALARM > 2
     #define Alarm_3 2U
@@ -346,7 +346,7 @@ extern void ISR_16(void);
     #else
         #define TSK4_STCK 0
     #endif
-    #if (2 == 2) && (EE_MAX_TASK > 4)
+    #if (1 == 2) && (EE_MAX_TASK > 4)
         #define TSK5_STCK 1
     #else
         #define TSK5_STCK 0

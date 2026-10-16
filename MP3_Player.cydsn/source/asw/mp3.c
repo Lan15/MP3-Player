@@ -119,6 +119,8 @@ static uint8_t  MP3__carryLen = 0u;
 /* Local function prototypes ('static')                                      */
 /*****************************************************************************/
 
+void MP3__initDisplay();            /**< \brief draw static header once */
+
 static void MP3__scanDir(const char * path);                /**< \brief recursive helper */
 static const char * MP3__shortName(const char * fullPath);  /**< \brief short name for display */
 
@@ -148,32 +150,6 @@ static void MP3__readBlock(void);
 /* Function implementation - global ('extern') and local ('static')          */
 /*****************************************************************************/
 
-/*RC_t MP3_Init()
-{
- 
-    MP3__player.m_state       = MP3STATE_ISSTOPPED;
-    MP3__player.m_volume      = MP3__MAXVOLUME;
-    MP3__player.m_currentSong = 0u;
- 
-    MP3__reader.m_state          = MP3READER_IDLE;
-    MP3__reader.m_newSongRequest = FALSE;
- 
-    // Scan SD card for WAV files
-    UART_LOG_PutString("\r\n[MP3] Scanning SD card...\n");
-    
-    FS_Init();
-    MP3__readCard();
- 
-    SEVEN_Set(SEVEN_1, MP3__player.m_volume);
-    SOUND_SetVolume(MP3__player.m_volume * 20u);
-    MP3__showSong();
-    
-    //sprintf(logBuf, "\r\n[MP3] Ready. %u song(s).\n", MP3__player.m_noSongs);
-    //UART_LOG_PutString(logBuf);
- 
-    return RC_SUCCESS;
-}*/
-
 RC_t MP3_Init(void)
 {
     MP3__player.m_state       = MP3STATE_ISSTOPPED;
@@ -195,9 +171,22 @@ RC_t MP3_Init(void)
     
     SEVEN_Set(SEVEN_1, MP3__player.m_volume);
     SOUND_SetVolume(MP3__player.m_volume * 20u);
-    MP3__showSong();
-
+    //MP3__showSong();
+    /* INC 10 — draw header once here, not inside MP3__showSong */
+    MP3__initDisplay();
+    
     return RC_SUCCESS;
+}
+
+/* INC 9 — draw static header once; call from MP3_Init() only */
+void MP3__initDisplay()
+{
+    TFT_fillScreen(BLACK);
+    TFT_setTextSize(1);
+    TFT_setTextWrap(FALSE);
+    TFT_setColors(RED, BLACK);
+    TFT_setCursor(2, 2);
+    TFT_println("== MP3 Player ==");
 }
 
 /**
@@ -216,18 +205,18 @@ RC_t MP3_ProcessEvent(EventMaskType nextEvent)
             if (nextEvent & ev_Button1)
             {
                 MP3__prevSong();
-                MP3__showSong();
+                //MP3__showSong();
             }
             else if (nextEvent & ev_Button2)
             {
                 MP3__nextSong();
-                MP3__showSong();
+                //MP3__showSong();
             }
             else if (nextEvent & ev_Button3)
             {
                 MP3__reader.m_failCount = 0u;               /* INC 7: fresh start (reader is IDLE here) */
                 MP3__playSong();
-                MP3__showSong();
+                //MP3__showSong();
                 MP3__player.m_state = MP3STATE_ISPLAYING;
             }
             break;
@@ -267,7 +256,7 @@ RC_t MP3_ProcessEvent(EventMaskType nextEvent)
                 {
                     MP3__nextSong();
                     MP3__playSong();
-                    MP3__showSong();
+                    //MP3__showSong();
                 }
             }
             break;
@@ -564,7 +553,7 @@ void MP3__resumeSong()
     UART_LOG_PutString("\r\n[MP3] Resumed\n");
 }
 
-void MP3__showSong()
+/*void MP3__showSong()
 {
     UART_LOG_PutString("\r\n===================\r\n");
     
@@ -579,11 +568,42 @@ void MP3__showSong()
             UART_LOG_PutString("( )");
         }
         //UART_LOG_PutString(MP3__songList[i]);
-        /* INC 9 - show short filename, full path in brackets */
+        // INC 9 - show short filename, full path in brackets
         UART_LOG_PutString(MP3__shortName(MP3__songList[i]));
         UART_LOG_PutString("\r\n");
     }
+}*/
+
+/* INC 9 — partial refresh: only song rows, header untouched */
+void MP3__showSong()
+{
+    uint16_t i;
+
+    //UART_LOG_PutString("\r\n===================\r\n");
+
+    for (i = 0u; i < MP3__player.m_noSongs; i++)
+    {
+        // Clear only this row's area — no full screen clear 
+        TFT_fillRect(0, 18 + i * 12, CFG_TFT_WIDTH, 11,
+                     (i == MP3__player.m_currentSong) ? DARKBLUE : BLACK);
+
+        TFT_setTextSize(1);
+        TFT_setTextWrap(FALSE);
+        TFT_setColors(
+            (i == MP3__player.m_currentSong) ? BLACK : GREEN,
+            (i == MP3__player.m_currentSong) ? DARKBLUE : BLACK);
+
+        TFT_setCursor(2, 20 + i * 12);
+        TFT_printf("%s %s",
+                   (i == MP3__player.m_currentSong) ? "(*)" : "( )",
+                   MP3__songList[i]);
+
+        //UART_LOG_PutString((i == MP3__player.m_currentSong) ? "(*) " : "( ) ");
+        //UART_LOG_PutString(MP3__songList[i]);
+        //UART_LOG_PutString("\r\n");
+    }
 }
+
 
 // decrements and displays it every second while playing
 void MP3__showRemainingPlaytime()
