@@ -18,7 +18,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="MP3_Player-000\MP3_Player\asw\sound.h">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="MP3_Player-000\MP3_Player\asw\mp3.h">
 <ExpandedNodeIds>
 <v>MP3_Player-000</v>
 <v>MP3_Player-000\MP3_Player</v>
@@ -497,6 +497,53 @@
 <VisibleNodeIds>
 <v>MP3_Player-000</v>
 <v>MP3_Player-000\MP3_Player</v>
+<v>MP3_Player-000\MP3_Player\CortexM3</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\button.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\BUTTON_1.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\BUTTON_2.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\BUTTON_3.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\BUTTON_4.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\CLK_LED.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_CONV.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_DEAD.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_FILL.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_FS.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_TOK.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_Clock_1.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_ConfigMMC_SPI.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_miso0.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_MMC_HW_SPI.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_mosi0.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_PM.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_sclk0.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_SPI0.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_SPI0_CS.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_SPI0_INT.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_SPI0_PM.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_Button.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_Timer.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\led.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\LED_green.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\LED_red.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\LED_yellow.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\logging.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\mp3.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>

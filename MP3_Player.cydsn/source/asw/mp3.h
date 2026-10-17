@@ -87,15 +87,19 @@
 *          for use in production, especially not for safety-critical applications!
 *
 * Changelog:\n
-*  - 6.11.18 : template
-*  - INC 5   : streaming from the SD card, dual buffer, reader state machine
-*  - INC 6   : 16/24 bit, stereo, 44100 Hz
-*  - INC 7   : files that fail to open are skipped
-*  - INC 8   : sector aligned SD reads
-*  - INC 9   : recursive scan of the SD card, full paths
-*  - INC 10  : TFT song list, partial redraw, "No songs" / error message
-*  - INC 11B : Doxygen, MISRA C:2012 clean-up, faster sample conversion,
-*              scan buffers bounded, notes N1..N10 at the end of mp3.c
+*  - 6.11.18   : template
+*  - INC 5     : streaming from the SD card, dual buffer, reader state machine
+*  - INC 6     : 16/24 bit, stereo, 44100 Hz
+*  - INC 7     : files that fail to open are skipped
+*  - INC 8     : sector aligned SD reads
+*  - INC 9     : recursive scan of the SD card, full paths
+*  - INC 10    : TFT song list, partial redraw, "No songs" / error message
+*  - INC 11B   : Doxygen, MISRA C:2012 clean-up, faster sample conversion,
+*                scan buffers bounded, notes N1..N10 at the end of mp3.c
+*  - INC 11B.1 : function comments in the project style (\param type name : [IN|OUT] text,
+*                \return per value); RC_t return codes: MP3_Init() returns the scan result,
+*                MP3_ProcessEvent() reports ignored events, MP3__openWavFile() passes on the
+*                reason; note N11 (return codes)
 *
 * \copyright Copyright 2016
 * Department of electrical engineering and information technology, Hochschule Darmstadt - University of applied sciences (h_da). All Rights Reserved.
@@ -136,47 +140,37 @@ public:
 /*****************************************************************************/
 
 /**
- * \brief Initialise the player: scan the SD card for WAV files, set the start
+ * \brief Initialise the player: scan the SD card for WAV files, set the start 
  *        volume and draw the TFT header.
  *
  * Starts in the STOPPED state with the first song selected. The card is
- * scanned recursively from the root, hidden and system entries and names that
+ * scanned from the root, hidden and system entries and names that
  * start with '.' are ignored, at most #MP3_MAX_SONGS files are stored.
  * If the card cannot be read the error flag is set, the TFT then shows
  * "Error: See UART Log"; if no WAV file is found it shows "No Song Detected :(".
  *
- * \return RC_SUCCESS always (problems are reported via UART and the TFT).
- * \note   Call once from tsk_init, after TFT_init() and SOUND_Init().
+ * Call once from tsk_init, after TFT_init() and SOUND_Init().
+ *
+ * \return RC_SUCCESS when the card was scanned (also with 0 songs found),
+ *         RC_ERROR_OPEN when a folder could not be opened, the list may be incomplete
+ *         (problems are also reported via UART and TFT)
  */
 RC_t MP3_Init(void);
 
 /**
  * \brief Player state machine. Processes ONE event.
  *
- * \param[in] EventMaskType nextEvent   : The event to be processed [IN]
- *  A single event bit: ev_Button1..ev_Button4 or ev_1s. Other values are ignored.
- * \return RC_SUCCESS always.
+ * While no song is in the list and the player is stopped, all events
+ * are ignored (no division by zero in the song selection). Any button press
+ * clears a displayed error.
  *
- * \note While no song is in the list and the player is stopped, all events
- *       are ignored (no division by zero in the song selection).
- * \note Any button press clears a displayed error.
+ * \param EventMaskType nextEvent : [IN] single event bit: ev_Button1..ev_Button4 or ev_1s
+ * \return RC_SUCCESS when the event was processed (an event without a function in the
+ *         current state counts as processed),
+ *         RC_ERROR_BAD_PARAM when no known event bit is set (nothing happens),
+ *         RC_ERROR_INVALID_STATE when stopped without songs (event ignored)
  */
 RC_t MP3_ProcessEvent(EventMaskType nextEvent);
-
-/**
- * \brief SD card streaming, body of tsk_reader (one run per ev_BufEmpty).
- *
- * Runs the reader state machine one step:
- *  - IDLE      : wait for a song request
- *  - OPEN      : open the file, parse the header, pre-fill both buffers, start the sound
- *  - STREAMING : refill the inactive buffer; a new song request ends the song
- *  - EOF       : stop the sound, close the file
- *
- * \note Call only from TASK(tsk_reader), after WaitEvent(ev_BufEmpty).
- * \note The function returns after each step. It does not contain the
- *       WaitEvent loop (that is in main.c).
- */
-void MP3_Reader(void);
 
 /**
  * \brief Update the TFT: song list, "No songs" or error message.

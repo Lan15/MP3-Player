@@ -3,7 +3,7 @@
 * \author  P. Fromm (template), V S Agilan (player)
 * \date    6.11.18 (INC 11B: 2026-10)
 *
-* \brief   WAV player application layer (state machine, SD card scan,
+* \brief   A simple MP3 Player (WAV player) application layer (state machine, SD card scan,
 *          PCM streaming and conversion, TFT song list)
 *
 * \details
@@ -55,7 +55,8 @@
  *  \{ */
 #define MP3__MAXVOLUME          (5u)        /**< \brief highest volume step                                   */
 #define MP3__VOLUME_STEP        (20u)       /**< \brief percent per volume step: 5 steps * 20 = 100 %         */
-#define MP3__BUTTON_MASK        (ev_Button1 | ev_Button2 | ev_Button3 | ev_Button4)  /**< \brief all button events */
+#define MP3__BUTTON_MASK        (ev_Button1 | ev_Button2 | ev_Button3 | ev_Button4)  /**< \brief all button events                               */
+#define MP3__EVENT_MASK         (MP3__BUTTON_MASK | ev_1s)                           /**< \brief all events the player state machine knows (N11) */
 /** \} */
 
 /** \name SD card scan (N6)
@@ -136,11 +137,11 @@ typedef enum eMP3__ReaderState MP3__ReaderState_t;
 /** \brief Player data. Fields used by more than one task are volatile (N7). */
 typedef struct
 {
-    MP3__State_t      m_state;              /**< \brief state of the state machine (tsk_control only)         */
-    uint16_t          m_noSongs;            /**< \brief number of songs in the list, written by MP3_Init only */
+    MP3__State_t      m_state;              /**< \brief state of the state machine (tsk_control only)           */
+    uint16_t          m_noSongs;            /**< \brief number of songs in the list, written by MP3_Init only   */
     volatile uint16_t m_currentSong;        /**< \brief selected song 0..m_noSongs-1 (tsk_control, tsk_display) */
-    uint8_t           m_volume;             /**< \brief volume step 0..MP3__MAXVOLUME                         */
-    volatile uint16_t m_remainingPlayTime;  /**< \brief remaining play time in s (tsk_control, tsk_reader)    */
+    uint8_t           m_volume;             /**< \brief volume step 0..MP3__MAXVOLUME                           */
+    volatile uint16_t m_remainingPlayTime;  /**< \brief remaining play time in s (tsk_control, tsk_reader)      */
 } MP3__Player_t;
 
 /** \brief Reader data. Shared between tsk_control and tsk_reader, therefore volatile (N7). */
@@ -159,7 +160,7 @@ typedef struct
 static MP3__Player_t MP3__player = {MP3STATE_ISSTOPPED, 0u, 0u, 0u, 0u};
 static MP3__Reader_t MP3__reader = {MP3READER_IDLE, 0u, FALSE, 0u};
 
-static char MP3__songList[MP3_MAX_SONGS][MP3_FILENAME_MAXLEN];	/**< \brief Song path list built from the SD card scan, e.g. "\MUSIC\SONG.WAV". */
+static char MP3__songList[MP3_MAX_SONGS][MP3_FILENAME_MAXLEN];	/**< \brief Song path list built from the SD card scan, e.g. "\MUSIC\SONG.WAV".                              */
 
 static char MP3__entryName[MP3__ENTRY_NAME_LEN];				/**< \brief Name of the directory entry just read. static: FS_MAX_PATH bytes are too big for the stack (N6). */
 
@@ -169,9 +170,9 @@ static U16      MP3__scanIdx[MP3__SCAN_LEVELS];					/**< \brief Entries already 
 
 static FS_FILE * MP3__pFile = NULL;								/**< \brief emFile handle of the open song, static so it is not on the tsk_reader stack. */
 
-static WAVFile MP3__wavInfo;									/**< \brief Decoded header of the open song. */
+static WAVFile  MP3__wavInfo;									/**< \brief Decoded header of the open song. */
 
-static uint8_t MP3__readBuf[MP3__MAX_READ + MP3__MAX_INBYTES];	/**< \brief One raw block of the largest frame format + MP3__MAX_INBYTES in front, so a carried partial frame fits before a full-size read (INC 8, N5). Kept off the tsk_reader stack. */
+static uint8_t  MP3__readBuf[MP3__MAX_READ + MP3__MAX_INBYTES];	/**< \brief One raw block of the largest frame format + MP3__MAX_INBYTES in front, so a carried partial frame fits before a full-size read (INC 8, N5). Kept off the tsk_reader stack. */
 
 static uint32_t MP3__bytesRemaining = 0u;						/**< \brief Remaining PCM bytes of the open song that are not read yet. */
 
@@ -191,38 +192,45 @@ static char MP3__rowText[MP3__ROW_TEXT_LEN];
 /* Local function prototypes ('static')                                      */
 /*****************************************************************************/
 
-static void MP3__initDisplay(void);														/**< \brief draw static header once */
-static void MP3__scanSD(void);															/**< \brief recursive helper */
-
-
-
-static void MP3__nextSong(void);														/**< \brief select the next song. Go to first in case of EOL */
-static void MP3__prevSong(void);														/**< \brief select the previous song. Go to last in case of EOL */
-static void MP3__applyVolume(void);													
-static void MP3__increaseVolume(void);													/**< \brief increase the volume by one */
-static void MP3__decreaseVolume(void);													/**< \brief decrease the volume by one */
-static void MP3__playSong(void);														/**< \brief set the sound record pointer to the current song and activate the clock */
-static void MP3__stopSong(void);														/**< \brief Stop the clock for the timer ISR */
-static void MP3__pauseSong(void);														/**< \brief Stop the clock for the timer ISR */
-static void MP3__resumeSong(void);														/**< \brief Start the clock for the timer ISR */
-static void MP3__showRemainingPlaytime(void);											/**< \brief Show the remaining play time via 7 segment */
-static void MP3__setRemainingPlaytime(void);											/**< \brief Calculates and sets the initial play time once when the file opens */
-static boolean_t MP3__songEnded(void);													/**< \brief Check if the remaining playtime has ended */
-static const char * MP3__shortName(const char * const fullPath);						/**< \brief File name of a full path, for the display */
-
-static RC_t MP3__openWavFile(uint16_t const songIndex);									
-static void MP3__closeWavFile(void);													
-static void MP3__readBlock(void);														
-static void MP3__convertBlock(uint16_t const samples);									
-
-static void MP3__drawRow(uint16_t const i, uint16_t const selected);					/**< \brief INC 10B: draw ONE song row */
-static void MP3__clearRow(uint16_t const i);											
-static void MP3__drawMessage(uint8_t const mode);										/**< \brief INC 10C: "No songs" / "Error - See UART Log" */
-static void MP3__switchMode(uint8_t const mode);										
-static void MP3__updateList(uint16_t const cur, uint16_t const no);						
-
+/* Player state machine helpers (tsk_control) */
+static void MP3__nextSong(void);                                                                                      /**< \brief select the next song, go to the first one at the end of the list         */
+static void MP3__prevSong(void);                                                                                      /**< \brief select the previous song, go to the last one at the start of the list    */
+static void MP3__applyVolume(void);                                                                                   /**< \brief show the volume on the 7 segment display and give it to the sound driver */
+static void MP3__increaseVolume(void);                                                                                /**< \brief increase the volume by one step                                          */
+static void MP3__decreaseVolume(void);                                                                                /**< \brief decrease the volume by one step                                          */
+static void MP3__playSong(void);                                                                                      /**< \brief request the reader to play the selected song                             */
+static void MP3__stopSong(void);                                                                                      /**< \brief stop the sound timer, close the file, send the reader back to IDLE       */
+static void MP3__pauseSong(void);                                                                                     /**< \brief pause: stop the sound timer, keep file and position                      */
+static void MP3__resumeSong(void);                                                                                    /**< \brief resume after pause: start the sound timer again                          */
+static void MP3__showRemainingPlaytime(void);                                                                         /**< \brief count the remaining play time down by one second and show it (7 segment) */
+static void MP3__setRemainingPlaytime(void);                                                                          /**< \brief calculate and show the play time of the open song once                   */
+static boolean_t MP3__songEnded(void);                                                                                /**< \brief check if the remaining play time has ended or the last open failed       */
+ 
+/* Reader helpers (tsk_reader) */
+static RC_t MP3__openWavFile(uint16_t const songIndex);                                                               /**< \brief open a song and decode its WAV header (N5, N11)                            */
+static void MP3__closeWavFile(void);                                                                                  /**< \brief close the open song and reset the streaming state                          */
+static void MP3__readBlock(void);                                                                                     /**< \brief read one PCM block, convert it and fill the inactive sound buffer (N1..N5) */
+static void MP3__convertBlock(uint16_t const samples);                                                                /**< \brief convert raw PCM frames to unsigned 8 bit samples, in place (N1..N4)        */
+ 
+/* SD card scan (tsk_init) */
+static boolean_t MP3__isWavName(const char * const name);                                                             /**< \brief is the file name a WAV file (".WAV" or ".wav")?                          */
+static boolean_t MP3__hasAttr(U8 const attr, uint32_t const flag);                                                    /**< \brief does an emFile attribute byte contain a flag?                            */
+static RC_t MP3__buildPath(char * const dst, size_t const dstSize, const char * const dir, const char * const name);  /**< \brief build "dir\name" with a length check (N6, N11)                           */
+static void MP3__logPath(const char * const prefix, const char * const path);                                         /**< \brief write "prefix + path + '" to the UART log (N10)                          */
+static const char * MP3__shortName(const char * const fullPath);                                                      /**< \brief file name of a full path, for the display                                */
+static FS_DIR * MP3__scanReopen(uint8_t const level);                                                                 /**< \brief reopen the folder of a scan level, skip the entries already read (N6)    */
+static RC_t MP3__scanSD(void);                                                                                        /**< \brief scan the SD card from the root, fill the song list (N6, N11)             */
+ 
+/* TFT (tsk_init, tsk_display) */
+static void MP3__initDisplay(void);                                                                                   /**< \brief clear the screen and draw the static header once                         */
+static void MP3__clearRow(uint16_t const i);                                                                          /**< \brief clear the area of one list row                                           */
+static void MP3__drawRow(uint16_t const i, uint16_t const selected);                                                  /**< \brief INC 10B: draw ONE song row (N9)                                          */
+static void MP3__drawMessage(uint8_t const mode);                                                                     /**< \brief INC 10C: "No Song Detected :(" / "Error: See UART Log"                   */
+static void MP3__switchMode(uint8_t const mode);                                                                      /**< \brief kind of content changed: wipe the old rows, prepare the new content (N9) */
+static void MP3__updateList(uint16_t const cur, uint16_t const no);                                                   /**< \brief redraw all rows or only the old and the new selected row (N9)            */
+ 
 #if (MP3__DEBUG_LOG != 0u)
-static void MP3__showEventAndState(EventMaskType const ev, MP3__State_t const state);	/**< \brief Helper function to show state and event */
+static void MP3__showEventAndState(EventMaskType const ev, MP3__State_t const state);	                              /**< \brief debug aid: print state and event as text via UART (N10)                  */
 #endif
 
 /*****************************************************************************/
@@ -233,6 +241,7 @@ static void MP3__showEventAndState(EventMaskType const ev, MP3__State_t const st
 /* Public API                                                                */
 /* ------------------------------------------------------------------------- */
 
+
 /**
  * \brief Initialise the player: scan the SD card, set the start volume, draw the TFT header.
  *
@@ -240,38 +249,43 @@ static void MP3__showEventAndState(EventMaskType const ev, MP3__State_t const st
  * FS_Init() and scans the card from the root (MP3__scanSD, N6). A scan problem
  * sets the error flag (N8). Writes "No WAV files found" once if nothing was found.
  *
- * \return RC_SUCCESS always; problems are shown via UART and TFT
- * \note   Call once from tsk_init after TFT_init() and SOUND_Init().
+ * Call once from tsk_init after TFT_init() and SOUND_Init().
+ *
+ * \return RC_SUCCESS when the card was scanned (also with 0 songs found),
+ *         RC_ERROR_OPEN when a folder could not be opened, the list may be incomplete
+ *         (UART line written, error shown on the TFT)
  */
 RC_t MP3_Init(void)
 {
+    RC_t rc;
+ 
     MP3__player.m_state       = MP3STATE_ISSTOPPED;
     MP3__player.m_volume      = MP3__MAXVOLUME;
     MP3__player.m_currentSong = 0u;
     MP3__player.m_noSongs     = 0u;
-
+ 
     MP3__reader.m_state          = MP3READER_IDLE;
     MP3__reader.m_newSongRequest = FALSE;
-
+ 
     /* Scan SD card for WAV files */
     UART_LOG_PutString("\r\n[MP3] Scanning SD card...\r\n");
-
+ 
     FS_Init();
-    MP3__scanSD();                                  /* INC 9: scan from the root, subfolders included (N6) */
-
+    rc = MP3__scanSD();                             /* INC 9: scan from the root, subfolders included (N6, N11) */
+ 
     /* Reported once here, not at the end of every folder (N6). An error
        was already reported by the scan itself. */
     if ((MP3__player.m_noSongs == 0u) && (MP3__error == FALSE))
     {
         UART_LOG_PutString("[MP3] No WAV files found\r\n");
     }
-
+ 
     MP3__applyVolume();
     MP3__initDisplay();                             /* INC 10: header is drawn once, here */
-
-    return RC_SUCCESS;
+ 
+    return rc;                                      /* N11: RC_SUCCESS also for an empty card */
 }
-
+ 
 /**
  * \brief Player state machine, processes ONE event (tsk_control).
  *
@@ -279,25 +293,32 @@ RC_t MP3_Init(void)
  * switch below. While stopped without songs all events are ignored. Any button
  * press clears a displayed error (N8).
  *
- * \param[in] nextEvent  single event bit: ev_Button1..ev_Button4 or ev_1s; other values are ignored
- * \return RC_SUCCESS always
+ * \param EventMaskType nextEvent    : [IN] single event bit: ev_Button1..ev_Button4 or ev_1s
+ * \return RC_SUCCESS when the event was processed (an event without a function in the
+ *         current state counts as processed),
+ *         RC_ERROR_BAD_PARAM when no known event bit is set (nothing happens),
+ *         RC_ERROR_INVALID_STATE when stopped without songs (event ignored, N8)
  */
 RC_t MP3_ProcessEvent(EventMaskType nextEvent)
 {
+    RC_t rc = RC_SUCCESS;
+ 
 #if (MP3__DEBUG_LOG != 0u)
     MP3__showEventAndState(nextEvent, MP3__player.m_state);
 #endif
-
-    /* INC 10C: nothing to play -> ignore all events. This also protects
-       the "% m_noSongs" in MP3__nextSong() against a division by zero (N8). */
-    if ((MP3__player.m_noSongs != 0u) || (MP3__player.m_state != MP3STATE_ISSTOPPED))
+ 
+    if ((nextEvent & MP3__EVENT_MASK) == 0u)
+    {
+        rc = RC_ERROR_BAD_PARAM;                    /* N11: not one of the events of this state machine, nothing to do */
+    }
+    else if ((MP3__player.m_noSongs != 0u) || (MP3__player.m_state != MP3STATE_ISSTOPPED))
     {
         /* INC 10C: any button press acknowledges a shown error (N8) */
         if (nextEvent & MP3__BUTTON_MASK)
         {
             MP3__error = FALSE;
         }
-
+ 
         switch (MP3__player.m_state)
         {
             case MP3STATE_ISSTOPPED:
@@ -320,7 +341,7 @@ RC_t MP3_ProcessEvent(EventMaskType nextEvent)
                     /* Button4 and ev_1s have no function while stopped */
                 }
                 break;
-
+ 
             case MP3STATE_ISPLAYING:
                 if (nextEvent & ev_Button1)
                 {
@@ -364,7 +385,7 @@ RC_t MP3_ProcessEvent(EventMaskType nextEvent)
                     /* other events are ignored */
                 }
                 break;
-
+ 
             case MP3STATE_ISPAUSING:
                 if (nextEvent & ev_Button3)
                 {
@@ -381,14 +402,20 @@ RC_t MP3_ProcessEvent(EventMaskType nextEvent)
                     /* other events are ignored */
                 }
                 break;
-
+ 
             default:
                 /* not reachable: m_state only gets the values above */
                 break;
         }
     }
-
-    return RC_SUCCESS;
+    else
+    {
+        /* INC 10C: nothing to play -> ignore all events. This also protects
+           the "% m_noSongs" in MP3__nextSong() against a division by zero (N8). */
+        rc = RC_ERROR_INVALID_STATE;                /* N11 */
+    }
+ 
+    return rc;
 }
 
 /**
@@ -399,7 +426,8 @@ RC_t MP3_ProcessEvent(EventMaskType nextEvent)
  * state machine, all actions and state changes are written out in the switch.
  * The function returns after one step; the WaitEvent() loop is in main.c.
  *
- * \note Call only from TASK(tsk_reader).
+ * Call only from TASK(tsk_reader). No return code, see N11.
+ *
  */
 void MP3_Reader(void)
 {
@@ -501,7 +529,8 @@ void MP3_Reader(void)
  * only what changed against the shadow state (N9): everything on a mode or
  * song-count change, otherwise the old and the new selected row.
  *
- * \note Call only from TASK(tsk_display). Public although the name has "__" (main.c uses it).
+ * Call only from TASK(tsk_display). Public although the name has "__" (main.c uses it).
+ *
  */
 void MP3__showSong(void)
 {
@@ -538,7 +567,12 @@ void MP3__showSong(void)
 /* Player state machine (tsk_control)                                        */
 /* ------------------------------------------------------------------------- */
 
-/** \brief Select the next song, wrap to the first one at the end of the list. */
+/**
+ * \brief Select the next song, wrap to the first one at the end of the list.
+ *
+ * Does nothing if the list is empty (zero-song guard, N8).
+ *
+ */
 static void MP3__nextSong(void)
 {
     uint16_t const no = MP3__player.m_noSongs;
@@ -549,7 +583,12 @@ static void MP3__nextSong(void)
     }
 }
 
-/** \brief Select the previous song, wrap to the last one at the start of the list. */
+/**
+ * \brief Select the previous song, wrap to the last one at the start of the list.
+ *
+ * Does nothing if the list is empty (zero-song guard, N8).
+ *
+ */
 static void MP3__prevSong(void)
 {
     uint16_t const no  = MP3__player.m_noSongs;
@@ -561,7 +600,12 @@ static void MP3__prevSong(void)
     }
 }
 
-/** \brief Show the volume on the 7 segment display and give it to the sound driver (volume * 20 %). */
+/**
+ * \brief Show the volume on the 7 segment display and give it to the sound driver.
+ *
+ * The sound driver gets volume step * MP3__VOLUME_STEP percent (5 steps * 20 = 100 %).
+ *
+ */
 static void MP3__applyVolume(void)
 {
     uint8_t const vol = MP3__player.m_volume;
@@ -570,7 +614,9 @@ static void MP3__applyVolume(void)
     (void)SOUND_SetVolume((uint8_t)(vol * MP3__VOLUME_STEP));
 }
 
-/** \brief Volume one step up, limited to MP3__MAXVOLUME. */
+/**
+ * \brief Volume one step up, limited to MP3__MAXVOLUME.
+ */
 static void MP3__increaseVolume(void)
 {
     if (MP3__player.m_volume < MP3__MAXVOLUME)
@@ -580,7 +626,9 @@ static void MP3__increaseVolume(void)
     MP3__applyVolume();
 }
 
-/** \brief Volume one step down, limited to 0. */
+/**
+ * \brief Volume one step down, limited to 0.
+ */
 static void MP3__decreaseVolume(void)
 {
     if (MP3__player.m_volume > 0u)
@@ -590,7 +638,13 @@ static void MP3__decreaseVolume(void)
     MP3__applyVolume();
 }
 
-/** \brief Request the reader to play the selected song. The reader opens it (N7). */
+/**
+ * \brief Request the reader to play the selected song.
+ *
+ * Sets the song index and the request flag and wakes the reader with ev_BufEmpty.
+ * The reader opens the file (N7).
+ *
+ */
 static void MP3__playSong(void)
 {
     MP3__player.m_remainingPlayTime = 0u;
@@ -600,7 +654,12 @@ static void MP3__playSong(void)
     (void)SetEvent(tsk_reader, ev_BufEmpty);        /* wake the reader */
 }
 
-/** \brief Stop the sound timer, close the file and send the reader back to IDLE. */
+/**
+ * \brief Stop the sound timer, close the file and send the reader back to IDLE.
+ *
+ * Runs in tsk_control; see N7 for the condition under which this is safe.
+ *
+ */
 static void MP3__stopSong(void)
 {
     (void)SOUND_StopPlay();
@@ -608,19 +667,25 @@ static void MP3__stopSong(void)
     MP3__reader.m_state = MP3READER_IDLE;
 }
 
-/** \brief Pause: stop the sound timer, keep file and position. */
+/**
+ * \brief Pause: stop the sound timer, keep file and position.
+ */
 static void MP3__pauseSong(void)
 {
     (void)SOUND_StopPlay();
 }
 
-/** \brief Resume after pause: start the sound timer again. */
+/**
+ * \brief Resume after pause: start the sound timer again.
+ */
 static void MP3__resumeSong(void)
 {
     (void)SOUND_StartPlay();
 }
 
-/** \brief Called every second while playing: count the remaining time down and show it. */
+/**
+ * \brief Count the remaining play time down by one second and show it (called every second while playing).
+ */
 static void MP3__showRemainingPlaytime(void)
 {
     uint16_t remaining = MP3__player.m_remainingPlayTime;
@@ -636,8 +701,8 @@ static void MP3__showRemainingPlaytime(void)
 /**
  * \brief Calculate the play time of the open song once and show it.
  *
- * seconds = data bytes / (samples per second * bytes per frame), limited to
- * 65535 s.
+ * seconds = data bytes / (samples per second * bytes per frame), limited to 65535 s.
+ *
  */
 static void MP3__setRemainingPlaytime(void)
 {
@@ -659,7 +724,8 @@ static void MP3__setRemainingPlaytime(void)
 
 /**
  * \brief Has the song ended (or did it fail to open)?
- * \return TRUE if no play time is left or the last open failed (INC 7)
+ * \return TRUE when no play time is left or the last open failed (INC 7),
+ *         FALSE otherwise
  */
 static boolean_t MP3__songEnded(void)
 {
@@ -681,49 +747,61 @@ static boolean_t MP3__songEnded(void)
  *
  * On success MP3__bytesRemaining and the sector alignment (N5) are set up. On
  * failure the file is closed, a line is written to the UART and the error flag
- * is set (N8).
+ * is set (N8). The return codes are described in N11.
  *
- * \param[in] songIndex  index into MP3__songList, 0..m_noSongs-1
- * \return RC_SUCCESS    file open, header valid, ready to stream
- * \return RC_ERROR      FS_FOpen() failed or the header is not supported
+ * \param uint16_t const songIndex   : [IN] index into MP3__songList, 0..m_noSongs-1
+ * \return RC_SUCCESS when the file is open, the header valid and everything is ready to stream,
+ *         RC_ERROR_RANGE when songIndex is not in the list (nothing is opened),
+ *         RC_ERROR_OPEN when FS_FOpen() failed,
+ *         the code of WAV_ParseHeader() when the header is not usable (RC_ERROR_READ_FAILS,
+ *         RC_ERROR_INVALID or RC_ERROR_NOT_IMPLEMENTED), the file is closed again
  */
 static RC_t MP3__openWavFile(uint16_t const songIndex)
 {
-    RC_t rc = RC_ERROR;
-
-    MP3__pFile = FS_FOpen(MP3__songList[songIndex], "r");
-
-    if (MP3__pFile == NULL)
+    RC_t rc = RC_ERROR_RANGE;                               /* N11: songIndex is not in the list */
+ 
+    if (songIndex < MP3__player.m_noSongs)
     {
-        UART_LOG_PutString("\r\n[MP3] ERROR: FS_FOpen failed\n");
-        MP3__error = TRUE;                                  /* INC 10C */
+        MP3__pFile = FS_FOpen(MP3__songList[songIndex], "r");
+ 
+        if (MP3__pFile == NULL)
+        {
+            UART_LOG_PutString("\r\n[MP3] ERROR: FS_FOpen failed\n");
+            MP3__error = TRUE;                              /* INC 10C */
+            rc         = RC_ERROR_OPEN;
+        }
+        else
+        {
+            rc = WAV_ParseHeader(MP3__pFile, &MP3__wavInfo);    /* N11: the reason of the parser is passed on */
+ 
+            if (rc != RC_SUCCESS)
+            {
+                (void)FS_FClose(MP3__pFile);
+                MP3__pFile = NULL;
+                UART_LOG_PutString("\r\n[MP3] ERROR: WAV header invalid\n");
+                MP3__error = TRUE;                          /* INC 10C */
+            }
+            else
+            {
+                I32      const dataPos = FS_FTell(MP3__pFile);
+                uint32_t const rem     = (dataPos > 0) ? ((uint32_t)dataPos % MP3__SECTOR_SIZE) : 0u;
+ 
+                MP3__bytesRemaining = MP3__wavInfo.data_length;
+ 
+                /* INC 8 / N5: WAV_ParseHeader() leaves the file position on the
+                   first PCM byte. Distance from there to the next sector boundary: */
+                MP3__alignBytes = (rem == 0u) ? 0u : (uint16_t)(MP3__SECTOR_SIZE - rem);
+                MP3__carryLen   = 0u;
+            }
+        }
     }
-    else if (WAV_ParseHeader(MP3__pFile, &MP3__wavInfo) != RC_SUCCESS)
-    {
-        (void)FS_FClose(MP3__pFile);
-        MP3__pFile = NULL;
-        UART_LOG_PutString("\r\n[MP3] ERROR: WAV header invalid\n");
-        MP3__error = TRUE;                                  /* INC 10C */
-    }
-    else
-    {
-        I32      const dataPos = FS_FTell(MP3__pFile);
-        uint32_t const rem     = (dataPos > 0) ? ((uint32_t)dataPos % MP3__SECTOR_SIZE) : 0u;
-
-        MP3__bytesRemaining = MP3__wavInfo.data_length;
-
-        /* INC 8 / N5: WAV_ParseHeader() leaves the file position on the
-           first PCM byte. Distance from there to the next sector boundary: */
-        MP3__alignBytes = (rem == 0u) ? 0u : (uint16_t)(MP3__SECTOR_SIZE - rem);
-        MP3__carryLen   = 0u;
-
-        rc = RC_SUCCESS;
-    }
-
+ 
     return rc;
 }
 
-/** \brief Close the open song (if any) and reset the streaming state. */
+/**
+ * \brief Close the open song (if any) and reset the streaming state.
+ */
 static void MP3__closeWavFile(void)
 {
     if (MP3__pFile != NULL)
@@ -850,8 +928,9 @@ static void MP3__readBlock(void)
  * which is the signed average moved to 0..255 (N1, N3, N4). n is 1, 2 or 4,
  * so every case has its own short loop without inner loops (N1).
  *
- * \param[in] samples  number of output samples, 1..SOUND_BUFFER_SIZE
- * \note Only called for blocks with more than one input byte per output sample.
+ * Only called for blocks with more than one input byte per output sample.
+ *
+ * \param uint16_t const samples     : [IN] number of output samples, 1..SOUND_BUFFER_SIZE
  */
 static void MP3__convertBlock(uint16_t const samples)
 {
@@ -926,8 +1005,9 @@ static void MP3__convertBlock(uint16_t const samples)
 
 /**
  * \brief Is the file name a WAV file (".WAV" or ".wav")?
- * \param[in] name  NUL terminated file name
- * \return TRUE if the name is longer than 4 characters and ends with ".WAV" or ".wav"
+ * \param char const *const name     : [IN] NUL terminated file name, not NULL
+ * \return TRUE when the name is longer than 4 characters and ends with ".WAV" or ".wav",
+ *         FALSE otherwise
  */
 static boolean_t MP3__isWavName(const char * const name)
 {
@@ -946,9 +1026,10 @@ static boolean_t MP3__isWavName(const char * const name)
 
 /**
  * \brief Does an emFile attribute byte contain a flag?
- * \param[in] attr  attribute byte of a directory entry
- * \param[in] flag  FS_ATTR_* mask
- * \return TRUE if the flag is set
+ * \param U8 const attr              : [IN] attribute byte of a directory entry
+ * \param uint32_t const flag        : [IN] FS_ATTR_* mask
+ * \return TRUE when the flag is set,
+ *         FALSE otherwise
  */
 static boolean_t MP3__hasAttr(U8 const attr, uint32_t const flag)
 {
@@ -957,22 +1038,21 @@ static boolean_t MP3__hasAttr(U8 const attr, uint32_t const flag)
 
 /**
  * \brief Build "dir\name" (or "\name" for the root) with a length check.
- *
- * \param[out] dst      buffer of \p dstSize bytes
- * \param[in]  dstSize  size of \p dst including the NUL
- * \param[in]  dir      parent folder, "\" for the root
- * \param[in]  name     entry name
- * \return TRUE the path fits and is NUL terminated in \p dst
- * \return FALSE the path is too long, \p dst is not written
+ * \param char *const dst            : [OUT] buffer of dstSize bytes, written only on RC_SUCCESS
+ * \param size_t const dstSize       : [IN]  size of dst including the terminating NUL
+ * \param char const *const dir      : [IN]  parent folder, "\" for the root
+ * \param char const *const name     : [IN]  entry name
+ * \return RC_SUCCESS when the path fits and is NUL terminated in dst,
+ *         RC_ERROR_OVERRUN when the path is too long (dst is not written)
  */
-static boolean_t MP3__buildPath(char * const dst, size_t const dstSize, const char * const dir, const char * const name)
+static RC_t MP3__buildPath(char * const dst, size_t const dstSize, const char * const dir, const char * const name)
 {
     size_t    const dirLen    = strlen(dir);
     size_t    const nameLen   = strlen(name);
     boolean_t const isRoot    = ((dir[0] == MP3__PATH_SEP) && (dir[1] == '\0')) ? TRUE : FALSE;
     size_t    const prefixLen = (isRoot == TRUE) ? 1u : (dirLen + 1u);      /* "\" or "dir\" */
-    boolean_t       fits      = FALSE;
-
+    RC_t            rc        = RC_ERROR_OVERRUN;                          /* N11: the path does not fit */
+ 
     if ((prefixLen + nameLen) < dstSize)
     {
         if (isRoot == FALSE)
@@ -981,15 +1061,15 @@ static boolean_t MP3__buildPath(char * const dst, size_t const dstSize, const ch
         }
         dst[prefixLen - 1u] = MP3__PATH_SEP;
         (void)memcpy(&dst[prefixLen], name, nameLen + 1u);      /* including the NUL */
-        fits = TRUE;
+        rc = RC_SUCCESS;
     }
-    return fits;
+    return rc;
 }
 
 /**
  * \brief Write "prefix + path + '" to the UART log (no sprintf, N10).
- * \param[in] prefix  text before the path, ends with a quote
- * \param[in] path    path to show
+ * \param char const *const prefix   : [IN] text before the path, ends with a quote
+ * \param char const *const path     : [IN] path to show
  */
 static void MP3__logPath(const char * const prefix, const char * const path)
 {
@@ -1003,9 +1083,10 @@ static void MP3__logPath(const char * const prefix, const char * const path)
  *
  * "\MUSIC\SONG.WAV" gives "SONG.WAV". A string without a separator is returned unchanged.
  *
- * \param[in] fullPath  NUL terminated path as stored in MP3__songList
- * \return pointer into \p fullPath, never NULL
- * \note   Not called yet (kept for the display). A compiler may warn "defined but not used".
+ * Not called yet (kept for the display). A compiler may warn "defined but not used".
+ *
+ * \param char const *const fullPath : [IN] NUL terminated path as stored in MP3__songList, not NULL
+ * \return pointer into fullPath, never NULL
  */
 static const char * MP3__shortName(const char * const fullPath)
 {
@@ -1019,8 +1100,9 @@ static const char * MP3__shortName(const char * const fullPath)
  *
  * The path of the level is the first MP3__scanLen[level] characters of MP3__scanPath.
  *
- * \param[in] level  scan level 0..MP3__SCAN_MAX_DEPTH
- * \return handle of the reopened folder, NULL if FS_OpenDir() failed (error flag set)
+ * \param uint8_t const level        : [IN] scan level, 0..MP3__SCAN_MAX_DEPTH
+ * \return handle of the reopened folder,
+ *         NULL when FS_OpenDir() failed (UART line written, error flag set)
  */
 static FS_DIR * MP3__scanReopen(uint8_t const level)
 {
@@ -1054,8 +1136,12 @@ static FS_DIR * MP3__scanReopen(uint8_t const level)
  * It is a loop with an explicit level counter instead of a recursive function
  * (MISRA C:2012 Rule 17.2). The parent folder is closed while a subfolder is
  * scanned and opened again afterwards, skipping what was already read (N6).
+ *
+ * \return RC_SUCCESS when every folder could be opened (also with 0 songs found),
+ *         RC_ERROR_OPEN when a folder could not be opened or reopened, the list may be
+ *         incomplete (UART line written, error flag set, N11)
  */
-static void MP3__scanSD(void)
+static RC_t MP3__scanSD(void)
 {
     FS_DIR    * pDir;
     FS_DIRENT * pDirEnt;
@@ -1064,25 +1150,27 @@ static void MP3__scanSD(void)
     uint8_t     level     = 0u;             /* folder level: 0 = root */
     boolean_t   active    = TRUE;           /* FALSE when the root is finished */
     boolean_t   levelDone;
-
+    RC_t        rc        = RC_SUCCESS;     /* N11: RC_ERROR_OPEN as soon as one folder could not be opened */
+ 
     MP3__scanPath[0] = MP3__PATH_SEP;       /* root = "\" */
     MP3__scanPath[1] = '\0';
     MP3__scanLen[0]  = 1u;
     MP3__scanIdx[0]  = 0u;
-
+ 
     pDir = FS_OpenDir(MP3__scanPath);
     if (pDir == NULL)
     {
         MP3__logPath("[SCAN] Cannot open dir: '", MP3__scanPath);
         MP3__error = TRUE;                                  /* INC 10C */
+        rc         = RC_ERROR_OPEN;
         active     = FALSE;
     }
-
+ 
     while (active == TRUE)
     {
         /* A level is done when its folder could not be (re)opened, the list is full, or the folder has no more entries */
         levelDone = ((pDir == NULL) || (MP3__player.m_noSongs >= MP3_MAX_SONGS)) ? TRUE : FALSE;
-
+ 
         if (levelDone == FALSE)
         {
             pDirEnt = FS_ReadDir(pDir);
@@ -1093,17 +1181,17 @@ static void MP3__scanSD(void)
             else
             {
                 MP3__scanIdx[level]++;                      /* entries consumed so far in this folder */
-
+ 
                 FS_DirEnt2Name(pDirEnt, MP3__entryName);
                 FS_DirEnt2Attr(pDirEnt, &attr);
-
+ 
                 if ((MP3__entryName[0] == '.')
                     || (MP3__hasAttr(attr, FS_ATTR_HIDDEN) == TRUE)
                     || (MP3__hasAttr(attr, FS_ATTR_SYSTEM) == TRUE))
                 {
                     /* ".", "..", hidden and system entries are skipped */
                 }
-                else if (MP3__buildPath(fullPath, sizeof(fullPath), MP3__scanPath, MP3__entryName) == FALSE)
+                else if (MP3__buildPath(fullPath, sizeof(fullPath), MP3__scanPath, MP3__entryName) != RC_SUCCESS)
                 {
                     MP3__logPath("[SCAN] Path too long, skipped: '", MP3__entryName);
                 }
@@ -1121,12 +1209,13 @@ static void MP3__scanSD(void)
                         (void)memcpy(MP3__scanPath, fullPath, strlen(fullPath) + 1u);
                         MP3__scanLen[level] = (uint8_t)strlen(fullPath);
                         MP3__scanIdx[level] = 0u;
-
+ 
                         pDir = FS_OpenDir(MP3__scanPath);
                         if (pDir == NULL)
                         {
                             MP3__logPath("[SCAN] Cannot open dir: '", MP3__scanPath);
                             MP3__error = TRUE;              /* INC 10C */
+                            rc         = RC_ERROR_OPEN;
                         }
                     }
                 }
@@ -1142,7 +1231,7 @@ static void MP3__scanSD(void)
                 }
             }
         }
-
+ 
         if (levelDone == TRUE)
         {
             if (pDir != NULL)
@@ -1158,16 +1247,24 @@ static void MP3__scanSD(void)
             {
                 level--;
                 pDir = MP3__scanReopen(level);              /* back in the parent folder */
+                if (pDir == NULL)
+                {
+                    rc = RC_ERROR_OPEN;                     /* error flag and UART line were set by MP3__scanReopen() */
+                }
             }
         }
     }
+ 
+    return rc;
 }
 
 /* ------------------------------------------------------------------------- */
 /* TFT (tsk_init, tsk_display)                                               */
 /* ------------------------------------------------------------------------- */
 
-/** \brief Clear the screen and draw the static header. Called once from MP3_Init(). */
+/**
+ * \brief Clear the screen and draw the static header. Called once from MP3_Init().
+ */
 static void MP3__initDisplay(void)
 {
     TFT_fillScreen(BLACK);
@@ -1181,7 +1278,10 @@ static void MP3__initDisplay(void)
     TFT_println("==== MP3 Player ====");     /* N10: tft.h takes char *, a literal is passed */
 }
 
-/** \brief Clear the area of one list row (black, no text). \param[in] i row 0..MP3_MAX_SONGS-1 */
+/**
+ * \brief Clear the area of one list row (black, no text).
+ * \param uint16_t const i           : [IN] row, 0..MP3_MAX_SONGS-1
+ */
 static void MP3__clearRow(uint16_t const i)
 {
     TFT_fillRect(0, (int16_t)(MP3__ROW0_RECT_Y + ((int16_t)i * MP3__ROW_PITCH)), CFG_TFT_WIDTH, MP3__ROW_RECT_H, BLACK);
@@ -1192,8 +1292,8 @@ static void MP3__clearRow(uint16_t const i)
  *
  * Selected row: BLACK on DARKBLUE with "(*)". Other rows: GREEN on BLACK with "( )".
  *
- * \param[in] i         row to draw, 0..m_noSongs-1
- * \param[in] selected  currently selected row
+ * \param uint16_t const i           : [IN] row to draw, 0..m_noSongs-1
+ * \param uint16_t const selected    : [IN] currently selected row
  */
 static void MP3__drawRow(uint16_t const i, uint16_t const selected)
 {
@@ -1217,7 +1317,7 @@ static void MP3__drawRow(uint16_t const i, uint16_t const selected)
 
 /**
  * \brief Draw the one-line message of a message mode in the first list row (INC 10C).
- * \param[in] mode  MP3__DISP_MODE_ERROR or MP3__DISP_MODE_NOSONGS
+ * \param uint8_t const mode         : [IN] MP3__DISP_MODE_ERROR or MP3__DISP_MODE_NOSONGS
  */
 static void MP3__drawMessage(uint8_t const mode)
 {
@@ -1237,9 +1337,8 @@ static void MP3__drawMessage(uint8_t const mode)
 }
 
 /**
- * \brief The kind of content changed: wipe the rows the old content used and
- *        prepare the new one (N9).
- * \param[in] mode  new MP3__DISP_MODE_*
+ * \brief The kind of content changed: wipe the rows the old content used and prepare the new one (N9).
+ * \param uint8_t const mode         : [IN] new MP3__DISP_MODE_*
  */
 static void MP3__switchMode(uint8_t const mode)
 {
@@ -1270,10 +1369,9 @@ static void MP3__switchMode(uint8_t const mode)
 }
 
 /**
- * \brief List mode: redraw everything if the number of songs changed, else
- *        only the old and the new selected row (INC 10B, N9).
- * \param[in] cur  selected song
- * \param[in] no   number of songs
+ * \brief List mode: redraw everything if the number of songs changed, else only the old and the new selected row (INC 10B, N9).
+ * \param uint16_t const cur         : [IN] selected song, 0..no-1
+ * \param uint16_t const no          : [IN] number of songs, 1..MP3_MAX_SONGS
  */
 static void MP3__updateList(uint16_t const cur, uint16_t const no)
 {
@@ -1316,8 +1414,11 @@ static void MP3__updateList(uint16_t const cur, uint16_t const no)
 #if (MP3__DEBUG_LOG != 0u)
 /**
  * \brief Debug aid: print state and event as text via UART (N10).
- * \param[in] ev     event processed
- * \param[in] state  player state
+ *
+ * Compiled only with MP3__DEBUG_LOG 1.
+ *
+ * \param EventMaskType const ev     : [IN] event processed
+ * \param MP3__State_t const state   : [IN] player state
  */
 static void MP3__showEventAndState(EventMaskType const ev, MP3__State_t const state)
 {
@@ -1451,6 +1552,31 @@ static void MP3__showEventAndState(EventMaskType const ev, MP3__State_t const st
 *        DBG_xxx_Write() calls.
 *      - Naming rule of the course: MP3__showSong() is public but has the private "__" prefix.
 *        It is kept because main.c calls it.
+*
+* N11 - Return codes (INC 11B.1). Functions that can fail for a reason return RC_t:
+*        MP3__openWavFile()   RC_ERROR_RANGE (songIndex not in the list, new check),
+*                             RC_ERROR_OPEN (FS_FOpen() failed) or the code of WAV_ParseHeader()
+*                             (RC_ERROR_READ_FAILS, _INVALID, _NOT_IMPLEMENTED, see N10 in
+*                             wav_parser.c). MP3_Reader() still only tests "!= RC_SUCCESS".
+*        MP3__buildPath()     RC_ERROR_OVERRUN (path does not fit into the buffer), was boolean_t.
+*        MP3__scanSD()        RC_ERROR_OPEN as soon as a folder could not be (re)opened (the list
+*                             may be incomplete), was void. The error flag is set as before.
+*        MP3_Init()           returns the result of MP3__scanSD(). RC_SUCCESS also for a card
+*                             without WAV files (the TFT shows "No Song Detected :(").
+*        MP3_ProcessEvent()   RC_ERROR_BAD_PARAM (no known event bit) and RC_ERROR_INVALID_STATE
+*                             (stopped, no songs). In both cases the event is ignored as before.
+*      No RC_t on purpose:
+*        MP3_Reader()         body of a task, nobody to report to. Its errors go to the player
+*                             through m_failCount and MP3__error (N8).
+*        MP3__readBlock()     a read error sets MP3__bytesRemaining to 0 (EOF) and MP3__error; a
+*                             return code would only repeat this.
+*        MP3__convertBlock(), volume, play, stop, pause, resume and display functions cannot fail
+*                             (SOUND_* always return RC_SUCCESS, the TFT driver reports nothing).
+*        MP3__nextSong() / MP3__prevSong() are guarded against an empty list, no caller could react.
+*        MP3__scanReopen()    returns the FS_DIR handle, NULL = failed (like FS_OpenDir()).
+*        MP3__isWavName(), MP3__hasAttr(), MP3__songEnded() are yes/no questions (boolean_t).
+*      main.c ignores the result of MP3_Init() and stores that of MP3_ProcessEvent() in an unused
+*      variable, so nothing changes there. MISRA 17.7 asks for a "(void)" cast if the result is ignored.
 *
 *
 * Time:
