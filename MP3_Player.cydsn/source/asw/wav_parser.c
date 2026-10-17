@@ -111,9 +111,10 @@ static void            WAV__BytesToString(uint8_t const * const src,
                                           char          * const dst,
                                           uint32_t        const n);
 static boolean_t       WAV__InWindow(uint32_t const offset, uint32_t const n);
-static uint8_t const * WAV__Window(FS_FILE * const pFile,
+static RC_t            WAV__Window(FS_FILE * const pFile,
                                    uint32_t   const offset,
-                                   uint32_t   const n);
+                                   uint32_t   const n,
+                                   uint8_t const * * const ppData);
 static RC_t            WAV__ValidateFormat(WAVHeader const * const hdr);
 static RC_t            WAV__ParseFmt(FS_FILE   * const pFile,
                                      WAVHeader * const hdr,
@@ -123,6 +124,7 @@ static void            WAV__LogText(char const * const label, char const * const
 static void            WAV__LogNumber(char     const * const label,
                                       uint32_t         const value,
                                       char     const * const unit);
+static RC_t            WAV__ParseChunks(FS_FILE * const pFile, WAVFile * const wav);
 
 /*****************************************************************************/
 /* Private helpers                                                           */
@@ -130,8 +132,8 @@ static void            WAV__LogNumber(char     const * const label,
 
 /**
  * \brief Read a little-endian 32 bit value from a byte buffer.
- * \param[in] data  Pointer to at least 4 bytes
- * \return decoded value
+ * \param uint8_t const *const data    : [IN] pointer to at least 4 bytes, not NULL
+ * \return decoded 32 bit value
  */
 static uint32_t WAV__ReadU32(uint8_t const * const data)
 {
@@ -143,8 +145,8 @@ static uint32_t WAV__ReadU32(uint8_t const * const data)
 
 /**
  * \brief Read a little-endian 16 bit value from a byte buffer.
- * \param[in] data  Pointer to at least 2 bytes
- * \return decoded value
+ * \param uint8_t const *const data    : [IN] pointer to at least 2 bytes, not NULL
+ * \return decoded 16 bit value
  */
 static uint16_t WAV__ReadU16(uint8_t const * const data)
 {
@@ -154,9 +156,9 @@ static uint16_t WAV__ReadU16(uint8_t const * const data)
 
 /**
  * \brief Copy n bytes and append a terminating NUL.
- * \param[in]  src  Source bytes
- * \param[out] dst  Destination, must hold n + 1 characters (all callers pass char[5] and n = 4)
- * \param[in]  n    Number of bytes to copy
+ * \param uint8_t const *const src     : [IN]  source bytes
+ * \param char *const dst              : [OUT] destination, must hold n + 1 characters (all callers pass char[5] and n = 4)
+ * \param uint32_t const n             : [IN]  number of bytes to copy
  */
 static void WAV__BytesToString(uint8_t const * const src,
                                char          * const dst,
@@ -172,9 +174,10 @@ static void WAV__BytesToString(uint8_t const * const src,
  * The comparison uses subtraction only, so it cannot overflow for offsets
  * close to 4 GB.
  *
- * \param[in] offset  File offset of the first byte
- * \param[in] n       Number of bytes needed
- * \return TRUE if all n bytes are in WAV__win, otherwise FALSE
+ * \param uint32_t const offset        : [IN] file offset of the first byte
+ * \param uint32_t const n             : [IN] number of bytes needed
+ * \return TRUE when all n bytes are in WAV__win,
+ *         FALSE otherwise
  */
 static boolean_t WAV__InWindow(uint32_t const offset, uint32_t const n)
 {
@@ -199,19 +202,27 @@ static boolean_t WAV__InWindow(uint32_t const offset, uint32_t const n)
  * (one FS_FSeek and one FS_Read of WAV__WIN_SIZE bytes). The returned pointer
  * is only valid until the next call, because a reload overwrites the window.
  *
- * \param[in] pFile   Open file
- * \param[in] offset  File offset of the first byte
- * \param[in] n       Number of bytes needed, at most WAV__WIN_SIZE
- * \return pointer to the bytes, or NULL if the seek or read failed or the file ends before offset + n
+ * \param FS_FILE *const pFile         : [IN]  open file, not NULL
+ * \param uint32_t const offset        : [IN]  file offset of the first byte, 0..WAV__SEEK_MAX
+ * \param uint32_t const n             : [IN]  number of bytes needed, at most WAV__WIN_SIZE
+ * \param uint8_t const **const ppData : [OUT] pointer to the bytes inside WAV__win, NULL on error, not NULL itself
+ * \return RC_SUCCESS when all n bytes are available at *ppData,
+ *         RC_ERROR_BAD_PARAM when n is larger than the window or offset is above WAV__SEEK_MAX,
+ *         RC_ERROR_READ_FAILS when the seek or read failed or the file ends before offset + n
  */
-static uint8_t const * WAV__Window(FS_FILE * const pFile,
-                                   uint32_t   const offset,
-                                   uint32_t   const n)
+static RC_t WAV__Window(FS_FILE * const pFile,
+                        uint32_t   const offset,
+                        uint32_t   const n,
+                        uint8_t const * * const ppData)
 {
-    uint8_t const * p = NULL;
-
+    RC_t rc = RC_ERROR_BAD_PARAM;
+ 
+    *ppData = NULL;
+ 
     if ((n <= WAV__WIN_SIZE) && (offset <= WAV__SEEK_MAX))
     {
+        rc = RC_ERROR_READ_FAILS;
+ 
         if (WAV__InWindow(offset, n) == FALSE)
         {
             if (FS_FSeek(pFile, (I32)offset, FS_SEEK_SET) == 0)
@@ -224,13 +235,14 @@ static uint8_t const * WAV__Window(FS_FILE * const pFile,
                 WAV__winLen  = 0u;
             }
         }
-
+ 
         if (WAV__InWindow(offset, n) == TRUE)
         {
-            p = &WAV__win[offset - WAV__winBase];
+            *ppData = &WAV__win[offset - WAV__winBase];
+            rc      = RC_SUCCESS;
         }
     }
-    return p;
+    return rc;
 }
 
 /**
@@ -238,8 +250,9 @@ static uint8_t const * WAV__Window(FS_FILE * const pFile,
  *
  * Writes one UART line for the first violated constraint.
  *
- * \param[in] hdr  Header with the fmt fields filled in (extensible already resolved)
- * \return RC_SUCCESS if the format is supported, otherwise RC_ERROR
+ * \param WAVHeader const *const hdr   : [IN] header with the fmt fields filled in (extensible already resolved)
+ * \return RC_SUCCESS when the format is supported,
+ *         RC_ERROR when a constraint is violated (reason on the UART)
  */
 static RC_t WAV__ValidateFormat(WAVHeader const * const hdr)
 {
@@ -284,30 +297,34 @@ static RC_t WAV__ValidateFormat(WAVHeader const * const hdr)
  *
  * Also resolves WAVE_FORMAT_EXTENSIBLE to the real format tag (N4).
  *
- * \param[in]  pFile  Open file
- * \param[out] hdr    Header whose fmt fields are filled in
- * \param[in]  body   File offset of the fmt chunk body
- * \param[in]  size   Size of the fmt chunk body as declared in the file
- * \return RC_SUCCESS if the chunk was decoded and the format is supported, otherwise RC_ERROR
+ * \param char const *const label      : [IN] text before the value, NUL terminated
+ * \param FS_FILE *const pFile         : [IN]     open file, not NULL
+ * \param WAVHeader *const hdr         : [IN/OUT] header whose fmt fields are filled in, not NULL
+ * \param uint32_t const body          : [IN]     file offset of the fmt chunk body
+ * \param uint32_t const size          : [IN]     size of the fmt chunk body as declared in the file (min. 16)
+ * \return RC_SUCCESS when the chunk was decoded and the format is supported,
+ *         RC_ERROR_INVALID when the chunk is too small (or WAV__ValidateFormat() says so),
+ *         RC_ERROR_READ_FAILS when the chunk cannot be read,
+ *         RC_ERROR_NOT_IMPLEMENTED when the format is not supported (reason on the UART)
  */
 static RC_t WAV__ParseFmt(FS_FILE   * const pFile,
                           WAVHeader * const hdr,
                           uint32_t    const body,
                           uint32_t    const size)
 {
-    RC_t            rc   = RC_ERROR;
+    RC_t            rc   = RC_ERROR_INVALID;
     uint32_t const  need = (size > WAV__FMT_MAX_READ) ? WAV__FMT_MAX_READ : size;
     uint8_t const * p    = NULL;
-
+ 
     if (size < WAV__FMT_BASE_SIZE)
     {
         UART_LOG_PutString("\r\n[WAV] ERROR: fmt chunk too small\n");
     }
     else
     {
-        p = WAV__Window(pFile, body, need);
-
-        if (p == NULL)
+        rc = WAV__Window(pFile, body, need, &p);
+ 
+        if (rc != RC_SUCCESS)
         {
             UART_LOG_PutString("\r\n[WAV] ERROR: fmt read failed\n");
         }
@@ -320,14 +337,14 @@ static RC_t WAV__ParseFmt(FS_FILE   * const pFile,
             hdr->byte_rate          = WAV__ReadU32(&p[WAV__FMT_OFF_BYTE_RATE]);
             hdr->block_align        = WAV__ReadU16(&p[WAV__FMT_OFF_BLOCK_ALIGN]);
             hdr->bits_per_sample    = WAV__ReadU16(&p[WAV__FMT_OFF_BITS]);
-
+ 
             /* N4: the real format tag of an extensible file is in the SubFormat GUID */
             if ((hdr->audio_format == WAV__FORMAT_EXTENSIBLE) &&
                 (need >= WAV__FMT_EXT_MIN_SIZE))
             {
                 hdr->audio_format = WAV__ReadU16(&p[WAV__FMT_OFF_SUBFORMAT]);
             }
-
+ 
             rc = WAV__ValidateFormat(hdr);
         }
     }
@@ -336,8 +353,8 @@ static RC_t WAV__ParseFmt(FS_FILE   * const pFile,
 
 /**
  * \brief Write "label text\n" to the UART log.
- * \param[in] label  Text before the value
- * \param[in] text   NUL terminated value, followed by a line feed
+ * \param char const *const label      : [IN] text before the value, NUL terminated
+ * \param char const *const text       : [IN] NUL terminated value, followed by a line feed
  */
 static void WAV__LogText(char const * const label, char const * const text)
 {
@@ -348,9 +365,9 @@ static void WAV__LogText(char const * const label, char const * const text)
 
 /**
  * \brief Write "label<decimal value>unit" to the UART log without stdio (N7).
- * \param[in] label  Text before the number
- * \param[in] value  Number to print in decimal
- * \param[in] unit   Text after the number (may contain the line feed)
+ * \param char const *const label      : [IN] text before the number, NUL terminated
+ * \param uint32_t const value         : [IN] number to print in decimal, 0..4294967295
+ * \param char const *const unit       : [IN] text after the number (may contain the line feed), NUL terminated
  */
 static void WAV__LogNumber(char     const * const label,
                            uint32_t         const value,
@@ -378,25 +395,21 @@ static void WAV__LogNumber(char     const * const label,
 /*****************************************************************************/
 
 /**
- * \brief Parse the header of an open emFile WAV file.
+ * \brief Walk the RIFF chunk list and fill the WAVFile (body of WAV_ParseHeader).
  *
  * Reads the RIFF header, walks the chunk list (at most WAV__MAX_CHUNKS chunks),
  * decodes and validates the 'fmt ' chunk (N4, N9), finds the 'data' chunk and
- * leaves the file position on its first PCM byte (N6). The function seeks to
- * offset 0 itself. Header bytes come through one read window (N1).
+ * leaves the file position on its first PCM byte (N6). Header bytes come through
+ * one read window (N1). The return codes are described in N10.
  *
- * \param[in]  pFile  open emFile handle (mode "r"), not NULL
- * \param[out] wav    structure to fill, not NULL; header fields and data_length
- *                    (limited to the bytes left in the file, N5) are valid on RC_SUCCESS
- * \return RC_SUCCESS header valid, FS_FTell() gives the offset of the first PCM byte
- * \return RC_ERROR   read or seek failed, not RIFF/WAVE, unsupported format or no data
- *                    chunk; a line "[WAV] ERROR: ..." was written to the UART log
- *
- * \note Not re-entrant (static read window), call from tsk_reader only.
+ * \param FS_FILE *const pFile         : [IN]  open emFile handle, not NULL (checked by WAV_ParseHeader())
+ * \param WAVFile *const wav           : [OUT] structure to fill, not NULL (checked by WAV_ParseHeader())
+ * \return RC_SUCCESS, RC_ERROR_READ_FAILS, RC_ERROR_INVALID or RC_ERROR_NOT_IMPLEMENTED,
+ *         see WAV_ParseHeader()
  */
-RC_t WAV_ParseHeader(FS_FILE * const pFile, WAVFile * const wav)
+static RC_t WAV__ParseChunks(FS_FILE * const pFile, WAVFile * const wav)
 {
-    RC_t              rc       = RC_ERROR;
+    RC_t              rc       = RC_SUCCESS;                /* status of the walk, first error stops it */
     WAVHeader * const hdr      = &wav->header;
     uint32_t const    fileSize = FS_GetFileSize(pFile);
     uint8_t const *   p        = NULL;
@@ -404,28 +417,26 @@ RC_t WAV_ParseHeader(FS_FILE * const pFile, WAVFile * const wav)
     uint8_t           chunks   = 0u;
     boolean_t         gotFmt   = FALSE;                 /* fmt chunk decoded and valid          */
     boolean_t         done     = FALSE;                 /* data chunk found, file positioned    */
-    boolean_t         failed   = FALSE;                 /* error already reported on the UART   */
-
+ 
     WAV__winBase = 0u;                                  /* drop whatever a previous file left in the window */
     WAV__winLen  = 0u;
-
+ 
     /* ---- RIFF header: one window read covers header, fmt and usually the data chunk header (N1) ---- */
-    p = WAV__Window(pFile, 0u, WAV__RIFF_HDR_SIZE);
-
-    if (p == NULL)
+    rc = WAV__Window(pFile, 0u, WAV__RIFF_HDR_SIZE, &p);
+ 
+    if (rc != RC_SUCCESS)
     {
         UART_LOG_PutString("\r\n[WAV] ERROR: header read failed\n");
-        failed = TRUE;
     }
     else if (WAV__ReadU32(&p[WAV__OFF_FILE_ID]) != WAV__TAG_RIFF)
     {
         UART_LOG_PutString("\r\n[WAV] ERROR: not RIFF\n");
-        failed = TRUE;
+        rc = RC_ERROR_INVALID;
     }
     else if (WAV__ReadU32(&p[WAV__OFF_FORMAT]) != WAV__TAG_WAVE)
     {
         UART_LOG_PutString("\r\n[WAV] ERROR: not WAVE\n");
-        failed = TRUE;
+        rc = RC_ERROR_INVALID;
     }
     else
     {
@@ -433,20 +444,19 @@ RC_t WAV_ParseHeader(FS_FILE * const pFile, WAVFile * const wav)
         hdr->file_size = WAV__ReadU32(&p[WAV__OFF_FILE_SIZE]);
         WAV__BytesToString(&p[WAV__OFF_FORMAT],  hdr->format,  4u);
     }
-
+ 
     /* ---- Chunk walker: fmt -> (anything) -> data. The offset test also stops the loop at the end of the file ---- */
-    while ((failed == FALSE) &&
+    while ((rc     == RC_SUCCESS) &&
            (done   == FALSE) &&
            (chunks <  WAV__MAX_CHUNKS) &&
            (fileSize >= WAV__CHUNK_HDR_SIZE) &&
            (offset <= (fileSize - WAV__CHUNK_HDR_SIZE)))
     {
-        p = WAV__Window(pFile, offset, WAV__CHUNK_HDR_SIZE);
-
-        if (p == NULL)
+        rc = WAV__Window(pFile, offset, WAV__CHUNK_HDR_SIZE, &p);
+ 
+        if (rc != RC_SUCCESS)
         {
             UART_LOG_PutString("\r\n[WAV] ERROR: chunk read failed\n");
-            failed = TRUE;
         }
         else
         {
@@ -454,18 +464,16 @@ RC_t WAV_ParseHeader(FS_FILE * const pFile, WAVFile * const wav)
             uint32_t const size  = WAV__ReadU32(&p[WAV__OFF_CHUNK_SIZE]);
             uint32_t const body  = offset + WAV__CHUNK_HDR_SIZE;    /* cannot overflow: offset + 8 <= fileSize */
             uint32_t const avail = fileSize - body;                 /* bytes behind this chunk header          */
-
+ 
             if (tag == WAV__TAG_FMT)
             {
                 WAV__BytesToString(p, hdr->subchunk_id, 4u);        /* p is still valid, no window reload yet  */
-
-                if (WAV__ParseFmt(pFile, hdr, body, size) == RC_SUCCESS)
+ 
+                rc = WAV__ParseFmt(pFile, hdr, body, size);         /* on error the reason is already on the UART */
+ 
+                if (rc == RC_SUCCESS)
                 {
                     gotFmt = TRUE;
-                }
-                else
-                {
-                    failed = TRUE;                                  /* reason already on the UART              */
                 }
             }
             else if (tag == WAV__TAG_DATA)
@@ -473,14 +481,14 @@ RC_t WAV_ParseHeader(FS_FILE * const pFile, WAVFile * const wav)
                 if (gotFmt == FALSE)
                 {
                     UART_LOG_PutString("\r\n[WAV] ERROR: data before fmt\n");
-                    failed = TRUE;
+                    rc = RC_ERROR_INVALID;
                 }
                 else
                 {
                     WAV__BytesToString(p, hdr->data_id, 4u);
                     hdr->data_size   = size;
                     wav->data_length = (size > avail) ? avail : size;   /* N5: never promise more than the file holds */
-
+ 
                     /* N6: the window read left the file position behind the header - put it on the first PCM byte */
                     if ((body <= WAV__SEEK_MAX) &&
                         (FS_FSeek(pFile, (I32)body, FS_SEEK_SET) == 0))
@@ -490,7 +498,7 @@ RC_t WAV_ParseHeader(FS_FILE * const pFile, WAVFile * const wav)
                     else
                     {
                         UART_LOG_PutString("\r\n[WAV] ERROR: seek to data failed\n");
-                        failed = TRUE;
+                        rc = RC_ERROR_READ_FAILS;
                     }
                 }
             }
@@ -498,7 +506,7 @@ RC_t WAV_ParseHeader(FS_FILE * const pFile, WAVFile * const wav)
             {
                 /* LIST, INFO, JUNK, ... : not needed, skipped by the offset update below */
             }
-
+ 
             /* Next chunk header. A chunk that claims more than the file holds ends the walk. */
             if (size > avail)
             {
@@ -515,18 +523,45 @@ RC_t WAV_ParseHeader(FS_FILE * const pFile, WAVFile * const wav)
             chunks++;
         }
     }
-
-    if ((done == TRUE) && (failed == FALSE))
-    {
-        rc = RC_SUCCESS;                                            /* file position = first PCM sample */
-    }
-    else if (failed == FALSE)
+ 
+    if ((rc == RC_SUCCESS) && (done == FALSE))
     {
         UART_LOG_PutString("\r\n[WAV] ERROR: data chunk not found\n");
+        rc = RC_ERROR_INVALID;
     }
-    else
+    /* else: RC_SUCCESS with done == TRUE = file position on the first PCM sample, or the error was reported where it happened */
+    return rc;
+}
+ 
+/**
+ * \brief Parse the header of an open emFile WAV file.
+ *
+ * Checks the pointers, then lets WAV__ParseChunks() do the work. After a successful
+ * call the file position is on the first PCM byte (N6). The function seeks to
+ * offset 0 itself. Header bytes come through one read window (N1).
+ *
+ * Not re-entrant (static read window), call from tsk_reader only (N8).
+ *
+ * \param FS_FILE *const pFile         : [IN]  open emFile handle (mode "r"), not NULL
+ * \param WAVFile *const wav           : [OUT] structure to fill, not NULL; header fields and data_length
+ *                                     (limited to the bytes left in the file, N5) are valid on RC_SUCCESS
+ * \return RC_SUCCESS when the header is valid, FS_FTell() gives the offset of the
+ *         first PCM byte,
+ *         RC_ERROR_NULL when pFile or wav is NULL (nothing is read, no UART output),
+ *         RC_ERROR_READ_FAILS when a seek or read failed (reason on the UART),
+ *         RC_ERROR_INVALID when the file is not RIFF/WAVE, the fmt chunk is too small,
+ *         the header fields contradict each other (block_align), data comes before
+ *         fmt or there is no data chunk (reason on the UART),
+ *         RC_ERROR_NOT_IMPLEMENTED when the file is valid but not playable: not PCM,
+ *         not 1/2 channels, not 8/16/24 bit or not 22050/44100 Hz (reason on the UART)
+ */
+RC_t WAV_ParseHeader(FS_FILE * const pFile, WAVFile * const wav)
+{
+    RC_t rc = RC_ERROR_NULL;
+ 
+    if ((pFile != NULL) && (wav != NULL))
     {
-        /* error was reported where it happened */
+        rc = WAV__ParseChunks(pFile, wav);
     }
     return rc;
 }
@@ -534,35 +569,45 @@ RC_t WAV_ParseHeader(FS_FILE * const pFile, WAVFile * const wav)
 /**
  * \brief Print all WAV header fields to the UART log (debug aid).
  *
- * Prints file size, format, channels, sample rate, byte rate, block align, bits
- * per sample, data size and the duration (data_length / byte rate, 0 if the byte
- * rate is 0). Uses WAV__LogText() and WAV__LogNumber(), no stdio (N7).
+ * Prints file id, format, fmt size, audio format, channels, sample rate, bits per
+ * sample, block align, data size and the duration (data_length / byte rate, not
+ * printed if the byte rate is 0). Uses WAV__LogText() and WAV__LogNumber(), no
+ * stdio (N7).
  *
- * \param[in] wav  parsed WAV file (result of WAV_ParseHeader()), not NULL
+ * \param WAVFile const *const wav     : [IN] parsed WAV file (result of WAV_ParseHeader())
+ * \return RC_SUCCESS when the header was printed,
+ *         RC_ERROR_NULL when wav is NULL (nothing is printed)
  */
-void WAV_PrintHeader(WAVFile const * const wav)
+RC_t WAV_PrintHeader(WAVFile const * const wav)
 {
-    WAVHeader const * const hdr         = &wav->header;
-    uint32_t const          bytesPerSec = hdr->sample_rate * (uint32_t)hdr->block_align;
-
-    UART_LOG_PutString("\r\n\n--- WAV Header ---\n");
-    WAV__LogText  ("\r\n  FileID        : ", hdr->file_id);
-    WAV__LogText  ("\r\n  Format        : ", hdr->format);
-    WAV__LogNumber("\r\n  FmtSize       : ", hdr->subchunk_size,                "\n");
-    WAV__LogNumber("\r\n  AudioFormat   : ", (uint32_t)hdr->audio_format,       "\n");
-    WAV__LogNumber("\r\n  Channels      : ", (uint32_t)hdr->number_of_channels, "\n");
-    WAV__LogNumber("\r\n  SampleRate    : ", hdr->sample_rate,                  " Hz\n");
-    WAV__LogNumber("\r\n  BitsPerSample : ", (uint32_t)hdr->bits_per_sample,    "\n");
-    WAV__LogNumber("\r\n  BlockAlign    : ", (uint32_t)hdr->block_align,        "\n");
-    WAV__LogNumber("\r\n  DataSize      : ", hdr->data_size,                    " bytes\n");
-
-    if (bytesPerSec != 0u)                                          /* PrintHeader is public: never divide by zero */
+    RC_t rc = RC_ERROR_NULL;
+ 
+    if (wav != NULL)
     {
-        WAV__LogNumber("\r\n  Duration      : ~", wav->data_length / bytesPerSec, " s\n");
+        WAVHeader const * const hdr         = &wav->header;
+        uint32_t const          bytesPerSec = hdr->sample_rate * (uint32_t)hdr->block_align;
+ 
+        UART_LOG_PutString("\r\n\n--- WAV Header ---\n");
+        WAV__LogText  ("\r\n  FileID        : ", hdr->file_id);
+        WAV__LogText  ("\r\n  Format        : ", hdr->format);
+        WAV__LogNumber("\r\n  FmtSize       : ", hdr->subchunk_size,                "\n");
+        WAV__LogNumber("\r\n  AudioFormat   : ", (uint32_t)hdr->audio_format,       "\n");
+        WAV__LogNumber("\r\n  Channels      : ", (uint32_t)hdr->number_of_channels, "\n");
+        WAV__LogNumber("\r\n  SampleRate    : ", hdr->sample_rate,                  " Hz\n");
+        WAV__LogNumber("\r\n  BitsPerSample : ", (uint32_t)hdr->bits_per_sample,    "\n");
+        WAV__LogNumber("\r\n  BlockAlign    : ", (uint32_t)hdr->block_align,        "\n");
+        WAV__LogNumber("\r\n  DataSize      : ", hdr->data_size,                    " bytes\n");
+ 
+        if (bytesPerSec != 0u)                                      /* PrintHeader is public: never divide by zero */
+        {
+            WAV__LogNumber("\r\n  Duration      : ~", wav->data_length / bytesPerSec, " s\n");
+        }
+        UART_LOG_PutString("\r\n------------------\n");
+        rc = RC_SUCCESS;
     }
-    UART_LOG_PutString("\r\n------------------\n");
+    return rc;
 }
-
+ 
 /*----------------------------------------------------------------------------------------
 * Notes:
 * N1 - One window read instead of one read per field. The emFile configuration has no sector
@@ -610,6 +655,23 @@ void WAV_PrintHeader(WAVFile const * const wav)
 *      Higher bit depths use the MSB only, stereo is averaged to mono. The block_align check
 *      (channels * bits / 8) rejects files whose header contradicts itself, because the
 *      conversion loop in mp3.c computes its read size from block_align.
+*
+* N10 - Return codes (INC 11A.1). Every function that can fail returns RC_t. WAV_ParseHeader()
+*      and the private WAV__ParseChunks() / WAV__ParseFmt() / WAV__ValidateFormat() report the
+*      reason with the project codes, the UART text stays as it was:
+*        RC_ERROR_NULL            pFile or wav is NULL (new check, before: crash)
+*        RC_ERROR_READ_FAILS      FS_FSeek() / FS_Read() failed or the file ends too early
+*        RC_ERROR_INVALID         not RIFF/WAVE, fmt chunk too small, block_align contradicts
+*                                 channels * bits, data before fmt, no data chunk
+*        RC_ERROR_NOT_IMPLEMENTED valid WAV, but not playable: not PCM, not 1/2 channels,
+*                                 not 8/16/24 bit, not 22050/44100 Hz
+*      WAV__Window() returns RC_t now (RC_SUCCESS, RC_ERROR_BAD_PARAM for n / offset out of
+*      range, RC_ERROR_READ_FAILS) and gives the pointer through an out parameter. WAV_PrintHeader()
+*      returns RC_SUCCESS or RC_ERROR_NULL. No RC_t for: WAV__ReadU32/U16 (decode a value, cannot
+*      fail), WAV__BytesToString (cannot fail, the callers copy 4 bytes), WAV__InWindow (a yes/no
+*      question, boolean_t), WAV__LogText/LogNumber (UART_LOG_PutString() reports nothing).
+*      Callers: mp3.c only tests "!= RC_SUCCESS", all codes above are different from 0, so nothing
+*      changes there. A caller of WAV_PrintHeader() must cast the result to void (MISRA 17.7).
 *
 * Time (estimated, not yet measured on the target):
 *      One sector read = about 4.5 ms (measured: 2 sectors = 9.2 ms in MP3__readBlock, SCLK 4 MHz).

@@ -1,7 +1,7 @@
 /**
 * \file    mp3.h
 * \author  P. Fromm (template), V S Agilan (player)
-* \date    6.11.18 (INC 11C: 2026-10)
+* \date    6.11.18 (INC 11B: 2026-10)
 *
 * \brief   A simple MP3 Player (WAV player) application layer: song list, state machine, SD card
 *          streaming and TFT song list
@@ -94,7 +94,7 @@
 *  - INC 8   : sector aligned SD reads
 *  - INC 9   : recursive scan of the SD card, full paths
 *  - INC 10  : TFT song list, partial redraw, "No songs" / error message
-*  - INC 11C : Doxygen, MISRA C:2012 clean-up, faster sample conversion,
+*  - INC 11B : Doxygen, MISRA C:2012 clean-up, faster sample conversion,
 *              scan buffers bounded, notes N1..N10 at the end of mp3.c
 *
 * \copyright Copyright 2016

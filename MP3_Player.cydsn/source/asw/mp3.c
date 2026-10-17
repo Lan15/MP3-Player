@@ -1,7 +1,7 @@
 /**
 * \file    mp3.c
 * \author  P. Fromm (template), V S Agilan (player)
-* \date     6.11.18 (INC 11C: 2026-10)
+* \date    6.11.18 (INC 11B: 2026-10)
 *
 * \brief   WAV player application layer (state machine, SD card scan,
 *          PCM streaming and conversion, TFT song list)
