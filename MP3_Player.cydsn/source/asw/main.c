@@ -18,7 +18,6 @@
 #include "tft.h"
 
 #include "sound.h"
-#include "sound_data.h"
 
 #include "mp3.h"
 
@@ -34,7 +33,7 @@ ISR(systick_handler)
     CounterTick(cnt_systick);
 }
 
-void soundTest1()
+/*void soundTest1()
 {    
     SOUND_Init();
 
@@ -76,7 +75,7 @@ void soundTest2()
     }
     while(1){;}
 }    
-
+*/
 
 int main()
 {
@@ -126,8 +125,7 @@ EventMaskType GetAndClearHighestEvent(EventMaskRefType ev)
  ********************************************************************************/
 
 TASK(tsk_init)
-{
-    
+{ 
     //Init MCAL Drivers
     UART_LOG_Start();
     SOUND_SAMPLE_Start();
@@ -161,10 +159,7 @@ TASK(tsk_init)
 }
 
 TASK(tsk_control)
-{
- 
-    static uint8_t count = 0;
-    
+{    
     EventMaskType ev = 0;
     EventMaskType nextEvent = 0;
     

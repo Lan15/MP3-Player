@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
   29:source\asw/mp3.c **** #include "DBG_CONV.h"
   30:source\asw/mp3.c **** #include "DBG_FILL.h"
   31:source\asw/mp3.c **** #include "DBG_DEAD.h"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 2
 
 
   32:source\asw/mp3.c **** 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
   86:source\asw/mp3.c **** /*****************************************************************************/
   87:source\asw/mp3.c **** 
   88:source\asw/mp3.c **** static struct
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 3
 
 
   89:source\asw/mp3.c **** {
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  143:source\asw/mp3.c **** void MP3__prevSong();                                       /**< \brief select the previous song. G
  144:source\asw/mp3.c **** 
  145:source\asw/mp3.c **** void MP3__increaseVolume();                                 /**< \brief increase the volume by one 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 4
 
 
  146:source\asw/mp3.c **** void MP3__decreaseVolume();                                 /**< \brief decrease the volume by one 
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  200:source\asw/mp3.c **** /* INC 9 — draw static header once; call from MP3_Init() only */
  201:source\asw/mp3.c **** void MP3__initDisplay()
  202:source\asw/mp3.c **** {
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 5
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 5
 
 
  203:source\asw/mp3.c ****     TFT_fillScreen(BLACK);
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  257:source\asw/mp3.c **** 
  258:source\asw/mp3.c ****         case MP3STATE_ISPLAYING :
  259:source\asw/mp3.c ****             if (nextEvent & ev_Button1)         
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 6
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 6
 
 
  260:source\asw/mp3.c ****             {
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  314:source\asw/mp3.c **** }
  315:source\asw/mp3.c **** 
  316:source\asw/mp3.c **** void MP3_Reader()
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 7
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 7
 
 
  317:source\asw/mp3.c **** {
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  371:source\asw/mp3.c **** 
  372:source\asw/mp3.c ****             //sprintf(logBuf, "\r\n[MP3] Underruns before start: %lu\n", SOUND__GetAndClearUnderrun
  373:source\asw/mp3.c ****             //UART_LOG_PutString(logBuf);
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 8
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 8
 
 
  374:source\asw/mp3.c ****             
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  428:source\asw/mp3.c ****     }
  429:source\asw/mp3.c **** }
  430:source\asw/mp3.c **** 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 9
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 9
 
 
  431:source\asw/mp3.c **** /*****************************************************************************/
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
   60 001e FFF7FEFF 		bl	UART_LOG_PutString
   61              	.LVL5:
  452:source\asw/mp3.c ****         MP3__error = TRUE;                                  /* INC 10C */
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 10
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 10
 
 
   62              		.loc 1 452 0
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  101 005c 13F0040F 		tst	r3, #4
  102 0060 5CD1     		bne	.L2
  468:source\asw/mp3.c **** 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 11
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 11
 
 
  469:source\asw/mp3.c ****         /* Full path with leading backslash: "\SONG.WAV" or "\MUSIC\SONG.WAV" */
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  142 00a2 FFF7ADFF 		bl	MP3__scanDir
  143              	.LVL15:
  484:source\asw/mp3.c **** 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 12
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 12
 
 
  485:source\asw/mp3.c ****             /* Reopen the parent and skip what was already consumed */
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  497:source\asw/mp3.c ****                 (strcmp(&entryName[len - 4u], ".WAV") == 0 ||
  184              		.loc 1 497 0 discriminator 1
  185 00d4 1D1F     		subs	r5, r3, #4
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 13
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 13
 
 
  186              	.LVL25:
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  229              	.LVL33:
  230              	.L2:
  456:source\asw/mp3.c ****     {
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 14
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 14
 
 
  231              		.loc 1 456 0
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  268              		.size	MP3__scanDir, .-MP3__scanDir
  269              		.section	.text.MP3__closeWavFile,"ax",%progbits
  270              		.align	2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 15
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 15
 
 
  271              		.thumb
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  573:source\asw/mp3.c **** {
  574:source\asw/mp3.c ****     SOUND_StopPlay();
  575:source\asw/mp3.c ****     MP3__closeWavFile();
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 16
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 16
 
 
  576:source\asw/mp3.c ****     MP3__reader.m_state = MP3READER_IDLE;
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  630:source\asw/mp3.c ****     uint16_t cur  = MP3__player.m_currentSong;     /* snapshot once */
  631:source\asw/mp3.c ****     uint16_t no   = MP3__player.m_noSongs;
  632:source\asw/mp3.c ****     uint8_t  mode = MP3__error ? MP3__DISP_MODE_ERROR
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 17
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 17
 
 
  633:source\asw/mp3.c ****                   : ((no == 0u) ? MP3__DISP_MODE_NOSONGS : MP3__DISP_MODE_LIST);
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  687:source\asw/mp3.c ****         MP3__dispSong = cur;
  688:source\asw/mp3.c ****     }
  689:source\asw/mp3.c **** }
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 18
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 18
 
 
  690:source\asw/mp3.c **** 
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  744:source\asw/mp3.c ****     //Create the state string
  745:source\asw/mp3.c ****     switch (state)
  746:source\asw/mp3.c ****     {
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 19
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 19
 
 
  747:source\asw/mp3.c ****         case MP3STATE_ISSTOPPED : stateStr = "IsStopped"; break; 
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  801:source\asw/mp3.c ****  
  802:source\asw/mp3.c ****     return RC_SUCCESS;
  803:source\asw/mp3.c **** }
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 20
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 20
 
 
  804:source\asw/mp3.c ****  
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  318              	.LFB132:
  762:source\asw/mp3.c ****     char logBuf[48];
  319              		.loc 1 762 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 21
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 21
 
 
  320              		.cfi_startproc
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  365 0042 1648     		ldr	r0, .L33+16
  366 0044 FFF7FEFF 		bl	UART_LOG_PutString
  367              	.LVL44:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 22
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 22
 
 
  783:source\asw/mp3.c ****         return RC_ERROR;
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  411 007c 034B     		ldr	r3, .L33
  412 007e A3F89802 		strh	r0, [r3, #664]	@ movhi
  795:source\asw/mp3.c ****     }
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 23
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 23
 
 
  413              		.loc 1 795 0 is_stmt 1 discriminator 4
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  445              		.cfi_offset 4, -36
  446              		.cfi_offset 5, -32
  447              		.cfi_offset 6, -28
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 24
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 24
 
 
  448              		.cfi_offset 7, -24
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  849:source\asw/mp3.c ****     uint32_t total;
  850:source\asw/mp3.c **** 
  851:source\asw/mp3.c ****         /* INC 6A: never read more than the buffer can hold */
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 25
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 25
 
 
  852:source\asw/mp3.c ****     if (maxBytes > MP3__MAX_READ)
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  871:source\asw/mp3.c ****         toRead = MP3__bytesRemaining;
  872:source\asw/mp3.c ****     }
  873:source\asw/mp3.c **** 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 26
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 26
 
 
  874:source\asw/mp3.c ****     /* INC 8: put back the partial output sample kept from the previous call */
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  564              	.LVL72:
  889:source\asw/mp3.c ****             MP3__error = TRUE;
  565              		.loc 1 889 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 27
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 27
 
 
  566 00c0 0122     		movs	r2, #1
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  904:source\asw/mp3.c ****     }
  905:source\asw/mp3.c **** 
  906:source\asw/mp3.c ****     DBG_HI(DBG_CONV); // Shows the conversion loop run/compute time
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 28
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 28
 
 
  606              		.loc 1 906 0
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  641 0138 803A     		subs	r2, r2, #128
  642              	.LVL82:
  643 013a 92B2     		uxth	r2, r2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 29
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 29
 
 
  644              	.LVL83:
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  909:source\asw/mp3.c ****         {
  690              		.loc 1 909 0 discriminator 2
  691 0168 0CF1010C 		add	ip, ip, #1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 30
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 30
 
 
  692              	.LVL95:
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  733 01a0 03B0     		add	sp, sp, #12
  734              		.cfi_def_cfa_offset 36
  735              		@ sp needed
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 31
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 31
 
 
  736 01a2 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  785 001c 0DD1     		bne	.L60
  617:source\asw/mp3.c ****         TFT_printf("Error: See UART Log");
  786              		.loc 1 617 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 32
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 32
 
 
  787 001e 0021     		movs	r1, #0
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  837              		.align	2
  838              		.thumb
  839              		.thumb_func
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 33
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 33
 
 
  840              		.type	MP3__drawRow, %function
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  603:source\asw/mp3.c **** 
  889              		.loc 1 603 0 discriminator 4
  890 003a B442     		cmp	r4, r6
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 34
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 34
 
 
  891 003c 01D1     		bne	.L71
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  607:source\asw/mp3.c **** 
  937              		.loc 1 607 0 is_stmt 1 discriminator 4
  938 0080 22B0     		add	sp, sp, #136
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 35
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 35
 
 
  939              		.cfi_def_cfa_offset 16
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  986 001a 0020     		movs	r0, #0
  987 001c FFF7FEFF 		bl	TFT_setTextWrap
  988              	.LVL129:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 36
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 36
 
 
  209:source\asw/mp3.c ****     TFT_setCursor(2, 2);
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  176:source\asw/mp3.c ****  
  1037              		.loc 1 176 0
  1038 000c 2C81     		strh	r4, [r5, #8]	@ movhi
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 37
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 37
 
 
  178:source\asw/mp3.c ****     MP3__reader.m_newSongRequest = FALSE;
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  1083              	.LFE111:
  1084              		.size	MP3_Init, .-MP3_Init
  1085              		.section	.text.MP3__nextSong,"ax",%progbits
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 38
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 38
 
 
  1086              		.align	2
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  1134 0006 0449     		ldr	r1, .L90
  1135 0008 CA88     		ldrh	r2, [r1, #6]
  1136 000a 1344     		add	r3, r3, r2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 39
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 39
 
 
  1137 000c 0B81     		strh	r3, [r1, #8]	@ movhi
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  1185 001a A37A     		ldrb	r3, [r4, #10]	@ zero_extendqisi2
  1186 001c 03EB8303 		add	r3, r3, r3, lsl #2
  1187 0020 9800     		lsls	r0, r3, #2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 40
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 40
 
 
  1188 0022 00F0FC00 		and	r0, r0, #252
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  1237 0028 10BD     		pop	{r4, pc}
  1238              	.L101:
  1239 002a 00BF     		.align	2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 41
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 41
 
 
  1240              	.L100:
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  1289              		.thumb
  1290              		.thumb_func
  1291              		.type	MP3__stopSong, %function
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 42
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 42
 
 
  1292              	MP3__stopSong:
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  1340              		.cfi_endproc
  1341              	.LFE123:
  1342              		.size	MP3__pauseSong, .-MP3__pauseSong
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 43
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 43
 
 
  1343              		.section	.text.MP3__resumeSong,"ax",%progbits
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  1392              		.loc 1 631 0
  1393 000a DD88     		ldrh	r5, [r3, #6]
  1394              	.LVL149:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 44
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 44
 
 
  632:source\asw/mp3.c ****                   : ((no == 0u) ? MP3__DISP_MODE_NOSONGS : MP3__DISP_MODE_LIST);
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  645:source\asw/mp3.c ****             }
  1440              		.loc 1 645 0 discriminator 3
  1441 004a 04EB4403 		add	r3, r4, r4, lsl #1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 45
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 45
 
 
  1442 004e 9900     		lsls	r1, r3, #2
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  1487              		.loc 1 661 0
  1488 008c B8F1000F 		cmp	r8, #0
  1489 0090 3DD1     		bne	.L114
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 46
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 46
 
 
  667:source\asw/mp3.c ****     {
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  1537 00d4 0134     		adds	r4, r4, #1
  1538              	.LVL165:
  1539 00d6 A4B2     		uxth	r4, r4
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 47
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 47
 
 
  1540              	.LVL166:
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  1585              	.L114:
  689:source\asw/mp3.c **** 
  1586              		.loc 1 689 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 48
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 48
 
 
  1587 010e 02B0     		add	sp, sp, #8
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  1637              	.LFE128:
  1638              		.size	MP3__showRemainingPlaytime, .-MP3__showRemainingPlaytime
  1639              		.section	.text.MP3__setRemainingPlaytime,"ax",%progbits
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 49
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 49
 
 
  1640              		.align	2
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  1686              		.thumb_func
  1687              		.type	MP3_Reader, %function
  1688              	MP3_Reader:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 50
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 50
 
 
  1689              	.LFB114:
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  1735              		.loc 1 342 0
  1736 0044 0022     		movs	r2, #0
  1737 0046 83F8F829 		strb	r2, [r3, #2552]
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 51
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 51
 
 
  345:source\asw/mp3.c ****             }
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  387:source\asw/mp3.c ****                 MP3__reader.m_state = MP3READER_IDLE;
  1780              		.loc 1 387 0
  1781 0088 FFF7FEFF 		bl	MP3__closeWavFile
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 52
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 52
 
 
  1782              	.LVL181:
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  1824 00c6 2046     		mov	r0, r4
  1825 00c8 FFF7FEFF 		bl	SEVEN_Set
  1826              	.LVL186:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 53
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 53
 
 
  418:source\asw/mp3.c **** 
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  1874 0012 0120     		movs	r0, #1
  1875 0014 7047     		bx	lr
  1876              	.L167:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 54
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 54
 
 
  1877 0016 0020     		movs	r0, #0
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  1924              		.loc 1 236 0
  1925 001a 394B     		ldr	r3, .L187
  1926 001c 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 55
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 55
 
 
  1927 001e 012B     		cmp	r3, #1
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  261:source\asw/mp3.c ****             }
  1972              		.loc 1 261 0
  1973 0062 FFF7FEFF 		bl	MP3__increaseVolume
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 56
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 56
 
 
  1974              	.LVL195:
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  2018              	.LVL203:
  2019 00a2 10B9     		cbnz	r0, .L183
  279:source\asw/mp3.c ****             }
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 57
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 57
 
 
  2020              		.loc 1 279 0 is_stmt 1
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  303:source\asw/mp3.c ****             }
  2064              		.loc 1 303 0
  2065 00e2 0122     		movs	r2, #1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 58
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 58
 
 
  2066 00e4 064B     		ldr	r3, .L187
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  2114 0002 0138     		subs	r0, r0, #1
  2115              	.LVL214:
  2116 0004 0F28     		cmp	r0, #15
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 59
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 59
 
 
  2117 0006 11D8     		bhi	.L190
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  2165              	.L191:
  2166              	.LVL220:
  745:source\asw/mp3.c ****     {
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 60
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 60
 
 
  2167              		.loc 1 745 0
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  2213 0068 64010000 		.word	.LC21
  2214 006c 70010000 		.word	.LC22
  2215 0070 7C010000 		.word	.LC23
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 61
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 61
 
 
  2216 0074 88010000 		.word	.LC24
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  2259      65732066 
  2260 0057 00       		.space	1
  2261              	.LC6:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 62
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 62
 
 
  2262 0058 7200     		.ascii	"r\000"
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  2287      20534420 
  2288 012e 0000     		.space	2
  2289              	.LC17:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 63
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 63
 
 
  2290 0130 5C00     		.ascii	"\\\000"
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  2322      653A2000 
  2323              	.LC29:
  2324 01c0 207C2045 		.ascii	" | Event: \000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 64
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 64
 
 
  2324      76656E74 
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  2367              		.type	MP3__readBuf, %object
  2368              		.size	MP3__readBuf, 6156
  2369              	MP3__readBuf:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 65
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 65
 
 
  2370 02d8 00000000 		.space	6156
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  2417 001d 00000000 		.4byte	0
  2418 0021 00000000 		.4byte	.Ldebug_line0
  2419 0025 02       		.uleb128 0x2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 66
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 66
 
 
  2420 0026 01       		.byte	0x1
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  2474 008c 03       		.uleb128 0x3
  2475 008d 1A060000 		.4byte	.LASF13
  2476 0091 02       		.byte	0x2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 67
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 67
 
 
  2477 0092 9C       		.byte	0x9c
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  2531 00fe EF020000 		.4byte	.LASF27
  2532 0102 74       		.sleb128 -12
  2533 0103 08       		.uleb128 0x8
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 68
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 68
 
 
  2534 0104 37040000 		.4byte	.LASF28
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  2588 0173 03       		.uleb128 0x3
  2589 0174 91050000 		.4byte	.LASF44
  2590 0178 03       		.byte	0x3
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 69
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 69
 
 
  2591 0179 3F       		.byte	0x3f
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  2645 01eb 0A       		.uleb128 0xa
  2646 01ec 2A020000 		.4byte	.LASF55
  2647 01f0 07       		.byte	0x7
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 70
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 70
 
 
  2648 01f1 2C02     		.2byte	0x22c
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  2702 0264 E007     		.2byte	0x7e0
  2703 0266 0B       		.uleb128 0xb
  2704 0267 BF080000 		.4byte	.LASF67
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 71
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 71
 
 
  2705 026b E0FF     		.2byte	0xffe0
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  2759 02e6 0E       		.uleb128 0xe
  2760 02e7 C4080000 		.4byte	.LASF81
  2761 02eb 1001     		.2byte	0x110
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 72
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 72
 
 
  2762 02ed 0B       		.byte	0xb
@@ -4303,82 +4303,82 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  2801 033f C5050000 		.4byte	.LASF86
  2802 0343 38       		.byte	0x38
  2803 0344 0C       		.byte	0xc
- 2804 0345 35       		.byte	0x35
+ 2804 0345 47       		.byte	0x47
  2805 0346 E7030000 		.4byte	0x3e7
  2806 034a 0F       		.uleb128 0xf
  2807 034b FA050000 		.4byte	.LASF87
  2808 034f 0C       		.byte	0xc
- 2809 0350 37       		.byte	0x37
+ 2809 0350 49       		.byte	0x49
  2810 0351 E7030000 		.4byte	0x3e7
  2811 0355 00       		.byte	0
  2812 0356 0F       		.uleb128 0xf
  2813 0357 0D0C0000 		.4byte	.LASF88
  2814 035b 0C       		.byte	0xc
- 2815 035c 38       		.byte	0x38
+ 2815 035c 4A       		.byte	0x4a
  2816 035d 5E000000 		.4byte	0x5e
  2817 0361 08       		.byte	0x8
  2818 0362 0F       		.uleb128 0xf
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 73
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 73
 
 
  2819 0363 51020000 		.4byte	.LASF89
  2820 0367 0C       		.byte	0xc
- 2821 0368 39       		.byte	0x39
+ 2821 0368 4B       		.byte	0x4b
  2822 0369 E7030000 		.4byte	0x3e7
  2823 036d 0C       		.byte	0xc
  2824 036e 0F       		.uleb128 0xf
  2825 036f FE040000 		.4byte	.LASF90
  2826 0373 0C       		.byte	0xc
- 2827 0374 3A       		.byte	0x3a
+ 2827 0374 4C       		.byte	0x4c
  2828 0375 E7030000 		.4byte	0x3e7
  2829 0379 11       		.byte	0x11
  2830 037a 0F       		.uleb128 0xf
  2831 037b 14070000 		.4byte	.LASF91
  2832 037f 0C       		.byte	0xc
- 2833 0380 3B       		.byte	0x3b
+ 2833 0380 4D       		.byte	0x4d
  2834 0381 5E000000 		.4byte	0x5e
  2835 0385 18       		.byte	0x18
  2836 0386 0F       		.uleb128 0xf
  2837 0387 A30B0000 		.4byte	.LASF92
  2838 038b 0C       		.byte	0xc
- 2839 038c 3C       		.byte	0x3c
+ 2839 038c 4E       		.byte	0x4e
  2840 038d 45000000 		.4byte	0x45
  2841 0391 1C       		.byte	0x1c
  2842 0392 0F       		.uleb128 0xf
  2843 0393 6D0B0000 		.4byte	.LASF93
  2844 0397 0C       		.byte	0xc
- 2845 0398 3D       		.byte	0x3d
+ 2845 0398 4F       		.byte	0x4f
  2846 0399 45000000 		.4byte	0x45
  2847 039d 1E       		.byte	0x1e
  2848 039e 0F       		.uleb128 0xf
  2849 039f 69040000 		.4byte	.LASF94
  2850 03a3 0C       		.byte	0xc
- 2851 03a4 3E       		.byte	0x3e
+ 2851 03a4 50       		.byte	0x50
  2852 03a5 5E000000 		.4byte	0x5e
  2853 03a9 20       		.byte	0x20
  2854 03aa 0F       		.uleb128 0xf
  2855 03ab C2070000 		.4byte	.LASF95
  2856 03af 0C       		.byte	0xc
- 2857 03b0 3F       		.byte	0x3f
+ 2857 03b0 51       		.byte	0x51
  2858 03b1 5E000000 		.4byte	0x5e
  2859 03b5 24       		.byte	0x24
  2860 03b6 0F       		.uleb128 0xf
  2861 03b7 03070000 		.4byte	.LASF96
  2862 03bb 0C       		.byte	0xc
- 2863 03bc 40       		.byte	0x40
+ 2863 03bc 52       		.byte	0x52
  2864 03bd 45000000 		.4byte	0x45
  2865 03c1 28       		.byte	0x28
  2866 03c2 0F       		.uleb128 0xf
  2867 03c3 BB090000 		.4byte	.LASF97
  2868 03c7 0C       		.byte	0xc
- 2869 03c8 41       		.byte	0x41
+ 2869 03c8 53       		.byte	0x53
  2870 03c9 45000000 		.4byte	0x45
  2871 03cd 2A       		.byte	0x2a
  2872 03ce 0F       		.uleb128 0xf
  2873 03cf 80040000 		.4byte	.LASF98
  2874 03d3 0C       		.byte	0xc
- 2875 03d4 42       		.byte	0x42
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 74
+ 2875 03d4 54       		.byte	0x54
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 74
 
 
  2876 03d5 E7030000 		.4byte	0x3e7
@@ -4386,7 +4386,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  2878 03da 0F       		.uleb128 0xf
  2879 03db 87050000 		.4byte	.LASF99
  2880 03df 0C       		.byte	0xc
- 2881 03e0 43       		.byte	0x43
+ 2881 03e0 55       		.byte	0x55
  2882 03e1 5E000000 		.4byte	0x5e
  2883 03e5 34       		.byte	0x34
  2884 03e6 00       		.byte	0
@@ -4400,31 +4400,31 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  2892 03f7 03       		.uleb128 0x3
  2893 03f8 97040000 		.4byte	.LASF100
  2894 03fc 0C       		.byte	0xc
- 2895 03fd 44       		.byte	0x44
+ 2895 03fd 56       		.byte	0x56
  2896 03fe 3E030000 		.4byte	0x33e
  2897 0402 13       		.uleb128 0x13
  2898 0403 DF050000 		.4byte	.LASF101
  2899 0407 3C       		.byte	0x3c
  2900 0408 0C       		.byte	0xc
- 2901 0409 46       		.byte	0x46
+ 2901 0409 5B       		.byte	0x5b
  2902 040a 27040000 		.4byte	0x427
  2903 040e 0F       		.uleb128 0xf
  2904 040f D80B0000 		.4byte	.LASF102
  2905 0413 0C       		.byte	0xc
- 2906 0414 48       		.byte	0x48
+ 2906 0414 5D       		.byte	0x5d
  2907 0415 F7030000 		.4byte	0x3f7
  2908 0419 00       		.byte	0
  2909 041a 0F       		.uleb128 0xf
  2910 041b E8000000 		.4byte	.LASF103
  2911 041f 0C       		.byte	0xc
- 2912 0420 49       		.byte	0x49
+ 2912 0420 5E       		.byte	0x5e
  2913 0421 5E000000 		.4byte	0x5e
  2914 0425 38       		.byte	0x38
  2915 0426 00       		.byte	0
  2916 0427 03       		.uleb128 0x3
  2917 0428 B7080000 		.4byte	.LASF104
  2918 042c 0C       		.byte	0xc
- 2919 042d 4A       		.byte	0x4a
+ 2919 042d 60       		.byte	0x60
  2920 042e 02040000 		.4byte	0x402
  2921 0432 15       		.uleb128 0x15
  2922 0433 CB020000 		.4byte	.LASF109
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  2930 0447 00       		.byte	0
  2931 0448 07       		.uleb128 0x7
  2932 0449 16080000 		.4byte	.LASF106
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 75
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 75
 
 
  2933 044d 01       		.byte	0x1
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  2987 04b9 01       		.byte	0x1
  2988 04ba 5C       		.byte	0x5c
  2989 04bb 45000000 		.4byte	0x45
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 76
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 76
 
 
  2990 04bf 04       		.byte	0x4
@@ -4558,7 +4558,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  3044 0529 E3000000 		.4byte	.LASF133
  3045 052d 01       		.byte	0x1
  3046 052e B401     		.2byte	0x1b4
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 77
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 77
 
 
  3047 0530 9E000000 		.4byte	0x9e
@@ -4618,7 +4618,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  3101 05ac 01       		.byte	0x1
  3102 05ad BD01     		.2byte	0x1bd
  3103 05af 50000000 		.4byte	0x50
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 78
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 78
 
 
  3104 05b3 E0000000 		.4byte	.LLST4
@@ -4678,7 +4678,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  3158 061d 34000000 		.4byte	.LC4
  3159 0621 00       		.byte	0
  3160 0622 1F       		.uleb128 0x1f
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 79
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 79
 
 
  3161 0623 06010000 		.4byte	.LVL31
@@ -4738,7 +4738,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  3215 0676 1E       		.uleb128 0x1e
  3216 0677 01       		.uleb128 0x1
  3217 0678 52       		.byte	0x52
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 80
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 80
 
 
  3218 0679 02       		.uleb128 0x2
@@ -4798,7 +4798,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  3272 06d4 01       		.uleb128 0x1
  3273 06d5 51       		.byte	0x51
  3274 06d6 03       		.uleb128 0x3
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 81
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 81
 
 
  3275 06d7 91       		.byte	0x91
@@ -4858,7 +4858,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  3329 0728 1E       		.uleb128 0x1e
  3330 0729 01       		.uleb128 0x1
  3331 072a 53       		.byte	0x53
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 82
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 82
 
 
  3332 072b 02       		.uleb128 0x2
@@ -4918,7 +4918,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  3386 0786 00       		.byte	0
  3387 0787 1D       		.uleb128 0x1d
  3388 0788 2A010000 		.4byte	.LVL34
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 83
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 83
 
 
  3389 078c 39150000 		.4byte	0x1539
@@ -4978,7 +4978,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  3443 07fc 9C       		.byte	0x9c
  3444 07fd 0B080000 		.4byte	0x80b
  3445 0801 20       		.uleb128 0x20
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 84
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 84
 
 
  3446 0802 0E000000 		.4byte	.LVL37
@@ -5038,7 +5038,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  3500 088e 00       		.byte	0
  3501 088f 1D       		.uleb128 0x1d
  3502 0890 1E000000 		.4byte	.LVL41
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 85
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 85
 
 
  3503 0894 FF140000 		.4byte	0x14ff
@@ -5098,7 +5098,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  3557 0908 45000000 		.4byte	0x45
  3558 090c 86010000 		.4byte	.LLST9
  3559 0910 19       		.uleb128 0x19
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 86
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 86
 
 
  3560 0911 85020000 		.4byte	.LASF138
@@ -5158,7 +5158,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  3614 09a1 E9050000 		.4byte	.LASF147
  3615 09a5 01       		.byte	0x1
  3616 09a6 4F03     		.2byte	0x34f
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 87
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 87
 
 
  3617 09a8 45000000 		.4byte	0x45
@@ -5218,7 +5218,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  3671 0a33 8C000000 		.4byte	.LVL66
  3672 0a37 74150000 		.4byte	0x1574
  3673 0a3b 520A0000 		.4byte	0xa52
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 88
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 88
 
 
  3674 0a3f 1E       		.uleb128 0x1e
@@ -5278,7 +5278,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  3728 0a9f A0000000 		.4byte	.LC9
  3729 0aa3 00       		.byte	0
  3730 0aa4 1D       		.uleb128 0x1d
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 89
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 89
 
 
  3731 0aa5 0A010000 		.4byte	.LVL76
@@ -5338,7 +5338,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  3785 0b08 AA150000 		.4byte	0x15aa
  3786 0b0c 200B0000 		.4byte	0xb20
  3787 0b10 1E       		.uleb128 0x1e
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 90
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 90
 
 
  3788 0b11 01       		.uleb128 0x1
@@ -5398,7 +5398,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  3842 0b79 1C       		.uleb128 0x1c
  3843 0b7a 26000000 		.4byte	.LBB6
  3844 0b7e 12000000 		.4byte	.LBE6-.LBB6
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 91
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 91
 
 
  3845 0b82 A70B0000 		.4byte	0xba7
@@ -5458,7 +5458,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  3899 0be9 12000000 		.4byte	.LVL109
  3900 0bed D8150000 		.4byte	0x15d8
  3901 0bf1 FB0B0000 		.4byte	0xbfb
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 92
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 92
 
 
  3902 0bf5 1E       		.uleb128 0x1e
@@ -5518,7 +5518,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  3956 0c47 520C0000 		.4byte	0xc52
  3957 0c4b 14       		.uleb128 0x14
  3958 0c4c F7010000 		.4byte	0x1f7
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 93
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 93
 
 
  3959 0c50 7F       		.byte	0x7f
@@ -5578,7 +5578,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  4013 0cca 05       		.uleb128 0x5
  4014 0ccb 03       		.byte	0x3
  4015 0ccc F0000000 		.4byte	.LC14
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 94
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 94
 
 
  4016 0cd0 1E       		.uleb128 0x1e
@@ -5638,7 +5638,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  4070 0d22 1D       		.uleb128 0x1d
  4071 0d23 3A000000 		.4byte	.LVL121
  4072 0d27 D8150000 		.4byte	0x15d8
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 95
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 95
 
 
  4073 0d2b 350D0000 		.4byte	0xd35
@@ -5698,7 +5698,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  4127 0d8e 00       		.byte	0
  4128 0d8f 1D       		.uleb128 0x1d
  4129 0d90 20000000 		.4byte	.LVL129
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 96
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 96
 
 
  4130 0d94 D8150000 		.4byte	0x15d8
@@ -5758,7 +5758,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  4184 0dee 52010000 		.4byte	0x152
  4185 0df2 00000000 		.4byte	.LFB111
  4186 0df6 5C000000 		.4byte	.LFE111-.LFB111
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 97
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 97
 
 
  4187 0dfa 01       		.uleb128 0x1
@@ -5818,7 +5818,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  4241 0e70 7A090000 		.4byte	.LASF155
  4242 0e74 01       		.byte	0x1
  4243 0e75 1B02     		.2byte	0x21b
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 98
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 98
 
 
  4244 0e77 00000000 		.4byte	.LFB118
@@ -5878,7 +5878,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  4298 0eef 00000000 		.4byte	.LFB121
  4299 0ef3 28000000 		.4byte	.LFE121-.LFB121
  4300 0ef7 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 99
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 99
 
 
  4301 0ef8 9C       		.byte	0x9c
@@ -5938,7 +5938,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  4355 0f6d 9C       		.byte	0x9c
  4356 0f6e 7C0F0000 		.4byte	0xf7c
  4357 0f72 20       		.uleb128 0x20
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 100
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 100
 
 
  4358 0f73 06000000 		.4byte	.LVL147
@@ -5998,7 +5998,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  4412 0ffa 1E       		.uleb128 0x1e
  4413 0ffb 01       		.uleb128 0x1
  4414 0ffc 51       		.byte	0x51
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 101
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 101
 
 
  4415 0ffd 0B       		.uleb128 0xb
@@ -6058,7 +6058,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  4469 1045 51       		.byte	0x51
  4470 1046 02       		.uleb128 0x2
  4471 1047 76       		.byte	0x76
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 102
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 102
 
 
  4472 1048 00       		.sleb128 0
@@ -6118,7 +6118,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  4526 1090 00       		.byte	0
  4527 1091 1F       		.uleb128 0x1f
  4528 1092 0A010000 		.4byte	.LVL170
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 103
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 103
 
 
  4529 1096 520C0000 		.4byte	0xc52
@@ -6178,7 +6178,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  4583 10f5 620B0000 		.4byte	.LASF167
  4584 10f9 01       		.byte	0x1
  4585 10fa 3C01     		.2byte	0x13c
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 104
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 104
 
 
  4586 10fc 00000000 		.4byte	.LFB114
@@ -6238,7 +6238,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  4640 1181 BA000000 		.4byte	.LVL184
  4641 1185 4B160000 		.4byte	0x164b
  4642 1189 20       		.uleb128 0x20
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 105
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 105
 
 
  4643 118a BE000000 		.4byte	.LVL185
@@ -6298,7 +6298,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  4697 11f1 2A       		.uleb128 0x2a
  4698 11f2 12050000 		.4byte	.LASF170
  4699 11f6 01       		.byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 106
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 106
 
 
  4700 11f7 DB       		.byte	0xdb
@@ -6358,7 +6358,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  4754 128d F4000000 		.4byte	.LVL212
  4755 1291 130F0000 		.4byte	0xf13
  4756 1295 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 107
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 107
 
 
  4757 1296 2B       		.uleb128 0x2b
@@ -6418,7 +6418,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  4811 1315 00       		.byte	0
  4812 1316 1D       		.uleb128 0x1d
  4813 1317 56000000 		.4byte	.LVL227
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 108
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 108
 
 
  4814 131b FF140000 		.4byte	0x14ff
@@ -6478,7 +6478,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  4868 1387 F7010000 		.4byte	0x1f7
  4869 138b 3F       		.byte	0x3f
  4870 138c 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 109
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 109
 
 
  4871 138d 2C       		.uleb128 0x2c
@@ -6538,7 +6538,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  4925 1400 98020000 		.4byte	MP3__alignBytes
  4926 1404 11       		.uleb128 0x11
  4927 1405 2C000000 		.4byte	0x2c
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 110
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 110
 
 
  4928 1409 14140000 		.4byte	0x1414
@@ -6598,7 +6598,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  4982 147b 8C000000 		.4byte	0x8c
  4983 147f 2E       		.uleb128 0x2e
  4984 1480 5C010000 		.4byte	.LASF188
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 111
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 111
 
 
  4985 1484 0D       		.byte	0xd
@@ -6658,7 +6658,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  5039 14fe E7       		.byte	0xe7
  5040 14ff 30       		.uleb128 0x30
  5041 1500 A20A0000 		.4byte	.LASF199
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 112
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 112
 
 
  5042 1504 A20A0000 		.4byte	.LASF199
@@ -6708,7 +6708,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  5086 156a 22070000 		.4byte	.LASF208
  5087 156e 22070000 		.4byte	.LASF208
  5088 1572 0C       		.byte	0xc
- 5089 1573 5C       		.byte	0x5c
+ 5089 1573 74       		.byte	0x74
  5090 1574 32       		.uleb128 0x32
  5091 1575 D7020000 		.4byte	.LASF236
  5092 1579 D7020000 		.4byte	.LASF236
@@ -6718,7 +6718,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  5096 1586 14       		.byte	0x14
  5097 1587 26       		.byte	0x26
  5098 1588 31       		.uleb128 0x31
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 113
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 113
 
 
  5099 1589 0A050000 		.4byte	.LASF210
@@ -6778,7 +6778,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  5153 1606 30       		.uleb128 0x30
  5154 1607 74010000 		.4byte	.LASF221
  5155 160b 74010000 		.4byte	.LASF221
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 114
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 114
 
 
  5156 160f 09       		.byte	0x9
@@ -6838,7 +6838,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  5210 0009 1B       		.uleb128 0x1b
  5211 000a 0E       		.uleb128 0xe
  5212 000b 55       		.uleb128 0x55
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 115
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 115
 
 
  5213 000c 17       		.uleb128 0x17
@@ -6898,7 +6898,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  5267 0042 3A       		.uleb128 0x3a
  5268 0043 0B       		.uleb128 0xb
  5269 0044 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 116
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 116
 
 
  5270 0045 0B       		.uleb128 0xb
@@ -6958,7 +6958,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  5324 007b 00       		.byte	0
  5325 007c 00       		.byte	0
  5326 007d 0C       		.uleb128 0xc
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 117
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 117
 
 
  5327 007e 28       		.uleb128 0x28
@@ -7018,7 +7018,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  5381 00b4 3B       		.uleb128 0x3b
  5382 00b5 0B       		.uleb128 0xb
  5383 00b6 49       		.uleb128 0x49
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 118
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 118
 
 
  5384 00b7 13       		.uleb128 0x13
@@ -7078,7 +7078,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  5438 00ed 49       		.uleb128 0x49
  5439 00ee 13       		.uleb128 0x13
  5440 00ef 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 119
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 119
 
 
  5441 00f0 0B       		.uleb128 0xb
@@ -7138,7 +7138,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  5495 0127 02       		.uleb128 0x2
  5496 0128 17       		.uleb128 0x17
  5497 0129 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 120
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 120
 
 
  5498 012a 00       		.byte	0
@@ -7198,7 +7198,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  5552 0160 13       		.uleb128 0x13
  5553 0161 00       		.byte	0
  5554 0162 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 121
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 121
 
 
  5555 0163 1D       		.uleb128 0x1d
@@ -7258,7 +7258,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  5609 01a2 06       		.uleb128 0x6
  5610 01a3 40       		.uleb128 0x40
  5611 01a4 18       		.uleb128 0x18
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 122
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 122
 
 
  5612 01a5 9742     		.uleb128 0x2117
@@ -7318,7 +7318,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  5666 01dc 11       		.uleb128 0x11
  5667 01dd 01       		.uleb128 0x1
  5668 01de 12       		.uleb128 0x12
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 123
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 123
 
 
  5669 01df 06       		.uleb128 0x6
@@ -7378,7 +7378,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  5723 0218 19       		.uleb128 0x19
  5724 0219 00       		.byte	0
  5725 021a 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 124
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 124
 
 
  5726 021b 28       		.uleb128 0x28
@@ -7438,7 +7438,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  5780 0253 0B       		.uleb128 0xb
  5781 0254 49       		.uleb128 0x49
  5782 0255 13       		.uleb128 0x13
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 125
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 125
 
 
  5783 0256 02       		.uleb128 0x2
@@ -7498,7 +7498,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  5837 028d 03       		.uleb128 0x3
  5838 028e 0E       		.uleb128 0xe
  5839 028f 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 126
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 126
 
 
  5840 0290 0B       		.uleb128 0xb
@@ -7558,7 +7558,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  5894 02c6 03       		.uleb128 0x3
  5895 02c7 0E       		.uleb128 0xe
  5896 02c8 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 127
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 127
 
 
  5897 02c9 0B       		.uleb128 0xb
@@ -7618,7 +7618,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  5951 0055 0100     		.2byte	0x1
  5952 0057 56       		.byte	0x56
  5953 0058 18010000 		.4byte	.LVL32
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 128
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 128
 
 
  5954 005c 1C010000 		.4byte	.LVL33
@@ -7678,7 +7678,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6008 00eb C2000000 		.4byte	.LVL21
  6009 00ef C8000000 		.4byte	.LVL22
  6010 00f3 0100     		.2byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 129
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 129
 
 
  6011 00f5 55       		.byte	0x55
@@ -7738,7 +7738,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6065 017e 00000000 		.4byte	0
  6066 0182 00000000 		.4byte	0
  6067              	.LLST9:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 130
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 130
 
 
  6068 0186 0C000000 		.4byte	.LVL52
@@ -7798,7 +7798,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6122 0217 46000000 		.4byte	.LVL59
  6123 021b 64000000 		.4byte	.LVL62
  6124 021f 0100     		.2byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 131
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 131
 
 
  6125 0221 53       		.byte	0x53
@@ -7858,7 +7858,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6179 02b1 5C       		.byte	0x5c
  6180 02b2 00000000 		.4byte	0
  6181 02b6 00000000 		.4byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 132
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 132
 
 
  6182              	.LLST21:
@@ -7918,7 +7918,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6236 0349 51       		.byte	0x51
  6237 034a 4E010000 		.4byte	.LVL91
  6238 034e 56010000 		.4byte	.LVL93
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 133
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 133
 
 
  6239 0352 0100     		.2byte	0x1
@@ -7978,7 +7978,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6293 03b2 00       		.sleb128 0
  6294 03b3 22       		.byte	0x22
  6295 03b4 76       		.byte	0x76
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 134
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 134
 
 
  6296 03b5 00       		.sleb128 0
@@ -8038,7 +8038,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6350 0420 14000000 		.4byte	.LVL117
  6351 0424 0100     		.2byte	0x1
  6352 0426 51       		.byte	0x51
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 135
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 135
 
 
  6353 0427 14000000 		.4byte	.LVL117
@@ -8098,7 +8098,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6407 0494 26000000 		.4byte	.LVL150
  6408 0498 14010000 		.4byte	.LVL171
  6409 049c 0100     		.2byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 136
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 136
 
 
  6410 049e 58       		.byte	0x58
@@ -8158,7 +8158,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6464 0529 36000000 		.4byte	.LVL190
  6465 052d 3F000000 		.4byte	.LVL191-1
  6466 0531 0100     		.2byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 137
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 137
 
 
  6467 0533 50       		.byte	0x50
@@ -8218,7 +8218,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6521 05ae 0100     		.2byte	0x1
  6522 05b0 50       		.byte	0x50
  6523 05b1 8F000000 		.4byte	.LVL201-1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 138
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 138
 
 
  6524 05b5 98000000 		.4byte	.LVL202
@@ -8278,7 +8278,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6578 0632 0400     		.2byte	0x4
  6579 0634 F3       		.byte	0xf3
  6580 0635 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 139
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 139
 
 
  6581 0636 50       		.byte	0x50
@@ -8338,7 +8338,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6635 06bf 88010000 		.4byte	.LC24
  6636 06c3 9F       		.byte	0x9f
  6637 06c4 32000000 		.4byte	.LVL220
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 140
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 140
 
 
  6638 06c8 64000000 		.4byte	.LVL230
@@ -8398,7 +8398,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6692 00b4 24000000 		.4byte	.LFE130-.LFB130
  6693 00b8 00000000 		.4byte	.LFB113
  6694 00bc 0C010000 		.4byte	.LFE113-.LFB113
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 141
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 141
 
 
  6695 00c0 00000000 		.4byte	.LFB131
@@ -8458,7 +8458,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6749              		.section	.debug_line,"",%progbits
  6750              	.Ldebug_line0:
  6751 0000 90070000 		.section	.debug_str,"MS",%progbits,1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 142
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 142
 
 
  6751      0200BB03 
@@ -8518,7 +8518,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6777      5F526561 
  6777      64657253 
  6777      74617465 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 143
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 143
 
 
  6777      5F7400
@@ -8578,7 +8578,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6802              	.LASF214:
  6803 0132 4442475F 		.ascii	"DBG_DEAD_Write\000"
  6803      44454144 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 144
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 144
 
 
  6803      5F577269 
@@ -8638,7 +8638,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6825      70332E63 
  6825      00
  6826              	.LASF218:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 145
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 145
 
 
  6827 01dd 5446545F 		.ascii	"TFT_setCursor\000"
@@ -8698,7 +8698,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6849      454D5450 
  6850              	.LASF171:
  6851 027f 73746174 		.ascii	"state\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 146
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 146
 
 
  6851      6500
@@ -8758,7 +8758,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6877      525F4944 
  6877      4C4500
  6878              	.LASF148:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 147
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 147
 
 
  6879 031f 746F7461 		.ascii	"total\000"
@@ -8818,7 +8818,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6905 03b5 4D50335F 		.ascii	"MP3__dispSong\000"
  6905      5F646973 
  6905      70536F6E 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 148
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 148
 
 
  6905      6700
@@ -8878,7 +8878,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6929      69676E65 
  6929      6420696E 
  6929      7400
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 149
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 149
 
 
  6930              	.LASF17:
@@ -8938,7 +8938,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6955      74536F6E 
  6955      6700
  6956              	.LASF194:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 150
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 150
 
 
  6957 04f7 7374726C 		.ascii	"strlen\000"
@@ -8998,7 +8998,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  6983 0591 5F5F696E 		.ascii	"__int32_t\000"
  6983      7433325F 
  6983      7400
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 151
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 151
 
 
  6984              	.LASF79:
@@ -9058,7 +9058,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  7011      5F577269 
  7011      746500
  7012              	.LASF143:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 152
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 152
 
 
  7013 0633 64697669 		.ascii	"divisor\000"
@@ -9118,7 +9118,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  7036              	.LASF169:
  7037 06cc 4D50335F 		.ascii	"MP3_ProcessEvent\000"
  7037      50726F63 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 153
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 153
 
 
  7037      65737345 
@@ -9178,7 +9178,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  7063 075d 6D5F6E6F 		.ascii	"m_noSongs\000"
  7063      536F6E67 
  7063      7300
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 154
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 154
 
 
  7064              	.LASF205:
@@ -9238,7 +9238,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  7086      4C415949 
  7086      4E4700
  7087              	.LASF230:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 155
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 155
 
 
  7088 0829 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
@@ -9298,7 +9298,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  7110 0919 46535F46 		.ascii	"FS_FOpen\000"
  7110      4F70656E 
  7110      00
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 156
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 156
 
 
  7111              	.LASF29:
@@ -9358,7 +9358,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  7136 09bb 62697473 		.ascii	"bits_per_sample\000"
  7136      5F706572 
  7136      5F73616D 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 157
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 157
 
 
  7136      706C6500 
@@ -9418,7 +9418,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  7161              	.LASF46:
  7162 0a5f 696E7438 		.ascii	"int8_t\000"
  7162      5F7400
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 158
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 158
 
 
  7163              	.LASF120:
@@ -9478,7 +9478,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  7187              	.LASF3:
  7188 0b05 75696E74 		.ascii	"uint8_t\000"
  7188      385F7400 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 159
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 159
 
 
  7189              	.LASF110:
@@ -9538,7 +9538,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 1
  7212      6F5F666F 
  7212      726D6174 
  7212      00
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc13lB5A.s 			page 160
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccR22bMn.s 			page 160
 
 
  7213              	.LASF156:

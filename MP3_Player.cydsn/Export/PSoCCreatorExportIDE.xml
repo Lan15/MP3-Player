@@ -126,15 +126,10 @@
       </Folder>
       <Folder BuildType="STRICT" Path="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn">
         <Files Root="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn">
-          <File BuildType="BUILD" Toolchain="">source\asw\Boxer.c</File>
-          <File BuildType="BUILD" Toolchain="">source\asw\CastleOfGlass.c</File>
           <File BuildType="BUILD" Toolchain="">source\asw\mp3.c</File>
           <File BuildType="BUILD" Toolchain="">source\asw\mp3.h</File>
           <File BuildType="BUILD" Toolchain="">source\asw\sound.c</File>
           <File BuildType="BUILD" Toolchain="">source\asw\sound.h</File>
-          <File BuildType="BUILD" Toolchain="">source\asw\sound_data.c</File>
-          <File BuildType="BUILD" Toolchain="">source\asw\sound_data.h</File>
-          <File BuildType="BUILD" Toolchain="">source\asw\valerie.c</File>
           <File BuildType="BUILD" Toolchain="">source\asw\main.c</File>
           <File BuildType="BUILD" Toolchain="">source\asw\wav_parser.c</File>
           <File BuildType="BUILD" Toolchain="">source\asw\wav_parser.h</File>

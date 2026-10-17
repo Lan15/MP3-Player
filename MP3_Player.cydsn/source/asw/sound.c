@@ -246,43 +246,6 @@ uint32_t SOUND__GetAndClearUnderruns(void)
  * ISR Definitions
  ********************************************************************************/
 
-/*RC_t SOUND_isr()
-{
-
-    // Dual buffer streaming
-    if (SOUND__currentSong.m_activeBuf != 0)
-    {
-        if (SOUND__currentSong.m_readPos < SOUND__currentSong.m_activeFill)
-        {
-            uint16_t sample =
-                ((uint16_t)SOUND__currentSong.m_activeBuf[SOUND__currentSong.m_readPos]
-                 * (uint16_t)SOUND__currentSong.m_volume) / 100u;
-
-            SOUND_PWM_WriteCompare((uint8_t)sample);
-            SOUND__currentSong.m_readPos++;
-
-            if (SOUND__currentSong.m_readPos == (SOUND__currentSong.m_activeFill / 2u))
-            {
-                SetEvent(tsk_reader, ev_BufEmpty);
-            }
-        }
-        else
-        {
-            if (SOUND__currentSong.m_activeFill == 0u)
-            {
-                SOUND__underruns++;          // INC 6B.1: reader missed the deadline 
-            }
-            SOUND_StopPlay();
-            SOUND_SwapBuffers();
-            SOUND_StartPlay();
-        }
-        
-        return RC_SUCCESS;
-    }
-    
-    return RC_SUCCESS;
-}*/
-
 RC_t SOUND_isr()
 {
     // Dual buffer streaming
