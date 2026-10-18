@@ -8,11 +8,10 @@
 * \details
 * See sound.h for the overview. Two contexts use this file:
 *
-*   - tsk_reader : SOUND_FillBuffer() writes the inactive buffer, SOUND_SwapBuffers()
-*                  once before the start
+*   - tsk_reader : SOUND_FillBuffer() writes the inactive buffer, SOUND_SwapBuffers() once before the start
 *   - ISR2(isr_Timer) : SOUND_isr() plays the active buffer, swaps when it is done
 *
-* Design notes N1..N8 are collected at the end of this file.
+* Design notes N1..N9 are collected at the end of this file.
 *
 * \copyright Copyright 2016
 * Department of electrical engineering and information technology, Hochschule Darmstadt - University of applied sciences (h_da). All Rights Reserved.
@@ -70,54 +69,54 @@ typedef struct
 /* Local variable definitions ('static')                                     */
 /*****************************************************************************/
 
-/** The two sample buffers. */
-static uint8_t SOUND__bufA[SOUND_BUFFER_SIZE];
-static uint8_t SOUND__bufB[SOUND_BUFFER_SIZE];
+static uint8_t SOUND__bufA[SOUND_BUFFER_SIZE];          /**< \brief sample buffer A, ISR plays it or the reader fills it (N1) */
+static uint8_t SOUND__bufB[SOUND_BUFFER_SIZE];          /**< \brief sample buffer B, ISR plays it or the reader fills it (N1) */
 
 static SOUND__Driver_t SOUND__currentSong = {NULL, 0u, 0u, NULL, NULL, 0u, 0u, 0u, SOUND_VOLUME_MAX};	/**< \brief Driver state, volume starts at 100 %. */
 
-
-static volatile uint32_t SOUND__underruns = 0u;	/**< \brief ticks where no sample was ready (N7). */
+static volatile uint32_t SOUND__underruns = 0u;	        /**< \brief ticks where no sample was ready (N7). */
 
 /*****************************************************************************/
 /* Local function prototypes ('static')                                      */
 /*****************************************************************************/
 
-static uint8_t * SOUND__GetInactiveBuf(void);
-static void SOUND__CompilerBarrier(void);
+static uint8_t * SOUND__GetInactiveBuf(void);                   /**< \brief buffer that the ISR is NOT playing (N1) */
+static void      SOUND__CompilerBarrier(void);                  /**< \brief stop the compiler from reordering memory accesses (N2) */
 
 /*****************************************************************************/
 /* Function implementation - global ('extern') and local ('static')          */
 /*****************************************************************************/
 
 /**
- * \brief Initialise the driver and the PWM / VDAC hardware (called once from tsk_init).
+ * \brief Initialise the sound driver and the PWM / VDAC hardware (called once from tsk_init).
  *
- * Fills both buffers with silence, selects A as active and B as inactive buffer,
- * clears the legacy flash fields (N6), routes channel 1, enables the output stage,
- * keeps the sample clock stopped and sets the PWM to the silence level.
- * The volume is not touched (default SOUND_VOLUME_MAX).
+ * Fills both buffers with silence (no click at the start), makes buffer A active and
+ * buffer B inactive, clears the legacy flash fields (N6), selects input channel 1,
+ * enables the amplifier, keeps the sample clock stopped and sets the PWM to the
+ * silence level. The volume is not touched (default SOUND_VOLUME_MAX).
  *
- * \return RC_SUCCESS (always)
+ * Call once from tsk_init, before the sample timer ISR can run.
+ *
+ * \return RC_SUCCESS (always, nothing can fail, N9)
  */
 RC_t SOUND_Init(void)
 {
     /* Pre-fill both buffers with silence - no click on start */
     (void)memset(SOUND__bufA, (int)SOUND_SILENCE, SOUND_BUFFER_SIZE);
     (void)memset(SOUND__bufB, (int)SOUND_SILENCE, SOUND_BUFFER_SIZE);
-
+ 
     /* Dual buffer: A active, B inactive */
     SOUND__currentSong.m_activeBuf    = SOUND__bufA;
     SOUND__currentSong.m_inactiveBuf  = SOUND__bufB;
     SOUND__currentSong.m_activeFill   = SOUND_BUFFER_SIZE;
     SOUND__currentSong.m_inactiveFill = 0u;
     SOUND__currentSong.m_readPos      = 0u;
-
+ 
     /* Flash path: cleared */
     SOUND__currentSong.m_song = NULL;
     SOUND__currentSong.m_size = 0u;
     SOUND__currentSong.m_pos  = 0u;
-
+ 
     /* Hardware init */
     SOUND_Control_Write(SOUND_CH1);
     SOUND_ENABLE_Write(1u);
@@ -125,77 +124,80 @@ RC_t SOUND_Init(void)
     SOUND_PWM_CLOCK_Start();
     SOUND_PWM_Start();
     SOUND_PWM_WriteCompare(SOUND_SILENCE);
-
+ 
     return RC_SUCCESS;
 }
-
+ 
 /**
  * \brief Start the sample clock; the timer ISR then calls SOUND_isr() every tick.
- * \return RC_SUCCESS (always)
+ * \return RC_SUCCESS (always, N9)
  */
 RC_t SOUND_StartPlay(void)
 {
     SOUND_SAMPLE_CLOCK_Start();
-
+ 
     return RC_SUCCESS;
 }
-
+ 
 /**
  * \brief Stop the sample clock; SOUND_isr() is no longer called, the PWM holds its last value.
- * \return RC_SUCCESS (always)
+ * \return RC_SUCCESS (always, N9)
  */
 RC_t SOUND_StopPlay(void)
 {
     SOUND_SAMPLE_CLOCK_Stop();      /* isr_Timer_Disable() does not work, the clock is stopped instead */
-
-	//isr_Timer_Disable seems not to work
-    //isr_Timer_Disable();
-
+ 
     return RC_SUCCESS;
 }
-
+ 
 /**
- * \brief Set a song in flash (old flash player, no longer played, N6 in sound.c).
+ * \brief Set a song in flash (old flash player, no longer played, N6).
  *
  * Switches the dual buffer path off: the ISR outputs nothing until the next
- * SOUND_FillBuffer() call.
+ * SOUND_FillBuffer() call. The song is only stored.
  *
- * /param   uint8_t const *const song       : pointer to the song data [IN]
- * /param   uint32_t sizeOfSong             : size of the song data [IN]
- * \return RC_SUCCESS always
+ * \param uint8_t const *const song : [IN] pointer to the song data (stored only, not dereferenced)
+ * \param uint32_t const sizeOfSong : [IN] size of the song data in bytes (stored only)
+ * \return RC_SUCCESS (always, N9)
  */
 RC_t SOUND_SetSong(uint8_t const * const song, uint32_t const sizeOfSong)
 {
     /* Disable dual buffer path */
     SOUND__currentSong.m_activeBuf = NULL;
-
+ 
     /* Set flash path (stored only, N6) */
     SOUND__currentSong.m_song = song;
     SOUND__currentSong.m_size = sizeOfSong;
     SOUND__currentSong.m_pos  = 0u;
-
+ 
     return RC_SUCCESS;
 }
-
+ 
 /**
- * \brief Set the volume.
- * /param   uint8_t volume                  : volume in percent, 0..#SOUND_VOLUME_MAX; larger values are limited to 100
- * \return RC_SUCCESS always
+ * \brief Set the output volume.
+ *
+ * Values above SOUND_VOLUME_MAX are limited to SOUND_VOLUME_MAX and reported (N9).
+ * 
+ * \param uint8_t const volume      : [IN] volume in percent, 0..SOUND_VOLUME_MAX
+ * \return RC_SUCCESS when the volume was set as requested,
+ *         RC_ERROR_RANGE when volume is above SOUND_VOLUME_MAX; the limited value SOUND_VOLUME_MAX is used
  */
 RC_t SOUND_SetVolume(uint8_t const volume)
 {
+    RC_t    rc  = RC_SUCCESS;
     uint8_t vol = volume;
-
+ 
     if (vol > SOUND_VOLUME_MAX)
     {
         vol = (uint8_t)SOUND_VOLUME_MAX;
+        rc  = RC_ERROR_RANGE;                   /* N9: the value is limited, the limited value is used */
     }
-
+ 
     SOUND__currentSong.m_volume = vol;
-
-    return RC_SUCCESS;
+ 
+    return rc;
 }
-
+ 
 /**
  * \brief Copy PCM data into the inactive buffer and announce it to the ISR (N1, N2, N5).
  *
@@ -203,18 +205,36 @@ RC_t SOUND_SetVolume(uint8_t const volume)
  * only then may the ISR swap. Switches the dual buffer path on if SOUND_SetSong()
  * had switched it off.
  *
- * \param[in] data  PCM bytes, at least size bytes, must not overlap the driver buffers
- * \param[in] size  Number of valid bytes, 1..SOUND_BUFFER_SIZE
- * \return RC_SUCCESS, or RC_ERROR if size is 0 or larger than SOUND_BUFFER_SIZE (nothing is changed)
+ * Only call while the inactive buffer is empty (after ev_BufEmpty).
+ *
+ * \param uint8_t const *const data : [IN] PCM bytes (unsigned 8 bit), at least size bytes, must not overlap the driver buffers
+ * \param uint16_t const size       : [IN] number of valid bytes, 1..SOUND_BUFFER_SIZE
+ * \return RC_SUCCESS when the buffer was filled,
+ *         RC_ERROR_NULL when data is NULL,
+ *         RC_ERROR_ZERO when size is 0,
+ *         RC_ERROR_OVERRUN when size is larger than SOUND_BUFFER_SIZE (nothing is changed in
+ *         the three error cases)
  */
 RC_t SOUND_FillBuffer(uint8_t const * const data, uint16_t const size)
 {
-    RC_t rc = RC_ERROR;
-
-    if ((size != 0u) && (size <= SOUND_BUFFER_SIZE))
+    RC_t rc = RC_SUCCESS;
+ 
+    if (data == NULL)
+    {
+        rc = RC_ERROR_NULL;                             /* N9: nothing to copy (before: memcpy from NULL) */
+    }
+    else if (size == 0u)
+    {
+        rc = RC_ERROR_ZERO;                             /* N9 */
+    }
+    else if (size > SOUND_BUFFER_SIZE)
+    {
+        rc = RC_ERROR_OVERRUN;                          /* N9 */
+    }
+    else
     {
         uint8_t * dst;
-
+ 
         /* Switch to dual buffer mode if not already */
         if (SOUND__currentSong.m_activeBuf == NULL)
         {
@@ -223,37 +243,36 @@ RC_t SOUND_FillBuffer(uint8_t const * const data, uint16_t const size)
             SOUND__currentSong.m_readPos     = 0u;
             SOUND__currentSong.m_activeFill  = 0u;
         }
-
+ 
         /* Write into the inactive buffer - the ISR never touches this one (N1) */
         dst = SOUND__GetInactiveBuf();
         SOUND__currentSong.m_inactiveBuf = dst;
-
+ 
         (void)memcpy(dst, data, size);                                              /* N5: block copy instead of a byte loop */
         (void)memset(&dst[size], (int)SOUND_SILENCE, (size_t)SOUND_BUFFER_SIZE - size);   /* pad the remainder with silence */
-
+ 
         SOUND__CompilerBarrier();                       /* N2: all bytes are written before the buffer is announced */
         SOUND__currentSong.m_inactiveFill = size;       /* last step: now the ISR may swap */
-
-        rc = RC_SUCCESS;
     }
-
+ 
     return rc;
 }
-
+ 
 /**
  * \brief Exchange active and inactive buffer (N1).
  *
  * The new active buffer gets the fill level of the former inactive one, the new
  * inactive buffer is marked empty and the read position restarts at 0.
  * Called from SOUND_isr() when the active buffer is finished and the inactive one
- * is ready, and once from the reader at start-up. Must not run in parallel with the ISR.
+ * is ready, and once from tsk_reader before the timer is started (pre-fill of both
+ * buffers, see mp3.c). Never call it from a task while the sample timer runs.
  *
- * \return RC_SUCCESS (always)
+ * \return RC_SUCCESS (always, N9)
  */
 RC_t SOUND_SwapBuffers(void)
 {
     uint8_t * tmpBuf;
-
+ 
     /* Swap the pointers and take over the fill level. In the ISR this cannot be
        interrupted by the reader (N1). */
     tmpBuf                            = SOUND__currentSong.m_activeBuf;
@@ -262,74 +281,82 @@ RC_t SOUND_SwapBuffers(void)
     SOUND__currentSong.m_activeFill   = SOUND__currentSong.m_inactiveFill;
     SOUND__currentSong.m_inactiveFill = 0u;
     SOUND__currentSong.m_readPos      = 0u;
-
+ 
     return RC_SUCCESS;
 }
-
+ 
 /**
  * \brief Return the number of underrun ticks since the last call and reset the counter (N7).
  *
- * An underrun is a tick where the active buffer was finished and no new one was ready.
+ * An underrun is a tick where the active buffer was finished and no new one was ready
+ * because the reader was late. Diagnostic only: a tick that happens between reading and
+ * clearing the counter is lost.
  *
- * \return Number of ISR ticks without a new sample, 0..UINT32_MAX
+ * \return number of ISR ticks without a new sample, 0..4294967295 (a count, not a status code, N9)
  */
 uint32_t SOUND__GetAndClearUnderruns(void)
 {
     uint32_t const n = SOUND__underruns;
-
+ 
     SOUND__underruns = 0u;                      /* N7: a tick between the two lines is lost */
     return n;
 }
-
+ 
 /*****************************************************************************/
 /* Private helpers                                                           */
 /*****************************************************************************/
-
+ 
 /**
  * \brief Return the buffer that the ISR is NOT playing.
- * \return SOUND__bufB if A is active, otherwise SOUND__bufA
+ * \return SOUND__bufB when A is active, otherwise SOUND__bufA
  */
 static uint8_t * SOUND__GetInactiveBuf(void)
 {
     return (SOUND__currentSong.m_activeBuf == SOUND__bufA) ? SOUND__bufB : SOUND__bufA;
 }
-
+ 
 /**
  * \brief Stop the compiler from moving memory accesses across this call (N2).
  *
  * GNU C inline assembler with a "memory" clobber, no instruction is generated.
+ *
  */
 static void SOUND__CompilerBarrier(void)
 {
     __asm volatile ("" : : : "memory");
 }
-
+ 
 /********************************************************************************
  * ISR Definitions
  ********************************************************************************/
-
+ 
 /**
  * \brief Timer interrupt body: output one sample, swap buffers when needed (N1, N3, N4).
  *
  * Per tick exactly one of: output a sample (volume scaled), swap + SetEvent(tsk_reader,
  * ev_BufEmpty), or count an underrun. Does nothing while the dual buffer path is off.
  *
- * \return RC_SUCCESS (always)
+ * Call only from ISR2(isr_Timer).
+ *
+ * \return RC_SUCCESS when a sample was output, a swap was done or the dual buffer path is off,
+ *         RC_ERROR_BUFFER_EMTPY when this tick was an underrun (reader late, last value held, N9)
  */
 RC_t SOUND_isr(void)
 {
+    RC_t rc = RC_SUCCESS;
+ 
     /* Dual buffer streaming. The buffer pointer and the read position are read once (N3). */
     uint8_t const * const active = SOUND__currentSong.m_activeBuf;
-
+ 
     if (active != NULL)
     {
         uint16_t const pos = SOUND__currentSong.m_readPos;
-
+ 
         if (pos < SOUND__currentSong.m_activeFill)
         {
             /* N4: sample * volume / 100, the compiler turns "/ 100u" into a multiplication */
             uint16_t const sample = (uint16_t)(((uint16_t)active[pos] * (uint16_t)SOUND__currentSong.m_volume) / 100u);
-
+ 
             SOUND_PWM_WriteCompare((uint8_t)sample);
             SOUND__currentSong.m_readPos = (uint16_t)(pos + 1u);
         }
@@ -349,12 +376,13 @@ RC_t SOUND_isr(void)
                Swapping only a filled buffer means FillBuffer can never write
                into the buffer the ISR is playing. */
             SOUND__underruns++;
+            rc = RC_ERROR_BUFFER_EMTPY;         /* N9 */
         }
     }
-
-    return RC_SUCCESS;
+ 
+    return rc;
 }
-
+ 
 /*----------------------------------------------------------------------------------------
 * Notes:
 *
@@ -411,6 +439,25 @@ RC_t SOUND_isr(void)
 *      - Rule 17.7: return values of SOUND_StopPlay(), SOUND_SwapBuffers(), SetEvent() are cast to
 *        void, they cannot fail (RC_SUCCESS always, E_OK for an existing task and event).
 *      - Rule 20.10 / Dir 4.9: the DBG_HI/DBG_LO macros with ## were removed.
+*      - Rule 4.4 / 3.1 (commented-out code): the two "//isr_Timer_Disable" lines were removed,
+*        the reason stays in one comment in SOUND_StopPlay().
+*
+* N9 - Return codes (INC 11C.1). Functions that can fail for a reason return RC_t:
+*        SOUND_FillBuffer()  RC_ERROR_NULL (data is NULL, new check, before: crash in memcpy),
+*                            RC_ERROR_ZERO (size 0), RC_ERROR_OVERRUN (size > SOUND_BUFFER_SIZE).
+*                            Before: RC_ERROR for the last two. Nothing is changed in these cases.
+*        SOUND_SetVolume()   RC_ERROR_RANGE when volume > SOUND_VOLUME_MAX. The limited value is
+*                            still stored, so the sound is as before; the caller can see that
+*                            it asked for too much.
+*        SOUND_isr()         RC_ERROR_BUFFER_EMTPY for a tick that counted an underrun, RC_SUCCESS
+*                            otherwise. The output is identical; the ISR2 wrapper ignores the value
+*                            (MISRA 17.7: cast it to void there).
+*      Always RC_SUCCESS because nothing can fail (the PSoC component calls return void):
+*        SOUND_Init(), SOUND_StartPlay(), SOUND_StopPlay(), SOUND_SetSong() (legacy, N6),
+*        SOUND_SwapBuffers(). SOUND__GetAndClearUnderruns() returns a count, not a status.
+*      Callers: mp3.c casts every result to void and passes volume steps of 0..100, so nothing
+*      changes there. The comment at its SOUND_FillBuffer() call may say RC_ERROR_ZERO /
+*      RC_ERROR_OVERRUN instead of RC_ERROR.
 *
 *
 * Time (estimated):
