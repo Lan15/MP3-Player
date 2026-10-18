@@ -173,6 +173,21 @@ RC_t MP3_Init(void);
 RC_t MP3_ProcessEvent(EventMaskType nextEvent);
 
 /**
+ * \brief SD card streaming, body of tsk_reader (one run per ev_BufEmpty).
+ *
+ * Runs the reader state machine one step:
+ *  - IDLE      : wait for a song request
+ *  - OPEN      : open the file, parse the header, pre-fill both buffers, start the sound
+ *  - STREAMING : refill the inactive buffer; a new song request ends the song
+ *  - EOF       : stop the sound, close the file
+ *
+ * Call only from TASK(tsk_reader), after WaitEvent(ev_BufEmpty). The function returns
+ * after each step, the WaitEvent loop is in main.c.
+ *
+ */
+void MP3_Reader(void);
+
+/**
  * \brief Update the TFT: song list, "No songs" or error message.
  *
  * Only what changed since the last call is redrawn (rows of the old and the
