@@ -432,9 +432,6 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_FS_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_FS.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_FS.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_TOK_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_TOK.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_TOK.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_CONV_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_CONV.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DBG_CONV.h</File>

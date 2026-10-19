@@ -1,5 +1,5 @@
 -- Project:   MP3_Player
--- Generated: 10/15/2026 21:27:29
+-- Generated: 10/18/2026 18:07:33
 -- PSoC Creator  4.4
 
 ENTITY MP3_Player IS
@@ -40,7 +40,6 @@ ENTITY MP3_Player IS
         \emFile:sclk0(0)_PAD\ : OUT std_ulogic;
         \emFile:SPI0_CS(0)_PAD\ : OUT std_ulogic;
         DBG_FS(0)_PAD : OUT std_ulogic;
-        DBG_TOK(0)_PAD : OUT std_ulogic;
         DBG_CONV(0)_PAD : OUT std_ulogic;
         DBG_FILL(0)_PAD : OUT std_ulogic;
         DBG_DEAD(0)_PAD : OUT std_ulogic);
@@ -75,7 +74,6 @@ ARCHITECTURE __DEFAULT__ OF MP3_Player IS
     SIGNAL DBG_DEAD(0)__PA : bit;
     SIGNAL DBG_FILL(0)__PA : bit;
     SIGNAL DBG_FS(0)__PA : bit;
-    SIGNAL DBG_TOK(0)__PA : bit;
     SIGNAL DEBUG_RX(0)__PA : bit;
     SIGNAL DEBUG_TX(0)__PA : bit;
     SIGNAL LED_green(0)__PA : bit;
@@ -4192,96 +4190,6 @@ BEGIN
             pa_out => DBG_FS(0)__PA,
             oe => open,
             pad_in => DBG_FS(0)_PAD,
-            in_clock => open,
-            in_clock_en => '1',
-            in_reset => '0',
-            out_clock => open,
-            out_clock_en => '1',
-            out_reset => '0');
-
-    DBG_TOK:logicalport
-        GENERIC MAP(
-            drive_mode => "110",
-            ibuf_enabled => "1",
-            id => "9f7c2a8a-edb0-4d89-b889-2c61784e33f9",
-            init_dr_st => "0",
-            input_buffer_sel => "00",
-            input_clk_en => 0,
-            input_sync => "1",
-            input_sync_mode => "0",
-            intr_mode => "00",
-            invert_in_clock => 0,
-            invert_in_clock_en => 0,
-            invert_in_reset => 0,
-            invert_out_clock => 0,
-            invert_out_clock_en => 0,
-            invert_out_reset => 0,
-            io_voltage => "",
-            layout_mode => "CONTIGUOUS",
-            oe_conn => "0",
-            oe_reset => 0,
-            oe_sync => "0",
-            output_clk_en => 0,
-            output_clock_mode => "0",
-            output_conn => "0",
-            output_mode => "0",
-            output_reset => 0,
-            output_sync => "0",
-            ovt_hyst_trim => "0",
-            ovt_needed => "0",
-            ovt_slew_control => "00",
-            pa_in_clock => -1,
-            pa_in_clock_en => -1,
-            pa_in_reset => -1,
-            pa_out_clock => -1,
-            pa_out_clock_en => -1,
-            pa_out_reset => -1,
-            pin_aliases => "",
-            pin_mode => "O",
-            por_state => 4,
-            port_alias_group => "",
-            port_alias_required => 0,
-            sio_group_cnt => 0,
-            sio_hifreq => "00000000",
-            sio_hyst => "1",
-            sio_ibuf => "00000000",
-            sio_info => "00",
-            sio_obuf => "00000000",
-            sio_refsel => "00000000",
-            sio_vohsel => "00000000",
-            sio_vtrip => "00000000",
-            slew_rate => "0",
-            spanning => 0,
-            sw_only => 0,
-            use_annotation => "0",
-            vtrip => "10",
-            width => 1,
-            in_clk_inv => 0,
-            in_clken_inv => 0,
-            in_clken_mode => 1,
-            in_rst_inv => 0,
-            out_clk_inv => 0,
-            out_clken_inv => 0,
-            out_clken_mode => 1,
-            out_rst_inv => 0)
-        PORT MAP(
-            in_clock_en => open,
-            in_reset => open,
-            out_clock_en => open,
-            out_reset => open);
-
-    DBG_TOK(0):iocell
-        GENERIC MAP(
-            in_sync_mode => 0,
-            out_sync_mode => 0,
-            oe_sync_mode => 0,
-            logicalport => "DBG_TOK",
-            logicalport_pin_id => 0,
-            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
-        PORT MAP(
-            pa_out => DBG_TOK(0)__PA,
-            oe => open,
-            pad_in => DBG_TOK(0)_PAD,
             in_clock => open,
             in_clock_en => '1',
             in_reset => '0',

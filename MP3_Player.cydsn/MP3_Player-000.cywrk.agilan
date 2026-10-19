@@ -18,7 +18,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="MP3_Player-000\MP3_Player\asw\mp3.h">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="MP3_Player-000\MP3_Player\TopDesign">
 <ExpandedNodeIds>
 <v>MP3_Player-000</v>
 <v>MP3_Player-000\MP3_Player</v>
@@ -365,7 +365,6 @@
 <v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_DEAD.lst</v>
 <v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_FILL.lst</v>
 <v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_FS.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_TOK.lst</v>
 <v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile.lst</v>
 <v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_Clock_1.lst</v>
 <v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_ConfigMMC_SPI.lst</v>
@@ -497,53 +496,6 @@
 <VisibleNodeIds>
 <v>MP3_Player-000</v>
 <v>MP3_Player-000\MP3_Player</v>
-<v>MP3_Player-000\MP3_Player\CortexM3</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\button.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\BUTTON_1.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\BUTTON_2.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\BUTTON_3.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\BUTTON_4.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\CLK_LED.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_CONV.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_DEAD.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_FILL.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_FS.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_TOK.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_Clock_1.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_ConfigMMC_SPI.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_miso0.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_MMC_HW_SPI.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_mosi0.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_PM.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_sclk0.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_SPI0.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_SPI0_CS.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_SPI0_INT.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_SPI0_PM.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_Button.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_Timer.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\led.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\LED_green.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\LED_red.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\LED_yellow.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\logging.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
-<v>MP3_Player-000\MP3_Player\CortexM3\ARM_GCC_541\Debug\Listing Files\mp3.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -635,7 +587,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1478, 670" SelectedTabbedMdiWindow="4e89c3b2-9ca2-4b26-a2b3-e873aeb1d1da"><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\main.c" Guid="4e89c3b2-9ca2-4b26-a2b3-e873aeb1d1da" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\wav_parser.c" Guid="5c02ee9e-352c-455d-8cde-96d131d3f919" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\sound.c" Guid="2fc3e3e9-e71c-448f-849e-16b10c9611b7" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\mp3.c" Guid="77611140-8a0b-4cde-b624-cfbb8bc37043" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\mp3.h" Guid="328b6dda-63de-458b-9b10-5eee19ac9b92" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\wav_parser.h" Guid="2b9a4498-085d-4672-ab4e-ec31bc839257" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\TopDesign\TopDesign.cysch" Guid="7b17f467-cdf0-44dd-969a-96aa81fac94b" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\sound.h" Guid="fcd3e243-90e3-4bc6-9393-3c00718f6319" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="cb98b672-06dc-4884-8407-7d2e5bb839d7" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\bsw\global.h" Guid="9babcdd8-182b-4870-941b-e6fcb6ab5377" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\MP3_Player.cydwr" Guid="dce18ade-cbd3-4e07-8438-eea16ac53985" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1485, 670" SelectedTabbedMdiWindow="7b17f467-cdf0-44dd-969a-96aa81fac94b"><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\main.c" Guid="4e89c3b2-9ca2-4b26-a2b3-e873aeb1d1da" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\wav_parser.c" Guid="5c02ee9e-352c-455d-8cde-96d131d3f919" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\sound.c" Guid="2fc3e3e9-e71c-448f-849e-16b10c9611b7" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\mp3.c" Guid="77611140-8a0b-4cde-b624-cfbb8bc37043" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\mp3.h" Guid="328b6dda-63de-458b-9b10-5eee19ac9b92" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\wav_parser.h" Guid="2b9a4498-085d-4672-ab4e-ec31bc839257" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\TopDesign\TopDesign.cysch" Guid="7b17f467-cdf0-44dd-969a-96aa81fac94b" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\asw\sound.h" Guid="fcd3e243-90e3-4bc6-9393-3c00718f6319" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="cb98b672-06dc-4884-8407-7d2e5bb839d7" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\source\bsw\global.h" Guid="9babcdd8-182b-4870-941b-e6fcb6ab5377" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_Player.cydsn\MP3_Player.cydwr" Guid="dce18ade-cbd3-4e07-8438-eea16ac53985" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

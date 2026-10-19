@@ -14,13 +14,18 @@ I1204: Reading architecture from file C:\H_Da Softwares & Projects\PSoC Creator\
 I1206: Completed Reading of file C:\H_Da Softwares & Projects\PSoC Creator\4.4\PSoC Creator\dev\psoc5/psoc5lp/route_arch-rrg.cydata
 I1209: Started routing
 I1223: Total Nets : 180 
-I1212: Iteration  1 :   120 unrouted : 0 seconds
-I1212: Iteration  2 :    31 unrouted : 0 seconds
-I1212: Iteration  3 :    22 unrouted : 0 seconds
-I1212: Iteration  4 :    17 unrouted : 0 seconds
-I1212: Iteration  5 :    15 unrouted : 1 seconds
-I1212: Iteration  6 :     8 unrouted : 0 seconds
-I1212: Iteration  7 :     0 unrouted : 0 seconds
+I1212: Iteration  1 :   119 unrouted : 0 seconds
+I1212: Iteration  2 :    39 unrouted : 1 seconds
+I1212: Iteration  3 :    29 unrouted : 0 seconds
+I1212: Iteration  4 :    15 unrouted : 0 seconds
+I1212: Iteration  5 :    14 unrouted : 0 seconds
+I1212: Iteration  6 :     7 unrouted : 0 seconds
+I1212: Iteration  7 :     7 unrouted : 0 seconds
+I1212: Iteration  8 :     7 unrouted : 0 seconds
+I1212: Iteration  9 :     4 unrouted : 0 seconds
+I1212: Iteration 10 :     4 unrouted : 0 seconds
+I1212: Iteration 11 :     2 unrouted : 0 seconds
+I1212: Iteration 12 :     0 unrouted : 0 seconds
 I1215: Routing is successful
 I1207: Completed routing
 I1210: Writing routes

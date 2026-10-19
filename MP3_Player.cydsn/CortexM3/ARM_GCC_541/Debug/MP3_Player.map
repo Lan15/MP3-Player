@@ -1657,7 +1657,7 @@ Discarded input sections
  .text          0x00000000        0x0 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
  .data          0x00000000        0x0 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
  .text.emFile_SPI0_Stop
-                0x00000000       0x24 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
+                0x00000000       0x28 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
  .text.emFile_SPI0_EnableTxInt
                 0x00000000        0x4 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
  .text.emFile_SPI0_EnableRxInt
@@ -1900,7 +1900,7 @@ END GROUP
                 0x00000800                ee_size = (CY_APPL_LOADABLE && ! (CY_EE_IN_BTLDR))?(CY_EE_SIZE / CY_APPL_MAX):CY_EE_SIZE
                 [!provide]                PROVIDE (CY_ECC_OFFSET, ecc_offset)
 
-.text           0x00000000     0x6942
+.text           0x00000000     0x693e
  CREATE_OBJECT_SYMBOLS
                 0x00000000                PROVIDE (__cy_interrupt_vector, RomVectors)
  *(.romvectors)
@@ -2364,810 +2364,808 @@ END GROUP
                 0x00003344       0x14 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_PWM.o)
                 0x00003344                SOUND_PWM_ClearFIFO
  .text.SOUND_PWM_Init
-                0x00003358       0x54 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_PWM.o)
+                0x00003358       0x50 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_PWM.o)
                 0x00003358                SOUND_PWM_Init
  .text.SOUND_PWM_Start
-                0x000033ac       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_PWM.o)
-                0x000033ac                SOUND_PWM_Start
+                0x000033a8       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_PWM.o)
+                0x000033a8                SOUND_PWM_Start
  .text.SOUND_PWM_CLOCK_Start
-                0x000033c8       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_PWM_CLOCK.o)
-                0x000033c8                SOUND_PWM_CLOCK_Start
+                0x000033c4       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_PWM_CLOCK.o)
+                0x000033c4                SOUND_PWM_CLOCK_Start
  .text.SOUND_Control_Write
-                0x000033e4        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_Control.o)
-                0x000033e4                SOUND_Control_Write
+                0x000033e0        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_Control.o)
+                0x000033e0                SOUND_Control_Write
  .text.SOUND_ENABLE_Write
-                0x000033f0       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_ENABLE.o)
-                0x000033f0                SOUND_ENABLE_Write
+                0x000033ec       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_ENABLE.o)
+                0x000033ec                SOUND_ENABLE_Write
  .text.SOUND_SAMPLE_Enable
-                0x00003408       0x28 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_SAMPLE.o)
-                0x00003408                SOUND_SAMPLE_Enable
+                0x00003404       0x28 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_SAMPLE.o)
+                0x00003404                SOUND_SAMPLE_Enable
  .text.SOUND_SAMPLE_SetInterruptMode
-                0x00003430        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_SAMPLE.o)
-                0x00003430                SOUND_SAMPLE_SetInterruptMode
+                0x0000342c        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_SAMPLE.o)
+                0x0000342c                SOUND_SAMPLE_SetInterruptMode
  .text.SOUND_SAMPLE_WriteCounter
-                0x0000343c       0x34 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_SAMPLE.o)
-                0x0000343c                SOUND_SAMPLE_WriteCounter
+                0x00003438       0x34 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_SAMPLE.o)
+                0x00003438                SOUND_SAMPLE_WriteCounter
  .text.SOUND_SAMPLE_WritePeriod
-                0x00003470        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_SAMPLE.o)
-                0x00003470                SOUND_SAMPLE_WritePeriod
+                0x0000346c        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_SAMPLE.o)
+                0x0000346c                SOUND_SAMPLE_WritePeriod
  .text.SOUND_SAMPLE_Init
-                0x0000347c       0x64 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_SAMPLE.o)
-                0x0000347c                SOUND_SAMPLE_Init
+                0x00003478       0x64 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_SAMPLE.o)
+                0x00003478                SOUND_SAMPLE_Init
  .text.SOUND_SAMPLE_Start
-                0x000034e0       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_SAMPLE.o)
-                0x000034e0                SOUND_SAMPLE_Start
+                0x000034dc       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_SAMPLE.o)
+                0x000034dc                SOUND_SAMPLE_Start
  .text.SOUND_SAMPLE_CLOCK_Start
-                0x000034fc       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_SAMPLE_CLOCK.o)
-                0x000034fc                SOUND_SAMPLE_CLOCK_Start
+                0x000034f8       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_SAMPLE_CLOCK.o)
+                0x000034f8                SOUND_SAMPLE_CLOCK_Start
  .text.SOUND_SAMPLE_CLOCK_Stop
-                0x00003518       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_SAMPLE_CLOCK.o)
-                0x00003518                SOUND_SAMPLE_CLOCK_Stop
+                0x00003514       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_SAMPLE_CLOCK.o)
+                0x00003514                SOUND_SAMPLE_CLOCK_Stop
  .text.UART_LOG_IntClock_Start
-                0x00003534       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(UART_LOG_IntClock.o)
-                0x00003534                UART_LOG_IntClock_Start
+                0x00003530       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(UART_LOG_IntClock.o)
+                0x00003530                UART_LOG_IntClock_Start
  .text.TFT_SPI_Enable
-                0x00003550       0x34 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_SPI.o)
-                0x00003550                TFT_SPI_Enable
+                0x0000354c       0x34 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_SPI.o)
+                0x0000354c                TFT_SPI_Enable
  .text.TFT_SPI_ReadTxStatus
-                0x00003584        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_SPI.o)
-                0x00003584                TFT_SPI_ReadTxStatus
+                0x00003580        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_SPI.o)
+                0x00003580                TFT_SPI_ReadTxStatus
  .text.TFT_SPI_ReadRxStatus
-                0x00003590        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_SPI.o)
-                0x00003590                TFT_SPI_ReadRxStatus
+                0x0000358c        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_SPI.o)
+                0x0000358c                TFT_SPI_ReadRxStatus
  .text.TFT_SPI_WriteTxData
-                0x0000359c       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_SPI.o)
-                0x0000359c                TFT_SPI_WriteTxData
+                0x00003598       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_SPI.o)
+                0x00003598                TFT_SPI_WriteTxData
  .text.TFT_SPI_ClearFIFO
-                0x000035b4       0x3c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_SPI.o)
-                0x000035b4                TFT_SPI_ClearFIFO
+                0x000035b0       0x3c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_SPI.o)
+                0x000035b0                TFT_SPI_ClearFIFO
  .text.TFT_SPI_Init
-                0x000035f0       0x28 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_SPI.o)
-                0x000035f0                TFT_SPI_Init
+                0x000035ec       0x28 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_SPI.o)
+                0x000035ec                TFT_SPI_Init
  .text.TFT_SPI_Start
-                0x00003618       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_SPI.o)
-                0x00003618                TFT_SPI_Start
+                0x00003614       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_SPI.o)
+                0x00003614                TFT_SPI_Start
  .text.TFT_DC_Write
-                0x00003634       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_DC.o)
-                0x00003634                TFT_DC_Write
+                0x00003630       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_DC.o)
+                0x00003630                TFT_DC_Write
  .text.TFT_RES_Write
-                0x0000364c       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_RES.o)
-                0x0000364c                TFT_RES_Write
+                0x00003648       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_RES.o)
+                0x00003648                TFT_RES_Write
  .text.TFT_BackLight_Enable
-                0x00003664       0x28 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_BackLight.o)
-                0x00003664                TFT_BackLight_Enable
+                0x00003660       0x28 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_BackLight.o)
+                0x00003660                TFT_BackLight_Enable
  .text.TFT_BackLight_WritePeriod
-                0x0000368c        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_BackLight.o)
-                0x0000368c                TFT_BackLight_WritePeriod
+                0x00003688        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_BackLight.o)
+                0x00003688                TFT_BackLight_WritePeriod
  .text.TFT_BackLight_WriteCompare
-                0x00003698        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_BackLight.o)
-                0x00003698                TFT_BackLight_WriteCompare
+                0x00003694        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_BackLight.o)
+                0x00003694                TFT_BackLight_WriteCompare
  .text.TFT_BackLight_SetInterruptMode
-                0x000036a4        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_BackLight.o)
-                0x000036a4                TFT_BackLight_SetInterruptMode
+                0x000036a0        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_BackLight.o)
+                0x000036a0                TFT_BackLight_SetInterruptMode
  .text.TFT_BackLight_Init
-                0x000036b0       0x74 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_BackLight.o)
-                0x000036b0                TFT_BackLight_Init
+                0x000036ac       0x74 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_BackLight.o)
+                0x000036ac                TFT_BackLight_Init
  .text.TFT_BackLight_Start
-                0x00003724       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_BackLight.o)
-                0x00003724                TFT_BackLight_Start
+                0x00003720       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_BackLight.o)
+                0x00003720                TFT_BackLight_Start
  .text.TFT_SPI_IntClock_Start
-                0x00003740       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_SPI_IntClock.o)
-                0x00003740                TFT_SPI_IntClock_Start
+                0x0000373c       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_SPI_IntClock.o)
+                0x0000373c                TFT_SPI_IntClock_Start
  .text.DBG_FS_Write
-                0x0000375c       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(DBG_FS.o)
-                0x0000375c                DBG_FS_Write
+                0x00003758       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(DBG_FS.o)
+                0x00003758                DBG_FS_Write
  .text.DBG_CONV_Write
-                0x00003774       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(DBG_CONV.o)
-                0x00003774                DBG_CONV_Write
+                0x00003770       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(DBG_CONV.o)
+                0x00003770                DBG_CONV_Write
  .text.DBG_FILL_Write
-                0x0000378c       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(DBG_FILL.o)
-                0x0000378c                DBG_FILL_Write
+                0x00003788       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(DBG_FILL.o)
+                0x00003788                DBG_FILL_Write
  .text.DBG_DEAD_Write
-                0x000037a4       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(DBG_DEAD.o)
-                0x000037a4                DBG_DEAD_Write
- *fill*         0x000037bc        0x4 
- .text          0x000037c0       0x20 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(CyBootAsmGnu.o)
-                0x000037c0                CyDelayCycles
-                0x000037d0                CyEnterCriticalSection
-                0x000037d8                CyExitCriticalSection
- .text          0x000037e0       0x7c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_gnu_change_context_isr.o)
-                0x000037e0                EE_set_switch_context_pri
-                0x000037fa                EE_switch_context
-                0x00003804                EE_cortex_mx_pendsv_ISR
-                0x00003840                EE_cortex_mx_svc_ISR
- .text          0x0000385c       0x24 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_gnu_irq_stack.o)
-                0x0000385c                EE_cortex_mx_change_IRQ_stack
-                0x0000386e                EE_cortex_mx_change_IRQ_stack_back
- .text          0x00003880       0x68 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_gnu_multi_context.o)
-                0x00003880                EE_cortex_mx_change_context
- .text          0x000038e8       0x80 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_gnu_oo.o)
-                0x000038e8                EE_hal_terminate_savestk
-                0x00003932                EE_hal_terminate_task
+                0x000037a0       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(DBG_DEAD.o)
+                0x000037a0                DBG_DEAD_Write
+ .text          0x000037b8       0x20 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(CyBootAsmGnu.o)
+                0x000037b8                CyDelayCycles
+                0x000037c8                CyEnterCriticalSection
+                0x000037d0                CyExitCriticalSection
+ .text          0x000037d8       0x7c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_gnu_change_context_isr.o)
+                0x000037d8                EE_set_switch_context_pri
+                0x000037f2                EE_switch_context
+                0x000037fc                EE_cortex_mx_pendsv_ISR
+                0x00003838                EE_cortex_mx_svc_ISR
+ .text          0x00003854       0x24 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_gnu_irq_stack.o)
+                0x00003854                EE_cortex_mx_change_IRQ_stack
+                0x00003866                EE_cortex_mx_change_IRQ_stack_back
+ .text          0x00003878       0x68 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_gnu_multi_context.o)
+                0x00003878                EE_cortex_mx_change_context
+ .text          0x000038e0       0x80 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_gnu_oo.o)
+                0x000038e0                EE_hal_terminate_savestk
+                0x0000392a                EE_hal_terminate_task
  .text.EE_thread_not_terminated
-                0x00003968       0x10 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_tnterm.o)
-                0x00003968                EE_thread_not_terminated
+                0x00003960       0x10 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_tnterm.o)
+                0x00003960                EE_thread_not_terminated
  .text.EE_oo_thread_stub
-                0x00003978       0x10 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_tstub.o)
-                0x00003978                EE_oo_thread_stub
+                0x00003970       0x10 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_tstub.o)
+                0x00003970                EE_oo_thread_stub
  .text.EE_std_run_task_code
-                0x00003988       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_cortex_mx_ee_context.o)
-                0x00003988                EE_std_run_task_code
+                0x00003980       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_cortex_mx_ee_context.o)
+                0x00003980                EE_std_run_task_code
  .text.EE_std_need_context_change
-                0x000039a0       0x28 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_cortex_mx_ee_context.o)
-                0x000039a0                EE_std_need_context_change
+                0x00003998       0x28 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_cortex_mx_ee_context.o)
+                0x00003998                EE_std_need_context_change
  .text.EE_thread_rnact_max
-                0x000039c8       0x20 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_thendin.o)
+                0x000039c0       0x20 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_thendin.o)
  .text.EE_thread_endcycle_next
-                0x000039e8       0x30 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_thendin.o)
+                0x000039e0       0x30 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_thendin.o)
  .text.EE_thread_end_instance
-                0x00003a18      0x108 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_thendin.o)
-                0x00003a18                EE_thread_end_instance
+                0x00003a10      0x108 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_thendin.o)
+                0x00003a10                EE_thread_end_instance
  .text._ClusterId2FATOff
-                0x00003b20       0x18 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00003b18       0x18 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
  .text._CalcLogClusterPos
-                0x00003b38        0xe .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00003b30        0xe .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
  .text._ReadFromFreeClusterCache
-                0x00003b46       0x46 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00003b3e       0x46 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
  .text.FS_FAT_GetFATType
-                0x00003b8c       0x1a .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
-                0x00003b8c                FS_FAT_GetFATType
+                0x00003b84       0x1a .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00003b84                FS_FAT_GetFATType
  .text.FS_FAT_ClusterId2SectorNo
-                0x00003ba6        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
-                0x00003ba6                FS_FAT_ClusterId2SectorNo
+                0x00003b9e        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00003b9e                FS_FAT_ClusterId2SectorNo
  .text.FS_FAT_IsValidShortNameChar
-                0x00003bb2       0x34 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
-                0x00003bb2                FS_FAT_IsValidShortNameChar
+                0x00003baa       0x34 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00003baa                FS_FAT_IsValidShortNameChar
  .text.FS_FAT_CopyShortName
-                0x00003be6       0x56 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
-                0x00003be6                FS_FAT_CopyShortName
+                0x00003bde       0x56 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00003bde                FS_FAT_CopyShortName
  .text._SFN_CreateDirEntry
-                0x00003c3c       0x5a .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00003c34       0x5a .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
  .text._SFN_FindDirEntry
-                0x00003c96       0x10 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
- *fill*         0x00003ca6        0x2 
+                0x00003c8e       0x10 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+ *fill*         0x00003c9e        0x2 
  .text.FS_FAT_FindDirEntry
-                0x00003ca8       0x60 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
-                0x00003ca8                FS_FAT_FindDirEntry
+                0x00003ca0       0x60 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00003ca0                FS_FAT_FindDirEntry
  .text.FS_FAT_CopyDirEntryInfo
-                0x00003d08       0x50 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
-                0x00003d08                FS_FAT_CopyDirEntryInfo
+                0x00003d00       0x50 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00003d00                FS_FAT_CopyDirEntryInfo
  .text._SFN_ReadDirEntryInfo
-                0x00003d58       0x6e .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00003d50       0x6e .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
  .text._SetFATSector
-                0x00003dc6        0x6 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00003dbe        0x6 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
  .text.FS_FAT_ReadFATEntry
-                0x00003dcc       0xb2 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
-                0x00003dcc                FS_FAT_ReadFATEntry
- *fill*         0x00003e7e        0x2 
+                0x00003dc4       0xb2 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00003dc4                FS_FAT_ReadFATEntry
+ *fill*         0x00003e76        0x2 
  .text.FS_FAT_GetNumAdjClustersInChain
-                0x00003e80       0x64 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
-                0x00003e80                FS_FAT_GetNumAdjClustersInChain
+                0x00003e78       0x64 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00003e78                FS_FAT_GetNumAdjClustersInChain
  .text.FS_FAT_WalkClusterEx
-                0x00003ee4       0x5c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
-                0x00003ee4                FS_FAT_WalkClusterEx
+                0x00003edc       0x5c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00003edc                FS_FAT_WalkClusterEx
  .text.FS_FAT_GotoCluster
-                0x00003f40       0x88 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
-                0x00003f40                FS_FAT_GotoCluster
+                0x00003f38       0x88 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00003f38                FS_FAT_GotoCluster
  .text.FS_FAT_WalkCluster
-                0x00003fc8       0x18 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
-                0x00003fc8                FS_FAT_WalkCluster
+                0x00003fc0       0x18 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00003fc0                FS_FAT_WalkCluster
  .text.FS_FAT_FindLastCluster
-                0x00003fe0       0x34 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
-                0x00003fe0                FS_FAT_FindLastCluster
+                0x00003fd8       0x34 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00003fd8                FS_FAT_FindLastCluster
  .text._WriteFATEntry
-                0x00004014      0x18e .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x0000400c      0x18e .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
  .text.FS_FAT_MarkClusterEOC
-                0x000041a2        0x8 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
-                0x000041a2                FS_FAT_MarkClusterEOC
+                0x0000419a        0x8 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x0000419a                FS_FAT_MarkClusterEOC
  .text.FS_FAT_SyncFAT
-                0x000041aa       0x3c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
-                0x000041aa                FS_FAT_SyncFAT
+                0x000041a2       0x3c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x000041a2                FS_FAT_SyncFAT
  .text.FS_FAT_LinkCluster
-                0x000041e6       0x1c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
-                0x000041e6                FS_FAT_LinkCluster
- *fill*         0x00004202        0x2 
+                0x000041de       0x1c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x000041de                FS_FAT_LinkCluster
+ *fill*         0x000041fa        0x2 
  .text._CalcFreeClusterCnt
-                0x00004204       0x88 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x000041fc       0x88 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
  .text.FS_FAT_FindFreeCluster
-                0x0000428c       0xa8 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
-                0x0000428c                FS_FAT_FindFreeCluster
+                0x00004284       0xa8 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00004284                FS_FAT_FindFreeCluster
  .text.FS_FAT_AllocCluster
-                0x00004334       0x20 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
-                0x00004334                FS_FAT_AllocCluster
+                0x0000432c       0x20 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x0000432c                FS_FAT_AllocCluster
  .text._WriteEmptyFATSectors
-                0x00004354       0x3c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x0000434c       0x3c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
  .text.FS_FAT_FreeClusterChain
-                0x00004390       0xe0 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
-                0x00004390                FS_FAT_FreeClusterChain
+                0x00004388       0xe0 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00004388                FS_FAT_FreeClusterChain
  .text.FS_FAT_CheckBPB
-                0x00004470      0x1cc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
-                0x00004470                FS_FAT_CheckBPB
+                0x00004468      0x1cc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00004468                FS_FAT_CheckBPB
  .text.FS_FAT_InitDirEntryScan
-                0x0000463c       0x14 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
-                0x0000463c                FS_FAT_InitDirEntryScan
+                0x00004634       0x14 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
+                0x00004634                FS_FAT_InitDirEntryScan
  .text.FS_FAT_IncDirPos
-                0x00004650        0x8 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
-                0x00004650                FS_FAT_IncDirPos
+                0x00004648        0x8 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
+                0x00004648                FS_FAT_IncDirPos
  .text._CopyDirText
-                0x00004658       0x44 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
+                0x00004650       0x44 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
  .text.FS_FAT_Make83Name
-                0x0000469c       0xb0 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
-                0x0000469c                FS_FAT_Make83Name
+                0x00004694       0xb0 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
+                0x00004694                FS_FAT_Make83Name
  .text.FS_FAT_GetDirEntry
-                0x0000474c       0xb2 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
-                0x0000474c                FS_FAT_GetDirEntry
+                0x00004744       0xb2 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
+                0x00004744                FS_FAT_GetDirEntry
  .text.FS_FAT_FindDirEntryShortEx
-                0x000047fe       0x5a .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
-                0x000047fe                FS_FAT_FindDirEntryShortEx
+                0x000047f6       0x5a .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
+                0x000047f6                FS_FAT_FindDirEntryShortEx
  .text.FS_FAT_FindDirEntryShort
-                0x00004858       0x36 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
-                0x00004858                FS_FAT_FindDirEntryShort
+                0x00004850       0x36 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
+                0x00004850                FS_FAT_FindDirEntryShort
  .text.FS_FAT_FindEmptyDirEntry
-                0x0000488e       0xb0 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
-                0x0000488e                FS_FAT_FindEmptyDirEntry
+                0x00004886       0xb0 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
+                0x00004886                FS_FAT_FindEmptyDirEntry
  .text.FS_FAT_GetFirstCluster
-                0x0000493e       0x1a .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
-                0x0000493e                FS_FAT_GetFirstCluster
+                0x00004936       0x1a .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
+                0x00004936                FS_FAT_GetFirstCluster
  .text.FS_FAT_FindPath
-                0x00004958       0x7a .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
-                0x00004958                FS_FAT_FindPath
+                0x00004950       0x7a .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
+                0x00004950                FS_FAT_FindPath
  .text.FS_FAT_DeleteFileOrDir
-                0x000049d2       0x48 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
-                0x000049d2                FS_FAT_DeleteFileOrDir
- *fill*         0x00004a1a        0x2 
+                0x000049ca       0x48 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
+                0x000049ca                FS_FAT_DeleteFileOrDir
+ *fill*         0x00004a12        0x2 
  .text.FS_FAT_Open
-                0x00004a1c      0x1dc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
-                0x00004a1c                FS_FAT_Open
+                0x00004a14      0x1dc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
+                0x00004a14                FS_FAT_Open
  .text.FS_FAT_WriteDirEntryCluster
-                0x00004bf8       0x1c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
-                0x00004bf8                FS_FAT_WriteDirEntryCluster
+                0x00004bf0       0x1c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
+                0x00004bf0                FS_FAT_WriteDirEntryCluster
  .text.FS_FAT_WriteDirEntry83
-                0x00004c14       0x6c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
-                0x00004c14                FS_FAT_WriteDirEntry83
+                0x00004c0c       0x6c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
+                0x00004c0c                FS_FAT_WriteDirEntry83
  .text.FS_FAT_UpdateDirEntry
-                0x00004c80       0x68 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Write.o)
-                0x00004c80                FS_FAT_UpdateDirEntry
+                0x00004c78       0x68 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Write.o)
+                0x00004c78                FS_FAT_UpdateDirEntry
  .text.FS_FAT_Close
-                0x00004ce8       0x44 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Write.o)
-                0x00004ce8                FS_FAT_Close
+                0x00004ce0       0x44 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Write.o)
+                0x00004ce0                FS_FAT_Close
  .text.FS__CLIB_memcmp
-                0x00004d2c       0x20 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_CLib.o)
-                0x00004d2c                FS__CLIB_memcmp
+                0x00004d24       0x20 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_CLib.o)
+                0x00004d24                FS__CLIB_memcmp
  .text.FS__CLIB_memset
-                0x00004d4c       0x6c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_CLib.o)
-                0x00004d4c                FS__CLIB_memset
+                0x00004d44       0x6c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_CLib.o)
+                0x00004d44                FS__CLIB_memset
  .text.FS__CLIB_strcmp
-                0x00004db8       0x1a .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_CLib.o)
-                0x00004db8                FS__CLIB_strcmp
+                0x00004db0       0x1a .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_CLib.o)
+                0x00004db0                FS__CLIB_strcmp
  .text.FS__CLIB_strcpy
-                0x00004dd2       0x1c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_CLib.o)
-                0x00004dd2                FS__CLIB_strcpy
+                0x00004dca       0x1c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_CLib.o)
+                0x00004dca                FS__CLIB_strcpy
  .text.FS__CLIB_strlen
-                0x00004dee       0x10 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_CLib.o)
-                0x00004dee                FS__CLIB_strlen
+                0x00004de6       0x10 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_CLib.o)
+                0x00004de6                FS__CLIB_strlen
  .text.FS__CLIB_strncmp
-                0x00004dfe       0x26 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_CLib.o)
-                0x00004dfe                FS__CLIB_strncmp
+                0x00004df6       0x26 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_CLib.o)
+                0x00004df6                FS__CLIB_strncmp
  .text.FS__CLIB_toupper
-                0x00004e24        0xe .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_CLib.o)
-                0x00004e24                FS__CLIB_toupper
+                0x00004e1c        0xe .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_CLib.o)
+                0x00004e1c                FS__CLIB_toupper
  .text.FS__strchr
-                0x00004e32       0x14 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
-                0x00004e32                FS__strchr
+                0x00004e2a       0x14 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
+                0x00004e2a                FS__strchr
  .text.FS_LoadU32BE
-                0x00004e46       0x18 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
-                0x00004e46                FS_LoadU32BE
+                0x00004e3e       0x18 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
+                0x00004e3e                FS_LoadU32BE
  .text.FS_LoadU32LE
-                0x00004e5e       0x16 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
-                0x00004e5e                FS_LoadU32LE
+                0x00004e56       0x16 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
+                0x00004e56                FS_LoadU32LE
  .text.FS_StoreU32LE
-                0x00004e74       0x14 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
-                0x00004e74                FS_StoreU32LE
+                0x00004e6c       0x14 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
+                0x00004e6c                FS_StoreU32LE
  .text.FS_StoreU16LE
-                0x00004e88        0x8 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
-                0x00004e88                FS_StoreU16LE
+                0x00004e80        0x8 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
+                0x00004e80                FS_StoreU16LE
  .text.FS_LoadU16LE
-                0x00004e90        0xa .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
-                0x00004e90                FS_LoadU16LE
- *fill*         0x00004e9a        0x2 
- .text._Alloc   0x00004e9c       0x30 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
+                0x00004e88        0xa .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
+                0x00004e88                FS_LoadU16LE
+ *fill*         0x00004e92        0x2 
+ .text._Alloc   0x00004e94       0x30 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
  .text.FS_Alloc
-                0x00004ecc        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
-                0x00004ecc                FS_Alloc
+                0x00004ec4        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
+                0x00004ec4                FS_Alloc
  .text.FS_TryAlloc
-                0x00004ed8        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
-                0x00004ed8                FS_TryAlloc
- .text.FS_Free  0x00004edc       0x1c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
-                0x00004edc                FS_Free
+                0x00004ed0        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
+                0x00004ed0                FS_TryAlloc
+ .text.FS_Free  0x00004ed4       0x1c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
+                0x00004ed4                FS_Free
  .text.FS_AssignMemory
-                0x00004ef8        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
-                0x00004ef8                FS_AssignMemory
+                0x00004ef0        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
+                0x00004ef0                FS_AssignMemory
  .text.FS_AllocZeroed
-                0x00004f04       0x16 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
-                0x00004f04                FS_AllocZeroed
- *fill*         0x00004f1a        0x2 
+                0x00004efc       0x16 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
+                0x00004efc                FS_AllocZeroed
+ *fill*         0x00004f12        0x2 
  .text.FS_STORAGE_Init
-                0x00004f1c       0x28 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
-                0x00004f1c                FS_STORAGE_Init
+                0x00004f14       0x28 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Core.o)
+                0x00004f14                FS_STORAGE_Init
  .text._FreeDirHandle
-                0x00004f44        0xa .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_DirOld.o)
+                0x00004f3c        0xa .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_DirOld.o)
  .text.FS__DirEnt2Attr
-                0x00004f4e        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_DirOld.o)
-                0x00004f4e                FS__DirEnt2Attr
+                0x00004f46        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_DirOld.o)
+                0x00004f46                FS__DirEnt2Attr
  .text.FS_DirEnt2Attr
-                0x00004f5a        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_DirOld.o)
-                0x00004f5a                FS_DirEnt2Attr
+                0x00004f52        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_DirOld.o)
+                0x00004f52                FS_DirEnt2Attr
  .text.FS_DirEnt2Name
-                0x00004f5e       0x10 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_DirOld.o)
-                0x00004f5e                FS_DirEnt2Name
+                0x00004f56       0x10 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_DirOld.o)
+                0x00004f56                FS_DirEnt2Name
  .text.FS__CloseDir
-                0x00004f6e       0x20 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_DirOld.o)
-                0x00004f6e                FS__CloseDir
+                0x00004f66       0x20 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_DirOld.o)
+                0x00004f66                FS__CloseDir
  .text.FS_CloseDir
-                0x00004f8e        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_DirOld.o)
-                0x00004f8e                FS_CloseDir
+                0x00004f86        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_DirOld.o)
+                0x00004f86                FS_CloseDir
  .text.FS__ReadDir
-                0x00004f92       0x4c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_DirOld.o)
-                0x00004f92                FS__ReadDir
+                0x00004f8a       0x4c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_DirOld.o)
+                0x00004f8a                FS__ReadDir
  .text.FS_ReadDir
-                0x00004fde        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_DirOld.o)
-                0x00004fde                FS_ReadDir
- *fill*         0x00004fe2        0x2 
+                0x00004fd6        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_DirOld.o)
+                0x00004fd6                FS_ReadDir
+ *fill*         0x00004fda        0x2 
  .text.FS__OpenDir
-                0x00004fe4       0x48 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_DirOld.o)
-                0x00004fe4                FS__OpenDir
+                0x00004fdc       0x48 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_DirOld.o)
+                0x00004fdc                FS__OpenDir
  .text.FS_OpenDir
-                0x0000502c        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_DirOld.o)
-                0x0000502c                FS_OpenDir
+                0x00005024        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_DirOld.o)
+                0x00005024                FS_OpenDir
  .text.FS__GetFileSize
-                0x00005030        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_GetFileSize.o)
-                0x00005030                FS__GetFileSize
+                0x00005028        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_GetFileSize.o)
+                0x00005028                FS__GetFileSize
  .text.FS_GetFileSize
-                0x0000503c        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_GetFileSize.o)
-                0x0000503c                FS_GetFileSize
+                0x00005034        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_GetFileSize.o)
+                0x00005034                FS_GetFileSize
  .text._ClrBusyLED
-                0x00005040        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
+                0x00005038        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
  .text._SetBusyLED
-                0x0000504c        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
- .text._Read    0x00005058        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
- .text._Write   0x00005064       0x12 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
+                0x00005044        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
+ .text._Read    0x00005050        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
+ .text._Write   0x0000505c       0x12 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
  .text.FS_LB_GetStatus
-                0x00005076        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
-                0x00005076                FS_LB_GetStatus
+                0x0000506e        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
+                0x0000506e                FS_LB_GetStatus
  .text.FS_LB_InitMedium
-                0x00005082       0x1a .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
-                0x00005082                FS_LB_InitMedium
+                0x0000507a       0x1a .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
+                0x0000507a                FS_LB_InitMedium
  .text.FS_LB_InitMediumIfRequired
-                0x0000509c       0x10 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
-                0x0000509c                FS_LB_InitMediumIfRequired
+                0x00005094       0x10 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
+                0x00005094                FS_LB_InitMediumIfRequired
  .text.FS_LB_ReadDevice
-                0x000050ac       0x2e .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
-                0x000050ac                FS_LB_ReadDevice
+                0x000050a4       0x2e .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
+                0x000050a4                FS_LB_ReadDevice
  .text.FS_LB_ReadPart
-                0x000050da        0xe .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
-                0x000050da                FS_LB_ReadPart
+                0x000050d2        0xe .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
+                0x000050d2                FS_LB_ReadPart
  .text.FS_LB_ReadBurst
-                0x000050e8       0x38 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
-                0x000050e8                FS_LB_ReadBurst
+                0x000050e0       0x38 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
+                0x000050e0                FS_LB_ReadBurst
  .text.FS_LB_ReadBurstPart
-                0x00005120       0x14 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
-                0x00005120                FS_LB_ReadBurstPart
+                0x00005118       0x14 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
+                0x00005118                FS_LB_ReadBurstPart
  .text.FS_LB_WriteMultiple
-                0x00005134       0x30 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
-                0x00005134                FS_LB_WriteMultiple
+                0x0000512c       0x30 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
+                0x0000512c                FS_LB_WriteMultiple
  .text.FS_LB_WriteMultiplePart
-                0x00005164       0x14 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
-                0x00005164                FS_LB_WriteMultiplePart
+                0x0000515c       0x14 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
+                0x0000515c                FS_LB_WriteMultiplePart
  .text.FS_LB_WriteDevice
-                0x00005178       0x36 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
-                0x00005178                FS_LB_WriteDevice
+                0x00005170       0x36 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
+                0x00005170                FS_LB_WriteDevice
  .text.FS_LB_WritePart
-                0x000051ae        0xe .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
-                0x000051ae                FS_LB_WritePart
+                0x000051a6        0xe .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
+                0x000051a6                FS_LB_WritePart
  .text.FS_GetSectorSize
-                0x000051bc       0x28 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
-                0x000051bc                FS_GetSectorSize
+                0x000051b4       0x28 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
+                0x000051b4                FS_GetSectorSize
  .text.FS_LB_GetDeviceInfo
-                0x000051e4       0x26 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
-                0x000051e4                FS_LB_GetDeviceInfo
+                0x000051dc       0x26 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_LogBlock.o)
+                0x000051dc                FS_LB_GetDeviceInfo
  .text.FS_memcpy
-                0x0000520a      0x120 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_memcpy.o)
-                0x0000520a                FS_memcpy
- *fill*         0x0000532a        0x2 
+                0x00005202      0x120 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_memcpy.o)
+                0x00005202                FS_memcpy
+ *fill*         0x00005322        0x2 
  .text.FS__AllocSectorBuffer
-                0x0000532c       0x2c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x0000532c                FS__AllocSectorBuffer
+                0x00005324       0x2c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x00005324                FS__AllocSectorBuffer
  .text.FS__FreeSectorBuffer
-                0x00005358       0x28 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x00005358                FS__FreeSectorBuffer
+                0x00005350       0x28 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x00005350                FS__FreeSectorBuffer
  .text.FS__SB_MarkDirty
-                0x00005380        0x6 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x00005380                FS__SB_MarkDirty
+                0x00005378        0x6 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x00005378                FS__SB_MarkDirty
  .text.FS__SB_MarkNotDirty
-                0x00005386        0x6 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x00005386                FS__SB_MarkNotDirty
+                0x0000537e        0x6 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x0000537e                FS__SB_MarkNotDirty
  .text.FS__FreeFileHandle
-                0x0000538c        0xa .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x0000538c                FS__FreeFileHandle
+                0x00005384        0xa .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x00005384                FS__FreeFileHandle
  .text.FS__FreeFileObj
-                0x00005396        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x00005396                FS__FreeFileObj
+                0x0000538e        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x0000538e                FS__FreeFileObj
  .text.FS__FTell
-                0x000053a2        0xa .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x000053a2                FS__FTell
+                0x0000539a        0xa .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x0000539a                FS__FTell
  .text.FS__FSeek
-                0x000053ac       0x42 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x000053ac                FS__FSeek
+                0x000053a4       0x42 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x000053a4                FS__FSeek
  .text.FS_FSeek
-                0x000053ee        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x000053ee                FS_FSeek
+                0x000053e6        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x000053e6                FS_FSeek
  .text.FS_FTell
-                0x000053f2        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x000053f2                FS_FTell
- *fill*         0x000053f6        0x2 
- .text.FS_Init  0x000053f8       0x58 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x000053f8                FS_Init
+                0x000053ea        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x000053ea                FS_FTell
+ *fill*         0x000053ee        0x2 
+ .text.FS_Init  0x000053f0       0x58 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x000053f0                FS_Init
  .text.FS__SB_Create
-                0x00005450       0x28 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x00005450                FS__SB_Create
+                0x00005448       0x28 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x00005448                FS__SB_Create
  .text.FS__FCloseNL
-                0x00005478       0x1e .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x00005478                FS__FCloseNL
+                0x00005470       0x1e .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x00005470                FS__FCloseNL
  .text.FS__FClose
-                0x00005496       0x1a .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x00005496                FS__FClose
+                0x0000548e       0x1a .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x0000548e                FS__FClose
  .text.FS_FClose
-                0x000054b0        0xa .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x000054b0                FS_FClose
- *fill*         0x000054ba        0x2 
+                0x000054a8        0xa .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x000054a8                FS_FClose
+ *fill*         0x000054b2        0x2 
  .text.FS__AllocFileObj
-                0x000054bc       0x48 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x000054bc                FS__AllocFileObj
+                0x000054b4       0x48 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x000054b4                FS__AllocFileObj
  .text.FS__AllocFileHandle
-                0x00005504       0x40 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x00005504                FS__AllocFileHandle
+                0x000054fc       0x40 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x000054fc                FS__AllocFileHandle
  .text.FS__OpenEx
-                0x00005544       0x58 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x00005544                FS__OpenEx
+                0x0000553c       0x58 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x0000553c                FS__OpenEx
  .text.FS__FOpenEx
-                0x0000559c       0x56 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x0000559c                FS__FOpenEx
- *fill*         0x000055f2        0x2 
+                0x00005594       0x56 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x00005594                FS__FOpenEx
+ *fill*         0x000055ea        0x2 
  .text.FS__FOpen
-                0x000055f4       0x48 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x000055f4                FS__FOpen
+                0x000055ec       0x48 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x000055ec                FS__FOpen
  .text.FS_FOpen
-                0x0000563c        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x0000563c                FS_FOpen
+                0x00005634        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x00005634                FS_FOpen
  .text.FS__SB_Write
-                0x00005640       0x24 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x00005640                FS__SB_Write
+                0x00005638       0x24 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x00005638                FS__SB_Write
  .text._SB_Clean
-                0x00005664       0x24 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x0000565c       0x24 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
  .text.FS__SB_SetSector
-                0x00005688       0x20 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x00005688                FS__SB_SetSector
+                0x00005680       0x20 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x00005680                FS__SB_SetSector
  .text.FS__SB_Clean
-                0x000056a8        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x000056a8                FS__SB_Clean
+                0x000056a0        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x000056a0                FS__SB_Clean
  .text.FS__SB_Delete
-                0x000056ac       0x12 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x000056ac                FS__SB_Delete
+                0x000056a4       0x12 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x000056a4                FS__SB_Delete
  .text.FS__SB_Flush
-                0x000056be        0x8 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x000056be                FS__SB_Flush
+                0x000056b6        0x8 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x000056b6                FS__SB_Flush
  .text.FS__SB_Read
-                0x000056c6       0x2a .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
-                0x000056c6                FS__SB_Read
+                0x000056be       0x2a .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x000056be                FS__SB_Read
  .text.FS__Read
-                0x000056f0       0x2e .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Read.o)
-                0x000056f0                FS__Read
- .text.FS_Read  0x0000571e        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Read.o)
-                0x0000571e                FS_Read
+                0x000056e8       0x2e .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Read.o)
+                0x000056e8                FS__Read
+ .text.FS_Read  0x00005716        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Read.o)
+                0x00005716                FS_Read
  .text.FS__AddPhysDevice
-                0x00005722       0x10 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Storage.o)
-                0x00005722                FS__AddPhysDevice
- *fill*         0x00005732        0x2 
+                0x0000571a       0x10 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Storage.o)
+                0x0000571a                FS__AddPhysDevice
+ *fill*         0x0000572a        0x2 
  .text.FS__FindVolume
-                0x00005734       0x78 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Storage.o)
-                0x00005734                FS__FindVolume
+                0x0000572c       0x78 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Storage.o)
+                0x0000572c                FS__FindVolume
  .text.FS__AddDevice
-                0x000057ac       0x68 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Storage.o)
-                0x000057ac                FS__AddDevice
+                0x000057a4       0x68 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Storage.o)
+                0x000057a4                FS__AddDevice
  .text.FS_AddDevice
-                0x00005814        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Storage.o)
-                0x00005814                FS_AddDevice
- .text._Mount   0x00005818       0x2e .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Volume.o)
+                0x0000580c        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Storage.o)
+                0x0000580c                FS_AddDevice
+ .text._Mount   0x00005810       0x2e .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Volume.o)
  .text.FS__AutoMount
-                0x00005846       0x14 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Volume.o)
-                0x00005846                FS__AutoMount
+                0x0000583e       0x14 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Volume.o)
+                0x0000583e                FS__AutoMount
  .text.FS_FAT_CloseDir
-                0x0000585a        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Dir.o)
-                0x0000585a                FS_FAT_CloseDir
- *fill*         0x00005866        0x2 
+                0x00005852        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Dir.o)
+                0x00005852                FS_FAT_CloseDir
+ *fill*         0x0000585e        0x2 
  .text.FS_FAT_ReadDir
-                0x00005868       0x38 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Dir.o)
-                0x00005868                FS_FAT_ReadDir
+                0x00005860       0x38 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Dir.o)
+                0x00005860                FS_FAT_ReadDir
  .text.FS_FAT_OpenDir
-                0x000058a0       0x72 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Dir.o)
-                0x000058a0                FS_FAT_OpenDir
+                0x00005898       0x72 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Dir.o)
+                0x00005898                FS_FAT_OpenDir
  .text._ReadBurst
-                0x00005912       0x24 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Read.o)
+                0x0000590a       0x24 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Read.o)
  .text.FS_FAT_Read
-                0x00005936      0x194 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Read.o)
-                0x00005936                FS_FAT_Read
- .text._IsBPB   0x00005aca       0x1e .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Partition.o)
+                0x0000592e      0x194 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Read.o)
+                0x0000592e                FS_FAT_Read
+ .text._IsBPB   0x00005ac2       0x1e .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Partition.o)
  .text._HasSignature
-                0x00005ae8       0x18 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Partition.o)
+                0x00005ae0       0x18 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Partition.o)
  .text._GetPartitionStartSector
-                0x00005b00        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Partition.o)
+                0x00005af8        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Partition.o)
  .text.FS__GetMediaStartSecEx
-                0x00005b0c       0x6e .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Partition.o)
-                0x00005b0c                FS__GetMediaStartSecEx
- *fill*         0x00005b7a        0x2 
+                0x00005b04       0x6e .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Partition.o)
+                0x00005b04                FS__GetMediaStartSecEx
+ *fill*         0x00005b72        0x2 
  .text.FS__LocatePartition
-                0x00005b7c       0x44 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Partition.o)
-                0x00005b7c                FS__LocatePartition
+                0x00005b74       0x44 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Partition.o)
+                0x00005b74                FS__LocatePartition
  .text.FS_X_AddDevices
-                0x00005bc0       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_ConfigMMC_SPI.o)
-                0x00005bc0                FS_X_AddDevices
+                0x00005bb8       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_ConfigMMC_SPI.o)
+                0x00005bb8                FS_X_AddDevices
  .text.FS_X_GetTimeDate
-                0x00005bdc        0x8 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_ConfigMMC_SPI.o)
-                0x00005bdc                FS_X_GetTimeDate
+                0x00005bd4        0x8 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_ConfigMMC_SPI.o)
+                0x00005bd4                FS_X_GetTimeDate
  .text._CalcDataCRC16Dummy
-                0x00005be4        0x6 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
- *fill*         0x00005bea        0x2 
+                0x00005bdc        0x6 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
+ *fill*         0x00005be2        0x2 
  .text._MMC_GetNumUnits
-                0x00005bec        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
+                0x00005be4        0xc .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
  .text._MMC_GetDriverName
-                0x00005bf8        0x8 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
+                0x00005bf0        0x8 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
  .text._MMC_GetStatus
-                0x00005c00        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
+                0x00005bf8        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
  .text._CheckR1
-                0x00005c04       0x38 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
+                0x00005bfc       0x38 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
  .text._WaitToGetReady
-                0x00005c3c       0x26 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
+                0x00005c34       0x26 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
  .text._SendEmptyCycles
-                0x00005c62       0x24 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
- *fill*         0x00005c86        0x2 
+                0x00005c5a       0x24 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
+ *fill*         0x00005c7e        0x2 
  .text._MMC_AddDevice
-                0x00005c88       0x2c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
- .text.T.53     0x00005cb4       0x14 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
+                0x00005c80       0x2c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
+ .text.T.53     0x00005cac       0x14 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
  .text._GetFromCSD
-                0x00005cc8       0x34 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
+                0x00005cc0       0x34 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
  .text._ExecCmdR1
-                0x00005cfc       0x98 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
+                0x00005cf4       0x98 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
  .text._ReadCSD
-                0x00005d94       0x86 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
- *fill*         0x00005e1a        0x2 
+                0x00005d8c       0x86 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
+ *fill*         0x00005e12        0x2 
  .text._MMC_Read
-                0x00005e1c      0x130 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
+                0x00005e14      0x130 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
  .text._MMC_Write
-                0x00005f4c      0x13c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
+                0x00005f44      0x13c .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
  .text._ApplyCSD
-                0x00006088      0x228 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
+                0x00006080      0x228 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
  .text._MMC_Init
-                0x000062b0      0x1c0 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
+                0x000062a8      0x1c0 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
  .text._MMC_InitMedium
-                0x00006470       0x28 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
+                0x00006468       0x28 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
  .text._MMC_IoCtl
-                0x00006498       0x60 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
+                0x00006490       0x60 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
  .text.emFile_Init
-                0x000064f8       0x4c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
+                0x000064f0       0x4c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
  .text.emFile_ReadWriteSPI
-                0x00006544       0x30 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
+                0x0000653c       0x30 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
  .text.FS_MMC_HW_X_EnableCS
-                0x00006574       0x14 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
-                0x00006574                FS_MMC_HW_X_EnableCS
+                0x0000656c       0x14 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
+                0x0000656c                FS_MMC_HW_X_EnableCS
  .text.FS_MMC_HW_X_DisableCS
-                0x00006588       0x14 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
-                0x00006588                FS_MMC_HW_X_DisableCS
+                0x00006580       0x14 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
+                0x00006580                FS_MMC_HW_X_DisableCS
  .text.FS_MMC_HW_X_IsWriteProtected
-                0x0000659c        0x4 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
-                0x0000659c                FS_MMC_HW_X_IsWriteProtected
+                0x00006594        0x4 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
+                0x00006594                FS_MMC_HW_X_IsWriteProtected
  .text.FS_MMC_HW_X_SetMaxSpeed
-                0x000065a0       0x54 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
-                0x000065a0                FS_MMC_HW_X_SetMaxSpeed
+                0x00006598       0x54 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
+                0x00006598                FS_MMC_HW_X_SetMaxSpeed
  .text.FS_MMC_HW_X_SetVoltage
-                0x000065f4       0x3c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
-                0x000065f4                FS_MMC_HW_X_SetVoltage
+                0x000065ec       0x3c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
+                0x000065ec                FS_MMC_HW_X_SetVoltage
  .text.FS_MMC_HW_X_IsPresent
-                0x00006630        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
-                0x00006630                FS_MMC_HW_X_IsPresent
+                0x00006628        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
+                0x00006628                FS_MMC_HW_X_IsPresent
  .text.FS_MMC_HW_X_Read
-                0x0000663c       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
-                0x0000663c                FS_MMC_HW_X_Read
+                0x00006634       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
+                0x00006634                FS_MMC_HW_X_Read
  .text.FS_MMC_HW_X_Write
-                0x00006658       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
-                0x00006658                FS_MMC_HW_X_Write
+                0x00006650       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
+                0x00006650                FS_MMC_HW_X_Write
  .text.emFile_SPI0_Enable
-                0x00006670       0x30 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
-                0x00006670                emFile_SPI0_Enable
+                0x00006668       0x30 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
+                0x00006668                emFile_SPI0_Enable
  .text.emFile_SPI0_ReadTxStatus
-                0x000066a0        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
-                0x000066a0                emFile_SPI0_ReadTxStatus
+                0x00006698        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
+                0x00006698                emFile_SPI0_ReadTxStatus
  .text.emFile_SPI0_ReadRxStatus
-                0x000066ac        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
-                0x000066ac                emFile_SPI0_ReadRxStatus
+                0x000066a4        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
+                0x000066a4                emFile_SPI0_ReadRxStatus
  .text.emFile_SPI0_WriteTxData
-                0x000066b8       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
-                0x000066b8                emFile_SPI0_WriteTxData
+                0x000066b0       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
+                0x000066b0                emFile_SPI0_WriteTxData
  .text.emFile_SPI0_ReadRxData
-                0x000066d0        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
-                0x000066d0                emFile_SPI0_ReadRxData
+                0x000066c8        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
+                0x000066c8                emFile_SPI0_ReadRxData
  .text.emFile_SPI0_ClearFIFO
-                0x000066dc       0x3c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
-                0x000066dc                emFile_SPI0_ClearFIFO
+                0x000066d4       0x3c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
+                0x000066d4                emFile_SPI0_ClearFIFO
  .text.emFile_SPI0_Init
-                0x00006718       0x28 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
-                0x00006718                emFile_SPI0_Init
+                0x00006710       0x2c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
+                0x00006710                emFile_SPI0_Init
  .text.emFile_SPI0_Start
-                0x00006740       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
-                0x00006740                emFile_SPI0_Start
+                0x0000673c       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
+                0x0000673c                emFile_SPI0_Start
  .text.emFile_Clock_1_Start
-                0x0000675c       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_Clock_1.o)
-                0x0000675c                emFile_Clock_1_Start
+                0x00006758       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_Clock_1.o)
+                0x00006758                emFile_Clock_1_Start
  .text.emFile_Clock_1_Stop
-                0x00006778       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_Clock_1.o)
-                0x00006778                emFile_Clock_1_Stop
+                0x00006774       0x1c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_Clock_1.o)
+                0x00006774                emFile_Clock_1_Stop
  .text.emFile_Clock_1_GetDividerRegister
-                0x00006794        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_Clock_1.o)
-                0x00006794                emFile_Clock_1_GetDividerRegister
+                0x00006790        0xc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_Clock_1.o)
+                0x00006790                emFile_Clock_1_GetDividerRegister
  .text.emFile_Clock_1_GetSourceRegister
-                0x000067a0       0x10 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_Clock_1.o)
-                0x000067a0                emFile_Clock_1_GetSourceRegister
+                0x0000679c       0x10 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_Clock_1.o)
+                0x0000679c                emFile_Clock_1_GetSourceRegister
  .text.emFile_Clock_1_SetDividerRegister
-                0x000067b0       0xd8 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_Clock_1.o)
-                0x000067b0                emFile_Clock_1_SetDividerRegister
+                0x000067ac       0xd8 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_Clock_1.o)
+                0x000067ac                emFile_Clock_1_SetDividerRegister
  .text.emFile_SPI0_CS_Write
-                0x00006888       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0_CS.o)
-                0x00006888                emFile_SPI0_CS_Write
- .text.__errno  0x000068a0        0xc c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-errno.o)
-                0x000068a0                __errno
+                0x00006884       0x18 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0_CS.o)
+                0x00006884                emFile_SPI0_CS_Write
+ .text.__errno  0x0000689c        0xc c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-errno.o)
+                0x0000689c                __errno
  .text.__libc_init_array
-                0x000068ac       0x4c c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
-                0x000068ac                __libc_init_array
- .text.memcpy   0x000068f8       0x16 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memcpy-stub.o)
-                0x000068f8                memcpy
- .text.memset   0x0000690e       0x10 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memset.o)
-                0x0000690e                memset
- .text          0x0000691e       0x14 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-strcmp.o)
-                0x0000691e                strcmp
- .text          0x00006932       0x10 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-strlen.o)
-                0x00006932                strlen
+                0x000068a8       0x4c c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
+                0x000068a8                __libc_init_array
+ .text.memcpy   0x000068f4       0x16 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memcpy-stub.o)
+                0x000068f4                memcpy
+ .text.memset   0x0000690a       0x10 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memset.o)
+                0x0000690a                memset
+ .text          0x0000691a       0x14 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-strcmp.o)
+                0x0000691a                strcmp
+ .text          0x0000692e       0x10 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-strlen.o)
+                0x0000692e                strlen
  *(.plt)
  *(.gnu.warning)
  *(.glue_7t)
- .glue_7t       0x00006942        0x0 linker stubs
+ .glue_7t       0x0000693e        0x0 linker stubs
  *(.glue_7)
- .glue_7        0x00006942        0x0 linker stubs
+ .glue_7        0x0000693e        0x0 linker stubs
  *(.vfp11_veneer)
- .vfp11_veneer  0x00006942        0x0 linker stubs
+ .vfp11_veneer  0x0000693e        0x0 linker stubs
  *(.bootloader)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
  *(.gcc_except_table)
 
-.v4_bx          0x00006944        0x0
- .v4_bx         0x00006944        0x0 linker stubs
+.v4_bx          0x00006940        0x0
+ .v4_bx         0x00006940        0x0 linker stubs
 
-.iplt           0x00006944        0x0
- .iplt          0x00006944        0x0 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+.iplt           0x00006940        0x0
+ .iplt          0x00006940        0x0 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
 
 .eh_frame_hdr
  *(.eh_frame_hdr)
 
-.eh_frame       0x00006944        0x4
+.eh_frame       0x00006940        0x4
  *(.eh_frame)
- .eh_frame      0x00006944        0x0 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
- .eh_frame      0x00006944        0x4 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtend.o
+ .eh_frame      0x00006940        0x0 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+ .eh_frame      0x00006940        0x4 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtend.o
                 [!provide]                PROVIDE (__exidx_start, .)
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x00006948                __exidx_end = .
+                0x00006944                __exidx_end = .
 
-.rodata         0x00006948      0xea8
+.rodata         0x00006944      0xe84
  *(.rodata .rodata.* .gnu.linkonce.r.*)
- .rodata        0x00006948       0x11 .\CortexM3\ARM_GCC_541\Debug\seven.o
- *fill*         0x00006959        0x3 
+ .rodata        0x00006944       0x11 .\CortexM3\ARM_GCC_541\Debug\seven.o
+ *fill*         0x00006955        0x3 
  .rodata.str1.4
-                0x0000695c       0x14 .\CortexM3\ARM_GCC_541\Debug\logging.o
+                0x00006958       0x14 .\CortexM3\ARM_GCC_541\Debug\logging.o
                                  0x18 (size before relaxing)
- .rodata        0x00006970      0x558 .\CortexM3\ARM_GCC_541\Debug\tft.o
+ .rodata        0x0000696c      0x558 .\CortexM3\ARM_GCC_541\Debug\tft.o
  .rodata.str1.4
-                0x00006ec8       0x14 .\CortexM3\ARM_GCC_541\Debug\tft.o
+                0x00006ec4       0x14 .\CortexM3\ARM_GCC_541\Debug\tft.o
  .rodata.str1.4
-                0x00006edc      0x199 .\CortexM3\ARM_GCC_541\Debug\mp3.o
- *fill*         0x00007075        0x3 
+                0x00006ed8      0x199 .\CortexM3\ARM_GCC_541\Debug\mp3.o
+ *fill*         0x00007071        0x3 
  .rodata.str1.4
-                0x00007078      0x302 .\CortexM3\ARM_GCC_541\Debug\wav_parser.o
+                0x00007074      0x302 .\CortexM3\ARM_GCC_541\Debug\wav_parser.o
                                 0x306 (size before relaxing)
- *fill*         0x0000737a        0x2 
- .rodata        0x0000737c       0x64 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
- .rodata        0x000073e0      0x100 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_lookup.o)
-                0x000073e0                EE_rq_lookup
- .rodata        0x000074e0      0x110 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_eecfg.o)
-                0x000074e0                EE_oo_autostart_task_data
-                0x000074ec                EE_oo_action_ROM
-                0x00007514                EE_oo_counter_object_ROM
-                0x0000752c                EE_ALARM_ID
-                0x00007534                EE_alarm_ROM
-                0x0000753c                EE_counter_ROM
-                0x00007548                EE_th_is_extended
-                0x0000755c                EE_th_rnact_max
-                0x00007570                EE_th_dispatch_prio
-                0x00007584                EE_EVENT_ID
-                0x0000759c                EE_th_ready_prio
-                0x000075b0                EE_terminate_real_th_body
-                0x000075c4                EE_hal_thread_body
-                0x000075d8                EE_std_thread_tos
+ *fill*         0x00007376        0x2 
+ .rodata        0x00007378       0x44 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+ .rodata        0x000073bc      0x100 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_lookup.o)
+                0x000073bc                EE_rq_lookup
+ .rodata        0x000074bc      0x110 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_eecfg.o)
+                0x000074bc                EE_oo_autostart_task_data
+                0x000074c8                EE_oo_action_ROM
+                0x000074f0                EE_oo_counter_object_ROM
+                0x00007508                EE_ALARM_ID
+                0x00007510                EE_alarm_ROM
+                0x00007518                EE_counter_ROM
+                0x00007524                EE_th_is_extended
+                0x00007538                EE_th_rnact_max
+                0x0000754c                EE_th_dispatch_prio
+                0x00007560                EE_EVENT_ID
+                0x00007578                EE_th_ready_prio
+                0x0000758c                EE_terminate_real_th_body
+                0x000075a0                EE_hal_thread_body
+                0x000075b4                EE_std_thread_tos
  .rodata.str1.4
-                0x000075f0       0x9c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_eecfg.o)
- .rodata        0x0000768c       0x10 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
-                0x0000768c                FAT_SFN_API
+                0x000075cc       0x9c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_eecfg.o)
+ .rodata        0x00007668       0x10 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Misc.o)
+                0x00007668                FAT_SFN_API
  .rodata.str1.1
-                0x0000769c        0x3 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
- *fill*         0x0000769f        0x1 
- .rodata        0x000076a0       0x78 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+                0x00007678        0x3 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FAT_Open.o)
+ *fill*         0x0000767b        0x1 
+ .rodata        0x0000767c       0x78 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
  .rodata.str1.1
-                0x00007718       0x30 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
- .rodata        0x00007748       0x68 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
-                0x00007790                FS_MMC_SPI_Driver
+                0x000076f4       0x30 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(FS_Misc.o)
+ .rodata        0x00007724       0x68 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
+                0x0000776c                FS_MMC_SPI_Driver
  .rodata.str1.1
-                0x000077b0        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
+                0x0000778c        0x4 .\source\library\emFile_V322c\LinkLibrary\PSoC5\GCC\libemf32noslfn.a(MMC_Drv.o)
  .rodata.str1.1
-                0x000077b4        0x2 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
-                0x000077b8                . = ALIGN (0x4)
- *fill*         0x000077b6        0x2 
+                0x00007790        0x2 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+                0x00007794                . = ALIGN (0x4)
+ *fill*         0x00007792        0x2 
  *(.init)
- .init          0x000077b8        0x4 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
-                0x000077b8                _init
- .init          0x000077bc        0x8 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
-                0x000077c4                . = ALIGN (0x4)
-                0x000077c4                __preinit_array_start = .
+ .init          0x00007794        0x4 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
+                0x00007794                _init
+ .init          0x00007798        0x8 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
+                0x000077a0                . = ALIGN (0x4)
+                0x000077a0                __preinit_array_start = .
  *(.preinit_array)
-                0x000077c4                __preinit_array_end = .
-                0x000077c4                . = ALIGN (0x4)
-                0x000077c4                __init_array_start = .
+                0x000077a0                __preinit_array_end = .
+                0x000077a0                . = ALIGN (0x4)
+                0x000077a0                __init_array_start = .
  *(SORT(.init_array.*))
  *(.init_array)
- .init_array    0x000077c4        0x4 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
- .init_array    0x000077c8        0x4 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
-                0x000077cc                __init_array_end = .
-                0x000077cc                . = ALIGN (0x4)
+ .init_array    0x000077a0        0x4 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+ .init_array    0x000077a4        0x4 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+                0x000077a8                __init_array_end = .
+                0x000077a8                . = ALIGN (0x4)
  *(.fini)
- .fini          0x000077cc        0x4 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
-                0x000077cc                _fini
- .fini          0x000077d0        0x8 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
-                0x000077d8                . = ALIGN (0x4)
-                0x000077d8                __fini_array_start = .
+ .fini          0x000077a8        0x4 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
+                0x000077a8                _fini
+ .fini          0x000077ac        0x8 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
+                0x000077b4                . = ALIGN (0x4)
+                0x000077b4                __fini_array_start = .
  *(.fini_array)
- .fini_array    0x000077d8        0x4 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+ .fini_array    0x000077b4        0x4 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
  *(SORT(.fini_array.*))
-                0x000077dc                __fini_array_end = .
-                0x000077dc                . = ALIGN (0x4)
+                0x000077b8                __fini_array_end = .
+                0x000077b8                . = ALIGN (0x4)
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT(.ctors.*))
  *crtend.o(.ctors)
-                0x000077dc                . = ALIGN (0x4)
+                0x000077b8                . = ALIGN (0x4)
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT(.dtors.*))
  *crtend.o(.dtors)
-                0x000077dc                . = ALIGN (0x4)
-                0x000077dc                __cy_regions = .
-                0x000077dc        0x4 LONG 0x77f0 __cy_region_init_ram
-                0x000077e0        0x4 LONG 0x1fff80c8 __cy_region_start_data
-                0x000077e4        0x4 LONG 0x1f0 __cy_region_init_size_ram
-                0x000077e8        0x4 LONG 0x40c8 __cy_region_zero_size_ram
-                0x000077ec                __cy_regions_end = .
-                0x000077f0                . = ALIGN (0x8)
- *fill*         0x000077ec        0x4 
-                0x000077f0                _etext = .
+                0x000077b8                . = ALIGN (0x4)
+                0x000077b8                __cy_regions = .
+                0x000077b8        0x4 LONG 0x77c8 __cy_region_init_ram
+                0x000077bc        0x4 LONG 0x1fff80c8 __cy_region_start_data
+                0x000077c0        0x4 LONG 0x1f0 __cy_region_init_size_ram
+                0x000077c4        0x4 LONG 0x40c8 __cy_region_zero_size_ram
+                0x000077c8                __cy_regions_end = .
+                0x000077c8                . = ALIGN (0x8)
+                0x000077c8                _etext = .
 
 .cy_checksum_exclude
-                0x000077f0        0x0
+                0x000077c8        0x0
  *(.cy_checksum_exclude)
 
 .ramvectors     0x1fff8000       0xc0
@@ -3181,7 +3179,7 @@ END GROUP
  .noinit        0x1fff80c0        0x1 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(CyLib.o)
                 0x1fff80c0                CyResetStatus
 
-.data           0x1fff80c8      0x1f0 load address 0x000077f0
+.data           0x1fff80c8      0x1f0 load address 0x000077c8
                 0x1fff80c8                __cy_region_start_data = .
  *(.jcr)
  .jcr           0x1fff80c8        0x0 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
@@ -3228,10 +3226,10 @@ END GROUP
  *(.ram)
                 0x1fff82b8                _edata = .
 
-.igot.plt       0x1fff82b8        0x0 load address 0x000079e0
+.igot.plt       0x1fff82b8        0x0 load address 0x000079b8
  .igot.plt      0x1fff82b8        0x0 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
 
-.bss            0x1fff82b8     0x40c8 load address 0x000079e0
+.bss            0x1fff82b8     0x40c8 load address 0x000079b8
                 0x1fff82b8                PROVIDE (__bss_start__, .)
  *(.shbss)
  *(.bss .bss.* .gnu.linkonce.b.*)
@@ -3309,11 +3307,11 @@ END GROUP
                 0x1fffc380                __end = .
                 0x1fffc380                PROVIDE (end, .)
                 0x1fffc380                PROVIDE (__bss_end__, .)
-                0x000077f0                __cy_region_init_ram = LOADADDR (.data)
+                0x000077c8                __cy_region_init_ram = LOADADDR (.data)
                 0x000001f0                __cy_region_init_size_ram = (_edata - ADDR (.data))
                 0x000040c8                __cy_region_zero_size_ram = (_end - _edata)
 
-.heap           0x1fffc380       0x80 load address 0x000079e0
+.heap           0x1fffc380       0x80 load address 0x000079b8
                 0x1fffc380                . = _end
                 0x1fffc400                . = (. + 0x80)
  *fill*         0x1fffc380       0x80 
@@ -3333,9 +3331,9 @@ END GROUP
 .cyloadablemeta
  *(.cyloadablemeta)
 
-.cyconfigecc    0x80000000      0xd08
+.cyconfigecc    0x80000000      0xd8c
  *(.cyconfigecc)
- .cyconfigecc   0x80000000      0xd08 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
+ .cyconfigecc   0x80000000      0xd8c .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
                 0x80000000                cy_meta_configecc
 
 .cycustnvl      0x90000000        0x4
@@ -3364,8 +3362,8 @@ END GROUP
  .cymeta        0x90500000        0xc .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
                 0x90500000                cy_metadata
 
-.rel.dyn        0x000079e0        0x0 load address 0x9050000c
- .rel.iplt      0x000079e0        0x0 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+.rel.dyn        0x000079b8        0x0 load address 0x9050000c
+ .rel.iplt      0x000079b8        0x0 c:/h_da softwares & projects/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
 
 .stab
  *(.stab)
@@ -4046,7 +4044,7 @@ END GROUP
  .debug_str     0x000068a0       0x73 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0_CS.o)
                                 0x208 (size before relaxing)
 
-.debug_loc      0x00000000     0x7cfc
+.debug_loc      0x00000000     0x7cfb
  *(.debug_loc)
  .debug_loc     0x00000000       0xde .\CortexM3\ARM_GCC_541\Debug\button.o
  .debug_loc     0x000000de      0x322 .\CortexM3\ARM_GCC_541\Debug\led.o
@@ -4058,61 +4056,61 @@ END GROUP
  .debug_loc     0x00003126      0x27f .\CortexM3\ARM_GCC_541\Debug\main.o
  .debug_loc     0x000033a5      0xa88 .\CortexM3\ARM_GCC_541\Debug\wav_parser.o
  .debug_loc     0x00003e2d       0xd1 .\CortexM3\ARM_GCC_541\Debug\emFile.o
- .debug_loc     0x00003efe      0x289 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
- .debug_loc     0x00004187      0x144 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
- .debug_loc     0x000042cb      0xa11 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(CyLib.o)
- .debug_loc     0x00004cdc      0x1e4 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(cyPm.o)
- .debug_loc     0x00004ec0      0x12d .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_activate.o)
- .debug_loc     0x00004fed      0x1ed .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_alsetrel.o)
- .debug_loc     0x000051da      0x46c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_altick.o)
- .debug_loc     0x00005646       0xbc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_evclear.o)
- .debug_loc     0x00005702       0xa4 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_evget.o)
- .debug_loc     0x000057a6      0x16b .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_evset.o)
- .debug_loc     0x00005911      0x13f .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_evwait.o)
- .debug_loc     0x00005a50       0x62 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_irqendin.o)
- .debug_loc     0x00005ab2       0x4a .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_rq_exchg.o)
- .debug_loc     0x00005afc       0x36 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_rq_first.o)
- .debug_loc     0x00005b32       0x1e .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_rq_inser.o)
- .debug_loc     0x00005b50      0x1d8 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_startos.o)
- .debug_loc     0x00005d28       0x50 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_terminat.o)
- .debug_loc     0x00005d78       0x13 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_cortex_mx_ee_utils.o)
- .debug_loc     0x00005d8b       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SEVEN_DP.o)
- .debug_loc     0x00005dcd       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SEVEN_SELECT.o)
- .debug_loc     0x00005e0f       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(BUTTON_1.o)
- .debug_loc     0x00005e51       0x56 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(isr_Button.o)
- .debug_loc     0x00005ea7       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(BUTTON_2.o)
- .debug_loc     0x00005ee9       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(BUTTON_3.o)
- .debug_loc     0x00005f2b       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(BUTTON_4.o)
- .debug_loc     0x00005f6d       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(LED_red.o)
- .debug_loc     0x00005faf       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(LED_yellow.o)
- .debug_loc     0x00005ff1       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(LED_green.o)
- .debug_loc     0x00006033      0x276 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(UART_LOG.o)
- .debug_loc     0x000062a9       0x13 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(RGB_PWM_red.o)
- .debug_loc     0x000062bc       0x13 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(RGB_PWM_green.o)
- .debug_loc     0x000062cf       0x13 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(RGB_PWM_blue.o)
- .debug_loc     0x000062e2       0x26 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_PWM.o)
- .debug_loc     0x00006308      0x128 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_PWM_CLOCK.o)
- .debug_loc     0x00006430       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_ENABLE.o)
- .debug_loc     0x00006472       0x21 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_SAMPLE.o)
- .debug_loc     0x00006493      0x128 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_SAMPLE_CLOCK.o)
- .debug_loc     0x000065bb      0x128 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(UART_LOG_IntClock.o)
- .debug_loc     0x000066e3       0xfe .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_SPI.o)
- .debug_loc     0x000067e1       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_DC.o)
- .debug_loc     0x00006823       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_RES.o)
- .debug_loc     0x00006865       0x13 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_BackLight.o)
- .debug_loc     0x00006878      0x128 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_SPI_IntClock.o)
- .debug_loc     0x000069a0       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(DBG_FS.o)
- .debug_loc     0x000069e2       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(DBG_CONV.o)
- .debug_loc     0x00006a24       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(DBG_FILL.o)
- .debug_loc     0x00006a66       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(DBG_DEAD.o)
- .debug_loc     0x00006aa8      0x3b2 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(CyFlash.o)
- .debug_loc     0x00006e5a      0x705 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(CySpc.o)
- .debug_loc     0x0000755f       0xc5 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_cortex_mx_ee_context.o)
- .debug_loc     0x00007624       0xdd .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_thendin.o)
- .debug_loc     0x00007701      0x38f .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
- .debug_loc     0x00007a90       0xfe .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
- .debug_loc     0x00007b8e      0x12c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_Clock_1.o)
- .debug_loc     0x00007cba       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0_CS.o)
+ .debug_loc     0x00003efe      0x288 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+ .debug_loc     0x00004186      0x144 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+ .debug_loc     0x000042ca      0xa11 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(CyLib.o)
+ .debug_loc     0x00004cdb      0x1e4 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(cyPm.o)
+ .debug_loc     0x00004ebf      0x12d .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_activate.o)
+ .debug_loc     0x00004fec      0x1ed .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_alsetrel.o)
+ .debug_loc     0x000051d9      0x46c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_altick.o)
+ .debug_loc     0x00005645       0xbc .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_evclear.o)
+ .debug_loc     0x00005701       0xa4 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_evget.o)
+ .debug_loc     0x000057a5      0x16b .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_evset.o)
+ .debug_loc     0x00005910      0x13f .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_evwait.o)
+ .debug_loc     0x00005a4f       0x62 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_irqendin.o)
+ .debug_loc     0x00005ab1       0x4a .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_rq_exchg.o)
+ .debug_loc     0x00005afb       0x36 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_rq_first.o)
+ .debug_loc     0x00005b31       0x1e .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_rq_inser.o)
+ .debug_loc     0x00005b4f      0x1d8 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_startos.o)
+ .debug_loc     0x00005d27       0x50 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_terminat.o)
+ .debug_loc     0x00005d77       0x13 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_cortex_mx_ee_utils.o)
+ .debug_loc     0x00005d8a       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SEVEN_DP.o)
+ .debug_loc     0x00005dcc       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SEVEN_SELECT.o)
+ .debug_loc     0x00005e0e       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(BUTTON_1.o)
+ .debug_loc     0x00005e50       0x56 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(isr_Button.o)
+ .debug_loc     0x00005ea6       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(BUTTON_2.o)
+ .debug_loc     0x00005ee8       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(BUTTON_3.o)
+ .debug_loc     0x00005f2a       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(BUTTON_4.o)
+ .debug_loc     0x00005f6c       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(LED_red.o)
+ .debug_loc     0x00005fae       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(LED_yellow.o)
+ .debug_loc     0x00005ff0       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(LED_green.o)
+ .debug_loc     0x00006032      0x276 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(UART_LOG.o)
+ .debug_loc     0x000062a8       0x13 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(RGB_PWM_red.o)
+ .debug_loc     0x000062bb       0x13 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(RGB_PWM_green.o)
+ .debug_loc     0x000062ce       0x13 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(RGB_PWM_blue.o)
+ .debug_loc     0x000062e1       0x26 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_PWM.o)
+ .debug_loc     0x00006307      0x128 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_PWM_CLOCK.o)
+ .debug_loc     0x0000642f       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_ENABLE.o)
+ .debug_loc     0x00006471       0x21 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_SAMPLE.o)
+ .debug_loc     0x00006492      0x128 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SOUND_SAMPLE_CLOCK.o)
+ .debug_loc     0x000065ba      0x128 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(UART_LOG_IntClock.o)
+ .debug_loc     0x000066e2       0xfe .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_SPI.o)
+ .debug_loc     0x000067e0       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_DC.o)
+ .debug_loc     0x00006822       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_RES.o)
+ .debug_loc     0x00006864       0x13 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_BackLight.o)
+ .debug_loc     0x00006877      0x128 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(TFT_SPI_IntClock.o)
+ .debug_loc     0x0000699f       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(DBG_FS.o)
+ .debug_loc     0x000069e1       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(DBG_CONV.o)
+ .debug_loc     0x00006a23       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(DBG_FILL.o)
+ .debug_loc     0x00006a65       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(DBG_DEAD.o)
+ .debug_loc     0x00006aa7      0x3b2 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(CyFlash.o)
+ .debug_loc     0x00006e59      0x705 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(CySpc.o)
+ .debug_loc     0x0000755e       0xc5 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_cortex_mx_ee_context.o)
+ .debug_loc     0x00007623       0xdd .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(SimpleSystem_ee_thendin.o)
+ .debug_loc     0x00007700      0x38f .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_MMC_HW_SPI.o)
+ .debug_loc     0x00007a8f       0xfe .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0.o)
+ .debug_loc     0x00007b8d      0x12c .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_Clock_1.o)
+ .debug_loc     0x00007cb9       0x42 .\CortexM3\ARM_GCC_541\Debug\MP3_Player.a(emFile_SPI0_CS.o)
 
 .debug_macinfo
  *(.debug_macinfo)
