@@ -1,0 +1,3547 @@
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"timing.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.TA_systick_isr,"ax",%progbits
+  20              		.align	2
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	TA_systick_isr, %function
+  24              	TA_systick_isr:
+  25              	.LFB117:
+  26              		.file 1 "source\\bsw\\Services\\analysis\\timing.c"
+   1:source\bsw\Services\analysis/timing.c **** /**
+   2:source\bsw\Services\analysis/timing.c **** * \file <filename>
+   3:source\bsw\Services\analysis/timing.c **** * \author <author-name>
+   4:source\bsw\Services\analysis/timing.c **** * \date <date>
+   5:source\bsw\Services\analysis/timing.c **** *
+   6:source\bsw\Services\analysis/timing.c **** * \brief <Symbolic File name>
+   7:source\bsw\Services\analysis/timing.c **** *
+   8:source\bsw\Services\analysis/timing.c **** * \copyright Copyright ©2016
+   9:source\bsw\Services\analysis/timing.c **** * Department of electrical engineering and information technology, Hochschule Darmstadt - Universit
+  10:source\bsw\Services\analysis/timing.c **** * Permission to use, copy, modify, and distribute this software and its documentation for education
+  11:source\bsw\Services\analysis/timing.c **** * (unless permitted by h_da) and official h_da projects, is hereby granted for enrolled students of
+  12:source\bsw\Services\analysis/timing.c **** * this paragraph and the following paragraph appear in all copies, modifications, and distributions
+  13:source\bsw\Services\analysis/timing.c **** * Contact Prof.Dr.-Ing. Peter Fromm, peter.fromm@h-da.de, Birkenweg 8 64295 Darmstadt - GERMANY for
+  14:source\bsw\Services\analysis/timing.c **** *
+  15:source\bsw\Services\analysis/timing.c **** * \warning This software is a PROTOTYPE version and is not designed or intended for use in producti
+  16:source\bsw\Services\analysis/timing.c **** * The user represents and warrants that it will NOT use or redistribute the Software for such purpo
+  17:source\bsw\Services\analysis/timing.c **** * This prototype is for research purposes only. This software is provided "AS IS," without a warran
+  18:source\bsw\Services\analysis/timing.c **** */
+  19:source\bsw\Services\analysis/timing.c **** 
+  20:source\bsw\Services\analysis/timing.c **** /*****************************************************************************/
+  21:source\bsw\Services\analysis/timing.c **** /* Include files                                                             */
+  22:source\bsw\Services\analysis/timing.c **** /*****************************************************************************/
+  23:source\bsw\Services\analysis/timing.c **** 
+  24:source\bsw\Services\analysis/timing.c **** #include "timing.h"
+  25:source\bsw\Services\analysis/timing.c **** 
+  26:source\bsw\Services\analysis/timing.c **** #include "log.h"
+  27:source\bsw\Services\analysis/timing.c **** #include "project.h"
+  28:source\bsw\Services\analysis/timing.c **** 
+  29:source\bsw\Services\analysis/timing.c **** /*****************************************************************************/
+  30:source\bsw\Services\analysis/timing.c **** /* Local pre-processor symbols/macros ('#define')                            */
+  31:source\bsw\Services\analysis/timing.c **** /*****************************************************************************/
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 2
+
+
+  32:source\bsw\Services\analysis/timing.c **** 
+  33:source\bsw\Services\analysis/timing.c **** #define TA_CYCLE2NANO                       1000 / BCLK__BUS_CLK__MHZ       //Translate cycles into
+  34:source\bsw\Services\analysis/timing.c **** 
+  35:source\bsw\Services\analysis/timing.c **** #define TA_SYSTICK_INTERRUPT_VECTOR_NUMBER  15u                             //Hard vector
+  36:source\bsw\Services\analysis/timing.c **** #define TA_SYSTICK_MAXVAL                   0x00FFFFFF                      //Max allowed SysTick c
+  37:source\bsw\Services\analysis/timing.c **** #define TA_SYSTICK_1MS_RELOAD               (BCLK__BUS_CLK__KHZ - 1)        //Reload value for 1ms
+  38:source\bsw\Services\analysis/timing.c **** 
+  39:source\bsw\Services\analysis/timing.c **** /*****************************************************************************/
+  40:source\bsw\Services\analysis/timing.c **** /* Global variable definitions (declared in header file with 'extern')       */
+  41:source\bsw\Services\analysis/timing.c **** /*****************************************************************************/
+  42:source\bsw\Services\analysis/timing.c **** 
+  43:source\bsw\Services\analysis/timing.c **** /*****************************************************************************/
+  44:source\bsw\Services\analysis/timing.c **** /* Local type definitions ('typedef')                                        */
+  45:source\bsw\Services\analysis/timing.c **** /*****************************************************************************/
+  46:source\bsw\Services\analysis/timing.c **** 
+  47:source\bsw\Services\analysis/timing.c **** /*****************************************************************************/
+  48:source\bsw\Services\analysis/timing.c **** /* Local variable definitions ('static')                                     */
+  49:source\bsw\Services\analysis/timing.c **** /*****************************************************************************/
+  50:source\bsw\Services\analysis/timing.c **** 
+  51:source\bsw\Services\analysis/timing.c **** static volatile uint32_t TA_systick_count =0;
+  52:source\bsw\Services\analysis/timing.c **** 
+  53:source\bsw\Services\analysis/timing.c **** /*****************************************************************************/
+  54:source\bsw\Services\analysis/timing.c **** /* Local function prototypes ('static')                                      */
+  55:source\bsw\Services\analysis/timing.c **** /*****************************************************************************/
+  56:source\bsw\Services\analysis/timing.c **** 
+  57:source\bsw\Services\analysis/timing.c **** /**
+  58:source\bsw\Services\analysis/timing.c ****  * Counts a software counter
+  59:source\bsw\Services\analysis/timing.c ****  */
+  60:source\bsw\Services\analysis/timing.c **** static void TA_systick_isr();
+  61:source\bsw\Services\analysis/timing.c **** 
+  62:source\bsw\Services\analysis/timing.c **** /*****************************************************************************/
+  63:source\bsw\Services\analysis/timing.c **** /* Function implementation - global ('extern') and local ('static')          */
+  64:source\bsw\Services\analysis/timing.c **** /*****************************************************************************/
+  65:source\bsw\Services\analysis/timing.c **** 
+  66:source\bsw\Services\analysis/timing.c **** /**
+  67:source\bsw\Services\analysis/timing.c ****  * The start function for the timing analyser hardware
+  68:source\bsw\Services\analysis/timing.c ****  * Only called once to avoid problems with multiple timer objects
+  69:source\bsw\Services\analysis/timing.c ****  **/
+  70:source\bsw\Services\analysis/timing.c **** RC_t TA_init()
+  71:source\bsw\Services\analysis/timing.c **** {
+  72:source\bsw\Services\analysis/timing.c ****     
+  73:source\bsw\Services\analysis/timing.c ****     //Init the DWT COunter
+  74:source\bsw\Services\analysis/timing.c ****     CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk; //Activate the trace unit
+  75:source\bsw\Services\analysis/timing.c ****     DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;            //Activate the cycle counter
+  76:source\bsw\Services\analysis/timing.c ****     DWT->CYCCNT = 0;                                //Set the start value to 0
+  77:source\bsw\Services\analysis/timing.c ****  
+  78:source\bsw\Services\analysis/timing.c ****     //Init the Systick Counter
+  79:source\bsw\Services\analysis/timing.c ****     CySysTickInit();
+  80:source\bsw\Services\analysis/timing.c ****     CySysTickSetCallback(0, TA_systick_isr);           //Set ISR for Systick
+  81:source\bsw\Services\analysis/timing.c ****     CySysTickSetReload(TA_SYSTICK_1MS_RELOAD);   //1ms cycle Time
+  82:source\bsw\Services\analysis/timing.c ****     CySysTickEnable();
+  83:source\bsw\Services\analysis/timing.c ****     
+  84:source\bsw\Services\analysis/timing.c ****     return RC_SUCCESS;
+  85:source\bsw\Services\analysis/timing.c **** }
+  86:source\bsw\Services\analysis/timing.c **** 
+  87:source\bsw\Services\analysis/timing.c **** /**
+  88:source\bsw\Services\analysis/timing.c ****  * The config function for the timing analyser objects
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 3
+
+
+  89:source\bsw\Services\analysis/timing.c ****  * \param TA_t *const me                : [OUT] The timing object
+  90:source\bsw\Services\analysis/timing.c ****  * \param char const *const name        : [IN] The name of the timer object
+  91:source\bsw\Services\analysis/timing.c ****  * \param TA_mode_t mode                : [IN] Timer measurement mode
+  92:source\bsw\Services\analysis/timing.c ****  * \param TA_fpPinWrite_t pinWrite      : [IN] Pin write function
+  93:source\bsw\Services\analysis/timing.c ****  * \return RC_SUCCESS or error code
+  94:source\bsw\Services\analysis/timing.c ****  */
+  95:source\bsw\Services\analysis/timing.c **** RC_t TA_config(TA_t *const me, char const *const name, TA_mode_t mode, TA_fpPinWrite_t pinWrite)
+  96:source\bsw\Services\analysis/timing.c **** {
+  97:source\bsw\Services\analysis/timing.c ****     
+  98:source\bsw\Services\analysis/timing.c ****     me->m_elapsedTime = 0;
+  99:source\bsw\Services\analysis/timing.c ****     me->m_mode = mode;
+ 100:source\bsw\Services\analysis/timing.c ****     me->m_name = name;
+ 101:source\bsw\Services\analysis/timing.c ****     me->m_state = TA_ISSTOPPED;
+ 102:source\bsw\Services\analysis/timing.c ****     me->p_pinWrite = pinWrite;
+ 103:source\bsw\Services\analysis/timing.c ****     
+ 104:source\bsw\Services\analysis/timing.c **** 
+ 105:source\bsw\Services\analysis/timing.c ****     //Start the pin toggle if active
+ 106:source\bsw\Services\analysis/timing.c ****     if (0 != me->p_pinWrite)
+ 107:source\bsw\Services\analysis/timing.c ****     {
+ 108:source\bsw\Services\analysis/timing.c ****         me->p_pinWrite(0);
+ 109:source\bsw\Services\analysis/timing.c ****     }    
+ 110:source\bsw\Services\analysis/timing.c **** 
+ 111:source\bsw\Services\analysis/timing.c ****     return RC_SUCCESS;
+ 112:source\bsw\Services\analysis/timing.c **** }
+ 113:source\bsw\Services\analysis/timing.c **** 
+ 114:source\bsw\Services\analysis/timing.c **** /**
+ 115:source\bsw\Services\analysis/timing.c ****  * The start function for the timing analyser, will start the measurement
+ 116:source\bsw\Services\analysis/timing.c ****  * \param TA_t *const me                : [IN/OUT] The timing object
+ 117:source\bsw\Services\analysis/timing.c ****  */
+ 118:source\bsw\Services\analysis/timing.c **** RC_t TA_start(TA_t *const me)
+ 119:source\bsw\Services\analysis/timing.c **** {
+ 120:source\bsw\Services\analysis/timing.c ****     if (me->m_state == TA_ISRUNNING)
+ 121:source\bsw\Services\analysis/timing.c ****     {
+ 122:source\bsw\Services\analysis/timing.c ****         return RC_ERROR_INVALID_STATE;
+ 123:source\bsw\Services\analysis/timing.c ****     }
+ 124:source\bsw\Services\analysis/timing.c ****     
+ 125:source\bsw\Services\analysis/timing.c ****     switch (me->m_mode)
+ 126:source\bsw\Services\analysis/timing.c ****     {
+ 127:source\bsw\Services\analysis/timing.c ****         case TA_DWT :
+ 128:source\bsw\Services\analysis/timing.c ****             me->m_startTime = DWT->CYCCNT ;   //Not required for the DWT
+ 129:source\bsw\Services\analysis/timing.c ****             me->m_elapsedTime = 0;
+ 130:source\bsw\Services\analysis/timing.c ****             break;
+ 131:source\bsw\Services\analysis/timing.c ****         case TA_SYSTICK : 
+ 132:source\bsw\Services\analysis/timing.c ****             me->m_startTime = TA_systick_count;
+ 133:source\bsw\Services\analysis/timing.c ****             me->m_elapsedTime = 0;
+ 134:source\bsw\Services\analysis/timing.c ****             break;
+ 135:source\bsw\Services\analysis/timing.c ****         
+ 136:source\bsw\Services\analysis/timing.c ****         case TA_NONE : 
+ 137:source\bsw\Services\analysis/timing.c ****             //Nothing to be done
+ 138:source\bsw\Services\analysis/timing.c ****             break;
+ 139:source\bsw\Services\analysis/timing.c ****         
+ 140:source\bsw\Services\analysis/timing.c ****         default: 
+ 141:source\bsw\Services\analysis/timing.c ****             return RC_ERROR_INVALID;
+ 142:source\bsw\Services\analysis/timing.c ****     }
+ 143:source\bsw\Services\analysis/timing.c ****     
+ 144:source\bsw\Services\analysis/timing.c ****     //Start the pin toggle if active
+ 145:source\bsw\Services\analysis/timing.c ****     if (0 != me->p_pinWrite)
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 4
+
+
+ 146:source\bsw\Services\analysis/timing.c ****     {
+ 147:source\bsw\Services\analysis/timing.c ****         me->p_pinWrite(1);
+ 148:source\bsw\Services\analysis/timing.c ****     }
+ 149:source\bsw\Services\analysis/timing.c ****     
+ 150:source\bsw\Services\analysis/timing.c ****     me->m_state = TA_ISRUNNING;
+ 151:source\bsw\Services\analysis/timing.c ****     
+ 152:source\bsw\Services\analysis/timing.c ****     return RC_SUCCESS;
+ 153:source\bsw\Services\analysis/timing.c **** }
+ 154:source\bsw\Services\analysis/timing.c **** 
+ 155:source\bsw\Services\analysis/timing.c **** /**
+ 156:source\bsw\Services\analysis/timing.c ****  * The stop function for the timing analyser, will stop the measurement
+ 157:source\bsw\Services\analysis/timing.c ****  * \param TA_t *const me                : [IN/OUT] The timing object
+ 158:source\bsw\Services\analysis/timing.c ****  */
+ 159:source\bsw\Services\analysis/timing.c **** RC_t TA_stop(TA_t *const me)
+ 160:source\bsw\Services\analysis/timing.c **** {
+ 161:source\bsw\Services\analysis/timing.c ****     
+ 162:source\bsw\Services\analysis/timing.c ****     if (me->m_state == TA_ISSTOPPED)
+ 163:source\bsw\Services\analysis/timing.c ****     {
+ 164:source\bsw\Services\analysis/timing.c ****         return RC_ERROR_INVALID_STATE;
+ 165:source\bsw\Services\analysis/timing.c ****     }
+ 166:source\bsw\Services\analysis/timing.c ****     
+ 167:source\bsw\Services\analysis/timing.c ****     switch (me->m_mode)
+ 168:source\bsw\Services\analysis/timing.c ****     {
+ 169:source\bsw\Services\analysis/timing.c ****         case TA_DWT :
+ 170:source\bsw\Services\analysis/timing.c ****             me->m_elapsedTime += (DWT->CYCCNT - me->m_startTime);
+ 171:source\bsw\Services\analysis/timing.c ****             break;
+ 172:source\bsw\Services\analysis/timing.c ****         
+ 173:source\bsw\Services\analysis/timing.c ****         case TA_SYSTICK : 
+ 174:source\bsw\Services\analysis/timing.c ****             me->m_elapsedTime += (TA_systick_count - me->m_startTime);
+ 175:source\bsw\Services\analysis/timing.c ****             break;
+ 176:source\bsw\Services\analysis/timing.c ****         
+ 177:source\bsw\Services\analysis/timing.c ****         case TA_NONE : 
+ 178:source\bsw\Services\analysis/timing.c ****             //Nothing to be done
+ 179:source\bsw\Services\analysis/timing.c ****             break;
+ 180:source\bsw\Services\analysis/timing.c ****         
+ 181:source\bsw\Services\analysis/timing.c ****         default: 
+ 182:source\bsw\Services\analysis/timing.c ****             return RC_ERROR_INVALID;
+ 183:source\bsw\Services\analysis/timing.c ****     }
+ 184:source\bsw\Services\analysis/timing.c ****     
+ 185:source\bsw\Services\analysis/timing.c ****     //Stop the pin toggle if active
+ 186:source\bsw\Services\analysis/timing.c ****     if (0 != me->p_pinWrite)
+ 187:source\bsw\Services\analysis/timing.c ****     {
+ 188:source\bsw\Services\analysis/timing.c ****         me->p_pinWrite(0);
+ 189:source\bsw\Services\analysis/timing.c ****     }
+ 190:source\bsw\Services\analysis/timing.c ****         
+ 191:source\bsw\Services\analysis/timing.c ****     
+ 192:source\bsw\Services\analysis/timing.c ****     me->m_state = TA_ISSTOPPED;
+ 193:source\bsw\Services\analysis/timing.c ****     
+ 194:source\bsw\Services\analysis/timing.c ****     return RC_SUCCESS;
+ 195:source\bsw\Services\analysis/timing.c ****     
+ 196:source\bsw\Services\analysis/timing.c **** }
+ 197:source\bsw\Services\analysis/timing.c **** 
+ 198:source\bsw\Services\analysis/timing.c **** /**
+ 199:source\bsw\Services\analysis/timing.c ****  * The pause function for the timing analyser, will pause the measurement
+ 200:source\bsw\Services\analysis/timing.c ****  * \param TA_t *const me                : [IN/OUT] The timing object
+ 201:source\bsw\Services\analysis/timing.c ****  */
+ 202:source\bsw\Services\analysis/timing.c **** RC_t TA_pause(TA_t *const me)
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 5
+
+
+ 203:source\bsw\Services\analysis/timing.c **** {
+ 204:source\bsw\Services\analysis/timing.c ****     if (me->m_state != TA_ISRUNNING)
+ 205:source\bsw\Services\analysis/timing.c ****     {
+ 206:source\bsw\Services\analysis/timing.c ****         return RC_ERROR_INVALID_STATE;
+ 207:source\bsw\Services\analysis/timing.c ****     }
+ 208:source\bsw\Services\analysis/timing.c ****     
+ 209:source\bsw\Services\analysis/timing.c ****     switch (me->m_mode)
+ 210:source\bsw\Services\analysis/timing.c ****     {
+ 211:source\bsw\Services\analysis/timing.c ****         case TA_DWT :
+ 212:source\bsw\Services\analysis/timing.c ****             me->m_elapsedTime += (DWT->CYCCNT - me->m_startTime);
+ 213:source\bsw\Services\analysis/timing.c ****             break;
+ 214:source\bsw\Services\analysis/timing.c ****         case TA_SYSTICK : 
+ 215:source\bsw\Services\analysis/timing.c ****             me->m_elapsedTime += (TA_systick_count - me->m_startTime);
+ 216:source\bsw\Services\analysis/timing.c ****             break;
+ 217:source\bsw\Services\analysis/timing.c ****         
+ 218:source\bsw\Services\analysis/timing.c ****         case TA_NONE : 
+ 219:source\bsw\Services\analysis/timing.c ****             //Nothing to be done
+ 220:source\bsw\Services\analysis/timing.c ****             break;
+ 221:source\bsw\Services\analysis/timing.c ****         
+ 222:source\bsw\Services\analysis/timing.c ****         default: 
+ 223:source\bsw\Services\analysis/timing.c ****             return RC_ERROR_INVALID;
+ 224:source\bsw\Services\analysis/timing.c ****     }
+ 225:source\bsw\Services\analysis/timing.c ****     
+ 226:source\bsw\Services\analysis/timing.c ****     //No action for the pin required
+ 227:source\bsw\Services\analysis/timing.c ****     me->m_state = TA_ISPAUSING;
+ 228:source\bsw\Services\analysis/timing.c ****     
+ 229:source\bsw\Services\analysis/timing.c ****     return RC_SUCCESS;
+ 230:source\bsw\Services\analysis/timing.c **** }
+ 231:source\bsw\Services\analysis/timing.c **** 
+ 232:source\bsw\Services\analysis/timing.c **** /**
+ 233:source\bsw\Services\analysis/timing.c ****  * The resume function for the timing analyser, will resume the measurement
+ 234:source\bsw\Services\analysis/timing.c ****  * \param TA_t *const me                : [IN/OUT] The timing object
+ 235:source\bsw\Services\analysis/timing.c ****  */
+ 236:source\bsw\Services\analysis/timing.c **** RC_t TA_resume(TA_t *const me)
+ 237:source\bsw\Services\analysis/timing.c **** {
+ 238:source\bsw\Services\analysis/timing.c ****     if (me->m_state != TA_ISPAUSING)
+ 239:source\bsw\Services\analysis/timing.c ****     {
+ 240:source\bsw\Services\analysis/timing.c ****         return RC_ERROR_INVALID_STATE;
+ 241:source\bsw\Services\analysis/timing.c ****     }
+ 242:source\bsw\Services\analysis/timing.c ****     
+ 243:source\bsw\Services\analysis/timing.c ****     switch (me->m_mode)
+ 244:source\bsw\Services\analysis/timing.c ****     {
+ 245:source\bsw\Services\analysis/timing.c ****         case TA_DWT :
+ 246:source\bsw\Services\analysis/timing.c ****             me->m_startTime = DWT->CYCCNT;
+ 247:source\bsw\Services\analysis/timing.c ****             break;
+ 248:source\bsw\Services\analysis/timing.c ****         case TA_SYSTICK : 
+ 249:source\bsw\Services\analysis/timing.c ****             me->m_startTime = TA_systick_count;
+ 250:source\bsw\Services\analysis/timing.c ****             break;
+ 251:source\bsw\Services\analysis/timing.c ****         
+ 252:source\bsw\Services\analysis/timing.c ****         case TA_NONE : 
+ 253:source\bsw\Services\analysis/timing.c ****             //Nothing to be done
+ 254:source\bsw\Services\analysis/timing.c ****             break;
+ 255:source\bsw\Services\analysis/timing.c ****         
+ 256:source\bsw\Services\analysis/timing.c ****         default: 
+ 257:source\bsw\Services\analysis/timing.c ****             return RC_ERROR_INVALID;
+ 258:source\bsw\Services\analysis/timing.c ****     }
+ 259:source\bsw\Services\analysis/timing.c ****     
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 6
+
+
+ 260:source\bsw\Services\analysis/timing.c ****     //No action for the pin required
+ 261:source\bsw\Services\analysis/timing.c ****     me->m_state = TA_ISRUNNING;
+ 262:source\bsw\Services\analysis/timing.c ****     
+ 263:source\bsw\Services\analysis/timing.c ****     return RC_SUCCESS;
+ 264:source\bsw\Services\analysis/timing.c **** }
+ 265:source\bsw\Services\analysis/timing.c **** 
+ 266:source\bsw\Services\analysis/timing.c **** /**
+ 267:source\bsw\Services\analysis/timing.c ****  * The print function for the timing analyser, will print the measurement values.
+ 268:source\bsw\Services\analysis/timing.c ****  * Will only work if the timer is not running
+ 269:source\bsw\Services\analysis/timing.c ****  * \param TA_t *const me                : [IN/OUT] The timing object
+ 270:source\bsw\Services\analysis/timing.c ****  */
+ 271:source\bsw\Services\analysis/timing.c **** RC_t TA_print(TA_t const * const me)
+ 272:source\bsw\Services\analysis/timing.c **** {
+ 273:source\bsw\Services\analysis/timing.c ****     if (me->m_state == TA_ISRUNNING)
+ 274:source\bsw\Services\analysis/timing.c ****     {
+ 275:source\bsw\Services\analysis/timing.c ****         return RC_ERROR_INVALID_STATE;
+ 276:source\bsw\Services\analysis/timing.c ****     }
+ 277:source\bsw\Services\analysis/timing.c **** 
+ 278:source\bsw\Services\analysis/timing.c ****     uint64_t nanoseconds = 0;
+ 279:source\bsw\Services\analysis/timing.c ****     uint64_t nanoseconds_whole = 0;
+ 280:source\bsw\Services\analysis/timing.c ****     uint64_t nanoseconds_fraction = 0;
+ 281:source\bsw\Services\analysis/timing.c ****     
+ 282:source\bsw\Services\analysis/timing.c ****     switch (me->m_mode)
+ 283:source\bsw\Services\analysis/timing.c ****     {
+ 284:source\bsw\Services\analysis/timing.c ****         case TA_DWT :
+ 285:source\bsw\Services\analysis/timing.c ****             nanoseconds = (uint64_t)me->m_elapsedTime * TA_CYCLE2NANO;
+ 286:source\bsw\Services\analysis/timing.c ****             nanoseconds_whole = nanoseconds / 1000;
+ 287:source\bsw\Services\analysis/timing.c ****             nanoseconds_fraction = nanoseconds % 1000;
+ 288:source\bsw\Services\analysis/timing.c ****             LOG_D("TA %s (DWT) -> %u.%u us (%u ns | %u cycles)", me->m_name, (uint32_t)(nanoseconds
+ 289:source\bsw\Services\analysis/timing.c ****             break;
+ 290:source\bsw\Services\analysis/timing.c ****         
+ 291:source\bsw\Services\analysis/timing.c ****         case TA_SYSTICK : 
+ 292:source\bsw\Services\analysis/timing.c ****             LOG_D("TA %s (SysTick) -> %u ms", me->m_name, me->m_elapsedTime);
+ 293:source\bsw\Services\analysis/timing.c ****             
+ 294:source\bsw\Services\analysis/timing.c ****             break;
+ 295:source\bsw\Services\analysis/timing.c ****         
+ 296:source\bsw\Services\analysis/timing.c ****         case TA_NONE : 
+ 297:source\bsw\Services\analysis/timing.c ****             //Nothing to be done
+ 298:source\bsw\Services\analysis/timing.c ****             break;
+ 299:source\bsw\Services\analysis/timing.c ****         
+ 300:source\bsw\Services\analysis/timing.c ****         default: 
+ 301:source\bsw\Services\analysis/timing.c ****             return RC_ERROR_INVALID;
+ 302:source\bsw\Services\analysis/timing.c ****     }
+ 303:source\bsw\Services\analysis/timing.c **** 
+ 304:source\bsw\Services\analysis/timing.c ****     
+ 305:source\bsw\Services\analysis/timing.c ****     return RC_SUCCESS;    
+ 306:source\bsw\Services\analysis/timing.c **** }
+ 307:source\bsw\Services\analysis/timing.c **** 
+ 308:source\bsw\Services\analysis/timing.c **** 
+ 309:source\bsw\Services\analysis/timing.c **** /**
+ 310:source\bsw\Services\analysis/timing.c ****  * Counts a software counter
+ 311:source\bsw\Services\analysis/timing.c ****  */
+ 312:source\bsw\Services\analysis/timing.c **** static void TA_systick_isr()
+ 313:source\bsw\Services\analysis/timing.c **** {
+  27              		.loc 1 313 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 7
+
+
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+ 314:source\bsw\Services\analysis/timing.c ****     TA_systick_count++;
+  32              		.loc 1 314 0
+  33 0000 024A     		ldr	r2, .L2
+  34 0002 1368     		ldr	r3, [r2]
+  35 0004 0133     		adds	r3, r3, #1
+  36 0006 1360     		str	r3, [r2]
+  37 0008 7047     		bx	lr
+  38              	.L3:
+  39 000a 00BF     		.align	2
+  40              	.L2:
+  41 000c 00000000 		.word	.LANCHOR0
+  42              		.cfi_endproc
+  43              	.LFE117:
+  44              		.size	TA_systick_isr, .-TA_systick_isr
+  45              		.section	.text.TA_init,"ax",%progbits
+  46              		.align	2
+  47              		.global	TA_init
+  48              		.thumb
+  49              		.thumb_func
+  50              		.type	TA_init, %function
+  51              	TA_init:
+  52              	.LFB110:
+  71:source\bsw\Services\analysis/timing.c ****     
+  53              		.loc 1 71 0
+  54              		.cfi_startproc
+  55              		@ args = 0, pretend = 0, frame = 0
+  56              		@ frame_needed = 0, uses_anonymous_args = 0
+  57 0000 10B5     		push	{r4, lr}
+  58              		.cfi_def_cfa_offset 8
+  59              		.cfi_offset 4, -8
+  60              		.cfi_offset 14, -4
+  74:source\bsw\Services\analysis/timing.c ****     DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;            //Activate the cycle counter
+  61              		.loc 1 74 0
+  62 0002 0C4A     		ldr	r2, .L6
+  63 0004 D368     		ldr	r3, [r2, #12]
+  64 0006 43F08073 		orr	r3, r3, #16777216
+  65 000a D360     		str	r3, [r2, #12]
+  75:source\bsw\Services\analysis/timing.c ****     DWT->CYCCNT = 0;                                //Set the start value to 0
+  66              		.loc 1 75 0
+  67 000c 0A4B     		ldr	r3, .L6+4
+  68 000e 1A68     		ldr	r2, [r3]
+  69 0010 42F00102 		orr	r2, r2, #1
+  70 0014 1A60     		str	r2, [r3]
+  76:source\bsw\Services\analysis/timing.c ****  
+  71              		.loc 1 76 0
+  72 0016 0024     		movs	r4, #0
+  73 0018 5C60     		str	r4, [r3, #4]
+  79:source\bsw\Services\analysis/timing.c ****     CySysTickSetCallback(0, TA_systick_isr);           //Set ISR for Systick
+  74              		.loc 1 79 0
+  75 001a FFF7FEFF 		bl	CySysTickInit
+  76              	.LVL0:
+  80:source\bsw\Services\analysis/timing.c ****     CySysTickSetReload(TA_SYSTICK_1MS_RELOAD);   //1ms cycle Time
+  77              		.loc 1 80 0
+  78 001e 0749     		ldr	r1, .L6+8
+  79 0020 2046     		mov	r0, r4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 8
+
+
+  80 0022 FFF7FEFF 		bl	CySysTickSetCallback
+  81              	.LVL1:
+  81:source\bsw\Services\analysis/timing.c ****     CySysTickEnable();
+  82              		.loc 1 81 0
+  83 0026 0648     		ldr	r0, .L6+12
+  84 0028 FFF7FEFF 		bl	CySysTickSetReload
+  85              	.LVL2:
+  82:source\bsw\Services\analysis/timing.c ****     
+  86              		.loc 1 82 0
+  87 002c FFF7FEFF 		bl	CySysTickEnable
+  88              	.LVL3:
+  85:source\bsw\Services\analysis/timing.c **** 
+  89              		.loc 1 85 0
+  90 0030 2046     		mov	r0, r4
+  91 0032 10BD     		pop	{r4, pc}
+  92              	.L7:
+  93              		.align	2
+  94              	.L6:
+  95 0034 F0ED00E0 		.word	-536810000
+  96 0038 001000E0 		.word	-536866816
+  97 003c 00000000 		.word	TA_systick_isr
+  98 0040 3F190100 		.word	71999
+  99              		.cfi_endproc
+ 100              	.LFE110:
+ 101              		.size	TA_init, .-TA_init
+ 102              		.section	.text.TA_config,"ax",%progbits
+ 103              		.align	2
+ 104              		.global	TA_config
+ 105              		.thumb
+ 106              		.thumb_func
+ 107              		.type	TA_config, %function
+ 108              	TA_config:
+ 109              	.LFB111:
+  96:source\bsw\Services\analysis/timing.c ****     
+ 110              		.loc 1 96 0
+ 111              		.cfi_startproc
+ 112              		@ args = 0, pretend = 0, frame = 0
+ 113              		@ frame_needed = 0, uses_anonymous_args = 0
+ 114              	.LVL4:
+ 115 0000 10B5     		push	{r4, lr}
+ 116              		.cfi_def_cfa_offset 8
+ 117              		.cfi_offset 4, -8
+ 118              		.cfi_offset 14, -4
+  98:source\bsw\Services\analysis/timing.c ****     me->m_mode = mode;
+ 119              		.loc 1 98 0
+ 120 0002 0024     		movs	r4, #0
+ 121 0004 8460     		str	r4, [r0, #8]
+  99:source\bsw\Services\analysis/timing.c ****     me->m_name = name;
+ 122              		.loc 1 99 0
+ 123 0006 4273     		strb	r2, [r0, #13]
+ 100:source\bsw\Services\analysis/timing.c ****     me->m_state = TA_ISSTOPPED;
+ 124              		.loc 1 100 0
+ 125 0008 0160     		str	r1, [r0]
+ 101:source\bsw\Services\analysis/timing.c ****     me->p_pinWrite = pinWrite;
+ 126              		.loc 1 101 0
+ 127 000a 0473     		strb	r4, [r0, #12]
+ 102:source\bsw\Services\analysis/timing.c ****     
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 9
+
+
+ 128              		.loc 1 102 0
+ 129 000c 0361     		str	r3, [r0, #16]
+ 106:source\bsw\Services\analysis/timing.c ****     {
+ 130              		.loc 1 106 0
+ 131 000e 0BB1     		cbz	r3, .L9
+ 108:source\bsw\Services\analysis/timing.c ****     }    
+ 132              		.loc 1 108 0
+ 133 0010 2046     		mov	r0, r4
+ 134              	.LVL5:
+ 135 0012 9847     		blx	r3
+ 136              	.LVL6:
+ 137              	.L9:
+ 112:source\bsw\Services\analysis/timing.c **** 
+ 138              		.loc 1 112 0
+ 139 0014 0020     		movs	r0, #0
+ 140 0016 10BD     		pop	{r4, pc}
+ 141              		.cfi_endproc
+ 142              	.LFE111:
+ 143              		.size	TA_config, .-TA_config
+ 144              		.section	.text.TA_start,"ax",%progbits
+ 145              		.align	2
+ 146              		.global	TA_start
+ 147              		.thumb
+ 148              		.thumb_func
+ 149              		.type	TA_start, %function
+ 150              	TA_start:
+ 151              	.LFB112:
+ 119:source\bsw\Services\analysis/timing.c ****     if (me->m_state == TA_ISRUNNING)
+ 152              		.loc 1 119 0
+ 153              		.cfi_startproc
+ 154              		@ args = 0, pretend = 0, frame = 0
+ 155              		@ frame_needed = 0, uses_anonymous_args = 0
+ 156              	.LVL7:
+ 157 0000 10B5     		push	{r4, lr}
+ 158              		.cfi_def_cfa_offset 8
+ 159              		.cfi_offset 4, -8
+ 160              		.cfi_offset 14, -4
+ 120:source\bsw\Services\analysis/timing.c ****     {
+ 161              		.loc 1 120 0
+ 162 0002 037B     		ldrb	r3, [r0, #12]	@ zero_extendqisi2
+ 163 0004 012B     		cmp	r3, #1
+ 164 0006 1AD0     		beq	.L17
+ 125:source\bsw\Services\analysis/timing.c ****     {
+ 165              		.loc 1 125 0
+ 166 0008 437B     		ldrb	r3, [r0, #13]	@ zero_extendqisi2
+ 167 000a 012B     		cmp	r3, #1
+ 168 000c 03D0     		beq	.L13
+ 169 000e 6BB1     		cbz	r3, .L14
+ 170 0010 022B     		cmp	r3, #2
+ 171 0012 06D0     		beq	.L15
+ 172 0014 16E0     		b	.L19
+ 173              	.L13:
+ 128:source\bsw\Services\analysis/timing.c ****             me->m_elapsedTime = 0;
+ 174              		.loc 1 128 0
+ 175 0016 0D4B     		ldr	r3, .L21
+ 176 0018 5B68     		ldr	r3, [r3, #4]
+ 177 001a 4360     		str	r3, [r0, #4]
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 10
+
+
+ 129:source\bsw\Services\analysis/timing.c ****             break;
+ 178              		.loc 1 129 0
+ 179 001c 0023     		movs	r3, #0
+ 180 001e 8360     		str	r3, [r0, #8]
+ 130:source\bsw\Services\analysis/timing.c ****         case TA_SYSTICK : 
+ 181              		.loc 1 130 0
+ 182 0020 04E0     		b	.L14
+ 183              	.L15:
+ 132:source\bsw\Services\analysis/timing.c ****             me->m_elapsedTime = 0;
+ 184              		.loc 1 132 0
+ 185 0022 0B4B     		ldr	r3, .L21+4
+ 186 0024 1B68     		ldr	r3, [r3]
+ 187 0026 4360     		str	r3, [r0, #4]
+ 133:source\bsw\Services\analysis/timing.c ****             break;
+ 188              		.loc 1 133 0
+ 189 0028 0023     		movs	r3, #0
+ 190 002a 8360     		str	r3, [r0, #8]
+ 191              	.L14:
+ 192 002c 0446     		mov	r4, r0
+ 145:source\bsw\Services\analysis/timing.c ****     {
+ 193              		.loc 1 145 0
+ 194 002e 0369     		ldr	r3, [r0, #16]
+ 195 0030 0BB1     		cbz	r3, .L16
+ 147:source\bsw\Services\analysis/timing.c ****     }
+ 196              		.loc 1 147 0
+ 197 0032 0120     		movs	r0, #1
+ 198              	.LVL8:
+ 199 0034 9847     		blx	r3
+ 200              	.LVL9:
+ 201              	.L16:
+ 150:source\bsw\Services\analysis/timing.c ****     
+ 202              		.loc 1 150 0
+ 203 0036 0123     		movs	r3, #1
+ 204 0038 2373     		strb	r3, [r4, #12]
+ 152:source\bsw\Services\analysis/timing.c **** }
+ 205              		.loc 1 152 0
+ 206 003a 0020     		movs	r0, #0
+ 207 003c 10BD     		pop	{r4, pc}
+ 208              	.LVL10:
+ 209              	.L17:
+ 122:source\bsw\Services\analysis/timing.c ****     }
+ 210              		.loc 1 122 0
+ 211 003e 6FF01600 		mvn	r0, #22
+ 212              	.LVL11:
+ 213 0042 10BD     		pop	{r4, pc}
+ 214              	.LVL12:
+ 215              	.L19:
+ 141:source\bsw\Services\analysis/timing.c ****     }
+ 216              		.loc 1 141 0
+ 217 0044 6FF00F00 		mvn	r0, #15
+ 218              	.LVL13:
+ 153:source\bsw\Services\analysis/timing.c **** 
+ 219              		.loc 1 153 0
+ 220 0048 10BD     		pop	{r4, pc}
+ 221              	.L22:
+ 222 004a 00BF     		.align	2
+ 223              	.L21:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 11
+
+
+ 224 004c 001000E0 		.word	-536866816
+ 225 0050 00000000 		.word	.LANCHOR0
+ 226              		.cfi_endproc
+ 227              	.LFE112:
+ 228              		.size	TA_start, .-TA_start
+ 229              		.section	.text.TA_stop,"ax",%progbits
+ 230              		.align	2
+ 231              		.global	TA_stop
+ 232              		.thumb
+ 233              		.thumb_func
+ 234              		.type	TA_stop, %function
+ 235              	TA_stop:
+ 236              	.LFB113:
+ 160:source\bsw\Services\analysis/timing.c ****     
+ 237              		.loc 1 160 0
+ 238              		.cfi_startproc
+ 239              		@ args = 0, pretend = 0, frame = 0
+ 240              		@ frame_needed = 0, uses_anonymous_args = 0
+ 241              	.LVL14:
+ 242 0000 10B5     		push	{r4, lr}
+ 243              		.cfi_def_cfa_offset 8
+ 244              		.cfi_offset 4, -8
+ 245              		.cfi_offset 14, -4
+ 162:source\bsw\Services\analysis/timing.c ****     {
+ 246              		.loc 1 162 0
+ 247 0002 037B     		ldrb	r3, [r0, #12]	@ zero_extendqisi2
+ 248 0004 EBB1     		cbz	r3, .L29
+ 167:source\bsw\Services\analysis/timing.c ****     {
+ 249              		.loc 1 167 0
+ 250 0006 437B     		ldrb	r3, [r0, #13]	@ zero_extendqisi2
+ 251 0008 012B     		cmp	r3, #1
+ 252 000a 03D0     		beq	.L25
+ 253 000c 8BB1     		cbz	r3, .L26
+ 254 000e 022B     		cmp	r3, #2
+ 255 0010 08D0     		beq	.L27
+ 256 0012 19E0     		b	.L31
+ 257              	.L25:
+ 170:source\bsw\Services\analysis/timing.c ****             break;
+ 258              		.loc 1 170 0
+ 259 0014 0E4B     		ldr	r3, .L33
+ 260 0016 5B68     		ldr	r3, [r3, #4]
+ 261 0018 4268     		ldr	r2, [r0, #4]
+ 262 001a 9B1A     		subs	r3, r3, r2
+ 263 001c 8268     		ldr	r2, [r0, #8]
+ 264 001e 1344     		add	r3, r3, r2
+ 265 0020 8360     		str	r3, [r0, #8]
+ 171:source\bsw\Services\analysis/timing.c ****         
+ 266              		.loc 1 171 0
+ 267 0022 06E0     		b	.L26
+ 268              	.L27:
+ 174:source\bsw\Services\analysis/timing.c ****             break;
+ 269              		.loc 1 174 0
+ 270 0024 0B4B     		ldr	r3, .L33+4
+ 271 0026 1B68     		ldr	r3, [r3]
+ 272 0028 4268     		ldr	r2, [r0, #4]
+ 273 002a 9B1A     		subs	r3, r3, r2
+ 274 002c 8268     		ldr	r2, [r0, #8]
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 12
+
+
+ 275 002e 1344     		add	r3, r3, r2
+ 276 0030 8360     		str	r3, [r0, #8]
+ 277              	.L26:
+ 278 0032 0446     		mov	r4, r0
+ 186:source\bsw\Services\analysis/timing.c ****     {
+ 279              		.loc 1 186 0
+ 280 0034 0369     		ldr	r3, [r0, #16]
+ 281 0036 0BB1     		cbz	r3, .L28
+ 188:source\bsw\Services\analysis/timing.c ****     }
+ 282              		.loc 1 188 0
+ 283 0038 0020     		movs	r0, #0
+ 284              	.LVL15:
+ 285 003a 9847     		blx	r3
+ 286              	.LVL16:
+ 287              	.L28:
+ 192:source\bsw\Services\analysis/timing.c ****     
+ 288              		.loc 1 192 0
+ 289 003c 0020     		movs	r0, #0
+ 290 003e 2073     		strb	r0, [r4, #12]
+ 194:source\bsw\Services\analysis/timing.c ****     
+ 291              		.loc 1 194 0
+ 292 0040 10BD     		pop	{r4, pc}
+ 293              	.LVL17:
+ 294              	.L29:
+ 164:source\bsw\Services\analysis/timing.c ****     }
+ 295              		.loc 1 164 0
+ 296 0042 6FF01600 		mvn	r0, #22
+ 297              	.LVL18:
+ 298 0046 10BD     		pop	{r4, pc}
+ 299              	.LVL19:
+ 300              	.L31:
+ 182:source\bsw\Services\analysis/timing.c ****     }
+ 301              		.loc 1 182 0
+ 302 0048 6FF00F00 		mvn	r0, #15
+ 303              	.LVL20:
+ 196:source\bsw\Services\analysis/timing.c **** 
+ 304              		.loc 1 196 0
+ 305 004c 10BD     		pop	{r4, pc}
+ 306              	.L34:
+ 307 004e 00BF     		.align	2
+ 308              	.L33:
+ 309 0050 001000E0 		.word	-536866816
+ 310 0054 00000000 		.word	.LANCHOR0
+ 311              		.cfi_endproc
+ 312              	.LFE113:
+ 313              		.size	TA_stop, .-TA_stop
+ 314              		.section	.text.TA_pause,"ax",%progbits
+ 315              		.align	2
+ 316              		.global	TA_pause
+ 317              		.thumb
+ 318              		.thumb_func
+ 319              		.type	TA_pause, %function
+ 320              	TA_pause:
+ 321              	.LFB114:
+ 203:source\bsw\Services\analysis/timing.c ****     if (me->m_state != TA_ISRUNNING)
+ 322              		.loc 1 203 0
+ 323              		.cfi_startproc
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 13
+
+
+ 324              		@ args = 0, pretend = 0, frame = 0
+ 325              		@ frame_needed = 0, uses_anonymous_args = 0
+ 326              		@ link register save eliminated.
+ 327              	.LVL21:
+ 204:source\bsw\Services\analysis/timing.c ****     {
+ 328              		.loc 1 204 0
+ 329 0000 037B     		ldrb	r3, [r0, #12]	@ zero_extendqisi2
+ 330 0002 012B     		cmp	r3, #1
+ 331 0004 19D1     		bne	.L40
+ 209:source\bsw\Services\analysis/timing.c ****     {
+ 332              		.loc 1 209 0
+ 333 0006 437B     		ldrb	r3, [r0, #13]	@ zero_extendqisi2
+ 334 0008 012B     		cmp	r3, #1
+ 335 000a 03D0     		beq	.L37
+ 336 000c 8BB1     		cbz	r3, .L38
+ 337 000e 022B     		cmp	r3, #2
+ 338 0010 08D0     		beq	.L39
+ 339 0012 15E0     		b	.L42
+ 340              	.L37:
+ 212:source\bsw\Services\analysis/timing.c ****             break;
+ 341              		.loc 1 212 0
+ 342 0014 0C4B     		ldr	r3, .L43
+ 343 0016 5B68     		ldr	r3, [r3, #4]
+ 344 0018 4268     		ldr	r2, [r0, #4]
+ 345 001a 9B1A     		subs	r3, r3, r2
+ 346 001c 8268     		ldr	r2, [r0, #8]
+ 347 001e 1344     		add	r3, r3, r2
+ 348 0020 8360     		str	r3, [r0, #8]
+ 213:source\bsw\Services\analysis/timing.c ****         case TA_SYSTICK : 
+ 349              		.loc 1 213 0
+ 350 0022 06E0     		b	.L38
+ 351              	.L39:
+ 215:source\bsw\Services\analysis/timing.c ****             break;
+ 352              		.loc 1 215 0
+ 353 0024 094B     		ldr	r3, .L43+4
+ 354 0026 1B68     		ldr	r3, [r3]
+ 355 0028 4268     		ldr	r2, [r0, #4]
+ 356 002a 9B1A     		subs	r3, r3, r2
+ 357 002c 8268     		ldr	r2, [r0, #8]
+ 358 002e 1344     		add	r3, r3, r2
+ 359 0030 8360     		str	r3, [r0, #8]
+ 360              	.L38:
+ 227:source\bsw\Services\analysis/timing.c ****     
+ 361              		.loc 1 227 0
+ 362 0032 0223     		movs	r3, #2
+ 363 0034 0373     		strb	r3, [r0, #12]
+ 229:source\bsw\Services\analysis/timing.c **** }
+ 364              		.loc 1 229 0
+ 365 0036 0020     		movs	r0, #0
+ 366              	.LVL22:
+ 367 0038 7047     		bx	lr
+ 368              	.LVL23:
+ 369              	.L40:
+ 206:source\bsw\Services\analysis/timing.c ****     }
+ 370              		.loc 1 206 0
+ 371 003a 6FF01600 		mvn	r0, #22
+ 372              	.LVL24:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 14
+
+
+ 373 003e 7047     		bx	lr
+ 374              	.LVL25:
+ 375              	.L42:
+ 223:source\bsw\Services\analysis/timing.c ****     }
+ 376              		.loc 1 223 0
+ 377 0040 6FF00F00 		mvn	r0, #15
+ 378              	.LVL26:
+ 230:source\bsw\Services\analysis/timing.c **** 
+ 379              		.loc 1 230 0
+ 380 0044 7047     		bx	lr
+ 381              	.L44:
+ 382 0046 00BF     		.align	2
+ 383              	.L43:
+ 384 0048 001000E0 		.word	-536866816
+ 385 004c 00000000 		.word	.LANCHOR0
+ 386              		.cfi_endproc
+ 387              	.LFE114:
+ 388              		.size	TA_pause, .-TA_pause
+ 389              		.section	.text.TA_resume,"ax",%progbits
+ 390              		.align	2
+ 391              		.global	TA_resume
+ 392              		.thumb
+ 393              		.thumb_func
+ 394              		.type	TA_resume, %function
+ 395              	TA_resume:
+ 396              	.LFB115:
+ 237:source\bsw\Services\analysis/timing.c ****     if (me->m_state != TA_ISPAUSING)
+ 397              		.loc 1 237 0
+ 398              		.cfi_startproc
+ 399              		@ args = 0, pretend = 0, frame = 0
+ 400              		@ frame_needed = 0, uses_anonymous_args = 0
+ 401              		@ link register save eliminated.
+ 402              	.LVL27:
+ 238:source\bsw\Services\analysis/timing.c ****     {
+ 403              		.loc 1 238 0
+ 404 0000 037B     		ldrb	r3, [r0, #12]	@ zero_extendqisi2
+ 405 0002 022B     		cmp	r3, #2
+ 406 0004 11D1     		bne	.L50
+ 243:source\bsw\Services\analysis/timing.c ****     {
+ 407              		.loc 1 243 0
+ 408 0006 437B     		ldrb	r3, [r0, #13]	@ zero_extendqisi2
+ 409 0008 012B     		cmp	r3, #1
+ 410 000a 03D0     		beq	.L47
+ 411 000c 4BB1     		cbz	r3, .L48
+ 412 000e 022B     		cmp	r3, #2
+ 413 0010 04D0     		beq	.L49
+ 414 0012 0DE0     		b	.L52
+ 415              	.L47:
+ 246:source\bsw\Services\analysis/timing.c ****             break;
+ 416              		.loc 1 246 0
+ 417 0014 084B     		ldr	r3, .L53
+ 418 0016 5B68     		ldr	r3, [r3, #4]
+ 419 0018 4360     		str	r3, [r0, #4]
+ 247:source\bsw\Services\analysis/timing.c ****         case TA_SYSTICK : 
+ 420              		.loc 1 247 0
+ 421 001a 02E0     		b	.L48
+ 422              	.L49:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 15
+
+
+ 249:source\bsw\Services\analysis/timing.c ****             break;
+ 423              		.loc 1 249 0
+ 424 001c 074B     		ldr	r3, .L53+4
+ 425 001e 1B68     		ldr	r3, [r3]
+ 426 0020 4360     		str	r3, [r0, #4]
+ 427              	.L48:
+ 261:source\bsw\Services\analysis/timing.c ****     
+ 428              		.loc 1 261 0
+ 429 0022 0123     		movs	r3, #1
+ 430 0024 0373     		strb	r3, [r0, #12]
+ 263:source\bsw\Services\analysis/timing.c **** }
+ 431              		.loc 1 263 0
+ 432 0026 0020     		movs	r0, #0
+ 433              	.LVL28:
+ 434 0028 7047     		bx	lr
+ 435              	.LVL29:
+ 436              	.L50:
+ 240:source\bsw\Services\analysis/timing.c ****     }
+ 437              		.loc 1 240 0
+ 438 002a 6FF01600 		mvn	r0, #22
+ 439              	.LVL30:
+ 440 002e 7047     		bx	lr
+ 441              	.LVL31:
+ 442              	.L52:
+ 257:source\bsw\Services\analysis/timing.c ****     }
+ 443              		.loc 1 257 0
+ 444 0030 6FF00F00 		mvn	r0, #15
+ 445              	.LVL32:
+ 264:source\bsw\Services\analysis/timing.c **** 
+ 446              		.loc 1 264 0
+ 447 0034 7047     		bx	lr
+ 448              	.L54:
+ 449 0036 00BF     		.align	2
+ 450              	.L53:
+ 451 0038 001000E0 		.word	-536866816
+ 452 003c 00000000 		.word	.LANCHOR0
+ 453              		.cfi_endproc
+ 454              	.LFE115:
+ 455              		.size	TA_resume, .-TA_resume
+ 456              		.global	__aeabi_uldivmod
+ 457              		.section	.text.TA_print,"ax",%progbits
+ 458              		.align	2
+ 459              		.global	TA_print
+ 460              		.thumb
+ 461              		.thumb_func
+ 462              		.type	TA_print, %function
+ 463              	TA_print:
+ 464              	.LFB116:
+ 272:source\bsw\Services\analysis/timing.c ****     if (me->m_state == TA_ISRUNNING)
+ 465              		.loc 1 272 0
+ 466              		.cfi_startproc
+ 467              		@ args = 0, pretend = 0, frame = 0
+ 468              		@ frame_needed = 0, uses_anonymous_args = 0
+ 469              	.LVL33:
+ 273:source\bsw\Services\analysis/timing.c ****     {
+ 470              		.loc 1 273 0
+ 471 0000 037B     		ldrb	r3, [r0, #12]	@ zero_extendqisi2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 16
+
+
+ 472 0002 012B     		cmp	r3, #1
+ 473 0004 49D0     		beq	.L60
+ 272:source\bsw\Services\analysis/timing.c ****     if (me->m_state == TA_ISRUNNING)
+ 474              		.loc 1 272 0
+ 475 0006 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 476              		.cfi_def_cfa_offset 28
+ 477              		.cfi_offset 4, -28
+ 478              		.cfi_offset 5, -24
+ 479              		.cfi_offset 6, -20
+ 480              		.cfi_offset 7, -16
+ 481              		.cfi_offset 8, -12
+ 482              		.cfi_offset 9, -8
+ 483              		.cfi_offset 14, -4
+ 484 000a 83B0     		sub	sp, sp, #12
+ 485              		.cfi_def_cfa_offset 40
+ 486 000c 0646     		mov	r6, r0
+ 487              	.LVL34:
+ 282:source\bsw\Services\analysis/timing.c ****     {
+ 488              		.loc 1 282 0
+ 489 000e 437B     		ldrb	r3, [r0, #13]	@ zero_extendqisi2
+ 490 0010 012B     		cmp	r3, #1
+ 491 0012 06D0     		beq	.L58
+ 492 0014 002B     		cmp	r3, #0
+ 493 0016 43D0     		beq	.L61
+ 494 0018 022B     		cmp	r3, #2
+ 495 001a 37D0     		beq	.L59
+ 301:source\bsw\Services\analysis/timing.c ****     }
+ 496              		.loc 1 301 0
+ 497 001c 6FF00F00 		mvn	r0, #15
+ 498              	.LVL35:
+ 499 0020 3FE0     		b	.L56
+ 500              	.LVL36:
+ 501              	.L58:
+ 285:source\bsw\Services\analysis/timing.c ****             nanoseconds_whole = nanoseconds / 1000;
+ 502              		.loc 1 285 0
+ 503 0022 8768     		ldr	r7, [r0, #8]
+ 504 0024 0021     		movs	r1, #0
+ 505 0026 BC00     		lsls	r4, r7, #2
+ 506 0028 BD0F     		lsrs	r5, r7, #30
+ 507 002a 6B01     		lsls	r3, r5, #5
+ 508 002c 43EAD463 		orr	r3, r3, r4, lsr #27
+ 509 0030 6201     		lsls	r2, r4, #5
+ 510 0032 121B     		subs	r2, r2, r4
+ 511 0034 63EB0503 		sbc	r3, r3, r5
+ 512 0038 D419     		adds	r4, r2, r7
+ 513 003a 43EB0105 		adc	r5, r3, r1
+ 514 003e EB00     		lsls	r3, r5, #3
+ 515 0040 43EA5473 		orr	r3, r3, r4, lsr #29
+ 516 0044 E200     		lsls	r2, r4, #3
+ 517 0046 1446     		mov	r4, r2
+ 518 0048 1D46     		mov	r5, r3
+ 519 004a 4822     		movs	r2, #72
+ 520 004c 0023     		movs	r3, #0
+ 521 004e 2046     		mov	r0, r4
+ 522              	.LVL37:
+ 523 0050 2946     		mov	r1, r5
+ 524 0052 FFF7FEFF 		bl	__aeabi_uldivmod
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 17
+
+
+ 525              	.LVL38:
+ 526 0056 8046     		mov	r8, r0
+ 527 0058 8946     		mov	r9, r1
+ 528              	.LVL39:
+ 286:source\bsw\Services\analysis/timing.c ****             nanoseconds_fraction = nanoseconds % 1000;
+ 529              		.loc 1 286 0
+ 530 005a 134A     		ldr	r2, .L63
+ 531 005c 0023     		movs	r3, #0
+ 532 005e 2046     		mov	r0, r4
+ 533              	.LVL40:
+ 534 0060 2946     		mov	r1, r5
+ 535              	.LVL41:
+ 536 0062 FFF7FEFF 		bl	__aeabi_uldivmod
+ 537              	.LVL42:
+ 538 0066 0446     		mov	r4, r0
+ 539              	.LVL43:
+ 287:source\bsw\Services\analysis/timing.c ****             LOG_D("TA %s (DWT) -> %u.%u us (%u ns | %u cycles)", me->m_name, (uint32_t)(nanoseconds
+ 540              		.loc 1 287 0
+ 541 0068 4FF47A72 		mov	r2, #1000
+ 542 006c 0023     		movs	r3, #0
+ 543 006e 4046     		mov	r0, r8
+ 544              	.LVL44:
+ 545 0070 4946     		mov	r1, r9
+ 546              	.LVL45:
+ 547 0072 FFF7FEFF 		bl	__aeabi_uldivmod
+ 548              	.LVL46:
+ 288:source\bsw\Services\analysis/timing.c ****             break;
+ 549              		.loc 1 288 0
+ 550 0076 3168     		ldr	r1, [r6]
+ 551 0078 0197     		str	r7, [sp, #4]
+ 552 007a CDF80080 		str	r8, [sp]
+ 553 007e 1346     		mov	r3, r2
+ 554 0080 2246     		mov	r2, r4
+ 555 0082 0A48     		ldr	r0, .L63+4
+ 556 0084 FFF7FEFF 		bl	LOG_D
+ 557              	.LVL47:
+ 305:source\bsw\Services\analysis/timing.c **** }
+ 558              		.loc 1 305 0
+ 559 0088 0020     		movs	r0, #0
+ 289:source\bsw\Services\analysis/timing.c ****         
+ 560              		.loc 1 289 0
+ 561 008a 0AE0     		b	.L56
+ 562              	.LVL48:
+ 563              	.L59:
+ 292:source\bsw\Services\analysis/timing.c ****             
+ 564              		.loc 1 292 0
+ 565 008c 8268     		ldr	r2, [r0, #8]
+ 566 008e 0168     		ldr	r1, [r0]
+ 567 0090 0748     		ldr	r0, .L63+8
+ 568              	.LVL49:
+ 569 0092 FFF7FEFF 		bl	LOG_D
+ 570              	.LVL50:
+ 305:source\bsw\Services\analysis/timing.c **** }
+ 571              		.loc 1 305 0
+ 572 0096 0020     		movs	r0, #0
+ 294:source\bsw\Services\analysis/timing.c ****         
+ 573              		.loc 1 294 0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 18
+
+
+ 574 0098 03E0     		b	.L56
+ 575              	.LVL51:
+ 576              	.L60:
+ 577              		.cfi_def_cfa_offset 0
+ 578              		.cfi_restore 4
+ 579              		.cfi_restore 5
+ 580              		.cfi_restore 6
+ 581              		.cfi_restore 7
+ 582              		.cfi_restore 8
+ 583              		.cfi_restore 9
+ 584              		.cfi_restore 14
+ 275:source\bsw\Services\analysis/timing.c ****     }
+ 585              		.loc 1 275 0
+ 586 009a 6FF01600 		mvn	r0, #22
+ 587              	.LVL52:
+ 306:source\bsw\Services\analysis/timing.c **** 
+ 588              		.loc 1 306 0
+ 589 009e 7047     		bx	lr
+ 590              	.LVL53:
+ 591              	.L61:
+ 592              		.cfi_def_cfa_offset 40
+ 593              		.cfi_offset 4, -28
+ 594              		.cfi_offset 5, -24
+ 595              		.cfi_offset 6, -20
+ 596              		.cfi_offset 7, -16
+ 597              		.cfi_offset 8, -12
+ 598              		.cfi_offset 9, -8
+ 599              		.cfi_offset 14, -4
+ 305:source\bsw\Services\analysis/timing.c **** }
+ 600              		.loc 1 305 0
+ 601 00a0 0020     		movs	r0, #0
+ 602              	.LVL54:
+ 603              	.L56:
+ 306:source\bsw\Services\analysis/timing.c **** 
+ 604              		.loc 1 306 0
+ 605 00a2 03B0     		add	sp, sp, #12
+ 606              		.cfi_def_cfa_offset 28
+ 607              		@ sp needed
+ 608 00a4 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 609              	.LVL55:
+ 610              	.L64:
+ 611              		.align	2
+ 612              	.L63:
+ 613 00a8 40190100 		.word	72000
+ 614 00ac 00000000 		.word	.LC0
+ 615 00b0 2C000000 		.word	.LC1
+ 616              		.cfi_endproc
+ 617              	.LFE116:
+ 618              		.size	TA_print, .-TA_print
+ 619              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 620              		.align	2
+ 621              	.LC0:
+ 622 0000 54412025 		.ascii	"TA %s (DWT) -> %u.%u us (%u ns | %u cycles)\000"
+ 622      73202844 
+ 622      57542920 
+ 622      2D3E2025 
+ 622      752E2575 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 19
+
+
+ 623              	.LC1:
+ 624 002c 54412025 		.ascii	"TA %s (SysTick) -> %u ms\000"
+ 624      73202853 
+ 624      79735469 
+ 624      636B2920 
+ 624      2D3E2025 
+ 625              		.bss
+ 626              		.align	2
+ 627              		.set	.LANCHOR0,. + 0
+ 628              		.type	TA_systick_count, %object
+ 629              		.size	TA_systick_count, 4
+ 630              	TA_systick_count:
+ 631 0000 00000000 		.space	4
+ 632              		.text
+ 633              	.Letext0:
+ 634              		.file 2 ".\\source\\bsw/global.h"
+ 635              		.file 3 "source\\bsw\\Services\\analysis\\timing.h"
+ 636              		.file 4 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
+ 637              		.file 5 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
+ 638              		.file 6 "Generated_Source\\PSoC5/ErikaOS_1_common_ee_types.inc"
+ 639              		.file 7 "Generated_Source\\PSoC5/ErikaOS_1_cortex_mx_ee_cpu.inc"
+ 640              		.file 8 "Generated_Source\\PSoC5/core_cm3.h"
+ 641              		.file 9 "Generated_Source\\PSoC5/ErikaOS_1_ee_oo_intfunc.inc"
+ 642              		.file 10 "Generated_Source\\PSoC5/ErikaOS_1_cortex_mx_ee_context.inc"
+ 643              		.file 11 "Generated_Source\\PSoC5/ErikaOS_1_common_ee_primitives.inc"
+ 644              		.file 12 "Generated_Source\\PSoC5/CyLib.h"
+ 645              		.file 13 ".\\source\\bsw\\Services\\log/log.h"
+ 646              		.section	.debug_info,"",%progbits
+ 647              	.Ldebug_info0:
+ 648 0000 FE060000 		.4byte	0x6fe
+ 649 0004 0400     		.2byte	0x4
+ 650 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 651 000a 04       		.byte	0x4
+ 652 000b 01       		.uleb128 0x1
+ 653 000c 9B040000 		.4byte	.LASF120
+ 654 0010 0C       		.byte	0xc
+ 655 0011 F1030000 		.4byte	.LASF121
+ 656 0015 BC020000 		.4byte	.LASF122
+ 657 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 658 001d 00000000 		.4byte	0
+ 659 0021 00000000 		.4byte	.Ldebug_line0
+ 660 0025 02       		.uleb128 0x2
+ 661 0026 04       		.byte	0x4
+ 662 0027 07       		.byte	0x7
+ 663 0028 C6010000 		.4byte	.LASF0
+ 664 002c 02       		.uleb128 0x2
+ 665 002d 01       		.byte	0x1
+ 666 002e 06       		.byte	0x6
+ 667 002f EC000000 		.4byte	.LASF1
+ 668 0033 03       		.uleb128 0x3
+ 669 0034 61060000 		.4byte	.LASF6
+ 670 0038 02       		.byte	0x2
+ 671 0039 91       		.byte	0x91
+ 672 003a 3E000000 		.4byte	0x3e
+ 673 003e 02       		.uleb128 0x2
+ 674 003f 01       		.byte	0x1
+ 675 0040 08       		.byte	0x8
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 20
+
+
+ 676 0041 30040000 		.4byte	.LASF2
+ 677 0045 02       		.uleb128 0x2
+ 678 0046 02       		.byte	0x2
+ 679 0047 05       		.byte	0x5
+ 680 0048 73040000 		.4byte	.LASF3
+ 681 004c 02       		.uleb128 0x2
+ 682 004d 02       		.byte	0x2
+ 683 004e 07       		.byte	0x7
+ 684 004f 4D020000 		.4byte	.LASF4
+ 685 0053 02       		.uleb128 0x2
+ 686 0054 04       		.byte	0x4
+ 687 0055 05       		.byte	0x5
+ 688 0056 15010000 		.4byte	.LASF5
+ 689 005a 03       		.uleb128 0x3
+ 690 005b 3E050000 		.4byte	.LASF7
+ 691 005f 02       		.byte	0x2
+ 692 0060 96       		.byte	0x96
+ 693 0061 65000000 		.4byte	0x65
+ 694 0065 02       		.uleb128 0x2
+ 695 0066 04       		.byte	0x4
+ 696 0067 07       		.byte	0x7
+ 697 0068 0A020000 		.4byte	.LASF8
+ 698 006c 02       		.uleb128 0x2
+ 699 006d 04       		.byte	0x4
+ 700 006e 04       		.byte	0x4
+ 701 006f BF030000 		.4byte	.LASF9
+ 702 0073 02       		.uleb128 0x2
+ 703 0074 08       		.byte	0x8
+ 704 0075 04       		.byte	0x4
+ 705 0076 42010000 		.4byte	.LASF10
+ 706 007a 02       		.uleb128 0x2
+ 707 007b 08       		.byte	0x8
+ 708 007c 05       		.byte	0x5
+ 709 007d DE000000 		.4byte	.LASF11
+ 710 0081 03       		.uleb128 0x3
+ 711 0082 31000000 		.4byte	.LASF12
+ 712 0086 02       		.byte	0x2
+ 713 0087 9B       		.byte	0x9b
+ 714 0088 8C000000 		.4byte	0x8c
+ 715 008c 02       		.uleb128 0x2
+ 716 008d 08       		.byte	0x8
+ 717 008e 07       		.byte	0x7
+ 718 008f 66000000 		.4byte	.LASF13
+ 719 0093 02       		.uleb128 0x2
+ 720 0094 01       		.byte	0x1
+ 721 0095 08       		.byte	0x8
+ 722 0096 81050000 		.4byte	.LASF14
+ 723 009a 04       		.uleb128 0x4
+ 724 009b 04       		.byte	0x4
+ 725 009c A0000000 		.4byte	0xa0
+ 726 00a0 05       		.uleb128 0x5
+ 727 00a1 93000000 		.4byte	0x93
+ 728 00a5 06       		.uleb128 0x6
+ 729 00a6 01       		.byte	0x1
+ 730 00a7 2C000000 		.4byte	0x2c
+ 731 00ab 02       		.byte	0x2
+ 732 00ac CF       		.byte	0xcf
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 21
+
+
+ 733 00ad 4E010000 		.4byte	0x14e
+ 734 00b1 07       		.uleb128 0x7
+ 735 00b2 1D030000 		.4byte	.LASF15
+ 736 00b6 00       		.byte	0
+ 737 00b7 08       		.uleb128 0x8
+ 738 00b8 AD030000 		.4byte	.LASF16
+ 739 00bc 7F       		.sleb128 -1
+ 740 00bd 08       		.uleb128 0x8
+ 741 00be 1C020000 		.4byte	.LASF17
+ 742 00c2 7E       		.sleb128 -2
+ 743 00c3 08       		.uleb128 0x8
+ 744 00c4 29050000 		.4byte	.LASF18
+ 745 00c8 7D       		.sleb128 -3
+ 746 00c9 08       		.uleb128 0x8
+ 747 00ca E4050000 		.4byte	.LASF19
+ 748 00ce 7C       		.sleb128 -4
+ 749 00cf 08       		.uleb128 0x8
+ 750 00d0 36060000 		.4byte	.LASF20
+ 751 00d4 7B       		.sleb128 -5
+ 752 00d5 08       		.uleb128 0x8
+ 753 00d6 D3050000 		.4byte	.LASF21
+ 754 00da 7A       		.sleb128 -6
+ 755 00db 08       		.uleb128 0x8
+ 756 00dc 3B020000 		.4byte	.LASF22
+ 757 00e0 79       		.sleb128 -7
+ 758 00e1 08       		.uleb128 0x8
+ 759 00e2 78020000 		.4byte	.LASF23
+ 760 00e6 78       		.sleb128 -8
+ 761 00e7 08       		.uleb128 0x8
+ 762 00e8 FF000000 		.4byte	.LASF24
+ 763 00ec 77       		.sleb128 -9
+ 764 00ed 08       		.uleb128 0x8
+ 765 00ee E3030000 		.4byte	.LASF25
+ 766 00f2 76       		.sleb128 -10
+ 767 00f3 08       		.uleb128 0x8
+ 768 00f4 00000000 		.4byte	.LASF26
+ 769 00f8 75       		.sleb128 -11
+ 770 00f9 08       		.uleb128 0x8
+ 771 00fa 34010000 		.4byte	.LASF27
+ 772 00fe 74       		.sleb128 -12
+ 773 00ff 08       		.uleb128 0x8
+ 774 0100 F8010000 		.4byte	.LASF28
+ 775 0104 73       		.sleb128 -13
+ 776 0105 08       		.uleb128 0x8
+ 777 0106 62050000 		.4byte	.LASF29
+ 778 010a 72       		.sleb128 -14
+ 779 010b 08       		.uleb128 0x8
+ 780 010c 09030000 		.4byte	.LASF30
+ 781 0110 71       		.sleb128 -15
+ 782 0111 08       		.uleb128 0x8
+ 783 0112 38030000 		.4byte	.LASF31
+ 784 0116 70       		.sleb128 -16
+ 785 0117 08       		.uleb128 0x8
+ 786 0118 7D040000 		.4byte	.LASF32
+ 787 011c 6F       		.sleb128 -17
+ 788 011d 08       		.uleb128 0x8
+ 789 011e 94020000 		.4byte	.LASF33
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 22
+
+
+ 790 0122 6E       		.sleb128 -18
+ 791 0123 08       		.uleb128 0x8
+ 792 0124 A9020000 		.4byte	.LASF34
+ 793 0128 6D       		.sleb128 -19
+ 794 0129 08       		.uleb128 0x8
+ 795 012a 4F050000 		.4byte	.LASF35
+ 796 012e 6C       		.sleb128 -20
+ 797 012f 08       		.uleb128 0x8
+ 798 0130 7D000000 		.4byte	.LASF36
+ 799 0134 6B       		.sleb128 -21
+ 800 0135 08       		.uleb128 0x8
+ 801 0136 5C030000 		.4byte	.LASF37
+ 802 013a 6A       		.sleb128 -22
+ 803 013b 08       		.uleb128 0x8
+ 804 013c 1A000000 		.4byte	.LASF38
+ 805 0140 69       		.sleb128 -23
+ 806 0141 08       		.uleb128 0x8
+ 807 0142 DF010000 		.4byte	.LASF39
+ 808 0146 68       		.sleb128 -24
+ 809 0147 08       		.uleb128 0x8
+ 810 0148 BA050000 		.4byte	.LASF40
+ 811 014c 67       		.sleb128 -25
+ 812 014d 00       		.byte	0
+ 813 014e 03       		.uleb128 0x3
+ 814 014f 3A000000 		.4byte	.LASF41
+ 815 0153 02       		.byte	0x2
+ 816 0154 EA       		.byte	0xea
+ 817 0155 A5000000 		.4byte	0xa5
+ 818 0159 03       		.uleb128 0x3
+ 819 015a 8A060000 		.4byte	.LASF42
+ 820 015e 03       		.byte	0x3
+ 821 015f 32       		.byte	0x32
+ 822 0160 64010000 		.4byte	0x164
+ 823 0164 04       		.uleb128 0x4
+ 824 0165 04       		.byte	0x4
+ 825 0166 6A010000 		.4byte	0x16a
+ 826 016a 09       		.uleb128 0x9
+ 827 016b 75010000 		.4byte	0x175
+ 828 016f 0A       		.uleb128 0xa
+ 829 0170 33000000 		.4byte	0x33
+ 830 0174 00       		.byte	0
+ 831 0175 06       		.uleb128 0x6
+ 832 0176 01       		.byte	0x1
+ 833 0177 3E000000 		.4byte	0x3e
+ 834 017b 03       		.byte	0x3
+ 835 017c 3B       		.byte	0x3b
+ 836 017d 94010000 		.4byte	0x194
+ 837 0181 07       		.uleb128 0x7
+ 838 0182 3E040000 		.4byte	.LASF43
+ 839 0186 00       		.byte	0
+ 840 0187 07       		.uleb128 0x7
+ 841 0188 9F010000 		.4byte	.LASF44
+ 842 018c 01       		.byte	0x1
+ 843 018d 07       		.uleb128 0x7
+ 844 018e 86030000 		.4byte	.LASF45
+ 845 0192 02       		.byte	0x2
+ 846 0193 00       		.byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 23
+
+
+ 847 0194 03       		.uleb128 0x3
+ 848 0195 94010000 		.4byte	.LASF46
+ 849 0199 03       		.byte	0x3
+ 850 019a 3F       		.byte	0x3f
+ 851 019b 75010000 		.4byte	0x175
+ 852 019f 06       		.uleb128 0x6
+ 853 01a0 01       		.byte	0x1
+ 854 01a1 3E000000 		.4byte	0x3e
+ 855 01a5 03       		.byte	0x3
+ 856 01a6 45       		.byte	0x45
+ 857 01a7 BE010000 		.4byte	0x1be
+ 858 01ab 07       		.uleb128 0x7
+ 859 01ac 45000000 		.4byte	.LASF47
+ 860 01b0 00       		.byte	0
+ 861 01b1 07       		.uleb128 0x7
+ 862 01b2 31030000 		.4byte	.LASF48
+ 863 01b6 01       		.byte	0x1
+ 864 01b7 07       		.uleb128 0x7
+ 865 01b8 23010000 		.4byte	.LASF49
+ 866 01bc 02       		.byte	0x2
+ 867 01bd 00       		.byte	0
+ 868 01be 03       		.uleb128 0x3
+ 869 01bf 91040000 		.4byte	.LASF50
+ 870 01c3 03       		.byte	0x3
+ 871 01c4 49       		.byte	0x49
+ 872 01c5 9F010000 		.4byte	0x19f
+ 873 01c9 0B       		.uleb128 0xb
+ 874 01ca 14       		.byte	0x14
+ 875 01cb 03       		.byte	0x3
+ 876 01cc 50       		.byte	0x50
+ 877 01cd 1A020000 		.4byte	0x21a
+ 878 01d1 0C       		.uleb128 0xc
+ 879 01d2 74010000 		.4byte	.LASF51
+ 880 01d6 03       		.byte	0x3
+ 881 01d7 51       		.byte	0x51
+ 882 01d8 9A000000 		.4byte	0x9a
+ 883 01dc 00       		.byte	0
+ 884 01dd 0C       		.uleb128 0xc
+ 885 01de 54000000 		.4byte	.LASF52
+ 886 01e2 03       		.byte	0x3
+ 887 01e3 52       		.byte	0x52
+ 888 01e4 5A000000 		.4byte	0x5a
+ 889 01e8 04       		.byte	0x4
+ 890 01e9 0C       		.uleb128 0xc
+ 891 01ea 69060000 		.4byte	.LASF53
+ 892 01ee 03       		.byte	0x3
+ 893 01ef 53       		.byte	0x53
+ 894 01f0 5A000000 		.4byte	0x5a
+ 895 01f4 08       		.byte	0x8
+ 896 01f5 0C       		.uleb128 0xc
+ 897 01f6 BF000000 		.4byte	.LASF54
+ 898 01fa 03       		.byte	0x3
+ 899 01fb 54       		.byte	0x54
+ 900 01fc 94010000 		.4byte	0x194
+ 901 0200 0C       		.byte	0xc
+ 902 0201 0C       		.uleb128 0xc
+ 903 0202 4D000000 		.4byte	.LASF55
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 24
+
+
+ 904 0206 03       		.byte	0x3
+ 905 0207 55       		.byte	0x55
+ 906 0208 BE010000 		.4byte	0x1be
+ 907 020c 0D       		.byte	0xd
+ 908 020d 0C       		.uleb128 0xc
+ 909 020e 9A060000 		.4byte	.LASF56
+ 910 0212 03       		.byte	0x3
+ 911 0213 56       		.byte	0x56
+ 912 0214 59010000 		.4byte	0x159
+ 913 0218 10       		.byte	0x10
+ 914 0219 00       		.byte	0
+ 915 021a 03       		.uleb128 0x3
+ 916 021b 1E010000 		.4byte	.LASF57
+ 917 021f 03       		.byte	0x3
+ 918 0220 57       		.byte	0x57
+ 919 0221 C9010000 		.4byte	0x1c9
+ 920 0225 03       		.uleb128 0x3
+ 921 0226 B0050000 		.4byte	.LASF58
+ 922 022a 04       		.byte	0x4
+ 923 022b 3F       		.byte	0x3f
+ 924 022c 53000000 		.4byte	0x53
+ 925 0230 0D       		.uleb128 0xd
+ 926 0231 04       		.byte	0x4
+ 927 0232 05       		.byte	0x5
+ 928 0233 696E7400 		.ascii	"int\000"
+ 929 0237 03       		.uleb128 0x3
+ 930 0238 28040000 		.4byte	.LASF59
+ 931 023c 05       		.byte	0x5
+ 932 023d 2C       		.byte	0x2c
+ 933 023e 25020000 		.4byte	0x225
+ 934 0242 02       		.uleb128 0x2
+ 935 0243 08       		.byte	0x8
+ 936 0244 04       		.byte	0x4
+ 937 0245 75050000 		.4byte	.LASF60
+ 938 0249 03       		.uleb128 0x3
+ 939 024a 4F060000 		.4byte	.LASF61
+ 940 024e 06       		.byte	0x6
+ 941 024f 53       		.byte	0x53
+ 942 0250 30020000 		.4byte	0x230
+ 943 0254 03       		.uleb128 0x3
+ 944 0255 17060000 		.4byte	.LASF62
+ 945 0259 06       		.byte	0x6
+ 946 025a 54       		.byte	0x54
+ 947 025b 25000000 		.4byte	0x25
+ 948 025f 03       		.uleb128 0x3
+ 949 0260 F0010000 		.4byte	.LASF63
+ 950 0264 07       		.byte	0x7
+ 951 0265 4D       		.byte	0x4d
+ 952 0266 54020000 		.4byte	0x254
+ 953 026a 03       		.uleb128 0x3
+ 954 026b A5060000 		.4byte	.LASF64
+ 955 026f 07       		.byte	0x7
+ 956 0270 4F       		.byte	0x4f
+ 957 0271 54020000 		.4byte	0x254
+ 958 0275 03       		.uleb128 0x3
+ 959 0276 93030000 		.4byte	.LASF65
+ 960 027a 07       		.byte	0x7
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 25
+
+
+ 961 027b 78       		.byte	0x78
+ 962 027c 49020000 		.4byte	0x249
+ 963 0280 02       		.uleb128 0x2
+ 964 0281 04       		.byte	0x4
+ 965 0282 07       		.byte	0x7
+ 966 0283 28030000 		.4byte	.LASF66
+ 967 0287 0E       		.uleb128 0xe
+ 968 0288 5A000000 		.4byte	0x5a
+ 969 028c 05       		.uleb128 0x5
+ 970 028d 87020000 		.4byte	0x287
+ 971 0291 0F       		.uleb128 0xf
+ 972 0292 5A000000 		.4byte	0x5a
+ 973 0296 A1020000 		.4byte	0x2a1
+ 974 029a 10       		.uleb128 0x10
+ 975 029b 80020000 		.4byte	0x280
+ 976 029f 00       		.byte	0
+ 977 02a0 00       		.byte	0
+ 978 02a1 11       		.uleb128 0x11
+ 979 02a2 5C       		.byte	0x5c
+ 980 02a3 08       		.byte	0x8
+ 981 02a4 4F03     		.2byte	0x34f
+ 982 02a6 D6030000 		.4byte	0x3d6
+ 983 02aa 12       		.uleb128 0x12
+ 984 02ab FD050000 		.4byte	.LASF67
+ 985 02af 08       		.byte	0x8
+ 986 02b0 5103     		.2byte	0x351
+ 987 02b2 87020000 		.4byte	0x287
+ 988 02b6 00       		.byte	0
+ 989 02b7 12       		.uleb128 0x12
+ 990 02b8 02030000 		.4byte	.LASF68
+ 991 02bc 08       		.byte	0x8
+ 992 02bd 5203     		.2byte	0x352
+ 993 02bf 87020000 		.4byte	0x287
+ 994 02c3 04       		.byte	0x4
+ 995 02c4 12       		.uleb128 0x12
+ 996 02c5 F8000000 		.4byte	.LASF69
+ 997 02c9 08       		.byte	0x8
+ 998 02ca 5303     		.2byte	0x353
+ 999 02cc 87020000 		.4byte	0x287
+ 1000 02d0 08       		.byte	0x8
+ 1001 02d1 12       		.uleb128 0x12
+ 1002 02d2 8D020000 		.4byte	.LASF70
+ 1003 02d6 08       		.byte	0x8
+ 1004 02d7 5403     		.2byte	0x354
+ 1005 02d9 87020000 		.4byte	0x287
+ 1006 02dd 0C       		.byte	0xc
+ 1007 02de 12       		.uleb128 0x12
+ 1008 02df 49010000 		.4byte	.LASF71
+ 1009 02e3 08       		.byte	0x8
+ 1010 02e4 5503     		.2byte	0x355
+ 1011 02e6 87020000 		.4byte	0x287
+ 1012 02ea 10       		.byte	0x10
+ 1013 02eb 12       		.uleb128 0x12
+ 1014 02ec 37050000 		.4byte	.LASF72
+ 1015 02f0 08       		.byte	0x8
+ 1016 02f1 5603     		.2byte	0x356
+ 1017 02f3 87020000 		.4byte	0x287
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 26
+
+
+ 1018 02f7 14       		.byte	0x14
+ 1019 02f8 12       		.uleb128 0x12
+ 1020 02f9 12000000 		.4byte	.LASF73
+ 1021 02fd 08       		.byte	0x8
+ 1022 02fe 5703     		.2byte	0x357
+ 1023 0300 87020000 		.4byte	0x287
+ 1024 0304 18       		.byte	0x18
+ 1025 0305 12       		.uleb128 0x12
+ 1026 0306 17040000 		.4byte	.LASF74
+ 1027 030a 08       		.byte	0x8
+ 1028 030b 5803     		.2byte	0x358
+ 1029 030d 8C020000 		.4byte	0x28c
+ 1030 0311 1C       		.byte	0x1c
+ 1031 0312 12       		.uleb128 0x12
+ 1032 0313 6E030000 		.4byte	.LASF75
+ 1033 0317 08       		.byte	0x8
+ 1034 0318 5903     		.2byte	0x359
+ 1035 031a 87020000 		.4byte	0x287
+ 1036 031e 20       		.byte	0x20
+ 1037 031f 12       		.uleb128 0x12
+ 1038 0320 C0010000 		.4byte	.LASF76
+ 1039 0324 08       		.byte	0x8
+ 1040 0325 5A03     		.2byte	0x35a
+ 1041 0327 87020000 		.4byte	0x287
+ 1042 032b 24       		.byte	0x24
+ 1043 032c 12       		.uleb128 0x12
+ 1044 032d 4B040000 		.4byte	.LASF77
+ 1045 0331 08       		.byte	0x8
+ 1046 0332 5B03     		.2byte	0x35b
+ 1047 0334 87020000 		.4byte	0x287
+ 1048 0338 28       		.byte	0x28
+ 1049 0339 12       		.uleb128 0x12
+ 1050 033a C5030000 		.4byte	.LASF78
+ 1051 033e 08       		.byte	0x8
+ 1052 033f 5C03     		.2byte	0x35c
+ 1053 0341 91020000 		.4byte	0x291
+ 1054 0345 2C       		.byte	0x2c
+ 1055 0346 12       		.uleb128 0x12
+ 1056 0347 74030000 		.4byte	.LASF79
+ 1057 034b 08       		.byte	0x8
+ 1058 034c 5D03     		.2byte	0x35d
+ 1059 034e 87020000 		.4byte	0x287
+ 1060 0352 30       		.byte	0x30
+ 1061 0353 12       		.uleb128 0x12
+ 1062 0354 22040000 		.4byte	.LASF80
+ 1063 0358 08       		.byte	0x8
+ 1064 0359 5E03     		.2byte	0x35e
+ 1065 035b 87020000 		.4byte	0x287
+ 1066 035f 34       		.byte	0x34
+ 1067 0360 12       		.uleb128 0x12
+ 1068 0361 55040000 		.4byte	.LASF81
+ 1069 0365 08       		.byte	0x8
+ 1070 0366 5F03     		.2byte	0x35f
+ 1071 0368 87020000 		.4byte	0x287
+ 1072 036c 38       		.byte	0x38
+ 1073 036d 12       		.uleb128 0x12
+ 1074 036e CF030000 		.4byte	.LASF82
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 27
+
+
+ 1075 0372 08       		.byte	0x8
+ 1076 0373 6003     		.2byte	0x360
+ 1077 0375 91020000 		.4byte	0x291
+ 1078 0379 3C       		.byte	0x3c
+ 1079 037a 12       		.uleb128 0x12
+ 1080 037b 7A030000 		.4byte	.LASF83
+ 1081 037f 08       		.byte	0x8
+ 1082 0380 6103     		.2byte	0x361
+ 1083 0382 87020000 		.4byte	0x287
+ 1084 0386 40       		.byte	0x40
+ 1085 0387 12       		.uleb128 0x12
+ 1086 0388 D3010000 		.4byte	.LASF84
+ 1087 038c 08       		.byte	0x8
+ 1088 038d 6203     		.2byte	0x362
+ 1089 038f 87020000 		.4byte	0x287
+ 1090 0393 44       		.byte	0x44
+ 1091 0394 12       		.uleb128 0x12
+ 1092 0395 5F040000 		.4byte	.LASF85
+ 1093 0399 08       		.byte	0x8
+ 1094 039a 6303     		.2byte	0x363
+ 1095 039c 87020000 		.4byte	0x287
+ 1096 03a0 48       		.byte	0x48
+ 1097 03a1 12       		.uleb128 0x12
+ 1098 03a2 D9030000 		.4byte	.LASF86
+ 1099 03a6 08       		.byte	0x8
+ 1100 03a7 6403     		.2byte	0x364
+ 1101 03a9 91020000 		.4byte	0x291
+ 1102 03ad 4C       		.byte	0x4c
+ 1103 03ae 12       		.uleb128 0x12
+ 1104 03af 80030000 		.4byte	.LASF87
+ 1105 03b3 08       		.byte	0x8
+ 1106 03b4 6503     		.2byte	0x365
+ 1107 03b6 87020000 		.4byte	0x287
+ 1108 03ba 50       		.byte	0x50
+ 1109 03bb 12       		.uleb128 0x12
+ 1110 03bc D9010000 		.4byte	.LASF88
+ 1111 03c0 08       		.byte	0x8
+ 1112 03c1 6603     		.2byte	0x366
+ 1113 03c3 87020000 		.4byte	0x287
+ 1114 03c7 54       		.byte	0x54
+ 1115 03c8 12       		.uleb128 0x12
+ 1116 03c9 69040000 		.4byte	.LASF89
+ 1117 03cd 08       		.byte	0x8
+ 1118 03ce 6703     		.2byte	0x367
+ 1119 03d0 87020000 		.4byte	0x287
+ 1120 03d4 58       		.byte	0x58
+ 1121 03d5 00       		.byte	0
+ 1122 03d6 13       		.uleb128 0x13
+ 1123 03d7 F4050000 		.4byte	.LASF90
+ 1124 03db 08       		.byte	0x8
+ 1125 03dc 6803     		.2byte	0x368
+ 1126 03de A1020000 		.4byte	0x2a1
+ 1127 03e2 11       		.uleb128 0x11
+ 1128 03e3 10       		.byte	0x10
+ 1129 03e4 08       		.byte	0x8
+ 1130 03e5 DC04     		.2byte	0x4dc
+ 1131 03e7 20040000 		.4byte	0x420
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 28
+
+
+ 1132 03eb 12       		.uleb128 0x12
+ 1133 03ec 2E010000 		.4byte	.LASF91
+ 1134 03f0 08       		.byte	0x8
+ 1135 03f1 DE04     		.2byte	0x4de
+ 1136 03f3 87020000 		.4byte	0x287
+ 1137 03f7 00       		.byte	0
+ 1138 03f8 12       		.uleb128 0x12
+ 1139 03f9 3F000000 		.4byte	.LASF92
+ 1140 03fd 08       		.byte	0x8
+ 1141 03fe DF04     		.2byte	0x4df
+ 1142 0400 87020000 		.4byte	0x287
+ 1143 0404 04       		.byte	0x4
+ 1144 0405 12       		.uleb128 0x12
+ 1145 0406 60000000 		.4byte	.LASF93
+ 1146 040a 08       		.byte	0x8
+ 1147 040b E004     		.2byte	0x4e0
+ 1148 040d 87020000 		.4byte	0x287
+ 1149 0411 08       		.byte	0x8
+ 1150 0412 12       		.uleb128 0x12
+ 1151 0413 1C040000 		.4byte	.LASF94
+ 1152 0417 08       		.byte	0x8
+ 1153 0418 E104     		.2byte	0x4e1
+ 1154 041a 87020000 		.4byte	0x287
+ 1155 041e 0C       		.byte	0xc
+ 1156 041f 00       		.byte	0
+ 1157 0420 13       		.uleb128 0x13
+ 1158 0421 C7000000 		.4byte	.LASF95
+ 1159 0425 08       		.byte	0x8
+ 1160 0426 E204     		.2byte	0x4e2
+ 1161 0428 E2030000 		.4byte	0x3e2
+ 1162 042c 14       		.uleb128 0x14
+ 1163 042d F3020000 		.4byte	.LASF123
+ 1164 0431 01       		.byte	0x1
+ 1165 0432 3801     		.2byte	0x138
+ 1166 0434 00000000 		.4byte	.LFB117
+ 1167 0438 10000000 		.4byte	.LFE117-.LFB117
+ 1168 043c 01       		.uleb128 0x1
+ 1169 043d 9C       		.byte	0x9c
+ 1170 043e 15       		.uleb128 0x15
+ 1171 043f D6000000 		.4byte	.LASF124
+ 1172 0443 01       		.byte	0x1
+ 1173 0444 46       		.byte	0x46
+ 1174 0445 4E010000 		.4byte	0x14e
+ 1175 0449 00000000 		.4byte	.LFB110
+ 1176 044d 44000000 		.4byte	.LFE110-.LFB110
+ 1177 0451 01       		.uleb128 0x1
+ 1178 0452 9C       		.byte	0x9c
+ 1179 0453 9E040000 		.4byte	0x49e
+ 1180 0457 16       		.uleb128 0x16
+ 1181 0458 1E000000 		.4byte	.LVL0
+ 1182 045c CA060000 		.4byte	0x6ca
+ 1183 0460 17       		.uleb128 0x17
+ 1184 0461 26000000 		.4byte	.LVL1
+ 1185 0465 D5060000 		.4byte	0x6d5
+ 1186 0469 7D040000 		.4byte	0x47d
+ 1187 046d 18       		.uleb128 0x18
+ 1188 046e 01       		.uleb128 0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 29
+
+
+ 1189 046f 50       		.byte	0x50
+ 1190 0470 02       		.uleb128 0x2
+ 1191 0471 74       		.byte	0x74
+ 1192 0472 00       		.sleb128 0
+ 1193 0473 18       		.uleb128 0x18
+ 1194 0474 01       		.uleb128 0x1
+ 1195 0475 51       		.byte	0x51
+ 1196 0476 05       		.uleb128 0x5
+ 1197 0477 03       		.byte	0x3
+ 1198 0478 00000000 		.4byte	TA_systick_isr
+ 1199 047c 00       		.byte	0
+ 1200 047d 17       		.uleb128 0x17
+ 1201 047e 2C000000 		.4byte	.LVL2
+ 1202 0482 E0060000 		.4byte	0x6e0
+ 1203 0486 94040000 		.4byte	0x494
+ 1204 048a 18       		.uleb128 0x18
+ 1205 048b 01       		.uleb128 0x1
+ 1206 048c 50       		.byte	0x50
+ 1207 048d 05       		.uleb128 0x5
+ 1208 048e 0C       		.byte	0xc
+ 1209 048f 3F190100 		.4byte	0x1193f
+ 1210 0493 00       		.byte	0
+ 1211 0494 16       		.uleb128 0x16
+ 1212 0495 30000000 		.4byte	.LVL3
+ 1213 0499 EB060000 		.4byte	0x6eb
+ 1214 049d 00       		.byte	0
+ 1215 049e 19       		.uleb128 0x19
+ 1216 049f A3030000 		.4byte	.LASF99
+ 1217 04a3 01       		.byte	0x1
+ 1218 04a4 5F       		.byte	0x5f
+ 1219 04a5 4E010000 		.4byte	0x14e
+ 1220 04a9 00000000 		.4byte	.LFB111
+ 1221 04ad 18000000 		.4byte	.LFE111-.LFB111
+ 1222 04b1 01       		.uleb128 0x1
+ 1223 04b2 9C       		.byte	0x9c
+ 1224 04b3 03050000 		.4byte	0x503
+ 1225 04b7 1A       		.uleb128 0x1a
+ 1226 04b8 6D6500   		.ascii	"me\000"
+ 1227 04bb 01       		.byte	0x1
+ 1228 04bc 5F       		.byte	0x5f
+ 1229 04bd 09050000 		.4byte	0x509
+ 1230 04c1 00000000 		.4byte	.LLST0
+ 1231 04c5 1B       		.uleb128 0x1b
+ 1232 04c6 36020000 		.4byte	.LASF96
+ 1233 04ca 01       		.byte	0x1
+ 1234 04cb 5F       		.byte	0x5f
+ 1235 04cc 0E050000 		.4byte	0x50e
+ 1236 04d0 21000000 		.4byte	.LLST1
+ 1237 04d4 1B       		.uleb128 0x1b
+ 1238 04d5 86050000 		.4byte	.LASF97
+ 1239 04d9 01       		.byte	0x1
+ 1240 04da 5F       		.byte	0x5f
+ 1241 04db BE010000 		.4byte	0x1be
+ 1242 04df 42000000 		.4byte	.LLST2
+ 1243 04e3 1B       		.uleb128 0x1b
+ 1244 04e4 9A030000 		.4byte	.LASF98
+ 1245 04e8 01       		.byte	0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 30
+
+
+ 1246 04e9 5F       		.byte	0x5f
+ 1247 04ea 59010000 		.4byte	0x159
+ 1248 04ee 63000000 		.4byte	.LLST3
+ 1249 04f2 1C       		.uleb128 0x1c
+ 1250 04f3 14000000 		.4byte	.LVL6
+ 1251 04f7 03       		.uleb128 0x3
+ 1252 04f8 F3       		.byte	0xf3
+ 1253 04f9 01       		.uleb128 0x1
+ 1254 04fa 53       		.byte	0x53
+ 1255 04fb 18       		.uleb128 0x18
+ 1256 04fc 01       		.uleb128 0x1
+ 1257 04fd 50       		.byte	0x50
+ 1258 04fe 02       		.uleb128 0x2
+ 1259 04ff 74       		.byte	0x74
+ 1260 0500 00       		.sleb128 0
+ 1261 0501 00       		.byte	0
+ 1262 0502 00       		.byte	0
+ 1263 0503 04       		.uleb128 0x4
+ 1264 0504 04       		.byte	0x4
+ 1265 0505 1A020000 		.4byte	0x21a
+ 1266 0509 05       		.uleb128 0x5
+ 1267 050a 03050000 		.4byte	0x503
+ 1268 050e 05       		.uleb128 0x5
+ 1269 050f 9A000000 		.4byte	0x9a
+ 1270 0513 19       		.uleb128 0x19
+ 1271 0514 58060000 		.4byte	.LASF100
+ 1272 0518 01       		.byte	0x1
+ 1273 0519 76       		.byte	0x76
+ 1274 051a 4E010000 		.4byte	0x14e
+ 1275 051e 00000000 		.4byte	.LFB112
+ 1276 0522 54000000 		.4byte	.LFE112-.LFB112
+ 1277 0526 01       		.uleb128 0x1
+ 1278 0527 9C       		.byte	0x9c
+ 1279 0528 46050000 		.4byte	0x546
+ 1280 052c 1A       		.uleb128 0x1a
+ 1281 052d 6D6500   		.ascii	"me\000"
+ 1282 0530 01       		.byte	0x1
+ 1283 0531 76       		.byte	0x76
+ 1284 0532 09050000 		.4byte	0x509
+ 1285 0536 84000000 		.4byte	.LLST4
+ 1286 053a 1D       		.uleb128 0x1d
+ 1287 053b 36000000 		.4byte	.LVL9
+ 1288 053f 18       		.uleb128 0x18
+ 1289 0540 01       		.uleb128 0x1
+ 1290 0541 50       		.byte	0x50
+ 1291 0542 01       		.uleb128 0x1
+ 1292 0543 31       		.byte	0x31
+ 1293 0544 00       		.byte	0
+ 1294 0545 00       		.byte	0
+ 1295 0546 19       		.uleb128 0x19
+ 1296 0547 47050000 		.4byte	.LASF101
+ 1297 054b 01       		.byte	0x1
+ 1298 054c 9F       		.byte	0x9f
+ 1299 054d 4E010000 		.4byte	0x14e
+ 1300 0551 00000000 		.4byte	.LFB113
+ 1301 0555 58000000 		.4byte	.LFE113-.LFB113
+ 1302 0559 01       		.uleb128 0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 31
+
+
+ 1303 055a 9C       		.byte	0x9c
+ 1304 055b 79050000 		.4byte	0x579
+ 1305 055f 1A       		.uleb128 0x1a
+ 1306 0560 6D6500   		.ascii	"me\000"
+ 1307 0563 01       		.byte	0x1
+ 1308 0564 9F       		.byte	0x9f
+ 1309 0565 09050000 		.4byte	0x509
+ 1310 0569 D4000000 		.4byte	.LLST5
+ 1311 056d 1D       		.uleb128 0x1d
+ 1312 056e 3C000000 		.4byte	.LVL16
+ 1313 0572 18       		.uleb128 0x18
+ 1314 0573 01       		.uleb128 0x1
+ 1315 0574 50       		.byte	0x50
+ 1316 0575 01       		.uleb128 0x1
+ 1317 0576 30       		.byte	0x30
+ 1318 0577 00       		.byte	0
+ 1319 0578 00       		.byte	0
+ 1320 0579 19       		.uleb128 0x19
+ 1321 057a B6030000 		.4byte	.LASF102
+ 1322 057e 01       		.byte	0x1
+ 1323 057f CA       		.byte	0xca
+ 1324 0580 4E010000 		.4byte	0x14e
+ 1325 0584 00000000 		.4byte	.LFB114
+ 1326 0588 50000000 		.4byte	.LFE114-.LFB114
+ 1327 058c 01       		.uleb128 0x1
+ 1328 058d 9C       		.byte	0x9c
+ 1329 058e A1050000 		.4byte	0x5a1
+ 1330 0592 1A       		.uleb128 0x1a
+ 1331 0593 6D6500   		.ascii	"me\000"
+ 1332 0596 01       		.byte	0x1
+ 1333 0597 CA       		.byte	0xca
+ 1334 0598 09050000 		.4byte	0x509
+ 1335 059c 24010000 		.4byte	.LLST6
+ 1336 05a0 00       		.byte	0
+ 1337 05a1 19       		.uleb128 0x19
+ 1338 05a2 45060000 		.4byte	.LASF103
+ 1339 05a6 01       		.byte	0x1
+ 1340 05a7 EC       		.byte	0xec
+ 1341 05a8 4E010000 		.4byte	0x14e
+ 1342 05ac 00000000 		.4byte	.LFB115
+ 1343 05b0 40000000 		.4byte	.LFE115-.LFB115
+ 1344 05b4 01       		.uleb128 0x1
+ 1345 05b5 9C       		.byte	0x9c
+ 1346 05b6 C9050000 		.4byte	0x5c9
+ 1347 05ba 1A       		.uleb128 0x1a
+ 1348 05bb 6D6500   		.ascii	"me\000"
+ 1349 05be 01       		.byte	0x1
+ 1350 05bf EC       		.byte	0xec
+ 1351 05c0 09050000 		.4byte	0x509
+ 1352 05c4 77010000 		.4byte	.LLST7
+ 1353 05c8 00       		.byte	0
+ 1354 05c9 1E       		.uleb128 0x1e
+ 1355 05ca 6B010000 		.4byte	.LASF104
+ 1356 05ce 01       		.byte	0x1
+ 1357 05cf 0F01     		.2byte	0x10f
+ 1358 05d1 4E010000 		.4byte	0x14e
+ 1359 05d5 00000000 		.4byte	.LFB116
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 32
+
+
+ 1360 05d9 B4000000 		.4byte	.LFE116-.LFB116
+ 1361 05dd 01       		.uleb128 0x1
+ 1362 05de 9C       		.byte	0x9c
+ 1363 05df 61060000 		.4byte	0x661
+ 1364 05e3 1F       		.uleb128 0x1f
+ 1365 05e4 6D6500   		.ascii	"me\000"
+ 1366 05e7 01       		.byte	0x1
+ 1367 05e8 0F01     		.2byte	0x10f
+ 1368 05ea 6C060000 		.4byte	0x66c
+ 1369 05ee CA010000 		.4byte	.LLST8
+ 1370 05f2 20       		.uleb128 0x20
+ 1371 05f3 2A020000 		.4byte	.LASF105
+ 1372 05f7 01       		.byte	0x1
+ 1373 05f8 1601     		.2byte	0x116
+ 1374 05fa 81000000 		.4byte	0x81
+ 1375 05fe 51020000 		.4byte	.LLST9
+ 1376 0602 20       		.uleb128 0x20
+ 1377 0603 8F000000 		.4byte	.LASF106
+ 1378 0607 01       		.byte	0x1
+ 1379 0608 1701     		.2byte	0x117
+ 1380 060a 81000000 		.4byte	0x81
+ 1381 060e C5020000 		.4byte	.LLST10
+ 1382 0612 20       		.uleb128 0x20
+ 1383 0613 21060000 		.4byte	.LASF107
+ 1384 0617 01       		.byte	0x1
+ 1385 0618 1801     		.2byte	0x118
+ 1386 061a 81000000 		.4byte	0x81
+ 1387 061e 09030000 		.4byte	.LLST11
+ 1388 0622 17       		.uleb128 0x17
+ 1389 0623 88000000 		.4byte	.LVL47
+ 1390 0627 F6060000 		.4byte	0x6f6
+ 1391 062b 4D060000 		.4byte	0x64d
+ 1392 062f 18       		.uleb128 0x18
+ 1393 0630 01       		.uleb128 0x1
+ 1394 0631 50       		.byte	0x50
+ 1395 0632 05       		.uleb128 0x5
+ 1396 0633 03       		.byte	0x3
+ 1397 0634 00000000 		.4byte	.LC0
+ 1398 0638 18       		.uleb128 0x18
+ 1399 0639 01       		.uleb128 0x1
+ 1400 063a 52       		.byte	0x52
+ 1401 063b 02       		.uleb128 0x2
+ 1402 063c 74       		.byte	0x74
+ 1403 063d 00       		.sleb128 0
+ 1404 063e 18       		.uleb128 0x18
+ 1405 063f 02       		.uleb128 0x2
+ 1406 0640 7D       		.byte	0x7d
+ 1407 0641 00       		.sleb128 0
+ 1408 0642 02       		.uleb128 0x2
+ 1409 0643 78       		.byte	0x78
+ 1410 0644 00       		.sleb128 0
+ 1411 0645 18       		.uleb128 0x18
+ 1412 0646 02       		.uleb128 0x2
+ 1413 0647 7D       		.byte	0x7d
+ 1414 0648 04       		.sleb128 4
+ 1415 0649 02       		.uleb128 0x2
+ 1416 064a 77       		.byte	0x77
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 33
+
+
+ 1417 064b 00       		.sleb128 0
+ 1418 064c 00       		.byte	0
+ 1419 064d 21       		.uleb128 0x21
+ 1420 064e 96000000 		.4byte	.LVL50
+ 1421 0652 F6060000 		.4byte	0x6f6
+ 1422 0656 18       		.uleb128 0x18
+ 1423 0657 01       		.uleb128 0x1
+ 1424 0658 50       		.byte	0x50
+ 1425 0659 05       		.uleb128 0x5
+ 1426 065a 03       		.byte	0x3
+ 1427 065b 2C000000 		.4byte	.LC1
+ 1428 065f 00       		.byte	0
+ 1429 0660 00       		.byte	0
+ 1430 0661 04       		.uleb128 0x4
+ 1431 0662 04       		.byte	0x4
+ 1432 0663 67060000 		.4byte	0x667
+ 1433 0667 05       		.uleb128 0x5
+ 1434 0668 1A020000 		.4byte	0x21a
+ 1435 066c 05       		.uleb128 0x5
+ 1436 066d 61060000 		.4byte	0x661
+ 1437 0671 22       		.uleb128 0x22
+ 1438 0672 AE000000 		.4byte	.LASF108
+ 1439 0676 01       		.byte	0x1
+ 1440 0677 33       		.byte	0x33
+ 1441 0678 87020000 		.4byte	0x287
+ 1442 067c 05       		.uleb128 0x5
+ 1443 067d 03       		.byte	0x3
+ 1444 067e 00000000 		.4byte	TA_systick_count
+ 1445 0682 23       		.uleb128 0x23
+ 1446 0683 60020000 		.4byte	.LASF109
+ 1447 0687 09       		.byte	0x9
+ 1448 0688 40       		.byte	0x40
+ 1449 0689 5F020000 		.4byte	0x25f
+ 1450 068d 23       		.uleb128 0x23
+ 1451 068e 52010000 		.4byte	.LASF110
+ 1452 0692 09       		.byte	0x9
+ 1453 0693 47       		.byte	0x47
+ 1454 0694 6A020000 		.4byte	0x26a
+ 1455 0698 23       		.uleb128 0x23
+ 1456 0699 49030000 		.4byte	.LASF111
+ 1457 069d 09       		.byte	0x9
+ 1458 069e 4A       		.byte	0x4a
+ 1459 069f 5F020000 		.4byte	0x25f
+ 1460 06a3 23       		.uleb128 0x23
+ 1461 06a4 7B010000 		.4byte	.LASF112
+ 1462 06a8 0A       		.byte	0xa
+ 1463 06a9 48       		.byte	0x48
+ 1464 06aa 75020000 		.4byte	0x275
+ 1465 06ae 23       		.uleb128 0x23
+ 1466 06af 02060000 		.4byte	.LASF113
+ 1467 06b3 0B       		.byte	0xb
+ 1468 06b4 44       		.byte	0x44
+ 1469 06b5 5F020000 		.4byte	0x25f
+ 1470 06b9 24       		.uleb128 0x24
+ 1471 06ba A1000000 		.4byte	.LASF114
+ 1472 06be 08       		.byte	0x8
+ 1473 06bf 1207     		.2byte	0x712
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 34
+
+
+ 1474 06c1 C5060000 		.4byte	0x6c5
+ 1475 06c5 0E       		.uleb128 0xe
+ 1476 06c6 37020000 		.4byte	0x237
+ 1477 06ca 25       		.uleb128 0x25
+ 1478 06cb AC010000 		.4byte	.LASF115
+ 1479 06cf AC010000 		.4byte	.LASF115
+ 1480 06d3 0C       		.byte	0xc
+ 1481 06d4 AF       		.byte	0xaf
+ 1482 06d5 25       		.uleb128 0x25
+ 1483 06d6 9B050000 		.4byte	.LASF116
+ 1484 06da 9B050000 		.4byte	.LASF116
+ 1485 06de 0C       		.byte	0xc
+ 1486 06df B7       		.byte	0xb7
+ 1487 06e0 25       		.uleb128 0x25
+ 1488 06e1 77060000 		.4byte	.LASF117
+ 1489 06e5 77060000 		.4byte	.LASF117
+ 1490 06e9 0C       		.byte	0xc
+ 1491 06ea B4       		.byte	0xb4
+ 1492 06eb 25       		.uleb128 0x25
+ 1493 06ec 8B050000 		.4byte	.LASF118
+ 1494 06f0 8B050000 		.4byte	.LASF118
+ 1495 06f4 0C       		.byte	0xc
+ 1496 06f5 B0       		.byte	0xb0
+ 1497 06f6 25       		.uleb128 0x25
+ 1498 06f7 BA010000 		.4byte	.LASF119
+ 1499 06fb BA010000 		.4byte	.LASF119
+ 1500 06ff 0D       		.byte	0xd
+ 1501 0700 A4       		.byte	0xa4
+ 1502 0701 00       		.byte	0
+ 1503              		.section	.debug_abbrev,"",%progbits
+ 1504              	.Ldebug_abbrev0:
+ 1505 0000 01       		.uleb128 0x1
+ 1506 0001 11       		.uleb128 0x11
+ 1507 0002 01       		.byte	0x1
+ 1508 0003 25       		.uleb128 0x25
+ 1509 0004 0E       		.uleb128 0xe
+ 1510 0005 13       		.uleb128 0x13
+ 1511 0006 0B       		.uleb128 0xb
+ 1512 0007 03       		.uleb128 0x3
+ 1513 0008 0E       		.uleb128 0xe
+ 1514 0009 1B       		.uleb128 0x1b
+ 1515 000a 0E       		.uleb128 0xe
+ 1516 000b 55       		.uleb128 0x55
+ 1517 000c 17       		.uleb128 0x17
+ 1518 000d 11       		.uleb128 0x11
+ 1519 000e 01       		.uleb128 0x1
+ 1520 000f 10       		.uleb128 0x10
+ 1521 0010 17       		.uleb128 0x17
+ 1522 0011 00       		.byte	0
+ 1523 0012 00       		.byte	0
+ 1524 0013 02       		.uleb128 0x2
+ 1525 0014 24       		.uleb128 0x24
+ 1526 0015 00       		.byte	0
+ 1527 0016 0B       		.uleb128 0xb
+ 1528 0017 0B       		.uleb128 0xb
+ 1529 0018 3E       		.uleb128 0x3e
+ 1530 0019 0B       		.uleb128 0xb
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 35
+
+
+ 1531 001a 03       		.uleb128 0x3
+ 1532 001b 0E       		.uleb128 0xe
+ 1533 001c 00       		.byte	0
+ 1534 001d 00       		.byte	0
+ 1535 001e 03       		.uleb128 0x3
+ 1536 001f 16       		.uleb128 0x16
+ 1537 0020 00       		.byte	0
+ 1538 0021 03       		.uleb128 0x3
+ 1539 0022 0E       		.uleb128 0xe
+ 1540 0023 3A       		.uleb128 0x3a
+ 1541 0024 0B       		.uleb128 0xb
+ 1542 0025 3B       		.uleb128 0x3b
+ 1543 0026 0B       		.uleb128 0xb
+ 1544 0027 49       		.uleb128 0x49
+ 1545 0028 13       		.uleb128 0x13
+ 1546 0029 00       		.byte	0
+ 1547 002a 00       		.byte	0
+ 1548 002b 04       		.uleb128 0x4
+ 1549 002c 0F       		.uleb128 0xf
+ 1550 002d 00       		.byte	0
+ 1551 002e 0B       		.uleb128 0xb
+ 1552 002f 0B       		.uleb128 0xb
+ 1553 0030 49       		.uleb128 0x49
+ 1554 0031 13       		.uleb128 0x13
+ 1555 0032 00       		.byte	0
+ 1556 0033 00       		.byte	0
+ 1557 0034 05       		.uleb128 0x5
+ 1558 0035 26       		.uleb128 0x26
+ 1559 0036 00       		.byte	0
+ 1560 0037 49       		.uleb128 0x49
+ 1561 0038 13       		.uleb128 0x13
+ 1562 0039 00       		.byte	0
+ 1563 003a 00       		.byte	0
+ 1564 003b 06       		.uleb128 0x6
+ 1565 003c 04       		.uleb128 0x4
+ 1566 003d 01       		.byte	0x1
+ 1567 003e 0B       		.uleb128 0xb
+ 1568 003f 0B       		.uleb128 0xb
+ 1569 0040 49       		.uleb128 0x49
+ 1570 0041 13       		.uleb128 0x13
+ 1571 0042 3A       		.uleb128 0x3a
+ 1572 0043 0B       		.uleb128 0xb
+ 1573 0044 3B       		.uleb128 0x3b
+ 1574 0045 0B       		.uleb128 0xb
+ 1575 0046 01       		.uleb128 0x1
+ 1576 0047 13       		.uleb128 0x13
+ 1577 0048 00       		.byte	0
+ 1578 0049 00       		.byte	0
+ 1579 004a 07       		.uleb128 0x7
+ 1580 004b 28       		.uleb128 0x28
+ 1581 004c 00       		.byte	0
+ 1582 004d 03       		.uleb128 0x3
+ 1583 004e 0E       		.uleb128 0xe
+ 1584 004f 1C       		.uleb128 0x1c
+ 1585 0050 0B       		.uleb128 0xb
+ 1586 0051 00       		.byte	0
+ 1587 0052 00       		.byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 36
+
+
+ 1588 0053 08       		.uleb128 0x8
+ 1589 0054 28       		.uleb128 0x28
+ 1590 0055 00       		.byte	0
+ 1591 0056 03       		.uleb128 0x3
+ 1592 0057 0E       		.uleb128 0xe
+ 1593 0058 1C       		.uleb128 0x1c
+ 1594 0059 0D       		.uleb128 0xd
+ 1595 005a 00       		.byte	0
+ 1596 005b 00       		.byte	0
+ 1597 005c 09       		.uleb128 0x9
+ 1598 005d 15       		.uleb128 0x15
+ 1599 005e 01       		.byte	0x1
+ 1600 005f 27       		.uleb128 0x27
+ 1601 0060 19       		.uleb128 0x19
+ 1602 0061 01       		.uleb128 0x1
+ 1603 0062 13       		.uleb128 0x13
+ 1604 0063 00       		.byte	0
+ 1605 0064 00       		.byte	0
+ 1606 0065 0A       		.uleb128 0xa
+ 1607 0066 05       		.uleb128 0x5
+ 1608 0067 00       		.byte	0
+ 1609 0068 49       		.uleb128 0x49
+ 1610 0069 13       		.uleb128 0x13
+ 1611 006a 00       		.byte	0
+ 1612 006b 00       		.byte	0
+ 1613 006c 0B       		.uleb128 0xb
+ 1614 006d 13       		.uleb128 0x13
+ 1615 006e 01       		.byte	0x1
+ 1616 006f 0B       		.uleb128 0xb
+ 1617 0070 0B       		.uleb128 0xb
+ 1618 0071 3A       		.uleb128 0x3a
+ 1619 0072 0B       		.uleb128 0xb
+ 1620 0073 3B       		.uleb128 0x3b
+ 1621 0074 0B       		.uleb128 0xb
+ 1622 0075 01       		.uleb128 0x1
+ 1623 0076 13       		.uleb128 0x13
+ 1624 0077 00       		.byte	0
+ 1625 0078 00       		.byte	0
+ 1626 0079 0C       		.uleb128 0xc
+ 1627 007a 0D       		.uleb128 0xd
+ 1628 007b 00       		.byte	0
+ 1629 007c 03       		.uleb128 0x3
+ 1630 007d 0E       		.uleb128 0xe
+ 1631 007e 3A       		.uleb128 0x3a
+ 1632 007f 0B       		.uleb128 0xb
+ 1633 0080 3B       		.uleb128 0x3b
+ 1634 0081 0B       		.uleb128 0xb
+ 1635 0082 49       		.uleb128 0x49
+ 1636 0083 13       		.uleb128 0x13
+ 1637 0084 38       		.uleb128 0x38
+ 1638 0085 0B       		.uleb128 0xb
+ 1639 0086 00       		.byte	0
+ 1640 0087 00       		.byte	0
+ 1641 0088 0D       		.uleb128 0xd
+ 1642 0089 24       		.uleb128 0x24
+ 1643 008a 00       		.byte	0
+ 1644 008b 0B       		.uleb128 0xb
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 37
+
+
+ 1645 008c 0B       		.uleb128 0xb
+ 1646 008d 3E       		.uleb128 0x3e
+ 1647 008e 0B       		.uleb128 0xb
+ 1648 008f 03       		.uleb128 0x3
+ 1649 0090 08       		.uleb128 0x8
+ 1650 0091 00       		.byte	0
+ 1651 0092 00       		.byte	0
+ 1652 0093 0E       		.uleb128 0xe
+ 1653 0094 35       		.uleb128 0x35
+ 1654 0095 00       		.byte	0
+ 1655 0096 49       		.uleb128 0x49
+ 1656 0097 13       		.uleb128 0x13
+ 1657 0098 00       		.byte	0
+ 1658 0099 00       		.byte	0
+ 1659 009a 0F       		.uleb128 0xf
+ 1660 009b 01       		.uleb128 0x1
+ 1661 009c 01       		.byte	0x1
+ 1662 009d 49       		.uleb128 0x49
+ 1663 009e 13       		.uleb128 0x13
+ 1664 009f 01       		.uleb128 0x1
+ 1665 00a0 13       		.uleb128 0x13
+ 1666 00a1 00       		.byte	0
+ 1667 00a2 00       		.byte	0
+ 1668 00a3 10       		.uleb128 0x10
+ 1669 00a4 21       		.uleb128 0x21
+ 1670 00a5 00       		.byte	0
+ 1671 00a6 49       		.uleb128 0x49
+ 1672 00a7 13       		.uleb128 0x13
+ 1673 00a8 2F       		.uleb128 0x2f
+ 1674 00a9 0B       		.uleb128 0xb
+ 1675 00aa 00       		.byte	0
+ 1676 00ab 00       		.byte	0
+ 1677 00ac 11       		.uleb128 0x11
+ 1678 00ad 13       		.uleb128 0x13
+ 1679 00ae 01       		.byte	0x1
+ 1680 00af 0B       		.uleb128 0xb
+ 1681 00b0 0B       		.uleb128 0xb
+ 1682 00b1 3A       		.uleb128 0x3a
+ 1683 00b2 0B       		.uleb128 0xb
+ 1684 00b3 3B       		.uleb128 0x3b
+ 1685 00b4 05       		.uleb128 0x5
+ 1686 00b5 01       		.uleb128 0x1
+ 1687 00b6 13       		.uleb128 0x13
+ 1688 00b7 00       		.byte	0
+ 1689 00b8 00       		.byte	0
+ 1690 00b9 12       		.uleb128 0x12
+ 1691 00ba 0D       		.uleb128 0xd
+ 1692 00bb 00       		.byte	0
+ 1693 00bc 03       		.uleb128 0x3
+ 1694 00bd 0E       		.uleb128 0xe
+ 1695 00be 3A       		.uleb128 0x3a
+ 1696 00bf 0B       		.uleb128 0xb
+ 1697 00c0 3B       		.uleb128 0x3b
+ 1698 00c1 05       		.uleb128 0x5
+ 1699 00c2 49       		.uleb128 0x49
+ 1700 00c3 13       		.uleb128 0x13
+ 1701 00c4 38       		.uleb128 0x38
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 38
+
+
+ 1702 00c5 0B       		.uleb128 0xb
+ 1703 00c6 00       		.byte	0
+ 1704 00c7 00       		.byte	0
+ 1705 00c8 13       		.uleb128 0x13
+ 1706 00c9 16       		.uleb128 0x16
+ 1707 00ca 00       		.byte	0
+ 1708 00cb 03       		.uleb128 0x3
+ 1709 00cc 0E       		.uleb128 0xe
+ 1710 00cd 3A       		.uleb128 0x3a
+ 1711 00ce 0B       		.uleb128 0xb
+ 1712 00cf 3B       		.uleb128 0x3b
+ 1713 00d0 05       		.uleb128 0x5
+ 1714 00d1 49       		.uleb128 0x49
+ 1715 00d2 13       		.uleb128 0x13
+ 1716 00d3 00       		.byte	0
+ 1717 00d4 00       		.byte	0
+ 1718 00d5 14       		.uleb128 0x14
+ 1719 00d6 2E       		.uleb128 0x2e
+ 1720 00d7 00       		.byte	0
+ 1721 00d8 03       		.uleb128 0x3
+ 1722 00d9 0E       		.uleb128 0xe
+ 1723 00da 3A       		.uleb128 0x3a
+ 1724 00db 0B       		.uleb128 0xb
+ 1725 00dc 3B       		.uleb128 0x3b
+ 1726 00dd 05       		.uleb128 0x5
+ 1727 00de 11       		.uleb128 0x11
+ 1728 00df 01       		.uleb128 0x1
+ 1729 00e0 12       		.uleb128 0x12
+ 1730 00e1 06       		.uleb128 0x6
+ 1731 00e2 40       		.uleb128 0x40
+ 1732 00e3 18       		.uleb128 0x18
+ 1733 00e4 9742     		.uleb128 0x2117
+ 1734 00e6 19       		.uleb128 0x19
+ 1735 00e7 00       		.byte	0
+ 1736 00e8 00       		.byte	0
+ 1737 00e9 15       		.uleb128 0x15
+ 1738 00ea 2E       		.uleb128 0x2e
+ 1739 00eb 01       		.byte	0x1
+ 1740 00ec 3F       		.uleb128 0x3f
+ 1741 00ed 19       		.uleb128 0x19
+ 1742 00ee 03       		.uleb128 0x3
+ 1743 00ef 0E       		.uleb128 0xe
+ 1744 00f0 3A       		.uleb128 0x3a
+ 1745 00f1 0B       		.uleb128 0xb
+ 1746 00f2 3B       		.uleb128 0x3b
+ 1747 00f3 0B       		.uleb128 0xb
+ 1748 00f4 49       		.uleb128 0x49
+ 1749 00f5 13       		.uleb128 0x13
+ 1750 00f6 11       		.uleb128 0x11
+ 1751 00f7 01       		.uleb128 0x1
+ 1752 00f8 12       		.uleb128 0x12
+ 1753 00f9 06       		.uleb128 0x6
+ 1754 00fa 40       		.uleb128 0x40
+ 1755 00fb 18       		.uleb128 0x18
+ 1756 00fc 9742     		.uleb128 0x2117
+ 1757 00fe 19       		.uleb128 0x19
+ 1758 00ff 01       		.uleb128 0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 39
+
+
+ 1759 0100 13       		.uleb128 0x13
+ 1760 0101 00       		.byte	0
+ 1761 0102 00       		.byte	0
+ 1762 0103 16       		.uleb128 0x16
+ 1763 0104 898201   		.uleb128 0x4109
+ 1764 0107 00       		.byte	0
+ 1765 0108 11       		.uleb128 0x11
+ 1766 0109 01       		.uleb128 0x1
+ 1767 010a 31       		.uleb128 0x31
+ 1768 010b 13       		.uleb128 0x13
+ 1769 010c 00       		.byte	0
+ 1770 010d 00       		.byte	0
+ 1771 010e 17       		.uleb128 0x17
+ 1772 010f 898201   		.uleb128 0x4109
+ 1773 0112 01       		.byte	0x1
+ 1774 0113 11       		.uleb128 0x11
+ 1775 0114 01       		.uleb128 0x1
+ 1776 0115 31       		.uleb128 0x31
+ 1777 0116 13       		.uleb128 0x13
+ 1778 0117 01       		.uleb128 0x1
+ 1779 0118 13       		.uleb128 0x13
+ 1780 0119 00       		.byte	0
+ 1781 011a 00       		.byte	0
+ 1782 011b 18       		.uleb128 0x18
+ 1783 011c 8A8201   		.uleb128 0x410a
+ 1784 011f 00       		.byte	0
+ 1785 0120 02       		.uleb128 0x2
+ 1786 0121 18       		.uleb128 0x18
+ 1787 0122 9142     		.uleb128 0x2111
+ 1788 0124 18       		.uleb128 0x18
+ 1789 0125 00       		.byte	0
+ 1790 0126 00       		.byte	0
+ 1791 0127 19       		.uleb128 0x19
+ 1792 0128 2E       		.uleb128 0x2e
+ 1793 0129 01       		.byte	0x1
+ 1794 012a 3F       		.uleb128 0x3f
+ 1795 012b 19       		.uleb128 0x19
+ 1796 012c 03       		.uleb128 0x3
+ 1797 012d 0E       		.uleb128 0xe
+ 1798 012e 3A       		.uleb128 0x3a
+ 1799 012f 0B       		.uleb128 0xb
+ 1800 0130 3B       		.uleb128 0x3b
+ 1801 0131 0B       		.uleb128 0xb
+ 1802 0132 27       		.uleb128 0x27
+ 1803 0133 19       		.uleb128 0x19
+ 1804 0134 49       		.uleb128 0x49
+ 1805 0135 13       		.uleb128 0x13
+ 1806 0136 11       		.uleb128 0x11
+ 1807 0137 01       		.uleb128 0x1
+ 1808 0138 12       		.uleb128 0x12
+ 1809 0139 06       		.uleb128 0x6
+ 1810 013a 40       		.uleb128 0x40
+ 1811 013b 18       		.uleb128 0x18
+ 1812 013c 9742     		.uleb128 0x2117
+ 1813 013e 19       		.uleb128 0x19
+ 1814 013f 01       		.uleb128 0x1
+ 1815 0140 13       		.uleb128 0x13
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 40
+
+
+ 1816 0141 00       		.byte	0
+ 1817 0142 00       		.byte	0
+ 1818 0143 1A       		.uleb128 0x1a
+ 1819 0144 05       		.uleb128 0x5
+ 1820 0145 00       		.byte	0
+ 1821 0146 03       		.uleb128 0x3
+ 1822 0147 08       		.uleb128 0x8
+ 1823 0148 3A       		.uleb128 0x3a
+ 1824 0149 0B       		.uleb128 0xb
+ 1825 014a 3B       		.uleb128 0x3b
+ 1826 014b 0B       		.uleb128 0xb
+ 1827 014c 49       		.uleb128 0x49
+ 1828 014d 13       		.uleb128 0x13
+ 1829 014e 02       		.uleb128 0x2
+ 1830 014f 17       		.uleb128 0x17
+ 1831 0150 00       		.byte	0
+ 1832 0151 00       		.byte	0
+ 1833 0152 1B       		.uleb128 0x1b
+ 1834 0153 05       		.uleb128 0x5
+ 1835 0154 00       		.byte	0
+ 1836 0155 03       		.uleb128 0x3
+ 1837 0156 0E       		.uleb128 0xe
+ 1838 0157 3A       		.uleb128 0x3a
+ 1839 0158 0B       		.uleb128 0xb
+ 1840 0159 3B       		.uleb128 0x3b
+ 1841 015a 0B       		.uleb128 0xb
+ 1842 015b 49       		.uleb128 0x49
+ 1843 015c 13       		.uleb128 0x13
+ 1844 015d 02       		.uleb128 0x2
+ 1845 015e 17       		.uleb128 0x17
+ 1846 015f 00       		.byte	0
+ 1847 0160 00       		.byte	0
+ 1848 0161 1C       		.uleb128 0x1c
+ 1849 0162 898201   		.uleb128 0x4109
+ 1850 0165 01       		.byte	0x1
+ 1851 0166 11       		.uleb128 0x11
+ 1852 0167 01       		.uleb128 0x1
+ 1853 0168 9342     		.uleb128 0x2113
+ 1854 016a 18       		.uleb128 0x18
+ 1855 016b 00       		.byte	0
+ 1856 016c 00       		.byte	0
+ 1857 016d 1D       		.uleb128 0x1d
+ 1858 016e 898201   		.uleb128 0x4109
+ 1859 0171 01       		.byte	0x1
+ 1860 0172 11       		.uleb128 0x11
+ 1861 0173 01       		.uleb128 0x1
+ 1862 0174 00       		.byte	0
+ 1863 0175 00       		.byte	0
+ 1864 0176 1E       		.uleb128 0x1e
+ 1865 0177 2E       		.uleb128 0x2e
+ 1866 0178 01       		.byte	0x1
+ 1867 0179 3F       		.uleb128 0x3f
+ 1868 017a 19       		.uleb128 0x19
+ 1869 017b 03       		.uleb128 0x3
+ 1870 017c 0E       		.uleb128 0xe
+ 1871 017d 3A       		.uleb128 0x3a
+ 1872 017e 0B       		.uleb128 0xb
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 41
+
+
+ 1873 017f 3B       		.uleb128 0x3b
+ 1874 0180 05       		.uleb128 0x5
+ 1875 0181 27       		.uleb128 0x27
+ 1876 0182 19       		.uleb128 0x19
+ 1877 0183 49       		.uleb128 0x49
+ 1878 0184 13       		.uleb128 0x13
+ 1879 0185 11       		.uleb128 0x11
+ 1880 0186 01       		.uleb128 0x1
+ 1881 0187 12       		.uleb128 0x12
+ 1882 0188 06       		.uleb128 0x6
+ 1883 0189 40       		.uleb128 0x40
+ 1884 018a 18       		.uleb128 0x18
+ 1885 018b 9642     		.uleb128 0x2116
+ 1886 018d 19       		.uleb128 0x19
+ 1887 018e 01       		.uleb128 0x1
+ 1888 018f 13       		.uleb128 0x13
+ 1889 0190 00       		.byte	0
+ 1890 0191 00       		.byte	0
+ 1891 0192 1F       		.uleb128 0x1f
+ 1892 0193 05       		.uleb128 0x5
+ 1893 0194 00       		.byte	0
+ 1894 0195 03       		.uleb128 0x3
+ 1895 0196 08       		.uleb128 0x8
+ 1896 0197 3A       		.uleb128 0x3a
+ 1897 0198 0B       		.uleb128 0xb
+ 1898 0199 3B       		.uleb128 0x3b
+ 1899 019a 05       		.uleb128 0x5
+ 1900 019b 49       		.uleb128 0x49
+ 1901 019c 13       		.uleb128 0x13
+ 1902 019d 02       		.uleb128 0x2
+ 1903 019e 17       		.uleb128 0x17
+ 1904 019f 00       		.byte	0
+ 1905 01a0 00       		.byte	0
+ 1906 01a1 20       		.uleb128 0x20
+ 1907 01a2 34       		.uleb128 0x34
+ 1908 01a3 00       		.byte	0
+ 1909 01a4 03       		.uleb128 0x3
+ 1910 01a5 0E       		.uleb128 0xe
+ 1911 01a6 3A       		.uleb128 0x3a
+ 1912 01a7 0B       		.uleb128 0xb
+ 1913 01a8 3B       		.uleb128 0x3b
+ 1914 01a9 05       		.uleb128 0x5
+ 1915 01aa 49       		.uleb128 0x49
+ 1916 01ab 13       		.uleb128 0x13
+ 1917 01ac 02       		.uleb128 0x2
+ 1918 01ad 17       		.uleb128 0x17
+ 1919 01ae 00       		.byte	0
+ 1920 01af 00       		.byte	0
+ 1921 01b0 21       		.uleb128 0x21
+ 1922 01b1 898201   		.uleb128 0x4109
+ 1923 01b4 01       		.byte	0x1
+ 1924 01b5 11       		.uleb128 0x11
+ 1925 01b6 01       		.uleb128 0x1
+ 1926 01b7 31       		.uleb128 0x31
+ 1927 01b8 13       		.uleb128 0x13
+ 1928 01b9 00       		.byte	0
+ 1929 01ba 00       		.byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 42
+
+
+ 1930 01bb 22       		.uleb128 0x22
+ 1931 01bc 34       		.uleb128 0x34
+ 1932 01bd 00       		.byte	0
+ 1933 01be 03       		.uleb128 0x3
+ 1934 01bf 0E       		.uleb128 0xe
+ 1935 01c0 3A       		.uleb128 0x3a
+ 1936 01c1 0B       		.uleb128 0xb
+ 1937 01c2 3B       		.uleb128 0x3b
+ 1938 01c3 0B       		.uleb128 0xb
+ 1939 01c4 49       		.uleb128 0x49
+ 1940 01c5 13       		.uleb128 0x13
+ 1941 01c6 02       		.uleb128 0x2
+ 1942 01c7 18       		.uleb128 0x18
+ 1943 01c8 00       		.byte	0
+ 1944 01c9 00       		.byte	0
+ 1945 01ca 23       		.uleb128 0x23
+ 1946 01cb 34       		.uleb128 0x34
+ 1947 01cc 00       		.byte	0
+ 1948 01cd 03       		.uleb128 0x3
+ 1949 01ce 0E       		.uleb128 0xe
+ 1950 01cf 3A       		.uleb128 0x3a
+ 1951 01d0 0B       		.uleb128 0xb
+ 1952 01d1 3B       		.uleb128 0x3b
+ 1953 01d2 0B       		.uleb128 0xb
+ 1954 01d3 49       		.uleb128 0x49
+ 1955 01d4 13       		.uleb128 0x13
+ 1956 01d5 3F       		.uleb128 0x3f
+ 1957 01d6 19       		.uleb128 0x19
+ 1958 01d7 3C       		.uleb128 0x3c
+ 1959 01d8 19       		.uleb128 0x19
+ 1960 01d9 00       		.byte	0
+ 1961 01da 00       		.byte	0
+ 1962 01db 24       		.uleb128 0x24
+ 1963 01dc 34       		.uleb128 0x34
+ 1964 01dd 00       		.byte	0
+ 1965 01de 03       		.uleb128 0x3
+ 1966 01df 0E       		.uleb128 0xe
+ 1967 01e0 3A       		.uleb128 0x3a
+ 1968 01e1 0B       		.uleb128 0xb
+ 1969 01e2 3B       		.uleb128 0x3b
+ 1970 01e3 05       		.uleb128 0x5
+ 1971 01e4 49       		.uleb128 0x49
+ 1972 01e5 13       		.uleb128 0x13
+ 1973 01e6 3F       		.uleb128 0x3f
+ 1974 01e7 19       		.uleb128 0x19
+ 1975 01e8 3C       		.uleb128 0x3c
+ 1976 01e9 19       		.uleb128 0x19
+ 1977 01ea 00       		.byte	0
+ 1978 01eb 00       		.byte	0
+ 1979 01ec 25       		.uleb128 0x25
+ 1980 01ed 2E       		.uleb128 0x2e
+ 1981 01ee 00       		.byte	0
+ 1982 01ef 3F       		.uleb128 0x3f
+ 1983 01f0 19       		.uleb128 0x19
+ 1984 01f1 3C       		.uleb128 0x3c
+ 1985 01f2 19       		.uleb128 0x19
+ 1986 01f3 6E       		.uleb128 0x6e
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 43
+
+
+ 1987 01f4 0E       		.uleb128 0xe
+ 1988 01f5 03       		.uleb128 0x3
+ 1989 01f6 0E       		.uleb128 0xe
+ 1990 01f7 3A       		.uleb128 0x3a
+ 1991 01f8 0B       		.uleb128 0xb
+ 1992 01f9 3B       		.uleb128 0x3b
+ 1993 01fa 0B       		.uleb128 0xb
+ 1994 01fb 00       		.byte	0
+ 1995 01fc 00       		.byte	0
+ 1996 01fd 00       		.byte	0
+ 1997              		.section	.debug_loc,"",%progbits
+ 1998              	.Ldebug_loc0:
+ 1999              	.LLST0:
+ 2000 0000 00000000 		.4byte	.LVL4
+ 2001 0004 12000000 		.4byte	.LVL5
+ 2002 0008 0100     		.2byte	0x1
+ 2003 000a 50       		.byte	0x50
+ 2004 000b 12000000 		.4byte	.LVL5
+ 2005 000f 18000000 		.4byte	.LFE111
+ 2006 0013 0400     		.2byte	0x4
+ 2007 0015 F3       		.byte	0xf3
+ 2008 0016 01       		.uleb128 0x1
+ 2009 0017 50       		.byte	0x50
+ 2010 0018 9F       		.byte	0x9f
+ 2011 0019 00000000 		.4byte	0
+ 2012 001d 00000000 		.4byte	0
+ 2013              	.LLST1:
+ 2014 0021 00000000 		.4byte	.LVL4
+ 2015 0025 13000000 		.4byte	.LVL6-1
+ 2016 0029 0100     		.2byte	0x1
+ 2017 002b 51       		.byte	0x51
+ 2018 002c 13000000 		.4byte	.LVL6-1
+ 2019 0030 18000000 		.4byte	.LFE111
+ 2020 0034 0400     		.2byte	0x4
+ 2021 0036 F3       		.byte	0xf3
+ 2022 0037 01       		.uleb128 0x1
+ 2023 0038 51       		.byte	0x51
+ 2024 0039 9F       		.byte	0x9f
+ 2025 003a 00000000 		.4byte	0
+ 2026 003e 00000000 		.4byte	0
+ 2027              	.LLST2:
+ 2028 0042 00000000 		.4byte	.LVL4
+ 2029 0046 13000000 		.4byte	.LVL6-1
+ 2030 004a 0100     		.2byte	0x1
+ 2031 004c 52       		.byte	0x52
+ 2032 004d 13000000 		.4byte	.LVL6-1
+ 2033 0051 18000000 		.4byte	.LFE111
+ 2034 0055 0400     		.2byte	0x4
+ 2035 0057 F3       		.byte	0xf3
+ 2036 0058 01       		.uleb128 0x1
+ 2037 0059 52       		.byte	0x52
+ 2038 005a 9F       		.byte	0x9f
+ 2039 005b 00000000 		.4byte	0
+ 2040 005f 00000000 		.4byte	0
+ 2041              	.LLST3:
+ 2042 0063 00000000 		.4byte	.LVL4
+ 2043 0067 13000000 		.4byte	.LVL6-1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 44
+
+
+ 2044 006b 0100     		.2byte	0x1
+ 2045 006d 53       		.byte	0x53
+ 2046 006e 13000000 		.4byte	.LVL6-1
+ 2047 0072 18000000 		.4byte	.LFE111
+ 2048 0076 0400     		.2byte	0x4
+ 2049 0078 F3       		.byte	0xf3
+ 2050 0079 01       		.uleb128 0x1
+ 2051 007a 53       		.byte	0x53
+ 2052 007b 9F       		.byte	0x9f
+ 2053 007c 00000000 		.4byte	0
+ 2054 0080 00000000 		.4byte	0
+ 2055              	.LLST4:
+ 2056 0084 00000000 		.4byte	.LVL7
+ 2057 0088 34000000 		.4byte	.LVL8
+ 2058 008c 0100     		.2byte	0x1
+ 2059 008e 50       		.byte	0x50
+ 2060 008f 34000000 		.4byte	.LVL8
+ 2061 0093 3E000000 		.4byte	.LVL10
+ 2062 0097 0100     		.2byte	0x1
+ 2063 0099 54       		.byte	0x54
+ 2064 009a 3E000000 		.4byte	.LVL10
+ 2065 009e 42000000 		.4byte	.LVL11
+ 2066 00a2 0100     		.2byte	0x1
+ 2067 00a4 50       		.byte	0x50
+ 2068 00a5 42000000 		.4byte	.LVL11
+ 2069 00a9 44000000 		.4byte	.LVL12
+ 2070 00ad 0400     		.2byte	0x4
+ 2071 00af F3       		.byte	0xf3
+ 2072 00b0 01       		.uleb128 0x1
+ 2073 00b1 50       		.byte	0x50
+ 2074 00b2 9F       		.byte	0x9f
+ 2075 00b3 44000000 		.4byte	.LVL12
+ 2076 00b7 48000000 		.4byte	.LVL13
+ 2077 00bb 0100     		.2byte	0x1
+ 2078 00bd 50       		.byte	0x50
+ 2079 00be 48000000 		.4byte	.LVL13
+ 2080 00c2 54000000 		.4byte	.LFE112
+ 2081 00c6 0400     		.2byte	0x4
+ 2082 00c8 F3       		.byte	0xf3
+ 2083 00c9 01       		.uleb128 0x1
+ 2084 00ca 50       		.byte	0x50
+ 2085 00cb 9F       		.byte	0x9f
+ 2086 00cc 00000000 		.4byte	0
+ 2087 00d0 00000000 		.4byte	0
+ 2088              	.LLST5:
+ 2089 00d4 00000000 		.4byte	.LVL14
+ 2090 00d8 3A000000 		.4byte	.LVL15
+ 2091 00dc 0100     		.2byte	0x1
+ 2092 00de 50       		.byte	0x50
+ 2093 00df 3A000000 		.4byte	.LVL15
+ 2094 00e3 42000000 		.4byte	.LVL17
+ 2095 00e7 0100     		.2byte	0x1
+ 2096 00e9 54       		.byte	0x54
+ 2097 00ea 42000000 		.4byte	.LVL17
+ 2098 00ee 46000000 		.4byte	.LVL18
+ 2099 00f2 0100     		.2byte	0x1
+ 2100 00f4 50       		.byte	0x50
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 45
+
+
+ 2101 00f5 46000000 		.4byte	.LVL18
+ 2102 00f9 48000000 		.4byte	.LVL19
+ 2103 00fd 0400     		.2byte	0x4
+ 2104 00ff F3       		.byte	0xf3
+ 2105 0100 01       		.uleb128 0x1
+ 2106 0101 50       		.byte	0x50
+ 2107 0102 9F       		.byte	0x9f
+ 2108 0103 48000000 		.4byte	.LVL19
+ 2109 0107 4C000000 		.4byte	.LVL20
+ 2110 010b 0100     		.2byte	0x1
+ 2111 010d 50       		.byte	0x50
+ 2112 010e 4C000000 		.4byte	.LVL20
+ 2113 0112 58000000 		.4byte	.LFE113
+ 2114 0116 0400     		.2byte	0x4
+ 2115 0118 F3       		.byte	0xf3
+ 2116 0119 01       		.uleb128 0x1
+ 2117 011a 50       		.byte	0x50
+ 2118 011b 9F       		.byte	0x9f
+ 2119 011c 00000000 		.4byte	0
+ 2120 0120 00000000 		.4byte	0
+ 2121              	.LLST6:
+ 2122 0124 00000000 		.4byte	.LVL21
+ 2123 0128 38000000 		.4byte	.LVL22
+ 2124 012c 0100     		.2byte	0x1
+ 2125 012e 50       		.byte	0x50
+ 2126 012f 38000000 		.4byte	.LVL22
+ 2127 0133 3A000000 		.4byte	.LVL23
+ 2128 0137 0400     		.2byte	0x4
+ 2129 0139 F3       		.byte	0xf3
+ 2130 013a 01       		.uleb128 0x1
+ 2131 013b 50       		.byte	0x50
+ 2132 013c 9F       		.byte	0x9f
+ 2133 013d 3A000000 		.4byte	.LVL23
+ 2134 0141 3E000000 		.4byte	.LVL24
+ 2135 0145 0100     		.2byte	0x1
+ 2136 0147 50       		.byte	0x50
+ 2137 0148 3E000000 		.4byte	.LVL24
+ 2138 014c 40000000 		.4byte	.LVL25
+ 2139 0150 0400     		.2byte	0x4
+ 2140 0152 F3       		.byte	0xf3
+ 2141 0153 01       		.uleb128 0x1
+ 2142 0154 50       		.byte	0x50
+ 2143 0155 9F       		.byte	0x9f
+ 2144 0156 40000000 		.4byte	.LVL25
+ 2145 015a 44000000 		.4byte	.LVL26
+ 2146 015e 0100     		.2byte	0x1
+ 2147 0160 50       		.byte	0x50
+ 2148 0161 44000000 		.4byte	.LVL26
+ 2149 0165 50000000 		.4byte	.LFE114
+ 2150 0169 0400     		.2byte	0x4
+ 2151 016b F3       		.byte	0xf3
+ 2152 016c 01       		.uleb128 0x1
+ 2153 016d 50       		.byte	0x50
+ 2154 016e 9F       		.byte	0x9f
+ 2155 016f 00000000 		.4byte	0
+ 2156 0173 00000000 		.4byte	0
+ 2157              	.LLST7:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 46
+
+
+ 2158 0177 00000000 		.4byte	.LVL27
+ 2159 017b 28000000 		.4byte	.LVL28
+ 2160 017f 0100     		.2byte	0x1
+ 2161 0181 50       		.byte	0x50
+ 2162 0182 28000000 		.4byte	.LVL28
+ 2163 0186 2A000000 		.4byte	.LVL29
+ 2164 018a 0400     		.2byte	0x4
+ 2165 018c F3       		.byte	0xf3
+ 2166 018d 01       		.uleb128 0x1
+ 2167 018e 50       		.byte	0x50
+ 2168 018f 9F       		.byte	0x9f
+ 2169 0190 2A000000 		.4byte	.LVL29
+ 2170 0194 2E000000 		.4byte	.LVL30
+ 2171 0198 0100     		.2byte	0x1
+ 2172 019a 50       		.byte	0x50
+ 2173 019b 2E000000 		.4byte	.LVL30
+ 2174 019f 30000000 		.4byte	.LVL31
+ 2175 01a3 0400     		.2byte	0x4
+ 2176 01a5 F3       		.byte	0xf3
+ 2177 01a6 01       		.uleb128 0x1
+ 2178 01a7 50       		.byte	0x50
+ 2179 01a8 9F       		.byte	0x9f
+ 2180 01a9 30000000 		.4byte	.LVL31
+ 2181 01ad 34000000 		.4byte	.LVL32
+ 2182 01b1 0100     		.2byte	0x1
+ 2183 01b3 50       		.byte	0x50
+ 2184 01b4 34000000 		.4byte	.LVL32
+ 2185 01b8 40000000 		.4byte	.LFE115
+ 2186 01bc 0400     		.2byte	0x4
+ 2187 01be F3       		.byte	0xf3
+ 2188 01bf 01       		.uleb128 0x1
+ 2189 01c0 50       		.byte	0x50
+ 2190 01c1 9F       		.byte	0x9f
+ 2191 01c2 00000000 		.4byte	0
+ 2192 01c6 00000000 		.4byte	0
+ 2193              	.LLST8:
+ 2194 01ca 00000000 		.4byte	.LVL33
+ 2195 01ce 20000000 		.4byte	.LVL35
+ 2196 01d2 0100     		.2byte	0x1
+ 2197 01d4 50       		.byte	0x50
+ 2198 01d5 20000000 		.4byte	.LVL35
+ 2199 01d9 22000000 		.4byte	.LVL36
+ 2200 01dd 0100     		.2byte	0x1
+ 2201 01df 56       		.byte	0x56
+ 2202 01e0 22000000 		.4byte	.LVL36
+ 2203 01e4 50000000 		.4byte	.LVL37
+ 2204 01e8 0100     		.2byte	0x1
+ 2205 01ea 50       		.byte	0x50
+ 2206 01eb 50000000 		.4byte	.LVL37
+ 2207 01ef 8C000000 		.4byte	.LVL48
+ 2208 01f3 0100     		.2byte	0x1
+ 2209 01f5 56       		.byte	0x56
+ 2210 01f6 8C000000 		.4byte	.LVL48
+ 2211 01fa 92000000 		.4byte	.LVL49
+ 2212 01fe 0100     		.2byte	0x1
+ 2213 0200 50       		.byte	0x50
+ 2214 0201 92000000 		.4byte	.LVL49
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 47
+
+
+ 2215 0205 9A000000 		.4byte	.LVL51
+ 2216 0209 0100     		.2byte	0x1
+ 2217 020b 56       		.byte	0x56
+ 2218 020c 9A000000 		.4byte	.LVL51
+ 2219 0210 9E000000 		.4byte	.LVL52
+ 2220 0214 0100     		.2byte	0x1
+ 2221 0216 50       		.byte	0x50
+ 2222 0217 9E000000 		.4byte	.LVL52
+ 2223 021b A0000000 		.4byte	.LVL53
+ 2224 021f 0400     		.2byte	0x4
+ 2225 0221 F3       		.byte	0xf3
+ 2226 0222 01       		.uleb128 0x1
+ 2227 0223 50       		.byte	0x50
+ 2228 0224 9F       		.byte	0x9f
+ 2229 0225 A0000000 		.4byte	.LVL53
+ 2230 0229 A2000000 		.4byte	.LVL54
+ 2231 022d 0100     		.2byte	0x1
+ 2232 022f 50       		.byte	0x50
+ 2233 0230 A2000000 		.4byte	.LVL54
+ 2234 0234 A8000000 		.4byte	.LVL55
+ 2235 0238 0100     		.2byte	0x1
+ 2236 023a 56       		.byte	0x56
+ 2237 023b A8000000 		.4byte	.LVL55
+ 2238 023f B4000000 		.4byte	.LFE116
+ 2239 0243 0400     		.2byte	0x4
+ 2240 0245 F3       		.byte	0xf3
+ 2241 0246 01       		.uleb128 0x1
+ 2242 0247 50       		.byte	0x50
+ 2243 0248 9F       		.byte	0x9f
+ 2244 0249 00000000 		.4byte	0
+ 2245 024d 00000000 		.4byte	0
+ 2246              	.LLST9:
+ 2247 0251 0E000000 		.4byte	.LVL34
+ 2248 0255 5A000000 		.4byte	.LVL39
+ 2249 0259 0A00     		.2byte	0xa
+ 2250 025b 9E       		.byte	0x9e
+ 2251 025c 08       		.uleb128 0x8
+ 2252 025d 00000000 		.8byte	0
+ 2252      00000000 
+ 2253 0265 5A000000 		.4byte	.LVL39
+ 2254 0269 60000000 		.4byte	.LVL40
+ 2255 026d 0600     		.2byte	0x6
+ 2256 026f 50       		.byte	0x50
+ 2257 0270 93       		.byte	0x93
+ 2258 0271 04       		.uleb128 0x4
+ 2259 0272 51       		.byte	0x51
+ 2260 0273 93       		.byte	0x93
+ 2261 0274 04       		.uleb128 0x4
+ 2262 0275 60000000 		.4byte	.LVL40
+ 2263 0279 62000000 		.4byte	.LVL41
+ 2264 027d 0600     		.2byte	0x6
+ 2265 027f 58       		.byte	0x58
+ 2266 0280 93       		.byte	0x93
+ 2267 0281 04       		.uleb128 0x4
+ 2268 0282 51       		.byte	0x51
+ 2269 0283 93       		.byte	0x93
+ 2270 0284 04       		.uleb128 0x4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 48
+
+
+ 2271 0285 62000000 		.4byte	.LVL41
+ 2272 0289 8C000000 		.4byte	.LVL48
+ 2273 028d 0600     		.2byte	0x6
+ 2274 028f 58       		.byte	0x58
+ 2275 0290 93       		.byte	0x93
+ 2276 0291 04       		.uleb128 0x4
+ 2277 0292 59       		.byte	0x59
+ 2278 0293 93       		.byte	0x93
+ 2279 0294 04       		.uleb128 0x4
+ 2280 0295 8C000000 		.4byte	.LVL48
+ 2281 0299 9A000000 		.4byte	.LVL51
+ 2282 029d 0A00     		.2byte	0xa
+ 2283 029f 9E       		.byte	0x9e
+ 2284 02a0 08       		.uleb128 0x8
+ 2285 02a1 00000000 		.8byte	0
+ 2285      00000000 
+ 2286 02a9 A0000000 		.4byte	.LVL53
+ 2287 02ad A2000000 		.4byte	.LVL54
+ 2288 02b1 0A00     		.2byte	0xa
+ 2289 02b3 9E       		.byte	0x9e
+ 2290 02b4 08       		.uleb128 0x8
+ 2291 02b5 00000000 		.8byte	0
+ 2291      00000000 
+ 2292 02bd 00000000 		.4byte	0
+ 2293 02c1 00000000 		.4byte	0
+ 2294              	.LLST10:
+ 2295 02c5 0E000000 		.4byte	.LVL34
+ 2296 02c9 68000000 		.4byte	.LVL43
+ 2297 02cd 0A00     		.2byte	0xa
+ 2298 02cf 9E       		.byte	0x9e
+ 2299 02d0 08       		.uleb128 0x8
+ 2300 02d1 00000000 		.8byte	0
+ 2300      00000000 
+ 2301 02d9 8C000000 		.4byte	.LVL48
+ 2302 02dd 9A000000 		.4byte	.LVL51
+ 2303 02e1 0A00     		.2byte	0xa
+ 2304 02e3 9E       		.byte	0x9e
+ 2305 02e4 08       		.uleb128 0x8
+ 2306 02e5 00000000 		.8byte	0
+ 2306      00000000 
+ 2307 02ed A0000000 		.4byte	.LVL53
+ 2308 02f1 A2000000 		.4byte	.LVL54
+ 2309 02f5 0A00     		.2byte	0xa
+ 2310 02f7 9E       		.byte	0x9e
+ 2311 02f8 08       		.uleb128 0x8
+ 2312 02f9 00000000 		.8byte	0
+ 2312      00000000 
+ 2313 0301 00000000 		.4byte	0
+ 2314 0305 00000000 		.4byte	0
+ 2315              	.LLST11:
+ 2316 0309 0E000000 		.4byte	.LVL34
+ 2317 030d 76000000 		.4byte	.LVL46
+ 2318 0311 0A00     		.2byte	0xa
+ 2319 0313 9E       		.byte	0x9e
+ 2320 0314 08       		.uleb128 0x8
+ 2321 0315 00000000 		.8byte	0
+ 2321      00000000 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 49
+
+
+ 2322 031d 8C000000 		.4byte	.LVL48
+ 2323 0321 9A000000 		.4byte	.LVL51
+ 2324 0325 0A00     		.2byte	0xa
+ 2325 0327 9E       		.byte	0x9e
+ 2326 0328 08       		.uleb128 0x8
+ 2327 0329 00000000 		.8byte	0
+ 2327      00000000 
+ 2328 0331 A0000000 		.4byte	.LVL53
+ 2329 0335 A2000000 		.4byte	.LVL54
+ 2330 0339 0A00     		.2byte	0xa
+ 2331 033b 9E       		.byte	0x9e
+ 2332 033c 08       		.uleb128 0x8
+ 2333 033d 00000000 		.8byte	0
+ 2333      00000000 
+ 2334 0345 00000000 		.4byte	0
+ 2335 0349 00000000 		.4byte	0
+ 2336              		.section	.debug_aranges,"",%progbits
+ 2337 0000 54000000 		.4byte	0x54
+ 2338 0004 0200     		.2byte	0x2
+ 2339 0006 00000000 		.4byte	.Ldebug_info0
+ 2340 000a 04       		.byte	0x4
+ 2341 000b 00       		.byte	0
+ 2342 000c 0000     		.2byte	0
+ 2343 000e 0000     		.2byte	0
+ 2344 0010 00000000 		.4byte	.LFB117
+ 2345 0014 10000000 		.4byte	.LFE117-.LFB117
+ 2346 0018 00000000 		.4byte	.LFB110
+ 2347 001c 44000000 		.4byte	.LFE110-.LFB110
+ 2348 0020 00000000 		.4byte	.LFB111
+ 2349 0024 18000000 		.4byte	.LFE111-.LFB111
+ 2350 0028 00000000 		.4byte	.LFB112
+ 2351 002c 54000000 		.4byte	.LFE112-.LFB112
+ 2352 0030 00000000 		.4byte	.LFB113
+ 2353 0034 58000000 		.4byte	.LFE113-.LFB113
+ 2354 0038 00000000 		.4byte	.LFB114
+ 2355 003c 50000000 		.4byte	.LFE114-.LFB114
+ 2356 0040 00000000 		.4byte	.LFB115
+ 2357 0044 40000000 		.4byte	.LFE115-.LFB115
+ 2358 0048 00000000 		.4byte	.LFB116
+ 2359 004c B4000000 		.4byte	.LFE116-.LFB116
+ 2360 0050 00000000 		.4byte	0
+ 2361 0054 00000000 		.4byte	0
+ 2362              		.section	.debug_ranges,"",%progbits
+ 2363              	.Ldebug_ranges0:
+ 2364 0000 00000000 		.4byte	.LFB117
+ 2365 0004 10000000 		.4byte	.LFE117
+ 2366 0008 00000000 		.4byte	.LFB110
+ 2367 000c 44000000 		.4byte	.LFE110
+ 2368 0010 00000000 		.4byte	.LFB111
+ 2369 0014 18000000 		.4byte	.LFE111
+ 2370 0018 00000000 		.4byte	.LFB112
+ 2371 001c 54000000 		.4byte	.LFE112
+ 2372 0020 00000000 		.4byte	.LFB113
+ 2373 0024 58000000 		.4byte	.LFE113
+ 2374 0028 00000000 		.4byte	.LFB114
+ 2375 002c 50000000 		.4byte	.LFE114
+ 2376 0030 00000000 		.4byte	.LFB115
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 50
+
+
+ 2377 0034 40000000 		.4byte	.LFE115
+ 2378 0038 00000000 		.4byte	.LFB116
+ 2379 003c B4000000 		.4byte	.LFE116
+ 2380 0040 00000000 		.4byte	0
+ 2381 0044 00000000 		.4byte	0
+ 2382              		.section	.debug_line,"",%progbits
+ 2383              	.Ldebug_line0:
+ 2384 0000 60030000 		.section	.debug_str,"MS",%progbits,1
+ 2384      02005B02 
+ 2384      00000201 
+ 2384      FB0E0D00 
+ 2384      01010101 
+ 2385              	.LASF26:
+ 2386 0000 52435F45 		.ascii	"RC_ERROR_TIME_OUT\000"
+ 2386      52524F52 
+ 2386      5F54494D 
+ 2386      455F4F55 
+ 2386      5400
+ 2387              	.LASF73:
+ 2388 0012 464F4C44 		.ascii	"FOLDCNT\000"
+ 2388      434E5400 
+ 2389              	.LASF38:
+ 2390 001a 52435F45 		.ascii	"RC_ERROR_INVALID_STATE\000"
+ 2390      52524F52 
+ 2390      5F494E56 
+ 2390      414C4944 
+ 2390      5F535441 
+ 2391              	.LASF12:
+ 2392 0031 75696E74 		.ascii	"uint64_t\000"
+ 2392      36345F74 
+ 2392      00
+ 2393              	.LASF41:
+ 2394 003a 52435F74 		.ascii	"RC_t\000"
+ 2394      00
+ 2395              	.LASF92:
+ 2396 003f 44435253 		.ascii	"DCRSR\000"
+ 2396      5200
+ 2397              	.LASF47:
+ 2398 0045 54415F4E 		.ascii	"TA_NONE\000"
+ 2398      4F4E4500 
+ 2399              	.LASF55:
+ 2400 004d 6D5F6D6F 		.ascii	"m_mode\000"
+ 2400      646500
+ 2401              	.LASF52:
+ 2402 0054 6D5F7374 		.ascii	"m_startTime\000"
+ 2402      61727454 
+ 2402      696D6500 
+ 2403              	.LASF93:
+ 2404 0060 44435244 		.ascii	"DCRDR\000"
+ 2404      5200
+ 2405              	.LASF13:
+ 2406 0066 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2406      206C6F6E 
+ 2406      6720756E 
+ 2406      7369676E 
+ 2406      65642069 
+ 2407              	.LASF36:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 51
+
+
+ 2408 007d 52435F45 		.ascii	"RC_ERROR_BAD_DATA\000"
+ 2408      52524F52 
+ 2408      5F424144 
+ 2408      5F444154 
+ 2408      4100
+ 2409              	.LASF106:
+ 2410 008f 6E616E6F 		.ascii	"nanoseconds_whole\000"
+ 2410      7365636F 
+ 2410      6E64735F 
+ 2410      77686F6C 
+ 2410      6500
+ 2411              	.LASF114:
+ 2412 00a1 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 2412      52784275 
+ 2412      66666572 
+ 2412      00
+ 2413              	.LASF108:
+ 2414 00ae 54415F73 		.ascii	"TA_systick_count\000"
+ 2414      79737469 
+ 2414      636B5F63 
+ 2414      6F756E74 
+ 2414      00
+ 2415              	.LASF54:
+ 2416 00bf 6D5F7374 		.ascii	"m_state\000"
+ 2416      61746500 
+ 2417              	.LASF95:
+ 2418 00c7 436F7265 		.ascii	"CoreDebug_Type\000"
+ 2418      44656275 
+ 2418      675F5479 
+ 2418      706500
+ 2419              	.LASF124:
+ 2420 00d6 54415F69 		.ascii	"TA_init\000"
+ 2420      6E697400 
+ 2421              	.LASF11:
+ 2422 00de 6C6F6E67 		.ascii	"long long int\000"
+ 2422      206C6F6E 
+ 2422      6720696E 
+ 2422      7400
+ 2423              	.LASF1:
+ 2424 00ec 7369676E 		.ascii	"signed char\000"
+ 2424      65642063 
+ 2424      68617200 
+ 2425              	.LASF69:
+ 2426 00f8 43504943 		.ascii	"CPICNT\000"
+ 2426      4E5400
+ 2427              	.LASF24:
+ 2428 00ff 52435F45 		.ascii	"RC_ERROR_BUFFER_EMTPY\000"
+ 2428      52524F52 
+ 2428      5F425546 
+ 2428      4645525F 
+ 2428      454D5450 
+ 2429              	.LASF5:
+ 2430 0115 6C6F6E67 		.ascii	"long int\000"
+ 2430      20696E74 
+ 2430      00
+ 2431              	.LASF57:
+ 2432 011e 54415F74 		.ascii	"TA_t\000"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 52
+
+
+ 2432      00
+ 2433              	.LASF49:
+ 2434 0123 54415F53 		.ascii	"TA_SYSTICK\000"
+ 2434      59535449 
+ 2434      434B00
+ 2435              	.LASF91:
+ 2436 012e 44484353 		.ascii	"DHCSR\000"
+ 2436      5200
+ 2437              	.LASF27:
+ 2438 0134 52435F45 		.ascii	"RC_ERROR_OPEN\000"
+ 2438      52524F52 
+ 2438      5F4F5045 
+ 2438      4E00
+ 2439              	.LASF10:
+ 2440 0142 646F7562 		.ascii	"double\000"
+ 2440      6C6500
+ 2441              	.LASF71:
+ 2442 0149 534C4545 		.ascii	"SLEEPCNT\000"
+ 2442      50434E54 
+ 2442      00
+ 2443              	.LASF110:
+ 2444 0152 45455F6F 		.ascii	"EE_oo_IRQ_suspend_status\000"
+ 2444      6F5F4952 
+ 2444      515F7375 
+ 2444      7370656E 
+ 2444      645F7374 
+ 2445              	.LASF104:
+ 2446 016b 54415F70 		.ascii	"TA_print\000"
+ 2446      72696E74 
+ 2446      00
+ 2447              	.LASF51:
+ 2448 0174 6D5F6E61 		.ascii	"m_name\000"
+ 2448      6D6500
+ 2449              	.LASF112:
+ 2450 017b 45455F73 		.ascii	"EE_std_endcycle_next_tid\000"
+ 2450      74645F65 
+ 2450      6E646379 
+ 2450      636C655F 
+ 2450      6E657874 
+ 2451              	.LASF46:
+ 2452 0194 54415F73 		.ascii	"TA_state_t\000"
+ 2452      74617465 
+ 2452      5F7400
+ 2453              	.LASF44:
+ 2454 019f 54415F49 		.ascii	"TA_ISRUNNING\000"
+ 2454      5352554E 
+ 2454      4E494E47 
+ 2454      00
+ 2455              	.LASF115:
+ 2456 01ac 43795379 		.ascii	"CySysTickInit\000"
+ 2456      73546963 
+ 2456      6B496E69 
+ 2456      7400
+ 2457              	.LASF119:
+ 2458 01ba 4C4F475F 		.ascii	"LOG_D\000"
+ 2458      4400
+ 2459              	.LASF76:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 53
+
+
+ 2460 01c0 4D41534B 		.ascii	"MASK0\000"
+ 2460      3000
+ 2461              	.LASF0:
+ 2462 01c6 756E7369 		.ascii	"unsigned int\000"
+ 2462      676E6564 
+ 2462      20696E74 
+ 2462      00
+ 2463              	.LASF84:
+ 2464 01d3 4D41534B 		.ascii	"MASK2\000"
+ 2464      3200
+ 2465              	.LASF88:
+ 2466 01d9 4D41534B 		.ascii	"MASK3\000"
+ 2466      3300
+ 2467              	.LASF39:
+ 2468 01df 52435F45 		.ascii	"RC_ERROR_UNKNOWN\000"
+ 2468      52524F52 
+ 2468      5F554E4B 
+ 2468      4E4F574E 
+ 2468      00
+ 2469              	.LASF63:
+ 2470 01f0 45455F55 		.ascii	"EE_UREG\000"
+ 2470      52454700 
+ 2471              	.LASF28:
+ 2472 01f8 52435F45 		.ascii	"RC_ERROR_CHECKSUM\000"
+ 2472      52524F52 
+ 2472      5F434845 
+ 2472      434B5355 
+ 2472      4D00
+ 2473              	.LASF8:
+ 2474 020a 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2474      20756E73 
+ 2474      69676E65 
+ 2474      6420696E 
+ 2474      7400
+ 2475              	.LASF17:
+ 2476 021c 52435F45 		.ascii	"RC_ERROR_NULL\000"
+ 2476      52524F52 
+ 2476      5F4E554C 
+ 2476      4C00
+ 2477              	.LASF105:
+ 2478 022a 6E616E6F 		.ascii	"nanoseconds\000"
+ 2478      7365636F 
+ 2478      6E647300 
+ 2479              	.LASF96:
+ 2480 0236 6E616D65 		.ascii	"name\000"
+ 2480      00
+ 2481              	.LASF22:
+ 2482 023b 52435F45 		.ascii	"RC_ERROR_UNDERRUN\000"
+ 2482      52524F52 
+ 2482      5F554E44 
+ 2482      45525255 
+ 2482      4E00
+ 2483              	.LASF4:
+ 2484 024d 73686F72 		.ascii	"short unsigned int\000"
+ 2484      7420756E 
+ 2484      7369676E 
+ 2484      65642069 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 54
+
+
+ 2484      6E7400
+ 2485              	.LASF109:
+ 2486 0260 45455F6F 		.ascii	"EE_oo_IRQ_disable_count\000"
+ 2486      6F5F4952 
+ 2486      515F6469 
+ 2486      7361626C 
+ 2486      655F636F 
+ 2487              	.LASF23:
+ 2488 0278 52435F45 		.ascii	"RC_ERROR_BUFFER_FULL\000"
+ 2488      52524F52 
+ 2488      5F425546 
+ 2488      4645525F 
+ 2488      46554C4C 
+ 2489              	.LASF70:
+ 2490 028d 45584343 		.ascii	"EXCCNT\000"
+ 2490      4E5400
+ 2491              	.LASF33:
+ 2492 0294 52435F45 		.ascii	"RC_ERROR_WRITE_FAILS\000"
+ 2492      52524F52 
+ 2492      5F575249 
+ 2492      54455F46 
+ 2492      41494C53 
+ 2493              	.LASF34:
+ 2494 02a9 52435F45 		.ascii	"RC_ERROR_NOT_MATCH\000"
+ 2494      52524F52 
+ 2494      5F4E4F54 
+ 2494      5F4D4154 
+ 2494      434800
+ 2495              	.LASF122:
+ 2496 02bc 433A5C48 		.ascii	"C:\\H_da\\SS26\\Research Project\\Workspace01\\MP3_"
+ 2496      5F64615C 
+ 2496      53533236 
+ 2496      5C526573 
+ 2496      65617263 
+ 2497 02ea 76342E63 		.ascii	"v4.cydsn\000"
+ 2497      7964736E 
+ 2497      00
+ 2498              	.LASF123:
+ 2499 02f3 54415F73 		.ascii	"TA_systick_isr\000"
+ 2499      79737469 
+ 2499      636B5F69 
+ 2499      737200
+ 2500              	.LASF68:
+ 2501 0302 43594343 		.ascii	"CYCCNT\000"
+ 2501      4E5400
+ 2502              	.LASF30:
+ 2503 0309 52435F45 		.ascii	"RC_ERROR_WRITE_ONLY\000"
+ 2503      52524F52 
+ 2503      5F575249 
+ 2503      54455F4F 
+ 2503      4E4C5900 
+ 2504              	.LASF15:
+ 2505 031d 52435F53 		.ascii	"RC_SUCCESS\000"
+ 2505      55434345 
+ 2505      535300
+ 2506              	.LASF66:
+ 2507 0328 73697A65 		.ascii	"sizetype\000"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 55
+
+
+ 2507      74797065 
+ 2507      00
+ 2508              	.LASF48:
+ 2509 0331 54415F44 		.ascii	"TA_DWT\000"
+ 2509      575400
+ 2510              	.LASF31:
+ 2511 0338 52435F45 		.ascii	"RC_ERROR_INVALID\000"
+ 2511      52524F52 
+ 2511      5F494E56 
+ 2511      414C4944 
+ 2511      00
+ 2512              	.LASF111:
+ 2513 0349 45455F41 		.ascii	"EE_ApplicationMode\000"
+ 2513      70706C69 
+ 2513      63617469 
+ 2513      6F6E4D6F 
+ 2513      646500
+ 2514              	.LASF37:
+ 2515 035c 52435F45 		.ascii	"RC_ERROR_CANCELED\000"
+ 2515      52524F52 
+ 2515      5F43414E 
+ 2515      43454C45 
+ 2515      4400
+ 2516              	.LASF75:
+ 2517 036e 434F4D50 		.ascii	"COMP0\000"
+ 2517      3000
+ 2518              	.LASF79:
+ 2519 0374 434F4D50 		.ascii	"COMP1\000"
+ 2519      3100
+ 2520              	.LASF83:
+ 2521 037a 434F4D50 		.ascii	"COMP2\000"
+ 2521      3200
+ 2522              	.LASF87:
+ 2523 0380 434F4D50 		.ascii	"COMP3\000"
+ 2523      3300
+ 2524              	.LASF45:
+ 2525 0386 54415F49 		.ascii	"TA_ISPAUSING\000"
+ 2525      53504155 
+ 2525      53494E47 
+ 2525      00
+ 2526              	.LASF65:
+ 2527 0393 45455F54 		.ascii	"EE_TID\000"
+ 2527      494400
+ 2528              	.LASF98:
+ 2529 039a 70696E57 		.ascii	"pinWrite\000"
+ 2529      72697465 
+ 2529      00
+ 2530              	.LASF99:
+ 2531 03a3 54415F63 		.ascii	"TA_config\000"
+ 2531      6F6E6669 
+ 2531      6700
+ 2532              	.LASF16:
+ 2533 03ad 52435F45 		.ascii	"RC_ERROR\000"
+ 2533      52524F52 
+ 2533      00
+ 2534              	.LASF102:
+ 2535 03b6 54415F70 		.ascii	"TA_pause\000"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 56
+
+
+ 2535      61757365 
+ 2535      00
+ 2536              	.LASF9:
+ 2537 03bf 666C6F61 		.ascii	"float\000"
+ 2537      7400
+ 2538              	.LASF78:
+ 2539 03c5 52455345 		.ascii	"RESERVED0\000"
+ 2539      52564544 
+ 2539      3000
+ 2540              	.LASF82:
+ 2541 03cf 52455345 		.ascii	"RESERVED1\000"
+ 2541      52564544 
+ 2541      3100
+ 2542              	.LASF86:
+ 2543 03d9 52455345 		.ascii	"RESERVED2\000"
+ 2543      52564544 
+ 2543      3200
+ 2544              	.LASF25:
+ 2545 03e3 52435F45 		.ascii	"RC_ERROR_BUSY\000"
+ 2545      52524F52 
+ 2545      5F425553 
+ 2545      5900
+ 2546              	.LASF121:
+ 2547 03f1 736F7572 		.ascii	"source\\bsw\\Services\\analysis\\timing.c\000"
+ 2547      63655C62 
+ 2547      73775C53 
+ 2547      65727669 
+ 2547      6365735C 
+ 2548              	.LASF74:
+ 2549 0417 50435352 		.ascii	"PCSR\000"
+ 2549      00
+ 2550              	.LASF94:
+ 2551 041c 44454D43 		.ascii	"DEMCR\000"
+ 2551      5200
+ 2552              	.LASF80:
+ 2553 0422 4D41534B 		.ascii	"MASK1\000"
+ 2553      3100
+ 2554              	.LASF59:
+ 2555 0428 696E7433 		.ascii	"int32_t\000"
+ 2555      325F7400 
+ 2556              	.LASF2:
+ 2557 0430 756E7369 		.ascii	"unsigned char\000"
+ 2557      676E6564 
+ 2557      20636861 
+ 2557      7200
+ 2558              	.LASF43:
+ 2559 043e 54415F49 		.ascii	"TA_ISSTOPPED\000"
+ 2559      5353544F 
+ 2559      50504544 
+ 2559      00
+ 2560              	.LASF77:
+ 2561 044b 46554E43 		.ascii	"FUNCTION0\000"
+ 2561      54494F4E 
+ 2561      3000
+ 2562              	.LASF81:
+ 2563 0455 46554E43 		.ascii	"FUNCTION1\000"
+ 2563      54494F4E 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 57
+
+
+ 2563      3100
+ 2564              	.LASF85:
+ 2565 045f 46554E43 		.ascii	"FUNCTION2\000"
+ 2565      54494F4E 
+ 2565      3200
+ 2566              	.LASF89:
+ 2567 0469 46554E43 		.ascii	"FUNCTION3\000"
+ 2567      54494F4E 
+ 2567      3300
+ 2568              	.LASF3:
+ 2569 0473 73686F72 		.ascii	"short int\000"
+ 2569      7420696E 
+ 2569      7400
+ 2570              	.LASF32:
+ 2571 047d 52435F45 		.ascii	"RC_ERROR_READ_FAILS\000"
+ 2571      52524F52 
+ 2571      5F524541 
+ 2571      445F4641 
+ 2571      494C5300 
+ 2572              	.LASF50:
+ 2573 0491 54415F6D 		.ascii	"TA_mode_t\000"
+ 2573      6F64655F 
+ 2573      7400
+ 2574              	.LASF120:
+ 2575 049b 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2575      43313120 
+ 2575      352E342E 
+ 2575      31203230 
+ 2575      31363036 
+ 2576 04ce 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2576      20726576 
+ 2576      6973696F 
+ 2576      6E203233 
+ 2576      37373135 
+ 2577 0501 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 2577      66756E63 
+ 2577      74696F6E 
+ 2577      2D736563 
+ 2577      74696F6E 
+ 2578              	.LASF18:
+ 2579 0529 52435F45 		.ascii	"RC_ERROR_ZERO\000"
+ 2579      52524F52 
+ 2579      5F5A4552 
+ 2579      4F00
+ 2580              	.LASF72:
+ 2581 0537 4C535543 		.ascii	"LSUCNT\000"
+ 2581      4E5400
+ 2582              	.LASF7:
+ 2583 053e 75696E74 		.ascii	"uint32_t\000"
+ 2583      33325F74 
+ 2583      00
+ 2584              	.LASF101:
+ 2585 0547 54415F73 		.ascii	"TA_stop\000"
+ 2585      746F7000 
+ 2586              	.LASF35:
+ 2587 054f 52435F45 		.ascii	"RC_ERROR_BAD_PARAM\000"
+ 2587      52524F52 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 58
+
+
+ 2587      5F424144 
+ 2587      5F504152 
+ 2587      414D00
+ 2588              	.LASF29:
+ 2589 0562 52435F45 		.ascii	"RC_ERROR_READ_ONLY\000"
+ 2589      52524F52 
+ 2589      5F524541 
+ 2589      445F4F4E 
+ 2589      4C5900
+ 2590              	.LASF60:
+ 2591 0575 6C6F6E67 		.ascii	"long double\000"
+ 2591      20646F75 
+ 2591      626C6500 
+ 2592              	.LASF14:
+ 2593 0581 63686172 		.ascii	"char\000"
+ 2593      00
+ 2594              	.LASF97:
+ 2595 0586 6D6F6465 		.ascii	"mode\000"
+ 2595      00
+ 2596              	.LASF118:
+ 2597 058b 43795379 		.ascii	"CySysTickEnable\000"
+ 2597      73546963 
+ 2597      6B456E61 
+ 2597      626C6500 
+ 2598              	.LASF116:
+ 2599 059b 43795379 		.ascii	"CySysTickSetCallback\000"
+ 2599      73546963 
+ 2599      6B536574 
+ 2599      43616C6C 
+ 2599      6261636B 
+ 2600              	.LASF58:
+ 2601 05b0 5F5F696E 		.ascii	"__int32_t\000"
+ 2601      7433325F 
+ 2601      7400
+ 2602              	.LASF40:
+ 2603 05ba 52435F45 		.ascii	"RC_ERROR_NOT_IMPLEMENTED\000"
+ 2603      52524F52 
+ 2603      5F4E4F54 
+ 2603      5F494D50 
+ 2603      4C454D45 
+ 2604              	.LASF21:
+ 2605 05d3 52435F45 		.ascii	"RC_ERROR_OVERRUN\000"
+ 2605      52524F52 
+ 2605      5F4F5645 
+ 2605      5252554E 
+ 2605      00
+ 2606              	.LASF19:
+ 2607 05e4 52435F45 		.ascii	"RC_ERROR_MEMORY\000"
+ 2607      52524F52 
+ 2607      5F4D454D 
+ 2607      4F525900 
+ 2608              	.LASF90:
+ 2609 05f4 4457545F 		.ascii	"DWT_Type\000"
+ 2609      54797065 
+ 2609      00
+ 2610              	.LASF67:
+ 2611 05fd 4354524C 		.ascii	"CTRL\000"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 59
+
+
+ 2611      00
+ 2612              	.LASF113:
+ 2613 0602 45455F49 		.ascii	"EE_IRQ_nesting_level\000"
+ 2613      52515F6E 
+ 2613      65737469 
+ 2613      6E675F6C 
+ 2613      6576656C 
+ 2614              	.LASF62:
+ 2615 0617 45455F55 		.ascii	"EE_UINT32\000"
+ 2615      494E5433 
+ 2615      3200
+ 2616              	.LASF107:
+ 2617 0621 6E616E6F 		.ascii	"nanoseconds_fraction\000"
+ 2617      7365636F 
+ 2617      6E64735F 
+ 2617      66726163 
+ 2617      74696F6E 
+ 2618              	.LASF20:
+ 2619 0636 52435F45 		.ascii	"RC_ERROR_RANGE\000"
+ 2619      52524F52 
+ 2619      5F52414E 
+ 2619      474500
+ 2620              	.LASF103:
+ 2621 0645 54415F72 		.ascii	"TA_resume\000"
+ 2621      6573756D 
+ 2621      6500
+ 2622              	.LASF61:
+ 2623 064f 45455F49 		.ascii	"EE_INT32\000"
+ 2623      4E543332 
+ 2623      00
+ 2624              	.LASF100:
+ 2625 0658 54415F73 		.ascii	"TA_start\000"
+ 2625      74617274 
+ 2625      00
+ 2626              	.LASF6:
+ 2627 0661 75696E74 		.ascii	"uint8_t\000"
+ 2627      385F7400 
+ 2628              	.LASF53:
+ 2629 0669 6D5F656C 		.ascii	"m_elapsedTime\000"
+ 2629      61707365 
+ 2629      6454696D 
+ 2629      6500
+ 2630              	.LASF117:
+ 2631 0677 43795379 		.ascii	"CySysTickSetReload\000"
+ 2631      73546963 
+ 2631      6B536574 
+ 2631      52656C6F 
+ 2631      616400
+ 2632              	.LASF42:
+ 2633 068a 54415F66 		.ascii	"TA_fpPinWrite_t\000"
+ 2633      7050696E 
+ 2633      57726974 
+ 2633      655F7400 
+ 2634              	.LASF56:
+ 2635 069a 705F7069 		.ascii	"p_pinWrite\000"
+ 2635      6E577269 
+ 2635      746500
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccKC3nEO.s 			page 60
+
+
+ 2636              	.LASF64:
+ 2637 06a5 45455F46 		.ascii	"EE_FREG\000"
+ 2637      52454700 
+ 2638              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

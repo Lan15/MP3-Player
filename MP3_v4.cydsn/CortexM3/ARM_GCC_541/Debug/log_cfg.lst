@@ -1,0 +1,1377 @@
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"log_cfg.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.LOG_print_e,"ax",%progbits
+  20              		.align	2
+  21              		.global	LOG_print_e
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	LOG_print_e, %function
+  25              	LOG_print_e:
+  26              	.LFB110:
+  27              		.file 1 "source\\bsw\\Services\\log\\log_cfg.c"
+   1:source\bsw\Services\log/log_cfg.c **** /**
+   2:source\bsw\Services\log/log_cfg.c **** * \file log_cfg.c
+   3:source\bsw\Services\log/log_cfg.c **** * \author Duyen
+   4:source\bsw\Services\log/log_cfg.c **** * \date 14.02.2025
+   5:source\bsw\Services\log/log_cfg.c **** *
+   6:source\bsw\Services\log/log_cfg.c **** * \brief Configuration file for logging
+   7:source\bsw\Services\log/log_cfg.c **** *
+   8:source\bsw\Services\log/log_cfg.c **** * Here we define the logging level and buffer sizes.
+   9:source\bsw\Services\log/log_cfg.c **** * Furthermore, the glue logic functions to the logging MCAL function, e.g. a UART driver are implem
+  10:source\bsw\Services\log/log_cfg.c **** *
+  11:source\bsw\Services\log/log_cfg.c **** * \note <notes>
+  12:source\bsw\Services\log/log_cfg.c **** * \todo <todos>
+  13:source\bsw\Services\log/log_cfg.c **** * \warning <warnings, e.g. dependencies, order of execution etc.>
+  14:source\bsw\Services\log/log_cfg.c **** *
+  15:source\bsw\Services\log/log_cfg.c **** *  Changelog:\n
+  16:source\bsw\Services\log/log_cfg.c **** *  - <version; data of change; author>
+  17:source\bsw\Services\log/log_cfg.c **** *            - <description of the change>
+  18:source\bsw\Services\log/log_cfg.c **** *
+  19:source\bsw\Services\log/log_cfg.c **** * \copyright Copyright ©2025
+  20:source\bsw\Services\log/log_cfg.c **** * Department of electrical engineering and information technology, Hochschule Darmstadt - Universit
+  21:source\bsw\Services\log/log_cfg.c **** * Permission to use, copy, modify, and distribute this software and its documentation for education
+  22:source\bsw\Services\log/log_cfg.c **** * (unless permitted by h_da) and official h_da projects, is hereby granted for enrolled students of
+  23:source\bsw\Services\log/log_cfg.c **** * this paragraph and the following paragraph appear in all copies, modifications, and distributions
+  24:source\bsw\Services\log/log_cfg.c **** * Contact Prof.Dr.-Ing. Peter Fromm, peter.fromm@h-da.de, Birkenweg 8 64295 Darmstadt - GERMANY for
+  25:source\bsw\Services\log/log_cfg.c **** *
+  26:source\bsw\Services\log/log_cfg.c **** * \warning This software is a PROTOTYPE version and is not designed or intended for use in producti
+  27:source\bsw\Services\log/log_cfg.c **** * The user represents and warrants that it will NOT use or redistribute the Software for such purpo
+  28:source\bsw\Services\log/log_cfg.c **** * This prototype is for research purposes only. This software is provided "AS IS," without a warran
+  29:source\bsw\Services\log/log_cfg.c **** */
+  30:source\bsw\Services\log/log_cfg.c **** 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 2
+
+
+  31:source\bsw\Services\log/log_cfg.c **** /*****************************************************************************/
+  32:source\bsw\Services\log/log_cfg.c **** /* Include files                                                             */
+  33:source\bsw\Services\log/log_cfg.c **** /*****************************************************************************/
+  34:source\bsw\Services\log/log_cfg.c **** 
+  35:source\bsw\Services\log/log_cfg.c **** #include "log_cfg.h"
+  36:source\bsw\Services\log/log_cfg.c **** #include "project.h"
+  37:source\bsw\Services\log/log_cfg.c **** 
+  38:source\bsw\Services\log/log_cfg.c **** /*****************************************************************************/
+  39:source\bsw\Services\log/log_cfg.c **** /* Local pre-processor symbols/macros ('#define')                            */
+  40:source\bsw\Services\log/log_cfg.c **** /*****************************************************************************/
+  41:source\bsw\Services\log/log_cfg.c **** 
+  42:source\bsw\Services\log/log_cfg.c **** 
+  43:source\bsw\Services\log/log_cfg.c **** 
+  44:source\bsw\Services\log/log_cfg.c **** 
+  45:source\bsw\Services\log/log_cfg.c **** /*****************************************************************************/
+  46:source\bsw\Services\log/log_cfg.c **** /* Global variable definitions (declared in header file with 'extern')       */
+  47:source\bsw\Services\log/log_cfg.c **** /*****************************************************************************/
+  48:source\bsw\Services\log/log_cfg.c **** 
+  49:source\bsw\Services\log/log_cfg.c **** 
+  50:source\bsw\Services\log/log_cfg.c **** 
+  51:source\bsw\Services\log/log_cfg.c **** /*****************************************************************************/
+  52:source\bsw\Services\log/log_cfg.c **** /* Local type definitions ('typedef')                                        */
+  53:source\bsw\Services\log/log_cfg.c **** /*****************************************************************************/
+  54:source\bsw\Services\log/log_cfg.c **** 
+  55:source\bsw\Services\log/log_cfg.c **** 
+  56:source\bsw\Services\log/log_cfg.c **** /*****************************************************************************/
+  57:source\bsw\Services\log/log_cfg.c **** /* Local variable definitions ('static')                                     */
+  58:source\bsw\Services\log/log_cfg.c **** /*****************************************************************************/
+  59:source\bsw\Services\log/log_cfg.c **** 
+  60:source\bsw\Services\log/log_cfg.c **** 
+  61:source\bsw\Services\log/log_cfg.c **** /*****************************************************************************/
+  62:source\bsw\Services\log/log_cfg.c **** /* Local function prototypes ('static')                                      */
+  63:source\bsw\Services\log/log_cfg.c **** /*****************************************************************************/
+  64:source\bsw\Services\log/log_cfg.c **** 
+  65:source\bsw\Services\log/log_cfg.c **** 
+  66:source\bsw\Services\log/log_cfg.c **** /*****************************************************************************/
+  67:source\bsw\Services\log/log_cfg.c **** /* Function implementation - global ('extern') and local ('static')          */
+  68:source\bsw\Services\log/log_cfg.c **** /*****************************************************************************/
+  69:source\bsw\Services\log/log_cfg.c **** 
+  70:source\bsw\Services\log/log_cfg.c **** /**
+  71:source\bsw\Services\log/log_cfg.c ****  * \brief user code which send out/store the buffer
+  72:source\bsw\Services\log/log_cfg.c ****  *
+  73:source\bsw\Services\log/log_cfg.c ****  * \param uint8_t* buffer      : [IN] string to be printed
+  74:source\bsw\Services\log/log_cfg.c ****  * \return void
+  75:source\bsw\Services\log/log_cfg.c ****  */
+  76:source\bsw\Services\log/log_cfg.c **** void LOG_print_e(uint8_t* buffer)
+  77:source\bsw\Services\log/log_cfg.c **** {
+  28              		.loc 1 77 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              	.LVL0:
+  33 0000 10B5     		push	{r4, lr}
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 4, -8
+  36              		.cfi_offset 14, -4
+  37 0002 0446     		mov	r4, r0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 3
+
+
+  78:source\bsw\Services\log/log_cfg.c **** 	// user code
+  79:source\bsw\Services\log/log_cfg.c **** 	UART_LOG_PutString("ERROR   : ");
+  38              		.loc 1 79 0
+  39 0004 0448     		ldr	r0, .L3
+  40              	.LVL1:
+  41 0006 FFF7FEFF 		bl	UART_LOG_PutString
+  42              	.LVL2:
+  80:source\bsw\Services\log/log_cfg.c **** 	UART_LOG_PutString((char*)buffer);
+  43              		.loc 1 80 0
+  44 000a 2046     		mov	r0, r4
+  45 000c FFF7FEFF 		bl	UART_LOG_PutString
+  46              	.LVL3:
+  81:source\bsw\Services\log/log_cfg.c **** 	UART_LOG_PutString("\n");
+  47              		.loc 1 81 0
+  48 0010 0248     		ldr	r0, .L3+4
+  49 0012 FFF7FEFF 		bl	UART_LOG_PutString
+  50              	.LVL4:
+  51 0016 10BD     		pop	{r4, pc}
+  52              	.LVL5:
+  53              	.L4:
+  54              		.align	2
+  55              	.L3:
+  56 0018 00000000 		.word	.LC0
+  57 001c 0C000000 		.word	.LC1
+  58              		.cfi_endproc
+  59              	.LFE110:
+  60              		.size	LOG_print_e, .-LOG_print_e
+  61              		.section	.text.LOG_print_d,"ax",%progbits
+  62              		.align	2
+  63              		.global	LOG_print_d
+  64              		.thumb
+  65              		.thumb_func
+  66              		.type	LOG_print_d, %function
+  67              	LOG_print_d:
+  68              	.LFB111:
+  82:source\bsw\Services\log/log_cfg.c **** }
+  83:source\bsw\Services\log/log_cfg.c **** 
+  84:source\bsw\Services\log/log_cfg.c **** /**
+  85:source\bsw\Services\log/log_cfg.c ****  * \brief user code which send out/store the buffer
+  86:source\bsw\Services\log/log_cfg.c ****  *
+  87:source\bsw\Services\log/log_cfg.c ****  * \param uint8_t* buffer      : [IN] string to be printed
+  88:source\bsw\Services\log/log_cfg.c ****  * \return void
+  89:source\bsw\Services\log/log_cfg.c ****  */
+  90:source\bsw\Services\log/log_cfg.c **** void LOG_print_d(uint8_t* buffer)
+  91:source\bsw\Services\log/log_cfg.c **** {
+  69              		.loc 1 91 0
+  70              		.cfi_startproc
+  71              		@ args = 0, pretend = 0, frame = 0
+  72              		@ frame_needed = 0, uses_anonymous_args = 0
+  73              	.LVL6:
+  74 0000 10B5     		push	{r4, lr}
+  75              		.cfi_def_cfa_offset 8
+  76              		.cfi_offset 4, -8
+  77              		.cfi_offset 14, -4
+  78 0002 0446     		mov	r4, r0
+  92:source\bsw\Services\log/log_cfg.c **** 	// user code
+  93:source\bsw\Services\log/log_cfg.c **** 	UART_LOG_PutString("DEBUG   : ");
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 4
+
+
+  79              		.loc 1 93 0
+  80 0004 0448     		ldr	r0, .L7
+  81              	.LVL7:
+  82 0006 FFF7FEFF 		bl	UART_LOG_PutString
+  83              	.LVL8:
+  94:source\bsw\Services\log/log_cfg.c **** 	UART_LOG_PutString((char*)buffer);
+  84              		.loc 1 94 0
+  85 000a 2046     		mov	r0, r4
+  86 000c FFF7FEFF 		bl	UART_LOG_PutString
+  87              	.LVL9:
+  95:source\bsw\Services\log/log_cfg.c **** 	UART_LOG_PutString("\n");
+  88              		.loc 1 95 0
+  89 0010 0248     		ldr	r0, .L7+4
+  90 0012 FFF7FEFF 		bl	UART_LOG_PutString
+  91              	.LVL10:
+  92 0016 10BD     		pop	{r4, pc}
+  93              	.LVL11:
+  94              	.L8:
+  95              		.align	2
+  96              	.L7:
+  97 0018 10000000 		.word	.LC2
+  98 001c 0C000000 		.word	.LC1
+  99              		.cfi_endproc
+ 100              	.LFE111:
+ 101              		.size	LOG_print_d, .-LOG_print_d
+ 102              		.section	.text.LOG_print_v,"ax",%progbits
+ 103              		.align	2
+ 104              		.global	LOG_print_v
+ 105              		.thumb
+ 106              		.thumb_func
+ 107              		.type	LOG_print_v, %function
+ 108              	LOG_print_v:
+ 109              	.LFB112:
+  96:source\bsw\Services\log/log_cfg.c **** }
+  97:source\bsw\Services\log/log_cfg.c **** 
+  98:source\bsw\Services\log/log_cfg.c **** /**
+  99:source\bsw\Services\log/log_cfg.c ****  * \brief user code which send out/store the buffer
+ 100:source\bsw\Services\log/log_cfg.c ****  *
+ 101:source\bsw\Services\log/log_cfg.c ****  * \param uint8_t* buffer      : [IN] string to be printed
+ 102:source\bsw\Services\log/log_cfg.c ****  * \return void
+ 103:source\bsw\Services\log/log_cfg.c ****  */
+ 104:source\bsw\Services\log/log_cfg.c **** void LOG_print_v(uint8_t* buffer)
+ 105:source\bsw\Services\log/log_cfg.c **** {
+ 110              		.loc 1 105 0
+ 111              		.cfi_startproc
+ 112              		@ args = 0, pretend = 0, frame = 0
+ 113              		@ frame_needed = 0, uses_anonymous_args = 0
+ 114              	.LVL12:
+ 115 0000 10B5     		push	{r4, lr}
+ 116              		.cfi_def_cfa_offset 8
+ 117              		.cfi_offset 4, -8
+ 118              		.cfi_offset 14, -4
+ 119 0002 0446     		mov	r4, r0
+ 106:source\bsw\Services\log/log_cfg.c **** 	// user code
+ 107:source\bsw\Services\log/log_cfg.c **** 	UART_LOG_PutString("VERBOSE : ");
+ 120              		.loc 1 107 0
+ 121 0004 0448     		ldr	r0, .L11
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 5
+
+
+ 122              	.LVL13:
+ 123 0006 FFF7FEFF 		bl	UART_LOG_PutString
+ 124              	.LVL14:
+ 108:source\bsw\Services\log/log_cfg.c **** 	UART_LOG_PutString((char*)buffer);
+ 125              		.loc 1 108 0
+ 126 000a 2046     		mov	r0, r4
+ 127 000c FFF7FEFF 		bl	UART_LOG_PutString
+ 128              	.LVL15:
+ 109:source\bsw\Services\log/log_cfg.c **** 	UART_LOG_PutString("\n");
+ 129              		.loc 1 109 0
+ 130 0010 0248     		ldr	r0, .L11+4
+ 131 0012 FFF7FEFF 		bl	UART_LOG_PutString
+ 132              	.LVL16:
+ 133 0016 10BD     		pop	{r4, pc}
+ 134              	.LVL17:
+ 135              	.L12:
+ 136              		.align	2
+ 137              	.L11:
+ 138 0018 1C000000 		.word	.LC3
+ 139 001c 0C000000 		.word	.LC1
+ 140              		.cfi_endproc
+ 141              	.LFE112:
+ 142              		.size	LOG_print_v, .-LOG_print_v
+ 143              		.section	.text.LOG_print_i,"ax",%progbits
+ 144              		.align	2
+ 145              		.global	LOG_print_i
+ 146              		.thumb
+ 147              		.thumb_func
+ 148              		.type	LOG_print_i, %function
+ 149              	LOG_print_i:
+ 150              	.LFB113:
+ 110:source\bsw\Services\log/log_cfg.c **** }
+ 111:source\bsw\Services\log/log_cfg.c **** 
+ 112:source\bsw\Services\log/log_cfg.c **** /**
+ 113:source\bsw\Services\log/log_cfg.c ****  * \brief user code which send out/store the buffer
+ 114:source\bsw\Services\log/log_cfg.c ****  *
+ 115:source\bsw\Services\log/log_cfg.c ****  * \param uint8_t* buffer      : [IN] string to be printed
+ 116:source\bsw\Services\log/log_cfg.c ****  * \return void
+ 117:source\bsw\Services\log/log_cfg.c ****  */
+ 118:source\bsw\Services\log/log_cfg.c **** void LOG_print_i(uint8_t* buffer)
+ 119:source\bsw\Services\log/log_cfg.c **** {
+ 151              		.loc 1 119 0
+ 152              		.cfi_startproc
+ 153              		@ args = 0, pretend = 0, frame = 0
+ 154              		@ frame_needed = 0, uses_anonymous_args = 0
+ 155              	.LVL18:
+ 156 0000 10B5     		push	{r4, lr}
+ 157              		.cfi_def_cfa_offset 8
+ 158              		.cfi_offset 4, -8
+ 159              		.cfi_offset 14, -4
+ 160 0002 0446     		mov	r4, r0
+ 120:source\bsw\Services\log/log_cfg.c **** 	// user code
+ 121:source\bsw\Services\log/log_cfg.c **** 	UART_LOG_PutString("INFO    : ");
+ 161              		.loc 1 121 0
+ 162 0004 0448     		ldr	r0, .L15
+ 163              	.LVL19:
+ 164 0006 FFF7FEFF 		bl	UART_LOG_PutString
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 6
+
+
+ 165              	.LVL20:
+ 122:source\bsw\Services\log/log_cfg.c **** 	UART_LOG_PutString((char*)buffer);
+ 166              		.loc 1 122 0
+ 167 000a 2046     		mov	r0, r4
+ 168 000c FFF7FEFF 		bl	UART_LOG_PutString
+ 169              	.LVL21:
+ 123:source\bsw\Services\log/log_cfg.c **** 	UART_LOG_PutString("\n");
+ 170              		.loc 1 123 0
+ 171 0010 0248     		ldr	r0, .L15+4
+ 172 0012 FFF7FEFF 		bl	UART_LOG_PutString
+ 173              	.LVL22:
+ 174 0016 10BD     		pop	{r4, pc}
+ 175              	.LVL23:
+ 176              	.L16:
+ 177              		.align	2
+ 178              	.L15:
+ 179 0018 28000000 		.word	.LC4
+ 180 001c 0C000000 		.word	.LC1
+ 181              		.cfi_endproc
+ 182              	.LFE113:
+ 183              		.size	LOG_print_i, .-LOG_print_i
+ 184              		.section	.text.LOG_print_w,"ax",%progbits
+ 185              		.align	2
+ 186              		.global	LOG_print_w
+ 187              		.thumb
+ 188              		.thumb_func
+ 189              		.type	LOG_print_w, %function
+ 190              	LOG_print_w:
+ 191              	.LFB114:
+ 124:source\bsw\Services\log/log_cfg.c **** }
+ 125:source\bsw\Services\log/log_cfg.c **** 
+ 126:source\bsw\Services\log/log_cfg.c **** /**
+ 127:source\bsw\Services\log/log_cfg.c ****  * \brief user code which send out/store the buffer
+ 128:source\bsw\Services\log/log_cfg.c ****  *
+ 129:source\bsw\Services\log/log_cfg.c ****  * \param uint8_t* buffer      : [IN] string to be printed
+ 130:source\bsw\Services\log/log_cfg.c ****  * \return void
+ 131:source\bsw\Services\log/log_cfg.c ****  */
+ 132:source\bsw\Services\log/log_cfg.c **** void LOG_print_w(uint8_t* buffer)
+ 133:source\bsw\Services\log/log_cfg.c **** {
+ 192              		.loc 1 133 0
+ 193              		.cfi_startproc
+ 194              		@ args = 0, pretend = 0, frame = 0
+ 195              		@ frame_needed = 0, uses_anonymous_args = 0
+ 196              	.LVL24:
+ 197 0000 10B5     		push	{r4, lr}
+ 198              		.cfi_def_cfa_offset 8
+ 199              		.cfi_offset 4, -8
+ 200              		.cfi_offset 14, -4
+ 201 0002 0446     		mov	r4, r0
+ 134:source\bsw\Services\log/log_cfg.c **** 	// user code
+ 135:source\bsw\Services\log/log_cfg.c **** 	UART_LOG_PutString("WARNING : ");
+ 202              		.loc 1 135 0
+ 203 0004 0448     		ldr	r0, .L19
+ 204              	.LVL25:
+ 205 0006 FFF7FEFF 		bl	UART_LOG_PutString
+ 206              	.LVL26:
+ 136:source\bsw\Services\log/log_cfg.c **** 	UART_LOG_PutString((char*)buffer);
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 7
+
+
+ 207              		.loc 1 136 0
+ 208 000a 2046     		mov	r0, r4
+ 209 000c FFF7FEFF 		bl	UART_LOG_PutString
+ 210              	.LVL27:
+ 137:source\bsw\Services\log/log_cfg.c **** 	UART_LOG_PutString("\n");
+ 211              		.loc 1 137 0
+ 212 0010 0248     		ldr	r0, .L19+4
+ 213 0012 FFF7FEFF 		bl	UART_LOG_PutString
+ 214              	.LVL28:
+ 215 0016 10BD     		pop	{r4, pc}
+ 216              	.LVL29:
+ 217              	.L20:
+ 218              		.align	2
+ 219              	.L19:
+ 220 0018 34000000 		.word	.LC5
+ 221 001c 0C000000 		.word	.LC1
+ 222              		.cfi_endproc
+ 223              	.LFE114:
+ 224              		.size	LOG_print_w, .-LOG_print_w
+ 225              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 226              		.align	2
+ 227              	.LC0:
+ 228 0000 4552524F 		.ascii	"ERROR   : \000"
+ 228      52202020 
+ 228      3A2000
+ 229 000b 00       		.space	1
+ 230              	.LC1:
+ 231 000c 0A00     		.ascii	"\012\000"
+ 232 000e 0000     		.space	2
+ 233              	.LC2:
+ 234 0010 44454255 		.ascii	"DEBUG   : \000"
+ 234      47202020 
+ 234      3A2000
+ 235 001b 00       		.space	1
+ 236              	.LC3:
+ 237 001c 56455242 		.ascii	"VERBOSE : \000"
+ 237      4F534520 
+ 237      3A2000
+ 238 0027 00       		.space	1
+ 239              	.LC4:
+ 240 0028 494E464F 		.ascii	"INFO    : \000"
+ 240      20202020 
+ 240      3A2000
+ 241 0033 00       		.space	1
+ 242              	.LC5:
+ 243 0034 5741524E 		.ascii	"WARNING : \000"
+ 243      494E4720 
+ 243      3A2000
+ 244              		.text
+ 245              	.Letext0:
+ 246              		.file 2 ".\\source\\bsw/global.h"
+ 247              		.file 3 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
+ 248              		.file 4 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
+ 249              		.file 5 "Generated_Source\\PSoC5/ErikaOS_1_common_ee_types.inc"
+ 250              		.file 6 "Generated_Source\\PSoC5/ErikaOS_1_cortex_mx_ee_cpu.inc"
+ 251              		.file 7 "Generated_Source\\PSoC5/ErikaOS_1_ee_oo_intfunc.inc"
+ 252              		.file 8 "Generated_Source\\PSoC5/ErikaOS_1_cortex_mx_ee_context.inc"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 8
+
+
+ 253              		.file 9 "Generated_Source\\PSoC5/ErikaOS_1_common_ee_primitives.inc"
+ 254              		.file 10 "Generated_Source\\PSoC5/core_cm3.h"
+ 255              		.file 11 "Generated_Source\\PSoC5/UART_LOG.h"
+ 256              		.section	.debug_info,"",%progbits
+ 257              	.Ldebug_info0:
+ 258 0000 2B030000 		.4byte	0x32b
+ 259 0004 0400     		.2byte	0x4
+ 260 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 261 000a 04       		.byte	0x4
+ 262 000b 01       		.uleb128 0x1
+ 263 000c CE000000 		.4byte	.LASF34
+ 264 0010 0C       		.byte	0xc
+ 265 0011 9E000000 		.4byte	.LASF35
+ 266 0015 00000000 		.4byte	.LASF36
+ 267 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 268 001d 00000000 		.4byte	0
+ 269 0021 00000000 		.4byte	.Ldebug_line0
+ 270 0025 02       		.uleb128 0x2
+ 271 0026 04       		.byte	0x4
+ 272 0027 07       		.byte	0x7
+ 273 0028 DB010000 		.4byte	.LASF0
+ 274 002c 02       		.uleb128 0x2
+ 275 002d 01       		.byte	0x1
+ 276 002e 06       		.byte	0x6
+ 277 002f 9F020000 		.4byte	.LASF1
+ 278 0033 03       		.uleb128 0x3
+ 279 0034 1D020000 		.4byte	.LASF12
+ 280 0038 02       		.byte	0x2
+ 281 0039 91       		.byte	0x91
+ 282 003a 3E000000 		.4byte	0x3e
+ 283 003e 02       		.uleb128 0x2
+ 284 003f 01       		.byte	0x1
+ 285 0040 08       		.byte	0x8
+ 286 0041 C0000000 		.4byte	.LASF2
+ 287 0045 02       		.uleb128 0x2
+ 288 0046 02       		.byte	0x2
+ 289 0047 05       		.byte	0x5
+ 290 0048 79020000 		.4byte	.LASF3
+ 291 004c 02       		.uleb128 0x2
+ 292 004d 02       		.byte	0x2
+ 293 004e 07       		.byte	0x7
+ 294 004f 6E010000 		.4byte	.LASF4
+ 295 0053 02       		.uleb128 0x2
+ 296 0054 04       		.byte	0x4
+ 297 0055 05       		.byte	0x5
+ 298 0056 8A020000 		.4byte	.LASF5
+ 299 005a 02       		.uleb128 0x2
+ 300 005b 04       		.byte	0x4
+ 301 005c 07       		.byte	0x7
+ 302 005d 5C010000 		.4byte	.LASF6
+ 303 0061 02       		.uleb128 0x2
+ 304 0062 04       		.byte	0x4
+ 305 0063 04       		.byte	0x4
+ 306 0064 98000000 		.4byte	.LASF7
+ 307 0068 02       		.uleb128 0x2
+ 308 0069 08       		.byte	0x8
+ 309 006a 04       		.byte	0x4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 9
+
+
+ 310 006b AF010000 		.4byte	.LASF8
+ 311 006f 02       		.uleb128 0x2
+ 312 0070 08       		.byte	0x8
+ 313 0071 05       		.byte	0x5
+ 314 0072 49020000 		.4byte	.LASF9
+ 315 0076 02       		.uleb128 0x2
+ 316 0077 08       		.byte	0x8
+ 317 0078 07       		.byte	0x7
+ 318 0079 06020000 		.4byte	.LASF10
+ 319 007d 02       		.uleb128 0x2
+ 320 007e 01       		.byte	0x1
+ 321 007f 08       		.byte	0x8
+ 322 0080 57020000 		.4byte	.LASF11
+ 323 0084 03       		.uleb128 0x3
+ 324 0085 37000000 		.4byte	.LASF13
+ 325 0089 03       		.byte	0x3
+ 326 008a 3F       		.byte	0x3f
+ 327 008b 53000000 		.4byte	0x53
+ 328 008f 04       		.uleb128 0x4
+ 329 0090 04       		.byte	0x4
+ 330 0091 05       		.byte	0x5
+ 331 0092 696E7400 		.ascii	"int\000"
+ 332 0096 03       		.uleb128 0x3
+ 333 0097 38020000 		.4byte	.LASF14
+ 334 009b 04       		.byte	0x4
+ 335 009c 2C       		.byte	0x2c
+ 336 009d 84000000 		.4byte	0x84
+ 337 00a1 02       		.uleb128 0x2
+ 338 00a2 08       		.byte	0x8
+ 339 00a3 04       		.byte	0x4
+ 340 00a4 93020000 		.4byte	.LASF15
+ 341 00a8 03       		.uleb128 0x3
+ 342 00a9 81010000 		.4byte	.LASF16
+ 343 00ad 05       		.byte	0x5
+ 344 00ae 53       		.byte	0x53
+ 345 00af 8F000000 		.4byte	0x8f
+ 346 00b3 03       		.uleb128 0x3
+ 347 00b4 F0010000 		.4byte	.LASF17
+ 348 00b8 05       		.byte	0x5
+ 349 00b9 54       		.byte	0x54
+ 350 00ba 25000000 		.4byte	0x25
+ 351 00be 03       		.uleb128 0x3
+ 352 00bf 5C020000 		.4byte	.LASF18
+ 353 00c3 06       		.byte	0x6
+ 354 00c4 4D       		.byte	0x4d
+ 355 00c5 B3000000 		.4byte	0xb3
+ 356 00c9 03       		.uleb128 0x3
+ 357 00ca E8010000 		.4byte	.LASF19
+ 358 00ce 06       		.byte	0x6
+ 359 00cf 4F       		.byte	0x4f
+ 360 00d0 B3000000 		.4byte	0xb3
+ 361 00d4 03       		.uleb128 0x3
+ 362 00d5 66000000 		.4byte	.LASF20
+ 363 00d9 06       		.byte	0x6
+ 364 00da 78       		.byte	0x78
+ 365 00db A8000000 		.4byte	0xa8
+ 366 00df 02       		.uleb128 0x2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 10
+
+
+ 367 00e0 04       		.byte	0x4
+ 368 00e1 07       		.byte	0x7
+ 369 00e2 40020000 		.4byte	.LASF21
+ 370 00e6 05       		.uleb128 0x5
+ 371 00e7 41000000 		.4byte	.LASF22
+ 372 00eb 01       		.byte	0x1
+ 373 00ec 4C       		.byte	0x4c
+ 374 00ed 00000000 		.4byte	.LFB110
+ 375 00f1 20000000 		.4byte	.LFE110-.LFB110
+ 376 00f5 01       		.uleb128 0x1
+ 377 00f6 9C       		.byte	0x9c
+ 378 00f7 49010000 		.4byte	0x149
+ 379 00fb 06       		.uleb128 0x6
+ 380 00fc 83020000 		.4byte	.LASF24
+ 381 0100 01       		.byte	0x1
+ 382 0101 4C       		.byte	0x4c
+ 383 0102 49010000 		.4byte	0x149
+ 384 0106 00000000 		.4byte	.LLST0
+ 385 010a 07       		.uleb128 0x7
+ 386 010b 0A000000 		.4byte	.LVL2
+ 387 010f 23030000 		.4byte	0x323
+ 388 0113 21010000 		.4byte	0x121
+ 389 0117 08       		.uleb128 0x8
+ 390 0118 01       		.uleb128 0x1
+ 391 0119 50       		.byte	0x50
+ 392 011a 05       		.uleb128 0x5
+ 393 011b 03       		.byte	0x3
+ 394 011c 00000000 		.4byte	.LC0
+ 395 0120 00       		.byte	0
+ 396 0121 07       		.uleb128 0x7
+ 397 0122 10000000 		.4byte	.LVL3
+ 398 0126 23030000 		.4byte	0x323
+ 399 012a 35010000 		.4byte	0x135
+ 400 012e 08       		.uleb128 0x8
+ 401 012f 01       		.uleb128 0x1
+ 402 0130 50       		.byte	0x50
+ 403 0131 02       		.uleb128 0x2
+ 404 0132 74       		.byte	0x74
+ 405 0133 00       		.sleb128 0
+ 406 0134 00       		.byte	0
+ 407 0135 09       		.uleb128 0x9
+ 408 0136 16000000 		.4byte	.LVL4
+ 409 013a 23030000 		.4byte	0x323
+ 410 013e 08       		.uleb128 0x8
+ 411 013f 01       		.uleb128 0x1
+ 412 0140 50       		.byte	0x50
+ 413 0141 05       		.uleb128 0x5
+ 414 0142 03       		.byte	0x3
+ 415 0143 0C000000 		.4byte	.LC1
+ 416 0147 00       		.byte	0
+ 417 0148 00       		.byte	0
+ 418 0149 0A       		.uleb128 0xa
+ 419 014a 04       		.byte	0x4
+ 420 014b 33000000 		.4byte	0x33
+ 421 014f 05       		.uleb128 0x5
+ 422 0150 8A010000 		.4byte	.LASF23
+ 423 0154 01       		.byte	0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 11
+
+
+ 424 0155 5A       		.byte	0x5a
+ 425 0156 00000000 		.4byte	.LFB111
+ 426 015a 20000000 		.4byte	.LFE111-.LFB111
+ 427 015e 01       		.uleb128 0x1
+ 428 015f 9C       		.byte	0x9c
+ 429 0160 B2010000 		.4byte	0x1b2
+ 430 0164 06       		.uleb128 0x6
+ 431 0165 83020000 		.4byte	.LASF24
+ 432 0169 01       		.byte	0x1
+ 433 016a 5A       		.byte	0x5a
+ 434 016b 49010000 		.4byte	0x149
+ 435 016f 2C000000 		.4byte	.LLST1
+ 436 0173 07       		.uleb128 0x7
+ 437 0174 0A000000 		.4byte	.LVL8
+ 438 0178 23030000 		.4byte	0x323
+ 439 017c 8A010000 		.4byte	0x18a
+ 440 0180 08       		.uleb128 0x8
+ 441 0181 01       		.uleb128 0x1
+ 442 0182 50       		.byte	0x50
+ 443 0183 05       		.uleb128 0x5
+ 444 0184 03       		.byte	0x3
+ 445 0185 10000000 		.4byte	.LC2
+ 446 0189 00       		.byte	0
+ 447 018a 07       		.uleb128 0x7
+ 448 018b 10000000 		.4byte	.LVL9
+ 449 018f 23030000 		.4byte	0x323
+ 450 0193 9E010000 		.4byte	0x19e
+ 451 0197 08       		.uleb128 0x8
+ 452 0198 01       		.uleb128 0x1
+ 453 0199 50       		.byte	0x50
+ 454 019a 02       		.uleb128 0x2
+ 455 019b 74       		.byte	0x74
+ 456 019c 00       		.sleb128 0
+ 457 019d 00       		.byte	0
+ 458 019e 09       		.uleb128 0x9
+ 459 019f 16000000 		.4byte	.LVL10
+ 460 01a3 23030000 		.4byte	0x323
+ 461 01a7 08       		.uleb128 0x8
+ 462 01a8 01       		.uleb128 0x1
+ 463 01a9 50       		.byte	0x50
+ 464 01aa 05       		.uleb128 0x5
+ 465 01ab 03       		.byte	0x3
+ 466 01ac 0C000000 		.4byte	.LC1
+ 467 01b0 00       		.byte	0
+ 468 01b1 00       		.byte	0
+ 469 01b2 05       		.uleb128 0x5
+ 470 01b3 B6010000 		.4byte	.LASF25
+ 471 01b7 01       		.byte	0x1
+ 472 01b8 68       		.byte	0x68
+ 473 01b9 00000000 		.4byte	.LFB112
+ 474 01bd 20000000 		.4byte	.LFE112-.LFB112
+ 475 01c1 01       		.uleb128 0x1
+ 476 01c2 9C       		.byte	0x9c
+ 477 01c3 15020000 		.4byte	0x215
+ 478 01c7 06       		.uleb128 0x6
+ 479 01c8 83020000 		.4byte	.LASF24
+ 480 01cc 01       		.byte	0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 12
+
+
+ 481 01cd 68       		.byte	0x68
+ 482 01ce 49010000 		.4byte	0x149
+ 483 01d2 58000000 		.4byte	.LLST2
+ 484 01d6 07       		.uleb128 0x7
+ 485 01d7 0A000000 		.4byte	.LVL14
+ 486 01db 23030000 		.4byte	0x323
+ 487 01df ED010000 		.4byte	0x1ed
+ 488 01e3 08       		.uleb128 0x8
+ 489 01e4 01       		.uleb128 0x1
+ 490 01e5 50       		.byte	0x50
+ 491 01e6 05       		.uleb128 0x5
+ 492 01e7 03       		.byte	0x3
+ 493 01e8 1C000000 		.4byte	.LC3
+ 494 01ec 00       		.byte	0
+ 495 01ed 07       		.uleb128 0x7
+ 496 01ee 10000000 		.4byte	.LVL15
+ 497 01f2 23030000 		.4byte	0x323
+ 498 01f6 01020000 		.4byte	0x201
+ 499 01fa 08       		.uleb128 0x8
+ 500 01fb 01       		.uleb128 0x1
+ 501 01fc 50       		.byte	0x50
+ 502 01fd 02       		.uleb128 0x2
+ 503 01fe 74       		.byte	0x74
+ 504 01ff 00       		.sleb128 0
+ 505 0200 00       		.byte	0
+ 506 0201 09       		.uleb128 0x9
+ 507 0202 16000000 		.4byte	.LVL16
+ 508 0206 23030000 		.4byte	0x323
+ 509 020a 08       		.uleb128 0x8
+ 510 020b 01       		.uleb128 0x1
+ 511 020c 50       		.byte	0x50
+ 512 020d 05       		.uleb128 0x5
+ 513 020e 03       		.byte	0x3
+ 514 020f 0C000000 		.4byte	.LC1
+ 515 0213 00       		.byte	0
+ 516 0214 00       		.byte	0
+ 517 0215 05       		.uleb128 0x5
+ 518 0216 A3010000 		.4byte	.LASF26
+ 519 021a 01       		.byte	0x1
+ 520 021b 76       		.byte	0x76
+ 521 021c 00000000 		.4byte	.LFB113
+ 522 0220 20000000 		.4byte	.LFE113-.LFB113
+ 523 0224 01       		.uleb128 0x1
+ 524 0225 9C       		.byte	0x9c
+ 525 0226 78020000 		.4byte	0x278
+ 526 022a 06       		.uleb128 0x6
+ 527 022b 83020000 		.4byte	.LASF24
+ 528 022f 01       		.byte	0x1
+ 529 0230 76       		.byte	0x76
+ 530 0231 49010000 		.4byte	0x149
+ 531 0235 84000000 		.4byte	.LLST3
+ 532 0239 07       		.uleb128 0x7
+ 533 023a 0A000000 		.4byte	.LVL20
+ 534 023e 23030000 		.4byte	0x323
+ 535 0242 50020000 		.4byte	0x250
+ 536 0246 08       		.uleb128 0x8
+ 537 0247 01       		.uleb128 0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 13
+
+
+ 538 0248 50       		.byte	0x50
+ 539 0249 05       		.uleb128 0x5
+ 540 024a 03       		.byte	0x3
+ 541 024b 28000000 		.4byte	.LC4
+ 542 024f 00       		.byte	0
+ 543 0250 07       		.uleb128 0x7
+ 544 0251 10000000 		.4byte	.LVL21
+ 545 0255 23030000 		.4byte	0x323
+ 546 0259 64020000 		.4byte	0x264
+ 547 025d 08       		.uleb128 0x8
+ 548 025e 01       		.uleb128 0x1
+ 549 025f 50       		.byte	0x50
+ 550 0260 02       		.uleb128 0x2
+ 551 0261 74       		.byte	0x74
+ 552 0262 00       		.sleb128 0
+ 553 0263 00       		.byte	0
+ 554 0264 09       		.uleb128 0x9
+ 555 0265 16000000 		.4byte	.LVL22
+ 556 0269 23030000 		.4byte	0x323
+ 557 026d 08       		.uleb128 0x8
+ 558 026e 01       		.uleb128 0x1
+ 559 026f 50       		.byte	0x50
+ 560 0270 05       		.uleb128 0x5
+ 561 0271 03       		.byte	0x3
+ 562 0272 0C000000 		.4byte	.LC1
+ 563 0276 00       		.byte	0
+ 564 0277 00       		.byte	0
+ 565 0278 05       		.uleb128 0x5
+ 566 0279 FA010000 		.4byte	.LASF27
+ 567 027d 01       		.byte	0x1
+ 568 027e 84       		.byte	0x84
+ 569 027f 00000000 		.4byte	.LFB114
+ 570 0283 20000000 		.4byte	.LFE114-.LFB114
+ 571 0287 01       		.uleb128 0x1
+ 572 0288 9C       		.byte	0x9c
+ 573 0289 DB020000 		.4byte	0x2db
+ 574 028d 06       		.uleb128 0x6
+ 575 028e 83020000 		.4byte	.LASF24
+ 576 0292 01       		.byte	0x1
+ 577 0293 84       		.byte	0x84
+ 578 0294 49010000 		.4byte	0x149
+ 579 0298 B0000000 		.4byte	.LLST4
+ 580 029c 07       		.uleb128 0x7
+ 581 029d 0A000000 		.4byte	.LVL26
+ 582 02a1 23030000 		.4byte	0x323
+ 583 02a5 B3020000 		.4byte	0x2b3
+ 584 02a9 08       		.uleb128 0x8
+ 585 02aa 01       		.uleb128 0x1
+ 586 02ab 50       		.byte	0x50
+ 587 02ac 05       		.uleb128 0x5
+ 588 02ad 03       		.byte	0x3
+ 589 02ae 34000000 		.4byte	.LC5
+ 590 02b2 00       		.byte	0
+ 591 02b3 07       		.uleb128 0x7
+ 592 02b4 10000000 		.4byte	.LVL27
+ 593 02b8 23030000 		.4byte	0x323
+ 594 02bc C7020000 		.4byte	0x2c7
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 14
+
+
+ 595 02c0 08       		.uleb128 0x8
+ 596 02c1 01       		.uleb128 0x1
+ 597 02c2 50       		.byte	0x50
+ 598 02c3 02       		.uleb128 0x2
+ 599 02c4 74       		.byte	0x74
+ 600 02c5 00       		.sleb128 0
+ 601 02c6 00       		.byte	0
+ 602 02c7 09       		.uleb128 0x9
+ 603 02c8 16000000 		.4byte	.LVL28
+ 604 02cc 23030000 		.4byte	0x323
+ 605 02d0 08       		.uleb128 0x8
+ 606 02d1 01       		.uleb128 0x1
+ 607 02d2 50       		.byte	0x50
+ 608 02d3 05       		.uleb128 0x5
+ 609 02d4 03       		.byte	0x3
+ 610 02d5 0C000000 		.4byte	.LC1
+ 611 02d9 00       		.byte	0
+ 612 02da 00       		.byte	0
+ 613 02db 0B       		.uleb128 0xb
+ 614 02dc 6D000000 		.4byte	.LASF28
+ 615 02e0 07       		.byte	0x7
+ 616 02e1 40       		.byte	0x40
+ 617 02e2 BE000000 		.4byte	0xbe
+ 618 02e6 0B       		.uleb128 0xb
+ 619 02e7 4D000000 		.4byte	.LASF29
+ 620 02eb 07       		.byte	0x7
+ 621 02ec 47       		.byte	0x47
+ 622 02ed C9000000 		.4byte	0xc9
+ 623 02f1 0B       		.uleb128 0xb
+ 624 02f2 25020000 		.4byte	.LASF30
+ 625 02f6 07       		.byte	0x7
+ 626 02f7 4A       		.byte	0x4a
+ 627 02f8 BE000000 		.4byte	0xbe
+ 628 02fc 0B       		.uleb128 0xb
+ 629 02fd C2010000 		.4byte	.LASF31
+ 630 0301 08       		.byte	0x8
+ 631 0302 48       		.byte	0x48
+ 632 0303 D4000000 		.4byte	0xd4
+ 633 0307 0B       		.uleb128 0xb
+ 634 0308 64020000 		.4byte	.LASF32
+ 635 030c 09       		.byte	0x9
+ 636 030d 44       		.byte	0x44
+ 637 030e BE000000 		.4byte	0xbe
+ 638 0312 0C       		.uleb128 0xc
+ 639 0313 96010000 		.4byte	.LASF33
+ 640 0317 0A       		.byte	0xa
+ 641 0318 1207     		.2byte	0x712
+ 642 031a 1E030000 		.4byte	0x31e
+ 643 031e 0D       		.uleb128 0xd
+ 644 031f 96000000 		.4byte	0x96
+ 645 0323 0E       		.uleb128 0xe
+ 646 0324 85000000 		.4byte	.LASF37
+ 647 0328 85000000 		.4byte	.LASF37
+ 648 032c 0B       		.byte	0xb
+ 649 032d 8B       		.byte	0x8b
+ 650 032e 00       		.byte	0
+ 651              		.section	.debug_abbrev,"",%progbits
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 15
+
+
+ 652              	.Ldebug_abbrev0:
+ 653 0000 01       		.uleb128 0x1
+ 654 0001 11       		.uleb128 0x11
+ 655 0002 01       		.byte	0x1
+ 656 0003 25       		.uleb128 0x25
+ 657 0004 0E       		.uleb128 0xe
+ 658 0005 13       		.uleb128 0x13
+ 659 0006 0B       		.uleb128 0xb
+ 660 0007 03       		.uleb128 0x3
+ 661 0008 0E       		.uleb128 0xe
+ 662 0009 1B       		.uleb128 0x1b
+ 663 000a 0E       		.uleb128 0xe
+ 664 000b 55       		.uleb128 0x55
+ 665 000c 17       		.uleb128 0x17
+ 666 000d 11       		.uleb128 0x11
+ 667 000e 01       		.uleb128 0x1
+ 668 000f 10       		.uleb128 0x10
+ 669 0010 17       		.uleb128 0x17
+ 670 0011 00       		.byte	0
+ 671 0012 00       		.byte	0
+ 672 0013 02       		.uleb128 0x2
+ 673 0014 24       		.uleb128 0x24
+ 674 0015 00       		.byte	0
+ 675 0016 0B       		.uleb128 0xb
+ 676 0017 0B       		.uleb128 0xb
+ 677 0018 3E       		.uleb128 0x3e
+ 678 0019 0B       		.uleb128 0xb
+ 679 001a 03       		.uleb128 0x3
+ 680 001b 0E       		.uleb128 0xe
+ 681 001c 00       		.byte	0
+ 682 001d 00       		.byte	0
+ 683 001e 03       		.uleb128 0x3
+ 684 001f 16       		.uleb128 0x16
+ 685 0020 00       		.byte	0
+ 686 0021 03       		.uleb128 0x3
+ 687 0022 0E       		.uleb128 0xe
+ 688 0023 3A       		.uleb128 0x3a
+ 689 0024 0B       		.uleb128 0xb
+ 690 0025 3B       		.uleb128 0x3b
+ 691 0026 0B       		.uleb128 0xb
+ 692 0027 49       		.uleb128 0x49
+ 693 0028 13       		.uleb128 0x13
+ 694 0029 00       		.byte	0
+ 695 002a 00       		.byte	0
+ 696 002b 04       		.uleb128 0x4
+ 697 002c 24       		.uleb128 0x24
+ 698 002d 00       		.byte	0
+ 699 002e 0B       		.uleb128 0xb
+ 700 002f 0B       		.uleb128 0xb
+ 701 0030 3E       		.uleb128 0x3e
+ 702 0031 0B       		.uleb128 0xb
+ 703 0032 03       		.uleb128 0x3
+ 704 0033 08       		.uleb128 0x8
+ 705 0034 00       		.byte	0
+ 706 0035 00       		.byte	0
+ 707 0036 05       		.uleb128 0x5
+ 708 0037 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 16
+
+
+ 709 0038 01       		.byte	0x1
+ 710 0039 3F       		.uleb128 0x3f
+ 711 003a 19       		.uleb128 0x19
+ 712 003b 03       		.uleb128 0x3
+ 713 003c 0E       		.uleb128 0xe
+ 714 003d 3A       		.uleb128 0x3a
+ 715 003e 0B       		.uleb128 0xb
+ 716 003f 3B       		.uleb128 0x3b
+ 717 0040 0B       		.uleb128 0xb
+ 718 0041 27       		.uleb128 0x27
+ 719 0042 19       		.uleb128 0x19
+ 720 0043 11       		.uleb128 0x11
+ 721 0044 01       		.uleb128 0x1
+ 722 0045 12       		.uleb128 0x12
+ 723 0046 06       		.uleb128 0x6
+ 724 0047 40       		.uleb128 0x40
+ 725 0048 18       		.uleb128 0x18
+ 726 0049 9742     		.uleb128 0x2117
+ 727 004b 19       		.uleb128 0x19
+ 728 004c 01       		.uleb128 0x1
+ 729 004d 13       		.uleb128 0x13
+ 730 004e 00       		.byte	0
+ 731 004f 00       		.byte	0
+ 732 0050 06       		.uleb128 0x6
+ 733 0051 05       		.uleb128 0x5
+ 734 0052 00       		.byte	0
+ 735 0053 03       		.uleb128 0x3
+ 736 0054 0E       		.uleb128 0xe
+ 737 0055 3A       		.uleb128 0x3a
+ 738 0056 0B       		.uleb128 0xb
+ 739 0057 3B       		.uleb128 0x3b
+ 740 0058 0B       		.uleb128 0xb
+ 741 0059 49       		.uleb128 0x49
+ 742 005a 13       		.uleb128 0x13
+ 743 005b 02       		.uleb128 0x2
+ 744 005c 17       		.uleb128 0x17
+ 745 005d 00       		.byte	0
+ 746 005e 00       		.byte	0
+ 747 005f 07       		.uleb128 0x7
+ 748 0060 898201   		.uleb128 0x4109
+ 749 0063 01       		.byte	0x1
+ 750 0064 11       		.uleb128 0x11
+ 751 0065 01       		.uleb128 0x1
+ 752 0066 31       		.uleb128 0x31
+ 753 0067 13       		.uleb128 0x13
+ 754 0068 01       		.uleb128 0x1
+ 755 0069 13       		.uleb128 0x13
+ 756 006a 00       		.byte	0
+ 757 006b 00       		.byte	0
+ 758 006c 08       		.uleb128 0x8
+ 759 006d 8A8201   		.uleb128 0x410a
+ 760 0070 00       		.byte	0
+ 761 0071 02       		.uleb128 0x2
+ 762 0072 18       		.uleb128 0x18
+ 763 0073 9142     		.uleb128 0x2111
+ 764 0075 18       		.uleb128 0x18
+ 765 0076 00       		.byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 17
+
+
+ 766 0077 00       		.byte	0
+ 767 0078 09       		.uleb128 0x9
+ 768 0079 898201   		.uleb128 0x4109
+ 769 007c 01       		.byte	0x1
+ 770 007d 11       		.uleb128 0x11
+ 771 007e 01       		.uleb128 0x1
+ 772 007f 31       		.uleb128 0x31
+ 773 0080 13       		.uleb128 0x13
+ 774 0081 00       		.byte	0
+ 775 0082 00       		.byte	0
+ 776 0083 0A       		.uleb128 0xa
+ 777 0084 0F       		.uleb128 0xf
+ 778 0085 00       		.byte	0
+ 779 0086 0B       		.uleb128 0xb
+ 780 0087 0B       		.uleb128 0xb
+ 781 0088 49       		.uleb128 0x49
+ 782 0089 13       		.uleb128 0x13
+ 783 008a 00       		.byte	0
+ 784 008b 00       		.byte	0
+ 785 008c 0B       		.uleb128 0xb
+ 786 008d 34       		.uleb128 0x34
+ 787 008e 00       		.byte	0
+ 788 008f 03       		.uleb128 0x3
+ 789 0090 0E       		.uleb128 0xe
+ 790 0091 3A       		.uleb128 0x3a
+ 791 0092 0B       		.uleb128 0xb
+ 792 0093 3B       		.uleb128 0x3b
+ 793 0094 0B       		.uleb128 0xb
+ 794 0095 49       		.uleb128 0x49
+ 795 0096 13       		.uleb128 0x13
+ 796 0097 3F       		.uleb128 0x3f
+ 797 0098 19       		.uleb128 0x19
+ 798 0099 3C       		.uleb128 0x3c
+ 799 009a 19       		.uleb128 0x19
+ 800 009b 00       		.byte	0
+ 801 009c 00       		.byte	0
+ 802 009d 0C       		.uleb128 0xc
+ 803 009e 34       		.uleb128 0x34
+ 804 009f 00       		.byte	0
+ 805 00a0 03       		.uleb128 0x3
+ 806 00a1 0E       		.uleb128 0xe
+ 807 00a2 3A       		.uleb128 0x3a
+ 808 00a3 0B       		.uleb128 0xb
+ 809 00a4 3B       		.uleb128 0x3b
+ 810 00a5 05       		.uleb128 0x5
+ 811 00a6 49       		.uleb128 0x49
+ 812 00a7 13       		.uleb128 0x13
+ 813 00a8 3F       		.uleb128 0x3f
+ 814 00a9 19       		.uleb128 0x19
+ 815 00aa 3C       		.uleb128 0x3c
+ 816 00ab 19       		.uleb128 0x19
+ 817 00ac 00       		.byte	0
+ 818 00ad 00       		.byte	0
+ 819 00ae 0D       		.uleb128 0xd
+ 820 00af 35       		.uleb128 0x35
+ 821 00b0 00       		.byte	0
+ 822 00b1 49       		.uleb128 0x49
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 18
+
+
+ 823 00b2 13       		.uleb128 0x13
+ 824 00b3 00       		.byte	0
+ 825 00b4 00       		.byte	0
+ 826 00b5 0E       		.uleb128 0xe
+ 827 00b6 2E       		.uleb128 0x2e
+ 828 00b7 00       		.byte	0
+ 829 00b8 3F       		.uleb128 0x3f
+ 830 00b9 19       		.uleb128 0x19
+ 831 00ba 3C       		.uleb128 0x3c
+ 832 00bb 19       		.uleb128 0x19
+ 833 00bc 6E       		.uleb128 0x6e
+ 834 00bd 0E       		.uleb128 0xe
+ 835 00be 03       		.uleb128 0x3
+ 836 00bf 0E       		.uleb128 0xe
+ 837 00c0 3A       		.uleb128 0x3a
+ 838 00c1 0B       		.uleb128 0xb
+ 839 00c2 3B       		.uleb128 0x3b
+ 840 00c3 0B       		.uleb128 0xb
+ 841 00c4 00       		.byte	0
+ 842 00c5 00       		.byte	0
+ 843 00c6 00       		.byte	0
+ 844              		.section	.debug_loc,"",%progbits
+ 845              	.Ldebug_loc0:
+ 846              	.LLST0:
+ 847 0000 00000000 		.4byte	.LVL0
+ 848 0004 06000000 		.4byte	.LVL1
+ 849 0008 0100     		.2byte	0x1
+ 850 000a 50       		.byte	0x50
+ 851 000b 06000000 		.4byte	.LVL1
+ 852 000f 18000000 		.4byte	.LVL5
+ 853 0013 0100     		.2byte	0x1
+ 854 0015 54       		.byte	0x54
+ 855 0016 18000000 		.4byte	.LVL5
+ 856 001a 20000000 		.4byte	.LFE110
+ 857 001e 0400     		.2byte	0x4
+ 858 0020 F3       		.byte	0xf3
+ 859 0021 01       		.uleb128 0x1
+ 860 0022 50       		.byte	0x50
+ 861 0023 9F       		.byte	0x9f
+ 862 0024 00000000 		.4byte	0
+ 863 0028 00000000 		.4byte	0
+ 864              	.LLST1:
+ 865 002c 00000000 		.4byte	.LVL6
+ 866 0030 06000000 		.4byte	.LVL7
+ 867 0034 0100     		.2byte	0x1
+ 868 0036 50       		.byte	0x50
+ 869 0037 06000000 		.4byte	.LVL7
+ 870 003b 18000000 		.4byte	.LVL11
+ 871 003f 0100     		.2byte	0x1
+ 872 0041 54       		.byte	0x54
+ 873 0042 18000000 		.4byte	.LVL11
+ 874 0046 20000000 		.4byte	.LFE111
+ 875 004a 0400     		.2byte	0x4
+ 876 004c F3       		.byte	0xf3
+ 877 004d 01       		.uleb128 0x1
+ 878 004e 50       		.byte	0x50
+ 879 004f 9F       		.byte	0x9f
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 19
+
+
+ 880 0050 00000000 		.4byte	0
+ 881 0054 00000000 		.4byte	0
+ 882              	.LLST2:
+ 883 0058 00000000 		.4byte	.LVL12
+ 884 005c 06000000 		.4byte	.LVL13
+ 885 0060 0100     		.2byte	0x1
+ 886 0062 50       		.byte	0x50
+ 887 0063 06000000 		.4byte	.LVL13
+ 888 0067 18000000 		.4byte	.LVL17
+ 889 006b 0100     		.2byte	0x1
+ 890 006d 54       		.byte	0x54
+ 891 006e 18000000 		.4byte	.LVL17
+ 892 0072 20000000 		.4byte	.LFE112
+ 893 0076 0400     		.2byte	0x4
+ 894 0078 F3       		.byte	0xf3
+ 895 0079 01       		.uleb128 0x1
+ 896 007a 50       		.byte	0x50
+ 897 007b 9F       		.byte	0x9f
+ 898 007c 00000000 		.4byte	0
+ 899 0080 00000000 		.4byte	0
+ 900              	.LLST3:
+ 901 0084 00000000 		.4byte	.LVL18
+ 902 0088 06000000 		.4byte	.LVL19
+ 903 008c 0100     		.2byte	0x1
+ 904 008e 50       		.byte	0x50
+ 905 008f 06000000 		.4byte	.LVL19
+ 906 0093 18000000 		.4byte	.LVL23
+ 907 0097 0100     		.2byte	0x1
+ 908 0099 54       		.byte	0x54
+ 909 009a 18000000 		.4byte	.LVL23
+ 910 009e 20000000 		.4byte	.LFE113
+ 911 00a2 0400     		.2byte	0x4
+ 912 00a4 F3       		.byte	0xf3
+ 913 00a5 01       		.uleb128 0x1
+ 914 00a6 50       		.byte	0x50
+ 915 00a7 9F       		.byte	0x9f
+ 916 00a8 00000000 		.4byte	0
+ 917 00ac 00000000 		.4byte	0
+ 918              	.LLST4:
+ 919 00b0 00000000 		.4byte	.LVL24
+ 920 00b4 06000000 		.4byte	.LVL25
+ 921 00b8 0100     		.2byte	0x1
+ 922 00ba 50       		.byte	0x50
+ 923 00bb 06000000 		.4byte	.LVL25
+ 924 00bf 18000000 		.4byte	.LVL29
+ 925 00c3 0100     		.2byte	0x1
+ 926 00c5 54       		.byte	0x54
+ 927 00c6 18000000 		.4byte	.LVL29
+ 928 00ca 20000000 		.4byte	.LFE114
+ 929 00ce 0400     		.2byte	0x4
+ 930 00d0 F3       		.byte	0xf3
+ 931 00d1 01       		.uleb128 0x1
+ 932 00d2 50       		.byte	0x50
+ 933 00d3 9F       		.byte	0x9f
+ 934 00d4 00000000 		.4byte	0
+ 935 00d8 00000000 		.4byte	0
+ 936              		.section	.debug_aranges,"",%progbits
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 20
+
+
+ 937 0000 3C000000 		.4byte	0x3c
+ 938 0004 0200     		.2byte	0x2
+ 939 0006 00000000 		.4byte	.Ldebug_info0
+ 940 000a 04       		.byte	0x4
+ 941 000b 00       		.byte	0
+ 942 000c 0000     		.2byte	0
+ 943 000e 0000     		.2byte	0
+ 944 0010 00000000 		.4byte	.LFB110
+ 945 0014 20000000 		.4byte	.LFE110-.LFB110
+ 946 0018 00000000 		.4byte	.LFB111
+ 947 001c 20000000 		.4byte	.LFE111-.LFB111
+ 948 0020 00000000 		.4byte	.LFB112
+ 949 0024 20000000 		.4byte	.LFE112-.LFB112
+ 950 0028 00000000 		.4byte	.LFB113
+ 951 002c 20000000 		.4byte	.LFE113-.LFB113
+ 952 0030 00000000 		.4byte	.LFB114
+ 953 0034 20000000 		.4byte	.LFE114-.LFB114
+ 954 0038 00000000 		.4byte	0
+ 955 003c 00000000 		.4byte	0
+ 956              		.section	.debug_ranges,"",%progbits
+ 957              	.Ldebug_ranges0:
+ 958 0000 00000000 		.4byte	.LFB110
+ 959 0004 20000000 		.4byte	.LFE110
+ 960 0008 00000000 		.4byte	.LFB111
+ 961 000c 20000000 		.4byte	.LFE111
+ 962 0010 00000000 		.4byte	.LFB112
+ 963 0014 20000000 		.4byte	.LFE112
+ 964 0018 00000000 		.4byte	.LFB113
+ 965 001c 20000000 		.4byte	.LFE113
+ 966 0020 00000000 		.4byte	.LFB114
+ 967 0024 20000000 		.4byte	.LFE114
+ 968 0028 00000000 		.4byte	0
+ 969 002c 00000000 		.4byte	0
+ 970              		.section	.debug_line,"",%progbits
+ 971              	.Ldebug_line0:
+ 972 0000 90020000 		.section	.debug_str,"MS",%progbits,1
+ 972      02002B02 
+ 972      00000201 
+ 972      FB0E0D00 
+ 972      01010101 
+ 973              	.LASF36:
+ 974 0000 433A5C48 		.ascii	"C:\\H_da\\SS26\\Research Project\\Workspace01\\MP3_"
+ 974      5F64615C 
+ 974      53533236 
+ 974      5C526573 
+ 974      65617263 
+ 975 002e 76342E63 		.ascii	"v4.cydsn\000"
+ 975      7964736E 
+ 975      00
+ 976              	.LASF13:
+ 977 0037 5F5F696E 		.ascii	"__int32_t\000"
+ 977      7433325F 
+ 977      7400
+ 978              	.LASF22:
+ 979 0041 4C4F475F 		.ascii	"LOG_print_e\000"
+ 979      7072696E 
+ 979      745F6500 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 21
+
+
+ 980              	.LASF29:
+ 981 004d 45455F6F 		.ascii	"EE_oo_IRQ_suspend_status\000"
+ 981      6F5F4952 
+ 981      515F7375 
+ 981      7370656E 
+ 981      645F7374 
+ 982              	.LASF20:
+ 983 0066 45455F54 		.ascii	"EE_TID\000"
+ 983      494400
+ 984              	.LASF28:
+ 985 006d 45455F6F 		.ascii	"EE_oo_IRQ_disable_count\000"
+ 985      6F5F4952 
+ 985      515F6469 
+ 985      7361626C 
+ 985      655F636F 
+ 986              	.LASF37:
+ 987 0085 55415254 		.ascii	"UART_LOG_PutString\000"
+ 987      5F4C4F47 
+ 987      5F507574 
+ 987      53747269 
+ 987      6E6700
+ 988              	.LASF7:
+ 989 0098 666C6F61 		.ascii	"float\000"
+ 989      7400
+ 990              	.LASF35:
+ 991 009e 736F7572 		.ascii	"source\\bsw\\Services\\log\\log_cfg.c\000"
+ 991      63655C62 
+ 991      73775C53 
+ 991      65727669 
+ 991      6365735C 
+ 992              	.LASF2:
+ 993 00c0 756E7369 		.ascii	"unsigned char\000"
+ 993      676E6564 
+ 993      20636861 
+ 993      7200
+ 994              	.LASF34:
+ 995 00ce 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 995      43313120 
+ 995      352E342E 
+ 995      31203230 
+ 995      31363036 
+ 996 0101 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 996      20726576 
+ 996      6973696F 
+ 996      6E203233 
+ 996      37373135 
+ 997 0134 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 997      66756E63 
+ 997      74696F6E 
+ 997      2D736563 
+ 997      74696F6E 
+ 998              	.LASF6:
+ 999 015c 6C6F6E67 		.ascii	"long unsigned int\000"
+ 999      20756E73 
+ 999      69676E65 
+ 999      6420696E 
+ 999      7400
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 22
+
+
+ 1000              	.LASF4:
+ 1001 016e 73686F72 		.ascii	"short unsigned int\000"
+ 1001      7420756E 
+ 1001      7369676E 
+ 1001      65642069 
+ 1001      6E7400
+ 1002              	.LASF16:
+ 1003 0181 45455F49 		.ascii	"EE_INT32\000"
+ 1003      4E543332 
+ 1003      00
+ 1004              	.LASF23:
+ 1005 018a 4C4F475F 		.ascii	"LOG_print_d\000"
+ 1005      7072696E 
+ 1005      745F6400 
+ 1006              	.LASF33:
+ 1007 0196 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1007      52784275 
+ 1007      66666572 
+ 1007      00
+ 1008              	.LASF26:
+ 1009 01a3 4C4F475F 		.ascii	"LOG_print_i\000"
+ 1009      7072696E 
+ 1009      745F6900 
+ 1010              	.LASF8:
+ 1011 01af 646F7562 		.ascii	"double\000"
+ 1011      6C6500
+ 1012              	.LASF25:
+ 1013 01b6 4C4F475F 		.ascii	"LOG_print_v\000"
+ 1013      7072696E 
+ 1013      745F7600 
+ 1014              	.LASF31:
+ 1015 01c2 45455F73 		.ascii	"EE_std_endcycle_next_tid\000"
+ 1015      74645F65 
+ 1015      6E646379 
+ 1015      636C655F 
+ 1015      6E657874 
+ 1016              	.LASF0:
+ 1017 01db 756E7369 		.ascii	"unsigned int\000"
+ 1017      676E6564 
+ 1017      20696E74 
+ 1017      00
+ 1018              	.LASF19:
+ 1019 01e8 45455F46 		.ascii	"EE_FREG\000"
+ 1019      52454700 
+ 1020              	.LASF17:
+ 1021 01f0 45455F55 		.ascii	"EE_UINT32\000"
+ 1021      494E5433 
+ 1021      3200
+ 1022              	.LASF27:
+ 1023 01fa 4C4F475F 		.ascii	"LOG_print_w\000"
+ 1023      7072696E 
+ 1023      745F7700 
+ 1024              	.LASF10:
+ 1025 0206 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1025      206C6F6E 
+ 1025      6720756E 
+ 1025      7369676E 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 23
+
+
+ 1025      65642069 
+ 1026              	.LASF12:
+ 1027 021d 75696E74 		.ascii	"uint8_t\000"
+ 1027      385F7400 
+ 1028              	.LASF30:
+ 1029 0225 45455F41 		.ascii	"EE_ApplicationMode\000"
+ 1029      70706C69 
+ 1029      63617469 
+ 1029      6F6E4D6F 
+ 1029      646500
+ 1030              	.LASF14:
+ 1031 0238 696E7433 		.ascii	"int32_t\000"
+ 1031      325F7400 
+ 1032              	.LASF21:
+ 1033 0240 73697A65 		.ascii	"sizetype\000"
+ 1033      74797065 
+ 1033      00
+ 1034              	.LASF9:
+ 1035 0249 6C6F6E67 		.ascii	"long long int\000"
+ 1035      206C6F6E 
+ 1035      6720696E 
+ 1035      7400
+ 1036              	.LASF11:
+ 1037 0257 63686172 		.ascii	"char\000"
+ 1037      00
+ 1038              	.LASF18:
+ 1039 025c 45455F55 		.ascii	"EE_UREG\000"
+ 1039      52454700 
+ 1040              	.LASF32:
+ 1041 0264 45455F49 		.ascii	"EE_IRQ_nesting_level\000"
+ 1041      52515F6E 
+ 1041      65737469 
+ 1041      6E675F6C 
+ 1041      6576656C 
+ 1042              	.LASF3:
+ 1043 0279 73686F72 		.ascii	"short int\000"
+ 1043      7420696E 
+ 1043      7400
+ 1044              	.LASF24:
+ 1045 0283 62756666 		.ascii	"buffer\000"
+ 1045      657200
+ 1046              	.LASF5:
+ 1047 028a 6C6F6E67 		.ascii	"long int\000"
+ 1047      20696E74 
+ 1047      00
+ 1048              	.LASF15:
+ 1049 0293 6C6F6E67 		.ascii	"long double\000"
+ 1049      20646F75 
+ 1049      626C6500 
+ 1050              	.LASF1:
+ 1051 029f 7369676E 		.ascii	"signed char\000"
+ 1051      65642063 
+ 1051      68617200 
+ 1052              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

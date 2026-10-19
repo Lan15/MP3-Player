@@ -1,0 +1,5001 @@
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"cymetadata.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	cy_metadata
+  20              		.global	cy_meta_flashprotect
+  21              		.global	cy_meta_wonvl
+  22              		.global	cy_meta_custnvl
+  23              		.global	cy_meta_configecc
+  24              		.section	.cyconfigecc,"a",%progbits
+  25              		.align	2
+  26              		.type	cy_meta_configecc, %object
+  27              		.size	cy_meta_configecc, 4272
+  28              	cy_meta_configecc:
+  29 0000 01       		.byte	1
+  30 0001 45       		.byte	69
+  31 0002 00       		.byte	0
+  32 0003 40       		.byte	64
+  33 0004 04       		.byte	4
+  34 0005 4F       		.byte	79
+  35 0006 00       		.byte	0
+  36 0007 40       		.byte	64
+  37 0008 0C       		.byte	12
+  38 0009 52       		.byte	82
+  39 000a 00       		.byte	0
+  40 000b 40       		.byte	64
+  41 000c 01       		.byte	1
+  42 000d 5B       		.byte	91
+  43 000e 00       		.byte	0
+  44 000f 40       		.byte	64
+  45 0010 03       		.byte	3
+  46 0011 64       		.byte	100
+  47 0012 00       		.byte	0
+  48 0013 40       		.byte	64
+  49 0014 04       		.byte	4
+  50 0015 65       		.byte	101
+  51 0016 00       		.byte	0
+  52 0017 40       		.byte	64
+  53 0018 4C       		.byte	76
+  54 0019 00       		.byte	0
+  55 001a 01       		.byte	1
+  56 001b 40       		.byte	64
+  57 001c 3A       		.byte	58
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 2
+
+
+  58 001d 01       		.byte	1
+  59 001e 01       		.byte	1
+  60 001f 40       		.byte	64
+  61 0020 49       		.byte	73
+  62 0021 02       		.byte	2
+  63 0022 01       		.byte	1
+  64 0023 40       		.byte	64
+  65 0024 59       		.byte	89
+  66 0025 03       		.byte	3
+  67 0026 01       		.byte	1
+  68 0027 40       		.byte	64
+  69 0028 42       		.byte	66
+  70 0029 04       		.byte	4
+  71 002a 01       		.byte	1
+  72 002b 40       		.byte	64
+  73 002c 56       		.byte	86
+  74 002d 05       		.byte	5
+  75 002e 01       		.byte	1
+  76 002f 40       		.byte	64
+  77 0030 5F       		.byte	95
+  78 0031 06       		.byte	6
+  79 0032 01       		.byte	1
+  80 0033 40       		.byte	64
+  81 0034 4D       		.byte	77
+  82 0035 07       		.byte	7
+  83 0036 01       		.byte	1
+  84 0037 40       		.byte	64
+  85 0038 48       		.byte	72
+  86 0039 08       		.byte	8
+  87 003a 01       		.byte	1
+  88 003b 40       		.byte	64
+  89 003c 4F       		.byte	79
+  90 003d 09       		.byte	9
+  91 003e 01       		.byte	1
+  92 003f 40       		.byte	64
+  93 0040 3C       		.byte	60
+  94 0041 0A       		.byte	10
+  95 0042 01       		.byte	1
+  96 0043 40       		.byte	64
+  97 0044 50       		.byte	80
+  98 0045 0B       		.byte	11
+  99 0046 01       		.byte	1
+ 100 0047 40       		.byte	64
+ 101 0048 43       		.byte	67
+ 102 0049 0C       		.byte	12
+ 103 004a 01       		.byte	1
+ 104 004b 40       		.byte	64
+ 105 004c 4D       		.byte	77
+ 106 004d 0D       		.byte	13
+ 107 004e 01       		.byte	1
+ 108 004f 40       		.byte	64
+ 109 0050 38       		.byte	56
+ 110 0051 0E       		.byte	14
+ 111 0052 01       		.byte	1
+ 112 0053 40       		.byte	64
+ 113 0054 35       		.byte	53
+ 114 0055 0F       		.byte	15
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 3
+
+
+ 115 0056 01       		.byte	1
+ 116 0057 40       		.byte	64
+ 117 0058 39       		.byte	57
+ 118 0059 14       		.byte	20
+ 119 005a 01       		.byte	1
+ 120 005b 40       		.byte	64
+ 121 005c 5A       		.byte	90
+ 122 005d 15       		.byte	21
+ 123 005e 01       		.byte	1
+ 124 005f 40       		.byte	64
+ 125 0060 41       		.byte	65
+ 126 0061 16       		.byte	22
+ 127 0062 01       		.byte	1
+ 128 0063 40       		.byte	64
+ 129 0064 5B       		.byte	91
+ 130 0065 17       		.byte	23
+ 131 0066 01       		.byte	1
+ 132 0067 40       		.byte	64
+ 133 0068 0C       		.byte	12
+ 134 0069 18       		.byte	24
+ 135 006a 01       		.byte	1
+ 136 006b 40       		.byte	64
+ 137 006c 52       		.byte	82
+ 138 006d 19       		.byte	25
+ 139 006e 01       		.byte	1
+ 140 006f 40       		.byte	64
+ 141 0070 50       		.byte	80
+ 142 0071 1A       		.byte	26
+ 143 0072 01       		.byte	1
+ 144 0073 40       		.byte	64
+ 145 0074 55       		.byte	85
+ 146 0075 1B       		.byte	27
+ 147 0076 01       		.byte	1
+ 148 0077 40       		.byte	64
+ 149 0078 12       		.byte	18
+ 150 0079 40       		.byte	64
+ 151 007a 01       		.byte	1
+ 152 007b 40       		.byte	64
+ 153 007c 17       		.byte	23
+ 154 007d 41       		.byte	65
+ 155 007e 01       		.byte	1
+ 156 007f 40       		.byte	64
+ 157 0080 0D       		.byte	13
+ 158 0081 42       		.byte	66
+ 159 0082 01       		.byte	1
+ 160 0083 40       		.byte	64
+ 161 0084 0B       		.byte	11
+ 162 0085 43       		.byte	67
+ 163 0086 01       		.byte	1
+ 164 0087 40       		.byte	64
+ 165 0088 09       		.byte	9
+ 166 0089 44       		.byte	68
+ 167 008a 01       		.byte	1
+ 168 008b 40       		.byte	64
+ 169 008c 0C       		.byte	12
+ 170 008d 45       		.byte	69
+ 171 008e 01       		.byte	1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 4
+
+
+ 172 008f 40       		.byte	64
+ 173 0090 0D       		.byte	13
+ 174 0091 46       		.byte	70
+ 175 0092 01       		.byte	1
+ 176 0093 40       		.byte	64
+ 177 0094 14       		.byte	20
+ 178 0095 47       		.byte	71
+ 179 0096 01       		.byte	1
+ 180 0097 40       		.byte	64
+ 181 0098 0D       		.byte	13
+ 182 0099 48       		.byte	72
+ 183 009a 01       		.byte	1
+ 184 009b 40       		.byte	64
+ 185 009c 14       		.byte	20
+ 186 009d 49       		.byte	73
+ 187 009e 01       		.byte	1
+ 188 009f 40       		.byte	64
+ 189 00a0 14       		.byte	20
+ 190 00a1 4C       		.byte	76
+ 191 00a2 01       		.byte	1
+ 192 00a3 40       		.byte	64
+ 193 00a4 0E       		.byte	14
+ 194 00a5 4D       		.byte	77
+ 195 00a6 01       		.byte	1
+ 196 00a7 40       		.byte	64
+ 197 00a8 06       		.byte	6
+ 198 00a9 50       		.byte	80
+ 199 00aa 01       		.byte	1
+ 200 00ab 40       		.byte	64
+ 201 00ac 03       		.byte	3
+ 202 00ad 51       		.byte	81
+ 203 00ae 01       		.byte	1
+ 204 00af 40       		.byte	64
+ 205 00b0 7E       		.byte	126
+ 206 00b1 02       		.byte	2
+ 207 00b2 01       		.byte	1
+ 208 00b3 30       		.byte	48
+ 209 00b4 0A       		.byte	10
+ 210 00b5 36       		.byte	54
+ 211 00b6 0D       		.byte	13
+ 212 00b7 70       		.byte	112
+ 213 00b8 16       		.byte	22
+ 214 00b9 36       		.byte	54
+ 215 00ba 00       		.byte	0
+ 216 00bb 02       		.byte	2
+ 217 00bc 01       		.byte	1
+ 218 00bd 01       		.byte	1
+ 219 00be 08       		.byte	8
+ 220 00bf C9       		.byte	-55
+ 221 00c0 09       		.byte	9
+ 222 00c1 53       		.byte	83
+ 223 00c2 10       		.byte	16
+ 224 00c3 2A       		.byte	42
+ 225 00c4 11       		.byte	17
+ 226 00c5 32       		.byte	50
+ 227 00c6 18       		.byte	24
+ 228 00c7 40       		.byte	64
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 5
+
+
+ 229 00c8 19       		.byte	25
+ 230 00c9 40       		.byte	64
+ 231 00ca 60       		.byte	96
+ 232 00cb 20       		.byte	32
+ 233 00cc 61       		.byte	97
+ 234 00cd 84       		.byte	-124
+ 235 00ce 78       		.byte	120
+ 236 00cf 01       		.byte	1
+ 237 00d0 7C       		.byte	124
+ 238 00d1 40       		.byte	64
+ 239 00d2 27       		.byte	39
+ 240 00d3 84       		.byte	-124
+ 241 00d4 83       		.byte	-125
+ 242 00d5 01       		.byte	1
+ 243 00d6 88       		.byte	-120
+ 244 00d7 0F       		.byte	15
+ 245 00d8 89       		.byte	-119
+ 246 00d9 0F       		.byte	15
+ 247 00da 84       		.byte	-124
+ 248 00db 0F       		.byte	15
+ 249 00dc 86       		.byte	-122
+ 250 00dd 38       		.byte	56
+ 251 00de 87       		.byte	-121
+ 252 00df 72       		.byte	114
+ 253 00e0 8A       		.byte	-118
+ 254 00e1 0D       		.byte	13
+ 255 00e2 12       		.byte	18
+ 256 00e3 01       		.byte	1
+ 257 00e4 16       		.byte	22
+ 258 00e5 02       		.byte	2
+ 259 00e6 22       		.byte	34
+ 260 00e7 04       		.byte	4
+ 261 00e8 30       		.byte	48
+ 262 00e9 01       		.byte	1
+ 263 00ea 32       		.byte	50
+ 264 00eb 02       		.byte	2
+ 265 00ec 34       		.byte	52
+ 266 00ed 04       		.byte	4
+ 267 00ee 40       		.byte	64
+ 268 00ef 30       		.byte	48
+ 269 00f0 41       		.byte	65
+ 270 00f1 04       		.byte	4
+ 271 00f2 49       		.byte	73
+ 272 00f3 FF       		.byte	-1
+ 273 00f4 4A       		.byte	74
+ 274 00f5 FF       		.byte	-1
+ 275 00f6 4B       		.byte	75
+ 276 00f7 FF       		.byte	-1
+ 277 00f8 4D       		.byte	77
+ 278 00f9 A0       		.byte	-96
+ 279 00fa 4F       		.byte	79
+ 280 00fb 04       		.byte	4
+ 281 00fc 50       		.byte	80
+ 282 00fd 18       		.byte	24
+ 283 00fe 52       		.byte	82
+ 284 00ff 03       		.byte	3
+ 285 0100 53       		.byte	83
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 6
+
+
+ 286 0101 02       		.byte	2
+ 287 0102 58       		.byte	88
+ 288 0103 04       		.byte	4
+ 289 0104 59       		.byte	89
+ 290 0105 04       		.byte	4
+ 291 0106 5A       		.byte	90
+ 292 0107 04       		.byte	4
+ 293 0108 5B       		.byte	91
+ 294 0109 04       		.byte	4
+ 295 010a 5C       		.byte	92
+ 296 010b 55       		.byte	85
+ 297 010c 5D       		.byte	93
+ 298 010d 54       		.byte	84
+ 299 010e 5F       		.byte	95
+ 300 010f 01       		.byte	1
+ 301 0110 60       		.byte	96
+ 302 0111 40       		.byte	64
+ 303 0112 62       		.byte	98
+ 304 0113 C0       		.byte	-64
+ 305 0114 64       		.byte	100
+ 306 0115 40       		.byte	64
+ 307 0116 65       		.byte	101
+ 308 0117 40       		.byte	64
+ 309 0118 66       		.byte	102
+ 310 0119 C0       		.byte	-64
+ 311 011a 68       		.byte	104
+ 312 011b C0       		.byte	-64
+ 313 011c 6A       		.byte	106
+ 314 011d C0       		.byte	-64
+ 315 011e 6C       		.byte	108
+ 316 011f C0       		.byte	-64
+ 317 0120 6E       		.byte	110
+ 318 0121 C0       		.byte	-64
+ 319 0122 81       		.byte	-127
+ 320 0123 04       		.byte	4
+ 321 0124 87       		.byte	-121
+ 322 0125 03       		.byte	3
+ 323 0126 89       		.byte	-119
+ 324 0127 02       		.byte	2
+ 325 0128 8B       		.byte	-117
+ 326 0129 01       		.byte	1
+ 327 012a 8D       		.byte	-115
+ 328 012b 03       		.byte	3
+ 329 012c 91       		.byte	-111
+ 330 012d 03       		.byte	3
+ 331 012e 95       		.byte	-107
+ 332 012f 04       		.byte	4
+ 333 0130 99       		.byte	-103
+ 334 0131 03       		.byte	3
+ 335 0132 9D       		.byte	-99
+ 336 0133 03       		.byte	3
+ 337 0134 A1       		.byte	-95
+ 338 0135 03       		.byte	3
+ 339 0136 A5       		.byte	-91
+ 340 0137 04       		.byte	4
+ 341 0138 A9       		.byte	-87
+ 342 0139 04       		.byte	4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 7
+
+
+ 343 013a B1       		.byte	-79
+ 344 013b 01       		.byte	1
+ 345 013c B5       		.byte	-75
+ 346 013d 02       		.byte	2
+ 347 013e B7       		.byte	-73
+ 348 013f 04       		.byte	4
+ 349 0140 B9       		.byte	-71
+ 350 0141 80       		.byte	-128
+ 351 0142 BF       		.byte	-65
+ 352 0143 40       		.byte	64
+ 353 0144 C0       		.byte	-64
+ 354 0145 30       		.byte	48
+ 355 0146 C1       		.byte	-63
+ 356 0147 05       		.byte	5
+ 357 0148 C5       		.byte	-59
+ 358 0149 01       		.byte	1
+ 359 014a C6       		.byte	-58
+ 360 014b 02       		.byte	2
+ 361 014c C8       		.byte	-56
+ 362 014d 05       		.byte	5
+ 363 014e C9       		.byte	-55
+ 364 014f FF       		.byte	-1
+ 365 0150 CA       		.byte	-54
+ 366 0151 FF       		.byte	-1
+ 367 0152 CB       		.byte	-53
+ 368 0153 FF       		.byte	-1
+ 369 0154 CD       		.byte	-51
+ 370 0155 AF       		.byte	-81
+ 371 0156 CE       		.byte	-50
+ 372 0157 0F       		.byte	15
+ 373 0158 CF       		.byte	-49
+ 374 0159 04       		.byte	4
+ 375 015a D0       		.byte	-48
+ 376 015b 18       		.byte	24
+ 377 015c D8       		.byte	-40
+ 378 015d 04       		.byte	4
+ 379 015e D9       		.byte	-39
+ 380 015f 04       		.byte	4
+ 381 0160 DA       		.byte	-38
+ 382 0161 04       		.byte	4
+ 383 0162 DC       		.byte	-36
+ 384 0163 55       		.byte	85
+ 385 0164 DD       		.byte	-35
+ 386 0165 04       		.byte	4
+ 387 0166 DF       		.byte	-33
+ 388 0167 01       		.byte	1
+ 389 0168 E0       		.byte	-32
+ 390 0169 40       		.byte	64
+ 391 016a E2       		.byte	-30
+ 392 016b C0       		.byte	-64
+ 393 016c E4       		.byte	-28
+ 394 016d 40       		.byte	64
+ 395 016e E5       		.byte	-27
+ 396 016f 40       		.byte	64
+ 397 0170 E6       		.byte	-26
+ 398 0171 C0       		.byte	-64
+ 399 0172 E8       		.byte	-24
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 8
+
+
+ 400 0173 C0       		.byte	-64
+ 401 0174 EA       		.byte	-22
+ 402 0175 C0       		.byte	-64
+ 403 0176 EC       		.byte	-20
+ 404 0177 C0       		.byte	-64
+ 405 0178 EE       		.byte	-18
+ 406 0179 C0       		.byte	-64
+ 407 017a 00       		.byte	0
+ 408 017b 40       		.byte	64
+ 409 017c 01       		.byte	1
+ 410 017d 04       		.byte	4
+ 411 017e 03       		.byte	3
+ 412 017f 28       		.byte	40
+ 413 0180 04       		.byte	4
+ 414 0181 40       		.byte	64
+ 415 0182 05       		.byte	5
+ 416 0183 12       		.byte	18
+ 417 0184 08       		.byte	8
+ 418 0185 40       		.byte	64
+ 419 0186 09       		.byte	9
+ 420 0187 04       		.byte	4
+ 421 0188 0A       		.byte	10
+ 422 0189 48       		.byte	72
+ 423 018a 0F       		.byte	15
+ 424 018b 42       		.byte	66
+ 425 018c 11       		.byte	17
+ 426 018d 21       		.byte	33
+ 427 018e 12       		.byte	18
+ 428 018f 01       		.byte	1
+ 429 0190 14       		.byte	20
+ 430 0191 40       		.byte	64
+ 431 0192 16       		.byte	22
+ 432 0193 01       		.byte	1
+ 433 0194 18       		.byte	24
+ 434 0195 80       		.byte	-128
+ 435 0196 19       		.byte	25
+ 436 0197 10       		.byte	16
+ 437 0198 1A       		.byte	26
+ 438 0199 08       		.byte	8
+ 439 019a 1B       		.byte	27
+ 440 019b 09       		.byte	9
+ 441 019c 25       		.byte	37
+ 442 019d 81       		.byte	-127
+ 443 019e 27       		.byte	39
+ 444 019f 04       		.byte	4
+ 445 01a0 2B       		.byte	43
+ 446 01a1 29       		.byte	41
+ 447 01a2 2C       		.byte	44
+ 448 01a3 40       		.byte	64
+ 449 01a4 2D       		.byte	45
+ 450 01a5 20       		.byte	32
+ 451 01a6 2F       		.byte	47
+ 452 01a7 10       		.byte	16
+ 453 01a8 30       		.byte	48
+ 454 01a9 40       		.byte	64
+ 455 01aa 31       		.byte	49
+ 456 01ab 10       		.byte	16
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 9
+
+
+ 457 01ac 34       		.byte	52
+ 458 01ad 08       		.byte	8
+ 459 01ae 35       		.byte	53
+ 460 01af 10       		.byte	16
+ 461 01b0 36       		.byte	54
+ 462 01b1 02       		.byte	2
+ 463 01b2 37       		.byte	55
+ 464 01b3 40       		.byte	64
+ 465 01b4 38       		.byte	56
+ 466 01b5 40       		.byte	64
+ 467 01b6 3A       		.byte	58
+ 468 01b7 01       		.byte	1
+ 469 01b8 3D       		.byte	61
+ 470 01b9 24       		.byte	36
+ 471 01ba 3F       		.byte	63
+ 472 01bb 41       		.byte	65
+ 473 01bc 41       		.byte	65
+ 474 01bd 08       		.byte	8
+ 475 01be 42       		.byte	66
+ 476 01bf 80       		.byte	-128
+ 477 01c0 45       		.byte	69
+ 478 01c1 08       		.byte	8
+ 479 01c2 4F       		.byte	79
+ 480 01c3 84       		.byte	-124
+ 481 01c4 56       		.byte	86
+ 482 01c5 80       		.byte	-128
+ 483 01c6 57       		.byte	87
+ 484 01c7 40       		.byte	64
+ 485 01c8 68       		.byte	104
+ 486 01c9 04       		.byte	4
+ 487 01ca 69       		.byte	105
+ 488 01cb 80       		.byte	-128
+ 489 01cc 6A       		.byte	106
+ 490 01cd 80       		.byte	-128
+ 491 01ce 81       		.byte	-127
+ 492 01cf 02       		.byte	2
+ 493 01d0 83       		.byte	-125
+ 494 01d1 34       		.byte	52
+ 495 01d2 85       		.byte	-123
+ 496 01d3 10       		.byte	16
+ 497 01d4 89       		.byte	-119
+ 498 01d5 20       		.byte	32
+ 499 01d6 8F       		.byte	-113
+ 500 01d7 01       		.byte	1
+ 501 01d8 C0       		.byte	-64
+ 502 01d9 D7       		.byte	-41
+ 503 01da C2       		.byte	-62
+ 504 01db 9F       		.byte	-97
+ 505 01dc C4       		.byte	-60
+ 506 01dd 9B       		.byte	-101
+ 507 01de CA       		.byte	-54
+ 508 01df EE       		.byte	-18
+ 509 01e0 CC       		.byte	-52
+ 510 01e1 FC       		.byte	-4
+ 511 01e2 CE       		.byte	-50
+ 512 01e3 F9       		.byte	-7
+ 513 01e4 D0       		.byte	-48
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 10
+
+
+ 514 01e5 43       		.byte	67
+ 515 01e6 D2       		.byte	-46
+ 516 01e7 10       		.byte	16
+ 517 01e8 E0       		.byte	-32
+ 518 01e9 24       		.byte	36
+ 519 01ea E4       		.byte	-28
+ 520 01eb 10       		.byte	16
+ 521 01ec E6       		.byte	-26
+ 522 01ed 4E       		.byte	78
+ 523 01ee 12       		.byte	18
+ 524 01ef 02       		.byte	2
+ 525 01f0 14       		.byte	20
+ 526 01f1 06       		.byte	6
+ 527 01f2 18       		.byte	24
+ 528 01f3 04       		.byte	4
+ 529 01f4 22       		.byte	34
+ 530 01f5 01       		.byte	1
+ 531 01f6 28       		.byte	40
+ 532 01f7 06       		.byte	6
+ 533 01f8 32       		.byte	50
+ 534 01f9 01       		.byte	1
+ 535 01fa 34       		.byte	52
+ 536 01fb 06       		.byte	6
+ 537 01fc 38       		.byte	56
+ 538 01fd 20       		.byte	32
+ 539 01fe 3E       		.byte	62
+ 540 01ff 10       		.byte	16
+ 541 0200 52       		.byte	82
+ 542 0201 80       		.byte	-128
+ 543 0202 58       		.byte	88
+ 544 0203 04       		.byte	4
+ 545 0204 59       		.byte	89
+ 546 0205 04       		.byte	4
+ 547 0206 5B       		.byte	91
+ 548 0207 04       		.byte	4
+ 549 0208 5C       		.byte	92
+ 550 0209 54       		.byte	84
+ 551 020a 5D       		.byte	93
+ 552 020b 40       		.byte	64
+ 553 020c 5F       		.byte	95
+ 554 020d 01       		.byte	1
+ 555 020e 80       		.byte	-128
+ 556 020f 04       		.byte	4
+ 557 0210 84       		.byte	-124
+ 558 0211 08       		.byte	8
+ 559 0212 85       		.byte	-123
+ 560 0213 3F       		.byte	63
+ 561 0214 88       		.byte	-120
+ 562 0215 10       		.byte	16
+ 563 0216 89       		.byte	-119
+ 564 0217 0A       		.byte	10
+ 565 0218 8A       		.byte	-118
+ 566 0219 20       		.byte	32
+ 567 021a 8B       		.byte	-117
+ 568 021b 11       		.byte	17
+ 569 021c 8D       		.byte	-115
+ 570 021d 01       		.byte	1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 11
+
+
+ 571 021e 8E       		.byte	-114
+ 572 021f 01       		.byte	1
+ 573 0220 8F       		.byte	-113
+ 574 0221 06       		.byte	6
+ 575 0222 90       		.byte	-112
+ 576 0223 80       		.byte	-128
+ 577 0224 91       		.byte	-111
+ 578 0225 20       		.byte	32
+ 579 0226 92       		.byte	-110
+ 580 0227 40       		.byte	64
+ 581 0228 94       		.byte	-108
+ 582 0229 20       		.byte	32
+ 583 022a 96       		.byte	-106
+ 584 022b 10       		.byte	16
+ 585 022c 99       		.byte	-103
+ 586 022d 3F       		.byte	63
+ 587 022e 9A       		.byte	-102
+ 588 022f 04       		.byte	4
+ 589 0230 9C       		.byte	-100
+ 590 0231 02       		.byte	2
+ 591 0232 9D       		.byte	-99
+ 592 0233 14       		.byte	20
+ 593 0234 9F       		.byte	-97
+ 594 0235 09       		.byte	9
+ 595 0236 A2       		.byte	-94
+ 596 0237 02       		.byte	2
+ 597 0238 A4       		.byte	-92
+ 598 0239 01       		.byte	1
+ 599 023a A8       		.byte	-88
+ 600 023b 40       		.byte	64
+ 601 023c AA       		.byte	-86
+ 602 023d 80       		.byte	-128
+ 603 023e AE       		.byte	-82
+ 604 023f 08       		.byte	8
+ 605 0240 B0       		.byte	-80
+ 606 0241 FF       		.byte	-1
+ 607 0242 B1       		.byte	-79
+ 608 0243 07       		.byte	7
+ 609 0244 B3       		.byte	-77
+ 610 0245 20       		.byte	32
+ 611 0246 B5       		.byte	-75
+ 612 0247 18       		.byte	24
+ 613 0248 BA       		.byte	-70
+ 614 0249 08       		.byte	8
+ 615 024a BE       		.byte	-66
+ 616 024b 01       		.byte	1
+ 617 024c C0       		.byte	-64
+ 618 024d 50       		.byte	80
+ 619 024e C1       		.byte	-63
+ 620 024f 04       		.byte	4
+ 621 0250 C9       		.byte	-55
+ 622 0251 FF       		.byte	-1
+ 623 0252 CA       		.byte	-54
+ 624 0253 FF       		.byte	-1
+ 625 0254 CB       		.byte	-53
+ 626 0255 FF       		.byte	-1
+ 627 0256 CD       		.byte	-51
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 12
+
+
+ 628 0257 A0       		.byte	-96
+ 629 0258 CF       		.byte	-49
+ 630 0259 04       		.byte	4
+ 631 025a D0       		.byte	-48
+ 632 025b 18       		.byte	24
+ 633 025c D6       		.byte	-42
+ 634 025d 02       		.byte	2
+ 635 025e D7       		.byte	-41
+ 636 025f 35       		.byte	53
+ 637 0260 D8       		.byte	-40
+ 638 0261 04       		.byte	4
+ 639 0262 D9       		.byte	-39
+ 640 0263 04       		.byte	4
+ 641 0264 DA       		.byte	-38
+ 642 0265 04       		.byte	4
+ 643 0266 DB       		.byte	-37
+ 644 0267 0C       		.byte	12
+ 645 0268 DC       		.byte	-36
+ 646 0269 66       		.byte	102
+ 647 026a DD       		.byte	-35
+ 648 026b 54       		.byte	84
+ 649 026c DF       		.byte	-33
+ 650 026d 01       		.byte	1
+ 651 026e E0       		.byte	-32
+ 652 026f 40       		.byte	64
+ 653 0270 E2       		.byte	-30
+ 654 0271 C0       		.byte	-64
+ 655 0272 E4       		.byte	-28
+ 656 0273 40       		.byte	64
+ 657 0274 E5       		.byte	-27
+ 658 0275 40       		.byte	64
+ 659 0276 E6       		.byte	-26
+ 660 0277 C0       		.byte	-64
+ 661 0278 E8       		.byte	-24
+ 662 0279 C0       		.byte	-64
+ 663 027a EA       		.byte	-22
+ 664 027b C0       		.byte	-64
+ 665 027c EC       		.byte	-20
+ 666 027d C0       		.byte	-64
+ 667 027e EE       		.byte	-18
+ 668 027f C0       		.byte	-64
+ 669 0280 00       		.byte	0
+ 670 0281 40       		.byte	64
+ 671 0282 01       		.byte	1
+ 672 0283 01       		.byte	1
+ 673 0284 02       		.byte	2
+ 674 0285 02       		.byte	2
+ 675 0286 03       		.byte	3
+ 676 0287 9C       		.byte	-100
+ 677 0288 09       		.byte	9
+ 678 0289 04       		.byte	4
+ 679 028a 0A       		.byte	10
+ 680 028b 5A       		.byte	90
+ 681 028c 0B       		.byte	11
+ 682 028d 09       		.byte	9
+ 683 028e 0E       		.byte	14
+ 684 028f 28       		.byte	40
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 13
+
+
+ 685 0290 0F       		.byte	15
+ 686 0291 A0       		.byte	-96
+ 687 0292 10       		.byte	16
+ 688 0293 44       		.byte	68
+ 689 0294 11       		.byte	17
+ 690 0295 20       		.byte	32
+ 691 0296 12       		.byte	18
+ 692 0297 01       		.byte	1
+ 693 0298 13       		.byte	19
+ 694 0299 18       		.byte	24
+ 695 029a 16       		.byte	22
+ 696 029b 81       		.byte	-127
+ 697 029c 17       		.byte	23
+ 698 029d 60       		.byte	96
+ 699 029e 18       		.byte	24
+ 700 029f 80       		.byte	-128
+ 701 02a0 19       		.byte	25
+ 702 02a1 08       		.byte	8
+ 703 02a2 1D       		.byte	29
+ 704 02a3 08       		.byte	8
+ 705 02a4 1E       		.byte	30
+ 706 02a5 04       		.byte	4
+ 707 02a6 20       		.byte	32
+ 708 02a7 20       		.byte	32
+ 709 02a8 21       		.byte	33
+ 710 02a9 10       		.byte	16
+ 711 02aa 23       		.byte	35
+ 712 02ab 40       		.byte	64
+ 713 02ac 2C       		.byte	44
+ 714 02ad 40       		.byte	64
+ 715 02ae 2E       		.byte	46
+ 716 02af 0C       		.byte	12
+ 717 02b0 2F       		.byte	47
+ 718 02b1 04       		.byte	4
+ 719 02b2 32       		.byte	50
+ 720 02b3 90       		.byte	-112
+ 721 02b4 33       		.byte	51
+ 722 02b5 01       		.byte	1
+ 723 02b6 35       		.byte	53
+ 724 02b7 02       		.byte	2
+ 725 02b8 37       		.byte	55
+ 726 02b9 44       		.byte	68
+ 727 02ba 39       		.byte	57
+ 728 02bb 24       		.byte	36
+ 729 02bc 3B       		.byte	59
+ 730 02bd 40       		.byte	64
+ 731 02be 3C       		.byte	60
+ 732 02bf 40       		.byte	64
+ 733 02c0 3D       		.byte	61
+ 734 02c1 20       		.byte	32
+ 735 02c2 41       		.byte	65
+ 736 02c3 01       		.byte	1
+ 737 02c4 48       		.byte	72
+ 738 02c5 04       		.byte	4
+ 739 02c6 49       		.byte	73
+ 740 02c7 20       		.byte	32
+ 741 02c8 4A       		.byte	74
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 14
+
+
+ 742 02c9 01       		.byte	1
+ 743 02ca 59       		.byte	89
+ 744 02cb 20       		.byte	32
+ 745 02cc 61       		.byte	97
+ 746 02cd 10       		.byte	16
+ 747 02ce 69       		.byte	105
+ 748 02cf 01       		.byte	1
+ 749 02d0 6A       		.byte	106
+ 750 02d1 50       		.byte	80
+ 751 02d2 6B       		.byte	107
+ 752 02d3 10       		.byte	16
+ 753 02d4 70       		.byte	112
+ 754 02d5 10       		.byte	16
+ 755 02d6 73       		.byte	115
+ 756 02d7 09       		.byte	9
+ 757 02d8 76       		.byte	118
+ 758 02d9 80       		.byte	-128
+ 759 02da 79       		.byte	121
+ 760 02db 80       		.byte	-128
+ 761 02dc 83       		.byte	-125
+ 762 02dd 10       		.byte	16
+ 763 02de 88       		.byte	-120
+ 764 02df 1C       		.byte	28
+ 765 02e0 8A       		.byte	-118
+ 766 02e1 01       		.byte	1
+ 767 02e2 8F       		.byte	-113
+ 768 02e3 08       		.byte	8
+ 769 02e4 91       		.byte	-111
+ 770 02e5 90       		.byte	-112
+ 771 02e6 92       		.byte	-110
+ 772 02e7 88       		.byte	-120
+ 773 02e8 93       		.byte	-109
+ 774 02e9 04       		.byte	4
+ 775 02ea 94       		.byte	-108
+ 776 02eb 40       		.byte	64
+ 777 02ec 95       		.byte	-107
+ 778 02ed 01       		.byte	1
+ 779 02ee 96       		.byte	-106
+ 780 02ef 40       		.byte	64
+ 781 02f0 97       		.byte	-105
+ 782 02f1 20       		.byte	32
+ 783 02f2 98       		.byte	-104
+ 784 02f3 40       		.byte	64
+ 785 02f4 99       		.byte	-103
+ 786 02f5 02       		.byte	2
+ 787 02f6 9A       		.byte	-102
+ 788 02f7 01       		.byte	1
+ 789 02f8 9C       		.byte	-100
+ 790 02f9 08       		.byte	8
+ 791 02fa 9F       		.byte	-97
+ 792 02fb 50       		.byte	80
+ 793 02fc A0       		.byte	-96
+ 794 02fd 04       		.byte	4
+ 795 02fe A1       		.byte	-95
+ 796 02ff 11       		.byte	17
+ 797 0300 A2       		.byte	-94
+ 798 0301 40       		.byte	64
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 15
+
+
+ 799 0302 A3       		.byte	-93
+ 800 0303 08       		.byte	8
+ 801 0304 A5       		.byte	-91
+ 802 0305 0C       		.byte	12
+ 803 0306 A6       		.byte	-90
+ 804 0307 02       		.byte	2
+ 805 0308 A8       		.byte	-88
+ 806 0309 40       		.byte	64
+ 807 030a A9       		.byte	-87
+ 808 030b 10       		.byte	16
+ 809 030c AA       		.byte	-86
+ 810 030d 01       		.byte	1
+ 811 030e AE       		.byte	-82
+ 812 030f 40       		.byte	64
+ 813 0310 B0       		.byte	-80
+ 814 0311 40       		.byte	64
+ 815 0312 B3       		.byte	-77
+ 816 0313 48       		.byte	72
+ 817 0314 B5       		.byte	-75
+ 818 0315 90       		.byte	-112
+ 819 0316 C0       		.byte	-64
+ 820 0317 0F       		.byte	15
+ 821 0318 C2       		.byte	-62
+ 822 0319 7F       		.byte	127
+ 823 031a C4       		.byte	-60
+ 824 031b 5F       		.byte	95
+ 825 031c CA       		.byte	-54
+ 826 031d A0       		.byte	-96
+ 827 031e CC       		.byte	-52
+ 828 031f DD       		.byte	-35
+ 829 0320 CE       		.byte	-50
+ 830 0321 3E       		.byte	62
+ 831 0322 D0       		.byte	-48
+ 832 0323 01       		.byte	1
+ 833 0324 D2       		.byte	-46
+ 834 0325 08       		.byte	8
+ 835 0326 D6       		.byte	-42
+ 836 0327 04       		.byte	4
+ 837 0328 D8       		.byte	-40
+ 838 0329 04       		.byte	4
+ 839 032a DE       		.byte	-34
+ 840 032b 08       		.byte	8
+ 841 032c E0       		.byte	-32
+ 842 032d 80       		.byte	-128
+ 843 032e E4       		.byte	-28
+ 844 032f 01       		.byte	1
+ 845 0330 EA       		.byte	-22
+ 846 0331 14       		.byte	20
+ 847 0332 0B       		.byte	11
+ 848 0333 02       		.byte	2
+ 849 0334 0F       		.byte	15
+ 850 0335 01       		.byte	1
+ 851 0336 26       		.byte	38
+ 852 0337 01       		.byte	1
+ 853 0338 2F       		.byte	47
+ 854 0339 02       		.byte	2
+ 855 033a 30       		.byte	48
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 16
+
+
+ 856 033b 01       		.byte	1
+ 857 033c 37       		.byte	55
+ 858 033d 03       		.byte	3
+ 859 033e 3F       		.byte	63
+ 860 033f 40       		.byte	64
+ 861 0340 40       		.byte	64
+ 862 0341 50       		.byte	80
+ 863 0342 41       		.byte	65
+ 864 0343 04       		.byte	4
+ 865 0344 47       		.byte	71
+ 866 0345 21       		.byte	33
+ 867 0346 48       		.byte	72
+ 868 0347 30       		.byte	48
+ 869 0348 49       		.byte	73
+ 870 0349 FF       		.byte	-1
+ 871 034a 4A       		.byte	74
+ 872 034b FF       		.byte	-1
+ 873 034c 4B       		.byte	75
+ 874 034d FF       		.byte	-1
+ 875 034e 4D       		.byte	77
+ 876 034f AF       		.byte	-81
+ 877 0350 4E       		.byte	78
+ 878 0351 0F       		.byte	15
+ 879 0352 4F       		.byte	79
+ 880 0353 04       		.byte	4
+ 881 0354 50       		.byte	80
+ 882 0355 18       		.byte	24
+ 883 0356 56       		.byte	86
+ 884 0357 08       		.byte	8
+ 885 0358 58       		.byte	88
+ 886 0359 04       		.byte	4
+ 887 035a 59       		.byte	89
+ 888 035b 04       		.byte	4
+ 889 035c 5A       		.byte	90
+ 890 035d 04       		.byte	4
+ 891 035e 5B       		.byte	91
+ 892 035f 04       		.byte	4
+ 893 0360 5C       		.byte	92
+ 894 0361 55       		.byte	85
+ 895 0362 5D       		.byte	93
+ 896 0363 94       		.byte	-108
+ 897 0364 5F       		.byte	95
+ 898 0365 01       		.byte	1
+ 899 0366 60       		.byte	96
+ 900 0367 40       		.byte	64
+ 901 0368 62       		.byte	98
+ 902 0369 C0       		.byte	-64
+ 903 036a 64       		.byte	100
+ 904 036b 40       		.byte	64
+ 905 036c 65       		.byte	101
+ 906 036d 40       		.byte	64
+ 907 036e 66       		.byte	102
+ 908 036f C0       		.byte	-64
+ 909 0370 68       		.byte	104
+ 910 0371 C0       		.byte	-64
+ 911 0372 6A       		.byte	106
+ 912 0373 C0       		.byte	-64
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 17
+
+
+ 913 0374 6C       		.byte	108
+ 914 0375 C0       		.byte	-64
+ 915 0376 6E       		.byte	110
+ 916 0377 C0       		.byte	-64
+ 917 0378 C0       		.byte	-64
+ 918 0379 25       		.byte	37
+ 919 037a C1       		.byte	-63
+ 920 037b 03       		.byte	3
+ 921 037c C2       		.byte	-62
+ 922 037d 01       		.byte	1
+ 923 037e C4       		.byte	-60
+ 924 037f 04       		.byte	4
+ 925 0380 C5       		.byte	-59
+ 926 0381 E0       		.byte	-32
+ 927 0382 C6       		.byte	-58
+ 928 0383 C0       		.byte	-64
+ 929 0384 C8       		.byte	-56
+ 930 0385 0A       		.byte	10
+ 931 0386 C9       		.byte	-55
+ 932 0387 FF       		.byte	-1
+ 933 0388 CA       		.byte	-54
+ 934 0389 FF       		.byte	-1
+ 935 038a CB       		.byte	-53
+ 936 038b FF       		.byte	-1
+ 937 038c CC       		.byte	-52
+ 938 038d 62       		.byte	98
+ 939 038e CD       		.byte	-51
+ 940 038f A0       		.byte	-96
+ 941 0390 CE       		.byte	-50
+ 942 0391 F0       		.byte	-16
+ 943 0392 CF       		.byte	-49
+ 944 0393 41       		.byte	65
+ 945 0394 D0       		.byte	-48
+ 946 0395 0C       		.byte	12
+ 947 0396 D6       		.byte	-42
+ 948 0397 08       		.byte	8
+ 949 0398 D8       		.byte	-40
+ 950 0399 04       		.byte	4
+ 951 039a D9       		.byte	-39
+ 952 039b 04       		.byte	4
+ 953 039c DA       		.byte	-38
+ 954 039d 04       		.byte	4
+ 955 039e DB       		.byte	-37
+ 956 039f 04       		.byte	4
+ 957 03a0 DC       		.byte	-36
+ 958 03a1 55       		.byte	85
+ 959 03a2 DD       		.byte	-35
+ 960 03a3 96       		.byte	-106
+ 961 03a4 DF       		.byte	-33
+ 962 03a5 01       		.byte	1
+ 963 03a6 E6       		.byte	-26
+ 964 03a7 40       		.byte	64
+ 965 03a8 E7       		.byte	-25
+ 966 03a9 02       		.byte	2
+ 967 03aa E9       		.byte	-23
+ 968 03ab 10       		.byte	16
+ 969 03ac EA       		.byte	-22
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 18
+
+
+ 970 03ad 30       		.byte	48
+ 971 03ae EB       		.byte	-21
+ 972 03af 10       		.byte	16
+ 973 03b0 ED       		.byte	-19
+ 974 03b1 10       		.byte	16
+ 975 03b2 EE       		.byte	-18
+ 976 03b3 10       		.byte	16
+ 977 03b4 EF       		.byte	-17
+ 978 03b5 12       		.byte	18
+ 979 03b6 00       		.byte	0
+ 980 03b7 40       		.byte	64
+ 981 03b8 03       		.byte	3
+ 982 03b9 40       		.byte	64
+ 983 03ba 04       		.byte	4
+ 984 03bb 40       		.byte	64
+ 985 03bc 07       		.byte	7
+ 986 03bd 40       		.byte	64
+ 987 03be 08       		.byte	8
+ 988 03bf 20       		.byte	32
+ 989 03c0 0A       		.byte	10
+ 990 03c1 44       		.byte	68
+ 991 03c2 0B       		.byte	11
+ 992 03c3 10       		.byte	16
+ 993 03c4 0E       		.byte	14
+ 994 03c5 44       		.byte	68
+ 995 03c6 0F       		.byte	15
+ 996 03c7 10       		.byte	16
+ 997 03c8 10       		.byte	16
+ 998 03c9 44       		.byte	68
+ 999 03ca 13       		.byte	19
+ 1000 03cb 08       		.byte	8
+ 1001 03cc 14       		.byte	20
+ 1002 03cd C4       		.byte	-60
+ 1003 03ce 18       		.byte	24
+ 1004 03cf 40       		.byte	64
+ 1005 03d0 19       		.byte	25
+ 1006 03d1 01       		.byte	1
+ 1007 03d2 23       		.byte	35
+ 1008 03d3 02       		.byte	2
+ 1009 03d4 28       		.byte	40
+ 1010 03d5 22       		.byte	34
+ 1011 03d6 2A       		.byte	42
+ 1012 03d7 21       		.byte	33
+ 1013 03d8 2C       		.byte	44
+ 1014 03d9 44       		.byte	68
+ 1015 03da 2F       		.byte	47
+ 1016 03db 04       		.byte	4
+ 1017 03dc 30       		.byte	48
+ 1018 03dd 40       		.byte	64
+ 1019 03de 31       		.byte	49
+ 1020 03df 21       		.byte	33
+ 1021 03e0 32       		.byte	50
+ 1022 03e1 24       		.byte	36
+ 1023 03e2 35       		.byte	53
+ 1024 03e3 09       		.byte	9
+ 1025 03e4 37       		.byte	55
+ 1026 03e5 44       		.byte	68
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 19
+
+
+ 1027 03e6 38       		.byte	56
+ 1028 03e7 14       		.byte	20
+ 1029 03e8 39       		.byte	57
+ 1030 03e9 20       		.byte	32
+ 1031 03ea 3B       		.byte	59
+ 1032 03eb 40       		.byte	64
+ 1033 03ec 3C       		.byte	60
+ 1034 03ed 80       		.byte	-128
+ 1035 03ee 3E       		.byte	62
+ 1036 03ef 64       		.byte	100
+ 1037 03f0 3F       		.byte	63
+ 1038 03f1 10       		.byte	16
+ 1039 03f2 40       		.byte	64
+ 1040 03f3 10       		.byte	16
+ 1041 03f4 41       		.byte	65
+ 1042 03f5 05       		.byte	5
+ 1043 03f6 45       		.byte	69
+ 1044 03f7 20       		.byte	32
+ 1045 03f8 47       		.byte	71
+ 1046 03f9 86       		.byte	-122
+ 1047 03fa 4A       		.byte	74
+ 1048 03fb 01       		.byte	1
+ 1049 03fc 4C       		.byte	76
+ 1050 03fd 02       		.byte	2
+ 1051 03fe 4D       		.byte	77
+ 1052 03ff 01       		.byte	1
+ 1053 0400 51       		.byte	81
+ 1054 0401 01       		.byte	1
+ 1055 0402 52       		.byte	82
+ 1056 0403 08       		.byte	8
+ 1057 0404 56       		.byte	86
+ 1058 0405 10       		.byte	16
+ 1059 0406 59       		.byte	89
+ 1060 0407 80       		.byte	-128
+ 1061 0408 5E       		.byte	94
+ 1062 0409 80       		.byte	-128
+ 1063 040a 60       		.byte	96
+ 1064 040b 02       		.byte	2
+ 1065 040c 62       		.byte	98
+ 1066 040d 80       		.byte	-128
+ 1067 040e 66       		.byte	102
+ 1068 040f 40       		.byte	64
+ 1069 0410 82       		.byte	-126
+ 1070 0411 18       		.byte	24
+ 1071 0412 89       		.byte	-119
+ 1072 0413 02       		.byte	2
+ 1073 0414 8C       		.byte	-116
+ 1074 0415 80       		.byte	-128
+ 1075 0416 90       		.byte	-112
+ 1076 0417 A0       		.byte	-96
+ 1077 0418 91       		.byte	-111
+ 1078 0419 30       		.byte	48
+ 1079 041a 92       		.byte	-110
+ 1080 041b 88       		.byte	-120
+ 1081 041c 93       		.byte	-109
+ 1082 041d 5C       		.byte	92
+ 1083 041e 94       		.byte	-108
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 20
+
+
+ 1084 041f 40       		.byte	64
+ 1085 0420 95       		.byte	-107
+ 1086 0421 06       		.byte	6
+ 1087 0422 96       		.byte	-106
+ 1088 0423 20       		.byte	32
+ 1089 0424 97       		.byte	-105
+ 1090 0425 20       		.byte	32
+ 1091 0426 98       		.byte	-104
+ 1092 0427 50       		.byte	80
+ 1093 0428 99       		.byte	-103
+ 1094 0429 08       		.byte	8
+ 1095 042a 9A       		.byte	-102
+ 1096 042b 09       		.byte	9
+ 1097 042c 9B       		.byte	-101
+ 1098 042d 58       		.byte	88
+ 1099 042e 9D       		.byte	-99
+ 1100 042f 10       		.byte	16
+ 1101 0430 9F       		.byte	-97
+ 1102 0431 21       		.byte	33
+ 1103 0432 A0       		.byte	-96
+ 1104 0433 14       		.byte	20
+ 1105 0434 A1       		.byte	-95
+ 1106 0435 08       		.byte	8
+ 1107 0436 A2       		.byte	-94
+ 1108 0437 40       		.byte	64
+ 1109 0438 A3       		.byte	-93
+ 1110 0439 80       		.byte	-128
+ 1111 043a A6       		.byte	-90
+ 1112 043b 91       		.byte	-111
+ 1113 043c A7       		.byte	-89
+ 1114 043d 40       		.byte	64
+ 1115 043e AA       		.byte	-86
+ 1116 043f 04       		.byte	4
+ 1117 0440 B3       		.byte	-77
+ 1118 0441 20       		.byte	32
+ 1119 0442 B5       		.byte	-75
+ 1120 0443 01       		.byte	1
+ 1121 0444 B7       		.byte	-73
+ 1122 0445 40       		.byte	64
+ 1123 0446 C0       		.byte	-64
+ 1124 0447 99       		.byte	-103
+ 1125 0448 C2       		.byte	-62
+ 1126 0449 7E       		.byte	126
+ 1127 044a C4       		.byte	-60
+ 1128 044b 5E       		.byte	94
+ 1129 044c CA       		.byte	-54
+ 1130 044d AF       		.byte	-81
+ 1131 044e CC       		.byte	-52
+ 1132 044f 9B       		.byte	-101
+ 1133 0450 CE       		.byte	-50
+ 1134 0451 7E       		.byte	126
+ 1135 0452 D0       		.byte	-48
+ 1136 0453 F1       		.byte	-15
+ 1137 0454 D2       		.byte	-46
+ 1138 0455 18       		.byte	24
+ 1139 0456 D6       		.byte	-42
+ 1140 0457 18       		.byte	24
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 21
+
+
+ 1141 0458 D8       		.byte	-40
+ 1142 0459 18       		.byte	24
+ 1143 045a E0       		.byte	-32
+ 1144 045b 05       		.byte	5
+ 1145 045c E6       		.byte	-26
+ 1146 045d 02       		.byte	2
+ 1147 045e EA       		.byte	-22
+ 1148 045f 10       		.byte	16
+ 1149 0460 EE       		.byte	-18
+ 1150 0461 04       		.byte	4
+ 1151 0462 04       		.byte	4
+ 1152 0463 10       		.byte	16
+ 1153 0464 06       		.byte	6
+ 1154 0465 AC       		.byte	-84
+ 1155 0466 08       		.byte	8
+ 1156 0467 14       		.byte	20
+ 1157 0468 10       		.byte	16
+ 1158 0469 10       		.byte	16
+ 1159 046a 12       		.byte	18
+ 1160 046b 40       		.byte	64
+ 1161 046c 14       		.byte	20
+ 1162 046d 0C       		.byte	12
+ 1163 046e 16       		.byte	22
+ 1164 046f 71       		.byte	113
+ 1165 0470 1A       		.byte	26
+ 1166 0471 03       		.byte	3
+ 1167 0472 22       		.byte	34
+ 1168 0473 20       		.byte	32
+ 1169 0474 28       		.byte	40
+ 1170 0475 DC       		.byte	-36
+ 1171 0476 2A       		.byte	42
+ 1172 0477 22       		.byte	34
+ 1173 0478 2C       		.byte	44
+ 1174 0479 09       		.byte	9
+ 1175 047a 2E       		.byte	46
+ 1176 047b D0       		.byte	-48
+ 1177 047c 32       		.byte	50
+ 1178 047d E0       		.byte	-32
+ 1179 047e 34       		.byte	52
+ 1180 047f 1F       		.byte	31
+ 1181 0480 3A       		.byte	58
+ 1182 0481 08       		.byte	8
+ 1183 0482 40       		.byte	64
+ 1184 0483 60       		.byte	96
+ 1185 0484 41       		.byte	65
+ 1186 0485 05       		.byte	5
+ 1187 0486 49       		.byte	73
+ 1188 0487 FF       		.byte	-1
+ 1189 0488 4A       		.byte	74
+ 1190 0489 FF       		.byte	-1
+ 1191 048a 4B       		.byte	75
+ 1192 048b FF       		.byte	-1
+ 1193 048c 4D       		.byte	77
+ 1194 048d A0       		.byte	-96
+ 1195 048e 4F       		.byte	79
+ 1196 048f 04       		.byte	4
+ 1197 0490 50       		.byte	80
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 22
+
+
+ 1198 0491 18       		.byte	24
+ 1199 0492 58       		.byte	88
+ 1200 0493 04       		.byte	4
+ 1201 0494 59       		.byte	89
+ 1202 0495 04       		.byte	4
+ 1203 0496 5A       		.byte	90
+ 1204 0497 04       		.byte	4
+ 1205 0498 5C       		.byte	92
+ 1206 0499 56       		.byte	86
+ 1207 049a 5D       		.byte	93
+ 1208 049b 04       		.byte	4
+ 1209 049c 5F       		.byte	95
+ 1210 049d 01       		.byte	1
+ 1211 049e 60       		.byte	96
+ 1212 049f 40       		.byte	64
+ 1213 04a0 62       		.byte	98
+ 1214 04a1 C0       		.byte	-64
+ 1215 04a2 64       		.byte	100
+ 1216 04a3 40       		.byte	64
+ 1217 04a4 65       		.byte	101
+ 1218 04a5 40       		.byte	64
+ 1219 04a6 66       		.byte	102
+ 1220 04a7 C0       		.byte	-64
+ 1221 04a8 68       		.byte	104
+ 1222 04a9 C0       		.byte	-64
+ 1223 04aa 6A       		.byte	106
+ 1224 04ab C0       		.byte	-64
+ 1225 04ac 6C       		.byte	108
+ 1226 04ad C0       		.byte	-64
+ 1227 04ae 6E       		.byte	110
+ 1228 04af C0       		.byte	-64
+ 1229 04b0 86       		.byte	-122
+ 1230 04b1 38       		.byte	56
+ 1231 04b2 8A       		.byte	-118
+ 1232 04b3 02       		.byte	2
+ 1233 04b4 8B       		.byte	-117
+ 1234 04b5 02       		.byte	2
+ 1235 04b6 8C       		.byte	-116
+ 1236 04b7 08       		.byte	8
+ 1237 04b8 8F       		.byte	-113
+ 1238 04b9 20       		.byte	32
+ 1239 04ba 91       		.byte	-111
+ 1240 04bb 02       		.byte	2
+ 1241 04bc 95       		.byte	-107
+ 1242 04bd 08       		.byte	8
+ 1243 04be 96       		.byte	-106
+ 1244 04bf 04       		.byte	4
+ 1245 04c0 98       		.byte	-104
+ 1246 04c1 38       		.byte	56
+ 1247 04c2 9B       		.byte	-101
+ 1248 04c3 10       		.byte	16
+ 1249 04c4 9C       		.byte	-100
+ 1250 04c5 20       		.byte	32
+ 1251 04c6 9D       		.byte	-99
+ 1252 04c7 10       		.byte	16
+ 1253 04c8 A1       		.byte	-95
+ 1254 04c9 04       		.byte	4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 23
+
+
+ 1255 04ca A2       		.byte	-94
+ 1256 04cb 02       		.byte	2
+ 1257 04cc A6       		.byte	-90
+ 1258 04cd 04       		.byte	4
+ 1259 04ce A7       		.byte	-89
+ 1260 04cf 04       		.byte	4
+ 1261 04d0 AA       		.byte	-86
+ 1262 04d1 01       		.byte	1
+ 1263 04d2 AB       		.byte	-85
+ 1264 04d3 08       		.byte	8
+ 1265 04d4 AE       		.byte	-82
+ 1266 04d5 10       		.byte	16
+ 1267 04d6 AF       		.byte	-81
+ 1268 04d7 01       		.byte	1
+ 1269 04d8 B0       		.byte	-80
+ 1270 04d9 02       		.byte	2
+ 1271 04da B1       		.byte	-79
+ 1272 04db 3E       		.byte	62
+ 1273 04dc B2       		.byte	-78
+ 1274 04dd 04       		.byte	4
+ 1275 04de B4       		.byte	-76
+ 1276 04df 01       		.byte	1
+ 1277 04e0 B6       		.byte	-74
+ 1278 04e1 38       		.byte	56
+ 1279 04e2 B7       		.byte	-73
+ 1280 04e3 01       		.byte	1
+ 1281 04e4 B9       		.byte	-71
+ 1282 04e5 02       		.byte	2
+ 1283 04e6 BE       		.byte	-66
+ 1284 04e7 40       		.byte	64
+ 1285 04e8 BF       		.byte	-65
+ 1286 04e9 01       		.byte	1
+ 1287 04ea C0       		.byte	-64
+ 1288 04eb 60       		.byte	96
+ 1289 04ec C1       		.byte	-63
+ 1290 04ed 05       		.byte	5
+ 1291 04ee C5       		.byte	-59
+ 1292 04ef 10       		.byte	16
+ 1293 04f0 C7       		.byte	-57
+ 1294 04f1 20       		.byte	32
+ 1295 04f2 C8       		.byte	-56
+ 1296 04f3 22       		.byte	34
+ 1297 04f4 C9       		.byte	-55
+ 1298 04f5 FF       		.byte	-1
+ 1299 04f6 CA       		.byte	-54
+ 1300 04f7 FF       		.byte	-1
+ 1301 04f8 CB       		.byte	-53
+ 1302 04f9 FF       		.byte	-1
+ 1303 04fa CD       		.byte	-51
+ 1304 04fb AF       		.byte	-81
+ 1305 04fc CE       		.byte	-50
+ 1306 04fd 0F       		.byte	15
+ 1307 04fe CF       		.byte	-49
+ 1308 04ff 04       		.byte	4
+ 1309 0500 D0       		.byte	-48
+ 1310 0501 18       		.byte	24
+ 1311 0502 D8       		.byte	-40
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 24
+
+
+ 1312 0503 04       		.byte	4
+ 1313 0504 D9       		.byte	-39
+ 1314 0505 04       		.byte	4
+ 1315 0506 DA       		.byte	-38
+ 1316 0507 04       		.byte	4
+ 1317 0508 DC       		.byte	-36
+ 1318 0509 64       		.byte	100
+ 1319 050a DD       		.byte	-35
+ 1320 050b 04       		.byte	4
+ 1321 050c DF       		.byte	-33
+ 1322 050d 01       		.byte	1
+ 1323 050e E0       		.byte	-32
+ 1324 050f 40       		.byte	64
+ 1325 0510 E2       		.byte	-30
+ 1326 0511 C0       		.byte	-64
+ 1327 0512 E4       		.byte	-28
+ 1328 0513 40       		.byte	64
+ 1329 0514 E5       		.byte	-27
+ 1330 0515 40       		.byte	64
+ 1331 0516 E6       		.byte	-26
+ 1332 0517 C0       		.byte	-64
+ 1333 0518 E8       		.byte	-24
+ 1334 0519 C0       		.byte	-64
+ 1335 051a EA       		.byte	-22
+ 1336 051b C0       		.byte	-64
+ 1337 051c EC       		.byte	-20
+ 1338 051d C0       		.byte	-64
+ 1339 051e EE       		.byte	-18
+ 1340 051f C0       		.byte	-64
+ 1341 0520 01       		.byte	1
+ 1342 0521 20       		.byte	32
+ 1343 0522 03       		.byte	3
+ 1344 0523 22       		.byte	34
+ 1345 0524 06       		.byte	6
+ 1346 0525 04       		.byte	4
+ 1347 0526 07       		.byte	7
+ 1348 0527 20       		.byte	32
+ 1349 0528 08       		.byte	8
+ 1350 0529 80       		.byte	-128
+ 1351 052a 09       		.byte	9
+ 1352 052b 28       		.byte	40
+ 1353 052c 0D       		.byte	13
+ 1354 052d 02       		.byte	2
+ 1355 052e 0E       		.byte	14
+ 1356 052f 28       		.byte	40
+ 1357 0530 10       		.byte	16
+ 1358 0531 80       		.byte	-128
+ 1359 0532 11       		.byte	17
+ 1360 0533 90       		.byte	-112
+ 1361 0534 13       		.byte	19
+ 1362 0535 04       		.byte	4
+ 1363 0536 14       		.byte	20
+ 1364 0537 08       		.byte	8
+ 1365 0538 16       		.byte	22
+ 1366 0539 81       		.byte	-127
+ 1367 053a 19       		.byte	25
+ 1368 053b A0       		.byte	-96
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 25
+
+
+ 1369 053c 1A       		.byte	26
+ 1370 053d 40       		.byte	64
+ 1371 053e 1B       		.byte	27
+ 1372 053f 08       		.byte	8
+ 1373 0540 1E       		.byte	30
+ 1374 0541 28       		.byte	40
+ 1375 0542 20       		.byte	32
+ 1376 0543 C0       		.byte	-64
+ 1377 0544 23       		.byte	35
+ 1378 0545 01       		.byte	1
+ 1379 0546 28       		.byte	40
+ 1380 0547 52       		.byte	82
+ 1381 0548 2B       		.byte	43
+ 1382 0549 04       		.byte	4
+ 1383 054a 2C       		.byte	44
+ 1384 054b 44       		.byte	68
+ 1385 054c 31       		.byte	49
+ 1386 054d 01       		.byte	1
+ 1387 054e 32       		.byte	50
+ 1388 054f 0C       		.byte	12
+ 1389 0550 33       		.byte	51
+ 1390 0551 50       		.byte	80
+ 1391 0552 35       		.byte	53
+ 1392 0553 01       		.byte	1
+ 1393 0554 36       		.byte	54
+ 1394 0555 08       		.byte	8
+ 1395 0556 37       		.byte	55
+ 1396 0557 40       		.byte	64
+ 1397 0558 38       		.byte	56
+ 1398 0559 A0       		.byte	-96
+ 1399 055a 3C       		.byte	60
+ 1400 055b 80       		.byte	-128
+ 1401 055c 3E       		.byte	62
+ 1402 055d 04       		.byte	4
+ 1403 055e 48       		.byte	72
+ 1404 055f 80       		.byte	-128
+ 1405 0560 49       		.byte	73
+ 1406 0561 20       		.byte	32
+ 1407 0562 4A       		.byte	74
+ 1408 0563 02       		.byte	2
+ 1409 0564 4D       		.byte	77
+ 1410 0565 20       		.byte	32
+ 1411 0566 4E       		.byte	78
+ 1412 0567 02       		.byte	2
+ 1413 0568 52       		.byte	82
+ 1414 0569 02       		.byte	2
+ 1415 056a 83       		.byte	-125
+ 1416 056b 84       		.byte	-124
+ 1417 056c 85       		.byte	-123
+ 1418 056d 80       		.byte	-128
+ 1419 056e 89       		.byte	-119
+ 1420 056f 40       		.byte	64
+ 1421 0570 8A       		.byte	-118
+ 1422 0571 04       		.byte	4
+ 1423 0572 8E       		.byte	-114
+ 1424 0573 40       		.byte	64
+ 1425 0574 8F       		.byte	-113
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 26
+
+
+ 1426 0575 08       		.byte	8
+ 1427 0576 90       		.byte	-112
+ 1428 0577 A0       		.byte	-96
+ 1429 0578 91       		.byte	-111
+ 1430 0579 19       		.byte	25
+ 1431 057a 92       		.byte	-110
+ 1432 057b 88       		.byte	-120
+ 1433 057c 93       		.byte	-109
+ 1434 057d 44       		.byte	68
+ 1435 057e 95       		.byte	-107
+ 1436 057f 04       		.byte	4
+ 1437 0580 96       		.byte	-106
+ 1438 0581 34       		.byte	52
+ 1439 0582 97       		.byte	-105
+ 1440 0583 20       		.byte	32
+ 1441 0584 98       		.byte	-104
+ 1442 0585 52       		.byte	82
+ 1443 0586 99       		.byte	-103
+ 1444 0587 09       		.byte	9
+ 1445 0588 9A       		.byte	-102
+ 1446 0589 58       		.byte	88
+ 1447 058a 9B       		.byte	-101
+ 1448 058b 50       		.byte	80
+ 1449 058c 9D       		.byte	-99
+ 1450 058d 10       		.byte	16
+ 1451 058e 9F       		.byte	-97
+ 1452 058f A1       		.byte	-95
+ 1453 0590 A0       		.byte	-96
+ 1454 0591 14       		.byte	20
+ 1455 0592 A1       		.byte	-95
+ 1456 0593 18       		.byte	24
+ 1457 0594 A2       		.byte	-94
+ 1458 0595 80       		.byte	-128
+ 1459 0596 A3       		.byte	-93
+ 1460 0597 80       		.byte	-128
+ 1461 0598 A4       		.byte	-92
+ 1462 0599 40       		.byte	64
+ 1463 059a A5       		.byte	-91
+ 1464 059b 02       		.byte	2
+ 1465 059c A6       		.byte	-90
+ 1466 059d 31       		.byte	49
+ 1467 059e A7       		.byte	-89
+ 1468 059f 40       		.byte	64
+ 1469 05a0 A9       		.byte	-87
+ 1470 05a1 90       		.byte	-112
+ 1471 05a2 AC       		.byte	-84
+ 1472 05a3 12       		.byte	18
+ 1473 05a4 B4       		.byte	-76
+ 1474 05a5 44       		.byte	68
+ 1475 05a6 B6       		.byte	-74
+ 1476 05a7 40       		.byte	64
+ 1477 05a8 C0       		.byte	-64
+ 1478 05a9 67       		.byte	103
+ 1479 05aa C2       		.byte	-62
+ 1480 05ab 77       		.byte	119
+ 1481 05ac C4       		.byte	-60
+ 1482 05ad DF       		.byte	-33
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 27
+
+
+ 1483 05ae CA       		.byte	-54
+ 1484 05af AF       		.byte	-81
+ 1485 05b0 CC       		.byte	-52
+ 1486 05b1 DF       		.byte	-33
+ 1487 05b2 CE       		.byte	-50
+ 1488 05b3 5C       		.byte	92
+ 1489 05b4 D2       		.byte	-46
+ 1490 05b5 3C       		.byte	60
+ 1491 05b6 EA       		.byte	-22
+ 1492 05b7 05       		.byte	5
+ 1493 05b8 EE       		.byte	-18
+ 1494 05b9 04       		.byte	4
+ 1495 05ba 04       		.byte	4
+ 1496 05bb A8       		.byte	-88
+ 1497 05bc 05       		.byte	5
+ 1498 05bd C2       		.byte	-62
+ 1499 05be 06       		.byte	6
+ 1500 05bf 43       		.byte	67
+ 1501 05c0 07       		.byte	7
+ 1502 05c1 04       		.byte	4
+ 1503 05c2 08       		.byte	8
+ 1504 05c3 80       		.byte	-128
+ 1505 05c4 09       		.byte	9
+ 1506 05c5 77       		.byte	119
+ 1507 05c6 0A       		.byte	10
+ 1508 05c7 60       		.byte	96
+ 1509 05c8 0B       		.byte	11
+ 1510 05c9 08       		.byte	8
+ 1511 05ca 11       		.byte	17
+ 1512 05cb C6       		.byte	-58
+ 1513 05cc 15       		.byte	21
+ 1514 05cd 01       		.byte	1
+ 1515 05ce 16       		.byte	22
+ 1516 05cf 0C       		.byte	12
+ 1517 05d0 17       		.byte	23
+ 1518 05d1 5E       		.byte	94
+ 1519 05d2 19       		.byte	25
+ 1520 05d3 39       		.byte	57
+ 1521 05d4 1A       		.byte	26
+ 1522 05d5 12       		.byte	18
+ 1523 05d6 1B       		.byte	27
+ 1524 05d7 06       		.byte	6
+ 1525 05d8 1D       		.byte	29
+ 1526 05d9 42       		.byte	66
+ 1527 05da 1E       		.byte	30
+ 1528 05db 01       		.byte	1
+ 1529 05dc 21       		.byte	33
+ 1530 05dd C6       		.byte	-58
+ 1531 05de 24       		.byte	36
+ 1532 05df 21       		.byte	33
+ 1533 05e0 25       		.byte	37
+ 1534 05e1 04       		.byte	4
+ 1535 05e2 26       		.byte	38
+ 1536 05e3 C2       		.byte	-62
+ 1537 05e4 27       		.byte	39
+ 1538 05e5 20       		.byte	32
+ 1539 05e6 28       		.byte	40
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 28
+
+
+ 1540 05e7 64       		.byte	100
+ 1541 05e8 29       		.byte	41
+ 1542 05e9 80       		.byte	-128
+ 1543 05ea 2A       		.byte	42
+ 1544 05eb 83       		.byte	-125
+ 1545 05ec 2B       		.byte	43
+ 1546 05ed 46       		.byte	70
+ 1547 05ee 2D       		.byte	45
+ 1548 05ef 46       		.byte	70
+ 1549 05f0 2F       		.byte	47
+ 1550 05f1 80       		.byte	-128
+ 1551 05f2 31       		.byte	49
+ 1552 05f3 08       		.byte	8
+ 1553 05f4 32       		.byte	50
+ 1554 05f5 0F       		.byte	15
+ 1555 05f6 33       		.byte	51
+ 1556 05f7 0F       		.byte	15
+ 1557 05f8 34       		.byte	52
+ 1558 05f9 E0       		.byte	-32
+ 1559 05fa 35       		.byte	53
+ 1560 05fb 70       		.byte	112
+ 1561 05fc 36       		.byte	54
+ 1562 05fd 10       		.byte	16
+ 1563 05fe 37       		.byte	55
+ 1564 05ff 80       		.byte	-128
+ 1565 0600 39       		.byte	57
+ 1566 0601 08       		.byte	8
+ 1567 0602 3A       		.byte	58
+ 1568 0603 20       		.byte	32
+ 1569 0604 3B       		.byte	59
+ 1570 0605 30       		.byte	48
+ 1571 0606 3F       		.byte	63
+ 1572 0607 41       		.byte	65
+ 1573 0608 56       		.byte	86
+ 1574 0609 02       		.byte	2
+ 1575 060a 57       		.byte	87
+ 1576 060b 28       		.byte	40
+ 1577 060c 58       		.byte	88
+ 1578 060d 04       		.byte	4
+ 1579 060e 59       		.byte	89
+ 1580 060f 04       		.byte	4
+ 1581 0610 5B       		.byte	91
+ 1582 0611 04       		.byte	4
+ 1583 0612 5F       		.byte	95
+ 1584 0613 01       		.byte	1
+ 1585 0614 8B       		.byte	-117
+ 1586 0615 01       		.byte	1
+ 1587 0616 8E       		.byte	-114
+ 1588 0617 02       		.byte	2
+ 1589 0618 91       		.byte	-111
+ 1590 0619 04       		.byte	4
+ 1591 061a 92       		.byte	-110
+ 1592 061b 02       		.byte	2
+ 1593 061c 93       		.byte	-109
+ 1594 061d 1A       		.byte	26
+ 1595 061e A1       		.byte	-95
+ 1596 061f 12       		.byte	18
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 29
+
+
+ 1597 0620 A3       		.byte	-93
+ 1598 0621 0C       		.byte	12
+ 1599 0622 A7       		.byte	-89
+ 1600 0623 01       		.byte	1
+ 1601 0624 A9       		.byte	-87
+ 1602 0625 0A       		.byte	10
+ 1603 0626 AB       		.byte	-85
+ 1604 0627 14       		.byte	20
+ 1605 0628 AD       		.byte	-83
+ 1606 0629 06       		.byte	6
+ 1607 062a AE       		.byte	-82
+ 1608 062b 01       		.byte	1
+ 1609 062c AF       		.byte	-81
+ 1610 062d 18       		.byte	24
+ 1611 062e B0       		.byte	-80
+ 1612 062f 01       		.byte	1
+ 1613 0630 B1       		.byte	-79
+ 1614 0631 1E       		.byte	30
+ 1615 0632 B3       		.byte	-77
+ 1616 0633 01       		.byte	1
+ 1617 0634 B6       		.byte	-74
+ 1618 0635 02       		.byte	2
+ 1619 0636 BB       		.byte	-69
+ 1620 0637 02       		.byte	2
+ 1621 0638 BF       		.byte	-65
+ 1622 0639 04       		.byte	4
+ 1623 063a D6       		.byte	-42
+ 1624 063b 02       		.byte	2
+ 1625 063c D7       		.byte	-41
+ 1626 063d 2C       		.byte	44
+ 1627 063e D8       		.byte	-40
+ 1628 063f 04       		.byte	4
+ 1629 0640 D9       		.byte	-39
+ 1630 0641 04       		.byte	4
+ 1631 0642 DB       		.byte	-37
+ 1632 0643 04       		.byte	4
+ 1633 0644 DC       		.byte	-36
+ 1634 0645 14       		.byte	20
+ 1635 0646 DD       		.byte	-35
+ 1636 0647 10       		.byte	16
+ 1637 0648 DF       		.byte	-33
+ 1638 0649 01       		.byte	1
+ 1639 064a 02       		.byte	2
+ 1640 064b 01       		.byte	1
+ 1641 064c 04       		.byte	4
+ 1642 064d 04       		.byte	4
+ 1643 064e 05       		.byte	5
+ 1644 064f 10       		.byte	16
+ 1645 0650 0A       		.byte	10
+ 1646 0651 80       		.byte	-128
+ 1647 0652 0D       		.byte	13
+ 1648 0653 80       		.byte	-128
+ 1649 0654 0E       		.byte	14
+ 1650 0655 20       		.byte	32
+ 1651 0656 0F       		.byte	15
+ 1652 0657 08       		.byte	8
+ 1653 0658 10       		.byte	16
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 30
+
+
+ 1654 0659 02       		.byte	2
+ 1655 065a 17       		.byte	23
+ 1656 065b 28       		.byte	40
+ 1657 065c 1A       		.byte	26
+ 1658 065d 82       		.byte	-126
+ 1659 065e 1D       		.byte	29
+ 1660 065f 90       		.byte	-112
+ 1661 0660 1E       		.byte	30
+ 1662 0661 20       		.byte	32
+ 1663 0662 1F       		.byte	31
+ 1664 0663 10       		.byte	16
+ 1665 0664 21       		.byte	33
+ 1666 0665 02       		.byte	2
+ 1667 0666 22       		.byte	34
+ 1668 0667 04       		.byte	4
+ 1669 0668 24       		.byte	36
+ 1670 0669 45       		.byte	69
+ 1671 066a 25       		.byte	37
+ 1672 066b 40       		.byte	64
+ 1673 066c 26       		.byte	38
+ 1674 066d 28       		.byte	40
+ 1675 066e 27       		.byte	39
+ 1676 066f 24       		.byte	36
+ 1677 0670 29       		.byte	41
+ 1678 0671 28       		.byte	40
+ 1679 0672 2A       		.byte	42
+ 1680 0673 80       		.byte	-128
+ 1681 0674 2B       		.byte	43
+ 1682 0675 80       		.byte	-128
+ 1683 0676 2E       		.byte	46
+ 1684 0677 19       		.byte	25
+ 1685 0678 2F       		.byte	47
+ 1686 0679 02       		.byte	2
+ 1687 067a 31       		.byte	49
+ 1688 067b 02       		.byte	2
+ 1689 067c 36       		.byte	54
+ 1690 067d 80       		.byte	-128
+ 1691 067e 37       		.byte	55
+ 1692 067f 26       		.byte	38
+ 1693 0680 38       		.byte	56
+ 1694 0681 20       		.byte	32
+ 1695 0682 3D       		.byte	61
+ 1696 0683 28       		.byte	40
+ 1697 0684 4C       		.byte	76
+ 1698 0685 01       		.byte	1
+ 1699 0686 4F       		.byte	79
+ 1700 0687 40       		.byte	64
+ 1701 0688 61       		.byte	97
+ 1702 0689 02       		.byte	2
+ 1703 068a 67       		.byte	103
+ 1704 068b 20       		.byte	32
+ 1705 068c 69       		.byte	105
+ 1706 068d 14       		.byte	20
+ 1707 068e 6A       		.byte	106
+ 1708 068f 44       		.byte	68
+ 1709 0690 6B       		.byte	107
+ 1710 0691 C1       		.byte	-63
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 31
+
+
+ 1711 0692 6C       		.byte	108
+ 1712 0693 A1       		.byte	-95
+ 1713 0694 6D       		.byte	109
+ 1714 0695 08       		.byte	8
+ 1715 0696 6E       		.byte	110
+ 1716 0697 11       		.byte	17
+ 1717 0698 6F       		.byte	111
+ 1718 0699 12       		.byte	18
+ 1719 069a 70       		.byte	112
+ 1720 069b 40       		.byte	64
+ 1721 069c 73       		.byte	115
+ 1722 069d 01       		.byte	1
+ 1723 069e 75       		.byte	117
+ 1724 069f 80       		.byte	-128
+ 1725 06a0 77       		.byte	119
+ 1726 06a1 02       		.byte	2
+ 1727 06a2 85       		.byte	-123
+ 1728 06a3 01       		.byte	1
+ 1729 06a4 86       		.byte	-122
+ 1730 06a5 08       		.byte	8
+ 1731 06a6 8B       		.byte	-117
+ 1732 06a7 24       		.byte	36
+ 1733 06a8 94       		.byte	-108
+ 1734 06a9 80       		.byte	-128
+ 1735 06aa 95       		.byte	-107
+ 1736 06ab 55       		.byte	85
+ 1737 06ac 96       		.byte	-106
+ 1738 06ad 56       		.byte	86
+ 1739 06ae 97       		.byte	-105
+ 1740 06af 43       		.byte	67
+ 1741 06b0 98       		.byte	-104
+ 1742 06b1 80       		.byte	-128
+ 1743 06b2 99       		.byte	-103
+ 1744 06b3 20       		.byte	32
+ 1745 06b4 9A       		.byte	-102
+ 1746 06b5 83       		.byte	-125
+ 1747 06b6 9C       		.byte	-100
+ 1748 06b7 04       		.byte	4
+ 1749 06b8 9F       		.byte	-97
+ 1750 06b9 CB       		.byte	-53
+ 1751 06ba A0       		.byte	-96
+ 1752 06bb 12       		.byte	18
+ 1753 06bc A3       		.byte	-93
+ 1754 06bd 80       		.byte	-128
+ 1755 06be A4       		.byte	-92
+ 1756 06bf 84       		.byte	-124
+ 1757 06c0 A5       		.byte	-91
+ 1758 06c1 04       		.byte	4
+ 1759 06c2 A6       		.byte	-90
+ 1760 06c3 20       		.byte	32
+ 1761 06c4 A7       		.byte	-89
+ 1762 06c5 20       		.byte	32
+ 1763 06c6 AE       		.byte	-82
+ 1764 06c7 01       		.byte	1
+ 1765 06c8 B0       		.byte	-80
+ 1766 06c9 04       		.byte	4
+ 1767 06ca B7       		.byte	-73
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 32
+
+
+ 1768 06cb 04       		.byte	4
+ 1769 06cc C0       		.byte	-64
+ 1770 06cd 61       		.byte	97
+ 1771 06ce C2       		.byte	-62
+ 1772 06cf E8       		.byte	-24
+ 1773 06d0 C4       		.byte	-60
+ 1774 06d1 61       		.byte	97
+ 1775 06d2 CA       		.byte	-54
+ 1776 06d3 FF       		.byte	-1
+ 1777 06d4 CC       		.byte	-52
+ 1778 06d5 F1       		.byte	-15
+ 1779 06d6 CE       		.byte	-50
+ 1780 06d7 64       		.byte	100
+ 1781 06d8 D8       		.byte	-40
+ 1782 06d9 41       		.byte	65
+ 1783 06da E0       		.byte	-32
+ 1784 06db 90       		.byte	-112
+ 1785 06dc E4       		.byte	-28
+ 1786 06dd 40       		.byte	64
+ 1787 06de E6       		.byte	-26
+ 1788 06df 20       		.byte	32
+ 1789 06e0 E8       		.byte	-24
+ 1790 06e1 40       		.byte	64
+ 1791 06e2 EA       		.byte	-22
+ 1792 06e3 05       		.byte	5
+ 1793 06e4 EC       		.byte	-20
+ 1794 06e5 02       		.byte	2
+ 1795 06e6 EE       		.byte	-18
+ 1796 06e7 04       		.byte	4
+ 1797 06e8 00       		.byte	0
+ 1798 06e9 56       		.byte	86
+ 1799 06ea 02       		.byte	2
+ 1800 06eb 09       		.byte	9
+ 1801 06ec 04       		.byte	4
+ 1802 06ed 04       		.byte	4
+ 1803 06ee 08       		.byte	8
+ 1804 06ef 80       		.byte	-128
+ 1805 06f0 0A       		.byte	10
+ 1806 06f1 04       		.byte	4
+ 1807 06f2 0C       		.byte	12
+ 1808 06f3 07       		.byte	7
+ 1809 06f4 0E       		.byte	14
+ 1810 06f5 38       		.byte	56
+ 1811 06f6 10       		.byte	16
+ 1812 06f7 04       		.byte	4
+ 1813 06f8 12       		.byte	18
+ 1814 06f9 80       		.byte	-128
+ 1815 06fa 14       		.byte	20
+ 1816 06fb 01       		.byte	1
+ 1817 06fc 18       		.byte	24
+ 1818 06fd 84       		.byte	-124
+ 1819 06fe 1C       		.byte	28
+ 1820 06ff 84       		.byte	-124
+ 1821 0700 20       		.byte	32
+ 1822 0701 60       		.byte	96
+ 1823 0702 28       		.byte	40
+ 1824 0703 0A       		.byte	10
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 33
+
+
+ 1825 0704 2A       		.byte	42
+ 1826 0705 10       		.byte	16
+ 1827 0706 2C       		.byte	44
+ 1828 0707 84       		.byte	-124
+ 1829 0708 30       		.byte	48
+ 1830 0709 80       		.byte	-128
+ 1831 070a 32       		.byte	50
+ 1832 070b 7F       		.byte	127
+ 1833 070c 34       		.byte	52
+ 1834 070d 80       		.byte	-128
+ 1835 070e 36       		.byte	54
+ 1836 070f 02       		.byte	2
+ 1837 0710 38       		.byte	56
+ 1838 0711 08       		.byte	8
+ 1839 0712 3E       		.byte	62
+ 1840 0713 51       		.byte	81
+ 1841 0714 40       		.byte	64
+ 1842 0715 65       		.byte	101
+ 1843 0716 41       		.byte	65
+ 1844 0717 04       		.byte	4
+ 1845 0718 42       		.byte	66
+ 1846 0719 20       		.byte	32
+ 1847 071a 45       		.byte	69
+ 1848 071b CE       		.byte	-50
+ 1849 071c 46       		.byte	70
+ 1850 071d FB       		.byte	-5
+ 1851 071e 47       		.byte	71
+ 1852 071f 0D       		.byte	13
+ 1853 0720 48       		.byte	72
+ 1854 0721 1F       		.byte	31
+ 1855 0722 49       		.byte	73
+ 1856 0723 FF       		.byte	-1
+ 1857 0724 4A       		.byte	74
+ 1858 0725 FF       		.byte	-1
+ 1859 0726 4B       		.byte	75
+ 1860 0727 FF       		.byte	-1
+ 1861 0728 4C       		.byte	76
+ 1862 0729 22       		.byte	34
+ 1863 072a 4E       		.byte	78
+ 1864 072b F0       		.byte	-16
+ 1865 072c 4F       		.byte	79
+ 1866 072d 08       		.byte	8
+ 1867 072e 50       		.byte	80
+ 1868 072f 04       		.byte	4
+ 1869 0730 54       		.byte	84
+ 1870 0731 09       		.byte	9
+ 1871 0732 58       		.byte	88
+ 1872 0733 04       		.byte	4
+ 1873 0734 59       		.byte	89
+ 1874 0735 04       		.byte	4
+ 1875 0736 5A       		.byte	90
+ 1876 0737 04       		.byte	4
+ 1877 0738 5B       		.byte	91
+ 1878 0739 04       		.byte	4
+ 1879 073a 5C       		.byte	92
+ 1880 073b 51       		.byte	81
+ 1881 073c 5D       		.byte	93
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 34
+
+
+ 1882 073d 11       		.byte	17
+ 1883 073e 5F       		.byte	95
+ 1884 073f 01       		.byte	1
+ 1885 0740 62       		.byte	98
+ 1886 0741 C0       		.byte	-64
+ 1887 0742 64       		.byte	100
+ 1888 0743 40       		.byte	64
+ 1889 0744 65       		.byte	101
+ 1890 0745 01       		.byte	1
+ 1891 0746 66       		.byte	102
+ 1892 0747 10       		.byte	16
+ 1893 0748 67       		.byte	103
+ 1894 0749 11       		.byte	17
+ 1895 074a 68       		.byte	104
+ 1896 074b C0       		.byte	-64
+ 1897 074c 69       		.byte	105
+ 1898 074d 01       		.byte	1
+ 1899 074e 6B       		.byte	107
+ 1900 074f 11       		.byte	17
+ 1901 0750 6C       		.byte	108
+ 1902 0751 40       		.byte	64
+ 1903 0752 6D       		.byte	109
+ 1904 0753 01       		.byte	1
+ 1905 0754 6E       		.byte	110
+ 1906 0755 40       		.byte	64
+ 1907 0756 6F       		.byte	111
+ 1908 0757 01       		.byte	1
+ 1909 0758 D8       		.byte	-40
+ 1910 0759 04       		.byte	4
+ 1911 075a D9       		.byte	-39
+ 1912 075b 04       		.byte	4
+ 1913 075c DC       		.byte	-36
+ 1914 075d 55       		.byte	85
+ 1915 075e DF       		.byte	-33
+ 1916 075f 01       		.byte	1
+ 1917 0760 01       		.byte	1
+ 1918 0761 18       		.byte	24
+ 1919 0762 03       		.byte	3
+ 1920 0763 82       		.byte	-126
+ 1921 0764 07       		.byte	7
+ 1922 0765 10       		.byte	16
+ 1923 0766 0A       		.byte	10
+ 1924 0767 65       		.byte	101
+ 1925 0768 0B       		.byte	11
+ 1926 0769 01       		.byte	1
+ 1927 076a 0D       		.byte	13
+ 1928 076b 04       		.byte	4
+ 1929 076c 0E       		.byte	14
+ 1930 076d 02       		.byte	2
+ 1931 076e 0F       		.byte	15
+ 1932 076f 08       		.byte	8
+ 1933 0770 12       		.byte	18
+ 1934 0771 88       		.byte	-120
+ 1935 0772 13       		.byte	19
+ 1936 0773 80       		.byte	-128
+ 1937 0774 14       		.byte	20
+ 1938 0775 A0       		.byte	-96
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 35
+
+
+ 1939 0776 15       		.byte	21
+ 1940 0777 40       		.byte	64
+ 1941 0778 18       		.byte	24
+ 1942 0779 04       		.byte	4
+ 1943 077a 19       		.byte	25
+ 1944 077b 41       		.byte	65
+ 1945 077c 1A       		.byte	26
+ 1946 077d 20       		.byte	32
+ 1947 077e 28       		.byte	40
+ 1948 077f A0       		.byte	-96
+ 1949 0780 2A       		.byte	42
+ 1950 0781 08       		.byte	8
+ 1951 0782 2B       		.byte	43
+ 1952 0783 04       		.byte	4
+ 1953 0784 2D       		.byte	45
+ 1954 0785 40       		.byte	64
+ 1955 0786 2E       		.byte	46
+ 1956 0787 08       		.byte	8
+ 1957 0788 33       		.byte	51
+ 1958 0789 18       		.byte	24
+ 1959 078a 34       		.byte	52
+ 1960 078b 80       		.byte	-128
+ 1961 078c 36       		.byte	54
+ 1962 078d 01       		.byte	1
+ 1963 078e 37       		.byte	55
+ 1964 078f 10       		.byte	16
+ 1965 0790 39       		.byte	57
+ 1966 0791 48       		.byte	72
+ 1967 0792 3C       		.byte	60
+ 1968 0793 20       		.byte	32
+ 1969 0794 3F       		.byte	63
+ 1970 0795 08       		.byte	8
+ 1971 0796 40       		.byte	64
+ 1972 0797 04       		.byte	4
+ 1973 0798 42       		.byte	66
+ 1974 0799 80       		.byte	-128
+ 1975 079a 43       		.byte	67
+ 1976 079b 02       		.byte	2
+ 1977 079c 49       		.byte	73
+ 1978 079d A6       		.byte	-90
+ 1979 079e 4A       		.byte	74
+ 1980 079f 08       		.byte	8
+ 1981 07a0 51       		.byte	81
+ 1982 07a1 28       		.byte	40
+ 1983 07a2 52       		.byte	82
+ 1984 07a3 80       		.byte	-128
+ 1985 07a4 59       		.byte	89
+ 1986 07a5 15       		.byte	21
+ 1987 07a6 5A       		.byte	90
+ 1988 07a7 80       		.byte	-128
+ 1989 07a8 61       		.byte	97
+ 1990 07a9 40       		.byte	64
+ 1991 07aa 82       		.byte	-126
+ 1992 07ab 11       		.byte	17
+ 1993 07ac 86       		.byte	-122
+ 1994 07ad 40       		.byte	64
+ 1995 07ae 88       		.byte	-120
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 36
+
+
+ 1996 07af 20       		.byte	32
+ 1997 07b0 8D       		.byte	-115
+ 1998 07b1 12       		.byte	18
+ 1999 07b2 8E       		.byte	-114
+ 2000 07b3 01       		.byte	1
+ 2001 07b4 8F       		.byte	-113
+ 2002 07b5 08       		.byte	8
+ 2003 07b6 91       		.byte	-111
+ 2004 07b7 08       		.byte	8
+ 2005 07b8 92       		.byte	-110
+ 2006 07b9 80       		.byte	-128
+ 2007 07ba 94       		.byte	-108
+ 2008 07bb 80       		.byte	-128
+ 2009 07bc 95       		.byte	-107
+ 2010 07bd 55       		.byte	85
+ 2011 07be 96       		.byte	-106
+ 2012 07bf 11       		.byte	17
+ 2013 07c0 97       		.byte	-105
+ 2014 07c1 42       		.byte	66
+ 2015 07c2 98       		.byte	-104
+ 2016 07c3 A0       		.byte	-96
+ 2017 07c4 99       		.byte	-103
+ 2018 07c5 A8       		.byte	-88
+ 2019 07c6 9A       		.byte	-102
+ 2020 07c7 02       		.byte	2
+ 2021 07c8 9B       		.byte	-101
+ 2022 07c9 10       		.byte	16
+ 2023 07ca 9C       		.byte	-100
+ 2024 07cb 04       		.byte	4
+ 2025 07cc 9D       		.byte	-99
+ 2026 07cd 02       		.byte	2
+ 2027 07ce 9F       		.byte	-97
+ 2028 07cf 4B       		.byte	75
+ 2029 07d0 A0       		.byte	-96
+ 2030 07d1 12       		.byte	18
+ 2031 07d2 A2       		.byte	-94
+ 2032 07d3 40       		.byte	64
+ 2033 07d4 A3       		.byte	-93
+ 2034 07d5 82       		.byte	-126
+ 2035 07d6 A4       		.byte	-92
+ 2036 07d7 A0       		.byte	-96
+ 2037 07d8 A5       		.byte	-91
+ 2038 07d9 2C       		.byte	44
+ 2039 07da A6       		.byte	-90
+ 2040 07db 21       		.byte	33
+ 2041 07dc A7       		.byte	-89
+ 2042 07dd 24       		.byte	36
+ 2043 07de AA       		.byte	-86
+ 2044 07df 12       		.byte	18
+ 2045 07e0 AE       		.byte	-82
+ 2046 07e1 84       		.byte	-124
+ 2047 07e2 B2       		.byte	-78
+ 2048 07e3 10       		.byte	16
+ 2049 07e4 B5       		.byte	-75
+ 2050 07e5 01       		.byte	1
+ 2051 07e6 C0       		.byte	-64
+ 2052 07e7 2F       		.byte	47
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 37
+
+
+ 2053 07e8 C2       		.byte	-62
+ 2054 07e9 EF       		.byte	-17
+ 2055 07ea C4       		.byte	-60
+ 2056 07eb BB       		.byte	-69
+ 2057 07ec CA       		.byte	-54
+ 2058 07ed 57       		.byte	87
+ 2059 07ee CC       		.byte	-52
+ 2060 07ef B6       		.byte	-74
+ 2061 07f0 CE       		.byte	-50
+ 2062 07f1 6A       		.byte	106
+ 2063 07f2 D0       		.byte	-48
+ 2064 07f3 05       		.byte	5
+ 2065 07f4 D2       		.byte	-46
+ 2066 07f5 0C       		.byte	12
+ 2067 07f6 D6       		.byte	-42
+ 2068 07f7 0F       		.byte	15
+ 2069 07f8 D8       		.byte	-40
+ 2070 07f9 08       		.byte	8
+ 2071 07fa E0       		.byte	-32
+ 2072 07fb 11       		.byte	17
+ 2073 07fc E4       		.byte	-28
+ 2074 07fd 24       		.byte	36
+ 2075 07fe EC       		.byte	-20
+ 2076 07ff 60       		.byte	96
+ 2077 0800 01       		.byte	1
+ 2078 0801 02       		.byte	2
+ 2079 0802 03       		.byte	3
+ 2080 0803 54       		.byte	84
+ 2081 0804 05       		.byte	5
+ 2082 0805 8D       		.byte	-115
+ 2083 0806 09       		.byte	9
+ 2084 0807 02       		.byte	2
+ 2085 0808 0B       		.byte	11
+ 2086 0809 0D       		.byte	13
+ 2087 080a 0D       		.byte	13
+ 2088 080b 0D       		.byte	13
+ 2089 080c 0F       		.byte	15
+ 2090 080d 80       		.byte	-128
+ 2091 080e 11       		.byte	17
+ 2092 080f 8D       		.byte	-115
+ 2093 0810 15       		.byte	21
+ 2094 0811 01       		.byte	1
+ 2095 0812 17       		.byte	23
+ 2096 0813 32       		.byte	50
+ 2097 0814 19       		.byte	25
+ 2098 0815 62       		.byte	98
+ 2099 0816 1B       		.byte	27
+ 2100 0817 08       		.byte	8
+ 2101 0818 1F       		.byte	31
+ 2102 0819 10       		.byte	16
+ 2103 081a 21       		.byte	33
+ 2104 081b 8D       		.byte	-115
+ 2105 081c 27       		.byte	39
+ 2106 081d 80       		.byte	-128
+ 2107 081e 29       		.byte	41
+ 2108 081f 8D       		.byte	-115
+ 2109 0820 33       		.byte	51
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 38
+
+
+ 2110 0821 80       		.byte	-128
+ 2111 0822 35       		.byte	53
+ 2112 0823 0F       		.byte	15
+ 2113 0824 37       		.byte	55
+ 2114 0825 70       		.byte	112
+ 2115 0826 3B       		.byte	59
+ 2116 0827 20       		.byte	32
+ 2117 0828 3F       		.byte	63
+ 2118 0829 04       		.byte	4
+ 2119 082a 54       		.byte	84
+ 2120 082b 40       		.byte	64
+ 2121 082c 58       		.byte	88
+ 2122 082d 04       		.byte	4
+ 2123 082e 59       		.byte	89
+ 2124 082f 04       		.byte	4
+ 2125 0830 5B       		.byte	91
+ 2126 0831 04       		.byte	4
+ 2127 0832 5C       		.byte	92
+ 2128 0833 05       		.byte	5
+ 2129 0834 5F       		.byte	95
+ 2130 0835 01       		.byte	1
+ 2131 0836 80       		.byte	-128
+ 2132 0837 40       		.byte	64
+ 2133 0838 83       		.byte	-125
+ 2134 0839 0C       		.byte	12
+ 2135 083a 84       		.byte	-124
+ 2136 083b 0E       		.byte	14
+ 2137 083c 85       		.byte	-123
+ 2138 083d 10       		.byte	16
+ 2139 083e 88       		.byte	-120
+ 2140 083f E5       		.byte	-27
+ 2141 0840 89       		.byte	-119
+ 2142 0841 10       		.byte	16
+ 2143 0842 8A       		.byte	-118
+ 2144 0843 1A       		.byte	26
+ 2145 0844 8C       		.byte	-116
+ 2146 0845 13       		.byte	19
+ 2147 0846 8D       		.byte	-115
+ 2148 0847 10       		.byte	16
+ 2149 0848 8E       		.byte	-114
+ 2150 0849 A4       		.byte	-92
+ 2151 084a 93       		.byte	-109
+ 2152 084b 10       		.byte	16
+ 2153 084c 97       		.byte	-105
+ 2154 084d 10       		.byte	16
+ 2155 084e 9B       		.byte	-101
+ 2156 084f 08       		.byte	8
+ 2157 0850 9C       		.byte	-100
+ 2158 0851 44       		.byte	68
+ 2159 0852 9D       		.byte	-99
+ 2160 0853 10       		.byte	16
+ 2161 0854 9E       		.byte	-98
+ 2162 0855 89       		.byte	-119
+ 2163 0856 A3       		.byte	-93
+ 2164 0857 03       		.byte	3
+ 2165 0858 A5       		.byte	-91
+ 2166 0859 01       		.byte	1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 39
+
+
+ 2167 085a A7       		.byte	-89
+ 2168 085b 0E       		.byte	14
+ 2169 085c A9       		.byte	-87
+ 2170 085d 01       		.byte	1
+ 2171 085e AB       		.byte	-85
+ 2172 085f 06       		.byte	6
+ 2173 0860 AD       		.byte	-83
+ 2174 0861 0C       		.byte	12
+ 2175 0862 AF       		.byte	-81
+ 2176 0863 03       		.byte	3
+ 2177 0864 B0       		.byte	-80
+ 2178 0865 80       		.byte	-128
+ 2179 0866 B3       		.byte	-77
+ 2180 0867 10       		.byte	16
+ 2181 0868 B4       		.byte	-76
+ 2182 0869 0F       		.byte	15
+ 2183 086a B5       		.byte	-75
+ 2184 086b 0F       		.byte	15
+ 2185 086c B6       		.byte	-74
+ 2186 086d 70       		.byte	112
+ 2187 086e B8       		.byte	-72
+ 2188 086f 20       		.byte	32
+ 2189 0870 BA       		.byte	-70
+ 2190 0871 80       		.byte	-128
+ 2191 0872 BB       		.byte	-69
+ 2192 0873 20       		.byte	32
+ 2193 0874 BE       		.byte	-66
+ 2194 0875 01       		.byte	1
+ 2195 0876 BF       		.byte	-65
+ 2196 0877 04       		.byte	4
+ 2197 0878 D2       		.byte	-46
+ 2198 0879 80       		.byte	-128
+ 2199 087a D8       		.byte	-40
+ 2200 087b 04       		.byte	4
+ 2201 087c D9       		.byte	-39
+ 2202 087d 04       		.byte	4
+ 2203 087e DB       		.byte	-37
+ 2204 087f 04       		.byte	4
+ 2205 0880 DC       		.byte	-36
+ 2206 0881 61       		.byte	97
+ 2207 0882 DD       		.byte	-35
+ 2208 0883 40       		.byte	64
+ 2209 0884 DF       		.byte	-33
+ 2210 0885 01       		.byte	1
+ 2211 0886 00       		.byte	0
+ 2212 0887 04       		.byte	4
+ 2213 0888 01       		.byte	1
+ 2214 0889 22       		.byte	34
+ 2215 088a 03       		.byte	3
+ 2216 088b 02       		.byte	2
+ 2217 088c 0A       		.byte	10
+ 2218 088d 02       		.byte	2
+ 2219 088e 0D       		.byte	13
+ 2220 088f 04       		.byte	4
+ 2221 0890 0E       		.byte	14
+ 2222 0891 02       		.byte	2
+ 2223 0892 0F       		.byte	15
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 40
+
+
+ 2224 0893 08       		.byte	8
+ 2225 0894 14       		.byte	20
+ 2226 0895 A0       		.byte	-96
+ 2227 0896 15       		.byte	21
+ 2228 0897 40       		.byte	64
+ 2229 0898 17       		.byte	23
+ 2230 0899 10       		.byte	16
+ 2231 089a 18       		.byte	24
+ 2232 089b 04       		.byte	4
+ 2233 089c 19       		.byte	25
+ 2234 089d 80       		.byte	-128
+ 2235 089e 1A       		.byte	26
+ 2236 089f 82       		.byte	-126
+ 2237 08a0 1B       		.byte	27
+ 2238 08a1 80       		.byte	-128
+ 2239 08a2 22       		.byte	34
+ 2240 08a3 18       		.byte	24
+ 2241 08a4 25       		.byte	37
+ 2242 08a5 10       		.byte	16
+ 2243 08a6 26       		.byte	38
+ 2244 08a7 40       		.byte	64
+ 2245 08a8 27       		.byte	39
+ 2246 08a9 20       		.byte	32
+ 2247 08aa 28       		.byte	40
+ 2248 08ab 01       		.byte	1
+ 2249 08ac 29       		.byte	41
+ 2250 08ad 05       		.byte	5
+ 2251 08ae 2A       		.byte	42
+ 2252 08af 10       		.byte	16
+ 2253 08b0 2C       		.byte	44
+ 2254 08b1 80       		.byte	-128
+ 2255 08b2 2E       		.byte	46
+ 2256 08b3 14       		.byte	20
+ 2257 08b4 2F       		.byte	47
+ 2258 08b5 20       		.byte	32
+ 2259 08b6 30       		.byte	48
+ 2260 08b7 20       		.byte	32
+ 2261 08b8 31       		.byte	49
+ 2262 08b9 08       		.byte	8
+ 2263 08ba 32       		.byte	50
+ 2264 08bb 84       		.byte	-124
+ 2265 08bc 33       		.byte	51
+ 2266 08bd 41       		.byte	65
+ 2267 08be 36       		.byte	54
+ 2268 08bf 60       		.byte	96
+ 2269 08c0 37       		.byte	55
+ 2270 08c1 0A       		.byte	10
+ 2271 08c2 38       		.byte	56
+ 2272 08c3 80       		.byte	-128
+ 2273 08c4 39       		.byte	57
+ 2274 08c5 14       		.byte	20
+ 2275 08c6 3B       		.byte	59
+ 2276 08c7 02       		.byte	2
+ 2277 08c8 3D       		.byte	61
+ 2278 08c9 29       		.byte	41
+ 2279 08ca 3F       		.byte	63
+ 2280 08cb 40       		.byte	64
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 41
+
+
+ 2281 08cc 44       		.byte	68
+ 2282 08cd 01       		.byte	1
+ 2283 08ce 46       		.byte	70
+ 2284 08cf 02       		.byte	2
+ 2285 08d0 5F       		.byte	95
+ 2286 08d1 30       		.byte	48
+ 2287 08d2 64       		.byte	100
+ 2288 08d3 04       		.byte	4
+ 2289 08d4 66       		.byte	102
+ 2290 08d5 80       		.byte	-128
+ 2291 08d6 67       		.byte	103
+ 2292 08d7 10       		.byte	16
+ 2293 08d8 70       		.byte	112
+ 2294 08d9 02       		.byte	2
+ 2295 08da 81       		.byte	-127
+ 2296 08db 04       		.byte	4
+ 2297 08dc 88       		.byte	-120
+ 2298 08dd 10       		.byte	16
+ 2299 08de 89       		.byte	-119
+ 2300 08df 04       		.byte	4
+ 2301 08e0 8A       		.byte	-118
+ 2302 08e1 08       		.byte	8
+ 2303 08e2 8C       		.byte	-116
+ 2304 08e3 80       		.byte	-128
+ 2305 08e4 8D       		.byte	-115
+ 2306 08e5 01       		.byte	1
+ 2307 08e6 94       		.byte	-108
+ 2308 08e7 80       		.byte	-128
+ 2309 08e8 95       		.byte	-107
+ 2310 08e9 5C       		.byte	92
+ 2311 08ea 96       		.byte	-106
+ 2312 08eb 09       		.byte	9
+ 2313 08ec 98       		.byte	-104
+ 2314 08ed 20       		.byte	32
+ 2315 08ee 99       		.byte	-103
+ 2316 08ef 28       		.byte	40
+ 2317 08f0 9B       		.byte	-101
+ 2318 08f1 10       		.byte	16
+ 2319 08f2 9C       		.byte	-100
+ 2320 08f3 80       		.byte	-128
+ 2321 08f4 9D       		.byte	-99
+ 2322 08f5 02       		.byte	2
+ 2323 08f6 9E       		.byte	-98
+ 2324 08f7 08       		.byte	8
+ 2325 08f8 9F       		.byte	-97
+ 2326 08f9 41       		.byte	65
+ 2327 08fa A3       		.byte	-93
+ 2328 08fb 02       		.byte	2
+ 2329 08fc A4       		.byte	-92
+ 2330 08fd 10       		.byte	16
+ 2331 08fe A5       		.byte	-91
+ 2332 08ff 21       		.byte	33
+ 2333 0900 A6       		.byte	-90
+ 2334 0901 88       		.byte	-120
+ 2335 0902 A7       		.byte	-89
+ 2336 0903 84       		.byte	-124
+ 2337 0904 AB       		.byte	-85
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 42
+
+
+ 2338 0905 10       		.byte	16
+ 2339 0906 B3       		.byte	-77
+ 2340 0907 04       		.byte	4
+ 2341 0908 B4       		.byte	-76
+ 2342 0909 20       		.byte	32
+ 2343 090a C0       		.byte	-64
+ 2344 090b 0F       		.byte	15
+ 2345 090c C2       		.byte	-62
+ 2346 090d E1       		.byte	-31
+ 2347 090e C4       		.byte	-60
+ 2348 090f F0       		.byte	-16
+ 2349 0910 CA       		.byte	-54
+ 2350 0911 EF       		.byte	-17
+ 2351 0912 CC       		.byte	-52
+ 2352 0913 FF       		.byte	-1
+ 2353 0914 CE       		.byte	-50
+ 2354 0915 FF       		.byte	-1
+ 2355 0916 D8       		.byte	-40
+ 2356 0917 70       		.byte	112
+ 2357 0918 E0       		.byte	-32
+ 2358 0919 30       		.byte	48
+ 2359 091a E4       		.byte	-28
+ 2360 091b 80       		.byte	-128
+ 2361 091c E8       		.byte	-24
+ 2362 091d 40       		.byte	64
+ 2363 091e EA       		.byte	-22
+ 2364 091f 80       		.byte	-128
+ 2365 0920 00       		.byte	0
+ 2366 0921 10       		.byte	16
+ 2367 0922 04       		.byte	4
+ 2368 0923 C1       		.byte	-63
+ 2369 0924 05       		.byte	5
+ 2370 0925 0D       		.byte	13
+ 2371 0926 06       		.byte	6
+ 2372 0927 06       		.byte	6
+ 2373 0928 08       		.byte	8
+ 2374 0929 09       		.byte	9
+ 2375 092a 09       		.byte	9
+ 2376 092b 0D       		.byte	13
+ 2377 092c 0A       		.byte	10
+ 2378 092d C6       		.byte	-58
+ 2379 092e 0C       		.byte	12
+ 2380 092f C4       		.byte	-60
+ 2381 0930 0D       		.byte	13
+ 2382 0931 0D       		.byte	13
+ 2383 0932 0E       		.byte	14
+ 2384 0933 10       		.byte	16
+ 2385 0934 10       		.byte	16
+ 2386 0935 98       		.byte	-104
+ 2387 0936 11       		.byte	17
+ 2388 0937 0D       		.byte	13
+ 2389 0938 12       		.byte	18
+ 2390 0939 23       		.byte	35
+ 2391 093a 17       		.byte	23
+ 2392 093b 20       		.byte	32
+ 2393 093c 19       		.byte	25
+ 2394 093d 02       		.byte	2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 43
+
+
+ 2395 093e 1B       		.byte	27
+ 2396 093f 0D       		.byte	13
+ 2397 0940 1C       		.byte	28
+ 2398 0941 D4       		.byte	-44
+ 2399 0942 1D       		.byte	29
+ 2400 0943 0D       		.byte	13
+ 2401 0944 20       		.byte	32
+ 2402 0945 D4       		.byte	-44
+ 2403 0946 21       		.byte	33
+ 2404 0947 02       		.byte	2
+ 2405 0948 23       		.byte	35
+ 2406 0949 38       		.byte	56
+ 2407 094a 24       		.byte	36
+ 2408 094b C4       		.byte	-60
+ 2409 094c 26       		.byte	38
+ 2410 094d 10       		.byte	16
+ 2411 094e 28       		.byte	40
+ 2412 094f 10       		.byte	16
+ 2413 0950 29       		.byte	41
+ 2414 0951 02       		.byte	2
+ 2415 0952 2A       		.byte	42
+ 2416 0953 C4       		.byte	-60
+ 2417 0954 2B       		.byte	43
+ 2418 0955 34       		.byte	52
+ 2419 0956 2C       		.byte	44
+ 2420 0957 E7       		.byte	-25
+ 2421 0958 2D       		.byte	45
+ 2422 0959 11       		.byte	17
+ 2423 095a 2E       		.byte	46
+ 2424 095b 18       		.byte	24
+ 2425 095c 2F       		.byte	47
+ 2426 095d 02       		.byte	2
+ 2427 095e 30       		.byte	48
+ 2428 095f 98       		.byte	-104
+ 2429 0960 32       		.byte	50
+ 2430 0961 07       		.byte	7
+ 2431 0962 33       		.byte	51
+ 2432 0963 30       		.byte	48
+ 2433 0964 34       		.byte	52
+ 2434 0965 78       		.byte	120
+ 2435 0966 35       		.byte	53
+ 2436 0967 0F       		.byte	15
+ 2437 0968 3A       		.byte	58
+ 2438 0969 28       		.byte	40
+ 2439 096a 3B       		.byte	59
+ 2440 096b 20       		.byte	32
+ 2441 096c 54       		.byte	84
+ 2442 096d 40       		.byte	64
+ 2443 096e 58       		.byte	88
+ 2444 096f 04       		.byte	4
+ 2445 0970 59       		.byte	89
+ 2446 0971 04       		.byte	4
+ 2447 0972 5B       		.byte	91
+ 2448 0973 04       		.byte	4
+ 2449 0974 5C       		.byte	92
+ 2450 0975 11       		.byte	17
+ 2451 0976 5D       		.byte	93
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 44
+
+
+ 2452 0977 10       		.byte	16
+ 2453 0978 5F       		.byte	95
+ 2454 0979 01       		.byte	1
+ 2455 097a 8A       		.byte	-118
+ 2456 097b 01       		.byte	1
+ 2457 097c 9F       		.byte	-97
+ 2458 097d 01       		.byte	1
+ 2459 097e B2       		.byte	-78
+ 2460 097f 01       		.byte	1
+ 2461 0980 B3       		.byte	-77
+ 2462 0981 01       		.byte	1
+ 2463 0982 D2       		.byte	-46
+ 2464 0983 80       		.byte	-128
+ 2465 0984 D8       		.byte	-40
+ 2466 0985 04       		.byte	4
+ 2467 0986 D9       		.byte	-39
+ 2468 0987 04       		.byte	4
+ 2469 0988 DB       		.byte	-37
+ 2470 0989 04       		.byte	4
+ 2471 098a DC       		.byte	-36
+ 2472 098b 55       		.byte	85
+ 2473 098c DD       		.byte	-35
+ 2474 098d 40       		.byte	64
+ 2475 098e DF       		.byte	-33
+ 2476 098f 01       		.byte	1
+ 2477 0990 01       		.byte	1
+ 2478 0991 2A       		.byte	42
+ 2479 0992 03       		.byte	3
+ 2480 0993 01       		.byte	1
+ 2481 0994 05       		.byte	5
+ 2482 0995 04       		.byte	4
+ 2483 0996 06       		.byte	6
+ 2484 0997 08       		.byte	8
+ 2485 0998 0A       		.byte	10
+ 2486 0999 41       		.byte	65
+ 2487 099a 0D       		.byte	13
+ 2488 099b 04       		.byte	4
+ 2489 099c 0F       		.byte	15
+ 2490 099d 08       		.byte	8
+ 2491 099e 11       		.byte	17
+ 2492 099f 14       		.byte	20
+ 2493 09a0 12       		.byte	18
+ 2494 09a1 81       		.byte	-127
+ 2495 09a2 14       		.byte	20
+ 2496 09a3 A0       		.byte	-96
+ 2497 09a4 15       		.byte	21
+ 2498 09a5 40       		.byte	64
+ 2499 09a6 17       		.byte	23
+ 2500 09a7 10       		.byte	16
+ 2501 09a8 19       		.byte	25
+ 2502 09a9 28       		.byte	40
+ 2503 09aa 1A       		.byte	26
+ 2504 09ab 40       		.byte	64
+ 2505 09ac 1B       		.byte	27
+ 2506 09ad 02       		.byte	2
+ 2507 09ae 1D       		.byte	29
+ 2508 09af 04       		.byte	4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 45
+
+
+ 2509 09b0 1F       		.byte	31
+ 2510 09b1 04       		.byte	4
+ 2511 09b2 21       		.byte	33
+ 2512 09b3 08       		.byte	8
+ 2513 09b4 22       		.byte	34
+ 2514 09b5 20       		.byte	32
+ 2515 09b6 26       		.byte	38
+ 2516 09b7 04       		.byte	4
+ 2517 09b8 27       		.byte	39
+ 2518 09b9 10       		.byte	16
+ 2519 09ba 29       		.byte	41
+ 2520 09bb 20       		.byte	32
+ 2521 09bc 2A       		.byte	42
+ 2522 09bd 01       		.byte	1
+ 2523 09be 2B       		.byte	43
+ 2524 09bf 82       		.byte	-126
+ 2525 09c0 2F       		.byte	47
+ 2526 09c1 04       		.byte	4
+ 2527 09c2 31       		.byte	49
+ 2528 09c3 08       		.byte	8
+ 2529 09c4 32       		.byte	50
+ 2530 09c5 20       		.byte	32
+ 2531 09c6 33       		.byte	51
+ 2532 09c7 41       		.byte	65
+ 2533 09c8 34       		.byte	52
+ 2534 09c9 20       		.byte	32
+ 2535 09ca 35       		.byte	53
+ 2536 09cb 80       		.byte	-128
+ 2537 09cc 36       		.byte	54
+ 2538 09cd 04       		.byte	4
+ 2539 09ce 38       		.byte	56
+ 2540 09cf 80       		.byte	-128
+ 2541 09d0 39       		.byte	57
+ 2542 09d1 14       		.byte	20
+ 2543 09d2 3C       		.byte	60
+ 2544 09d3 20       		.byte	32
+ 2545 09d4 3D       		.byte	61
+ 2546 09d5 42       		.byte	66
+ 2547 09d6 3F       		.byte	63
+ 2548 09d7 08       		.byte	8
+ 2549 09d8 61       		.byte	97
+ 2550 09d9 20       		.byte	32
+ 2551 09da 62       		.byte	98
+ 2552 09db 08       		.byte	8
+ 2553 09dc 63       		.byte	99
+ 2554 09dd 02       		.byte	2
+ 2555 09de 74       		.byte	116
+ 2556 09df 01       		.byte	1
+ 2557 09e0 81       		.byte	-127
+ 2558 09e1 C0       		.byte	-64
+ 2559 09e2 84       		.byte	-124
+ 2560 09e3 01       		.byte	1
+ 2561 09e4 8A       		.byte	-118
+ 2562 09e5 04       		.byte	4
+ 2563 09e6 8B       		.byte	-117
+ 2564 09e7 01       		.byte	1
+ 2565 09e8 8D       		.byte	-115
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 46
+
+
+ 2566 09e9 08       		.byte	8
+ 2567 09ea C0       		.byte	-64
+ 2568 09eb 6F       		.byte	111
+ 2569 09ec C2       		.byte	-62
+ 2570 09ed 69       		.byte	105
+ 2571 09ee C4       		.byte	-60
+ 2572 09ef FF       		.byte	-1
+ 2573 09f0 CA       		.byte	-54
+ 2574 09f1 2D       		.byte	45
+ 2575 09f2 CC       		.byte	-52
+ 2576 09f3 7F       		.byte	127
+ 2577 09f4 CE       		.byte	-50
+ 2578 09f5 FE       		.byte	-2
+ 2579 09f6 D8       		.byte	-40
+ 2580 09f7 0E       		.byte	14
+ 2581 09f8 E6       		.byte	-26
+ 2582 09f9 42       		.byte	66
+ 2583 09fa 04       		.byte	4
+ 2584 09fb 4F       		.byte	79
+ 2585 09fc 06       		.byte	6
+ 2586 09fd 30       		.byte	48
+ 2587 09fe 08       		.byte	8
+ 2588 09ff 38       		.byte	56
+ 2589 0a00 0A       		.byte	10
+ 2590 0a01 43       		.byte	67
+ 2591 0a02 0C       		.byte	12
+ 2592 0a03 38       		.byte	56
+ 2593 0a04 0E       		.byte	14
+ 2594 0a05 45       		.byte	69
+ 2595 0a06 10       		.byte	16
+ 2596 0a07 08       		.byte	8
+ 2597 0a08 14       		.byte	20
+ 2598 0a09 30       		.byte	48
+ 2599 0a0a 18       		.byte	24
+ 2600 0a0b 7F       		.byte	127
+ 2601 0a0c 1E       		.byte	30
+ 2602 0a0d 08       		.byte	8
+ 2603 0a0e 20       		.byte	32
+ 2604 0a0f 20       		.byte	32
+ 2605 0a10 24       		.byte	36
+ 2606 0a11 10       		.byte	16
+ 2607 0a12 2E       		.byte	46
+ 2608 0a13 46       		.byte	70
+ 2609 0a14 30       		.byte	48
+ 2610 0a15 3E       		.byte	62
+ 2611 0a16 32       		.byte	50
+ 2612 0a17 01       		.byte	1
+ 2613 0a18 34       		.byte	52
+ 2614 0a19 70       		.byte	112
+ 2615 0a1a 38       		.byte	56
+ 2616 0a1b 08       		.byte	8
+ 2617 0a1c 3A       		.byte	58
+ 2618 0a1d 22       		.byte	34
+ 2619 0a1e 40       		.byte	64
+ 2620 0a1f 61       		.byte	97
+ 2621 0a20 41       		.byte	65
+ 2622 0a21 05       		.byte	5
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 47
+
+
+ 2623 0a22 45       		.byte	69
+ 2624 0a23 0E       		.byte	14
+ 2625 0a24 46       		.byte	70
+ 2626 0a25 0C       		.byte	12
+ 2627 0a26 47       		.byte	71
+ 2628 0a27 0B       		.byte	11
+ 2629 0a28 48       		.byte	72
+ 2630 0a29 15       		.byte	21
+ 2631 0a2a 49       		.byte	73
+ 2632 0a2b FF       		.byte	-1
+ 2633 0a2c 4A       		.byte	74
+ 2634 0a2d FF       		.byte	-1
+ 2635 0a2e 4B       		.byte	75
+ 2636 0a2f FF       		.byte	-1
+ 2637 0a30 4E       		.byte	78
+ 2638 0a31 F0       		.byte	-16
+ 2639 0a32 4F       		.byte	79
+ 2640 0a33 44       		.byte	68
+ 2641 0a34 50       		.byte	80
+ 2642 0a35 0C       		.byte	12
+ 2643 0a36 54       		.byte	84
+ 2644 0a37 01       		.byte	1
+ 2645 0a38 56       		.byte	86
+ 2646 0a39 04       		.byte	4
+ 2647 0a3a 58       		.byte	88
+ 2648 0a3b 04       		.byte	4
+ 2649 0a3c 59       		.byte	89
+ 2650 0a3d 04       		.byte	4
+ 2651 0a3e 5A       		.byte	90
+ 2652 0a3f 04       		.byte	4
+ 2653 0a40 5B       		.byte	91
+ 2654 0a41 04       		.byte	4
+ 2655 0a42 5C       		.byte	92
+ 2656 0a43 56       		.byte	86
+ 2657 0a44 5D       		.byte	93
+ 2658 0a45 66       		.byte	102
+ 2659 0a46 5F       		.byte	95
+ 2660 0a47 01       		.byte	1
+ 2661 0a48 66       		.byte	102
+ 2662 0a49 C0       		.byte	-64
+ 2663 0a4a 6A       		.byte	106
+ 2664 0a4b 40       		.byte	64
+ 2665 0a4c 6B       		.byte	107
+ 2666 0a4d 02       		.byte	2
+ 2667 0a4e 8C       		.byte	-116
+ 2668 0a4f 01       		.byte	1
+ 2669 0a50 96       		.byte	-106
+ 2670 0a51 05       		.byte	5
+ 2671 0a52 9A       		.byte	-102
+ 2672 0a53 02       		.byte	2
+ 2673 0a54 A2       		.byte	-94
+ 2674 0a55 02       		.byte	2
+ 2675 0a56 B2       		.byte	-78
+ 2676 0a57 02       		.byte	2
+ 2677 0a58 B4       		.byte	-76
+ 2678 0a59 01       		.byte	1
+ 2679 0a5a B6       		.byte	-74
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 48
+
+
+ 2680 0a5b 04       		.byte	4
+ 2681 0a5c BE       		.byte	-66
+ 2682 0a5d 04       		.byte	4
+ 2683 0a5e D4       		.byte	-44
+ 2684 0a5f 01       		.byte	1
+ 2685 0a60 D8       		.byte	-40
+ 2686 0a61 0F       		.byte	15
+ 2687 0a62 D9       		.byte	-39
+ 2688 0a63 04       		.byte	4
+ 2689 0a64 DB       		.byte	-37
+ 2690 0a65 0F       		.byte	15
+ 2691 0a66 DC       		.byte	-36
+ 2692 0a67 55       		.byte	85
+ 2693 0a68 DD       		.byte	-35
+ 2694 0a69 50       		.byte	80
+ 2695 0a6a DF       		.byte	-33
+ 2696 0a6b 01       		.byte	1
+ 2697 0a6c 01       		.byte	1
+ 2698 0a6d 20       		.byte	32
+ 2699 0a6e 02       		.byte	2
+ 2700 0a6f 20       		.byte	32
+ 2701 0a70 03       		.byte	3
+ 2702 0a71 02       		.byte	2
+ 2703 0a72 05       		.byte	5
+ 2704 0a73 40       		.byte	64
+ 2705 0a74 08       		.byte	8
+ 2706 0a75 12       		.byte	18
+ 2707 0a76 09       		.byte	9
+ 2708 0a77 08       		.byte	8
+ 2709 0a78 0B       		.byte	11
+ 2710 0a79 01       		.byte	1
+ 2711 0a7a 0E       		.byte	14
+ 2712 0a7b 20       		.byte	32
+ 2713 0a7c 0F       		.byte	15
+ 2714 0a7d 08       		.byte	8
+ 2715 0a7e 10       		.byte	16
+ 2716 0a7f 82       		.byte	-126
+ 2717 0a80 13       		.byte	19
+ 2718 0a81 08       		.byte	8
+ 2719 0a82 15       		.byte	21
+ 2720 0a83 01       		.byte	1
+ 2721 0a84 19       		.byte	25
+ 2722 0a85 20       		.byte	32
+ 2723 0a86 1B       		.byte	27
+ 2724 0a87 07       		.byte	7
+ 2725 0a88 1C       		.byte	28
+ 2726 0a89 04       		.byte	4
+ 2727 0a8a 1D       		.byte	29
+ 2728 0a8b 40       		.byte	64
+ 2729 0a8c 1F       		.byte	31
+ 2730 0a8d 04       		.byte	4
+ 2731 0a8e 28       		.byte	40
+ 2732 0a8f 44       		.byte	68
+ 2733 0a90 2C       		.byte	44
+ 2734 0a91 44       		.byte	68
+ 2735 0a92 31       		.byte	49
+ 2736 0a93 01       		.byte	1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 49
+
+
+ 2737 0a94 32       		.byte	50
+ 2738 0a95 08       		.byte	8
+ 2739 0a96 33       		.byte	51
+ 2740 0a97 40       		.byte	64
+ 2741 0a98 35       		.byte	53
+ 2742 0a99 01       		.byte	1
+ 2743 0a9a 36       		.byte	54
+ 2744 0a9b 08       		.byte	8
+ 2745 0a9c 38       		.byte	56
+ 2746 0a9d 40       		.byte	64
+ 2747 0a9e 3A       		.byte	58
+ 2748 0a9f 08       		.byte	8
+ 2749 0aa0 3C       		.byte	60
+ 2750 0aa1 50       		.byte	80
+ 2751 0aa2 3E       		.byte	62
+ 2752 0aa3 0C       		.byte	12
+ 2753 0aa4 43       		.byte	67
+ 2754 0aa5 80       		.byte	-128
+ 2755 0aa6 48       		.byte	72
+ 2756 0aa7 09       		.byte	9
+ 2757 0aa8 4B       		.byte	75
+ 2758 0aa9 04       		.byte	4
+ 2759 0aaa 50       		.byte	80
+ 2760 0aab 40       		.byte	64
+ 2761 0aac 52       		.byte	82
+ 2762 0aad 04       		.byte	4
+ 2763 0aae 58       		.byte	88
+ 2764 0aaf 01       		.byte	1
+ 2765 0ab0 59       		.byte	89
+ 2766 0ab1 84       		.byte	-124
+ 2767 0ab2 5B       		.byte	91
+ 2768 0ab3 20       		.byte	32
+ 2769 0ab4 5E       		.byte	94
+ 2770 0ab5 40       		.byte	64
+ 2771 0ab6 63       		.byte	99
+ 2772 0ab7 40       		.byte	64
+ 2773 0ab8 7E       		.byte	126
+ 2774 0ab9 40       		.byte	64
+ 2775 0aba 80       		.byte	-128
+ 2776 0abb 40       		.byte	64
+ 2777 0abc 82       		.byte	-126
+ 2778 0abd 08       		.byte	8
+ 2779 0abe 83       		.byte	-125
+ 2780 0abf 20       		.byte	32
+ 2781 0ac0 85       		.byte	-123
+ 2782 0ac1 80       		.byte	-128
+ 2783 0ac2 88       		.byte	-120
+ 2784 0ac3 05       		.byte	5
+ 2785 0ac4 8B       		.byte	-117
+ 2786 0ac5 44       		.byte	68
+ 2787 0ac6 8C       		.byte	-116
+ 2788 0ac7 54       		.byte	84
+ 2789 0ac8 8E       		.byte	-114
+ 2790 0ac9 40       		.byte	64
+ 2791 0aca 8F       		.byte	-113
+ 2792 0acb 40       		.byte	64
+ 2793 0acc 90       		.byte	-112
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 50
+
+
+ 2794 0acd 40       		.byte	64
+ 2795 0ace 91       		.byte	-111
+ 2796 0acf 01       		.byte	1
+ 2797 0ad0 92       		.byte	-110
+ 2798 0ad1 80       		.byte	-128
+ 2799 0ad2 93       		.byte	-109
+ 2800 0ad3 01       		.byte	1
+ 2801 0ad4 94       		.byte	-108
+ 2802 0ad5 04       		.byte	4
+ 2803 0ad6 96       		.byte	-106
+ 2804 0ad7 04       		.byte	4
+ 2805 0ad8 97       		.byte	-105
+ 2806 0ad9 0C       		.byte	12
+ 2807 0ada 98       		.byte	-104
+ 2808 0adb 52       		.byte	82
+ 2809 0adc 99       		.byte	-103
+ 2810 0add 05       		.byte	5
+ 2811 0ade 9B       		.byte	-101
+ 2812 0adf 48       		.byte	72
+ 2813 0ae0 9C       		.byte	-100
+ 2814 0ae1 04       		.byte	4
+ 2815 0ae2 9D       		.byte	-99
+ 2816 0ae3 20       		.byte	32
+ 2817 0ae4 9E       		.byte	-98
+ 2818 0ae5 04       		.byte	4
+ 2819 0ae6 A0       		.byte	-96
+ 2820 0ae7 8B       		.byte	-117
+ 2821 0ae8 A1       		.byte	-95
+ 2822 0ae9 08       		.byte	8
+ 2823 0aea A2       		.byte	-94
+ 2824 0aeb 38       		.byte	56
+ 2825 0aec A3       		.byte	-93
+ 2826 0aed 80       		.byte	-128
+ 2827 0aee A7       		.byte	-89
+ 2828 0aef 01       		.byte	1
+ 2829 0af0 A8       		.byte	-88
+ 2830 0af1 08       		.byte	8
+ 2831 0af2 AB       		.byte	-85
+ 2832 0af3 20       		.byte	32
+ 2833 0af4 AC       		.byte	-84
+ 2834 0af5 12       		.byte	18
+ 2835 0af6 AF       		.byte	-81
+ 2836 0af7 10       		.byte	16
+ 2837 0af8 B0       		.byte	-80
+ 2838 0af9 40       		.byte	64
+ 2839 0afa B5       		.byte	-75
+ 2840 0afb 01       		.byte	1
+ 2841 0afc B6       		.byte	-74
+ 2842 0afd 04       		.byte	4
+ 2843 0afe C0       		.byte	-64
+ 2844 0aff 87       		.byte	-121
+ 2845 0b00 C2       		.byte	-62
+ 2846 0b01 6F       		.byte	111
+ 2847 0b02 C4       		.byte	-60
+ 2848 0b03 1D       		.byte	29
+ 2849 0b04 CA       		.byte	-54
+ 2850 0b05 A5       		.byte	-91
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 51
+
+
+ 2851 0b06 CC       		.byte	-52
+ 2852 0b07 CB       		.byte	-53
+ 2853 0b08 CE       		.byte	-50
+ 2854 0b09 7A       		.byte	122
+ 2855 0b0a D0       		.byte	-48
+ 2856 0b0b 08       		.byte	8
+ 2857 0b0c D2       		.byte	-46
+ 2858 0b0d 0C       		.byte	12
+ 2859 0b0e D6       		.byte	-42
+ 2860 0b0f 1F       		.byte	31
+ 2861 0b10 D8       		.byte	-40
+ 2862 0b11 01       		.byte	1
+ 2863 0b12 DE       		.byte	-34
+ 2864 0b13 80       		.byte	-128
+ 2865 0b14 E0       		.byte	-32
+ 2866 0b15 01       		.byte	1
+ 2867 0b16 E2       		.byte	-30
+ 2868 0b17 28       		.byte	40
+ 2869 0b18 E4       		.byte	-28
+ 2870 0b19 02       		.byte	2
+ 2871 0b1a E6       		.byte	-26
+ 2872 0b1b 01       		.byte	1
+ 2873 0b1c EA       		.byte	-22
+ 2874 0b1d 05       		.byte	5
+ 2875 0b1e EC       		.byte	-20
+ 2876 0b1f 08       		.byte	8
+ 2877 0b20 02       		.byte	2
+ 2878 0b21 02       		.byte	2
+ 2879 0b22 04       		.byte	4
+ 2880 0b23 01       		.byte	1
+ 2881 0b24 16       		.byte	22
+ 2882 0b25 01       		.byte	1
+ 2883 0b26 26       		.byte	38
+ 2884 0b27 04       		.byte	4
+ 2885 0b28 2E       		.byte	46
+ 2886 0b29 04       		.byte	4
+ 2887 0b2a 32       		.byte	50
+ 2888 0b2b 03       		.byte	3
+ 2889 0b2c 36       		.byte	54
+ 2890 0b2d 04       		.byte	4
+ 2891 0b2e 3E       		.byte	62
+ 2892 0b2f 40       		.byte	64
+ 2893 0b30 40       		.byte	64
+ 2894 0b31 02       		.byte	2
+ 2895 0b32 47       		.byte	71
+ 2896 0b33 40       		.byte	64
+ 2897 0b34 49       		.byte	73
+ 2898 0b35 FF       		.byte	-1
+ 2899 0b36 4A       		.byte	74
+ 2900 0b37 07       		.byte	7
+ 2901 0b38 4B       		.byte	75
+ 2902 0b39 FF       		.byte	-1
+ 2903 0b3a 4C       		.byte	76
+ 2904 0b3b 40       		.byte	64
+ 2905 0b3c 4D       		.byte	77
+ 2906 0b3d 20       		.byte	32
+ 2907 0b3e 4E       		.byte	78
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 52
+
+
+ 2908 0b3f F0       		.byte	-16
+ 2909 0b40 4F       		.byte	79
+ 2910 0b41 05       		.byte	5
+ 2911 0b42 50       		.byte	80
+ 2912 0b43 08       		.byte	8
+ 2913 0b44 54       		.byte	84
+ 2914 0b45 18       		.byte	24
+ 2915 0b46 58       		.byte	88
+ 2916 0b47 04       		.byte	4
+ 2917 0b48 59       		.byte	89
+ 2918 0b49 04       		.byte	4
+ 2919 0b4a 5A       		.byte	90
+ 2920 0b4b 04       		.byte	4
+ 2921 0b4c 5B       		.byte	91
+ 2922 0b4d 04       		.byte	4
+ 2923 0b4e 5C       		.byte	92
+ 2924 0b4f 59       		.byte	89
+ 2925 0b50 5D       		.byte	93
+ 2926 0b51 66       		.byte	102
+ 2927 0b52 5F       		.byte	95
+ 2928 0b53 01       		.byte	1
+ 2929 0b54 60       		.byte	96
+ 2930 0b55 40       		.byte	64
+ 2931 0b56 61       		.byte	97
+ 2932 0b57 A8       		.byte	-88
+ 2933 0b58 62       		.byte	98
+ 2934 0b59 40       		.byte	64
+ 2935 0b5a 63       		.byte	99
+ 2936 0b5b 20       		.byte	32
+ 2937 0b5c 84       		.byte	-124
+ 2938 0b5d 01       		.byte	1
+ 2939 0b5e 85       		.byte	-123
+ 2940 0b5f 05       		.byte	5
+ 2941 0b60 89       		.byte	-119
+ 2942 0b61 10       		.byte	16
+ 2943 0b62 8D       		.byte	-115
+ 2944 0b63 0F       		.byte	15
+ 2945 0b64 93       		.byte	-109
+ 2946 0b65 4F       		.byte	79
+ 2947 0b66 95       		.byte	-107
+ 2948 0b67 30       		.byte	48
+ 2949 0b68 98       		.byte	-104
+ 2950 0b69 01       		.byte	1
+ 2951 0b6a 99       		.byte	-103
+ 2952 0b6b CF       		.byte	-49
+ 2953 0b6c 9B       		.byte	-101
+ 2954 0b6d 30       		.byte	48
+ 2955 0b6e 9D       		.byte	-99
+ 2956 0b6f 0A       		.byte	10
+ 2957 0b70 A1       		.byte	-95
+ 2958 0b71 20       		.byte	32
+ 2959 0b72 A4       		.byte	-92
+ 2960 0b73 02       		.byte	2
+ 2961 0b74 A5       		.byte	-91
+ 2962 0b75 FF       		.byte	-1
+ 2963 0b76 A9       		.byte	-87
+ 2964 0b77 BC       		.byte	-68
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 53
+
+
+ 2965 0b78 AB       		.byte	-85
+ 2966 0b79 43       		.byte	67
+ 2967 0b7a AD       		.byte	-83
+ 2968 0b7b F0       		.byte	-16
+ 2969 0b7c AF       		.byte	-81
+ 2970 0b7d 0F       		.byte	15
+ 2971 0b7e B1       		.byte	-79
+ 2972 0b7f 70       		.byte	112
+ 2973 0b80 B2       		.byte	-78
+ 2974 0b81 02       		.byte	2
+ 2975 0b82 B3       		.byte	-77
+ 2976 0b83 80       		.byte	-128
+ 2977 0b84 B4       		.byte	-76
+ 2978 0b85 01       		.byte	1
+ 2979 0b86 B5       		.byte	-75
+ 2980 0b87 3C       		.byte	60
+ 2981 0b88 B7       		.byte	-73
+ 2982 0b89 03       		.byte	3
+ 2983 0b8a B8       		.byte	-72
+ 2984 0b8b 20       		.byte	32
+ 2985 0b8c BB       		.byte	-69
+ 2986 0b8d 20       		.byte	32
+ 2987 0b8e BE       		.byte	-66
+ 2988 0b8f 14       		.byte	20
+ 2989 0b90 BF       		.byte	-65
+ 2990 0b91 04       		.byte	4
+ 2991 0b92 D6       		.byte	-42
+ 2992 0b93 02       		.byte	2
+ 2993 0b94 D7       		.byte	-41
+ 2994 0b95 12       		.byte	18
+ 2995 0b96 D8       		.byte	-40
+ 2996 0b97 04       		.byte	4
+ 2997 0b98 D9       		.byte	-39
+ 2998 0b99 04       		.byte	4
+ 2999 0b9a DB       		.byte	-37
+ 3000 0b9b 04       		.byte	4
+ 3001 0b9c DC       		.byte	-36
+ 3002 0b9d 60       		.byte	96
+ 3003 0b9e DD       		.byte	-35
+ 3004 0b9f 60       		.byte	96
+ 3005 0ba0 DF       		.byte	-33
+ 3006 0ba1 01       		.byte	1
+ 3007 0ba2 00       		.byte	0
+ 3008 0ba3 08       		.byte	8
+ 3009 0ba4 04       		.byte	4
+ 3010 0ba5 04       		.byte	4
+ 3011 0ba6 06       		.byte	6
+ 3012 0ba7 60       		.byte	96
+ 3013 0ba8 09       		.byte	9
+ 3014 0ba9 10       		.byte	16
+ 3015 0baa 0E       		.byte	14
+ 3016 0bab 20       		.byte	32
+ 3017 0bac 13       		.byte	19
+ 3018 0bad 04       		.byte	4
+ 3019 0bae 16       		.byte	22
+ 3020 0baf 10       		.byte	16
+ 3021 0bb0 17       		.byte	23
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 54
+
+
+ 3022 0bb1 80       		.byte	-128
+ 3023 0bb2 19       		.byte	25
+ 3024 0bb3 14       		.byte	20
+ 3025 0bb4 1D       		.byte	29
+ 3026 0bb5 40       		.byte	64
+ 3027 0bb6 1E       		.byte	30
+ 3028 0bb7 20       		.byte	32
+ 3029 0bb8 22       		.byte	34
+ 3030 0bb9 24       		.byte	36
+ 3031 0bba 23       		.byte	35
+ 3032 0bbb 82       		.byte	-126
+ 3033 0bbc 28       		.byte	40
+ 3034 0bbd 10       		.byte	16
+ 3035 0bbe 29       		.byte	41
+ 3036 0bbf 28       		.byte	40
+ 3037 0bc0 2A       		.byte	42
+ 3038 0bc1 02       		.byte	2
+ 3039 0bc2 2B       		.byte	43
+ 3040 0bc3 01       		.byte	1
+ 3041 0bc4 2C       		.byte	44
+ 3042 0bc5 44       		.byte	68
+ 3043 0bc6 30       		.byte	48
+ 3044 0bc7 02       		.byte	2
+ 3045 0bc8 31       		.byte	49
+ 3046 0bc9 08       		.byte	8
+ 3047 0bca 32       		.byte	50
+ 3048 0bcb A0       		.byte	-96
+ 3049 0bcc 35       		.byte	53
+ 3050 0bcd 01       		.byte	1
+ 3051 0bce 36       		.byte	54
+ 3052 0bcf 08       		.byte	8
+ 3053 0bd0 37       		.byte	55
+ 3054 0bd1 40       		.byte	64
+ 3055 0bd2 38       		.byte	56
+ 3056 0bd3 20       		.byte	32
+ 3057 0bd4 39       		.byte	57
+ 3058 0bd5 08       		.byte	8
+ 3059 0bd6 3B       		.byte	59
+ 3060 0bd7 40       		.byte	64
+ 3061 0bd8 3C       		.byte	60
+ 3062 0bd9 40       		.byte	64
+ 3063 0bda 3E       		.byte	62
+ 3064 0bdb 04       		.byte	4
+ 3065 0bdc 46       		.byte	70
+ 3066 0bdd 08       		.byte	8
+ 3067 0bde 54       		.byte	84
+ 3068 0bdf 40       		.byte	64
+ 3069 0be0 55       		.byte	85
+ 3070 0be1 02       		.byte	2
+ 3071 0be2 56       		.byte	86
+ 3072 0be3 80       		.byte	-128
+ 3073 0be4 57       		.byte	87
+ 3074 0be5 C0       		.byte	-64
+ 3075 0be6 5A       		.byte	90
+ 3076 0be7 08       		.byte	8
+ 3077 0be8 5F       		.byte	95
+ 3078 0be9 02       		.byte	2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 55
+
+
+ 3079 0bea 65       		.byte	101
+ 3080 0beb 40       		.byte	64
+ 3081 0bec 67       		.byte	103
+ 3082 0bed 08       		.byte	8
+ 3083 0bee 69       		.byte	105
+ 3084 0bef 04       		.byte	4
+ 3085 0bf0 6A       		.byte	106
+ 3086 0bf1 20       		.byte	32
+ 3087 0bf2 6B       		.byte	107
+ 3088 0bf3 01       		.byte	1
+ 3089 0bf4 6E       		.byte	110
+ 3090 0bf5 90       		.byte	-112
+ 3091 0bf6 70       		.byte	112
+ 3092 0bf7 90       		.byte	-112
+ 3093 0bf8 71       		.byte	113
+ 3094 0bf9 08       		.byte	8
+ 3095 0bfa 72       		.byte	114
+ 3096 0bfb 02       		.byte	2
+ 3097 0bfc 73       		.byte	115
+ 3098 0bfd 08       		.byte	8
+ 3099 0bfe 81       		.byte	-127
+ 3100 0bff 20       		.byte	32
+ 3101 0c00 88       		.byte	-120
+ 3102 0c01 40       		.byte	64
+ 3103 0c02 8A       		.byte	-118
+ 3104 0c03 40       		.byte	64
+ 3105 0c04 8E       		.byte	-114
+ 3106 0c05 01       		.byte	1
+ 3107 0c06 90       		.byte	-112
+ 3108 0c07 40       		.byte	64
+ 3109 0c08 91       		.byte	-111
+ 3110 0c09 09       		.byte	9
+ 3111 0c0a 92       		.byte	-110
+ 3112 0c0b 80       		.byte	-128
+ 3113 0c0c 93       		.byte	-109
+ 3114 0c0d 41       		.byte	65
+ 3115 0c0e 95       		.byte	-107
+ 3116 0c0f 04       		.byte	4
+ 3117 0c10 96       		.byte	-106
+ 3118 0c11 34       		.byte	52
+ 3119 0c12 97       		.byte	-105
+ 3120 0c13 20       		.byte	32
+ 3121 0c14 98       		.byte	-104
+ 3122 0c15 42       		.byte	66
+ 3123 0c16 99       		.byte	-103
+ 3124 0c17 09       		.byte	9
+ 3125 0c18 9A       		.byte	-102
+ 3126 0c19 58       		.byte	88
+ 3127 0c1a 9B       		.byte	-101
+ 3128 0c1b 40       		.byte	64
+ 3129 0c1c 9C       		.byte	-100
+ 3130 0c1d 04       		.byte	4
+ 3131 0c1e 9D       		.byte	-99
+ 3132 0c1f 10       		.byte	16
+ 3133 0c20 9E       		.byte	-98
+ 3134 0c21 A5       		.byte	-91
+ 3135 0c22 9F       		.byte	-97
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 56
+
+
+ 3136 0c23 A1       		.byte	-95
+ 3137 0c24 A0       		.byte	-96
+ 3138 0c25 15       		.byte	21
+ 3139 0c26 A1       		.byte	-95
+ 3140 0c27 10       		.byte	16
+ 3141 0c28 A2       		.byte	-94
+ 3142 0c29 8C       		.byte	-116
+ 3143 0c2a A5       		.byte	-91
+ 3144 0c2b 22       		.byte	34
+ 3145 0c2c A6       		.byte	-90
+ 3146 0c2d 20       		.byte	32
+ 3147 0c2e A7       		.byte	-89
+ 3148 0c2f 40       		.byte	64
+ 3149 0c30 A8       		.byte	-88
+ 3150 0c31 08       		.byte	8
+ 3151 0c32 AA       		.byte	-86
+ 3152 0c33 01       		.byte	1
+ 3153 0c34 AB       		.byte	-85
+ 3154 0c35 02       		.byte	2
+ 3155 0c36 AF       		.byte	-81
+ 3156 0c37 20       		.byte	32
+ 3157 0c38 B0       		.byte	-80
+ 3158 0c39 81       		.byte	-127
+ 3159 0c3a B2       		.byte	-78
+ 3160 0c3b 10       		.byte	16
+ 3161 0c3c B6       		.byte	-74
+ 3162 0c3d 20       		.byte	32
+ 3163 0c3e C0       		.byte	-64
+ 3164 0c3f 34       		.byte	52
+ 3165 0c40 C2       		.byte	-62
+ 3166 0c41 22       		.byte	34
+ 3167 0c42 C4       		.byte	-60
+ 3168 0c43 A4       		.byte	-92
+ 3169 0c44 CA       		.byte	-54
+ 3170 0c45 AF       		.byte	-81
+ 3171 0c46 CC       		.byte	-52
+ 3172 0c47 DF       		.byte	-33
+ 3173 0c48 CE       		.byte	-50
+ 3174 0c49 5E       		.byte	94
+ 3175 0c4a D0       		.byte	-48
+ 3176 0c4b 20       		.byte	32
+ 3177 0c4c D6       		.byte	-42
+ 3178 0c4d 82       		.byte	-126
+ 3179 0c4e D8       		.byte	-40
+ 3180 0c4f 30       		.byte	48
+ 3181 0c50 E2       		.byte	-30
+ 3182 0c51 04       		.byte	4
+ 3183 0c52 E6       		.byte	-26
+ 3184 0c53 02       		.byte	2
+ 3185 0c54 EA       		.byte	-22
+ 3186 0c55 06       		.byte	6
+ 3187 0c56 EE       		.byte	-18
+ 3188 0c57 4D       		.byte	77
+ 3189 0c58 82       		.byte	-126
+ 3190 0c59 01       		.byte	1
+ 3191 0c5a A5       		.byte	-91
+ 3192 0c5b 01       		.byte	1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 57
+
+
+ 3193 0c5c B1       		.byte	-79
+ 3194 0c5d 01       		.byte	1
+ 3195 0c5e B2       		.byte	-78
+ 3196 0c5f 01       		.byte	1
+ 3197 0c60 B8       		.byte	-72
+ 3198 0c61 20       		.byte	32
+ 3199 0c62 BE       		.byte	-66
+ 3200 0c63 10       		.byte	16
+ 3201 0c64 BF       		.byte	-65
+ 3202 0c65 01       		.byte	1
+ 3203 0c66 D8       		.byte	-40
+ 3204 0c67 04       		.byte	4
+ 3205 0c68 D9       		.byte	-39
+ 3206 0c69 04       		.byte	4
+ 3207 0c6a DB       		.byte	-37
+ 3208 0c6b 04       		.byte	4
+ 3209 0c6c DC       		.byte	-36
+ 3210 0c6d 02       		.byte	2
+ 3211 0c6e DF       		.byte	-33
+ 3212 0c6f 01       		.byte	1
+ 3213 0c70 02       		.byte	2
+ 3214 0c71 40       		.byte	64
+ 3215 0c72 04       		.byte	4
+ 3216 0c73 02       		.byte	2
+ 3217 0c74 07       		.byte	7
+ 3218 0c75 25       		.byte	37
+ 3219 0c76 0E       		.byte	14
+ 3220 0c77 A1       		.byte	-95
+ 3221 0c78 0F       		.byte	15
+ 3222 0c79 08       		.byte	8
+ 3223 0c7a 17       		.byte	23
+ 3224 0c7b 5A       		.byte	90
+ 3225 0c7c 18       		.byte	24
+ 3226 0c7d 10       		.byte	16
+ 3227 0c7e 19       		.byte	25
+ 3228 0c7f 28       		.byte	40
+ 3229 0c80 1D       		.byte	29
+ 3230 0c81 40       		.byte	64
+ 3231 0c82 1E       		.byte	30
+ 3232 0c83 A0       		.byte	-96
+ 3233 0c84 1F       		.byte	31
+ 3234 0c85 08       		.byte	8
+ 3235 0c86 22       		.byte	34
+ 3236 0c87 02       		.byte	2
+ 3237 0c88 25       		.byte	37
+ 3238 0c89 20       		.byte	32
+ 3239 0c8a 27       		.byte	39
+ 3240 0c8b 40       		.byte	64
+ 3241 0c8c 28       		.byte	40
+ 3242 0c8d 20       		.byte	32
+ 3243 0c8e 2C       		.byte	44
+ 3244 0c8f 20       		.byte	32
+ 3245 0c90 2E       		.byte	46
+ 3246 0c91 01       		.byte	1
+ 3247 0c92 2F       		.byte	47
+ 3248 0c93 0A       		.byte	10
+ 3249 0c94 36       		.byte	54
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 58
+
+
+ 3250 0c95 80       		.byte	-128
+ 3251 0c96 37       		.byte	55
+ 3252 0c97 2A       		.byte	42
+ 3253 0c98 3C       		.byte	60
+ 3254 0c99 04       		.byte	4
+ 3255 0c9a 3D       		.byte	61
+ 3256 0c9b 02       		.byte	2
+ 3257 0c9c 3E       		.byte	62
+ 3258 0c9d 10       		.byte	16
+ 3259 0c9e 45       		.byte	69
+ 3260 0c9f 50       		.byte	80
+ 3261 0ca0 47       		.byte	71
+ 3262 0ca1 04       		.byte	4
+ 3263 0ca2 4D       		.byte	77
+ 3264 0ca3 01       		.byte	1
+ 3265 0ca4 4E       		.byte	78
+ 3266 0ca5 09       		.byte	9
+ 3267 0ca6 4F       		.byte	79
+ 3268 0ca7 08       		.byte	8
+ 3269 0ca8 55       		.byte	85
+ 3270 0ca9 81       		.byte	-127
+ 3271 0caa 56       		.byte	86
+ 3272 0cab 08       		.byte	8
+ 3273 0cac 57       		.byte	87
+ 3274 0cad 20       		.byte	32
+ 3275 0cae 69       		.byte	105
+ 3276 0caf 2A       		.byte	42
+ 3277 0cb0 6A       		.byte	106
+ 3278 0cb1 80       		.byte	-128
+ 3279 0cb2 70       		.byte	112
+ 3280 0cb3 40       		.byte	64
+ 3281 0cb4 71       		.byte	113
+ 3282 0cb5 16       		.byte	22
+ 3283 0cb6 76       		.byte	118
+ 3284 0cb7 40       		.byte	64
+ 3285 0cb8 81       		.byte	-127
+ 3286 0cb9 04       		.byte	4
+ 3287 0cba 82       		.byte	-126
+ 3288 0cbb 40       		.byte	64
+ 3289 0cbc 83       		.byte	-125
+ 3290 0cbd 21       		.byte	33
+ 3291 0cbe 85       		.byte	-123
+ 3292 0cbf 34       		.byte	52
+ 3293 0cc0 8A       		.byte	-118
+ 3294 0cc1 10       		.byte	16
+ 3295 0cc2 8E       		.byte	-114
+ 3296 0cc3 40       		.byte	64
+ 3297 0cc4 90       		.byte	-112
+ 3298 0cc5 47       		.byte	71
+ 3299 0cc6 92       		.byte	-110
+ 3300 0cc7 19       		.byte	25
+ 3301 0cc8 93       		.byte	-109
+ 3302 0cc9 48       		.byte	72
+ 3303 0cca 94       		.byte	-108
+ 3304 0ccb 20       		.byte	32
+ 3305 0ccc 95       		.byte	-107
+ 3306 0ccd 40       		.byte	64
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 59
+
+
+ 3307 0cce 97       		.byte	-105
+ 3308 0ccf 02       		.byte	2
+ 3309 0cd0 98       		.byte	-104
+ 3310 0cd1 C0       		.byte	-64
+ 3311 0cd2 99       		.byte	-103
+ 3312 0cd3 80       		.byte	-128
+ 3313 0cd4 9A       		.byte	-102
+ 3314 0cd5 02       		.byte	2
+ 3315 0cd6 9B       		.byte	-101
+ 3316 0cd7 36       		.byte	54
+ 3317 0cd8 9C       		.byte	-100
+ 3318 0cd9 04       		.byte	4
+ 3319 0cda 9D       		.byte	-99
+ 3320 0cdb 08       		.byte	8
+ 3321 0cdc 9E       		.byte	-98
+ 3322 0cdd 08       		.byte	8
+ 3323 0cde 9F       		.byte	-97
+ 3324 0cdf 08       		.byte	8
+ 3325 0ce0 A0       		.byte	-96
+ 3326 0ce1 30       		.byte	48
+ 3327 0ce2 A1       		.byte	-95
+ 3328 0ce3 40       		.byte	64
+ 3329 0ce4 A2       		.byte	-94
+ 3330 0ce5 08       		.byte	8
+ 3331 0ce6 A3       		.byte	-93
+ 3332 0ce7 02       		.byte	2
+ 3333 0ce8 A4       		.byte	-92
+ 3334 0ce9 04       		.byte	4
+ 3335 0cea A5       		.byte	-91
+ 3336 0ceb 10       		.byte	16
+ 3337 0cec A6       		.byte	-90
+ 3338 0ced 80       		.byte	-128
+ 3339 0cee A7       		.byte	-89
+ 3340 0cef 24       		.byte	36
+ 3341 0cf0 AA       		.byte	-86
+ 3342 0cf1 42       		.byte	66
+ 3343 0cf2 AB       		.byte	-85
+ 3344 0cf3 08       		.byte	8
+ 3345 0cf4 AE       		.byte	-82
+ 3346 0cf5 10       		.byte	16
+ 3347 0cf6 B0       		.byte	-80
+ 3348 0cf7 40       		.byte	64
+ 3349 0cf8 B2       		.byte	-78
+ 3350 0cf9 20       		.byte	32
+ 3351 0cfa C0       		.byte	-64
+ 3352 0cfb F8       		.byte	-8
+ 3353 0cfc C2       		.byte	-62
+ 3354 0cfd F0       		.byte	-16
+ 3355 0cfe C4       		.byte	-60
+ 3356 0cff F0       		.byte	-16
+ 3357 0d00 CA       		.byte	-54
+ 3358 0d01 F2       		.byte	-14
+ 3359 0d02 CC       		.byte	-52
+ 3360 0d03 F0       		.byte	-16
+ 3361 0d04 CE       		.byte	-50
+ 3362 0d05 E0       		.byte	-32
+ 3363 0d06 D0       		.byte	-48
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 60
+
+
+ 3364 0d07 70       		.byte	112
+ 3365 0d08 D2       		.byte	-46
+ 3366 0d09 30       		.byte	48
+ 3367 0d0a E0       		.byte	-32
+ 3368 0d0b 2A       		.byte	42
+ 3369 0d0c E4       		.byte	-28
+ 3370 0d0d 21       		.byte	33
+ 3371 0d0e E6       		.byte	-26
+ 3372 0d0f 40       		.byte	64
+ 3373 0d10 E8       		.byte	-24
+ 3374 0d11 80       		.byte	-128
+ 3375 0d12 EA       		.byte	-22
+ 3376 0d13 22       		.byte	34
+ 3377 0d14 0B       		.byte	11
+ 3378 0d15 01       		.byte	1
+ 3379 0d16 11       		.byte	17
+ 3380 0d17 04       		.byte	4
+ 3381 0d18 1B       		.byte	27
+ 3382 0d19 07       		.byte	7
+ 3383 0d1a 31       		.byte	49
+ 3384 0d1b 02       		.byte	2
+ 3385 0d1c 35       		.byte	53
+ 3386 0d1d 01       		.byte	1
+ 3387 0d1e 37       		.byte	55
+ 3388 0d1f 04       		.byte	4
+ 3389 0d20 40       		.byte	64
+ 3390 0d21 30       		.byte	48
+ 3391 0d22 41       		.byte	65
+ 3392 0d23 02       		.byte	2
+ 3393 0d24 45       		.byte	69
+ 3394 0d25 D1       		.byte	-47
+ 3395 0d26 46       		.byte	70
+ 3396 0d27 20       		.byte	32
+ 3397 0d28 48       		.byte	72
+ 3398 0d29 0B       		.byte	11
+ 3399 0d2a 49       		.byte	73
+ 3400 0d2b FF       		.byte	-1
+ 3401 0d2c 4A       		.byte	74
+ 3402 0d2d FF       		.byte	-1
+ 3403 0d2e 4B       		.byte	75
+ 3404 0d2f FF       		.byte	-1
+ 3405 0d30 4D       		.byte	77
+ 3406 0d31 A0       		.byte	-96
+ 3407 0d32 4F       		.byte	79
+ 3408 0d33 04       		.byte	4
+ 3409 0d34 50       		.byte	80
+ 3410 0d35 18       		.byte	24
+ 3411 0d36 54       		.byte	84
+ 3412 0d37 05       		.byte	5
+ 3413 0d38 58       		.byte	88
+ 3414 0d39 04       		.byte	4
+ 3415 0d3a 59       		.byte	89
+ 3416 0d3b 04       		.byte	4
+ 3417 0d3c 5A       		.byte	90
+ 3418 0d3d 04       		.byte	4
+ 3419 0d3e 5B       		.byte	91
+ 3420 0d3f 04       		.byte	4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 61
+
+
+ 3421 0d40 5C       		.byte	92
+ 3422 0d41 25       		.byte	37
+ 3423 0d42 5D       		.byte	93
+ 3424 0d43 22       		.byte	34
+ 3425 0d44 5F       		.byte	95
+ 3426 0d45 01       		.byte	1
+ 3427 0d46 60       		.byte	96
+ 3428 0d47 40       		.byte	64
+ 3429 0d48 62       		.byte	98
+ 3430 0d49 C0       		.byte	-64
+ 3431 0d4a 64       		.byte	100
+ 3432 0d4b 40       		.byte	64
+ 3433 0d4c 65       		.byte	101
+ 3434 0d4d 40       		.byte	64
+ 3435 0d4e 66       		.byte	102
+ 3436 0d4f C0       		.byte	-64
+ 3437 0d50 68       		.byte	104
+ 3438 0d51 C0       		.byte	-64
+ 3439 0d52 6A       		.byte	106
+ 3440 0d53 C0       		.byte	-64
+ 3441 0d54 6C       		.byte	108
+ 3442 0d55 C0       		.byte	-64
+ 3443 0d56 6E       		.byte	110
+ 3444 0d57 C0       		.byte	-64
+ 3445 0d58 81       		.byte	-127
+ 3446 0d59 21       		.byte	33
+ 3447 0d5a 83       		.byte	-125
+ 3448 0d5b 9E       		.byte	-98
+ 3449 0d5c 84       		.byte	-124
+ 3450 0d5d 20       		.byte	32
+ 3451 0d5e 85       		.byte	-123
+ 3452 0d5f C0       		.byte	-64
+ 3453 0d60 86       		.byte	-122
+ 3454 0d61 45       		.byte	69
+ 3455 0d62 89       		.byte	-119
+ 3456 0d63 11       		.byte	17
+ 3457 0d64 8B       		.byte	-117
+ 3458 0d65 62       		.byte	98
+ 3459 0d66 8C       		.byte	-116
+ 3460 0d67 0A       		.byte	10
+ 3461 0d68 8D       		.byte	-115
+ 3462 0d69 0C       		.byte	12
+ 3463 0d6a 8E       		.byte	-114
+ 3464 0d6b 54       		.byte	84
+ 3465 0d6c 8F       		.byte	-113
+ 3466 0d6d 10       		.byte	16
+ 3467 0d6e 92       		.byte	-110
+ 3468 0d6f 08       		.byte	8
+ 3469 0d70 94       		.byte	-108
+ 3470 0d71 53       		.byte	83
+ 3471 0d72 95       		.byte	-107
+ 3472 0d73 70       		.byte	112
+ 3473 0d74 96       		.byte	-106
+ 3474 0d75 0C       		.byte	12
+ 3475 0d76 97       		.byte	-105
+ 3476 0d77 0F       		.byte	15
+ 3477 0d78 99       		.byte	-103
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 62
+
+
+ 3478 0d79 14       		.byte	20
+ 3479 0d7a 9B       		.byte	-101
+ 3480 0d7b 08       		.byte	8
+ 3481 0d7c 9C       		.byte	-100
+ 3482 0d7d 03       		.byte	3
+ 3483 0d7e 9D       		.byte	-99
+ 3484 0d7f 24       		.byte	36
+ 3485 0d80 9E       		.byte	-98
+ 3486 0d81 44       		.byte	68
+ 3487 0d82 9F       		.byte	-97
+ 3488 0d83 10       		.byte	16
+ 3489 0d84 A0       		.byte	-96
+ 3490 0d85 53       		.byte	83
+ 3491 0d86 A1       		.byte	-95
+ 3492 0d87 1C       		.byte	28
+ 3493 0d88 A2       		.byte	-94
+ 3494 0d89 04       		.byte	4
+ 3495 0d8a A5       		.byte	-91
+ 3496 0d8b 08       		.byte	8
+ 3497 0d8c A9       		.byte	-87
+ 3498 0d8d 10       		.byte	16
+ 3499 0d8e AB       		.byte	-85
+ 3500 0d8f 0C       		.byte	12
+ 3501 0d90 AD       		.byte	-83
+ 3502 0d91 1C       		.byte	28
+ 3503 0d92 B0       		.byte	-80
+ 3504 0d93 30       		.byte	48
+ 3505 0d94 B2       		.byte	-78
+ 3506 0d95 0F       		.byte	15
+ 3507 0d96 B3       		.byte	-77
+ 3508 0d97 C1       		.byte	-63
+ 3509 0d98 B4       		.byte	-76
+ 3510 0d99 40       		.byte	64
+ 3511 0d9a B5       		.byte	-75
+ 3512 0d9b 0F       		.byte	15
+ 3513 0d9c B7       		.byte	-73
+ 3514 0d9d 30       		.byte	48
+ 3515 0d9e B8       		.byte	-72
+ 3516 0d9f 02       		.byte	2
+ 3517 0da0 B9       		.byte	-71
+ 3518 0da1 08       		.byte	8
+ 3519 0da2 BA       		.byte	-70
+ 3520 0da3 08       		.byte	8
+ 3521 0da4 BB       		.byte	-69
+ 3522 0da5 80       		.byte	-128
+ 3523 0da6 BE       		.byte	-66
+ 3524 0da7 10       		.byte	16
+ 3525 0da8 D4       		.byte	-44
+ 3526 0da9 09       		.byte	9
+ 3527 0daa D8       		.byte	-40
+ 3528 0dab 04       		.byte	4
+ 3529 0dac D9       		.byte	-39
+ 3530 0dad 04       		.byte	4
+ 3531 0dae DB       		.byte	-37
+ 3532 0daf 04       		.byte	4
+ 3533 0db0 DC       		.byte	-36
+ 3534 0db1 06       		.byte	6
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 63
+
+
+ 3535 0db2 DF       		.byte	-33
+ 3536 0db3 01       		.byte	1
+ 3537 0db4 00       		.byte	0
+ 3538 0db5 22       		.byte	34
+ 3539 0db6 01       		.byte	1
+ 3540 0db7 40       		.byte	64
+ 3541 0db8 06       		.byte	6
+ 3542 0db9 12       		.byte	18
+ 3543 0dba 08       		.byte	8
+ 3544 0dbb 80       		.byte	-128
+ 3545 0dbc 09       		.byte	9
+ 3546 0dbd 80       		.byte	-128
+ 3547 0dbe 0B       		.byte	11
+ 3548 0dbf 08       		.byte	8
+ 3549 0dc0 0D       		.byte	13
+ 3550 0dc1 48       		.byte	72
+ 3551 0dc2 0E       		.byte	14
+ 3552 0dc3 40       		.byte	64
+ 3553 0dc4 11       		.byte	17
+ 3554 0dc5 02       		.byte	2
+ 3555 0dc6 12       		.byte	18
+ 3556 0dc7 01       		.byte	1
+ 3557 0dc8 14       		.byte	20
+ 3558 0dc9 40       		.byte	64
+ 3559 0dca 1D       		.byte	29
+ 3560 0dcb 28       		.byte	40
+ 3561 0dcc 1E       		.byte	30
+ 3562 0dcd 40       		.byte	64
+ 3563 0dce 1F       		.byte	31
+ 3564 0dcf 01       		.byte	1
+ 3565 0dd0 20       		.byte	32
+ 3566 0dd1 08       		.byte	8
+ 3567 0dd2 21       		.byte	33
+ 3568 0dd3 02       		.byte	2
+ 3569 0dd4 22       		.byte	34
+ 3570 0dd5 40       		.byte	64
+ 3571 0dd6 25       		.byte	37
+ 3572 0dd7 14       		.byte	20
+ 3573 0dd8 26       		.byte	38
+ 3574 0dd9 80       		.byte	-128
+ 3575 0dda 27       		.byte	39
+ 3576 0ddb 09       		.byte	9
+ 3577 0ddc 2D       		.byte	45
+ 3578 0ddd 80       		.byte	-128
+ 3579 0dde 2E       		.byte	46
+ 3580 0ddf 19       		.byte	25
+ 3581 0de0 30       		.byte	48
+ 3582 0de1 20       		.byte	32
+ 3583 0de2 31       		.byte	49
+ 3584 0de3 02       		.byte	2
+ 3585 0de4 36       		.byte	54
+ 3586 0de5 80       		.byte	-128
+ 3587 0de6 37       		.byte	55
+ 3588 0de7 14       		.byte	20
+ 3589 0de8 38       		.byte	56
+ 3590 0de9 10       		.byte	16
+ 3591 0dea 3D       		.byte	61
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 64
+
+
+ 3592 0deb 28       		.byte	40
+ 3593 0dec 3F       		.byte	63
+ 3594 0ded 41       		.byte	65
+ 3595 0dee 40       		.byte	64
+ 3596 0def 10       		.byte	16
+ 3597 0df0 41       		.byte	65
+ 3598 0df1 10       		.byte	16
+ 3599 0df2 48       		.byte	72
+ 3600 0df3 20       		.byte	32
+ 3601 0df4 49       		.byte	73
+ 3602 0df5 01       		.byte	1
+ 3603 0df6 50       		.byte	80
+ 3604 0df7 10       		.byte	16
+ 3605 0df8 51       		.byte	81
+ 3606 0df9 10       		.byte	16
+ 3607 0dfa 59       		.byte	89
+ 3608 0dfb 01       		.byte	1
+ 3609 0dfc 5A       		.byte	90
+ 3610 0dfd 88       		.byte	-120
+ 3611 0dfe 5C       		.byte	92
+ 3612 0dff 61       		.byte	97
+ 3613 0e00 5D       		.byte	93
+ 3614 0e01 04       		.byte	4
+ 3615 0e02 64       		.byte	100
+ 3616 0e03 20       		.byte	32
+ 3617 0e04 65       		.byte	101
+ 3618 0e05 40       		.byte	64
+ 3619 0e06 66       		.byte	102
+ 3620 0e07 08       		.byte	8
+ 3621 0e08 81       		.byte	-127
+ 3622 0e09 C0       		.byte	-64
+ 3623 0e0a 85       		.byte	-123
+ 3624 0e0b 20       		.byte	32
+ 3625 0e0c 86       		.byte	-122
+ 3626 0e0d 01       		.byte	1
+ 3627 0e0e 88       		.byte	-120
+ 3628 0e0f 10       		.byte	16
+ 3629 0e10 8D       		.byte	-115
+ 3630 0e11 41       		.byte	65
+ 3631 0e12 90       		.byte	-112
+ 3632 0e13 51       		.byte	81
+ 3633 0e14 91       		.byte	-111
+ 3634 0e15 04       		.byte	4
+ 3635 0e16 92       		.byte	-110
+ 3636 0e17 19       		.byte	25
+ 3637 0e18 93       		.byte	-109
+ 3638 0e19 49       		.byte	73
+ 3639 0e1a 94       		.byte	-108
+ 3640 0e1b 20       		.byte	32
+ 3641 0e1c 95       		.byte	-107
+ 3642 0e1d 40       		.byte	64
+ 3643 0e1e 96       		.byte	-106
+ 3644 0e1f 42       		.byte	66
+ 3645 0e20 97       		.byte	-105
+ 3646 0e21 02       		.byte	2
+ 3647 0e22 98       		.byte	-104
+ 3648 0e23 C0       		.byte	-64
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 65
+
+
+ 3649 0e24 99       		.byte	-103
+ 3650 0e25 C0       		.byte	-64
+ 3651 0e26 9A       		.byte	-102
+ 3652 0e27 1B       		.byte	27
+ 3653 0e28 9B       		.byte	-101
+ 3654 0e29 14       		.byte	20
+ 3655 0e2a 9F       		.byte	-97
+ 3656 0e2b 09       		.byte	9
+ 3657 0e2c A0       		.byte	-96
+ 3658 0e2d 11       		.byte	17
+ 3659 0e2e A4       		.byte	-92
+ 3660 0e2f 04       		.byte	4
+ 3661 0e30 A5       		.byte	-91
+ 3662 0e31 1C       		.byte	28
+ 3663 0e32 A6       		.byte	-90
+ 3664 0e33 80       		.byte	-128
+ 3665 0e34 A9       		.byte	-87
+ 3666 0e35 3C       		.byte	60
+ 3667 0e36 AC       		.byte	-84
+ 3668 0e37 04       		.byte	4
+ 3669 0e38 AD       		.byte	-83
+ 3670 0e39 85       		.byte	-123
+ 3671 0e3a AE       		.byte	-82
+ 3672 0e3b 02       		.byte	2
+ 3673 0e3c B0       		.byte	-80
+ 3674 0e3d 01       		.byte	1
+ 3675 0e3e B1       		.byte	-79
+ 3676 0e3f 03       		.byte	3
+ 3677 0e40 B4       		.byte	-76
+ 3678 0e41 60       		.byte	96
+ 3679 0e42 B6       		.byte	-74
+ 3680 0e43 01       		.byte	1
+ 3681 0e44 C0       		.byte	-64
+ 3682 0e45 AB       		.byte	-85
+ 3683 0e46 C2       		.byte	-62
+ 3684 0e47 B3       		.byte	-77
+ 3685 0e48 C4       		.byte	-60
+ 3686 0e49 19       		.byte	25
+ 3687 0e4a CA       		.byte	-54
+ 3688 0e4b F0       		.byte	-16
+ 3689 0e4c CC       		.byte	-52
+ 3690 0e4d 75       		.byte	117
+ 3691 0e4e CE       		.byte	-50
+ 3692 0e4f F4       		.byte	-12
+ 3693 0e50 D0       		.byte	-48
+ 3694 0e51 06       		.byte	6
+ 3695 0e52 D6       		.byte	-42
+ 3696 0e53 FB       		.byte	-5
+ 3697 0e54 D8       		.byte	-40
+ 3698 0e55 10       		.byte	16
+ 3699 0e56 E0       		.byte	-32
+ 3700 0e57 50       		.byte	80
+ 3701 0e58 E6       		.byte	-26
+ 3702 0e59 80       		.byte	-128
+ 3703 0e5a E8       		.byte	-24
+ 3704 0e5b C2       		.byte	-62
+ 3705 0e5c EC       		.byte	-20
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 66
+
+
+ 3706 0e5d 4D       		.byte	77
+ 3707 0e5e 12       		.byte	18
+ 3708 0e5f 20       		.byte	32
+ 3709 0e60 16       		.byte	22
+ 3710 0e61 80       		.byte	-128
+ 3711 0e62 30       		.byte	48
+ 3712 0e63 80       		.byte	-128
+ 3713 0e64 33       		.byte	51
+ 3714 0e65 01       		.byte	1
+ 3715 0e66 35       		.byte	53
+ 3716 0e67 20       		.byte	32
+ 3717 0e68 36       		.byte	54
+ 3718 0e69 08       		.byte	8
+ 3719 0e6a 3B       		.byte	59
+ 3720 0e6b 22       		.byte	34
+ 3721 0e6c 3E       		.byte	62
+ 3722 0e6d 80       		.byte	-128
+ 3723 0e6e 83       		.byte	-125
+ 3724 0e6f 20       		.byte	32
+ 3725 0e70 87       		.byte	-121
+ 3726 0e71 10       		.byte	16
+ 3727 0e72 8B       		.byte	-117
+ 3728 0e73 40       		.byte	64
+ 3729 0e74 8D       		.byte	-115
+ 3730 0e75 08       		.byte	8
+ 3731 0e76 8E       		.byte	-114
+ 3732 0e77 08       		.byte	8
+ 3733 0e78 C4       		.byte	-60
+ 3734 0e79 30       		.byte	48
+ 3735 0e7a CC       		.byte	-52
+ 3736 0e7b F0       		.byte	-16
+ 3737 0e7c CE       		.byte	-50
+ 3738 0e7d 70       		.byte	112
+ 3739 0e7e E2       		.byte	-30
+ 3740 0e7f 80       		.byte	-128
+ 3741 0e80 E6       		.byte	-26
+ 3742 0e81 40       		.byte	64
+ 3743 0e82 01       		.byte	1
+ 3744 0e83 80       		.byte	-128
+ 3745 0e84 05       		.byte	5
+ 3746 0e85 40       		.byte	64
+ 3747 0e86 0B       		.byte	11
+ 3748 0e87 40       		.byte	64
+ 3749 0e88 0D       		.byte	13
+ 3750 0e89 08       		.byte	8
+ 3751 0e8a 32       		.byte	50
+ 3752 0e8b 40       		.byte	64
+ 3753 0e8c 35       		.byte	53
+ 3754 0e8d 80       		.byte	-128
+ 3755 0e8e 57       		.byte	87
+ 3756 0e8f 08       		.byte	8
+ 3757 0e90 5B       		.byte	91
+ 3758 0e91 20       		.byte	32
+ 3759 0e92 89       		.byte	-119
+ 3760 0e93 40       		.byte	64
+ 3761 0e94 92       		.byte	-110
+ 3762 0e95 80       		.byte	-128
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 67
+
+
+ 3763 0e96 97       		.byte	-105
+ 3764 0e97 42       		.byte	66
+ 3765 0e98 9B       		.byte	-101
+ 3766 0e99 20       		.byte	32
+ 3767 0e9a 9D       		.byte	-99
+ 3768 0e9b 20       		.byte	32
+ 3769 0e9c 9F       		.byte	-97
+ 3770 0e9d 01       		.byte	1
+ 3771 0e9e A4       		.byte	-92
+ 3772 0e9f 80       		.byte	-128
+ 3773 0ea0 A5       		.byte	-91
+ 3774 0ea1 08       		.byte	8
+ 3775 0ea2 AE       		.byte	-82
+ 3776 0ea3 20       		.byte	32
+ 3777 0ea4 B6       		.byte	-74
+ 3778 0ea5 40       		.byte	64
+ 3779 0ea6 C0       		.byte	-64
+ 3780 0ea7 C0       		.byte	-64
+ 3781 0ea8 C2       		.byte	-62
+ 3782 0ea9 30       		.byte	48
+ 3783 0eaa CC       		.byte	-52
+ 3784 0eab 30       		.byte	48
+ 3785 0eac D4       		.byte	-44
+ 3786 0ead C0       		.byte	-64
+ 3787 0eae EC       		.byte	-20
+ 3788 0eaf 40       		.byte	64
+ 3789 0eb0 13       		.byte	19
+ 3790 0eb1 08       		.byte	8
+ 3791 0eb2 53       		.byte	83
+ 3792 0eb3 08       		.byte	8
+ 3793 0eb4 5B       		.byte	91
+ 3794 0eb5 08       		.byte	8
+ 3795 0eb6 86       		.byte	-122
+ 3796 0eb7 08       		.byte	8
+ 3797 0eb8 97       		.byte	-105
+ 3798 0eb9 02       		.byte	2
+ 3799 0eba 9D       		.byte	-99
+ 3800 0ebb 20       		.byte	32
+ 3801 0ebc 9F       		.byte	-97
+ 3802 0ebd 01       		.byte	1
+ 3803 0ebe A4       		.byte	-92
+ 3804 0ebf 80       		.byte	-128
+ 3805 0ec0 B7       		.byte	-73
+ 3806 0ec1 08       		.byte	8
+ 3807 0ec2 C4       		.byte	-60
+ 3808 0ec3 10       		.byte	16
+ 3809 0ec4 D4       		.byte	-44
+ 3810 0ec5 20       		.byte	32
+ 3811 0ec6 D6       		.byte	-42
+ 3812 0ec7 40       		.byte	64
+ 3813 0ec8 E6       		.byte	-26
+ 3814 0ec9 40       		.byte	64
+ 3815 0eca 1F       		.byte	31
+ 3816 0ecb 08       		.byte	8
+ 3817 0ecc 86       		.byte	-122
+ 3818 0ecd 40       		.byte	64
+ 3819 0ece 9A       		.byte	-102
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 68
+
+
+ 3820 0ecf 08       		.byte	8
+ 3821 0ed0 9D       		.byte	-99
+ 3822 0ed1 20       		.byte	32
+ 3823 0ed2 9F       		.byte	-97
+ 3824 0ed3 01       		.byte	1
+ 3825 0ed4 A4       		.byte	-92
+ 3826 0ed5 80       		.byte	-128
+ 3827 0ed6 A7       		.byte	-89
+ 3828 0ed7 08       		.byte	8
+ 3829 0ed8 AB       		.byte	-85
+ 3830 0ed9 01       		.byte	1
+ 3831 0eda C6       		.byte	-58
+ 3832 0edb 20       		.byte	32
+ 3833 0edc E2       		.byte	-30
+ 3834 0edd 10       		.byte	16
+ 3835 0ede EE       		.byte	-18
+ 3836 0edf 20       		.byte	32
+ 3837 0ee0 70       		.byte	112
+ 3838 0ee1 08       		.byte	8
+ 3839 0ee2 7C       		.byte	124
+ 3840 0ee3 40       		.byte	64
+ 3841 0ee4 86       		.byte	-122
+ 3842 0ee5 01       		.byte	1
+ 3843 0ee6 8C       		.byte	-116
+ 3844 0ee7 08       		.byte	8
+ 3845 0ee8 8F       		.byte	-113
+ 3846 0ee9 40       		.byte	64
+ 3847 0eea DC       		.byte	-36
+ 3848 0eeb 01       		.byte	1
+ 3849 0eec DE       		.byte	-34
+ 3850 0eed 04       		.byte	4
+ 3851 0eee E4       		.byte	-28
+ 3852 0eef 08       		.byte	8
+ 3853 0ef0 E6       		.byte	-26
+ 3854 0ef1 02       		.byte	2
+ 3855 0ef2 51       		.byte	81
+ 3856 0ef3 08       		.byte	8
+ 3857 0ef4 57       		.byte	87
+ 3858 0ef5 08       		.byte	8
+ 3859 0ef6 58       		.byte	88
+ 3860 0ef7 02       		.byte	2
+ 3861 0ef8 5E       		.byte	94
+ 3862 0ef9 80       		.byte	-128
+ 3863 0efa 60       		.byte	96
+ 3864 0efb 80       		.byte	-128
+ 3865 0efc 65       		.byte	101
+ 3866 0efd 01       		.byte	1
+ 3867 0efe 94       		.byte	-108
+ 3868 0eff 40       		.byte	64
+ 3869 0f00 96       		.byte	-106
+ 3870 0f01 02       		.byte	2
+ 3871 0f02 A7       		.byte	-89
+ 3872 0f03 40       		.byte	64
+ 3873 0f04 D4       		.byte	-44
+ 3874 0f05 06       		.byte	6
+ 3875 0f06 D6       		.byte	-42
+ 3876 0f07 06       		.byte	6
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 69
+
+
+ 3877 0f08 D8       		.byte	-40
+ 3878 0f09 03       		.byte	3
+ 3879 0f0a 1B       		.byte	27
+ 3880 0f0b 04       		.byte	4
+ 3881 0f0c 27       		.byte	39
+ 3882 0f0d 20       		.byte	32
+ 3883 0f0e 80       		.byte	-128
+ 3884 0f0f 40       		.byte	64
+ 3885 0f10 81       		.byte	-127
+ 3886 0f11 08       		.byte	8
+ 3887 0f12 94       		.byte	-108
+ 3888 0f13 40       		.byte	64
+ 3889 0f14 96       		.byte	-106
+ 3890 0f15 02       		.byte	2
+ 3891 0f16 9C       		.byte	-100
+ 3892 0f17 82       		.byte	-126
+ 3893 0f18 9D       		.byte	-99
+ 3894 0f19 01       		.byte	1
+ 3895 0f1a A5       		.byte	-91
+ 3896 0f1b 08       		.byte	8
+ 3897 0f1c A6       		.byte	-90
+ 3898 0f1d 40       		.byte	64
+ 3899 0f1e A7       		.byte	-89
+ 3900 0f1f 48       		.byte	72
+ 3901 0f20 C6       		.byte	-58
+ 3902 0f21 08       		.byte	8
+ 3903 0f22 C8       		.byte	-56
+ 3904 0f23 01       		.byte	1
+ 3905 0f24 09       		.byte	9
+ 3906 0f25 08       		.byte	8
+ 3907 0f26 0A       		.byte	10
+ 3908 0f27 02       		.byte	2
+ 3909 0f28 0F       		.byte	15
+ 3910 0f29 80       		.byte	-128
+ 3911 0f2a 46       		.byte	70
+ 3912 0f2b 02       		.byte	2
+ 3913 0f2c 8D       		.byte	-115
+ 3914 0f2d 01       		.byte	1
+ 3915 0f2e 8F       		.byte	-113
+ 3916 0f2f 08       		.byte	8
+ 3917 0f30 96       		.byte	-106
+ 3918 0f31 02       		.byte	2
+ 3919 0f32 9D       		.byte	-99
+ 3920 0f33 01       		.byte	1
+ 3921 0f34 A5       		.byte	-91
+ 3922 0f35 04       		.byte	4
+ 3923 0f36 A6       		.byte	-90
+ 3924 0f37 40       		.byte	64
+ 3925 0f38 A7       		.byte	-89
+ 3926 0f39 48       		.byte	72
+ 3927 0f3a A9       		.byte	-87
+ 3928 0f3b 04       		.byte	4
+ 3929 0f3c AB       		.byte	-85
+ 3930 0f3d 24       		.byte	36
+ 3931 0f3e AC       		.byte	-84
+ 3932 0f3f 80       		.byte	-128
+ 3933 0f40 B0       		.byte	-80
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 70
+
+
+ 3934 0f41 02       		.byte	2
+ 3935 0f42 C2       		.byte	-62
+ 3936 0f43 0E       		.byte	14
+ 3937 0f44 D0       		.byte	-48
+ 3938 0f45 04       		.byte	4
+ 3939 0f46 E0       		.byte	-32
+ 3940 0f47 08       		.byte	8
+ 3941 0f48 E4       		.byte	-28
+ 3942 0f49 02       		.byte	2
+ 3943 0f4a E8       		.byte	-24
+ 3944 0f4b 04       		.byte	4
+ 3945 0f4c 56       		.byte	86
+ 3946 0f4d 40       		.byte	64
+ 3947 0f4e 65       		.byte	101
+ 3948 0f4f 01       		.byte	1
+ 3949 0f50 6B       		.byte	107
+ 3950 0f51 02       		.byte	2
+ 3951 0f52 87       		.byte	-121
+ 3952 0f53 02       		.byte	2
+ 3953 0f54 9A       		.byte	-102
+ 3954 0f55 48       		.byte	72
+ 3955 0f56 9D       		.byte	-99
+ 3956 0f57 20       		.byte	32
+ 3957 0f58 AF       		.byte	-81
+ 3958 0f59 01       		.byte	1
+ 3959 0f5a B4       		.byte	-76
+ 3960 0f5b 80       		.byte	-128
+ 3961 0f5c D4       		.byte	-44
+ 3962 0f5d 40       		.byte	64
+ 3963 0f5e D8       		.byte	-40
+ 3964 0f5f 80       		.byte	-128
+ 3965 0f60 DA       		.byte	-38
+ 3966 0f61 40       		.byte	64
+ 3967 0f62 E6       		.byte	-26
+ 3968 0f63 40       		.byte	64
+ 3969 0f64 EA       		.byte	-22
+ 3970 0f65 40       		.byte	64
+ 3971 0f66 03       		.byte	3
+ 3972 0f67 08       		.byte	8
+ 3973 0f68 0C       		.byte	12
+ 3974 0f69 10       		.byte	16
+ 3975 0f6a 22       		.byte	34
+ 3976 0f6b 80       		.byte	-128
+ 3977 0f6c 66       		.byte	102
+ 3978 0f6d 08       		.byte	8
+ 3979 0f6e 84       		.byte	-124
+ 3980 0f6f 10       		.byte	16
+ 3981 0f70 89       		.byte	-119
+ 3982 0f71 20       		.byte	32
+ 3983 0f72 9A       		.byte	-102
+ 3984 0f73 08       		.byte	8
+ 3985 0f74 9D       		.byte	-99
+ 3986 0f75 20       		.byte	32
+ 3987 0f76 A6       		.byte	-90
+ 3988 0f77 80       		.byte	-128
+ 3989 0f78 A7       		.byte	-89
+ 3990 0f79 08       		.byte	8
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 71
+
+
+ 3991 0f7a A9       		.byte	-87
+ 3992 0f7b 01       		.byte	1
+ 3993 0f7c AE       		.byte	-82
+ 3994 0f7d 80       		.byte	-128
+ 3995 0f7e AF       		.byte	-81
+ 3996 0f7f 08       		.byte	8
+ 3997 0f80 C0       		.byte	-64
+ 3998 0f81 40       		.byte	64
+ 3999 0f82 C2       		.byte	-62
+ 4000 0f83 80       		.byte	-128
+ 4001 0f84 C8       		.byte	-56
+ 4002 0f85 10       		.byte	16
+ 4003 0f86 D8       		.byte	-40
+ 4004 0f87 80       		.byte	-128
+ 4005 0f88 E4       		.byte	-28
+ 4006 0f89 40       		.byte	64
+ 4007 0f8a EA       		.byte	-22
+ 4008 0f8b 20       		.byte	32
+ 4009 0f8c EC       		.byte	-20
+ 4010 0f8d 50       		.byte	80
+ 4011 0f8e 52       		.byte	82
+ 4012 0f8f 40       		.byte	64
+ 4013 0f90 57       		.byte	87
+ 4014 0f91 08       		.byte	8
+ 4015 0f92 59       		.byte	89
+ 4016 0f93 08       		.byte	8
+ 4017 0f94 5B       		.byte	91
+ 4018 0f95 80       		.byte	-128
+ 4019 0f96 5C       		.byte	92
+ 4020 0f97 10       		.byte	16
+ 4021 0f98 5F       		.byte	95
+ 4022 0f99 04       		.byte	4
+ 4023 0f9a 62       		.byte	98
+ 4024 0f9b 02       		.byte	2
+ 4025 0f9c 66       		.byte	102
+ 4026 0f9d 08       		.byte	8
+ 4027 0f9e 80       		.byte	-128
+ 4028 0f9f 10       		.byte	16
+ 4029 0fa0 86       		.byte	-122
+ 4030 0fa1 40       		.byte	64
+ 4031 0fa2 87       		.byte	-121
+ 4032 0fa3 80       		.byte	-128
+ 4033 0fa4 8A       		.byte	-118
+ 4034 0fa5 40       		.byte	64
+ 4035 0fa6 9E       		.byte	-98
+ 4036 0fa7 02       		.byte	2
+ 4037 0fa8 A5       		.byte	-91
+ 4038 0fa9 04       		.byte	4
+ 4039 0faa A6       		.byte	-90
+ 4040 0fab 40       		.byte	64
+ 4041 0fac AD       		.byte	-83
+ 4042 0fad 08       		.byte	8
+ 4043 0fae D4       		.byte	-44
+ 4044 0faf 07       		.byte	7
+ 4045 0fb0 D6       		.byte	-42
+ 4046 0fb1 07       		.byte	7
+ 4047 0fb2 D8       		.byte	-40
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 72
+
+
+ 4048 0fb3 03       		.byte	3
+ 4049 0fb4 E0       		.byte	-32
+ 4050 0fb5 04       		.byte	4
+ 4051 0fb6 11       		.byte	17
+ 4052 0fb7 08       		.byte	8
+ 4053 0fb8 70       		.byte	112
+ 4054 0fb9 08       		.byte	8
+ 4055 0fba A0       		.byte	-96
+ 4056 0fbb 08       		.byte	8
+ 4057 0fbc A5       		.byte	-91
+ 4058 0fbd 04       		.byte	4
+ 4059 0fbe A9       		.byte	-87
+ 4060 0fbf 08       		.byte	8
+ 4061 0fc0 AA       		.byte	-86
+ 4062 0fc1 08       		.byte	8
+ 4063 0fc2 AC       		.byte	-84
+ 4064 0fc3 08       		.byte	8
+ 4065 0fc4 AE       		.byte	-82
+ 4066 0fc5 02       		.byte	2
+ 4067 0fc6 B3       		.byte	-77
+ 4068 0fc7 0C       		.byte	12
+ 4069 0fc8 B6       		.byte	-74
+ 4070 0fc9 02       		.byte	2
+ 4071 0fca C4       		.byte	-60
+ 4072 0fcb 08       		.byte	8
+ 4073 0fcc DC       		.byte	-36
+ 4074 0fcd 01       		.byte	1
+ 4075 0fce E8       		.byte	-24
+ 4076 0fcf 04       		.byte	4
+ 4077 0fd0 EC       		.byte	-20
+ 4078 0fd1 0C       		.byte	12
+ 4079 0fd2 10       		.byte	16
+ 4080 0fd3 65       		.byte	101
+ 4081 0fd4 11       		.byte	17
+ 4082 0fd5 01       		.byte	1
+ 4083 0fd6 12       		.byte	18
+ 4084 0fd7 14       		.byte	20
+ 4085 0fd8 1A       		.byte	26
+ 4086 0fd9 60       		.byte	96
+ 4087 0fda 1B       		.byte	27
+ 4088 0fdb 01       		.byte	1
+ 4089 0fdc 1C       		.byte	28
+ 4090 0fdd 65       		.byte	101
+ 4091 0fde 00       		.byte	0
+ 4092 0fdf AF       		.byte	-81
+ 4093 0fe0 01       		.byte	1
+ 4094 0fe1 3E       		.byte	62
+ 4095 0fe2 10       		.byte	16
+ 4096 0fe3 0A       		.byte	10
+ 4097 0fe4 01       		.byte	1
+ 4098 0fe5 00       		.byte	0
+ 4099 0fe6 00       		.byte	0
+ 4100 0fe7 9F       		.byte	-97
+ 4101 0fe8 88       		.byte	-120
+ 4102 0fe9 7F       		.byte	127
+ 4103 0fea 21       		.byte	33
+ 4104 0feb 80       		.byte	-128
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 73
+
+
+ 4105 0fec A2       		.byte	-94
+ 4106 0fed C0       		.byte	-64
+ 4107 0fee 08       		.byte	8
+ 4108 0fef 08       		.byte	8
+ 4109 0ff0 01       		.byte	1
+ 4110 0ff1 00       		.byte	0
+ 4111 0ff2 00       		.byte	0
+ 4112 0ff3 00       		.byte	0
+ 4113 0ff4 40       		.byte	64
+ 4114 0ff5 C0       		.byte	-64
+ 4115 0ff6 00       		.byte	0
+ 4116 0ff7 01       		.byte	1
+ 4117 0ff8 04       		.byte	4
+ 4118 0ff9 1F       		.byte	31
+ 4119 0ffa 00       		.byte	0
+ 4120 0ffb 20       		.byte	32
+ 4121 0ffc 10       		.byte	16
+ 4122 0ffd 00       		.byte	0
+ 4123 0ffe 00       		.byte	0
+ 4124 0fff FF       		.byte	-1
+ 4125 1000 01       		.byte	1
+ 4126 1001 80       		.byte	-128
+ 4127 1002 00       		.byte	0
+ 4128 1003 00       		.byte	0
+ 4129 1004 01       		.byte	1
+ 4130 1005 C0       		.byte	-64
+ 4131 1006 00       		.byte	0
+ 4132 1007 02       		.byte	2
+ 4133 1008 87       		.byte	-121
+ 4134 1009 C0       		.byte	-64
+ 4135 100a 18       		.byte	24
+ 4136 100b 04       		.byte	4
+ 4137 100c 01       		.byte	1
+ 4138 100d 00       		.byte	0
+ 4139 100e 00       		.byte	0
+ 4140 100f 60       		.byte	96
+ 4141 1010 40       		.byte	64
+ 4142 1011 90       		.byte	-112
+ 4143 1012 00       		.byte	0
+ 4144 1013 40       		.byte	64
+ 4145 1014 3F       		.byte	63
+ 4146 1015 FF       		.byte	-1
+ 4147 1016 40       		.byte	64
+ 4148 1017 00       		.byte	0
+ 4149 1018 00       		.byte	0
+ 4150 1019 00       		.byte	0
+ 4151 101a 80       		.byte	-128
+ 4152 101b 00       		.byte	0
+ 4153 101c 0A       		.byte	10
+ 4154 101d 00       		.byte	0
+ 4155 101e 00       		.byte	0
+ 4156 101f 00       		.byte	0
+ 4157 1020 00       		.byte	0
+ 4158 1021 00       		.byte	0
+ 4159 1022 41       		.byte	65
+ 4160 1023 11       		.byte	17
+ 4161 1024 63       		.byte	99
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 74
+
+
+ 4162 1025 02       		.byte	2
+ 4163 1026 10       		.byte	16
+ 4164 1027 00       		.byte	0
+ 4165 1028 05       		.byte	5
+ 4166 1029 FB       		.byte	-5
+ 4167 102a DE       		.byte	-34
+ 4168 102b BC       		.byte	-68
+ 4169 102c 3F       		.byte	63
+ 4170 102d FF       		.byte	-1
+ 4171 102e FF       		.byte	-1
+ 4172 102f FF       		.byte	-1
+ 4173 1030 22       		.byte	34
+ 4174 1031 00       		.byte	0
+ 4175 1032 F0       		.byte	-16
+ 4176 1033 08       		.byte	8
+ 4177 1034 04       		.byte	4
+ 4178 1035 00       		.byte	0
+ 4179 1036 80       		.byte	-128
+ 4180 1037 00       		.byte	0
+ 4181 1038 00       		.byte	0
+ 4182 1039 00       		.byte	0
+ 4183 103a 00       		.byte	0
+ 4184 103b 00       		.byte	0
+ 4185 103c 04       		.byte	4
+ 4186 103d 04       		.byte	4
+ 4187 103e 04       		.byte	4
+ 4188 103f 04       		.byte	4
+ 4189 1040 00       		.byte	0
+ 4190 1041 20       		.byte	32
+ 4191 1042 00       		.byte	0
+ 4192 1043 01       		.byte	1
+ 4193 1044 00       		.byte	0
+ 4194 1045 00       		.byte	0
+ 4195 1046 C0       		.byte	-64
+ 4196 1047 00       		.byte	0
+ 4197 1048 40       		.byte	64
+ 4198 1049 01       		.byte	1
+ 4199 104a 10       		.byte	16
+ 4200 104b 11       		.byte	17
+ 4201 104c C0       		.byte	-64
+ 4202 104d 01       		.byte	1
+ 4203 104e 00       		.byte	0
+ 4204 104f 11       		.byte	17
+ 4205 1050 40       		.byte	64
+ 4206 1051 01       		.byte	1
+ 4207 1052 40       		.byte	64
+ 4208 1053 01       		.byte	1
+ 4209 1054 00       		.byte	0
+ 4210 1055 00       		.byte	0
+ 4211 1056 00       		.byte	0
+ 4212 1057 00       		.byte	0
+ 4213 1058 00       		.byte	0
+ 4214 1059 00       		.byte	0
+ 4215 105a 00       		.byte	0
+ 4216 105b 00       		.byte	0
+ 4217 105c 00       		.byte	0
+ 4218 105d 00       		.byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 75
+
+
+ 4219 105e 00       		.byte	0
+ 4220 105f 00       		.byte	0
+ 4221 1060 00       		.byte	0
+ 4222 1061 00       		.byte	0
+ 4223 1062 00       		.byte	0
+ 4224 1063 00       		.byte	0
+ 4225 1064 73       		.byte	115
+ 4226 1065 01       		.byte	1
+ 4227 1066 14       		.byte	20
+ 4228 1067 00       		.byte	0
+ 4229 1068 00       		.byte	0
+ 4230 1069 00       		.byte	0
+ 4231 106a 00       		.byte	0
+ 4232 106b 00       		.byte	0
+ 4233 106c 70       		.byte	112
+ 4234 106d 00       		.byte	0
+ 4235 106e 70       		.byte	112
+ 4236 106f 01       		.byte	1
+ 4237 1070 33       		.byte	51
+ 4238 1071 00       		.byte	0
+ 4239 1072 73       		.byte	115
+ 4240 1073 00       		.byte	0
+ 4241 1074 3C       		.byte	60
+ 4242 1075 C0       		.byte	-64
+ 4243 1076 C0       		.byte	-64
+ 4244 1077 00       		.byte	0
+ 4245 1078 00       		.byte	0
+ 4246 1079 03       		.byte	3
+ 4247 107a 03       		.byte	3
+ 4248 107b 00       		.byte	0
+ 4249 107c 80       		.byte	-128
+ 4250 107d 00       		.byte	0
+ 4251 107e 40       		.byte	64
+ 4252 107f BF       		.byte	-65
+ 4253 1080 BF       		.byte	-65
+ 4254 1081 00       		.byte	0
+ 4255 1082 B4       		.byte	-76
+ 4256 1083 00       		.byte	0
+ 4257 1084 00       		.byte	0
+ 4258 1085 00       		.byte	0
+ 4259 1086 00       		.byte	0
+ 4260 1087 00       		.byte	0
+ 4261 1088 40       		.byte	64
+ 4262 1089 00       		.byte	0
+ 4263 108a 00       		.byte	0
+ 4264 108b 03       		.byte	3
+ 4265 108c 03       		.byte	3
+ 4266 108d 00       		.byte	0
+ 4267 108e 01       		.byte	1
+ 4268 108f 00       		.byte	0
+ 4269 1090 C0       		.byte	-64
+ 4270 1091 00       		.byte	0
+ 4271 1092 00       		.byte	0
+ 4272 1093 00       		.byte	0
+ 4273 1094 00       		.byte	0
+ 4274 1095 FF       		.byte	-1
+ 4275 1096 FF       		.byte	-1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 76
+
+
+ 4276 1097 00       		.byte	0
+ 4277 1098 FF       		.byte	-1
+ 4278 1099 00       		.byte	0
+ 4279 109a 00       		.byte	0
+ 4280 109b 00       		.byte	0
+ 4281 109c 00       		.byte	0
+ 4282 109d FF       		.byte	-1
+ 4283 109e FF       		.byte	-1
+ 4284 109f 00       		.byte	0
+ 4285 10a0 BE       		.byte	-66
+ 4286 10a1 00       		.byte	0
+ 4287 10a2 00       		.byte	0
+ 4288 10a3 00       		.byte	0
+ 4289 10a4 84       		.byte	-124
+ 4290 10a5 7B       		.byte	123
+ 4291 10a6 7B       		.byte	123
+ 4292 10a7 00       		.byte	0
+ 4293 10a8 48       		.byte	72
+ 4294 10a9 00       		.byte	0
+ 4295 10aa 00       		.byte	0
+ 4296 10ab 00       		.byte	0
+ 4297 10ac 00       		.byte	0
+ 4298 10ad 01       		.byte	1
+ 4299 10ae 00       		.byte	0
+ 4300 10af 00       		.byte	0
+ 4301              		.section	.cywolatch,"a",%progbits
+ 4302              		.align	2
+ 4303              		.type	cy_meta_wonvl, %object
+ 4304              		.size	cy_meta_wonvl, 4
+ 4305              	cy_meta_wonvl:
+ 4306 0000 BC       		.byte	-68
+ 4307 0001 90       		.byte	-112
+ 4308 0002 AC       		.byte	-84
+ 4309 0003 AF       		.byte	-81
+ 4310              		.section	.cycustnvl,"a",%progbits
+ 4311              		.align	2
+ 4312              		.type	cy_meta_custnvl, %object
+ 4313              		.size	cy_meta_custnvl, 4
+ 4314              	cy_meta_custnvl:
+ 4315 0000 00       		.byte	0
+ 4316 0001 00       		.byte	0
+ 4317 0002 40       		.byte	64
+ 4318 0003 07       		.byte	7
+ 4319              		.section	.cymeta,"a",%progbits
+ 4320              		.align	2
+ 4321              		.type	cy_metadata, %object
+ 4322              		.size	cy_metadata, 12
+ 4323              	cy_metadata:
+ 4324 0000 00       		.byte	0
+ 4325 0001 01       		.byte	1
+ 4326 0002 2E       		.byte	46
+ 4327 0003 16       		.byte	22
+ 4328 0004 10       		.byte	16
+ 4329 0005 69       		.byte	105
+ 4330 0006 00       		.byte	0
+ 4331 0007 01       		.byte	1
+ 4332 0008 00       		.byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 77
+
+
+ 4333 0009 00       		.byte	0
+ 4334 000a 00       		.byte	0
+ 4335 000b 00       		.byte	0
+ 4336              		.section	.cyflashprotect,"a",%progbits
+ 4337              		.align	2
+ 4338              		.type	cy_meta_flashprotect, %object
+ 4339              		.size	cy_meta_flashprotect, 256
+ 4340              	cy_meta_flashprotect:
+ 4341 0000 00000000 		.space	256
+ 4341      00000000 
+ 4341      00000000 
+ 4341      00000000 
+ 4341      00000000 
+ 4342              		.text
+ 4343              	.Letext0:
+ 4344              		.file 1 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
+ 4345              		.file 2 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
+ 4346              		.file 3 "Generated_Source\\PSoC5\\cymetadata.c"
+ 4347              		.section	.debug_info,"",%progbits
+ 4348              	.Ldebug_info0:
+ 4349 0000 35010000 		.4byte	0x135
+ 4350 0004 0400     		.2byte	0x4
+ 4351 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 4352 000a 04       		.byte	0x4
+ 4353 000b 01       		.uleb128 0x1
+ 4354 000c 5B000000 		.4byte	.LASF17
+ 4355 0010 0C       		.byte	0xc
+ 4356 0011 B5010000 		.4byte	.LASF18
+ 4357 0015 0A000000 		.4byte	.LASF19
+ 4358 0019 00000000 		.4byte	.Ldebug_line0
+ 4359 001d 02       		.uleb128 0x2
+ 4360 001e 01       		.byte	0x1
+ 4361 001f 06       		.byte	0x6
+ 4362 0020 A9010000 		.4byte	.LASF0
+ 4363 0024 03       		.uleb128 0x3
+ 4364 0025 00000000 		.4byte	.LASF9
+ 4365 0029 01       		.byte	0x1
+ 4366 002a 1D       		.byte	0x1d
+ 4367 002b 2F000000 		.4byte	0x2f
+ 4368 002f 02       		.uleb128 0x2
+ 4369 0030 01       		.byte	0x1
+ 4370 0031 08       		.byte	0x8
+ 4371 0032 4D000000 		.4byte	.LASF1
+ 4372 0036 02       		.uleb128 0x2
+ 4373 0037 02       		.byte	0x2
+ 4374 0038 05       		.byte	0x5
+ 4375 0039 96010000 		.4byte	.LASF2
+ 4376 003d 02       		.uleb128 0x2
+ 4377 003e 02       		.byte	0x2
+ 4378 003f 07       		.byte	0x7
+ 4379 0040 FB000000 		.4byte	.LASF3
+ 4380 0044 02       		.uleb128 0x2
+ 4381 0045 04       		.byte	0x4
+ 4382 0046 05       		.byte	0x5
+ 4383 0047 A0010000 		.4byte	.LASF4
+ 4384 004b 02       		.uleb128 0x2
+ 4385 004c 04       		.byte	0x4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 78
+
+
+ 4386 004d 07       		.byte	0x7
+ 4387 004e E9000000 		.4byte	.LASF5
+ 4388 0052 02       		.uleb128 0x2
+ 4389 0053 08       		.byte	0x8
+ 4390 0054 05       		.byte	0x5
+ 4391 0055 88010000 		.4byte	.LASF6
+ 4392 0059 02       		.uleb128 0x2
+ 4393 005a 08       		.byte	0x8
+ 4394 005b 07       		.byte	0x7
+ 4395 005c 3D010000 		.4byte	.LASF7
+ 4396 0060 04       		.uleb128 0x4
+ 4397 0061 04       		.byte	0x4
+ 4398 0062 05       		.byte	0x5
+ 4399 0063 696E7400 		.ascii	"int\000"
+ 4400 0067 02       		.uleb128 0x2
+ 4401 0068 04       		.byte	0x4
+ 4402 0069 07       		.byte	0x7
+ 4403 006a 30010000 		.4byte	.LASF8
+ 4404 006e 03       		.uleb128 0x3
+ 4405 006f 54010000 		.4byte	.LASF10
+ 4406 0073 02       		.byte	0x2
+ 4407 0074 18       		.byte	0x18
+ 4408 0075 24000000 		.4byte	0x24
+ 4409 0079 05       		.uleb128 0x5
+ 4410 007a 91000000 		.4byte	0x91
+ 4411 007e 8A000000 		.4byte	0x8a
+ 4412 0082 06       		.uleb128 0x6
+ 4413 0083 8A000000 		.4byte	0x8a
+ 4414 0087 AF10     		.2byte	0x10af
+ 4415 0089 00       		.byte	0
+ 4416 008a 02       		.uleb128 0x2
+ 4417 008b 04       		.byte	0x4
+ 4418 008c 07       		.byte	0x7
+ 4419 008d 7F010000 		.4byte	.LASF11
+ 4420 0091 07       		.uleb128 0x7
+ 4421 0092 6E000000 		.4byte	0x6e
+ 4422 0096 08       		.uleb128 0x8
+ 4423 0097 1E010000 		.4byte	.LASF12
+ 4424 009b 03       		.byte	0x3
+ 4425 009c 1F       		.byte	0x1f
+ 4426 009d A7000000 		.4byte	0xa7
+ 4427 00a1 05       		.uleb128 0x5
+ 4428 00a2 03       		.byte	0x3
+ 4429 00a3 00000000 		.4byte	cy_meta_configecc
+ 4430 00a7 07       		.uleb128 0x7
+ 4431 00a8 79000000 		.4byte	0x79
+ 4432 00ac 05       		.uleb128 0x5
+ 4433 00ad 91000000 		.4byte	0x91
+ 4434 00b1 BC000000 		.4byte	0xbc
+ 4435 00b5 09       		.uleb128 0x9
+ 4436 00b6 8A000000 		.4byte	0x8a
+ 4437 00ba 03       		.byte	0x3
+ 4438 00bb 00       		.byte	0
+ 4439 00bc 0A       		.uleb128 0xa
+ 4440 00bd 0E010000 		.4byte	.LASF13
+ 4441 00c1 03       		.byte	0x3
+ 4442 00c2 4202     		.2byte	0x242
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 79
+
+
+ 4443 00c4 CE000000 		.4byte	0xce
+ 4444 00c8 05       		.uleb128 0x5
+ 4445 00c9 03       		.byte	0x3
+ 4446 00ca 00000000 		.4byte	cy_meta_custnvl
+ 4447 00ce 07       		.uleb128 0x7
+ 4448 00cf AC000000 		.4byte	0xac
+ 4449 00d3 0A       		.uleb128 0xa
+ 4450 00d4 71010000 		.4byte	.LASF14
+ 4451 00d8 03       		.byte	0x3
+ 4452 00d9 5002     		.2byte	0x250
+ 4453 00db E5000000 		.4byte	0xe5
+ 4454 00df 05       		.uleb128 0x5
+ 4455 00e0 03       		.byte	0x3
+ 4456 00e1 00000000 		.4byte	cy_meta_wonvl
+ 4457 00e5 07       		.uleb128 0x7
+ 4458 00e6 AC000000 		.4byte	0xac
+ 4459 00ea 05       		.uleb128 0x5
+ 4460 00eb 91000000 		.4byte	0x91
+ 4461 00ef FA000000 		.4byte	0xfa
+ 4462 00f3 09       		.uleb128 0x9
+ 4463 00f4 8A000000 		.4byte	0x8a
+ 4464 00f8 FF       		.byte	0xff
+ 4465 00f9 00       		.byte	0
+ 4466 00fa 0A       		.uleb128 0xa
+ 4467 00fb 5C010000 		.4byte	.LASF15
+ 4468 00ff 03       		.byte	0x3
+ 4469 0100 5E02     		.2byte	0x25e
+ 4470 0102 0C010000 		.4byte	0x10c
+ 4471 0106 05       		.uleb128 0x5
+ 4472 0107 03       		.byte	0x3
+ 4473 0108 00000000 		.4byte	cy_meta_flashprotect
+ 4474 010c 07       		.uleb128 0x7
+ 4475 010d EA000000 		.4byte	0xea
+ 4476 0111 05       		.uleb128 0x5
+ 4477 0112 91000000 		.4byte	0x91
+ 4478 0116 21010000 		.4byte	0x121
+ 4479 011a 09       		.uleb128 0x9
+ 4480 011b 8A000000 		.4byte	0x8a
+ 4481 011f 0B       		.byte	0xb
+ 4482 0120 00       		.byte	0
+ 4483 0121 0A       		.uleb128 0xa
+ 4484 0122 41000000 		.4byte	.LASF16
+ 4485 0126 03       		.byte	0x3
+ 4486 0127 8B02     		.2byte	0x28b
+ 4487 0129 33010000 		.4byte	0x133
+ 4488 012d 05       		.uleb128 0x5
+ 4489 012e 03       		.byte	0x3
+ 4490 012f 00000000 		.4byte	cy_metadata
+ 4491 0133 07       		.uleb128 0x7
+ 4492 0134 11010000 		.4byte	0x111
+ 4493 0138 00       		.byte	0
+ 4494              		.section	.debug_abbrev,"",%progbits
+ 4495              	.Ldebug_abbrev0:
+ 4496 0000 01       		.uleb128 0x1
+ 4497 0001 11       		.uleb128 0x11
+ 4498 0002 01       		.byte	0x1
+ 4499 0003 25       		.uleb128 0x25
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 80
+
+
+ 4500 0004 0E       		.uleb128 0xe
+ 4501 0005 13       		.uleb128 0x13
+ 4502 0006 0B       		.uleb128 0xb
+ 4503 0007 03       		.uleb128 0x3
+ 4504 0008 0E       		.uleb128 0xe
+ 4505 0009 1B       		.uleb128 0x1b
+ 4506 000a 0E       		.uleb128 0xe
+ 4507 000b 10       		.uleb128 0x10
+ 4508 000c 17       		.uleb128 0x17
+ 4509 000d 00       		.byte	0
+ 4510 000e 00       		.byte	0
+ 4511 000f 02       		.uleb128 0x2
+ 4512 0010 24       		.uleb128 0x24
+ 4513 0011 00       		.byte	0
+ 4514 0012 0B       		.uleb128 0xb
+ 4515 0013 0B       		.uleb128 0xb
+ 4516 0014 3E       		.uleb128 0x3e
+ 4517 0015 0B       		.uleb128 0xb
+ 4518 0016 03       		.uleb128 0x3
+ 4519 0017 0E       		.uleb128 0xe
+ 4520 0018 00       		.byte	0
+ 4521 0019 00       		.byte	0
+ 4522 001a 03       		.uleb128 0x3
+ 4523 001b 16       		.uleb128 0x16
+ 4524 001c 00       		.byte	0
+ 4525 001d 03       		.uleb128 0x3
+ 4526 001e 0E       		.uleb128 0xe
+ 4527 001f 3A       		.uleb128 0x3a
+ 4528 0020 0B       		.uleb128 0xb
+ 4529 0021 3B       		.uleb128 0x3b
+ 4530 0022 0B       		.uleb128 0xb
+ 4531 0023 49       		.uleb128 0x49
+ 4532 0024 13       		.uleb128 0x13
+ 4533 0025 00       		.byte	0
+ 4534 0026 00       		.byte	0
+ 4535 0027 04       		.uleb128 0x4
+ 4536 0028 24       		.uleb128 0x24
+ 4537 0029 00       		.byte	0
+ 4538 002a 0B       		.uleb128 0xb
+ 4539 002b 0B       		.uleb128 0xb
+ 4540 002c 3E       		.uleb128 0x3e
+ 4541 002d 0B       		.uleb128 0xb
+ 4542 002e 03       		.uleb128 0x3
+ 4543 002f 08       		.uleb128 0x8
+ 4544 0030 00       		.byte	0
+ 4545 0031 00       		.byte	0
+ 4546 0032 05       		.uleb128 0x5
+ 4547 0033 01       		.uleb128 0x1
+ 4548 0034 01       		.byte	0x1
+ 4549 0035 49       		.uleb128 0x49
+ 4550 0036 13       		.uleb128 0x13
+ 4551 0037 01       		.uleb128 0x1
+ 4552 0038 13       		.uleb128 0x13
+ 4553 0039 00       		.byte	0
+ 4554 003a 00       		.byte	0
+ 4555 003b 06       		.uleb128 0x6
+ 4556 003c 21       		.uleb128 0x21
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 81
+
+
+ 4557 003d 00       		.byte	0
+ 4558 003e 49       		.uleb128 0x49
+ 4559 003f 13       		.uleb128 0x13
+ 4560 0040 2F       		.uleb128 0x2f
+ 4561 0041 05       		.uleb128 0x5
+ 4562 0042 00       		.byte	0
+ 4563 0043 00       		.byte	0
+ 4564 0044 07       		.uleb128 0x7
+ 4565 0045 26       		.uleb128 0x26
+ 4566 0046 00       		.byte	0
+ 4567 0047 49       		.uleb128 0x49
+ 4568 0048 13       		.uleb128 0x13
+ 4569 0049 00       		.byte	0
+ 4570 004a 00       		.byte	0
+ 4571 004b 08       		.uleb128 0x8
+ 4572 004c 34       		.uleb128 0x34
+ 4573 004d 00       		.byte	0
+ 4574 004e 03       		.uleb128 0x3
+ 4575 004f 0E       		.uleb128 0xe
+ 4576 0050 3A       		.uleb128 0x3a
+ 4577 0051 0B       		.uleb128 0xb
+ 4578 0052 3B       		.uleb128 0x3b
+ 4579 0053 0B       		.uleb128 0xb
+ 4580 0054 49       		.uleb128 0x49
+ 4581 0055 13       		.uleb128 0x13
+ 4582 0056 3F       		.uleb128 0x3f
+ 4583 0057 19       		.uleb128 0x19
+ 4584 0058 02       		.uleb128 0x2
+ 4585 0059 18       		.uleb128 0x18
+ 4586 005a 00       		.byte	0
+ 4587 005b 00       		.byte	0
+ 4588 005c 09       		.uleb128 0x9
+ 4589 005d 21       		.uleb128 0x21
+ 4590 005e 00       		.byte	0
+ 4591 005f 49       		.uleb128 0x49
+ 4592 0060 13       		.uleb128 0x13
+ 4593 0061 2F       		.uleb128 0x2f
+ 4594 0062 0B       		.uleb128 0xb
+ 4595 0063 00       		.byte	0
+ 4596 0064 00       		.byte	0
+ 4597 0065 0A       		.uleb128 0xa
+ 4598 0066 34       		.uleb128 0x34
+ 4599 0067 00       		.byte	0
+ 4600 0068 03       		.uleb128 0x3
+ 4601 0069 0E       		.uleb128 0xe
+ 4602 006a 3A       		.uleb128 0x3a
+ 4603 006b 0B       		.uleb128 0xb
+ 4604 006c 3B       		.uleb128 0x3b
+ 4605 006d 05       		.uleb128 0x5
+ 4606 006e 49       		.uleb128 0x49
+ 4607 006f 13       		.uleb128 0x13
+ 4608 0070 3F       		.uleb128 0x3f
+ 4609 0071 19       		.uleb128 0x19
+ 4610 0072 02       		.uleb128 0x2
+ 4611 0073 18       		.uleb128 0x18
+ 4612 0074 00       		.byte	0
+ 4613 0075 00       		.byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 82
+
+
+ 4614 0076 00       		.byte	0
+ 4615              		.section	.debug_aranges,"",%progbits
+ 4616 0000 14000000 		.4byte	0x14
+ 4617 0004 0200     		.2byte	0x2
+ 4618 0006 00000000 		.4byte	.Ldebug_info0
+ 4619 000a 04       		.byte	0x4
+ 4620 000b 00       		.byte	0
+ 4621 000c 0000     		.2byte	0
+ 4622 000e 0000     		.2byte	0
+ 4623 0010 00000000 		.4byte	0
+ 4624 0014 00000000 		.4byte	0
+ 4625              		.section	.debug_line,"",%progbits
+ 4626              	.Ldebug_line0:
+ 4627 0000 39010000 		.section	.debug_str,"MS",%progbits,1
+ 4627      02003301 
+ 4627      00000201 
+ 4627      FB0E0D00 
+ 4627      01010101 
+ 4628              	.LASF9:
+ 4629 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 4629      6E74385F 
+ 4629      7400
+ 4630              	.LASF19:
+ 4631 000a 433A5C48 		.ascii	"C:\\H_da\\SS26\\Research Project\\Workspace01\\MP3_"
+ 4631      5F64615C 
+ 4631      53533236 
+ 4631      5C526573 
+ 4631      65617263 
+ 4632 0038 76342E63 		.ascii	"v4.cydsn\000"
+ 4632      7964736E 
+ 4632      00
+ 4633              	.LASF16:
+ 4634 0041 63795F6D 		.ascii	"cy_metadata\000"
+ 4634      65746164 
+ 4634      61746100 
+ 4635              	.LASF1:
+ 4636 004d 756E7369 		.ascii	"unsigned char\000"
+ 4636      676E6564 
+ 4636      20636861 
+ 4636      7200
+ 4637              	.LASF17:
+ 4638 005b 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 4638      43313120 
+ 4638      352E342E 
+ 4638      31203230 
+ 4638      31363036 
+ 4639 008e 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 4639      20726576 
+ 4639      6973696F 
+ 4639      6E203233 
+ 4639      37373135 
+ 4640 00c1 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 4640      66756E63 
+ 4640      74696F6E 
+ 4640      2D736563 
+ 4640      74696F6E 
+ 4641              	.LASF5:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 83
+
+
+ 4642 00e9 6C6F6E67 		.ascii	"long unsigned int\000"
+ 4642      20756E73 
+ 4642      69676E65 
+ 4642      6420696E 
+ 4642      7400
+ 4643              	.LASF3:
+ 4644 00fb 73686F72 		.ascii	"short unsigned int\000"
+ 4644      7420756E 
+ 4644      7369676E 
+ 4644      65642069 
+ 4644      6E7400
+ 4645              	.LASF13:
+ 4646 010e 63795F6D 		.ascii	"cy_meta_custnvl\000"
+ 4646      6574615F 
+ 4646      63757374 
+ 4646      6E766C00 
+ 4647              	.LASF12:
+ 4648 011e 63795F6D 		.ascii	"cy_meta_configecc\000"
+ 4648      6574615F 
+ 4648      636F6E66 
+ 4648      69676563 
+ 4648      6300
+ 4649              	.LASF8:
+ 4650 0130 756E7369 		.ascii	"unsigned int\000"
+ 4650      676E6564 
+ 4650      20696E74 
+ 4650      00
+ 4651              	.LASF7:
+ 4652 013d 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 4652      206C6F6E 
+ 4652      6720756E 
+ 4652      7369676E 
+ 4652      65642069 
+ 4653              	.LASF10:
+ 4654 0154 75696E74 		.ascii	"uint8_t\000"
+ 4654      385F7400 
+ 4655              	.LASF15:
+ 4656 015c 63795F6D 		.ascii	"cy_meta_flashprotect\000"
+ 4656      6574615F 
+ 4656      666C6173 
+ 4656      6870726F 
+ 4656      74656374 
+ 4657              	.LASF14:
+ 4658 0171 63795F6D 		.ascii	"cy_meta_wonvl\000"
+ 4658      6574615F 
+ 4658      776F6E76 
+ 4658      6C00
+ 4659              	.LASF11:
+ 4660 017f 73697A65 		.ascii	"sizetype\000"
+ 4660      74797065 
+ 4660      00
+ 4661              	.LASF6:
+ 4662 0188 6C6F6E67 		.ascii	"long long int\000"
+ 4662      206C6F6E 
+ 4662      6720696E 
+ 4662      7400
+ 4663              	.LASF2:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccl18Xq9.s 			page 84
+
+
+ 4664 0196 73686F72 		.ascii	"short int\000"
+ 4664      7420696E 
+ 4664      7400
+ 4665              	.LASF4:
+ 4666 01a0 6C6F6E67 		.ascii	"long int\000"
+ 4666      20696E74 
+ 4666      00
+ 4667              	.LASF0:
+ 4668 01a9 7369676E 		.ascii	"signed char\000"
+ 4668      65642063 
+ 4668      68617200 
+ 4669              	.LASF18:
+ 4670 01b5 47656E65 		.ascii	"Generated_Source\\PSoC5\\cymetadata.c\000"
+ 4670      72617465 
+ 4670      645F536F 
+ 4670      75726365 
+ 4670      5C50536F 
+ 4671              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

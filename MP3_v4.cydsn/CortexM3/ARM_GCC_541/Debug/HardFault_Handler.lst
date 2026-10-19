@@ -1,0 +1,2433 @@
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"HardFault_Handler.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.FAULTHANDLER_HardFault_hdl,"ax",%progbits
+  20              		.align	2
+  21              		.global	FAULTHANDLER_HardFault_hdl
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	FAULTHANDLER_HardFault_hdl, %function
+  25              	FAULTHANDLER_HardFault_hdl:
+  26              	.LFB111:
+  27              		.file 1 "source\\bsw\\Services\\ceh\\HardFault_Handler.c"
+   1:source\bsw\Services\ceh/HardFault_Handler.c **** /**
+   2:source\bsw\Services\ceh/HardFault_Handler.c ****  * \file 	HardFault_Handler.c
+   3:source\bsw\Services\ceh/HardFault_Handler.c ****  * \author 	Thomas Barth	- Hochschule Darmstadt thomas.barth@h-da.de
+   4:source\bsw\Services\ceh/HardFault_Handler.c ****  * \date 	03.03.2020
+   5:source\bsw\Services\ceh/HardFault_Handler.c ****  *
+   6:source\bsw\Services\ceh/HardFault_Handler.c ****  * \brief ARM Cortex-M3 Hard Fault
+   7:source\bsw\Services\ceh/HardFault_Handler.c ****  *
+   8:source\bsw\Services\ceh/HardFault_Handler.c ****  * The register definitions are based on http://infocenter.arm.com/help/index.jsp?topic=/com.arm.do
+   9:source\bsw\Services\ceh/HardFault_Handler.c ****  *
+  10:source\bsw\Services\ceh/HardFault_Handler.c ****  * \copyright Copyright ©2020
+  11:source\bsw\Services\ceh/HardFault_Handler.c ****  * Department of electrical engineering and information technology, Hochschule Darmstadt - Universi
+  12:source\bsw\Services\ceh/HardFault_Handler.c ****  * Permission to use, copy, modify, and distribute this software and its documentation for educatio
+  13:source\bsw\Services\ceh/HardFault_Handler.c ****  * (unless permitted by h_da) and official h_da projects, is hereby granted for enrolled students o
+  14:source\bsw\Services\ceh/HardFault_Handler.c ****  * this paragraph and the following paragraph appear in all copies, modifications, and distribution
+  15:source\bsw\Services\ceh/HardFault_Handler.c ****  * Contact Prof.Dr.-Ing. Peter Fromm, peter.fromm@h-da.de, Birkenweg 8 64295 Darmstadt - GERMANY fo
+  16:source\bsw\Services\ceh/HardFault_Handler.c ****  *
+  17:source\bsw\Services\ceh/HardFault_Handler.c ****  * \warning This software is a PROTOTYPE version and is not designed or intended for use in product
+  18:source\bsw\Services\ceh/HardFault_Handler.c ****  * The user represents and warrants that it will NOT use or redistribute the Software for such purp
+  19:source\bsw\Services\ceh/HardFault_Handler.c ****  * This prototype is for research purposes only. This software is provided "AS IS," without a warra
+  20:source\bsw\Services\ceh/HardFault_Handler.c ****  */
+  21:source\bsw\Services\ceh/HardFault_Handler.c **** 
+  22:source\bsw\Services\ceh/HardFault_Handler.c **** //-------------------------------------------------------------------- [includes]
+  23:source\bsw\Services\ceh/HardFault_Handler.c **** 
+  24:source\bsw\Services\ceh/HardFault_Handler.c **** #include "HardFault_Handler.h"
+  25:source\bsw\Services\ceh/HardFault_Handler.c **** #include <project.h>
+  26:source\bsw\Services\ceh/HardFault_Handler.c **** #include "HardFault_Regdef_CM3.h"
+  27:source\bsw\Services\ceh/HardFault_Handler.c **** 
+  28:source\bsw\Services\ceh/HardFault_Handler.c **** 
+  29:source\bsw\Services\ceh/HardFault_Handler.c **** //-------------------------------------------------------------------- [References]
+  30:source\bsw\Services\ceh/HardFault_Handler.c **** 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 2
+
+
+  31:source\bsw\Services\ceh/HardFault_Handler.c **** /**
+  32:source\bsw\Services\ceh/HardFault_Handler.c ****  * Reference to the interrupt vector table
+  33:source\bsw\Services\ceh/HardFault_Handler.c ****  */
+  34:source\bsw\Services\ceh/HardFault_Handler.c **** extern cyisraddress     CyRamVectors[];
+  35:source\bsw\Services\ceh/HardFault_Handler.c **** 
+  36:source\bsw\Services\ceh/HardFault_Handler.c **** //-------------------------------------------------------------------- [Defines]
+  37:source\bsw\Services\ceh/HardFault_Handler.c **** 
+  38:source\bsw\Services\ceh/HardFault_Handler.c **** //User Code to stop the system. Implementation depends on the architecture
+  39:source\bsw\Services\ceh/HardFault_Handler.c **** #define FAULTHANDLER_stop(a)   asm("bkpt")
+  40:source\bsw\Services\ceh/HardFault_Handler.c **** 
+  41:source\bsw\Services\ceh/HardFault_Handler.c **** //-------------------------------------------------------------------- [Types]
+  42:source\bsw\Services\ceh/HardFault_Handler.c **** 
+  43:source\bsw\Services\ceh/HardFault_Handler.c **** /** \brief Fault Detail structure
+  44:source\bsw\Services\ceh/HardFault_Handler.c ****  *
+  45:source\bsw\Services\ceh/HardFault_Handler.c ****  * This structure is used to save all relevant information after an fault occurred */
+  46:source\bsw\Services\ceh/HardFault_Handler.c **** typedef struct{
+  47:source\bsw\Services\ceh/HardFault_Handler.c ****     struct{
+  48:source\bsw\Services\ceh/HardFault_Handler.c ****         uint32_t r0;					/**< \brief CPU register R0. */
+  49:source\bsw\Services\ceh/HardFault_Handler.c ****         uint32_t r1;					/**< \brief CPU register R1. */
+  50:source\bsw\Services\ceh/HardFault_Handler.c ****         uint32_t r2;					/**< \brief CPU register R2. */
+  51:source\bsw\Services\ceh/HardFault_Handler.c ****         uint32_t r3;					/**< \brief CPU register R3. */
+  52:source\bsw\Services\ceh/HardFault_Handler.c ****         uint32_t r12;					/**< \brief CPU register R12. */
+  53:source\bsw\Services\ceh/HardFault_Handler.c ****         uint32_t lr;    				/**< \brief Link register. */
+  54:source\bsw\Services\ceh/HardFault_Handler.c ****         uint32_t pc;    				/**< \brief Program counter. */
+  55:source\bsw\Services\ceh/HardFault_Handler.c ****         uint32_t psr;   				/**< \brief Program status register. */
+  56:source\bsw\Services\ceh/HardFault_Handler.c ****     }CPU;
+  57:source\bsw\Services\ceh/HardFault_Handler.c **** 	struct{
+  58:source\bsw\Services\ceh/HardFault_Handler.c **** 		CORTEX_SHCRS_t 	SHCRS;			/**< \brief System Handler Control and State Register. */
+  59:source\bsw\Services\ceh/HardFault_Handler.c **** 		CORTEX_CFSR_t	CFSR;			/**< \brief Configurable Fault Status Register. */
+  60:source\bsw\Services\ceh/HardFault_Handler.c **** 		CORTEX_HFSR_t	HFSR;			/**< \brief HardFault Status Register. */
+  61:source\bsw\Services\ceh/HardFault_Handler.c **** 		CORTEX_MMFAR_t	MMFAR;			/**< \brief MemManage Fault Address Register. */
+  62:source\bsw\Services\ceh/HardFault_Handler.c **** 		CORTEX_HFSR_t	BFAR;			/**< \brief BusFault Address Register. */
+  63:source\bsw\Services\ceh/HardFault_Handler.c ****     }Faults;
+  64:source\bsw\Services\ceh/HardFault_Handler.c **** }FaultDetail_t;
+  65:source\bsw\Services\ceh/HardFault_Handler.c **** 
+  66:source\bsw\Services\ceh/HardFault_Handler.c **** //-------------------------------------------------------------------- [local variables]
+  67:source\bsw\Services\ceh/HardFault_Handler.c **** 
+  68:source\bsw\Services\ceh/HardFault_Handler.c **** /** \brief contains information about the last fault */
+  69:source\bsw\Services\ceh/HardFault_Handler.c **** static volatile FaultDetail_t   FaultDetail={};
+  70:source\bsw\Services\ceh/HardFault_Handler.c **** 
+  71:source\bsw\Services\ceh/HardFault_Handler.c **** //-------------------------------------------------------------------- [local functions]
+  72:source\bsw\Services\ceh/HardFault_Handler.c **** 
+  73:source\bsw\Services\ceh/HardFault_Handler.c **** /** \brief Safe fault details
+  74:source\bsw\Services\ceh/HardFault_Handler.c ****   *
+  75:source\bsw\Services\ceh/HardFault_Handler.c ****   * This function gathers information about any fault
+  76:source\bsw\Services\ceh/HardFault_Handler.c ****   */
+  77:source\bsw\Services\ceh/HardFault_Handler.c **** void FAULTHANDLER_SaveDetails(void){
+  78:source\bsw\Services\ceh/HardFault_Handler.c **** 
+  79:source\bsw\Services\ceh/HardFault_Handler.c ****     //safe fault details
+  80:source\bsw\Services\ceh/HardFault_Handler.c ****     FaultDetail.Faults.SHCRS.u32=*ADR_SCB_SHCRS;
+  81:source\bsw\Services\ceh/HardFault_Handler.c ****     FaultDetail.Faults.CFSR.u32=*ADR_SCB_CFSR;
+  82:source\bsw\Services\ceh/HardFault_Handler.c ****     FaultDetail.Faults.HFSR.u32=*ADR_SCB_HFSR;
+  83:source\bsw\Services\ceh/HardFault_Handler.c ****     FaultDetail.Faults.MMFAR.u32=*ADR_SCB_MMFAR;
+  84:source\bsw\Services\ceh/HardFault_Handler.c ****     FaultDetail.Faults.BFAR.u32=*ADR_SCB_BFAR;
+  85:source\bsw\Services\ceh/HardFault_Handler.c **** }
+  86:source\bsw\Services\ceh/HardFault_Handler.c **** 
+  87:source\bsw\Services\ceh/HardFault_Handler.c **** /** \brief Hard Fault handler
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 3
+
+
+  88:source\bsw\Services\ceh/HardFault_Handler.c ****   *
+  89:source\bsw\Services\ceh/HardFault_Handler.c ****   * This function should be set as a hard fault "ISR"
+  90:source\bsw\Services\ceh/HardFault_Handler.c ****   * It will gather information about the fault, which can be used for debugging
+  91:source\bsw\Services\ceh/HardFault_Handler.c ****   * By calling FAULTHANDLER__getRegistersFromStack
+  92:source\bsw\Services\ceh/HardFault_Handler.c ****   */
+  93:source\bsw\Services\ceh/HardFault_Handler.c **** __attribute__((naked)) void FAULTHANDLER_HardFault_hdl(void){
+  28              		.loc 1 93 0
+  29              		.cfi_startproc
+  30              		@ Naked Function: prologue and epilogue provided by programmer.
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  94:source\bsw\Services\ceh/HardFault_Handler.c ****     __asm volatile
+  33              		.loc 1 94 0
+  34              		.syntax unified
+  35              	@ 94 "source\bsw\Services\ceh\HardFault_Handler.c" 1
+  36 0000 1EF0040F 		 tst lr, #4                                                          
+  37 0004 0CBF     	 ite eq                                                              
+  38 0006 EFF30880 	 mrseq r0, msp                                                       
+  39 000a EFF30980 	 mrsne r0, psp                                                       
+  40 000e 8169     	 ldr r1, [r0, #24]                                                   
+  41 0010 004A     	 ldr r2, handler2_address_const                                      
+  42 0012 1047     	 bx r2                                                               
+  43 0014 00000000 	 handler2_address_const: .word FAULTHANDLER__getRegistersFromStack   
+  44              	
+  45              	@ 0 "" 2
+  95:source\bsw\Services\ceh/HardFault_Handler.c ****     (
+  96:source\bsw\Services\ceh/HardFault_Handler.c ****         " tst lr, #4                                                          \n"
+  97:source\bsw\Services\ceh/HardFault_Handler.c ****         " ite eq                                                              \n"
+  98:source\bsw\Services\ceh/HardFault_Handler.c ****         " mrseq r0, msp                                                       \n"
+  99:source\bsw\Services\ceh/HardFault_Handler.c ****         " mrsne r0, psp                                                       \n"
+ 100:source\bsw\Services\ceh/HardFault_Handler.c ****         " ldr r1, [r0, #24]                                                   \n"
+ 101:source\bsw\Services\ceh/HardFault_Handler.c ****         " ldr r2, handler2_address_const                                      \n"
+ 102:source\bsw\Services\ceh/HardFault_Handler.c ****         " bx r2                                                               \n"
+ 103:source\bsw\Services\ceh/HardFault_Handler.c ****         " handler2_address_const: .word FAULTHANDLER__getRegistersFromStack   \n"
+ 104:source\bsw\Services\ceh/HardFault_Handler.c ****     );
+ 105:source\bsw\Services\ceh/HardFault_Handler.c **** }
+  46              		.loc 1 105 0
+  47              		.thumb
+  48              		.syntax unified
+  49              		.cfi_endproc
+  50              	.LFE111:
+  51              		.size	FAULTHANDLER_HardFault_hdl, .-FAULTHANDLER_HardFault_hdl
+  52              		.section	.text.FAULTHANDLER_SaveDetails,"ax",%progbits
+  53              		.align	2
+  54              		.global	FAULTHANDLER_SaveDetails
+  55              		.thumb
+  56              		.thumb_func
+  57              		.type	FAULTHANDLER_SaveDetails, %function
+  58              	FAULTHANDLER_SaveDetails:
+  59              	.LFB110:
+  77:source\bsw\Services\ceh/HardFault_Handler.c **** 
+  60              		.loc 1 77 0
+  61              		.cfi_startproc
+  62              		@ args = 0, pretend = 0, frame = 0
+  63              		@ frame_needed = 0, uses_anonymous_args = 0
+  64              		@ link register save eliminated.
+  80:source\bsw\Services\ceh/HardFault_Handler.c ****     FaultDetail.Faults.CFSR.u32=*ADR_SCB_CFSR;
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 4
+
+
+  65              		.loc 1 80 0
+  66 0000 084B     		ldr	r3, .L3
+  67 0002 1A68     		ldr	r2, [r3]
+  68 0004 084B     		ldr	r3, .L3+4
+  69 0006 1A62     		str	r2, [r3, #32]
+  81:source\bsw\Services\ceh/HardFault_Handler.c ****     FaultDetail.Faults.HFSR.u32=*ADR_SCB_HFSR;
+  70              		.loc 1 81 0
+  71 0008 084A     		ldr	r2, .L3+8
+  72 000a 1268     		ldr	r2, [r2]
+  73 000c 5A62     		str	r2, [r3, #36]
+  82:source\bsw\Services\ceh/HardFault_Handler.c ****     FaultDetail.Faults.MMFAR.u32=*ADR_SCB_MMFAR;
+  74              		.loc 1 82 0
+  75 000e 084A     		ldr	r2, .L3+12
+  76 0010 1268     		ldr	r2, [r2]
+  77 0012 9A62     		str	r2, [r3, #40]
+  83:source\bsw\Services\ceh/HardFault_Handler.c ****     FaultDetail.Faults.BFAR.u32=*ADR_SCB_BFAR;
+  78              		.loc 1 83 0
+  79 0014 074A     		ldr	r2, .L3+16
+  80 0016 1268     		ldr	r2, [r2]
+  81 0018 DA62     		str	r2, [r3, #44]
+  84:source\bsw\Services\ceh/HardFault_Handler.c **** }
+  82              		.loc 1 84 0
+  83 001a 074A     		ldr	r2, .L3+20
+  84 001c 1268     		ldr	r2, [r2]
+  85 001e 1A63     		str	r2, [r3, #48]
+  86 0020 7047     		bx	lr
+  87              	.L4:
+  88 0022 00BF     		.align	2
+  89              	.L3:
+  90 0024 24ED00E0 		.word	-536810204
+  91 0028 00000000 		.word	.LANCHOR0
+  92 002c 28ED00E0 		.word	-536810200
+  93 0030 2CED00E0 		.word	-536810196
+  94 0034 34ED00E0 		.word	-536810188
+  95 0038 38ED00E0 		.word	-536810184
+  96              		.cfi_endproc
+  97              	.LFE110:
+  98              		.size	FAULTHANDLER_SaveDetails, .-FAULTHANDLER_SaveDetails
+  99              		.section	.text.FAULTHANDLER_fault_hdl,"ax",%progbits
+ 100              		.align	2
+ 101              		.thumb
+ 102              		.thumb_func
+ 103              		.type	FAULTHANDLER_fault_hdl, %function
+ 104              	FAULTHANDLER_fault_hdl:
+ 105              	.LFB112:
+ 106:source\bsw\Services\ceh/HardFault_Handler.c **** 
+ 107:source\bsw\Services\ceh/HardFault_Handler.c **** /** \brief ISR for faults other than the hard fault */
+ 108:source\bsw\Services\ceh/HardFault_Handler.c **** static void FAULTHANDLER_fault_hdl(void){
+ 106              		.loc 1 108 0
+ 107              		.cfi_startproc
+ 108              		@ args = 0, pretend = 0, frame = 0
+ 109              		@ frame_needed = 0, uses_anonymous_args = 0
+ 110 0000 08B5     		push	{r3, lr}
+ 111              		.cfi_def_cfa_offset 8
+ 112              		.cfi_offset 3, -8
+ 113              		.cfi_offset 14, -4
+ 109:source\bsw\Services\ceh/HardFault_Handler.c ****     FAULTHANDLER_SaveDetails();
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 5
+
+
+ 114              		.loc 1 109 0
+ 115 0002 FFF7FEFF 		bl	FAULTHANDLER_SaveDetails
+ 116              	.LVL0:
+ 110:source\bsw\Services\ceh/HardFault_Handler.c ****     FAULTHANDLER_stop(0);
+ 117              		.loc 1 110 0
+ 118              		.syntax unified
+ 119              	@ 110 "source\bsw\Services\ceh\HardFault_Handler.c" 1
+ 120 0006 00BE     		bkpt
+ 121              	@ 0 "" 2
+ 122              		.thumb
+ 123              		.syntax unified
+ 124 0008 08BD     		pop	{r3, pc}
+ 125              		.cfi_endproc
+ 126              	.LFE112:
+ 127              		.size	FAULTHANDLER_fault_hdl, .-FAULTHANDLER_fault_hdl
+ 128 000a 00BF     		.section	.text.FAULTHANDLER__getRegistersFromStack,"ax",%progbits
+ 129              		.align	2
+ 130              		.global	FAULTHANDLER__getRegistersFromStack
+ 131              		.thumb
+ 132              		.thumb_func
+ 133              		.type	FAULTHANDLER__getRegistersFromStack, %function
+ 134              	FAULTHANDLER__getRegistersFromStack:
+ 135              	.LFB113:
+ 111:source\bsw\Services\ceh/HardFault_Handler.c **** }
+ 112:source\bsw\Services\ceh/HardFault_Handler.c **** 
+ 113:source\bsw\Services\ceh/HardFault_Handler.c **** /**
+ 114:source\bsw\Services\ceh/HardFault_Handler.c ****  * Gets the CPU registers which have been stored on the stack after an hard fault and stores them i
+ 115:source\bsw\Services\ceh/HardFault_Handler.c ****  * @param pulFaultStackAddress	Pointer to the stack in which the error information is stored
+ 116:source\bsw\Services\ceh/HardFault_Handler.c ****  */
+ 117:source\bsw\Services\ceh/HardFault_Handler.c **** void FAULTHANDLER__getRegistersFromStack( uint32_t *pulFaultStackAddress ){
+ 136              		.loc 1 117 0
+ 137              		.cfi_startproc
+ 138              		@ args = 0, pretend = 0, frame = 0
+ 139              		@ frame_needed = 0, uses_anonymous_args = 0
+ 140              	.LVL1:
+ 141 0000 08B5     		push	{r3, lr}
+ 142              		.cfi_def_cfa_offset 8
+ 143              		.cfi_offset 3, -8
+ 144              		.cfi_offset 14, -4
+ 118:source\bsw\Services\ceh/HardFault_Handler.c **** 
+ 119:source\bsw\Services\ceh/HardFault_Handler.c ****     //safe CPU details from the stack
+ 120:source\bsw\Services\ceh/HardFault_Handler.c ****     FaultDetail.CPU.r0 = pulFaultStackAddress[ 0 ];
+ 145              		.loc 1 120 0
+ 146 0002 0268     		ldr	r2, [r0]
+ 147 0004 094B     		ldr	r3, .L9
+ 148 0006 1A60     		str	r2, [r3]
+ 121:source\bsw\Services\ceh/HardFault_Handler.c ****     FaultDetail.CPU.r1 = pulFaultStackAddress[ 1 ];
+ 149              		.loc 1 121 0
+ 150 0008 4268     		ldr	r2, [r0, #4]
+ 151 000a 5A60     		str	r2, [r3, #4]
+ 122:source\bsw\Services\ceh/HardFault_Handler.c ****     FaultDetail.CPU.r2 = pulFaultStackAddress[ 2 ];
+ 152              		.loc 1 122 0
+ 153 000c 8268     		ldr	r2, [r0, #8]
+ 154 000e 9A60     		str	r2, [r3, #8]
+ 123:source\bsw\Services\ceh/HardFault_Handler.c ****     FaultDetail.CPU.r3 = pulFaultStackAddress[ 3 ];
+ 155              		.loc 1 123 0
+ 156 0010 C268     		ldr	r2, [r0, #12]
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 6
+
+
+ 157 0012 DA60     		str	r2, [r3, #12]
+ 124:source\bsw\Services\ceh/HardFault_Handler.c **** 
+ 125:source\bsw\Services\ceh/HardFault_Handler.c ****     FaultDetail.CPU.r12 = pulFaultStackAddress[ 4 ];
+ 158              		.loc 1 125 0
+ 159 0014 0269     		ldr	r2, [r0, #16]
+ 160 0016 1A61     		str	r2, [r3, #16]
+ 126:source\bsw\Services\ceh/HardFault_Handler.c ****     FaultDetail.CPU.lr =  pulFaultStackAddress[ 5 ];
+ 161              		.loc 1 126 0
+ 162 0018 4269     		ldr	r2, [r0, #20]
+ 163 001a 5A61     		str	r2, [r3, #20]
+ 127:source\bsw\Services\ceh/HardFault_Handler.c ****     FaultDetail.CPU.pc =  pulFaultStackAddress[ 6 ];
+ 164              		.loc 1 127 0
+ 165 001c 8269     		ldr	r2, [r0, #24]
+ 166 001e 9A61     		str	r2, [r3, #24]
+ 128:source\bsw\Services\ceh/HardFault_Handler.c ****     FaultDetail.CPU.psr = pulFaultStackAddress[ 7 ];
+ 167              		.loc 1 128 0
+ 168 0020 C269     		ldr	r2, [r0, #28]
+ 169 0022 DA61     		str	r2, [r3, #28]
+ 129:source\bsw\Services\ceh/HardFault_Handler.c **** 
+ 130:source\bsw\Services\ceh/HardFault_Handler.c ****     //safe additional details
+ 131:source\bsw\Services\ceh/HardFault_Handler.c ****     FAULTHANDLER_SaveDetails();
+ 170              		.loc 1 131 0
+ 171 0024 FFF7FEFF 		bl	FAULTHANDLER_SaveDetails
+ 172              	.LVL2:
+ 132:source\bsw\Services\ceh/HardFault_Handler.c **** 
+ 133:source\bsw\Services\ceh/HardFault_Handler.c ****     /* When the following line is hit, the variables contain the register values. */
+ 134:source\bsw\Services\ceh/HardFault_Handler.c ****     FAULTHANDLER_stop(0);
+ 173              		.loc 1 134 0
+ 174              		.syntax unified
+ 175              	@ 134 "source\bsw\Services\ceh\HardFault_Handler.c" 1
+ 176 0028 00BE     		bkpt
+ 177              	@ 0 "" 2
+ 178              		.thumb
+ 179              		.syntax unified
+ 180 002a 08BD     		pop	{r3, pc}
+ 181              	.L10:
+ 182              		.align	2
+ 183              	.L9:
+ 184 002c 00000000 		.word	.LANCHOR0
+ 185              		.cfi_endproc
+ 186              	.LFE113:
+ 187              		.size	FAULTHANDLER__getRegistersFromStack, .-FAULTHANDLER__getRegistersFromStack
+ 188              		.section	.text.FAULTHANDLER_Install,"ax",%progbits
+ 189              		.align	2
+ 190              		.global	FAULTHANDLER_Install
+ 191              		.thumb
+ 192              		.thumb_func
+ 193              		.type	FAULTHANDLER_Install, %function
+ 194              	FAULTHANDLER_Install:
+ 195              	.LFB114:
+ 135:source\bsw\Services\ceh/HardFault_Handler.c **** 
+ 136:source\bsw\Services\ceh/HardFault_Handler.c ****     //supress warnings
+ 137:source\bsw\Services\ceh/HardFault_Handler.c ****     (void)FaultDetail;
+ 138:source\bsw\Services\ceh/HardFault_Handler.c **** }
+ 139:source\bsw\Services\ceh/HardFault_Handler.c **** 
+ 140:source\bsw\Services\ceh/HardFault_Handler.c **** //-------------------------------------------------------------------- [global functions]
+ 141:source\bsw\Services\ceh/HardFault_Handler.c **** 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 7
+
+
+ 142:source\bsw\Services\ceh/HardFault_Handler.c **** void FAULTHANDLER_Install(void){
+ 196              		.loc 1 142 0
+ 197              		.cfi_startproc
+ 198              		@ args = 0, pretend = 0, frame = 0
+ 199              		@ frame_needed = 0, uses_anonymous_args = 0
+ 200              		@ link register save eliminated.
+ 143:source\bsw\Services\ceh/HardFault_Handler.c ****     //install fault handlers
+ 144:source\bsw\Services\ceh/HardFault_Handler.c ****     CyRamVectors[ CY_INT_HARD_FAULT_IRQN ]  = ( cyisraddress ) FAULTHANDLER_HardFault_hdl;       /*
+ 201              		.loc 1 144 0
+ 202 0000 044B     		ldr	r3, .L12
+ 203 0002 054A     		ldr	r2, .L12+4
+ 204 0004 DA60     		str	r2, [r3, #12]
+ 145:source\bsw\Services\ceh/HardFault_Handler.c ****     CyRamVectors[ CY_INT_NMI_IRQN ]         = ( cyisraddress ) FAULTHANDLER_fault_hdl;           /*
+ 205              		.loc 1 145 0
+ 206 0006 054A     		ldr	r2, .L12+8
+ 207 0008 9A60     		str	r2, [r3, #8]
+ 146:source\bsw\Services\ceh/HardFault_Handler.c ****     CyRamVectors[ CY_INT_MEM_MANAGE_IRQN ]  = ( cyisraddress ) FAULTHANDLER_fault_hdl;           /*
+ 208              		.loc 1 146 0
+ 209 000a 1A61     		str	r2, [r3, #16]
+ 147:source\bsw\Services\ceh/HardFault_Handler.c ****     CyRamVectors[ CY_INT_BUS_FAULT_IRQN ]   = ( cyisraddress ) FAULTHANDLER_fault_hdl;           /*
+ 210              		.loc 1 147 0
+ 211 000c 5A61     		str	r2, [r3, #20]
+ 148:source\bsw\Services\ceh/HardFault_Handler.c ****     CyRamVectors[ CY_INT_USAGE_FAULT_IRQN ] = ( cyisraddress ) FAULTHANDLER_fault_hdl;           /*
+ 212              		.loc 1 148 0
+ 213 000e 9A61     		str	r2, [r3, #24]
+ 214 0010 7047     		bx	lr
+ 215              	.L13:
+ 216 0012 00BF     		.align	2
+ 217              	.L12:
+ 218 0014 00000000 		.word	CyRamVectors
+ 219 0018 00000000 		.word	FAULTHANDLER_HardFault_hdl
+ 220 001c 00000000 		.word	FAULTHANDLER_fault_hdl
+ 221              		.cfi_endproc
+ 222              	.LFE114:
+ 223              		.size	FAULTHANDLER_Install, .-FAULTHANDLER_Install
+ 224              		.bss
+ 225              		.align	2
+ 226              		.set	.LANCHOR0,. + 0
+ 227              		.type	FaultDetail, %object
+ 228              		.size	FaultDetail, 52
+ 229              	FaultDetail:
+ 230 0000 00000000 		.space	52
+ 230      00000000 
+ 230      00000000 
+ 230      00000000 
+ 230      00000000 
+ 231              		.text
+ 232              	.Letext0:
+ 233              		.file 2 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
+ 234              		.file 3 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
+ 235              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 236              		.file 5 "Generated_Source\\PSoC5/ErikaOS_1_common_ee_types.inc"
+ 237              		.file 6 "Generated_Source\\PSoC5/ErikaOS_1_cortex_mx_ee_cpu.inc"
+ 238              		.file 7 "source\\bsw\\Services\\ceh\\HardFault_Regdef_CM3.h"
+ 239              		.file 8 "Generated_Source\\PSoC5/ErikaOS_1_ee_oo_intfunc.inc"
+ 240              		.file 9 "Generated_Source\\PSoC5/ErikaOS_1_cortex_mx_ee_context.inc"
+ 241              		.file 10 "Generated_Source\\PSoC5/ErikaOS_1_common_ee_primitives.inc"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 8
+
+
+ 242              		.file 11 "Generated_Source\\PSoC5/core_cm3.h"
+ 243              		.section	.debug_info,"",%progbits
+ 244              	.Ldebug_info0:
+ 245 0000 1E070000 		.4byte	0x71e
+ 246 0004 0400     		.2byte	0x4
+ 247 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 248 000a 04       		.byte	0x4
+ 249 000b 01       		.uleb128 0x1
+ 250 000c 70040000 		.4byte	.LASF88
+ 251 0010 0C       		.byte	0xc
+ 252 0011 23020000 		.4byte	.LASF89
+ 253 0015 B2030000 		.4byte	.LASF90
+ 254 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 255 001d 00000000 		.4byte	0
+ 256 0021 00000000 		.4byte	.Ldebug_line0
+ 257 0025 02       		.uleb128 0x2
+ 258 0026 01       		.byte	0x1
+ 259 0027 06       		.byte	0x6
+ 260 0028 72020000 		.4byte	.LASF0
+ 261 002c 02       		.uleb128 0x2
+ 262 002d 01       		.byte	0x1
+ 263 002e 08       		.byte	0x8
+ 264 002f 4F020000 		.4byte	.LASF1
+ 265 0033 02       		.uleb128 0x2
+ 266 0034 02       		.byte	0x2
+ 267 0035 05       		.byte	0x5
+ 268 0036 24000000 		.4byte	.LASF2
+ 269 003a 02       		.uleb128 0x2
+ 270 003b 02       		.byte	0x2
+ 271 003c 07       		.byte	0x7
+ 272 003d DB020000 		.4byte	.LASF3
+ 273 0041 03       		.uleb128 0x3
+ 274 0042 01040000 		.4byte	.LASF5
+ 275 0046 02       		.byte	0x2
+ 276 0047 3F       		.byte	0x3f
+ 277 0048 4C000000 		.4byte	0x4c
+ 278 004c 02       		.uleb128 0x2
+ 279 004d 04       		.byte	0x4
+ 280 004e 05       		.byte	0x5
+ 281 004f C9010000 		.4byte	.LASF4
+ 282 0053 03       		.uleb128 0x3
+ 283 0054 92000000 		.4byte	.LASF6
+ 284 0058 02       		.byte	0x2
+ 285 0059 41       		.byte	0x41
+ 286 005a 5E000000 		.4byte	0x5e
+ 287 005e 02       		.uleb128 0x2
+ 288 005f 04       		.byte	0x4
+ 289 0060 07       		.byte	0x7
+ 290 0061 A0030000 		.4byte	.LASF7
+ 291 0065 02       		.uleb128 0x2
+ 292 0066 08       		.byte	0x8
+ 293 0067 05       		.byte	0x5
+ 294 0068 9A010000 		.4byte	.LASF8
+ 295 006c 02       		.uleb128 0x2
+ 296 006d 08       		.byte	0x8
+ 297 006e 07       		.byte	0x7
+ 298 006f 5D000000 		.4byte	.LASF9
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 9
+
+
+ 299 0073 04       		.uleb128 0x4
+ 300 0074 04       		.byte	0x4
+ 301 0075 05       		.byte	0x5
+ 302 0076 696E7400 		.ascii	"int\000"
+ 303 007a 02       		.uleb128 0x2
+ 304 007b 04       		.byte	0x4
+ 305 007c 07       		.byte	0x7
+ 306 007d FE040000 		.4byte	.LASF10
+ 307 0081 03       		.uleb128 0x3
+ 308 0082 53030000 		.4byte	.LASF11
+ 309 0086 03       		.byte	0x3
+ 310 0087 2C       		.byte	0x2c
+ 311 0088 41000000 		.4byte	0x41
+ 312 008c 03       		.uleb128 0x3
+ 313 008d 90020000 		.4byte	.LASF12
+ 314 0091 03       		.byte	0x3
+ 315 0092 30       		.byte	0x30
+ 316 0093 53000000 		.4byte	0x53
+ 317 0097 02       		.uleb128 0x2
+ 318 0098 04       		.byte	0x4
+ 319 0099 04       		.byte	0x4
+ 320 009a 60010000 		.4byte	.LASF13
+ 321 009e 02       		.uleb128 0x2
+ 322 009f 08       		.byte	0x8
+ 323 00a0 04       		.byte	0x4
+ 324 00a1 48040000 		.4byte	.LASF14
+ 325 00a5 02       		.uleb128 0x2
+ 326 00a6 01       		.byte	0x1
+ 327 00a7 08       		.byte	0x8
+ 328 00a8 1E030000 		.4byte	.LASF15
+ 329 00ac 05       		.uleb128 0x5
+ 330 00ad A8010000 		.4byte	.LASF16
+ 331 00b1 04       		.byte	0x4
+ 332 00b2 A002     		.2byte	0x2a0
+ 333 00b4 B8000000 		.4byte	0xb8
+ 334 00b8 06       		.uleb128 0x6
+ 335 00b9 04       		.byte	0x4
+ 336 00ba BE000000 		.4byte	0xbe
+ 337 00be 07       		.uleb128 0x7
+ 338 00bf 02       		.uleb128 0x2
+ 339 00c0 08       		.byte	0x8
+ 340 00c1 04       		.byte	0x4
+ 341 00c2 17020000 		.4byte	.LASF17
+ 342 00c6 03       		.uleb128 0x3
+ 343 00c7 C1020000 		.4byte	.LASF18
+ 344 00cb 05       		.byte	0x5
+ 345 00cc 53       		.byte	0x53
+ 346 00cd 73000000 		.4byte	0x73
+ 347 00d1 03       		.uleb128 0x3
+ 348 00d2 A5000000 		.4byte	.LASF19
+ 349 00d6 05       		.byte	0x5
+ 350 00d7 54       		.byte	0x54
+ 351 00d8 7A000000 		.4byte	0x7a
+ 352 00dc 03       		.uleb128 0x3
+ 353 00dd 00000000 		.4byte	.LASF20
+ 354 00e1 06       		.byte	0x6
+ 355 00e2 4D       		.byte	0x4d
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 10
+
+
+ 356 00e3 D1000000 		.4byte	0xd1
+ 357 00e7 03       		.uleb128 0x3
+ 358 00e8 9D000000 		.4byte	.LASF21
+ 359 00ec 06       		.byte	0x6
+ 360 00ed 4F       		.byte	0x4f
+ 361 00ee D1000000 		.4byte	0xd1
+ 362 00f2 03       		.uleb128 0x3
+ 363 00f3 B9000000 		.4byte	.LASF22
+ 364 00f7 06       		.byte	0x6
+ 365 00f8 78       		.byte	0x78
+ 366 00f9 C6000000 		.4byte	0xc6
+ 367 00fd 02       		.uleb128 0x2
+ 368 00fe 04       		.byte	0x4
+ 369 00ff 07       		.byte	0x7
+ 370 0100 38000000 		.4byte	.LASF23
+ 371 0104 08       		.uleb128 0x8
+ 372 0105 04       		.byte	0x4
+ 373 0106 07       		.byte	0x7
+ 374 0107 BD       		.byte	0xbd
+ 375 0108 1B020000 		.4byte	0x21b
+ 376 010c 09       		.uleb128 0x9
+ 377 010d 27040000 		.4byte	.LASF24
+ 378 0111 07       		.byte	0x7
+ 379 0112 BE       		.byte	0xbe
+ 380 0113 7A000000 		.4byte	0x7a
+ 381 0117 04       		.byte	0x4
+ 382 0118 01       		.byte	0x1
+ 383 0119 1F       		.byte	0x1f
+ 384 011a 00       		.byte	0
+ 385 011b 09       		.uleb128 0x9
+ 386 011c F8000000 		.4byte	.LASF25
+ 387 0120 07       		.byte	0x7
+ 388 0121 BF       		.byte	0xbf
+ 389 0122 7A000000 		.4byte	0x7a
+ 390 0126 04       		.byte	0x4
+ 391 0127 01       		.byte	0x1
+ 392 0128 1E       		.byte	0x1e
+ 393 0129 00       		.byte	0
+ 394 012a 09       		.uleb128 0x9
+ 395 012b 83000000 		.4byte	.LASF26
+ 396 012f 07       		.byte	0x7
+ 397 0130 C0       		.byte	0xc0
+ 398 0131 7A000000 		.4byte	0x7a
+ 399 0135 04       		.byte	0x4
+ 400 0136 01       		.byte	0x1
+ 401 0137 1D       		.byte	0x1d
+ 402 0138 00       		.byte	0
+ 403 0139 09       		.uleb128 0x9
+ 404 013a 84020000 		.4byte	.LASF27
+ 405 013e 07       		.byte	0x7
+ 406 013f C1       		.byte	0xc1
+ 407 0140 7A000000 		.4byte	0x7a
+ 408 0144 04       		.byte	0x4
+ 409 0145 01       		.byte	0x1
+ 410 0146 1C       		.byte	0x1c
+ 411 0147 00       		.byte	0
+ 412 0148 09       		.uleb128 0x9
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 11
+
+
+ 413 0149 D7000000 		.4byte	.LASF28
+ 414 014d 07       		.byte	0x7
+ 415 014e C2       		.byte	0xc2
+ 416 014f 7A000000 		.4byte	0x7a
+ 417 0153 04       		.byte	0x4
+ 418 0154 03       		.byte	0x3
+ 419 0155 19       		.byte	0x19
+ 420 0156 00       		.byte	0
+ 421 0157 09       		.uleb128 0x9
+ 422 0158 D1020000 		.4byte	.LASF29
+ 423 015c 07       		.byte	0x7
+ 424 015d C3       		.byte	0xc3
+ 425 015e 7A000000 		.4byte	0x7a
+ 426 0162 04       		.byte	0x4
+ 427 0163 01       		.byte	0x1
+ 428 0164 18       		.byte	0x18
+ 429 0165 00       		.byte	0
+ 430 0166 09       		.uleb128 0x9
+ 431 0167 32050000 		.4byte	.LASF30
+ 432 016b 07       		.byte	0x7
+ 433 016c C4       		.byte	0xc4
+ 434 016d 7A000000 		.4byte	0x7a
+ 435 0171 04       		.byte	0x4
+ 436 0172 01       		.byte	0x1
+ 437 0173 17       		.byte	0x17
+ 438 0174 00       		.byte	0
+ 439 0175 09       		.uleb128 0x9
+ 440 0176 E2000000 		.4byte	.LASF31
+ 441 017a 07       		.byte	0x7
+ 442 017b C5       		.byte	0xc5
+ 443 017c 7A000000 		.4byte	0x7a
+ 444 0180 04       		.byte	0x4
+ 445 0181 01       		.byte	0x1
+ 446 0182 16       		.byte	0x16
+ 447 0183 00       		.byte	0
+ 448 0184 09       		.uleb128 0x9
+ 449 0185 66010000 		.4byte	.LASF32
+ 450 0189 07       		.byte	0x7
+ 451 018a C6       		.byte	0xc6
+ 452 018b 7A000000 		.4byte	0x7a
+ 453 018f 04       		.byte	0x4
+ 454 0190 01       		.byte	0x1
+ 455 0191 15       		.byte	0x15
+ 456 0192 00       		.byte	0
+ 457 0193 09       		.uleb128 0x9
+ 458 0194 5D020000 		.4byte	.LASF33
+ 459 0198 07       		.byte	0x7
+ 460 0199 C7       		.byte	0xc7
+ 461 019a 7A000000 		.4byte	0x7a
+ 462 019e 04       		.byte	0x4
+ 463 019f 01       		.byte	0x1
+ 464 01a0 14       		.byte	0x14
+ 465 01a1 00       		.byte	0
+ 466 01a2 09       		.uleb128 0x9
+ 467 01a3 8B010000 		.4byte	.LASF34
+ 468 01a7 07       		.byte	0x7
+ 469 01a8 C8       		.byte	0xc8
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 12
+
+
+ 470 01a9 7A000000 		.4byte	0x7a
+ 471 01ad 04       		.byte	0x4
+ 472 01ae 01       		.byte	0x1
+ 473 01af 13       		.byte	0x13
+ 474 01b0 00       		.byte	0
+ 475 01b1 09       		.uleb128 0x9
+ 476 01b2 C0000000 		.4byte	.LASF35
+ 477 01b6 07       		.byte	0x7
+ 478 01b7 C9       		.byte	0xc9
+ 479 01b8 7A000000 		.4byte	0x7a
+ 480 01bc 04       		.byte	0x4
+ 481 01bd 01       		.byte	0x1
+ 482 01be 12       		.byte	0x12
+ 483 01bf 00       		.byte	0
+ 484 01c0 09       		.uleb128 0x9
+ 485 01c1 E9030000 		.4byte	.LASF36
+ 486 01c5 07       		.byte	0x7
+ 487 01c6 CA       		.byte	0xca
+ 488 01c7 7A000000 		.4byte	0x7a
+ 489 01cb 04       		.byte	0x4
+ 490 01cc 01       		.byte	0x1
+ 491 01cd 11       		.byte	0x11
+ 492 01ce 00       		.byte	0
+ 493 01cf 09       		.uleb128 0x9
+ 494 01d0 50000000 		.4byte	.LASF37
+ 495 01d4 07       		.byte	0x7
+ 496 01d5 CB       		.byte	0xcb
+ 497 01d6 7A000000 		.4byte	0x7a
+ 498 01da 04       		.byte	0x4
+ 499 01db 01       		.byte	0x1
+ 500 01dc 10       		.byte	0x10
+ 501 01dd 00       		.byte	0
+ 502 01de 09       		.uleb128 0x9
+ 503 01df 00020000 		.4byte	.LASF38
+ 504 01e3 07       		.byte	0x7
+ 505 01e4 CC       		.byte	0xcc
+ 506 01e5 7A000000 		.4byte	0x7a
+ 507 01e9 04       		.byte	0x4
+ 508 01ea 01       		.byte	0x1
+ 509 01eb 0F       		.byte	0xf
+ 510 01ec 00       		.byte	0
+ 511 01ed 09       		.uleb128 0x9
+ 512 01ee 47030000 		.4byte	.LASF39
+ 513 01f2 07       		.byte	0x7
+ 514 01f3 CD       		.byte	0xcd
+ 515 01f4 7A000000 		.4byte	0x7a
+ 516 01f8 04       		.byte	0x4
+ 517 01f9 01       		.byte	0x1
+ 518 01fa 0E       		.byte	0xe
+ 519 01fb 00       		.byte	0
+ 520 01fc 09       		.uleb128 0x9
+ 521 01fd 36010000 		.4byte	.LASF40
+ 522 0201 07       		.byte	0x7
+ 523 0202 CE       		.byte	0xce
+ 524 0203 7A000000 		.4byte	0x7a
+ 525 0207 04       		.byte	0x4
+ 526 0208 01       		.byte	0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 13
+
+
+ 527 0209 0D       		.byte	0xd
+ 528 020a 00       		.byte	0
+ 529 020b 09       		.uleb128 0x9
+ 530 020c ED000000 		.4byte	.LASF41
+ 531 0210 07       		.byte	0x7
+ 532 0211 CF       		.byte	0xcf
+ 533 0212 7A000000 		.4byte	0x7a
+ 534 0216 04       		.byte	0x4
+ 535 0217 0D       		.byte	0xd
+ 536 0218 00       		.byte	0
+ 537 0219 00       		.byte	0
+ 538 021a 00       		.byte	0
+ 539 021b 0A       		.uleb128 0xa
+ 540 021c 04       		.byte	0x4
+ 541 021d 07       		.byte	0x7
+ 542 021e BB       		.byte	0xbb
+ 543 021f 3B020000 		.4byte	0x23b
+ 544 0223 0B       		.uleb128 0xb
+ 545 0224 75333200 		.ascii	"u32\000"
+ 546 0228 07       		.byte	0x7
+ 547 0229 BC       		.byte	0xbc
+ 548 022a 7A000000 		.4byte	0x7a
+ 549 022e 04       		.byte	0x4
+ 550 022f 20       		.byte	0x20
+ 551 0230 00       		.byte	0
+ 552 0231 0C       		.uleb128 0xc
+ 553 0232 4200     		.ascii	"B\000"
+ 554 0234 07       		.byte	0x7
+ 555 0235 D0       		.byte	0xd0
+ 556 0236 04010000 		.4byte	0x104
+ 557 023a 00       		.byte	0
+ 558 023b 03       		.uleb128 0x3
+ 559 023c 74000000 		.4byte	.LASF42
+ 560 0240 07       		.byte	0x7
+ 561 0241 D1       		.byte	0xd1
+ 562 0242 1B020000 		.4byte	0x21b
+ 563 0246 08       		.uleb128 0x8
+ 564 0247 01       		.byte	0x1
+ 565 0248 07       		.byte	0x7
+ 566 0249 DE       		.byte	0xde
+ 567 024a BB020000 		.4byte	0x2bb
+ 568 024e 09       		.uleb128 0x9
+ 569 024f 42010000 		.4byte	.LASF43
+ 570 0253 07       		.byte	0x7
+ 571 0254 E6       		.byte	0xe6
+ 572 0255 7A000000 		.4byte	0x7a
+ 573 0259 04       		.byte	0x4
+ 574 025a 01       		.byte	0x1
+ 575 025b 1F       		.byte	0x1f
+ 576 025c 00       		.byte	0
+ 577 025d 09       		.uleb128 0x9
+ 578 025e 11000000 		.4byte	.LASF44
+ 579 0262 07       		.byte	0x7
+ 580 0263 EE       		.byte	0xee
+ 581 0264 7A000000 		.4byte	0x7a
+ 582 0268 04       		.byte	0x4
+ 583 0269 01       		.byte	0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 14
+
+
+ 584 026a 1E       		.byte	0x1e
+ 585 026b 00       		.byte	0
+ 586 026c 09       		.uleb128 0x9
+ 587 026d D7000000 		.4byte	.LASF28
+ 588 0271 07       		.byte	0x7
+ 589 0272 F1       		.byte	0xf1
+ 590 0273 7A000000 		.4byte	0x7a
+ 591 0277 04       		.byte	0x4
+ 592 0278 01       		.byte	0x1
+ 593 0279 1D       		.byte	0x1d
+ 594 027a 00       		.byte	0
+ 595 027b 09       		.uleb128 0x9
+ 596 027c 28050000 		.4byte	.LASF45
+ 597 0280 07       		.byte	0x7
+ 598 0281 FA       		.byte	0xfa
+ 599 0282 7A000000 		.4byte	0x7a
+ 600 0286 04       		.byte	0x4
+ 601 0287 01       		.byte	0x1
+ 602 0288 1C       		.byte	0x1c
+ 603 0289 00       		.byte	0
+ 604 028a 0D       		.uleb128 0xd
+ 605 028b C1010000 		.4byte	.LASF46
+ 606 028f 07       		.byte	0x7
+ 607 0290 0201     		.2byte	0x102
+ 608 0292 7A000000 		.4byte	0x7a
+ 609 0296 04       		.byte	0x4
+ 610 0297 01       		.byte	0x1
+ 611 0298 1B       		.byte	0x1b
+ 612 0299 00       		.byte	0
+ 613 029a 0D       		.uleb128 0xd
+ 614 029b E2000000 		.4byte	.LASF31
+ 615 029f 07       		.byte	0x7
+ 616 02a0 0501     		.2byte	0x105
+ 617 02a2 7A000000 		.4byte	0x7a
+ 618 02a6 04       		.byte	0x4
+ 619 02a7 02       		.byte	0x2
+ 620 02a8 19       		.byte	0x19
+ 621 02a9 00       		.byte	0
+ 622 02aa 0D       		.uleb128 0xd
+ 623 02ab 68020000 		.4byte	.LASF47
+ 624 02af 07       		.byte	0x7
+ 625 02b0 0D01     		.2byte	0x10d
+ 626 02b2 7A000000 		.4byte	0x7a
+ 627 02b6 04       		.byte	0x4
+ 628 02b7 01       		.byte	0x1
+ 629 02b8 18       		.byte	0x18
+ 630 02b9 00       		.byte	0
+ 631 02ba 00       		.byte	0
+ 632 02bb 0A       		.uleb128 0xa
+ 633 02bc 01       		.byte	0x1
+ 634 02bd 07       		.byte	0x7
+ 635 02be DC       		.byte	0xdc
+ 636 02bf DB020000 		.4byte	0x2db
+ 637 02c3 0B       		.uleb128 0xb
+ 638 02c4 753800   		.ascii	"u8\000"
+ 639 02c7 07       		.byte	0x7
+ 640 02c8 DD       		.byte	0xdd
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 15
+
+
+ 641 02c9 7A000000 		.4byte	0x7a
+ 642 02cd 04       		.byte	0x4
+ 643 02ce 08       		.byte	0x8
+ 644 02cf 18       		.byte	0x18
+ 645 02d0 0E       		.uleb128 0xe
+ 646 02d1 4200     		.ascii	"B\000"
+ 647 02d3 07       		.byte	0x7
+ 648 02d4 0E01     		.2byte	0x10e
+ 649 02d6 46020000 		.4byte	0x246
+ 650 02da 00       		.byte	0
+ 651 02db 0F       		.uleb128 0xf
+ 652 02dc 01       		.byte	0x1
+ 653 02dd 07       		.byte	0x7
+ 654 02de 1201     		.2byte	0x112
+ 655 02e0 55030000 		.4byte	0x355
+ 656 02e4 0D       		.uleb128 0xd
+ 657 02e5 CF000000 		.4byte	.LASF48
+ 658 02e9 07       		.byte	0x7
+ 659 02ea 1A01     		.2byte	0x11a
+ 660 02ec 7A000000 		.4byte	0x7a
+ 661 02f0 04       		.byte	0x4
+ 662 02f1 01       		.byte	0x1
+ 663 02f2 1F       		.byte	0x1f
+ 664 02f3 00       		.byte	0
+ 665 02f4 0D       		.uleb128 0xd
+ 666 02f5 AF000000 		.4byte	.LASF49
+ 667 02f9 07       		.byte	0x7
+ 668 02fa 2201     		.2byte	0x122
+ 669 02fc 7A000000 		.4byte	0x7a
+ 670 0300 04       		.byte	0x4
+ 671 0301 01       		.byte	0x1
+ 672 0302 1E       		.byte	0x1e
+ 673 0303 00       		.byte	0
+ 674 0304 0D       		.uleb128 0xd
+ 675 0305 57040000 		.4byte	.LASF50
+ 676 0309 07       		.byte	0x7
+ 677 030a 2E01     		.2byte	0x12e
+ 678 030c 7A000000 		.4byte	0x7a
+ 679 0310 04       		.byte	0x4
+ 680 0311 01       		.byte	0x1
+ 681 0312 1D       		.byte	0x1d
+ 682 0313 00       		.byte	0
+ 683 0314 0D       		.uleb128 0xd
+ 684 0315 12010000 		.4byte	.LASF51
+ 685 0319 07       		.byte	0x7
+ 686 031a 3701     		.2byte	0x137
+ 687 031c 7A000000 		.4byte	0x7a
+ 688 0320 04       		.byte	0x4
+ 689 0321 01       		.byte	0x1
+ 690 0322 1C       		.byte	0x1c
+ 691 0323 00       		.byte	0
+ 692 0324 0D       		.uleb128 0xd
+ 693 0325 20040000 		.4byte	.LASF52
+ 694 0329 07       		.byte	0x7
+ 695 032a 3F01     		.2byte	0x13f
+ 696 032c 7A000000 		.4byte	0x7a
+ 697 0330 04       		.byte	0x4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 16
+
+
+ 698 0331 01       		.byte	0x1
+ 699 0332 1B       		.byte	0x1b
+ 700 0333 00       		.byte	0
+ 701 0334 0D       		.uleb128 0xd
+ 702 0335 F8030000 		.4byte	.LASF53
+ 703 0339 07       		.byte	0x7
+ 704 033a 4201     		.2byte	0x142
+ 705 033c 7A000000 		.4byte	0x7a
+ 706 0340 04       		.byte	0x4
+ 707 0341 02       		.byte	0x2
+ 708 0342 19       		.byte	0x19
+ 709 0343 00       		.byte	0
+ 710 0344 0D       		.uleb128 0xd
+ 711 0345 83030000 		.4byte	.LASF54
+ 712 0349 07       		.byte	0x7
+ 713 034a 4C01     		.2byte	0x14c
+ 714 034c 7A000000 		.4byte	0x7a
+ 715 0350 04       		.byte	0x4
+ 716 0351 01       		.byte	0x1
+ 717 0352 18       		.byte	0x18
+ 718 0353 00       		.byte	0
+ 719 0354 00       		.byte	0
+ 720 0355 10       		.uleb128 0x10
+ 721 0356 01       		.byte	0x1
+ 722 0357 07       		.byte	0x7
+ 723 0358 1001     		.2byte	0x110
+ 724 035a 77030000 		.4byte	0x377
+ 725 035e 11       		.uleb128 0x11
+ 726 035f 753800   		.ascii	"u8\000"
+ 727 0362 07       		.byte	0x7
+ 728 0363 1101     		.2byte	0x111
+ 729 0365 7A000000 		.4byte	0x7a
+ 730 0369 04       		.byte	0x4
+ 731 036a 08       		.byte	0x8
+ 732 036b 18       		.byte	0x18
+ 733 036c 0E       		.uleb128 0xe
+ 734 036d 4200     		.ascii	"B\000"
+ 735 036f 07       		.byte	0x7
+ 736 0370 4D01     		.2byte	0x14d
+ 737 0372 DB020000 		.4byte	0x2db
+ 738 0376 00       		.byte	0
+ 739 0377 0F       		.uleb128 0xf
+ 740 0378 02       		.byte	0x2
+ 741 0379 07       		.byte	0x7
+ 742 037a 5101     		.2byte	0x151
+ 743 037c 01040000 		.4byte	0x401
+ 744 0380 0D       		.uleb128 0xd
+ 745 0381 0C020000 		.4byte	.LASF55
+ 746 0385 07       		.byte	0x7
+ 747 0386 5801     		.2byte	0x158
+ 748 0388 7A000000 		.4byte	0x7a
+ 749 038c 04       		.byte	0x4
+ 750 038d 01       		.byte	0x1
+ 751 038e 1F       		.byte	0x1f
+ 752 038f 00       		.byte	0
+ 753 0390 0D       		.uleb128 0xd
+ 754 0391 99020000 		.4byte	.LASF56
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 17
+
+
+ 755 0395 07       		.byte	0x7
+ 756 0396 6101     		.2byte	0x161
+ 757 0398 7A000000 		.4byte	0x7a
+ 758 039c 04       		.byte	0x4
+ 759 039d 01       		.byte	0x1
+ 760 039e 1E       		.byte	0x1e
+ 761 039f 00       		.byte	0
+ 762 03a0 0D       		.uleb128 0xd
+ 763 03a1 7E020000 		.4byte	.LASF57
+ 764 03a5 07       		.byte	0x7
+ 765 03a6 6A01     		.2byte	0x16a
+ 766 03a8 7A000000 		.4byte	0x7a
+ 767 03ac 04       		.byte	0x4
+ 768 03ad 01       		.byte	0x1
+ 769 03ae 1D       		.byte	0x1d
+ 770 03af 00       		.byte	0
+ 771 03b0 0D       		.uleb128 0xd
+ 772 03b1 0B050000 		.4byte	.LASF58
+ 773 03b5 07       		.byte	0x7
+ 774 03b6 7001     		.2byte	0x170
+ 775 03b8 7A000000 		.4byte	0x7a
+ 776 03bc 04       		.byte	0x4
+ 777 03bd 01       		.byte	0x1
+ 778 03be 1C       		.byte	0x1c
+ 779 03bf 00       		.byte	0
+ 780 03c0 0D       		.uleb128 0xd
+ 781 03c1 D7000000 		.4byte	.LASF28
+ 782 03c5 07       		.byte	0x7
+ 783 03c6 7301     		.2byte	0x173
+ 784 03c8 7A000000 		.4byte	0x7a
+ 785 03cc 04       		.byte	0x4
+ 786 03cd 04       		.byte	0x4
+ 787 03ce 18       		.byte	0x18
+ 788 03cf 00       		.byte	0
+ 789 03d0 0D       		.uleb128 0xd
+ 790 03d1 F1010000 		.4byte	.LASF59
+ 791 03d5 07       		.byte	0x7
+ 792 03d6 7B01     		.2byte	0x17b
+ 793 03d8 7A000000 		.4byte	0x7a
+ 794 03dc 04       		.byte	0x4
+ 795 03dd 01       		.byte	0x1
+ 796 03de 17       		.byte	0x17
+ 797 03df 00       		.byte	0
+ 798 03e0 0D       		.uleb128 0xd
+ 799 03e1 2E000000 		.4byte	.LASF60
+ 800 03e5 07       		.byte	0x7
+ 801 03e6 8401     		.2byte	0x184
+ 802 03e8 7A000000 		.4byte	0x7a
+ 803 03ec 04       		.byte	0x4
+ 804 03ed 01       		.byte	0x1
+ 805 03ee 16       		.byte	0x16
+ 806 03ef 00       		.byte	0
+ 807 03f0 0D       		.uleb128 0xd
+ 808 03f1 E2000000 		.4byte	.LASF31
+ 809 03f5 07       		.byte	0x7
+ 810 03f6 8701     		.2byte	0x187
+ 811 03f8 7A000000 		.4byte	0x7a
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 18
+
+
+ 812 03fc 04       		.byte	0x4
+ 813 03fd 06       		.byte	0x6
+ 814 03fe 10       		.byte	0x10
+ 815 03ff 00       		.byte	0
+ 816 0400 00       		.byte	0
+ 817 0401 10       		.uleb128 0x10
+ 818 0402 02       		.byte	0x2
+ 819 0403 07       		.byte	0x7
+ 820 0404 4F01     		.2byte	0x14f
+ 821 0406 24040000 		.4byte	0x424
+ 822 040a 11       		.uleb128 0x11
+ 823 040b 75313600 		.ascii	"u16\000"
+ 824 040f 07       		.byte	0x7
+ 825 0410 5001     		.2byte	0x150
+ 826 0412 7A000000 		.4byte	0x7a
+ 827 0416 04       		.byte	0x4
+ 828 0417 10       		.byte	0x10
+ 829 0418 10       		.byte	0x10
+ 830 0419 0E       		.uleb128 0xe
+ 831 041a 4200     		.ascii	"B\000"
+ 832 041c 07       		.byte	0x7
+ 833 041d 8801     		.2byte	0x188
+ 834 041f 77030000 		.4byte	0x377
+ 835 0423 00       		.byte	0
+ 836 0424 08       		.uleb128 0x8
+ 837 0425 04       		.byte	0x4
+ 838 0426 07       		.byte	0x7
+ 839 0427 DB       		.byte	0xdb
+ 840 0428 54040000 		.4byte	0x454
+ 841 042c 12       		.uleb128 0x12
+ 842 042d D2010000 		.4byte	.LASF61
+ 843 0431 07       		.byte	0x7
+ 844 0432 0F01     		.2byte	0x10f
+ 845 0434 BB020000 		.4byte	0x2bb
+ 846 0438 00       		.byte	0
+ 847 0439 12       		.uleb128 0x12
+ 848 043a 8D000000 		.4byte	.LASF62
+ 849 043e 07       		.byte	0x7
+ 850 043f 4E01     		.2byte	0x14e
+ 851 0441 55030000 		.4byte	0x355
+ 852 0445 01       		.byte	0x1
+ 853 0446 12       		.uleb128 0x12
+ 854 0447 1A000000 		.4byte	.LASF63
+ 855 044b 07       		.byte	0x7
+ 856 044c 8901     		.2byte	0x189
+ 857 044e 01040000 		.4byte	0x401
+ 858 0452 02       		.byte	0x2
+ 859 0453 00       		.byte	0
+ 860 0454 0A       		.uleb128 0xa
+ 861 0455 04       		.byte	0x4
+ 862 0456 07       		.byte	0x7
+ 863 0457 D9       		.byte	0xd9
+ 864 0458 75040000 		.4byte	0x475
+ 865 045c 0B       		.uleb128 0xb
+ 866 045d 75333200 		.ascii	"u32\000"
+ 867 0461 07       		.byte	0x7
+ 868 0462 DA       		.byte	0xda
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 19
+
+
+ 869 0463 7A000000 		.4byte	0x7a
+ 870 0467 04       		.byte	0x4
+ 871 0468 20       		.byte	0x20
+ 872 0469 00       		.byte	0
+ 873 046a 0E       		.uleb128 0xe
+ 874 046b 4200     		.ascii	"B\000"
+ 875 046d 07       		.byte	0x7
+ 876 046e 8A01     		.2byte	0x18a
+ 877 0470 24040000 		.4byte	0x424
+ 878 0474 00       		.byte	0
+ 879 0475 05       		.uleb128 0x5
+ 880 0476 04010000 		.4byte	.LASF64
+ 881 047a 07       		.byte	0x7
+ 882 047b 8B01     		.2byte	0x18b
+ 883 047d 54040000 		.4byte	0x454
+ 884 0481 0F       		.uleb128 0xf
+ 885 0482 04       		.byte	0x4
+ 886 0483 07       		.byte	0x7
+ 887 0484 9501     		.2byte	0x195
+ 888 0486 DB040000 		.4byte	0x4db
+ 889 048a 0D       		.uleb128 0xd
+ 890 048b D7000000 		.4byte	.LASF28
+ 891 048f 07       		.byte	0x7
+ 892 0490 9701     		.2byte	0x197
+ 893 0492 7A000000 		.4byte	0x7a
+ 894 0496 04       		.byte	0x4
+ 895 0497 01       		.byte	0x1
+ 896 0498 1F       		.byte	0x1f
+ 897 0499 00       		.byte	0
+ 898 049a 0D       		.uleb128 0xd
+ 899 049b 5B030000 		.4byte	.LASF65
+ 900 049f 07       		.byte	0x7
+ 901 04a0 9F01     		.2byte	0x19f
+ 902 04a2 7A000000 		.4byte	0x7a
+ 903 04a6 04       		.byte	0x4
+ 904 04a7 01       		.byte	0x1
+ 905 04a8 1E       		.byte	0x1e
+ 906 04a9 00       		.byte	0
+ 907 04aa 0D       		.uleb128 0xd
+ 908 04ab E2000000 		.4byte	.LASF31
+ 909 04af 07       		.byte	0x7
+ 910 04b0 A201     		.2byte	0x1a2
+ 911 04b2 7A000000 		.4byte	0x7a
+ 912 04b6 04       		.byte	0x4
+ 913 04b7 1C       		.byte	0x1c
+ 914 04b8 02       		.byte	0x2
+ 915 04b9 00       		.byte	0
+ 916 04ba 0D       		.uleb128 0xd
+ 917 04bb 33040000 		.4byte	.LASF66
+ 918 04bf 07       		.byte	0x7
+ 919 04c0 AB01     		.2byte	0x1ab
+ 920 04c2 7A000000 		.4byte	0x7a
+ 921 04c6 04       		.byte	0x4
+ 922 04c7 01       		.byte	0x1
+ 923 04c8 01       		.byte	0x1
+ 924 04c9 00       		.byte	0
+ 925 04ca 0D       		.uleb128 0xd
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 20
+
+
+ 926 04cb 08000000 		.4byte	.LASF67
+ 927 04cf 07       		.byte	0x7
+ 928 04d0 B001     		.2byte	0x1b0
+ 929 04d2 7A000000 		.4byte	0x7a
+ 930 04d6 04       		.byte	0x4
+ 931 04d7 01       		.byte	0x1
+ 932 04d8 00       		.byte	0
+ 933 04d9 00       		.byte	0
+ 934 04da 00       		.byte	0
+ 935 04db 10       		.uleb128 0x10
+ 936 04dc 04       		.byte	0x4
+ 937 04dd 07       		.byte	0x7
+ 938 04de 9301     		.2byte	0x193
+ 939 04e0 FE040000 		.4byte	0x4fe
+ 940 04e4 11       		.uleb128 0x11
+ 941 04e5 75333200 		.ascii	"u32\000"
+ 942 04e9 07       		.byte	0x7
+ 943 04ea 9401     		.2byte	0x194
+ 944 04ec 7A000000 		.4byte	0x7a
+ 945 04f0 04       		.byte	0x4
+ 946 04f1 20       		.byte	0x20
+ 947 04f2 00       		.byte	0
+ 948 04f3 0E       		.uleb128 0xe
+ 949 04f4 4200     		.ascii	"B\000"
+ 950 04f6 07       		.byte	0x7
+ 951 04f7 B101     		.2byte	0x1b1
+ 952 04f9 81040000 		.4byte	0x481
+ 953 04fd 00       		.byte	0
+ 954 04fe 05       		.uleb128 0x5
+ 955 04ff 75030000 		.4byte	.LASF68
+ 956 0503 07       		.byte	0x7
+ 957 0504 B201     		.2byte	0x1b2
+ 958 0506 DB040000 		.4byte	0x4db
+ 959 050a 0F       		.uleb128 0xf
+ 960 050b 04       		.byte	0x4
+ 961 050c 07       		.byte	0x7
+ 962 050d BD01     		.2byte	0x1bd
+ 963 050f 24050000 		.4byte	0x524
+ 964 0513 0D       		.uleb128 0xd
+ 965 0514 4F040000 		.4byte	.LASF69
+ 966 0518 07       		.byte	0x7
+ 967 0519 C001     		.2byte	0x1c0
+ 968 051b 7A000000 		.4byte	0x7a
+ 969 051f 04       		.byte	0x4
+ 970 0520 20       		.byte	0x20
+ 971 0521 00       		.byte	0
+ 972 0522 00       		.byte	0
+ 973 0523 00       		.byte	0
+ 974 0524 10       		.uleb128 0x10
+ 975 0525 04       		.byte	0x4
+ 976 0526 07       		.byte	0x7
+ 977 0527 BB01     		.2byte	0x1bb
+ 978 0529 47050000 		.4byte	0x547
+ 979 052d 11       		.uleb128 0x11
+ 980 052e 75333200 		.ascii	"u32\000"
+ 981 0532 07       		.byte	0x7
+ 982 0533 BC01     		.2byte	0x1bc
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 21
+
+
+ 983 0535 7A000000 		.4byte	0x7a
+ 984 0539 04       		.byte	0x4
+ 985 053a 20       		.byte	0x20
+ 986 053b 00       		.byte	0
+ 987 053c 0E       		.uleb128 0xe
+ 988 053d 4200     		.ascii	"B\000"
+ 989 053f 07       		.byte	0x7
+ 990 0540 C101     		.2byte	0x1c1
+ 991 0542 0A050000 		.4byte	0x50a
+ 992 0546 00       		.byte	0
+ 993 0547 05       		.uleb128 0x5
+ 994 0548 41000000 		.4byte	.LASF70
+ 995 054c 07       		.byte	0x7
+ 996 054d C201     		.2byte	0x1c2
+ 997 054f 24050000 		.4byte	0x524
+ 998 0553 08       		.uleb128 0x8
+ 999 0554 20       		.byte	0x20
+ 1000 0555 01       		.byte	0x1
+ 1001 0556 2F       		.byte	0x2f
+ 1002 0557 B6050000 		.4byte	0x5b6
+ 1003 055b 13       		.uleb128 0x13
+ 1004 055c 723000   		.ascii	"r0\000"
+ 1005 055f 01       		.byte	0x1
+ 1006 0560 30       		.byte	0x30
+ 1007 0561 8C000000 		.4byte	0x8c
+ 1008 0565 00       		.byte	0
+ 1009 0566 13       		.uleb128 0x13
+ 1010 0567 723100   		.ascii	"r1\000"
+ 1011 056a 01       		.byte	0x1
+ 1012 056b 31       		.byte	0x31
+ 1013 056c 8C000000 		.4byte	0x8c
+ 1014 0570 04       		.byte	0x4
+ 1015 0571 13       		.uleb128 0x13
+ 1016 0572 723200   		.ascii	"r2\000"
+ 1017 0575 01       		.byte	0x1
+ 1018 0576 32       		.byte	0x32
+ 1019 0577 8C000000 		.4byte	0x8c
+ 1020 057b 08       		.byte	0x8
+ 1021 057c 13       		.uleb128 0x13
+ 1022 057d 723300   		.ascii	"r3\000"
+ 1023 0580 01       		.byte	0x1
+ 1024 0581 33       		.byte	0x33
+ 1025 0582 8C000000 		.4byte	0x8c
+ 1026 0586 0C       		.byte	0xc
+ 1027 0587 13       		.uleb128 0x13
+ 1028 0588 72313200 		.ascii	"r12\000"
+ 1029 058c 01       		.byte	0x1
+ 1030 058d 34       		.byte	0x34
+ 1031 058e 8C000000 		.4byte	0x8c
+ 1032 0592 10       		.byte	0x10
+ 1033 0593 13       		.uleb128 0x13
+ 1034 0594 6C7200   		.ascii	"lr\000"
+ 1035 0597 01       		.byte	0x1
+ 1036 0598 35       		.byte	0x35
+ 1037 0599 8C000000 		.4byte	0x8c
+ 1038 059d 14       		.byte	0x14
+ 1039 059e 13       		.uleb128 0x13
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 22
+
+
+ 1040 059f 706300   		.ascii	"pc\000"
+ 1041 05a2 01       		.byte	0x1
+ 1042 05a3 36       		.byte	0x36
+ 1043 05a4 8C000000 		.4byte	0x8c
+ 1044 05a8 18       		.byte	0x18
+ 1045 05a9 13       		.uleb128 0x13
+ 1046 05aa 70737200 		.ascii	"psr\000"
+ 1047 05ae 01       		.byte	0x1
+ 1048 05af 37       		.byte	0x37
+ 1049 05b0 8C000000 		.4byte	0x8c
+ 1050 05b4 1C       		.byte	0x1c
+ 1051 05b5 00       		.byte	0
+ 1052 05b6 08       		.uleb128 0x8
+ 1053 05b7 14       		.byte	0x14
+ 1054 05b8 01       		.byte	0x1
+ 1055 05b9 39       		.byte	0x39
+ 1056 05ba FB050000 		.4byte	0x5fb
+ 1057 05be 14       		.uleb128 0x14
+ 1058 05bf 30010000 		.4byte	.LASF71
+ 1059 05c3 01       		.byte	0x1
+ 1060 05c4 3A       		.byte	0x3a
+ 1061 05c5 3B020000 		.4byte	0x23b
+ 1062 05c9 00       		.byte	0
+ 1063 05ca 14       		.uleb128 0x14
+ 1064 05cb FB010000 		.4byte	.LASF72
+ 1065 05cf 01       		.byte	0x1
+ 1066 05d0 3B       		.byte	0x3b
+ 1067 05d1 75040000 		.4byte	0x475
+ 1068 05d5 04       		.byte	0x4
+ 1069 05d6 14       		.uleb128 0x14
+ 1070 05d7 70030000 		.4byte	.LASF73
+ 1071 05db 01       		.byte	0x1
+ 1072 05dc 3C       		.byte	0x3c
+ 1073 05dd FE040000 		.4byte	0x4fe
+ 1074 05e1 08       		.byte	0x8
+ 1075 05e2 14       		.uleb128 0x14
+ 1076 05e3 A2020000 		.4byte	.LASF74
+ 1077 05e7 01       		.byte	0x1
+ 1078 05e8 3D       		.byte	0x3d
+ 1079 05e9 47050000 		.4byte	0x547
+ 1080 05ed 0C       		.byte	0xc
+ 1081 05ee 14       		.uleb128 0x14
+ 1082 05ef 1F000000 		.4byte	.LASF75
+ 1083 05f3 01       		.byte	0x1
+ 1084 05f4 3E       		.byte	0x3e
+ 1085 05f5 FE040000 		.4byte	0x4fe
+ 1086 05f9 10       		.byte	0x10
+ 1087 05fa 00       		.byte	0
+ 1088 05fb 08       		.uleb128 0x8
+ 1089 05fc 34       		.byte	0x34
+ 1090 05fd 01       		.byte	0x1
+ 1091 05fe 2E       		.byte	0x2e
+ 1092 05ff 1C060000 		.4byte	0x61c
+ 1093 0603 13       		.uleb128 0x13
+ 1094 0604 43505500 		.ascii	"CPU\000"
+ 1095 0608 01       		.byte	0x1
+ 1096 0609 38       		.byte	0x38
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 23
+
+
+ 1097 060a 53050000 		.4byte	0x553
+ 1098 060e 00       		.byte	0
+ 1099 060f 14       		.uleb128 0x14
+ 1100 0610 CA020000 		.4byte	.LASF76
+ 1101 0614 01       		.byte	0x1
+ 1102 0615 3F       		.byte	0x3f
+ 1103 0616 B6050000 		.4byte	0x5b6
+ 1104 061a 20       		.byte	0x20
+ 1105 061b 00       		.byte	0
+ 1106 061c 03       		.uleb128 0x3
+ 1107 061d 3A040000 		.4byte	.LASF77
+ 1108 0621 01       		.byte	0x1
+ 1109 0622 40       		.byte	0x40
+ 1110 0623 FB050000 		.4byte	0x5fb
+ 1111 0627 15       		.uleb128 0x15
+ 1112 0628 70010000 		.4byte	.LASF78
+ 1113 062c 01       		.byte	0x1
+ 1114 062d 5D       		.byte	0x5d
+ 1115 062e 00000000 		.4byte	.LFB111
+ 1116 0632 18000000 		.4byte	.LFE111-.LFB111
+ 1117 0636 01       		.uleb128 0x1
+ 1118 0637 9C       		.byte	0x9c
+ 1119 0638 15       		.uleb128 0x15
+ 1120 0639 EE020000 		.4byte	.LASF79
+ 1121 063d 01       		.byte	0x1
+ 1122 063e 4D       		.byte	0x4d
+ 1123 063f 00000000 		.4byte	.LFB110
+ 1124 0643 3C000000 		.4byte	.LFE110-.LFB110
+ 1125 0647 01       		.uleb128 0x1
+ 1126 0648 9C       		.byte	0x9c
+ 1127 0649 16       		.uleb128 0x16
+ 1128 064a 07030000 		.4byte	.LASF91
+ 1129 064e 01       		.byte	0x1
+ 1130 064f 6C       		.byte	0x6c
+ 1131 0650 00000000 		.4byte	.LFB112
+ 1132 0654 0A000000 		.4byte	.LFE112-.LFB112
+ 1133 0658 01       		.uleb128 0x1
+ 1134 0659 9C       		.byte	0x9c
+ 1135 065a 68060000 		.4byte	0x668
+ 1136 065e 17       		.uleb128 0x17
+ 1137 065f 06000000 		.4byte	.LVL0
+ 1138 0663 38060000 		.4byte	0x638
+ 1139 0667 00       		.byte	0
+ 1140 0668 18       		.uleb128 0x18
+ 1141 0669 23030000 		.4byte	.LASF92
+ 1142 066d 01       		.byte	0x1
+ 1143 066e 75       		.byte	0x75
+ 1144 066f 00000000 		.4byte	.LFB113
+ 1145 0673 30000000 		.4byte	.LFE113-.LFB113
+ 1146 0677 01       		.uleb128 0x1
+ 1147 0678 9C       		.byte	0x9c
+ 1148 0679 96060000 		.4byte	0x696
+ 1149 067d 19       		.uleb128 0x19
+ 1150 067e 0B040000 		.4byte	.LASF93
+ 1151 0682 01       		.byte	0x1
+ 1152 0683 75       		.byte	0x75
+ 1153 0684 96060000 		.4byte	0x696
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 24
+
+
+ 1154 0688 00000000 		.4byte	.LLST0
+ 1155 068c 17       		.uleb128 0x17
+ 1156 068d 28000000 		.4byte	.LVL2
+ 1157 0691 38060000 		.4byte	0x638
+ 1158 0695 00       		.byte	0
+ 1159 0696 06       		.uleb128 0x6
+ 1160 0697 04       		.byte	0x4
+ 1161 0698 8C000000 		.4byte	0x8c
+ 1162 069c 15       		.uleb128 0x15
+ 1163 069d 4B010000 		.4byte	.LASF80
+ 1164 06a1 01       		.byte	0x1
+ 1165 06a2 8E       		.byte	0x8e
+ 1166 06a3 00000000 		.4byte	.LFB114
+ 1167 06a7 20000000 		.4byte	.LFE114-.LFB114
+ 1168 06ab 01       		.uleb128 0x1
+ 1169 06ac 9C       		.byte	0x9c
+ 1170 06ad 1A       		.uleb128 0x1a
+ 1171 06ae B5010000 		.4byte	.LASF94
+ 1172 06b2 01       		.byte	0x1
+ 1173 06b3 45       		.byte	0x45
+ 1174 06b4 BE060000 		.4byte	0x6be
+ 1175 06b8 05       		.uleb128 0x5
+ 1176 06b9 03       		.byte	0x3
+ 1177 06ba 00000000 		.4byte	FaultDetail
+ 1178 06be 1B       		.uleb128 0x1b
+ 1179 06bf 1C060000 		.4byte	0x61c
+ 1180 06c3 1C       		.uleb128 0x1c
+ 1181 06c4 10050000 		.4byte	.LASF81
+ 1182 06c8 08       		.byte	0x8
+ 1183 06c9 40       		.byte	0x40
+ 1184 06ca DC000000 		.4byte	0xdc
+ 1185 06ce 1C       		.uleb128 0x1c
+ 1186 06cf D8010000 		.4byte	.LASF82
+ 1187 06d3 08       		.byte	0x8
+ 1188 06d4 47       		.byte	0x47
+ 1189 06d5 E7000000 		.4byte	0xe7
+ 1190 06d9 1C       		.uleb128 0x1c
+ 1191 06da 8D030000 		.4byte	.LASF83
+ 1192 06de 08       		.byte	0x8
+ 1193 06df 4A       		.byte	0x4a
+ 1194 06e0 DC000000 		.4byte	0xdc
+ 1195 06e4 1C       		.uleb128 0x1c
+ 1196 06e5 A8020000 		.4byte	.LASF84
+ 1197 06e9 09       		.byte	0x9
+ 1198 06ea 48       		.byte	0x48
+ 1199 06eb F2000000 		.4byte	0xf2
+ 1200 06ef 1C       		.uleb128 0x1c
+ 1201 06f0 1B010000 		.4byte	.LASF85
+ 1202 06f4 0A       		.byte	0xa
+ 1203 06f5 44       		.byte	0x44
+ 1204 06f6 DC000000 		.4byte	0xdc
+ 1205 06fa 1D       		.uleb128 0x1d
+ 1206 06fb 63040000 		.4byte	.LASF86
+ 1207 06ff 0B       		.byte	0xb
+ 1208 0700 1207     		.2byte	0x712
+ 1209 0702 06070000 		.4byte	0x706
+ 1210 0706 1B       		.uleb128 0x1b
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 25
+
+
+ 1211 0707 81000000 		.4byte	0x81
+ 1212 070b 1E       		.uleb128 0x1e
+ 1213 070c AC000000 		.4byte	0xac
+ 1214 0710 16070000 		.4byte	0x716
+ 1215 0714 1F       		.uleb128 0x1f
+ 1216 0715 00       		.byte	0
+ 1217 0716 1C       		.uleb128 0x1c
+ 1218 0717 63030000 		.4byte	.LASF87
+ 1219 071b 01       		.byte	0x1
+ 1220 071c 22       		.byte	0x22
+ 1221 071d 0B070000 		.4byte	0x70b
+ 1222 0721 00       		.byte	0
+ 1223              		.section	.debug_abbrev,"",%progbits
+ 1224              	.Ldebug_abbrev0:
+ 1225 0000 01       		.uleb128 0x1
+ 1226 0001 11       		.uleb128 0x11
+ 1227 0002 01       		.byte	0x1
+ 1228 0003 25       		.uleb128 0x25
+ 1229 0004 0E       		.uleb128 0xe
+ 1230 0005 13       		.uleb128 0x13
+ 1231 0006 0B       		.uleb128 0xb
+ 1232 0007 03       		.uleb128 0x3
+ 1233 0008 0E       		.uleb128 0xe
+ 1234 0009 1B       		.uleb128 0x1b
+ 1235 000a 0E       		.uleb128 0xe
+ 1236 000b 55       		.uleb128 0x55
+ 1237 000c 17       		.uleb128 0x17
+ 1238 000d 11       		.uleb128 0x11
+ 1239 000e 01       		.uleb128 0x1
+ 1240 000f 10       		.uleb128 0x10
+ 1241 0010 17       		.uleb128 0x17
+ 1242 0011 00       		.byte	0
+ 1243 0012 00       		.byte	0
+ 1244 0013 02       		.uleb128 0x2
+ 1245 0014 24       		.uleb128 0x24
+ 1246 0015 00       		.byte	0
+ 1247 0016 0B       		.uleb128 0xb
+ 1248 0017 0B       		.uleb128 0xb
+ 1249 0018 3E       		.uleb128 0x3e
+ 1250 0019 0B       		.uleb128 0xb
+ 1251 001a 03       		.uleb128 0x3
+ 1252 001b 0E       		.uleb128 0xe
+ 1253 001c 00       		.byte	0
+ 1254 001d 00       		.byte	0
+ 1255 001e 03       		.uleb128 0x3
+ 1256 001f 16       		.uleb128 0x16
+ 1257 0020 00       		.byte	0
+ 1258 0021 03       		.uleb128 0x3
+ 1259 0022 0E       		.uleb128 0xe
+ 1260 0023 3A       		.uleb128 0x3a
+ 1261 0024 0B       		.uleb128 0xb
+ 1262 0025 3B       		.uleb128 0x3b
+ 1263 0026 0B       		.uleb128 0xb
+ 1264 0027 49       		.uleb128 0x49
+ 1265 0028 13       		.uleb128 0x13
+ 1266 0029 00       		.byte	0
+ 1267 002a 00       		.byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 26
+
+
+ 1268 002b 04       		.uleb128 0x4
+ 1269 002c 24       		.uleb128 0x24
+ 1270 002d 00       		.byte	0
+ 1271 002e 0B       		.uleb128 0xb
+ 1272 002f 0B       		.uleb128 0xb
+ 1273 0030 3E       		.uleb128 0x3e
+ 1274 0031 0B       		.uleb128 0xb
+ 1275 0032 03       		.uleb128 0x3
+ 1276 0033 08       		.uleb128 0x8
+ 1277 0034 00       		.byte	0
+ 1278 0035 00       		.byte	0
+ 1279 0036 05       		.uleb128 0x5
+ 1280 0037 16       		.uleb128 0x16
+ 1281 0038 00       		.byte	0
+ 1282 0039 03       		.uleb128 0x3
+ 1283 003a 0E       		.uleb128 0xe
+ 1284 003b 3A       		.uleb128 0x3a
+ 1285 003c 0B       		.uleb128 0xb
+ 1286 003d 3B       		.uleb128 0x3b
+ 1287 003e 05       		.uleb128 0x5
+ 1288 003f 49       		.uleb128 0x49
+ 1289 0040 13       		.uleb128 0x13
+ 1290 0041 00       		.byte	0
+ 1291 0042 00       		.byte	0
+ 1292 0043 06       		.uleb128 0x6
+ 1293 0044 0F       		.uleb128 0xf
+ 1294 0045 00       		.byte	0
+ 1295 0046 0B       		.uleb128 0xb
+ 1296 0047 0B       		.uleb128 0xb
+ 1297 0048 49       		.uleb128 0x49
+ 1298 0049 13       		.uleb128 0x13
+ 1299 004a 00       		.byte	0
+ 1300 004b 00       		.byte	0
+ 1301 004c 07       		.uleb128 0x7
+ 1302 004d 15       		.uleb128 0x15
+ 1303 004e 00       		.byte	0
+ 1304 004f 27       		.uleb128 0x27
+ 1305 0050 19       		.uleb128 0x19
+ 1306 0051 00       		.byte	0
+ 1307 0052 00       		.byte	0
+ 1308 0053 08       		.uleb128 0x8
+ 1309 0054 13       		.uleb128 0x13
+ 1310 0055 01       		.byte	0x1
+ 1311 0056 0B       		.uleb128 0xb
+ 1312 0057 0B       		.uleb128 0xb
+ 1313 0058 3A       		.uleb128 0x3a
+ 1314 0059 0B       		.uleb128 0xb
+ 1315 005a 3B       		.uleb128 0x3b
+ 1316 005b 0B       		.uleb128 0xb
+ 1317 005c 01       		.uleb128 0x1
+ 1318 005d 13       		.uleb128 0x13
+ 1319 005e 00       		.byte	0
+ 1320 005f 00       		.byte	0
+ 1321 0060 09       		.uleb128 0x9
+ 1322 0061 0D       		.uleb128 0xd
+ 1323 0062 00       		.byte	0
+ 1324 0063 03       		.uleb128 0x3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 27
+
+
+ 1325 0064 0E       		.uleb128 0xe
+ 1326 0065 3A       		.uleb128 0x3a
+ 1327 0066 0B       		.uleb128 0xb
+ 1328 0067 3B       		.uleb128 0x3b
+ 1329 0068 0B       		.uleb128 0xb
+ 1330 0069 49       		.uleb128 0x49
+ 1331 006a 13       		.uleb128 0x13
+ 1332 006b 0B       		.uleb128 0xb
+ 1333 006c 0B       		.uleb128 0xb
+ 1334 006d 0D       		.uleb128 0xd
+ 1335 006e 0B       		.uleb128 0xb
+ 1336 006f 0C       		.uleb128 0xc
+ 1337 0070 0B       		.uleb128 0xb
+ 1338 0071 38       		.uleb128 0x38
+ 1339 0072 0B       		.uleb128 0xb
+ 1340 0073 00       		.byte	0
+ 1341 0074 00       		.byte	0
+ 1342 0075 0A       		.uleb128 0xa
+ 1343 0076 17       		.uleb128 0x17
+ 1344 0077 01       		.byte	0x1
+ 1345 0078 0B       		.uleb128 0xb
+ 1346 0079 0B       		.uleb128 0xb
+ 1347 007a 3A       		.uleb128 0x3a
+ 1348 007b 0B       		.uleb128 0xb
+ 1349 007c 3B       		.uleb128 0x3b
+ 1350 007d 0B       		.uleb128 0xb
+ 1351 007e 01       		.uleb128 0x1
+ 1352 007f 13       		.uleb128 0x13
+ 1353 0080 00       		.byte	0
+ 1354 0081 00       		.byte	0
+ 1355 0082 0B       		.uleb128 0xb
+ 1356 0083 0D       		.uleb128 0xd
+ 1357 0084 00       		.byte	0
+ 1358 0085 03       		.uleb128 0x3
+ 1359 0086 08       		.uleb128 0x8
+ 1360 0087 3A       		.uleb128 0x3a
+ 1361 0088 0B       		.uleb128 0xb
+ 1362 0089 3B       		.uleb128 0x3b
+ 1363 008a 0B       		.uleb128 0xb
+ 1364 008b 49       		.uleb128 0x49
+ 1365 008c 13       		.uleb128 0x13
+ 1366 008d 0B       		.uleb128 0xb
+ 1367 008e 0B       		.uleb128 0xb
+ 1368 008f 0D       		.uleb128 0xd
+ 1369 0090 0B       		.uleb128 0xb
+ 1370 0091 0C       		.uleb128 0xc
+ 1371 0092 0B       		.uleb128 0xb
+ 1372 0093 00       		.byte	0
+ 1373 0094 00       		.byte	0
+ 1374 0095 0C       		.uleb128 0xc
+ 1375 0096 0D       		.uleb128 0xd
+ 1376 0097 00       		.byte	0
+ 1377 0098 03       		.uleb128 0x3
+ 1378 0099 08       		.uleb128 0x8
+ 1379 009a 3A       		.uleb128 0x3a
+ 1380 009b 0B       		.uleb128 0xb
+ 1381 009c 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 28
+
+
+ 1382 009d 0B       		.uleb128 0xb
+ 1383 009e 49       		.uleb128 0x49
+ 1384 009f 13       		.uleb128 0x13
+ 1385 00a0 00       		.byte	0
+ 1386 00a1 00       		.byte	0
+ 1387 00a2 0D       		.uleb128 0xd
+ 1388 00a3 0D       		.uleb128 0xd
+ 1389 00a4 00       		.byte	0
+ 1390 00a5 03       		.uleb128 0x3
+ 1391 00a6 0E       		.uleb128 0xe
+ 1392 00a7 3A       		.uleb128 0x3a
+ 1393 00a8 0B       		.uleb128 0xb
+ 1394 00a9 3B       		.uleb128 0x3b
+ 1395 00aa 05       		.uleb128 0x5
+ 1396 00ab 49       		.uleb128 0x49
+ 1397 00ac 13       		.uleb128 0x13
+ 1398 00ad 0B       		.uleb128 0xb
+ 1399 00ae 0B       		.uleb128 0xb
+ 1400 00af 0D       		.uleb128 0xd
+ 1401 00b0 0B       		.uleb128 0xb
+ 1402 00b1 0C       		.uleb128 0xc
+ 1403 00b2 0B       		.uleb128 0xb
+ 1404 00b3 38       		.uleb128 0x38
+ 1405 00b4 0B       		.uleb128 0xb
+ 1406 00b5 00       		.byte	0
+ 1407 00b6 00       		.byte	0
+ 1408 00b7 0E       		.uleb128 0xe
+ 1409 00b8 0D       		.uleb128 0xd
+ 1410 00b9 00       		.byte	0
+ 1411 00ba 03       		.uleb128 0x3
+ 1412 00bb 08       		.uleb128 0x8
+ 1413 00bc 3A       		.uleb128 0x3a
+ 1414 00bd 0B       		.uleb128 0xb
+ 1415 00be 3B       		.uleb128 0x3b
+ 1416 00bf 05       		.uleb128 0x5
+ 1417 00c0 49       		.uleb128 0x49
+ 1418 00c1 13       		.uleb128 0x13
+ 1419 00c2 00       		.byte	0
+ 1420 00c3 00       		.byte	0
+ 1421 00c4 0F       		.uleb128 0xf
+ 1422 00c5 13       		.uleb128 0x13
+ 1423 00c6 01       		.byte	0x1
+ 1424 00c7 0B       		.uleb128 0xb
+ 1425 00c8 0B       		.uleb128 0xb
+ 1426 00c9 3A       		.uleb128 0x3a
+ 1427 00ca 0B       		.uleb128 0xb
+ 1428 00cb 3B       		.uleb128 0x3b
+ 1429 00cc 05       		.uleb128 0x5
+ 1430 00cd 01       		.uleb128 0x1
+ 1431 00ce 13       		.uleb128 0x13
+ 1432 00cf 00       		.byte	0
+ 1433 00d0 00       		.byte	0
+ 1434 00d1 10       		.uleb128 0x10
+ 1435 00d2 17       		.uleb128 0x17
+ 1436 00d3 01       		.byte	0x1
+ 1437 00d4 0B       		.uleb128 0xb
+ 1438 00d5 0B       		.uleb128 0xb
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 29
+
+
+ 1439 00d6 3A       		.uleb128 0x3a
+ 1440 00d7 0B       		.uleb128 0xb
+ 1441 00d8 3B       		.uleb128 0x3b
+ 1442 00d9 05       		.uleb128 0x5
+ 1443 00da 01       		.uleb128 0x1
+ 1444 00db 13       		.uleb128 0x13
+ 1445 00dc 00       		.byte	0
+ 1446 00dd 00       		.byte	0
+ 1447 00de 11       		.uleb128 0x11
+ 1448 00df 0D       		.uleb128 0xd
+ 1449 00e0 00       		.byte	0
+ 1450 00e1 03       		.uleb128 0x3
+ 1451 00e2 08       		.uleb128 0x8
+ 1452 00e3 3A       		.uleb128 0x3a
+ 1453 00e4 0B       		.uleb128 0xb
+ 1454 00e5 3B       		.uleb128 0x3b
+ 1455 00e6 05       		.uleb128 0x5
+ 1456 00e7 49       		.uleb128 0x49
+ 1457 00e8 13       		.uleb128 0x13
+ 1458 00e9 0B       		.uleb128 0xb
+ 1459 00ea 0B       		.uleb128 0xb
+ 1460 00eb 0D       		.uleb128 0xd
+ 1461 00ec 0B       		.uleb128 0xb
+ 1462 00ed 0C       		.uleb128 0xc
+ 1463 00ee 0B       		.uleb128 0xb
+ 1464 00ef 00       		.byte	0
+ 1465 00f0 00       		.byte	0
+ 1466 00f1 12       		.uleb128 0x12
+ 1467 00f2 0D       		.uleb128 0xd
+ 1468 00f3 00       		.byte	0
+ 1469 00f4 03       		.uleb128 0x3
+ 1470 00f5 0E       		.uleb128 0xe
+ 1471 00f6 3A       		.uleb128 0x3a
+ 1472 00f7 0B       		.uleb128 0xb
+ 1473 00f8 3B       		.uleb128 0x3b
+ 1474 00f9 05       		.uleb128 0x5
+ 1475 00fa 49       		.uleb128 0x49
+ 1476 00fb 13       		.uleb128 0x13
+ 1477 00fc 38       		.uleb128 0x38
+ 1478 00fd 0B       		.uleb128 0xb
+ 1479 00fe 00       		.byte	0
+ 1480 00ff 00       		.byte	0
+ 1481 0100 13       		.uleb128 0x13
+ 1482 0101 0D       		.uleb128 0xd
+ 1483 0102 00       		.byte	0
+ 1484 0103 03       		.uleb128 0x3
+ 1485 0104 08       		.uleb128 0x8
+ 1486 0105 3A       		.uleb128 0x3a
+ 1487 0106 0B       		.uleb128 0xb
+ 1488 0107 3B       		.uleb128 0x3b
+ 1489 0108 0B       		.uleb128 0xb
+ 1490 0109 49       		.uleb128 0x49
+ 1491 010a 13       		.uleb128 0x13
+ 1492 010b 38       		.uleb128 0x38
+ 1493 010c 0B       		.uleb128 0xb
+ 1494 010d 00       		.byte	0
+ 1495 010e 00       		.byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 30
+
+
+ 1496 010f 14       		.uleb128 0x14
+ 1497 0110 0D       		.uleb128 0xd
+ 1498 0111 00       		.byte	0
+ 1499 0112 03       		.uleb128 0x3
+ 1500 0113 0E       		.uleb128 0xe
+ 1501 0114 3A       		.uleb128 0x3a
+ 1502 0115 0B       		.uleb128 0xb
+ 1503 0116 3B       		.uleb128 0x3b
+ 1504 0117 0B       		.uleb128 0xb
+ 1505 0118 49       		.uleb128 0x49
+ 1506 0119 13       		.uleb128 0x13
+ 1507 011a 38       		.uleb128 0x38
+ 1508 011b 0B       		.uleb128 0xb
+ 1509 011c 00       		.byte	0
+ 1510 011d 00       		.byte	0
+ 1511 011e 15       		.uleb128 0x15
+ 1512 011f 2E       		.uleb128 0x2e
+ 1513 0120 00       		.byte	0
+ 1514 0121 3F       		.uleb128 0x3f
+ 1515 0122 19       		.uleb128 0x19
+ 1516 0123 03       		.uleb128 0x3
+ 1517 0124 0E       		.uleb128 0xe
+ 1518 0125 3A       		.uleb128 0x3a
+ 1519 0126 0B       		.uleb128 0xb
+ 1520 0127 3B       		.uleb128 0x3b
+ 1521 0128 0B       		.uleb128 0xb
+ 1522 0129 27       		.uleb128 0x27
+ 1523 012a 19       		.uleb128 0x19
+ 1524 012b 11       		.uleb128 0x11
+ 1525 012c 01       		.uleb128 0x1
+ 1526 012d 12       		.uleb128 0x12
+ 1527 012e 06       		.uleb128 0x6
+ 1528 012f 40       		.uleb128 0x40
+ 1529 0130 18       		.uleb128 0x18
+ 1530 0131 9742     		.uleb128 0x2117
+ 1531 0133 19       		.uleb128 0x19
+ 1532 0134 00       		.byte	0
+ 1533 0135 00       		.byte	0
+ 1534 0136 16       		.uleb128 0x16
+ 1535 0137 2E       		.uleb128 0x2e
+ 1536 0138 01       		.byte	0x1
+ 1537 0139 03       		.uleb128 0x3
+ 1538 013a 0E       		.uleb128 0xe
+ 1539 013b 3A       		.uleb128 0x3a
+ 1540 013c 0B       		.uleb128 0xb
+ 1541 013d 3B       		.uleb128 0x3b
+ 1542 013e 0B       		.uleb128 0xb
+ 1543 013f 27       		.uleb128 0x27
+ 1544 0140 19       		.uleb128 0x19
+ 1545 0141 11       		.uleb128 0x11
+ 1546 0142 01       		.uleb128 0x1
+ 1547 0143 12       		.uleb128 0x12
+ 1548 0144 06       		.uleb128 0x6
+ 1549 0145 40       		.uleb128 0x40
+ 1550 0146 18       		.uleb128 0x18
+ 1551 0147 9742     		.uleb128 0x2117
+ 1552 0149 19       		.uleb128 0x19
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 31
+
+
+ 1553 014a 01       		.uleb128 0x1
+ 1554 014b 13       		.uleb128 0x13
+ 1555 014c 00       		.byte	0
+ 1556 014d 00       		.byte	0
+ 1557 014e 17       		.uleb128 0x17
+ 1558 014f 898201   		.uleb128 0x4109
+ 1559 0152 00       		.byte	0
+ 1560 0153 11       		.uleb128 0x11
+ 1561 0154 01       		.uleb128 0x1
+ 1562 0155 31       		.uleb128 0x31
+ 1563 0156 13       		.uleb128 0x13
+ 1564 0157 00       		.byte	0
+ 1565 0158 00       		.byte	0
+ 1566 0159 18       		.uleb128 0x18
+ 1567 015a 2E       		.uleb128 0x2e
+ 1568 015b 01       		.byte	0x1
+ 1569 015c 3F       		.uleb128 0x3f
+ 1570 015d 19       		.uleb128 0x19
+ 1571 015e 03       		.uleb128 0x3
+ 1572 015f 0E       		.uleb128 0xe
+ 1573 0160 3A       		.uleb128 0x3a
+ 1574 0161 0B       		.uleb128 0xb
+ 1575 0162 3B       		.uleb128 0x3b
+ 1576 0163 0B       		.uleb128 0xb
+ 1577 0164 27       		.uleb128 0x27
+ 1578 0165 19       		.uleb128 0x19
+ 1579 0166 11       		.uleb128 0x11
+ 1580 0167 01       		.uleb128 0x1
+ 1581 0168 12       		.uleb128 0x12
+ 1582 0169 06       		.uleb128 0x6
+ 1583 016a 40       		.uleb128 0x40
+ 1584 016b 18       		.uleb128 0x18
+ 1585 016c 9742     		.uleb128 0x2117
+ 1586 016e 19       		.uleb128 0x19
+ 1587 016f 01       		.uleb128 0x1
+ 1588 0170 13       		.uleb128 0x13
+ 1589 0171 00       		.byte	0
+ 1590 0172 00       		.byte	0
+ 1591 0173 19       		.uleb128 0x19
+ 1592 0174 05       		.uleb128 0x5
+ 1593 0175 00       		.byte	0
+ 1594 0176 03       		.uleb128 0x3
+ 1595 0177 0E       		.uleb128 0xe
+ 1596 0178 3A       		.uleb128 0x3a
+ 1597 0179 0B       		.uleb128 0xb
+ 1598 017a 3B       		.uleb128 0x3b
+ 1599 017b 0B       		.uleb128 0xb
+ 1600 017c 49       		.uleb128 0x49
+ 1601 017d 13       		.uleb128 0x13
+ 1602 017e 02       		.uleb128 0x2
+ 1603 017f 17       		.uleb128 0x17
+ 1604 0180 00       		.byte	0
+ 1605 0181 00       		.byte	0
+ 1606 0182 1A       		.uleb128 0x1a
+ 1607 0183 34       		.uleb128 0x34
+ 1608 0184 00       		.byte	0
+ 1609 0185 03       		.uleb128 0x3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 32
+
+
+ 1610 0186 0E       		.uleb128 0xe
+ 1611 0187 3A       		.uleb128 0x3a
+ 1612 0188 0B       		.uleb128 0xb
+ 1613 0189 3B       		.uleb128 0x3b
+ 1614 018a 0B       		.uleb128 0xb
+ 1615 018b 49       		.uleb128 0x49
+ 1616 018c 13       		.uleb128 0x13
+ 1617 018d 02       		.uleb128 0x2
+ 1618 018e 18       		.uleb128 0x18
+ 1619 018f 00       		.byte	0
+ 1620 0190 00       		.byte	0
+ 1621 0191 1B       		.uleb128 0x1b
+ 1622 0192 35       		.uleb128 0x35
+ 1623 0193 00       		.byte	0
+ 1624 0194 49       		.uleb128 0x49
+ 1625 0195 13       		.uleb128 0x13
+ 1626 0196 00       		.byte	0
+ 1627 0197 00       		.byte	0
+ 1628 0198 1C       		.uleb128 0x1c
+ 1629 0199 34       		.uleb128 0x34
+ 1630 019a 00       		.byte	0
+ 1631 019b 03       		.uleb128 0x3
+ 1632 019c 0E       		.uleb128 0xe
+ 1633 019d 3A       		.uleb128 0x3a
+ 1634 019e 0B       		.uleb128 0xb
+ 1635 019f 3B       		.uleb128 0x3b
+ 1636 01a0 0B       		.uleb128 0xb
+ 1637 01a1 49       		.uleb128 0x49
+ 1638 01a2 13       		.uleb128 0x13
+ 1639 01a3 3F       		.uleb128 0x3f
+ 1640 01a4 19       		.uleb128 0x19
+ 1641 01a5 3C       		.uleb128 0x3c
+ 1642 01a6 19       		.uleb128 0x19
+ 1643 01a7 00       		.byte	0
+ 1644 01a8 00       		.byte	0
+ 1645 01a9 1D       		.uleb128 0x1d
+ 1646 01aa 34       		.uleb128 0x34
+ 1647 01ab 00       		.byte	0
+ 1648 01ac 03       		.uleb128 0x3
+ 1649 01ad 0E       		.uleb128 0xe
+ 1650 01ae 3A       		.uleb128 0x3a
+ 1651 01af 0B       		.uleb128 0xb
+ 1652 01b0 3B       		.uleb128 0x3b
+ 1653 01b1 05       		.uleb128 0x5
+ 1654 01b2 49       		.uleb128 0x49
+ 1655 01b3 13       		.uleb128 0x13
+ 1656 01b4 3F       		.uleb128 0x3f
+ 1657 01b5 19       		.uleb128 0x19
+ 1658 01b6 3C       		.uleb128 0x3c
+ 1659 01b7 19       		.uleb128 0x19
+ 1660 01b8 00       		.byte	0
+ 1661 01b9 00       		.byte	0
+ 1662 01ba 1E       		.uleb128 0x1e
+ 1663 01bb 01       		.uleb128 0x1
+ 1664 01bc 01       		.byte	0x1
+ 1665 01bd 49       		.uleb128 0x49
+ 1666 01be 13       		.uleb128 0x13
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 33
+
+
+ 1667 01bf 01       		.uleb128 0x1
+ 1668 01c0 13       		.uleb128 0x13
+ 1669 01c1 00       		.byte	0
+ 1670 01c2 00       		.byte	0
+ 1671 01c3 1F       		.uleb128 0x1f
+ 1672 01c4 21       		.uleb128 0x21
+ 1673 01c5 00       		.byte	0
+ 1674 01c6 00       		.byte	0
+ 1675 01c7 00       		.byte	0
+ 1676 01c8 00       		.byte	0
+ 1677              		.section	.debug_loc,"",%progbits
+ 1678              	.Ldebug_loc0:
+ 1679              	.LLST0:
+ 1680 0000 00000000 		.4byte	.LVL1
+ 1681 0004 27000000 		.4byte	.LVL2-1
+ 1682 0008 0100     		.2byte	0x1
+ 1683 000a 50       		.byte	0x50
+ 1684 000b 27000000 		.4byte	.LVL2-1
+ 1685 000f 30000000 		.4byte	.LFE113
+ 1686 0013 0400     		.2byte	0x4
+ 1687 0015 F3       		.byte	0xf3
+ 1688 0016 01       		.uleb128 0x1
+ 1689 0017 50       		.byte	0x50
+ 1690 0018 9F       		.byte	0x9f
+ 1691 0019 00000000 		.4byte	0
+ 1692 001d 00000000 		.4byte	0
+ 1693              		.section	.debug_aranges,"",%progbits
+ 1694 0000 3C000000 		.4byte	0x3c
+ 1695 0004 0200     		.2byte	0x2
+ 1696 0006 00000000 		.4byte	.Ldebug_info0
+ 1697 000a 04       		.byte	0x4
+ 1698 000b 00       		.byte	0
+ 1699 000c 0000     		.2byte	0
+ 1700 000e 0000     		.2byte	0
+ 1701 0010 00000000 		.4byte	.LFB111
+ 1702 0014 18000000 		.4byte	.LFE111-.LFB111
+ 1703 0018 00000000 		.4byte	.LFB110
+ 1704 001c 3C000000 		.4byte	.LFE110-.LFB110
+ 1705 0020 00000000 		.4byte	.LFB112
+ 1706 0024 0A000000 		.4byte	.LFE112-.LFB112
+ 1707 0028 00000000 		.4byte	.LFB113
+ 1708 002c 30000000 		.4byte	.LFE113-.LFB113
+ 1709 0030 00000000 		.4byte	.LFB114
+ 1710 0034 20000000 		.4byte	.LFE114-.LFB114
+ 1711 0038 00000000 		.4byte	0
+ 1712 003c 00000000 		.4byte	0
+ 1713              		.section	.debug_ranges,"",%progbits
+ 1714              	.Ldebug_ranges0:
+ 1715 0000 00000000 		.4byte	.LFB111
+ 1716 0004 18000000 		.4byte	.LFE111
+ 1717 0008 00000000 		.4byte	.LFB110
+ 1718 000c 3C000000 		.4byte	.LFE110
+ 1719 0010 00000000 		.4byte	.LFB112
+ 1720 0014 0A000000 		.4byte	.LFE112
+ 1721 0018 00000000 		.4byte	.LFB113
+ 1722 001c 30000000 		.4byte	.LFE113
+ 1723 0020 00000000 		.4byte	.LFB114
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 34
+
+
+ 1724 0024 20000000 		.4byte	.LFE114
+ 1725 0028 00000000 		.4byte	0
+ 1726 002c 00000000 		.4byte	0
+ 1727              		.section	.debug_line,"",%progbits
+ 1728              	.Ldebug_line0:
+ 1729 0000 A4020000 		.section	.debug_str,"MS",%progbits,1
+ 1729      02003502 
+ 1729      00000201 
+ 1729      FB0E0D00 
+ 1729      01010101 
+ 1730              	.LASF20:
+ 1731 0000 45455F55 		.ascii	"EE_UREG\000"
+ 1731      52454700 
+ 1732              	.LASF67:
+ 1733 0008 44454255 		.ascii	"DEBUGEVT\000"
+ 1733      47455654 
+ 1733      00
+ 1734              	.LASF44:
+ 1735 0011 44414343 		.ascii	"DACCVIOL\000"
+ 1735      56494F4C 
+ 1735      00
+ 1736              	.LASF63:
+ 1737 001a 55465352 		.ascii	"UFSR\000"
+ 1737      00
+ 1738              	.LASF75:
+ 1739 001f 42464152 		.ascii	"BFAR\000"
+ 1739      00
+ 1740              	.LASF2:
+ 1741 0024 73686F72 		.ascii	"short int\000"
+ 1741      7420696E 
+ 1741      7400
+ 1742              	.LASF60:
+ 1743 002e 44495642 		.ascii	"DIVBYZERO\000"
+ 1743      595A4552 
+ 1743      4F00
+ 1744              	.LASF23:
+ 1745 0038 73697A65 		.ascii	"sizetype\000"
+ 1745      74797065 
+ 1745      00
+ 1746              	.LASF70:
+ 1747 0041 434F5254 		.ascii	"CORTEX_MMFAR_t\000"
+ 1747      45585F4D 
+ 1747      4D464152 
+ 1747      5F7400
+ 1748              	.LASF37:
+ 1749 0050 53564341 		.ascii	"SVCALLPENDED\000"
+ 1749      4C4C5045 
+ 1749      4E444544 
+ 1749      00
+ 1750              	.LASF9:
+ 1751 005d 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1751      206C6F6E 
+ 1751      6720756E 
+ 1751      7369676E 
+ 1751      65642069 
+ 1752              	.LASF42:
+ 1753 0074 434F5254 		.ascii	"CORTEX_SHCRS_t\000"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 35
+
+
+ 1753      45585F53 
+ 1753      48435253 
+ 1753      5F7400
+ 1754              	.LASF26:
+ 1755 0083 72657365 		.ascii	"reseved_0\000"
+ 1755      7665645F 
+ 1755      3000
+ 1756              	.LASF62:
+ 1757 008d 42465352 		.ascii	"BFSR\000"
+ 1757      00
+ 1758              	.LASF6:
+ 1759 0092 5F5F7569 		.ascii	"__uint32_t\000"
+ 1759      6E743332 
+ 1759      5F7400
+ 1760              	.LASF21:
+ 1761 009d 45455F46 		.ascii	"EE_FREG\000"
+ 1761      52454700 
+ 1762              	.LASF19:
+ 1763 00a5 45455F55 		.ascii	"EE_UINT32\000"
+ 1763      494E5433 
+ 1763      3200
+ 1764              	.LASF49:
+ 1765 00af 50524543 		.ascii	"PRECISERR\000"
+ 1765      49534552 
+ 1765      5200
+ 1766              	.LASF22:
+ 1767 00b9 45455F54 		.ascii	"EE_TID\000"
+ 1767      494400
+ 1768              	.LASF35:
+ 1769 00c0 4D454D46 		.ascii	"MEMFAULTPENDED\000"
+ 1769      41554C54 
+ 1769      50454E44 
+ 1769      454400
+ 1770              	.LASF48:
+ 1771 00cf 49425553 		.ascii	"IBUSERR\000"
+ 1771      45525200 
+ 1772              	.LASF28:
+ 1773 00d7 72657365 		.ascii	"reserved_1\000"
+ 1773      72766564 
+ 1773      5F3100
+ 1774              	.LASF31:
+ 1775 00e2 72657365 		.ascii	"reserved_2\000"
+ 1775      72766564 
+ 1775      5F3200
+ 1776              	.LASF41:
+ 1777 00ed 72657365 		.ascii	"reserved_3\000"
+ 1777      72766564 
+ 1777      5F3300
+ 1778              	.LASF25:
+ 1779 00f8 42555346 		.ascii	"BUSFAULTACT\000"
+ 1779      41554C54 
+ 1779      41435400 
+ 1780              	.LASF64:
+ 1781 0104 434F5254 		.ascii	"CORTEX_CFSR_t\000"
+ 1781      45585F43 
+ 1781      4653525F 
+ 1781      7400
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 36
+
+
+ 1782              	.LASF51:
+ 1783 0112 554E5354 		.ascii	"UNSTKERR\000"
+ 1783      4B455252 
+ 1783      00
+ 1784              	.LASF85:
+ 1785 011b 45455F49 		.ascii	"EE_IRQ_nesting_level\000"
+ 1785      52515F6E 
+ 1785      65737469 
+ 1785      6E675F6C 
+ 1785      6576656C 
+ 1786              	.LASF71:
+ 1787 0130 53484352 		.ascii	"SHCRS\000"
+ 1787      5300
+ 1788              	.LASF40:
+ 1789 0136 55534746 		.ascii	"USGFAULTENA\000"
+ 1789      41554C54 
+ 1789      454E4100 
+ 1790              	.LASF43:
+ 1791 0142 49414343 		.ascii	"IACCVIOL\000"
+ 1791      56494F4C 
+ 1791      00
+ 1792              	.LASF80:
+ 1793 014b 4641554C 		.ascii	"FAULTHANDLER_Install\000"
+ 1793      5448414E 
+ 1793      444C4552 
+ 1793      5F496E73 
+ 1793      74616C6C 
+ 1794              	.LASF13:
+ 1795 0160 666C6F61 		.ascii	"float\000"
+ 1795      7400
+ 1796              	.LASF32:
+ 1797 0166 50454E44 		.ascii	"PENDSVACT\000"
+ 1797      53564143 
+ 1797      5400
+ 1798              	.LASF78:
+ 1799 0170 4641554C 		.ascii	"FAULTHANDLER_HardFault_hdl\000"
+ 1799      5448414E 
+ 1799      444C4552 
+ 1799      5F486172 
+ 1799      64466175 
+ 1800              	.LASF34:
+ 1801 018b 55534746 		.ascii	"USGFAULTPENDED\000"
+ 1801      41554C54 
+ 1801      50454E44 
+ 1801      454400
+ 1802              	.LASF8:
+ 1803 019a 6C6F6E67 		.ascii	"long long int\000"
+ 1803      206C6F6E 
+ 1803      6720696E 
+ 1803      7400
+ 1804              	.LASF16:
+ 1805 01a8 63796973 		.ascii	"cyisraddress\000"
+ 1805      72616464 
+ 1805      72657373 
+ 1805      00
+ 1806              	.LASF94:
+ 1807 01b5 4661756C 		.ascii	"FaultDetail\000"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 37
+
+
+ 1807      74446574 
+ 1807      61696C00 
+ 1808              	.LASF46:
+ 1809 01c1 4D53544B 		.ascii	"MSTKERR\000"
+ 1809      45525200 
+ 1810              	.LASF4:
+ 1811 01c9 6C6F6E67 		.ascii	"long int\000"
+ 1811      20696E74 
+ 1811      00
+ 1812              	.LASF61:
+ 1813 01d2 4D4D4653 		.ascii	"MMFSR\000"
+ 1813      5200
+ 1814              	.LASF82:
+ 1815 01d8 45455F6F 		.ascii	"EE_oo_IRQ_suspend_status\000"
+ 1815      6F5F4952 
+ 1815      515F7375 
+ 1815      7370656E 
+ 1815      645F7374 
+ 1816              	.LASF59:
+ 1817 01f1 554E414C 		.ascii	"UNALIGNED\000"
+ 1817      49474E45 
+ 1817      4400
+ 1818              	.LASF72:
+ 1819 01fb 43465352 		.ascii	"CFSR\000"
+ 1819      00
+ 1820              	.LASF38:
+ 1821 0200 4D454D46 		.ascii	"MEMFAULTENA\000"
+ 1821      41554C54 
+ 1821      454E4100 
+ 1822              	.LASF55:
+ 1823 020c 554E4445 		.ascii	"UNDEFINSTR\000"
+ 1823      46494E53 
+ 1823      545200
+ 1824              	.LASF17:
+ 1825 0217 6C6F6E67 		.ascii	"long double\000"
+ 1825      20646F75 
+ 1825      626C6500 
+ 1826              	.LASF89:
+ 1827 0223 736F7572 		.ascii	"source\\bsw\\Services\\ceh\\HardFault_Handler.c\000"
+ 1827      63655C62 
+ 1827      73775C53 
+ 1827      65727669 
+ 1827      6365735C 
+ 1828              	.LASF1:
+ 1829 024f 756E7369 		.ascii	"unsigned char\000"
+ 1829      676E6564 
+ 1829      20636861 
+ 1829      7200
+ 1830              	.LASF33:
+ 1831 025d 53595354 		.ascii	"SYSTICKACT\000"
+ 1831      49434B41 
+ 1831      435400
+ 1832              	.LASF47:
+ 1833 0268 4D4D4152 		.ascii	"MMARVALID\000"
+ 1833      56414C49 
+ 1833      4400
+ 1834              	.LASF0:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 38
+
+
+ 1835 0272 7369676E 		.ascii	"signed char\000"
+ 1835      65642063 
+ 1835      68617200 
+ 1836              	.LASF57:
+ 1837 027e 494E5650 		.ascii	"INVPC\000"
+ 1837      4300
+ 1838              	.LASF27:
+ 1839 0284 55534746 		.ascii	"USGFAULTACT\000"
+ 1839      41554C54 
+ 1839      41435400 
+ 1840              	.LASF12:
+ 1841 0290 75696E74 		.ascii	"uint32_t\000"
+ 1841      33325F74 
+ 1841      00
+ 1842              	.LASF56:
+ 1843 0299 494E5653 		.ascii	"INVSTATE\000"
+ 1843      54415445 
+ 1843      00
+ 1844              	.LASF74:
+ 1845 02a2 4D4D4641 		.ascii	"MMFAR\000"
+ 1845      5200
+ 1846              	.LASF84:
+ 1847 02a8 45455F73 		.ascii	"EE_std_endcycle_next_tid\000"
+ 1847      74645F65 
+ 1847      6E646379 
+ 1847      636C655F 
+ 1847      6E657874 
+ 1848              	.LASF18:
+ 1849 02c1 45455F49 		.ascii	"EE_INT32\000"
+ 1849      4E543332 
+ 1849      00
+ 1850              	.LASF76:
+ 1851 02ca 4661756C 		.ascii	"Faults\000"
+ 1851      747300
+ 1852              	.LASF29:
+ 1853 02d1 53564341 		.ascii	"SVCALLACT\000"
+ 1853      4C4C4143 
+ 1853      5400
+ 1854              	.LASF3:
+ 1855 02db 73686F72 		.ascii	"short unsigned int\000"
+ 1855      7420756E 
+ 1855      7369676E 
+ 1855      65642069 
+ 1855      6E7400
+ 1856              	.LASF79:
+ 1857 02ee 4641554C 		.ascii	"FAULTHANDLER_SaveDetails\000"
+ 1857      5448414E 
+ 1857      444C4552 
+ 1857      5F536176 
+ 1857      65446574 
+ 1858              	.LASF91:
+ 1859 0307 4641554C 		.ascii	"FAULTHANDLER_fault_hdl\000"
+ 1859      5448414E 
+ 1859      444C4552 
+ 1859      5F666175 
+ 1859      6C745F68 
+ 1860              	.LASF15:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 39
+
+
+ 1861 031e 63686172 		.ascii	"char\000"
+ 1861      00
+ 1862              	.LASF92:
+ 1863 0323 4641554C 		.ascii	"FAULTHANDLER__getRegistersFromStack\000"
+ 1863      5448414E 
+ 1863      444C4552 
+ 1863      5F5F6765 
+ 1863      74526567 
+ 1864              	.LASF39:
+ 1865 0347 42555346 		.ascii	"BUSFAULTENA\000"
+ 1865      41554C54 
+ 1865      454E4100 
+ 1866              	.LASF11:
+ 1867 0353 696E7433 		.ascii	"int32_t\000"
+ 1867      325F7400 
+ 1868              	.LASF65:
+ 1869 035b 56454354 		.ascii	"VECTTBL\000"
+ 1869      54424C00 
+ 1870              	.LASF87:
+ 1871 0363 43795261 		.ascii	"CyRamVectors\000"
+ 1871      6D566563 
+ 1871      746F7273 
+ 1871      00
+ 1872              	.LASF73:
+ 1873 0370 48465352 		.ascii	"HFSR\000"
+ 1873      00
+ 1874              	.LASF68:
+ 1875 0375 434F5254 		.ascii	"CORTEX_HFSR_t\000"
+ 1875      45585F48 
+ 1875      4653525F 
+ 1875      7400
+ 1876              	.LASF54:
+ 1877 0383 42464152 		.ascii	"BFARVALID\000"
+ 1877      56414C49 
+ 1877      4400
+ 1878              	.LASF83:
+ 1879 038d 45455F41 		.ascii	"EE_ApplicationMode\000"
+ 1879      70706C69 
+ 1879      63617469 
+ 1879      6F6E4D6F 
+ 1879      646500
+ 1880              	.LASF7:
+ 1881 03a0 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1881      20756E73 
+ 1881      69676E65 
+ 1881      6420696E 
+ 1881      7400
+ 1882              	.LASF90:
+ 1883 03b2 433A5C48 		.ascii	"C:\\H_da\\SS26\\Research Project\\Workspace01\\MP3_"
+ 1883      5F64615C 
+ 1883      53533236 
+ 1883      5C526573 
+ 1883      65617263 
+ 1884 03e0 76342E63 		.ascii	"v4.cydsn\000"
+ 1884      7964736E 
+ 1884      00
+ 1885              	.LASF36:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 40
+
+
+ 1886 03e9 42555346 		.ascii	"BUSFAULTPENDED\000"
+ 1886      41554C54 
+ 1886      50454E44 
+ 1886      454400
+ 1887              	.LASF53:
+ 1888 03f8 72657365 		.ascii	"reserved\000"
+ 1888      72766564 
+ 1888      00
+ 1889              	.LASF5:
+ 1890 0401 5F5F696E 		.ascii	"__int32_t\000"
+ 1890      7433325F 
+ 1890      7400
+ 1891              	.LASF93:
+ 1892 040b 70756C46 		.ascii	"pulFaultStackAddress\000"
+ 1892      61756C74 
+ 1892      53746163 
+ 1892      6B416464 
+ 1892      72657373 
+ 1893              	.LASF52:
+ 1894 0420 53544B45 		.ascii	"STKERR\000"
+ 1894      525200
+ 1895              	.LASF24:
+ 1896 0427 4D454D46 		.ascii	"MEMFAULTACT\000"
+ 1896      41554C54 
+ 1896      41435400 
+ 1897              	.LASF66:
+ 1898 0433 464F5243 		.ascii	"FORCED\000"
+ 1898      454400
+ 1899              	.LASF77:
+ 1900 043a 4661756C 		.ascii	"FaultDetail_t\000"
+ 1900      74446574 
+ 1900      61696C5F 
+ 1900      7400
+ 1901              	.LASF14:
+ 1902 0448 646F7562 		.ascii	"double\000"
+ 1902      6C6500
+ 1903              	.LASF69:
+ 1904 044f 41444452 		.ascii	"ADDRESS\000"
+ 1904      45535300 
+ 1905              	.LASF50:
+ 1906 0457 494D5052 		.ascii	"IMPRECISERR\000"
+ 1906      45434953 
+ 1906      45525200 
+ 1907              	.LASF86:
+ 1908 0463 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1908      52784275 
+ 1908      66666572 
+ 1908      00
+ 1909              	.LASF88:
+ 1910 0470 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1910      43313120 
+ 1910      352E342E 
+ 1910      31203230 
+ 1910      31363036 
+ 1911 04a3 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1911      20726576 
+ 1911      6973696F 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cctrtb6c.s 			page 41
+
+
+ 1911      6E203233 
+ 1911      37373135 
+ 1912 04d6 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1912      66756E63 
+ 1912      74696F6E 
+ 1912      2D736563 
+ 1912      74696F6E 
+ 1913              	.LASF10:
+ 1914 04fe 756E7369 		.ascii	"unsigned int\000"
+ 1914      676E6564 
+ 1914      20696E74 
+ 1914      00
+ 1915              	.LASF58:
+ 1916 050b 4E4F4350 		.ascii	"NOCP\000"
+ 1916      00
+ 1917              	.LASF81:
+ 1918 0510 45455F6F 		.ascii	"EE_oo_IRQ_disable_count\000"
+ 1918      6F5F4952 
+ 1918      515F6469 
+ 1918      7361626C 
+ 1918      655F636F 
+ 1919              	.LASF45:
+ 1920 0528 4D554E53 		.ascii	"MUNSTKERR\000"
+ 1920      544B4552 
+ 1920      5200
+ 1921              	.LASF30:
+ 1922 0532 4D4F4E49 		.ascii	"MONITORACT\000"
+ 1922      544F5241 
+ 1922      435400
+ 1923              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

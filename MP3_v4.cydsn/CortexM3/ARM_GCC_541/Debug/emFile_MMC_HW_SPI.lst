@@ -1,0 +1,3364 @@
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"emFile_MMC_HW_SPI.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.emFile_Init,"ax",%progbits
+  20              		.align	2
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	emFile_Init, %function
+  24              	emFile_Init:
+  25              	.LFB110:
+  26              		.file 1 "Generated_Source\\PSoC5\\emFile_MMC_HW_SPI.c"
+   1:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * File Name: emFile_MMC_HW_SPI.c
+   3:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Version 1.20
+   4:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+   5:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Description:
+   6:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  Contains a set of File System APIs that implements SPI mode driver operation.
+   7:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+   8:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Note:
+   9:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+  10:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** ********************************************************************************
+  11:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Copyright 2011-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  12:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * You may use this file only in accordance with the license, terms, conditions,
+  13:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  14:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * the software package with which this file was provided.
+  15:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *******************************************************************************/
+  16:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  17:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** #include "FS.h"
+  18:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** #include "emFile.h"
+  19:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** #include "MMC_X_HW.h"
+  20:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** #include "project.h"
+  21:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  22:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  23:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** /*********************************************************************
+  24:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *             Macros
+  25:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *********************************************************************/
+  26:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** /* in mV, example means 3.3V */
+  27:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** #define emFile_MMC_DEFAULT_SUPPLY_VOLTAGE    (3300u)
+  28:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  29:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** /* Max. startup frequency (KHz) */
+  30:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** #define emFile_STARTUP_FREQ                   (400u)
+  31:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 2
+
+
+  32:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  33:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** /*********************************************************************
+  34:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *       Static data
+  35:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *********************************************************************/
+  36:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  37:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** static char emFile_isInited0;
+  38:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  39:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** #if (emFile_NUMBER_SD_CARDS >= 2u)
+  40:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  41:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     static char emFile_isInited1;
+  42:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  43:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** #endif /* (emFile_NUMBER_SD_CARDS >= 2u) */
+  44:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  45:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** #if (emFile_NUMBER_SD_CARDS >= 3u)
+  46:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  47:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     static char emFile_isInited2;
+  48:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  49:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** #endif /* (emFile_NUMBER_SD_CARDS >= 3u) */
+  50:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  51:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** #if (emFile_NUMBER_SD_CARDS == 4u)
+  52:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  53:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     static char emFile_isInited3;
+  54:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  55:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** #endif /* (emFile_NUMBER_SD_CARDS == 4u) */
+  56:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  57:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  58:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** /*******************************************************************************
+  59:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Function Name: emFile_Init
+  60:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** ********************************************************************************
+  61:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+  62:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Summary:
+  63:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  Initialize SPI Masters.
+  64:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+  65:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Parameters:
+  66:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  Unit - Unit (SPIM) number.
+  67:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+  68:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Return:
+  69:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  None
+  70:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+  71:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Reentrant:
+  72:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  No
+  73:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+  74:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *******************************************************************************/
+  75:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** static void emFile_Init(U8 Unit) CYREENTRANT
+  76:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** {
+  27              		.loc 1 76 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              	.LVL0:
+  32 0000 10B5     		push	{r4, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 4, -8
+  35              		.cfi_offset 14, -4
+  77:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     switch(Unit)
+  36              		.loc 1 77 0
+  37 0002 80B9     		cbnz	r0, .L5
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 3
+
+
+  78:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     {
+  79:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     case 0u:
+  80:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  81:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         if (emFile_isInited0 == 0u)
+  38              		.loc 1 81 0
+  39 0004 104B     		ldr	r3, .L7
+  40 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  41 0008 EBB9     		cbnz	r3, .L1
+  82:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         {
+  83:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Indicate that SPI 0 was initialized */
+  84:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_isInited0 = 1u;
+  42              		.loc 1 84 0
+  43 000a 0124     		movs	r4, #1
+  44 000c 0E4B     		ldr	r3, .L7
+  45 000e 1C70     		strb	r4, [r3]
+  85:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  86:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Initialize SPI */
+  87:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  88:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Stop the clock to set a required divider */
+  89:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_1_Stop();
+  46              		.loc 1 89 0
+  47 0010 FFF7FEFF 		bl	emFile_Clock_1_Stop
+  48              	.LVL1:
+  90:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  91:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Set the inital clock frequency to 400 KHz */
+  92:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_1_SetDividerValue(BCLK__BUS_CLK__KHZ/emFile_STARTUP_FREQ);
+  49              		.loc 1 92 0
+  50 0014 2146     		mov	r1, r4
+  51 0016 B320     		movs	r0, #179
+  52 0018 FFF7FEFF 		bl	emFile_Clock_1_SetDividerRegister
+  53              	.LVL2:
+  93:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  94:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Start the clock */
+  95:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_1_Start();
+  54              		.loc 1 95 0
+  55 001c FFF7FEFF 		bl	emFile_Clock_1_Start
+  56              	.LVL3:
+  96:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+  97:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Start SPI 0 */
+  98:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_SPI0_Start();
+  57              		.loc 1 98 0
+  58 0020 FFF7FEFF 		bl	emFile_SPI0_Start
+  59              	.LVL4:
+  60 0024 10BD     		pop	{r4, pc}
+  61              	.LVL5:
+  62              	.L5:
+  99:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         }
+ 100:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 101:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         break;
+ 102:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 103:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #if (emFile_NUMBER_SD_CARDS >= 2u)
+ 104:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 105:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             case 1u:
+ 106:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 107:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 if (emFile_isInited1 == 0u)
+ 108:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 {
+ 109:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     /* Indicate that SPI 1 was initialized */
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 4
+
+
+ 110:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     emFile_isInited1 = 1u;
+ 111:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 112:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     /* Stop the clock to set a required divider */
+ 113:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     emFile_Clock_2_Stop();
+ 114:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 115:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     /* Set the inital clock frequency to 400 KHz */
+ 116:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     emFile_Clock_2_SetDividerValue(BCLK__BUS_CLK__KHZ/emFile_STARTUP_FREQ);
+ 117:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 118:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     /* Start the clock */
+ 119:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     emFile_Clock_2_Start();
+ 120:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 121:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     /* Start SPI 1 */
+ 122:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     emFile_SPI1_Start();
+ 123:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 }
+ 124:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 125:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 break;
+ 126:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 127:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #endif /* (emFile_NUMBER_SD_CARDS >= 2u) */
+ 128:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 129:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #if (emFile_NUMBER_SD_CARDS >= 3u)
+ 130:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 131:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             case 2u:
+ 132:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 133:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 if (emFile_isInited2 == 0u)
+ 134:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 {
+ 135:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     /* Indicate that SPI 2 was initialized */
+ 136:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     emFile_isInited2 = 1u;
+ 137:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 138:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     /* Stop the clock to set a required divider */
+ 139:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     emFile_Clock_3_Stop();
+ 140:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 141:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     /* Set the inital clock frequency to 400 KHz */
+ 142:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     emFile_Clock_3_SetDividerValue(BCLK__BUS_CLK__KHZ/emFile_STARTUP_FREQ);
+ 143:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 144:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     /* Start the clock */
+ 145:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     emFile_Clock_3_Start();
+ 146:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 147:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     /* Start SPI 2 */
+ 148:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     emFile_SPI2_Start();
+ 149:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 }
+ 150:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 151:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 break;
+ 152:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 153:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #endif /* (emFile_NUMBER_SD_CARDS >= 3u) */
+ 154:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 155:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #if (emFile_NUMBER_SD_CARDS == 4u)
+ 156:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 157:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             case 3u:
+ 158:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 159:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 if (emFile_isInited3 == 0u)
+ 160:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 {
+ 161:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     /* Indicate that SPI 3 was initialized */
+ 162:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     emFile_isInited3 = 1u;
+ 163:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 164:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     /* Stop the clock to set a required divider */
+ 165:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     emFile_Clock_4_Stop();
+ 166:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 5
+
+
+ 167:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     /* Set the inital clock frequency to 400 KHz */
+ 168:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     emFile_Clock_4_SetDividerValue(BCLK__BUS_CLK__KHZ/emFile_STARTUP_FREQ);
+ 169:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 170:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     /* Start the clock */
+ 171:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     emFile_Clock_4_Start();
+ 172:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 173:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     /* Start SPI 3 */
+ 174:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                     emFile_SPI3_Start();
+ 175:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 }
+ 176:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 177:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 break;
+ 178:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 179:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #endif /* (emFile_NUMBER_SD_CARDS == 4u) */
+ 180:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 181:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     default:
+ 182:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 183:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         if (emFile_isInited0 == 0u)
+  63              		.loc 1 183 0
+  64 0026 084B     		ldr	r3, .L7
+  65 0028 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  66 002a 63B9     		cbnz	r3, .L1
+ 184:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         {
+ 185:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Indicate that SPI 0 was initialized */
+ 186:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_isInited0 = 1u;
+  67              		.loc 1 186 0
+  68 002c 0124     		movs	r4, #1
+  69 002e 064B     		ldr	r3, .L7
+  70 0030 1C70     		strb	r4, [r3]
+ 187:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 188:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Stop the clock to set a required divider */
+ 189:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_1_Stop();
+  71              		.loc 1 189 0
+  72 0032 FFF7FEFF 		bl	emFile_Clock_1_Stop
+  73              	.LVL6:
+ 190:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 191:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Set the inital clock frequency to 400 KHz */
+ 192:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_1_SetDividerValue(BCLK__BUS_CLK__KHZ/emFile_STARTUP_FREQ);
+  74              		.loc 1 192 0
+  75 0036 2146     		mov	r1, r4
+  76 0038 B320     		movs	r0, #179
+  77 003a FFF7FEFF 		bl	emFile_Clock_1_SetDividerRegister
+  78              	.LVL7:
+ 193:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 194:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Start the clock */
+ 195:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_1_Start();
+  79              		.loc 1 195 0
+  80 003e FFF7FEFF 		bl	emFile_Clock_1_Start
+  81              	.LVL8:
+ 196:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 197:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Start SPI 0 */
+ 198:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_SPI0_Start();
+  82              		.loc 1 198 0
+  83 0042 FFF7FEFF 		bl	emFile_SPI0_Start
+  84              	.LVL9:
+  85              	.L1:
+  86 0046 10BD     		pop	{r4, pc}
+  87              	.L8:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 6
+
+
+  88              		.align	2
+  89              	.L7:
+  90 0048 00000000 		.word	.LANCHOR0
+  91              		.cfi_endproc
+  92              	.LFE110:
+  93              		.size	emFile_Init, .-emFile_Init
+  94              		.section	.text.emFile_ReadWriteSPI,"ax",%progbits
+  95              		.align	2
+  96              		.thumb
+  97              		.thumb_func
+  98              		.type	emFile_ReadWriteSPI, %function
+  99              	emFile_ReadWriteSPI:
+ 100              	.LFB111:
+ 199:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         }
+ 200:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         
+ 201:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         break;
+ 202:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****       }
+ 203:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** }
+ 204:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 205:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 206:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** /*******************************************************************************
+ 207:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Function Name: emFile_ReadWriteSPI
+ 208:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** ********************************************************************************
+ 209:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 210:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Summary:
+ 211:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  Reads and Writes data via SPI.
+ 212:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 213:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Parameters:
+ 214:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  Unit - Unit number;
+ 215:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  Data - data to be written.
+ 216:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 217:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Return:
+ 218:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  Data received from SD card.
+ 219:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 220:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Reentrant:
+ 221:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  No
+ 222:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 223:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *******************************************************************************/
+ 224:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** static U8 emFile_ReadWriteSPI(U8 Unit, U8 Data) CYREENTRANT
+ 225:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** {
+ 101              		.loc 1 225 0
+ 102              		.cfi_startproc
+ 103              		@ args = 0, pretend = 0, frame = 0
+ 104              		@ frame_needed = 0, uses_anonymous_args = 0
+ 105              	.LVL10:
+ 106 0000 08B5     		push	{r3, lr}
+ 107              		.cfi_def_cfa_offset 8
+ 108              		.cfi_offset 3, -8
+ 109              		.cfi_offset 14, -4
+ 226:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     U8 spiData;
+ 227:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 228:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     switch(Unit)
+ 110              		.loc 1 228 0
+ 111 0002 50B9     		cbnz	r0, .L15
+ 229:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     {
+ 230:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     case 0u:
+ 231:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 7
+
+
+ 232:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         /* Send Data */
+ 233:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         emFile_SPI0_WriteTxData(Data);
+ 112              		.loc 1 233 0
+ 113 0004 0846     		mov	r0, r1
+ 114              	.LVL11:
+ 115 0006 FFF7FEFF 		bl	emFile_SPI0_WriteTxData
+ 116              	.LVL12:
+ 117              	.L12:
+ 234:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 235:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         /* Wait until all bits are shifted */
+ 236:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         while (0u == (emFile_SPI0_STS_SPI_DONE & emFile_SPI0_ReadTxStatus()));
+ 118              		.loc 1 236 0 discriminator 1
+ 119 000a FFF7FEFF 		bl	emFile_SPI0_ReadTxStatus
+ 120              	.LVL13:
+ 121 000e 10F0010F 		tst	r0, #1
+ 122 0012 FAD0     		beq	.L12
+ 237:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 238:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         /* Read data */
+ 239:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         spiData = emFile_SPI0_ReadRxData();
+ 123              		.loc 1 239 0
+ 124 0014 FFF7FEFF 		bl	emFile_SPI0_ReadRxData
+ 125              	.LVL14:
+ 240:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 241:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         break;
+ 126              		.loc 1 241 0
+ 127 0018 08BD     		pop	{r3, pc}
+ 128              	.LVL15:
+ 129              	.L15:
+ 242:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 243:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     #if (emFile_NUMBER_SD_CARDS >= 2u)
+ 244:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 245:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         case 1u:
+ 246:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 247:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Send Data */
+ 248:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_SPI1_WriteTxData(Data);
+ 249:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 250:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Wait until all bits are shifted */
+ 251:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             while (0u == (emFile_SPI1_STS_SPI_DONE & emFile_SPI1_ReadTxStatus()));
+ 252:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 253:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Read data */
+ 254:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             spiData = emFile_SPI1_ReadRxData();
+ 255:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 256:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             break;
+ 257:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 258:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     #endif /* (emFile_NUMBER_SD_CARDS >= 2u) */
+ 259:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 260:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     #if (emFile_NUMBER_SD_CARDS >= 3u)
+ 261:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 262:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         case 2u:
+ 263:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 264:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Send Data */
+ 265:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_SPI2_WriteTxData(Data);
+ 266:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 267:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Wait until all bits are shifted */
+ 268:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             while (0u == (emFile_SPI2_STS_SPI_DONE & emFile_SPI2_ReadTxStatus()));
+ 269:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 270:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Read data */
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 8
+
+
+ 271:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             spiData = emFile_SPI2_ReadRxData();
+ 272:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 273:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             break;
+ 274:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 275:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     #endif /* (emFile_NUMBER_SD_CARDS >= 2u) */
+ 276:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 277:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     #if (emFile_NUMBER_SD_CARDS >= 4u)
+ 278:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 279:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         case 3u:
+ 280:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 281:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Send Data */
+ 282:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_SPI3_WriteTxData(Data);
+ 283:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 284:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Wait until all bits are shifted */
+ 285:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             while (0u == (emFile_SPI3_STS_SPI_DONE & emFile_SPI3_ReadTxStatus()));
+ 286:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 287:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Read data */
+ 288:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             spiData = emFile_SPI3_ReadRxData();
+ 289:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 290:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             break;
+ 291:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 292:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     #endif /* (emFile_NUMBER_SD_CARDS >= 4u) */
+ 293:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 294:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     default:
+ 295:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 296:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         /* Send Data */
+ 297:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         emFile_SPI0_WriteTxData(Data);
+ 130              		.loc 1 297 0
+ 131 001a 0846     		mov	r0, r1
+ 132              	.LVL16:
+ 133 001c FFF7FEFF 		bl	emFile_SPI0_WriteTxData
+ 134              	.LVL17:
+ 135              	.L14:
+ 298:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 299:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         /* Wait until all bits are shifted */
+ 300:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         while (0u == (emFile_SPI0_STS_SPI_DONE & emFile_SPI0_ReadTxStatus()));
+ 136              		.loc 1 300 0 discriminator 1
+ 137 0020 FFF7FEFF 		bl	emFile_SPI0_ReadTxStatus
+ 138              	.LVL18:
+ 139 0024 10F0010F 		tst	r0, #1
+ 140 0028 FAD0     		beq	.L14
+ 301:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 302:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         /* Read data */
+ 303:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         spiData = emFile_SPI0_ReadRxData();
+ 141              		.loc 1 303 0
+ 142 002a FFF7FEFF 		bl	emFile_SPI0_ReadRxData
+ 143              	.LVL19:
+ 304:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         
+ 305:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         break;
+ 306:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     }
+ 307:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 308:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     return(spiData);
+ 309:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** }
+ 144              		.loc 1 309 0
+ 145 002e 08BD     		pop	{r3, pc}
+ 146              		.cfi_endproc
+ 147              	.LFE111:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 9
+
+
+ 148              		.size	emFile_ReadWriteSPI, .-emFile_ReadWriteSPI
+ 149              		.section	.text.FS_MMC_HW_X_EnableCS,"ax",%progbits
+ 150              		.align	2
+ 151              		.global	FS_MMC_HW_X_EnableCS
+ 152              		.thumb
+ 153              		.thumb_func
+ 154              		.type	FS_MMC_HW_X_EnableCS, %function
+ 155              	FS_MMC_HW_X_EnableCS:
+ 156              	.LFB112:
+ 310:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 311:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** /*******************************************************************************
+ 312:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_EnableCS
+ 313:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** ********************************************************************************
+ 314:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 315:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Summary:
+ 316:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  FS low level function. Sets the card slot active using the
+ 317:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  chip select (CS) line.
+ 318:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 319:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Parameters:
+ 320:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  Unit      - Device Index.
+ 321:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 322:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Return:
+ 323:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  None
+ 324:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 325:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Reentrant:
+ 326:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  No
+ 327:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 328:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *******************************************************************************/
+ 329:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** void FS_MMC_HW_X_EnableCS(U8 Unit)
+ 330:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** {
+ 157              		.loc 1 330 0
+ 158              		.cfi_startproc
+ 159              		@ args = 0, pretend = 0, frame = 0
+ 160              		@ frame_needed = 0, uses_anonymous_args = 0
+ 161              	.LVL20:
+ 162 0000 08B5     		push	{r3, lr}
+ 163              		.cfi_def_cfa_offset 8
+ 164              		.cfi_offset 3, -8
+ 165              		.cfi_offset 14, -4
+ 331:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     switch(Unit)
+ 166              		.loc 1 331 0
+ 167 0002 10B9     		cbnz	r0, .L21
+ 332:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     {
+ 333:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         case 0u:
+ 334:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 335:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Set CS to 0 */
+ 336:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_SPI0_CS_Write(0u);
+ 168              		.loc 1 336 0
+ 169 0004 FFF7FEFF 		bl	emFile_SPI0_CS_Write
+ 170              	.LVL21:
+ 337:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 338:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             break;
+ 171              		.loc 1 338 0
+ 172 0008 08BD     		pop	{r3, pc}
+ 173              	.LVL22:
+ 174              	.L21:
+ 339:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 10
+
+
+ 340:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #if (emFile_NUMBER_SD_CARDS >= 2u)
+ 341:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 342:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             case 1u:
+ 343:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 344:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 /* Set CS to 0 */
+ 345:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 emFile_SPI1_CS_Write(0u);
+ 346:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 347:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 break;
+ 348:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 349:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #endif /* (emFile_NUMBER_SD_CARDS >= 2u) */
+ 350:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 351:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #if (emFile_NUMBER_SD_CARDS >= 3u)
+ 352:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 353:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             case 2u:
+ 354:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 355:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 /* Set CS to 0 */
+ 356:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 emFile_SPI2_CS_Write(0u);
+ 357:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 358:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 break;
+ 359:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 360:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #endif /* (emFile_NUMBER_SD_CARDS >= 3u) */
+ 361:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 362:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #if (emFile_NUMBER_SD_CARDS == 4u)
+ 363:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 364:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             case 3u:
+ 365:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 366:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 /* Set CS to 0 */
+ 367:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 emFile_SPI3_CS_Write(0u);
+ 368:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 369:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 break;
+ 370:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 371:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #endif /* (emFile_NUMBER_SD_CARDS == 4u) */
+ 372:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 373:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         default:
+ 374:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 375:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_SPI0_CS_Write(0u);
+ 175              		.loc 1 375 0
+ 176 000a 0020     		movs	r0, #0
+ 177              	.LVL23:
+ 178 000c FFF7FEFF 		bl	emFile_SPI0_CS_Write
+ 179              	.LVL24:
+ 180 0010 08BD     		pop	{r3, pc}
+ 181              		.cfi_endproc
+ 182              	.LFE112:
+ 183              		.size	FS_MMC_HW_X_EnableCS, .-FS_MMC_HW_X_EnableCS
+ 184 0012 00BF     		.section	.text.FS_MMC_HW_X_DisableCS,"ax",%progbits
+ 185              		.align	2
+ 186              		.global	FS_MMC_HW_X_DisableCS
+ 187              		.thumb
+ 188              		.thumb_func
+ 189              		.type	FS_MMC_HW_X_DisableCS, %function
+ 190              	FS_MMC_HW_X_DisableCS:
+ 191              	.LFB113:
+ 376:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 377:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             break;
+ 378:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     }
+ 379:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** }
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 11
+
+
+ 380:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 381:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 382:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** /*******************************************************************************
+ 383:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_DisableCS
+ 384:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** ********************************************************************************
+ 385:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 386:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Summary:
+ 387:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  FS low level function. Clears the card slot inactive using the
+ 388:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  chip select (CS) line.
+ 389:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 390:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Parameters:
+ 391:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  Unit      - Device Index.
+ 392:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 393:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Return:
+ 394:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  None
+ 395:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 396:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Reentrant:
+ 397:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  No
+ 398:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 399:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *******************************************************************************/
+ 400:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** void FS_MMC_HW_X_DisableCS(U8 Unit)
+ 401:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** {
+ 192              		.loc 1 401 0
+ 193              		.cfi_startproc
+ 194              		@ args = 0, pretend = 0, frame = 0
+ 195              		@ frame_needed = 0, uses_anonymous_args = 0
+ 196              	.LVL25:
+ 197 0000 08B5     		push	{r3, lr}
+ 198              		.cfi_def_cfa_offset 8
+ 199              		.cfi_offset 3, -8
+ 200              		.cfi_offset 14, -4
+ 402:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     switch(Unit)
+ 201              		.loc 1 402 0
+ 202 0002 18B9     		cbnz	r0, .L27
+ 403:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     {
+ 404:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     case 0u:
+ 405:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 406:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         emFile_SPI0_CS_Write(1u);
+ 203              		.loc 1 406 0
+ 204 0004 0120     		movs	r0, #1
+ 205              	.LVL26:
+ 206 0006 FFF7FEFF 		bl	emFile_SPI0_CS_Write
+ 207              	.LVL27:
+ 407:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 408:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         break;
+ 208              		.loc 1 408 0
+ 209 000a 08BD     		pop	{r3, pc}
+ 210              	.LVL28:
+ 211              	.L27:
+ 409:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 410:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     #if (emFile_NUMBER_SD_CARDS >= 2u)
+ 411:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 412:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         case 1u:
+ 413:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 414:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_SPI1_CS_Write(1u);
+ 415:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 416:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             break;
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 12
+
+
+ 417:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 418:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     #endif /* (emFile_NUMBER_SD_CARDS >= 2u) */
+ 419:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 420:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     #if (emFile_NUMBER_SD_CARDS >= 3u)
+ 421:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 422:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         case 2u:
+ 423:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 424:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_SPI2_CS_Write(1u);
+ 425:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 426:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             break;
+ 427:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 428:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     #endif /* (emFile_NUMBER_SD_CARDS >= 3u) */
+ 429:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 430:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     #if (emFile_NUMBER_SD_CARDS == 4u)
+ 431:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 432:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         case 3u:
+ 433:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 434:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_SPI3_CS_Write(1u);
+ 435:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 436:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             break;
+ 437:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 438:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     #endif /* (emFile_NUMBER_SD_CARDS == 4u) */
+ 439:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 440:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     default:
+ 441:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 442:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         emFile_SPI0_CS_Write(1u);
+ 212              		.loc 1 442 0
+ 213 000c 0120     		movs	r0, #1
+ 214              	.LVL29:
+ 215 000e FFF7FEFF 		bl	emFile_SPI0_CS_Write
+ 216              	.LVL30:
+ 217 0012 08BD     		pop	{r3, pc}
+ 218              		.cfi_endproc
+ 219              	.LFE113:
+ 220              		.size	FS_MMC_HW_X_DisableCS, .-FS_MMC_HW_X_DisableCS
+ 221              		.section	.text.FS_MMC_HW_X_IsWriteProtected,"ax",%progbits
+ 222              		.align	2
+ 223              		.global	FS_MMC_HW_X_IsWriteProtected
+ 224              		.thumb
+ 225              		.thumb_func
+ 226              		.type	FS_MMC_HW_X_IsWriteProtected, %function
+ 227              	FS_MMC_HW_X_IsWriteProtected:
+ 228              	.LFB114:
+ 443:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         
+ 444:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         break;
+ 445:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     }
+ 446:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** }
+ 447:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 448:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 449:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** /*******************************************************************************
+ 450:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_IsWriteProtected
+ 451:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** ********************************************************************************
+ 452:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 453:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Summary:
+ 454:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  FS low level function. Returns the state of the physical write
+ 455:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  protection of the SD cards.
+ 456:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 13
+
+
+ 457:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Parameters:
+ 458:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  Unit      - Device Index.
+ 459:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 460:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Return:
+ 461:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *    1       - the card is write protected;
+ 462:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *    0       - the card is not write protected.
+ 463:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 464:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Reentrant:
+ 465:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  No
+ 466:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 467:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *******************************************************************************/
+ 468:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** int FS_MMC_HW_X_IsWriteProtected(U8 Unit)
+ 469:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** {
+ 229              		.loc 1 469 0
+ 230              		.cfi_startproc
+ 231              		@ args = 0, pretend = 0, frame = 0
+ 232              		@ frame_needed = 0, uses_anonymous_args = 0
+ 233              		@ link register save eliminated.
+ 234              	.LVL31:
+ 470:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****    int wpState;
+ 471:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 472:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     switch(Unit)
+ 473:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     {
+ 474:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     case 0u:
+ 475:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 476:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #if (emFile_WP0_EN)
+ 477:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 478:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             /* Based on physical switch state */
+ 479:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****               wpState = (int)emFile_SPI0_WP_Read();
+ 480:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 481:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #else
+ 482:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 483:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             wpState = 0;
+ 484:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 485:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #endif /* (emFile_WP0_EN) */
+ 486:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 487:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         break;
+ 488:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 489:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     #if (emFile_NUMBER_SD_CARDS >= 2u)
+ 490:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 491:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         case 1u:
+ 492:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 493:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             #if (emFile_WP1_EN)
+ 494:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 495:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                    /* Based on physical switch state */
+ 496:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 wpState = (int)emFile_SPI1_WP_Read();
+ 497:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 498:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             #else
+ 499:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 500:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 wpState = 0;
+ 501:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 502:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             #endif /* (emFile_WP1_EN) */
+ 503:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 504:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             break;
+ 505:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 506:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     #endif /* (emFile_NUMBER_SD_CARDS >= 2u) */
+ 507:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 14
+
+
+ 508:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     #if (emFile_NUMBER_SD_CARDS >= 3u)
+ 509:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 510:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         case 2u:
+ 511:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 512:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             #if (emFile_WP2_EN)
+ 513:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 514:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                   /* Based on physical switch state */
+ 515:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 wpState = (int)emFile_SPI2_WP_Read();
+ 516:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 517:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             #else
+ 518:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 519:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 wpState = 0;
+ 520:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 521:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             #endif /* (emFile_WP2_EN) */
+ 522:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 523:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             break;
+ 524:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 525:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     #endif /* (emFile_NUMBER_SD_CARDS >= 3u) */
+ 526:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 527:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     #if (emFile_NUMBER_SD_CARDS == 4u)
+ 528:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 529:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         case 3u:
+ 530:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 531:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             #if (emFile_WP3_EN)
+ 532:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 533:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 /* Based on physical switch state */
+ 534:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 wpState = (int)emFile_SPI3_WP_Read();
+ 535:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 536:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             #else
+ 537:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 538:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****                 wpState = 0;
+ 539:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 540:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             #endif /* (emFile_WP3_EN) */
+ 541:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 542:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             break;
+ 543:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 544:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     #endif /* (emFile_NUMBER_SD_CARDS == 4u) */
+ 545:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 546:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     default:
+ 547:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 548:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #if (emFile_WP0_EN)
+ 549:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 550:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****               /* Based on physical switch state */
+ 551:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             wpState = (int)emFile_SPI0_WP_Read();
+ 552:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 553:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #else
+ 554:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 555:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             wpState = 0;
+ 556:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 557:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #endif /* (emFile_WP0_EN) */
+ 558:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         
+ 559:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         break;
+ 560:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     }
+ 561:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 562:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     return(wpState);
+ 563:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** }
+ 235              		.loc 1 563 0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 15
+
+
+ 236 0000 0020     		movs	r0, #0
+ 237              	.LVL32:
+ 238 0002 7047     		bx	lr
+ 239              		.cfi_endproc
+ 240              	.LFE114:
+ 241              		.size	FS_MMC_HW_X_IsWriteProtected, .-FS_MMC_HW_X_IsWriteProtected
+ 242              		.section	.text.FS_MMC_HW_X_SetMaxSpeed,"ax",%progbits
+ 243              		.align	2
+ 244              		.global	FS_MMC_HW_X_SetMaxSpeed
+ 245              		.thumb
+ 246              		.thumb_func
+ 247              		.type	FS_MMC_HW_X_SetMaxSpeed, %function
+ 248              	FS_MMC_HW_X_SetMaxSpeed:
+ 249              	.LFB115:
+ 564:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 565:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 566:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** /*******************************************************************************
+ 567:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_SetMaxSpeed
+ 568:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** ********************************************************************************
+ 569:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 570:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Summary:
+ 571:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  FS low level function. Sets the SPI interface to a maximum frequency.
+ 572:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  Make sure that you set the frequency lower or equal but never higher
+ 573:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  than the given value. Recommended startup frequency is 100kHz - 400kHz.
+ 574:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 575:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Parameters:
+ 576:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  Unit             - Device Index;
+ 577:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  MaxFreq          - SPI clock frequency in kHz.
+ 578:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 579:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Return:
+ 580:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  max. frequency   - the maximum frequency set in kHz;
+ 581:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  0                - the frequency could not be set.
+ 582:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 583:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Reentrant:
+ 584:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  No
+ 585:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 586:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *******************************************************************************/
+ 587:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** U16 FS_MMC_HW_X_SetMaxSpeed(U8 Unit, U16 MaxFreq)
+ 588:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** {
+ 250              		.loc 1 588 0
+ 251              		.cfi_startproc
+ 252              		@ args = 0, pretend = 0, frame = 0
+ 253              		@ frame_needed = 0, uses_anonymous_args = 0
+ 254              	.LVL33:
+ 255 0000 38B5     		push	{r3, r4, r5, lr}
+ 256              		.cfi_def_cfa_offset 16
+ 257              		.cfi_offset 3, -16
+ 258              		.cfi_offset 4, -12
+ 259              		.cfi_offset 5, -8
+ 260              		.cfi_offset 14, -4
+ 589:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     U16 freq;
+ 590:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     U32 divResult;
+ 591:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 592:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     if(MaxFreq < emFile_STARTUP_FREQ)
+ 261              		.loc 1 592 0
+ 262 0002 B1F5C87F 		cmp	r1, #400
+ 263 0006 04D3     		bcc	.L35
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 16
+
+
+ 264 0008 0D46     		mov	r5, r1
+ 593:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     {
+ 594:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         MaxFreq = emFile_STARTUP_FREQ;
+ 595:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     }
+ 596:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     else if(MaxFreq > emFile_MAX_SPI_FREQ)
+ 265              		.loc 1 596 0
+ 266 000a B1F57A6F 		cmp	r1, #4000
+ 267 000e 03D8     		bhi	.L36
+ 268 0010 04E0     		b	.L31
+ 269              	.L35:
+ 594:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     }
+ 270              		.loc 1 594 0
+ 271 0012 4FF4C875 		mov	r5, #400
+ 272 0016 01E0     		b	.L31
+ 273              	.L36:
+ 597:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     {
+ 598:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         MaxFreq = emFile_MAX_SPI_FREQ;
+ 274              		.loc 1 598 0
+ 275 0018 4FF47A65 		mov	r5, #4000
+ 276              	.L31:
+ 277              	.LVL34:
+ 599:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     }
+ 600:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     else
+ 601:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     {
+ 602:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         /* Do nothing */
+ 603:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     }
+ 604:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 605:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     freq = MaxFreq << 1u;
+ 278              		.loc 1 605 0
+ 279 001c 6C00     		lsls	r4, r5, #1
+ 280 001e A4B2     		uxth	r4, r4
+ 281              	.LVL35:
+ 606:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 607:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     divResult = ((U32) BCLK__BUS_CLK__KHZ)/((U32) freq);
+ 282              		.loc 1 607 0
+ 283 0020 0C4B     		ldr	r3, .L39
+ 284 0022 B3FBF4F4 		udiv	r4, r3, r4
+ 285              	.LVL36:
+ 608:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 609:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     switch(Unit)
+ 286              		.loc 1 609 0
+ 287 0026 48B9     		cbnz	r0, .L37
+ 610:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     {
+ 611:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         case 0u:
+ 612:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_1_Stop();
+ 288              		.loc 1 612 0
+ 289 0028 FFF7FEFF 		bl	emFile_Clock_1_Stop
+ 290              	.LVL37:
+ 613:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_1_SetDividerValue((U16)divResult);    /* update the frequency */
+ 291              		.loc 1 613 0
+ 292 002c 601E     		subs	r0, r4, #1
+ 293 002e 0121     		movs	r1, #1
+ 294 0030 80B2     		uxth	r0, r0
+ 295 0032 FFF7FEFF 		bl	emFile_Clock_1_SetDividerRegister
+ 296              	.LVL38:
+ 614:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_1_Start();
+ 297              		.loc 1 614 0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 17
+
+
+ 298 0036 FFF7FEFF 		bl	emFile_Clock_1_Start
+ 299              	.LVL39:
+ 615:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             break;
+ 300              		.loc 1 615 0
+ 301 003a 08E0     		b	.L34
+ 302              	.LVL40:
+ 303              	.L37:
+ 616:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 617:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #if (emFile_NUMBER_SD_CARDS >= 2u)
+ 618:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 619:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         case 1u:
+ 620:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 621:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_2_Stop();
+ 622:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_2_SetDividerValue((U16)divResult);    /* update the frequency */
+ 623:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_2_Start();
+ 624:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             break;
+ 625:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 626:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #endif /* (emFile_NUMBER_SD_CARDS >= 2u) */
+ 627:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 628:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #if (emFile_NUMBER_SD_CARDS >= 3u)
+ 629:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 630:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         case 2u:
+ 631:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 632:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_3_Stop();
+ 633:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_3_SetDividerValue((U16)divResult);    /* update the frequency */
+ 634:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_3_Start();
+ 635:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             break;
+ 636:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 637:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #endif /* (emFile_NUMBER_SD_CARDS >= 3u) */
+ 638:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 639:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #if (emFile_NUMBER_SD_CARDS == 4u)
+ 640:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 641:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         case 3u:
+ 642:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 643:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_4_Stop();
+ 644:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_4_SetDividerValue((U16)divResult);    /* update the frequency */
+ 645:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_4_Start();
+ 646:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             break;
+ 647:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 648:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         #endif /* (emFile_NUMBER_SD_CARDS == 4u) */
+ 649:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 650:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         default:
+ 651:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_1_Stop();
+ 304              		.loc 1 651 0
+ 305 003c FFF7FEFF 		bl	emFile_Clock_1_Stop
+ 306              	.LVL41:
+ 652:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_1_SetDividerValue((U16)divResult);    /* update the frequency */
+ 307              		.loc 1 652 0
+ 308 0040 601E     		subs	r0, r4, #1
+ 309 0042 0121     		movs	r1, #1
+ 310 0044 80B2     		uxth	r0, r0
+ 311 0046 FFF7FEFF 		bl	emFile_Clock_1_SetDividerRegister
+ 312              	.LVL42:
+ 653:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_Clock_1_Start();
+ 313              		.loc 1 653 0
+ 314 004a FFF7FEFF 		bl	emFile_Clock_1_Start
+ 315              	.LVL43:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 18
+
+
+ 316              	.L34:
+ 654:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             break;
+ 655:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     }
+ 656:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 657:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     return (MaxFreq);
+ 658:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 659:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** }
+ 317              		.loc 1 659 0
+ 318 004e 2846     		mov	r0, r5
+ 319 0050 38BD     		pop	{r3, r4, r5, pc}
+ 320              	.LVL44:
+ 321              	.L40:
+ 322 0052 00BF     		.align	2
+ 323              	.L39:
+ 324 0054 40190100 		.word	72000
+ 325              		.cfi_endproc
+ 326              	.LFE115:
+ 327              		.size	FS_MMC_HW_X_SetMaxSpeed, .-FS_MMC_HW_X_SetMaxSpeed
+ 328              		.section	.text.FS_MMC_HW_X_SetVoltage,"ax",%progbits
+ 329              		.align	2
+ 330              		.global	FS_MMC_HW_X_SetVoltage
+ 331              		.thumb
+ 332              		.thumb_func
+ 333              		.type	FS_MMC_HW_X_SetVoltage, %function
+ 334              	FS_MMC_HW_X_SetVoltage:
+ 335              	.LFB116:
+ 660:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 661:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 662:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** /*******************************************************************************
+ 663:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_SetVoltage
+ 664:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** ********************************************************************************
+ 665:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 666:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Summary:
+ 667:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  FS low level function. Be sure that your card slot si within the given
+ 668:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  voltage range. Return 1 if your slot can support the required voltage,
+ 669:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  and if not, return 0.
+ 670:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 671:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Parameters:
+ 672:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  Unit             - Device Index;
+ 673:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  Vmin             - Minimum supply voltage in mV;
+ 674:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  Vmin             - Maximum supply voltage in mV.
+ 675:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 676:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Return:
+ 677:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  1                - the card slot supports the voltage range;
+ 678:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  0                - the card slot does not support the voltage range.
+ 679:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 680:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Reentrant:
+ 681:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  No
+ 682:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 683:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *******************************************************************************/
+ 684:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** int FS_MMC_HW_X_SetVoltage(U8 Unit, U16 Vmin, U16 Vmax)
+ 685:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** {
+ 336              		.loc 1 685 0
+ 337              		.cfi_startproc
+ 338              		@ args = 0, pretend = 0, frame = 0
+ 339              		@ frame_needed = 0, uses_anonymous_args = 0
+ 340              		@ link register save eliminated.
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 19
+
+
+ 341              	.LVL45:
+ 686:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     int result;
+ 687:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 688:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     switch(Unit)
+ 342              		.loc 1 688 0
+ 343 0000 0328     		cmp	r0, #3
+ 344 0002 09D8     		bhi	.L42
+ 689:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     {
+ 690:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     case 0u:
+ 691:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 692:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     case 1u:
+ 693:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 694:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     case 2u:
+ 695:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 696:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     case 3u:
+ 697:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 698:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         if((Vmin <= emFile_MMC_DEFAULT_SUPPLY_VOLTAGE) &&
+ 345              		.loc 1 698 0
+ 346 0004 40F6E443 		movw	r3, #3300
+ 347 0008 9942     		cmp	r1, r3
+ 348 000a 0FD8     		bhi	.L45
+ 349              		.loc 1 698 0 is_stmt 0 discriminator 1
+ 350 000c 40F6E343 		movw	r3, #3299
+ 351 0010 9A42     		cmp	r2, r3
+ 352 0012 0DD8     		bhi	.L46
+ 699:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             (emFile_MMC_DEFAULT_SUPPLY_VOLTAGE <= Vmax))
+ 700:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         {
+ 701:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             result = emFile_RET_SUCCCESS;
+ 702:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         }
+ 703:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         else
+ 704:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         {
+ 705:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             result = emFile_RET_FAIL;
+ 353              		.loc 1 705 0 is_stmt 1
+ 354 0014 0020     		movs	r0, #0
+ 355              	.LVL46:
+ 356 0016 7047     		bx	lr
+ 357              	.LVL47:
+ 358              	.L42:
+ 706:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         }
+ 707:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 708:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         break;
+ 709:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 710:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     default:
+ 711:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 712:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         if((Vmin <= emFile_MMC_DEFAULT_SUPPLY_VOLTAGE) &&
+ 359              		.loc 1 712 0
+ 360 0018 40F6E443 		movw	r3, #3300
+ 361 001c 9942     		cmp	r1, r3
+ 362 001e 09D8     		bhi	.L47
+ 363              		.loc 1 712 0 is_stmt 0 discriminator 1
+ 364 0020 40F6E343 		movw	r3, #3299
+ 365 0024 9A42     		cmp	r2, r3
+ 366 0026 07D8     		bhi	.L48
+ 713:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             (emFile_MMC_DEFAULT_SUPPLY_VOLTAGE <= Vmax))
+ 714:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         {
+ 715:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             result = emFile_RET_SUCCCESS;
+ 716:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         }
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 20
+
+
+ 717:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         else
+ 718:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         {
+ 719:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             result = emFile_RET_FAIL;
+ 367              		.loc 1 719 0 is_stmt 1
+ 368 0028 0020     		movs	r0, #0
+ 369              	.LVL48:
+ 370 002a 7047     		bx	lr
+ 371              	.LVL49:
+ 372              	.L45:
+ 705:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         }
+ 373              		.loc 1 705 0
+ 374 002c 0020     		movs	r0, #0
+ 375              	.LVL50:
+ 376 002e 7047     		bx	lr
+ 377              	.LVL51:
+ 378              	.L46:
+ 701:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         }
+ 379              		.loc 1 701 0
+ 380 0030 0120     		movs	r0, #1
+ 381              	.LVL52:
+ 382 0032 7047     		bx	lr
+ 383              	.LVL53:
+ 384              	.L47:
+ 385              		.loc 1 719 0
+ 386 0034 0020     		movs	r0, #0
+ 387              	.LVL54:
+ 388 0036 7047     		bx	lr
+ 389              	.LVL55:
+ 390              	.L48:
+ 715:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         }
+ 391              		.loc 1 715 0
+ 392 0038 0120     		movs	r0, #1
+ 393              	.LVL56:
+ 720:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         }
+ 721:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         
+ 722:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         break;
+ 723:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     }
+ 724:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 725:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     return(result);
+ 726:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** }
+ 394              		.loc 1 726 0
+ 395 003a 7047     		bx	lr
+ 396              		.cfi_endproc
+ 397              	.LFE116:
+ 398              		.size	FS_MMC_HW_X_SetVoltage, .-FS_MMC_HW_X_SetVoltage
+ 399              		.section	.text.FS_MMC_HW_X_IsPresent,"ax",%progbits
+ 400              		.align	2
+ 401              		.global	FS_MMC_HW_X_IsPresent
+ 402              		.thumb
+ 403              		.thumb_func
+ 404              		.type	FS_MMC_HW_X_IsPresent, %function
+ 405              	FS_MMC_HW_X_IsPresent:
+ 406              	.LFB117:
+ 727:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 728:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 729:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** /*******************************************************************************
+ 730:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_IsPresent
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 21
+
+
+ 731:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** ********************************************************************************
+ 732:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 733:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Summary:
+ 734:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  Returns the state of the media. If you do not know the state, return
+ 735:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  FS_MEDIA_STATE_UNKNOWN and the higher layer will try to figure out if
+ 736:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  a media is present.
+ 737:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 738:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Parameters:
+ 739:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  Unit                      - Device Index.
+ 740:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 741:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Return:
+ 742:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  FS_MEDIA_STATE_UNKNOWN    - Media state is unknown;
+ 743:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  FS_MEDIA_NOT_PRESENT      - Media is not present;
+ 744:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  FS_MEDIA_IS_PRESENT       - Media is present.
+ 745:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 746:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Reentrant:
+ 747:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  No
+ 748:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 749:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *******************************************************************************/
+ 750:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** int FS_MMC_HW_X_IsPresent(U8 Unit)
+ 751:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** {
+ 407              		.loc 1 751 0
+ 408              		.cfi_startproc
+ 409              		@ args = 0, pretend = 0, frame = 0
+ 410              		@ frame_needed = 0, uses_anonymous_args = 0
+ 411              	.LVL57:
+ 412 0000 08B5     		push	{r3, lr}
+ 413              		.cfi_def_cfa_offset 8
+ 414              		.cfi_offset 3, -8
+ 415              		.cfi_offset 14, -4
+ 752:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****      int result;
+ 753:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 754:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     emFile_Init(Unit);
+ 416              		.loc 1 754 0
+ 417 0002 FFF7FEFF 		bl	emFile_Init
+ 418              	.LVL58:
+ 755:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 756:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     switch(Unit)
+ 757:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     {
+ 758:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     case 0u:
+ 759:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 760:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     case 1u:
+ 761:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 762:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     case 2u:
+ 763:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 764:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     case 3u:
+ 765:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 766:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         result = FS_MEDIA_STATE_UNKNOWN;
+ 767:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         break;
+ 768:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 769:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     default:
+ 770:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 771:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         result = FS_MEDIA_STATE_UNKNOWN;
+ 772:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         break;
+ 773:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     }
+ 774:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 775:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     return(result);
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 22
+
+
+ 776:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** }
+ 419              		.loc 1 776 0
+ 420 0006 0220     		movs	r0, #2
+ 421 0008 08BD     		pop	{r3, pc}
+ 422              		.cfi_endproc
+ 423              	.LFE117:
+ 424              		.size	FS_MMC_HW_X_IsPresent, .-FS_MMC_HW_X_IsPresent
+ 425 000a 00BF     		.section	.text.FS_MMC_HW_X_Read,"ax",%progbits
+ 426              		.align	2
+ 427              		.global	FS_MMC_HW_X_Read
+ 428              		.thumb
+ 429              		.thumb_func
+ 430              		.type	FS_MMC_HW_X_Read, %function
+ 431              	FS_MMC_HW_X_Read:
+ 432              	.LFB118:
+ 777:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 778:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 779:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** /*******************************************************************************
+ 780:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_Read
+ 781:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** ********************************************************************************
+ 782:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 783:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Summary:
+ 784:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  FS low level function. Reads a specified number of bytes from MMC card to 
+ 785:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  buffer.
+ 786:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 787:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Parameters:
+ 788:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *    Unit             - Device Index;
+ 789:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *    pData            - Pointer to a data buffer;
+ 790:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *    NumBytes         - Number of bytes.
+ 791:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 792:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Return:
+ 793:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  None
+ 794:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 795:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Reentrant:
+ 796:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  No
+ 797:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 798:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *******************************************************************************/
+ 799:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** #if (CY_PSOC5)
+ 800:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     void  FS_MMC_HW_X_Read (U8 Unit, U8 * pData, int NumBytes)
+ 801:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     {
+ 433              		.loc 1 801 0
+ 434              		.cfi_startproc
+ 435              		@ args = 0, pretend = 0, frame = 0
+ 436              		@ frame_needed = 0, uses_anonymous_args = 0
+ 437              	.LVL59:
+ 438 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 439              		.cfi_def_cfa_offset 24
+ 440              		.cfi_offset 3, -24
+ 441              		.cfi_offset 4, -20
+ 442              		.cfi_offset 5, -16
+ 443              		.cfi_offset 6, -12
+ 444              		.cfi_offset 7, -8
+ 445              		.cfi_offset 14, -4
+ 446 0002 0746     		mov	r7, r0
+ 447 0004 0D46     		mov	r5, r1
+ 448 0006 1446     		mov	r4, r2
+ 449              	.LVL60:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 23
+
+
+ 450              	.L52:
+ 802:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         do
+ 803:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         {
+ 804:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             *pData++ = emFile_ReadWriteSPI(Unit, 0xff);
+ 451              		.loc 1 804 0 discriminator 1
+ 452 0008 6E1C     		adds	r6, r5, #1
+ 453              	.LVL61:
+ 454 000a FF21     		movs	r1, #255
+ 455 000c 3846     		mov	r0, r7
+ 456 000e FFF7FEFF 		bl	emFile_ReadWriteSPI
+ 457              	.LVL62:
+ 458 0012 2870     		strb	r0, [r5]
+ 459              	.LVL63:
+ 460 0014 3546     		mov	r5, r6
+ 805:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         } while (--NumBytes);
+ 461              		.loc 1 805 0 discriminator 1
+ 462 0016 013C     		subs	r4, r4, #1
+ 463              	.LVL64:
+ 464 0018 F6D1     		bne	.L52
+ 806:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     }
+ 465              		.loc 1 806 0
+ 466 001a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 467              		.cfi_endproc
+ 468              	.LFE118:
+ 469              		.size	FS_MMC_HW_X_Read, .-FS_MMC_HW_X_Read
+ 470              		.section	.text.FS_MMC_HW_X_Write,"ax",%progbits
+ 471              		.align	2
+ 472              		.global	FS_MMC_HW_X_Write
+ 473              		.thumb
+ 474              		.thumb_func
+ 475              		.type	FS_MMC_HW_X_Write, %function
+ 476              	FS_MMC_HW_X_Write:
+ 477              	.LFB119:
+ 807:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** #else
+ 808:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     void  FS_MMC_HW_X_Read (U8 Unit, U8 xdata * pData, int NumBytes)
+ 809:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     {
+ 810:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         do
+ 811:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         {
+ 812:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             *pData++ = emFile_ReadWriteSPI(Unit, 0xff);
+ 813:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         } while (--NumBytes);
+ 814:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     }
+ 815:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** #endif /* (CY_PSOC5) */
+ 816:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 817:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** 
+ 818:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** /*******************************************************************************
+ 819:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_Write
+ 820:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** ********************************************************************************
+ 821:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 822:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Summary:
+ 823:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  FS low level function. Writes a specified number of bytes from
+ 824:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  data buffer to the MMC/SD card.
+ 825:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 826:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Parameters:
+ 827:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *    Unit             - Device Index;
+ 828:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *    pData            - Pointer to a data buffer;
+ 829:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *    NumBytes         - Number of bytes.
+ 830:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 24
+
+
+ 831:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Return:
+ 832:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  None
+ 833:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 834:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** * Reentrant:
+ 835:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *  No
+ 836:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *
+ 837:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** *******************************************************************************/
+ 838:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c **** #if (CY_PSOC5)
+ 839:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     void  FS_MMC_HW_X_Write(U8 Unit, const U8 * pData, int NumBytes) 
+ 840:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     {
+ 478              		.loc 1 840 0
+ 479              		.cfi_startproc
+ 480              		@ args = 0, pretend = 0, frame = 0
+ 481              		@ frame_needed = 0, uses_anonymous_args = 0
+ 482              	.LVL65:
+ 483 0000 70B5     		push	{r4, r5, r6, lr}
+ 484              		.cfi_def_cfa_offset 16
+ 485              		.cfi_offset 4, -16
+ 486              		.cfi_offset 5, -12
+ 487              		.cfi_offset 6, -8
+ 488              		.cfi_offset 14, -4
+ 489 0002 0646     		mov	r6, r0
+ 490 0004 1446     		mov	r4, r2
+ 491              	.LVL66:
+ 492              	.L55:
+ 841:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         do
+ 842:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         {
+ 843:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****             emFile_ReadWriteSPI(Unit, *pData++);
+ 493              		.loc 1 843 0 discriminator 1
+ 494 0006 4D1C     		adds	r5, r1, #1
+ 495              	.LVL67:
+ 496 0008 0978     		ldrb	r1, [r1]	@ zero_extendqisi2
+ 497 000a 3046     		mov	r0, r6
+ 498 000c FFF7FEFF 		bl	emFile_ReadWriteSPI
+ 499              	.LVL68:
+ 500 0010 2946     		mov	r1, r5
+ 844:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****         } while (--NumBytes);
+ 501              		.loc 1 844 0 discriminator 1
+ 502 0012 013C     		subs	r4, r4, #1
+ 503              	.LVL69:
+ 504 0014 F7D1     		bne	.L55
+ 845:Generated_Source\PSoC5/emFile_MMC_HW_SPI.c ****     }
+ 505              		.loc 1 845 0
+ 506 0016 70BD     		pop	{r4, r5, r6, pc}
+ 507              		.cfi_endproc
+ 508              	.LFE119:
+ 509              		.size	FS_MMC_HW_X_Write, .-FS_MMC_HW_X_Write
+ 510              		.bss
+ 511              		.set	.LANCHOR0,. + 0
+ 512              		.type	emFile_isInited0, %object
+ 513              		.size	emFile_isInited0, 1
+ 514              	emFile_isInited0:
+ 515 0000 00       		.space	1
+ 516              		.text
+ 517              	.Letext0:
+ 518              		.file 2 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
+ 519              		.file 3 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 25
+
+
+ 520              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 521              		.file 5 "Generated_Source\\PSoC5\\ErikaOS_1_common_ee_types.inc"
+ 522              		.file 6 "Generated_Source\\PSoC5\\ErikaOS_1_cortex_mx_ee_cpu.inc"
+ 523              		.file 7 "Generated_Source\\PSoC5\\ErikaOS_1_ee_oo_intfunc.inc"
+ 524              		.file 8 "Generated_Source\\PSoC5\\ErikaOS_1_cortex_mx_ee_context.inc"
+ 525              		.file 9 "Generated_Source\\PSoC5\\ErikaOS_1_common_ee_primitives.inc"
+ 526              		.file 10 "Generated_Source\\PSoC5/core_cm3.h"
+ 527              		.file 11 "Generated_Source\\PSoC5\\emFile_Clock_1.h"
+ 528              		.file 12 "Generated_Source\\PSoC5\\emFile_SPI0.h"
+ 529              		.file 13 "Generated_Source\\PSoC5\\emFile_SPI0_CS.h"
+ 530              		.section	.debug_info,"",%progbits
+ 531              	.Ldebug_info0:
+ 532 0000 6D050000 		.4byte	0x56d
+ 533 0004 0400     		.2byte	0x4
+ 534 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 535 000a 04       		.byte	0x4
+ 536 000b 01       		.uleb128 0x1
+ 537 000c 13010000 		.4byte	.LASF57
+ 538 0010 0C       		.byte	0xc
+ 539 0011 24020000 		.4byte	.LASF58
+ 540 0015 4E000000 		.4byte	.LASF59
+ 541 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 542 001d 00000000 		.4byte	0
+ 543 0021 00000000 		.4byte	.Ldebug_line0
+ 544 0025 02       		.uleb128 0x2
+ 545 0026 04       		.byte	0x4
+ 546 0027 07       		.byte	0x7
+ 547 0028 B1020000 		.4byte	.LASF0
+ 548 002c 02       		.uleb128 0x2
+ 549 002d 02       		.byte	0x2
+ 550 002e 07       		.byte	0x7
+ 551 002f 8F000000 		.4byte	.LASF1
+ 552 0033 02       		.uleb128 0x2
+ 553 0034 04       		.byte	0x4
+ 554 0035 07       		.byte	0x7
+ 555 0036 C3010000 		.4byte	.LASF2
+ 556 003a 03       		.uleb128 0x3
+ 557 003b 04       		.byte	0x4
+ 558 003c 05       		.byte	0x5
+ 559 003d 696E7400 		.ascii	"int\000"
+ 560 0041 02       		.uleb128 0x2
+ 561 0042 01       		.byte	0x1
+ 562 0043 08       		.byte	0x8
+ 563 0044 05010000 		.4byte	.LASF3
+ 564 0048 02       		.uleb128 0x2
+ 565 0049 04       		.byte	0x4
+ 566 004a 07       		.byte	0x7
+ 567 004b 3A030000 		.4byte	.LASF4
+ 568 004f 02       		.uleb128 0x2
+ 569 0050 01       		.byte	0x1
+ 570 0051 08       		.byte	0x8
+ 571 0052 E7020000 		.4byte	.LASF5
+ 572 0056 02       		.uleb128 0x2
+ 573 0057 02       		.byte	0x2
+ 574 0058 05       		.byte	0x5
+ 575 0059 7C030000 		.4byte	.LASF6
+ 576 005d 02       		.uleb128 0x2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 26
+
+
+ 577 005e 04       		.byte	0x4
+ 578 005f 05       		.byte	0x5
+ 579 0060 AB030000 		.4byte	.LASF7
+ 580 0064 04       		.uleb128 0x4
+ 581 0065 04       		.byte	0x4
+ 582 0066 41000000 		.4byte	0x41
+ 583 006a 02       		.uleb128 0x2
+ 584 006b 01       		.byte	0x1
+ 585 006c 06       		.byte	0x6
+ 586 006d E4030000 		.4byte	.LASF8
+ 587 0071 05       		.uleb128 0x5
+ 588 0072 85000000 		.4byte	.LASF11
+ 589 0076 02       		.byte	0x2
+ 590 0077 3F       		.byte	0x3f
+ 591 0078 5D000000 		.4byte	0x5d
+ 592 007c 02       		.uleb128 0x2
+ 593 007d 08       		.byte	0x8
+ 594 007e 05       		.byte	0x5
+ 595 007f 43030000 		.4byte	.LASF9
+ 596 0083 02       		.uleb128 0x2
+ 597 0084 08       		.byte	0x8
+ 598 0085 07       		.byte	0x7
+ 599 0086 E5000000 		.4byte	.LASF10
+ 600 008a 05       		.uleb128 0x5
+ 601 008b 32030000 		.4byte	.LASF12
+ 602 008f 03       		.byte	0x3
+ 603 0090 2C       		.byte	0x2c
+ 604 0091 71000000 		.4byte	0x71
+ 605 0095 06       		.uleb128 0x6
+ 606 0096 9A030000 		.4byte	.LASF13
+ 607 009a 04       		.byte	0x4
+ 608 009b E401     		.2byte	0x1e4
+ 609 009d 41000000 		.4byte	0x41
+ 610 00a1 02       		.uleb128 0x2
+ 611 00a2 04       		.byte	0x4
+ 612 00a3 04       		.byte	0x4
+ 613 00a4 DF000000 		.4byte	.LASF14
+ 614 00a8 02       		.uleb128 0x2
+ 615 00a9 08       		.byte	0x8
+ 616 00aa 04       		.byte	0x4
+ 617 00ab 4F020000 		.4byte	.LASF15
+ 618 00af 02       		.uleb128 0x2
+ 619 00b0 08       		.byte	0x8
+ 620 00b1 04       		.byte	0x4
+ 621 00b2 D8030000 		.4byte	.LASF16
+ 622 00b6 05       		.uleb128 0x5
+ 623 00b7 FC000000 		.4byte	.LASF17
+ 624 00bb 05       		.byte	0x5
+ 625 00bc 53       		.byte	0x53
+ 626 00bd 3A000000 		.4byte	0x3a
+ 627 00c1 05       		.uleb128 0x5
+ 628 00c2 A1010000 		.4byte	.LASF18
+ 629 00c6 05       		.byte	0x5
+ 630 00c7 54       		.byte	0x54
+ 631 00c8 25000000 		.4byte	0x25
+ 632 00cc 05       		.uleb128 0x5
+ 633 00cd 5F030000 		.4byte	.LASF19
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 27
+
+
+ 634 00d1 06       		.byte	0x6
+ 635 00d2 4D       		.byte	0x4d
+ 636 00d3 C1000000 		.4byte	0xc1
+ 637 00d7 05       		.uleb128 0x5
+ 638 00d8 BE020000 		.4byte	.LASF20
+ 639 00dc 06       		.byte	0x6
+ 640 00dd 4F       		.byte	0x4f
+ 641 00de C1000000 		.4byte	0xc1
+ 642 00e2 05       		.uleb128 0x5
+ 643 00e3 B6000000 		.4byte	.LASF21
+ 644 00e7 06       		.byte	0x6
+ 645 00e8 78       		.byte	0x78
+ 646 00e9 B6000000 		.4byte	0xb6
+ 647 00ed 07       		.uleb128 0x7
+ 648 00ee B4030000 		.4byte	.LASF60
+ 649 00f2 01       		.byte	0x1
+ 650 00f3 4B       		.byte	0x4b
+ 651 00f4 00000000 		.4byte	.LFB110
+ 652 00f8 4C000000 		.4byte	.LFE110-.LFB110
+ 653 00fc 01       		.uleb128 0x1
+ 654 00fd 9C       		.byte	0x9c
+ 655 00fe 7C010000 		.4byte	0x17c
+ 656 0102 08       		.uleb128 0x8
+ 657 0103 A6030000 		.4byte	.LASF22
+ 658 0107 01       		.byte	0x1
+ 659 0108 4B       		.byte	0x4b
+ 660 0109 41000000 		.4byte	0x41
+ 661 010d 00000000 		.4byte	.LLST0
+ 662 0111 09       		.uleb128 0x9
+ 663 0112 14000000 		.4byte	.LVL1
+ 664 0116 18050000 		.4byte	0x518
+ 665 011a 0A       		.uleb128 0xa
+ 666 011b 1C000000 		.4byte	.LVL2
+ 667 011f 23050000 		.4byte	0x523
+ 668 0123 34010000 		.4byte	0x134
+ 669 0127 0B       		.uleb128 0xb
+ 670 0128 01       		.uleb128 0x1
+ 671 0129 50       		.byte	0x50
+ 672 012a 02       		.uleb128 0x2
+ 673 012b 08       		.byte	0x8
+ 674 012c B3       		.byte	0xb3
+ 675 012d 0B       		.uleb128 0xb
+ 676 012e 01       		.uleb128 0x1
+ 677 012f 51       		.byte	0x51
+ 678 0130 02       		.uleb128 0x2
+ 679 0131 74       		.byte	0x74
+ 680 0132 00       		.sleb128 0
+ 681 0133 00       		.byte	0
+ 682 0134 09       		.uleb128 0x9
+ 683 0135 20000000 		.4byte	.LVL3
+ 684 0139 2E050000 		.4byte	0x52e
+ 685 013d 09       		.uleb128 0x9
+ 686 013e 24000000 		.4byte	.LVL4
+ 687 0142 39050000 		.4byte	0x539
+ 688 0146 09       		.uleb128 0x9
+ 689 0147 36000000 		.4byte	.LVL6
+ 690 014b 18050000 		.4byte	0x518
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 28
+
+
+ 691 014f 0A       		.uleb128 0xa
+ 692 0150 3E000000 		.4byte	.LVL7
+ 693 0154 23050000 		.4byte	0x523
+ 694 0158 69010000 		.4byte	0x169
+ 695 015c 0B       		.uleb128 0xb
+ 696 015d 01       		.uleb128 0x1
+ 697 015e 50       		.byte	0x50
+ 698 015f 02       		.uleb128 0x2
+ 699 0160 08       		.byte	0x8
+ 700 0161 B3       		.byte	0xb3
+ 701 0162 0B       		.uleb128 0xb
+ 702 0163 01       		.uleb128 0x1
+ 703 0164 51       		.byte	0x51
+ 704 0165 02       		.uleb128 0x2
+ 705 0166 74       		.byte	0x74
+ 706 0167 00       		.sleb128 0
+ 707 0168 00       		.byte	0
+ 708 0169 09       		.uleb128 0x9
+ 709 016a 42000000 		.4byte	.LVL8
+ 710 016e 2E050000 		.4byte	0x52e
+ 711 0172 09       		.uleb128 0x9
+ 712 0173 46000000 		.4byte	.LVL9
+ 713 0177 39050000 		.4byte	0x539
+ 714 017b 00       		.byte	0
+ 715 017c 0C       		.uleb128 0xc
+ 716 017d 86030000 		.4byte	.LASF61
+ 717 0181 01       		.byte	0x1
+ 718 0182 E0       		.byte	0xe0
+ 719 0183 41000000 		.4byte	0x41
+ 720 0187 00000000 		.4byte	.LFB111
+ 721 018b 30000000 		.4byte	.LFE111-.LFB111
+ 722 018f 01       		.uleb128 0x1
+ 723 0190 9C       		.byte	0x9c
+ 724 0191 F9010000 		.4byte	0x1f9
+ 725 0195 08       		.uleb128 0x8
+ 726 0196 A6030000 		.4byte	.LASF22
+ 727 019a 01       		.byte	0x1
+ 728 019b E0       		.byte	0xe0
+ 729 019c 41000000 		.4byte	0x41
+ 730 01a0 3A000000 		.4byte	.LLST1
+ 731 01a4 08       		.uleb128 0x8
+ 732 01a5 F0030000 		.4byte	.LASF23
+ 733 01a9 01       		.byte	0x1
+ 734 01aa E0       		.byte	0xe0
+ 735 01ab 41000000 		.4byte	0x41
+ 736 01af 74000000 		.4byte	.LLST2
+ 737 01b3 0D       		.uleb128 0xd
+ 738 01b4 C6020000 		.4byte	.LASF26
+ 739 01b8 01       		.byte	0x1
+ 740 01b9 E2       		.byte	0xe2
+ 741 01ba 41000000 		.4byte	0x41
+ 742 01be AE000000 		.4byte	.LLST3
+ 743 01c2 09       		.uleb128 0x9
+ 744 01c3 0A000000 		.4byte	.LVL12
+ 745 01c7 44050000 		.4byte	0x544
+ 746 01cb 09       		.uleb128 0x9
+ 747 01cc 0E000000 		.4byte	.LVL13
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 29
+
+
+ 748 01d0 4F050000 		.4byte	0x54f
+ 749 01d4 09       		.uleb128 0x9
+ 750 01d5 18000000 		.4byte	.LVL14
+ 751 01d9 5A050000 		.4byte	0x55a
+ 752 01dd 09       		.uleb128 0x9
+ 753 01de 20000000 		.4byte	.LVL17
+ 754 01e2 44050000 		.4byte	0x544
+ 755 01e6 09       		.uleb128 0x9
+ 756 01e7 24000000 		.4byte	.LVL18
+ 757 01eb 4F050000 		.4byte	0x54f
+ 758 01ef 09       		.uleb128 0x9
+ 759 01f0 2E000000 		.4byte	.LVL19
+ 760 01f4 5A050000 		.4byte	0x55a
+ 761 01f8 00       		.byte	0
+ 762 01f9 0E       		.uleb128 0xe
+ 763 01fa 56020000 		.4byte	.LASF24
+ 764 01fe 01       		.byte	0x1
+ 765 01ff 4901     		.2byte	0x149
+ 766 0201 00000000 		.4byte	.LFB112
+ 767 0205 12000000 		.4byte	.LFE112-.LFB112
+ 768 0209 01       		.uleb128 0x1
+ 769 020a 9C       		.byte	0x9c
+ 770 020b 38020000 		.4byte	0x238
+ 771 020f 0F       		.uleb128 0xf
+ 772 0210 A6030000 		.4byte	.LASF22
+ 773 0214 01       		.byte	0x1
+ 774 0215 4901     		.2byte	0x149
+ 775 0217 41000000 		.4byte	0x41
+ 776 021b CC000000 		.4byte	.LLST4
+ 777 021f 09       		.uleb128 0x9
+ 778 0220 08000000 		.4byte	.LVL21
+ 779 0224 65050000 		.4byte	0x565
+ 780 0228 10       		.uleb128 0x10
+ 781 0229 10000000 		.4byte	.LVL24
+ 782 022d 65050000 		.4byte	0x565
+ 783 0231 0B       		.uleb128 0xb
+ 784 0232 01       		.uleb128 0x1
+ 785 0233 50       		.byte	0x50
+ 786 0234 01       		.uleb128 0x1
+ 787 0235 30       		.byte	0x30
+ 788 0236 00       		.byte	0
+ 789 0237 00       		.byte	0
+ 790 0238 0E       		.uleb128 0xe
+ 791 0239 06040000 		.4byte	.LASF25
+ 792 023d 01       		.byte	0x1
+ 793 023e 9001     		.2byte	0x190
+ 794 0240 00000000 		.4byte	.LFB113
+ 795 0244 14000000 		.4byte	.LFE113-.LFB113
+ 796 0248 01       		.uleb128 0x1
+ 797 0249 9C       		.byte	0x9c
+ 798 024a 81020000 		.4byte	0x281
+ 799 024e 0F       		.uleb128 0xf
+ 800 024f A6030000 		.4byte	.LASF22
+ 801 0253 01       		.byte	0x1
+ 802 0254 9001     		.2byte	0x190
+ 803 0256 41000000 		.4byte	0x41
+ 804 025a 06010000 		.4byte	.LLST5
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 30
+
+
+ 805 025e 0A       		.uleb128 0xa
+ 806 025f 0A000000 		.4byte	.LVL27
+ 807 0263 65050000 		.4byte	0x565
+ 808 0267 71020000 		.4byte	0x271
+ 809 026b 0B       		.uleb128 0xb
+ 810 026c 01       		.uleb128 0x1
+ 811 026d 50       		.byte	0x50
+ 812 026e 01       		.uleb128 0x1
+ 813 026f 31       		.byte	0x31
+ 814 0270 00       		.byte	0
+ 815 0271 10       		.uleb128 0x10
+ 816 0272 12000000 		.4byte	.LVL30
+ 817 0276 65050000 		.4byte	0x565
+ 818 027a 0B       		.uleb128 0xb
+ 819 027b 01       		.uleb128 0x1
+ 820 027c 50       		.byte	0x50
+ 821 027d 01       		.uleb128 0x1
+ 822 027e 31       		.byte	0x31
+ 823 027f 00       		.byte	0
+ 824 0280 00       		.byte	0
+ 825 0281 11       		.uleb128 0x11
+ 826 0282 17000000 		.4byte	.LASF28
+ 827 0286 01       		.byte	0x1
+ 828 0287 D401     		.2byte	0x1d4
+ 829 0289 3A000000 		.4byte	0x3a
+ 830 028d 00000000 		.4byte	.LFB114
+ 831 0291 04000000 		.4byte	.LFE114-.LFB114
+ 832 0295 01       		.uleb128 0x1
+ 833 0296 9C       		.byte	0x9c
+ 834 0297 B9020000 		.4byte	0x2b9
+ 835 029b 0F       		.uleb128 0xf
+ 836 029c A6030000 		.4byte	.LASF22
+ 837 02a0 01       		.byte	0x1
+ 838 02a1 D401     		.2byte	0x1d4
+ 839 02a3 41000000 		.4byte	0x41
+ 840 02a7 40010000 		.4byte	.LLST6
+ 841 02ab 12       		.uleb128 0x12
+ 842 02ac 34000000 		.4byte	.LASF27
+ 843 02b0 01       		.byte	0x1
+ 844 02b1 D601     		.2byte	0x1d6
+ 845 02b3 3A000000 		.4byte	0x3a
+ 846 02b7 00       		.byte	0
+ 847 02b8 00       		.byte	0
+ 848 02b9 11       		.uleb128 0x11
+ 849 02ba AB010000 		.4byte	.LASF29
+ 850 02be 01       		.byte	0x1
+ 851 02bf 4B02     		.2byte	0x24b
+ 852 02c1 2C000000 		.4byte	0x2c
+ 853 02c5 00000000 		.4byte	.LFB115
+ 854 02c9 58000000 		.4byte	.LFE115-.LFB115
+ 855 02cd 01       		.uleb128 0x1
+ 856 02ce 9C       		.byte	0x9c
+ 857 02cf 6A030000 		.4byte	0x36a
+ 858 02d3 0F       		.uleb128 0xf
+ 859 02d4 A6030000 		.4byte	.LASF22
+ 860 02d8 01       		.byte	0x1
+ 861 02d9 4B02     		.2byte	0x24b
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 31
+
+
+ 862 02db 41000000 		.4byte	0x41
+ 863 02df 61010000 		.4byte	.LLST7
+ 864 02e3 0F       		.uleb128 0xf
+ 865 02e4 7A020000 		.4byte	.LASF30
+ 866 02e8 01       		.byte	0x1
+ 867 02e9 4B02     		.2byte	0x24b
+ 868 02eb 2C000000 		.4byte	0x2c
+ 869 02ef 9B010000 		.4byte	.LLST8
+ 870 02f3 13       		.uleb128 0x13
+ 871 02f4 6B020000 		.4byte	.LASF31
+ 872 02f8 01       		.byte	0x1
+ 873 02f9 4D02     		.2byte	0x24d
+ 874 02fb 2C000000 		.4byte	0x2c
+ 875 02ff B9010000 		.4byte	.LLST9
+ 876 0303 13       		.uleb128 0x13
+ 877 0304 70020000 		.4byte	.LASF32
+ 878 0308 01       		.byte	0x1
+ 879 0309 4E02     		.2byte	0x24e
+ 880 030b 33000000 		.4byte	0x33
+ 881 030f EA010000 		.4byte	.LLST10
+ 882 0313 09       		.uleb128 0x9
+ 883 0314 2C000000 		.4byte	.LVL37
+ 884 0318 18050000 		.4byte	0x518
+ 885 031c 0A       		.uleb128 0xa
+ 886 031d 36000000 		.4byte	.LVL38
+ 887 0321 23050000 		.4byte	0x523
+ 888 0325 35030000 		.4byte	0x335
+ 889 0329 0B       		.uleb128 0xb
+ 890 032a 01       		.uleb128 0x1
+ 891 032b 50       		.byte	0x50
+ 892 032c 02       		.uleb128 0x2
+ 893 032d 74       		.byte	0x74
+ 894 032e 7F       		.sleb128 -1
+ 895 032f 0B       		.uleb128 0xb
+ 896 0330 01       		.uleb128 0x1
+ 897 0331 51       		.byte	0x51
+ 898 0332 01       		.uleb128 0x1
+ 899 0333 31       		.byte	0x31
+ 900 0334 00       		.byte	0
+ 901 0335 09       		.uleb128 0x9
+ 902 0336 3A000000 		.4byte	.LVL39
+ 903 033a 2E050000 		.4byte	0x52e
+ 904 033e 09       		.uleb128 0x9
+ 905 033f 40000000 		.4byte	.LVL41
+ 906 0343 18050000 		.4byte	0x518
+ 907 0347 0A       		.uleb128 0xa
+ 908 0348 4A000000 		.4byte	.LVL42
+ 909 034c 23050000 		.4byte	0x523
+ 910 0350 60030000 		.4byte	0x360
+ 911 0354 0B       		.uleb128 0xb
+ 912 0355 01       		.uleb128 0x1
+ 913 0356 50       		.byte	0x50
+ 914 0357 02       		.uleb128 0x2
+ 915 0358 74       		.byte	0x74
+ 916 0359 7F       		.sleb128 -1
+ 917 035a 0B       		.uleb128 0xb
+ 918 035b 01       		.uleb128 0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 32
+
+
+ 919 035c 51       		.byte	0x51
+ 920 035d 01       		.uleb128 0x1
+ 921 035e 31       		.byte	0x31
+ 922 035f 00       		.byte	0
+ 923 0360 09       		.uleb128 0x9
+ 924 0361 4E000000 		.4byte	.LVL43
+ 925 0365 2E050000 		.4byte	0x52e
+ 926 0369 00       		.byte	0
+ 927 036a 11       		.uleb128 0x11
+ 928 036b 31040000 		.4byte	.LASF33
+ 929 036f 01       		.byte	0x1
+ 930 0370 AC02     		.2byte	0x2ac
+ 931 0372 3A000000 		.4byte	0x3a
+ 932 0376 00000000 		.4byte	.LFB116
+ 933 037a 3C000000 		.4byte	.LFE116-.LFB116
+ 934 037e 01       		.uleb128 0x1
+ 935 037f 9C       		.byte	0x9c
+ 936 0380 BF030000 		.4byte	0x3bf
+ 937 0384 0F       		.uleb128 0xf
+ 938 0385 A6030000 		.4byte	.LASF22
+ 939 0389 01       		.byte	0x1
+ 940 038a AC02     		.2byte	0x2ac
+ 941 038c 41000000 		.4byte	0x41
+ 942 0390 1C020000 		.4byte	.LLST11
+ 943 0394 14       		.uleb128 0x14
+ 944 0395 5A030000 		.4byte	.LASF34
+ 945 0399 01       		.byte	0x1
+ 946 039a AC02     		.2byte	0x2ac
+ 947 039c 2C000000 		.4byte	0x2c
+ 948 03a0 01       		.uleb128 0x1
+ 949 03a1 51       		.byte	0x51
+ 950 03a2 14       		.uleb128 0x14
+ 951 03a3 EC020000 		.4byte	.LASF35
+ 952 03a7 01       		.byte	0x1
+ 953 03a8 AC02     		.2byte	0x2ac
+ 954 03aa 2C000000 		.4byte	0x2c
+ 955 03ae 01       		.uleb128 0x1
+ 956 03af 52       		.byte	0x52
+ 957 03b0 15       		.uleb128 0x15
+ 958 03b1 F1020000 		.4byte	.LASF36
+ 959 03b5 01       		.byte	0x1
+ 960 03b6 AE02     		.2byte	0x2ae
+ 961 03b8 3A000000 		.4byte	0x3a
+ 962 03bc 01       		.uleb128 0x1
+ 963 03bd 50       		.byte	0x50
+ 964 03be 00       		.byte	0
+ 965 03bf 11       		.uleb128 0x11
+ 966 03c0 82020000 		.4byte	.LASF37
+ 967 03c4 01       		.byte	0x1
+ 968 03c5 EE02     		.2byte	0x2ee
+ 969 03c7 3A000000 		.4byte	0x3a
+ 970 03cb 00000000 		.4byte	.LFB117
+ 971 03cf 0A000000 		.4byte	.LFE117-.LFB117
+ 972 03d3 01       		.uleb128 0x1
+ 973 03d4 9C       		.byte	0x9c
+ 974 03d5 00040000 		.4byte	0x400
+ 975 03d9 0F       		.uleb128 0xf
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 33
+
+
+ 976 03da A6030000 		.4byte	.LASF22
+ 977 03de 01       		.byte	0x1
+ 978 03df EE02     		.2byte	0x2ee
+ 979 03e1 41000000 		.4byte	0x41
+ 980 03e5 BA020000 		.4byte	.LLST12
+ 981 03e9 12       		.uleb128 0x12
+ 982 03ea F1020000 		.4byte	.LASF36
+ 983 03ee 01       		.byte	0x1
+ 984 03ef F002     		.2byte	0x2f0
+ 985 03f1 3A000000 		.4byte	0x3a
+ 986 03f5 02       		.byte	0x2
+ 987 03f6 09       		.uleb128 0x9
+ 988 03f7 06000000 		.4byte	.LVL58
+ 989 03fb ED000000 		.4byte	0xed
+ 990 03ff 00       		.byte	0
+ 991 0400 0E       		.uleb128 0xe
+ 992 0401 EE010000 		.4byte	.LASF38
+ 993 0405 01       		.byte	0x1
+ 994 0406 2003     		.2byte	0x320
+ 995 0408 00000000 		.4byte	.LFB118
+ 996 040c 1C000000 		.4byte	.LFE118-.LFB118
+ 997 0410 01       		.uleb128 0x1
+ 998 0411 9C       		.byte	0x9c
+ 999 0412 5D040000 		.4byte	0x45d
+ 1000 0416 0F       		.uleb128 0xf
+ 1001 0417 A6030000 		.4byte	.LASF22
+ 1002 041b 01       		.byte	0x1
+ 1003 041c 2003     		.2byte	0x320
+ 1004 041e 41000000 		.4byte	0x41
+ 1005 0422 DB020000 		.4byte	.LLST13
+ 1006 0426 0F       		.uleb128 0xf
+ 1007 0427 A0030000 		.4byte	.LASF39
+ 1008 042b 01       		.byte	0x1
+ 1009 042c 2003     		.2byte	0x320
+ 1010 042e 64000000 		.4byte	0x64
+ 1011 0432 FC020000 		.4byte	.LLST14
+ 1012 0436 0F       		.uleb128 0xf
+ 1013 0437 51030000 		.4byte	.LASF40
+ 1014 043b 01       		.byte	0x1
+ 1015 043c 2003     		.2byte	0x320
+ 1016 043e 3A000000 		.4byte	0x3a
+ 1017 0442 25030000 		.4byte	.LLST15
+ 1018 0446 10       		.uleb128 0x10
+ 1019 0447 12000000 		.4byte	.LVL62
+ 1020 044b 7C010000 		.4byte	0x17c
+ 1021 044f 0B       		.uleb128 0xb
+ 1022 0450 01       		.uleb128 0x1
+ 1023 0451 50       		.byte	0x50
+ 1024 0452 02       		.uleb128 0x2
+ 1025 0453 77       		.byte	0x77
+ 1026 0454 00       		.sleb128 0
+ 1027 0455 0B       		.uleb128 0xb
+ 1028 0456 01       		.uleb128 0x1
+ 1029 0457 51       		.byte	0x51
+ 1030 0458 02       		.uleb128 0x2
+ 1031 0459 09       		.byte	0x9
+ 1032 045a FF       		.byte	0xff
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 34
+
+
+ 1033 045b 00       		.byte	0
+ 1034 045c 00       		.byte	0
+ 1035 045d 0E       		.uleb128 0xe
+ 1036 045e 20030000 		.4byte	.LASF41
+ 1037 0462 01       		.byte	0x1
+ 1038 0463 4703     		.2byte	0x347
+ 1039 0465 00000000 		.4byte	.LFB119
+ 1040 0469 18000000 		.4byte	.LFE119-.LFB119
+ 1041 046d 01       		.uleb128 0x1
+ 1042 046e 9C       		.byte	0x9c
+ 1043 046f B4040000 		.4byte	0x4b4
+ 1044 0473 0F       		.uleb128 0xf
+ 1045 0474 A6030000 		.4byte	.LASF22
+ 1046 0478 01       		.byte	0x1
+ 1047 0479 4703     		.2byte	0x347
+ 1048 047b 41000000 		.4byte	0x41
+ 1049 047f 5B030000 		.4byte	.LLST16
+ 1050 0483 0F       		.uleb128 0xf
+ 1051 0484 A0030000 		.4byte	.LASF39
+ 1052 0488 01       		.byte	0x1
+ 1053 0489 4703     		.2byte	0x347
+ 1054 048b B4040000 		.4byte	0x4b4
+ 1055 048f 7C030000 		.4byte	.LLST17
+ 1056 0493 0F       		.uleb128 0xf
+ 1057 0494 51030000 		.4byte	.LASF40
+ 1058 0498 01       		.byte	0x1
+ 1059 0499 4703     		.2byte	0x347
+ 1060 049b 3A000000 		.4byte	0x3a
+ 1061 049f 9A030000 		.4byte	.LLST18
+ 1062 04a3 10       		.uleb128 0x10
+ 1063 04a4 10000000 		.4byte	.LVL68
+ 1064 04a8 7C010000 		.4byte	0x17c
+ 1065 04ac 0B       		.uleb128 0xb
+ 1066 04ad 01       		.uleb128 0x1
+ 1067 04ae 50       		.byte	0x50
+ 1068 04af 02       		.uleb128 0x2
+ 1069 04b0 76       		.byte	0x76
+ 1070 04b1 00       		.sleb128 0
+ 1071 04b2 00       		.byte	0
+ 1072 04b3 00       		.byte	0
+ 1073 04b4 04       		.uleb128 0x4
+ 1074 04b5 04       		.byte	0x4
+ 1075 04b6 BA040000 		.4byte	0x4ba
+ 1076 04ba 16       		.uleb128 0x16
+ 1077 04bb 41000000 		.4byte	0x41
+ 1078 04bf 17       		.uleb128 0x17
+ 1079 04c0 F5030000 		.4byte	.LASF42
+ 1080 04c4 01       		.byte	0x1
+ 1081 04c5 25       		.byte	0x25
+ 1082 04c6 4F000000 		.4byte	0x4f
+ 1083 04ca 05       		.uleb128 0x5
+ 1084 04cb 03       		.byte	0x3
+ 1085 04cc 00000000 		.4byte	emFile_isInited0
+ 1086 04d0 18       		.uleb128 0x18
+ 1087 04d1 FF010000 		.4byte	.LASF43
+ 1088 04d5 07       		.byte	0x7
+ 1089 04d6 40       		.byte	0x40
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 35
+
+
+ 1090 04d7 CC000000 		.4byte	0xcc
+ 1091 04db 18       		.uleb128 0x18
+ 1092 04dc CE020000 		.4byte	.LASF44
+ 1093 04e0 07       		.byte	0x7
+ 1094 04e1 47       		.byte	0x47
+ 1095 04e2 D7000000 		.4byte	0xd7
+ 1096 04e6 18       		.uleb128 0x18
+ 1097 04e7 F8020000 		.4byte	.LASF45
+ 1098 04eb 07       		.byte	0x7
+ 1099 04ec 4A       		.byte	0x4a
+ 1100 04ed CC000000 		.4byte	0xcc
+ 1101 04f1 18       		.uleb128 0x18
+ 1102 04f2 98020000 		.4byte	.LASF46
+ 1103 04f6 08       		.byte	0x8
+ 1104 04f7 48       		.byte	0x48
+ 1105 04f8 E2000000 		.4byte	0xe2
+ 1106 04fc 18       		.uleb128 0x18
+ 1107 04fd 67030000 		.4byte	.LASF47
+ 1108 0501 09       		.byte	0x9
+ 1109 0502 44       		.byte	0x44
+ 1110 0503 CC000000 		.4byte	0xcc
+ 1111 0507 19       		.uleb128 0x19
+ 1112 0508 17020000 		.4byte	.LASF48
+ 1113 050c 0A       		.byte	0xa
+ 1114 050d 1207     		.2byte	0x712
+ 1115 050f 13050000 		.4byte	0x513
+ 1116 0513 1A       		.uleb128 0x1a
+ 1117 0514 8A000000 		.4byte	0x8a
+ 1118 0518 1B       		.uleb128 0x1b
+ 1119 0519 A2000000 		.4byte	.LASF49
+ 1120 051d A2000000 		.4byte	.LASF49
+ 1121 0521 0B       		.byte	0xb
+ 1122 0522 28       		.byte	0x28
+ 1123 0523 1B       		.uleb128 0x1b
+ 1124 0524 BD000000 		.4byte	.LASF50
+ 1125 0528 BD000000 		.4byte	.LASF50
+ 1126 052c 0B       		.byte	0xb
+ 1127 052d 2F       		.byte	0x2f
+ 1128 052e 1B       		.uleb128 0x1b
+ 1129 052f 1C040000 		.4byte	.LASF51
+ 1130 0533 1C040000 		.4byte	.LASF51
+ 1131 0537 0B       		.byte	0xb
+ 1132 0538 27       		.byte	0x27
+ 1133 0539 1B       		.uleb128 0x1b
+ 1134 053a 3C000000 		.4byte	.LASF52
+ 1135 053e 3C000000 		.4byte	.LASF52
+ 1136 0542 0C       		.byte	0xc
+ 1137 0543 58       		.byte	0x58
+ 1138 0544 1B       		.uleb128 0x1b
+ 1139 0545 C0030000 		.4byte	.LASF53
+ 1140 0549 C0030000 		.4byte	.LASF53
+ 1141 054d 0C       		.byte	0xc
+ 1142 054e 69       		.byte	0x69
+ 1143 054f 1B       		.uleb128 0x1b
+ 1144 0550 D5010000 		.4byte	.LASF54
+ 1145 0554 D5010000 		.4byte	.LASF54
+ 1146 0558 0C       		.byte	0xc
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 36
+
+
+ 1147 0559 67       		.byte	0x67
+ 1148 055a 1B       		.uleb128 0x1b
+ 1149 055b 00000000 		.4byte	.LASF55
+ 1150 055f 00000000 		.4byte	.LASF55
+ 1151 0563 0C       		.byte	0xc
+ 1152 0564 6B       		.byte	0x6b
+ 1153 0565 1B       		.uleb128 0x1b
+ 1154 0566 0B030000 		.4byte	.LASF56
+ 1155 056a 0B030000 		.4byte	.LASF56
+ 1156 056e 0D       		.byte	0xd
+ 1157 056f 28       		.byte	0x28
+ 1158 0570 00       		.byte	0
+ 1159              		.section	.debug_abbrev,"",%progbits
+ 1160              	.Ldebug_abbrev0:
+ 1161 0000 01       		.uleb128 0x1
+ 1162 0001 11       		.uleb128 0x11
+ 1163 0002 01       		.byte	0x1
+ 1164 0003 25       		.uleb128 0x25
+ 1165 0004 0E       		.uleb128 0xe
+ 1166 0005 13       		.uleb128 0x13
+ 1167 0006 0B       		.uleb128 0xb
+ 1168 0007 03       		.uleb128 0x3
+ 1169 0008 0E       		.uleb128 0xe
+ 1170 0009 1B       		.uleb128 0x1b
+ 1171 000a 0E       		.uleb128 0xe
+ 1172 000b 55       		.uleb128 0x55
+ 1173 000c 17       		.uleb128 0x17
+ 1174 000d 11       		.uleb128 0x11
+ 1175 000e 01       		.uleb128 0x1
+ 1176 000f 10       		.uleb128 0x10
+ 1177 0010 17       		.uleb128 0x17
+ 1178 0011 00       		.byte	0
+ 1179 0012 00       		.byte	0
+ 1180 0013 02       		.uleb128 0x2
+ 1181 0014 24       		.uleb128 0x24
+ 1182 0015 00       		.byte	0
+ 1183 0016 0B       		.uleb128 0xb
+ 1184 0017 0B       		.uleb128 0xb
+ 1185 0018 3E       		.uleb128 0x3e
+ 1186 0019 0B       		.uleb128 0xb
+ 1187 001a 03       		.uleb128 0x3
+ 1188 001b 0E       		.uleb128 0xe
+ 1189 001c 00       		.byte	0
+ 1190 001d 00       		.byte	0
+ 1191 001e 03       		.uleb128 0x3
+ 1192 001f 24       		.uleb128 0x24
+ 1193 0020 00       		.byte	0
+ 1194 0021 0B       		.uleb128 0xb
+ 1195 0022 0B       		.uleb128 0xb
+ 1196 0023 3E       		.uleb128 0x3e
+ 1197 0024 0B       		.uleb128 0xb
+ 1198 0025 03       		.uleb128 0x3
+ 1199 0026 08       		.uleb128 0x8
+ 1200 0027 00       		.byte	0
+ 1201 0028 00       		.byte	0
+ 1202 0029 04       		.uleb128 0x4
+ 1203 002a 0F       		.uleb128 0xf
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 37
+
+
+ 1204 002b 00       		.byte	0
+ 1205 002c 0B       		.uleb128 0xb
+ 1206 002d 0B       		.uleb128 0xb
+ 1207 002e 49       		.uleb128 0x49
+ 1208 002f 13       		.uleb128 0x13
+ 1209 0030 00       		.byte	0
+ 1210 0031 00       		.byte	0
+ 1211 0032 05       		.uleb128 0x5
+ 1212 0033 16       		.uleb128 0x16
+ 1213 0034 00       		.byte	0
+ 1214 0035 03       		.uleb128 0x3
+ 1215 0036 0E       		.uleb128 0xe
+ 1216 0037 3A       		.uleb128 0x3a
+ 1217 0038 0B       		.uleb128 0xb
+ 1218 0039 3B       		.uleb128 0x3b
+ 1219 003a 0B       		.uleb128 0xb
+ 1220 003b 49       		.uleb128 0x49
+ 1221 003c 13       		.uleb128 0x13
+ 1222 003d 00       		.byte	0
+ 1223 003e 00       		.byte	0
+ 1224 003f 06       		.uleb128 0x6
+ 1225 0040 16       		.uleb128 0x16
+ 1226 0041 00       		.byte	0
+ 1227 0042 03       		.uleb128 0x3
+ 1228 0043 0E       		.uleb128 0xe
+ 1229 0044 3A       		.uleb128 0x3a
+ 1230 0045 0B       		.uleb128 0xb
+ 1231 0046 3B       		.uleb128 0x3b
+ 1232 0047 05       		.uleb128 0x5
+ 1233 0048 49       		.uleb128 0x49
+ 1234 0049 13       		.uleb128 0x13
+ 1235 004a 00       		.byte	0
+ 1236 004b 00       		.byte	0
+ 1237 004c 07       		.uleb128 0x7
+ 1238 004d 2E       		.uleb128 0x2e
+ 1239 004e 01       		.byte	0x1
+ 1240 004f 03       		.uleb128 0x3
+ 1241 0050 0E       		.uleb128 0xe
+ 1242 0051 3A       		.uleb128 0x3a
+ 1243 0052 0B       		.uleb128 0xb
+ 1244 0053 3B       		.uleb128 0x3b
+ 1245 0054 0B       		.uleb128 0xb
+ 1246 0055 27       		.uleb128 0x27
+ 1247 0056 19       		.uleb128 0x19
+ 1248 0057 11       		.uleb128 0x11
+ 1249 0058 01       		.uleb128 0x1
+ 1250 0059 12       		.uleb128 0x12
+ 1251 005a 06       		.uleb128 0x6
+ 1252 005b 40       		.uleb128 0x40
+ 1253 005c 18       		.uleb128 0x18
+ 1254 005d 9742     		.uleb128 0x2117
+ 1255 005f 19       		.uleb128 0x19
+ 1256 0060 01       		.uleb128 0x1
+ 1257 0061 13       		.uleb128 0x13
+ 1258 0062 00       		.byte	0
+ 1259 0063 00       		.byte	0
+ 1260 0064 08       		.uleb128 0x8
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 38
+
+
+ 1261 0065 05       		.uleb128 0x5
+ 1262 0066 00       		.byte	0
+ 1263 0067 03       		.uleb128 0x3
+ 1264 0068 0E       		.uleb128 0xe
+ 1265 0069 3A       		.uleb128 0x3a
+ 1266 006a 0B       		.uleb128 0xb
+ 1267 006b 3B       		.uleb128 0x3b
+ 1268 006c 0B       		.uleb128 0xb
+ 1269 006d 49       		.uleb128 0x49
+ 1270 006e 13       		.uleb128 0x13
+ 1271 006f 02       		.uleb128 0x2
+ 1272 0070 17       		.uleb128 0x17
+ 1273 0071 00       		.byte	0
+ 1274 0072 00       		.byte	0
+ 1275 0073 09       		.uleb128 0x9
+ 1276 0074 898201   		.uleb128 0x4109
+ 1277 0077 00       		.byte	0
+ 1278 0078 11       		.uleb128 0x11
+ 1279 0079 01       		.uleb128 0x1
+ 1280 007a 31       		.uleb128 0x31
+ 1281 007b 13       		.uleb128 0x13
+ 1282 007c 00       		.byte	0
+ 1283 007d 00       		.byte	0
+ 1284 007e 0A       		.uleb128 0xa
+ 1285 007f 898201   		.uleb128 0x4109
+ 1286 0082 01       		.byte	0x1
+ 1287 0083 11       		.uleb128 0x11
+ 1288 0084 01       		.uleb128 0x1
+ 1289 0085 31       		.uleb128 0x31
+ 1290 0086 13       		.uleb128 0x13
+ 1291 0087 01       		.uleb128 0x1
+ 1292 0088 13       		.uleb128 0x13
+ 1293 0089 00       		.byte	0
+ 1294 008a 00       		.byte	0
+ 1295 008b 0B       		.uleb128 0xb
+ 1296 008c 8A8201   		.uleb128 0x410a
+ 1297 008f 00       		.byte	0
+ 1298 0090 02       		.uleb128 0x2
+ 1299 0091 18       		.uleb128 0x18
+ 1300 0092 9142     		.uleb128 0x2111
+ 1301 0094 18       		.uleb128 0x18
+ 1302 0095 00       		.byte	0
+ 1303 0096 00       		.byte	0
+ 1304 0097 0C       		.uleb128 0xc
+ 1305 0098 2E       		.uleb128 0x2e
+ 1306 0099 01       		.byte	0x1
+ 1307 009a 03       		.uleb128 0x3
+ 1308 009b 0E       		.uleb128 0xe
+ 1309 009c 3A       		.uleb128 0x3a
+ 1310 009d 0B       		.uleb128 0xb
+ 1311 009e 3B       		.uleb128 0x3b
+ 1312 009f 0B       		.uleb128 0xb
+ 1313 00a0 27       		.uleb128 0x27
+ 1314 00a1 19       		.uleb128 0x19
+ 1315 00a2 49       		.uleb128 0x49
+ 1316 00a3 13       		.uleb128 0x13
+ 1317 00a4 11       		.uleb128 0x11
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 39
+
+
+ 1318 00a5 01       		.uleb128 0x1
+ 1319 00a6 12       		.uleb128 0x12
+ 1320 00a7 06       		.uleb128 0x6
+ 1321 00a8 40       		.uleb128 0x40
+ 1322 00a9 18       		.uleb128 0x18
+ 1323 00aa 9742     		.uleb128 0x2117
+ 1324 00ac 19       		.uleb128 0x19
+ 1325 00ad 01       		.uleb128 0x1
+ 1326 00ae 13       		.uleb128 0x13
+ 1327 00af 00       		.byte	0
+ 1328 00b0 00       		.byte	0
+ 1329 00b1 0D       		.uleb128 0xd
+ 1330 00b2 34       		.uleb128 0x34
+ 1331 00b3 00       		.byte	0
+ 1332 00b4 03       		.uleb128 0x3
+ 1333 00b5 0E       		.uleb128 0xe
+ 1334 00b6 3A       		.uleb128 0x3a
+ 1335 00b7 0B       		.uleb128 0xb
+ 1336 00b8 3B       		.uleb128 0x3b
+ 1337 00b9 0B       		.uleb128 0xb
+ 1338 00ba 49       		.uleb128 0x49
+ 1339 00bb 13       		.uleb128 0x13
+ 1340 00bc 02       		.uleb128 0x2
+ 1341 00bd 17       		.uleb128 0x17
+ 1342 00be 00       		.byte	0
+ 1343 00bf 00       		.byte	0
+ 1344 00c0 0E       		.uleb128 0xe
+ 1345 00c1 2E       		.uleb128 0x2e
+ 1346 00c2 01       		.byte	0x1
+ 1347 00c3 3F       		.uleb128 0x3f
+ 1348 00c4 19       		.uleb128 0x19
+ 1349 00c5 03       		.uleb128 0x3
+ 1350 00c6 0E       		.uleb128 0xe
+ 1351 00c7 3A       		.uleb128 0x3a
+ 1352 00c8 0B       		.uleb128 0xb
+ 1353 00c9 3B       		.uleb128 0x3b
+ 1354 00ca 05       		.uleb128 0x5
+ 1355 00cb 27       		.uleb128 0x27
+ 1356 00cc 19       		.uleb128 0x19
+ 1357 00cd 11       		.uleb128 0x11
+ 1358 00ce 01       		.uleb128 0x1
+ 1359 00cf 12       		.uleb128 0x12
+ 1360 00d0 06       		.uleb128 0x6
+ 1361 00d1 40       		.uleb128 0x40
+ 1362 00d2 18       		.uleb128 0x18
+ 1363 00d3 9742     		.uleb128 0x2117
+ 1364 00d5 19       		.uleb128 0x19
+ 1365 00d6 01       		.uleb128 0x1
+ 1366 00d7 13       		.uleb128 0x13
+ 1367 00d8 00       		.byte	0
+ 1368 00d9 00       		.byte	0
+ 1369 00da 0F       		.uleb128 0xf
+ 1370 00db 05       		.uleb128 0x5
+ 1371 00dc 00       		.byte	0
+ 1372 00dd 03       		.uleb128 0x3
+ 1373 00de 0E       		.uleb128 0xe
+ 1374 00df 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 40
+
+
+ 1375 00e0 0B       		.uleb128 0xb
+ 1376 00e1 3B       		.uleb128 0x3b
+ 1377 00e2 05       		.uleb128 0x5
+ 1378 00e3 49       		.uleb128 0x49
+ 1379 00e4 13       		.uleb128 0x13
+ 1380 00e5 02       		.uleb128 0x2
+ 1381 00e6 17       		.uleb128 0x17
+ 1382 00e7 00       		.byte	0
+ 1383 00e8 00       		.byte	0
+ 1384 00e9 10       		.uleb128 0x10
+ 1385 00ea 898201   		.uleb128 0x4109
+ 1386 00ed 01       		.byte	0x1
+ 1387 00ee 11       		.uleb128 0x11
+ 1388 00ef 01       		.uleb128 0x1
+ 1389 00f0 31       		.uleb128 0x31
+ 1390 00f1 13       		.uleb128 0x13
+ 1391 00f2 00       		.byte	0
+ 1392 00f3 00       		.byte	0
+ 1393 00f4 11       		.uleb128 0x11
+ 1394 00f5 2E       		.uleb128 0x2e
+ 1395 00f6 01       		.byte	0x1
+ 1396 00f7 3F       		.uleb128 0x3f
+ 1397 00f8 19       		.uleb128 0x19
+ 1398 00f9 03       		.uleb128 0x3
+ 1399 00fa 0E       		.uleb128 0xe
+ 1400 00fb 3A       		.uleb128 0x3a
+ 1401 00fc 0B       		.uleb128 0xb
+ 1402 00fd 3B       		.uleb128 0x3b
+ 1403 00fe 05       		.uleb128 0x5
+ 1404 00ff 27       		.uleb128 0x27
+ 1405 0100 19       		.uleb128 0x19
+ 1406 0101 49       		.uleb128 0x49
+ 1407 0102 13       		.uleb128 0x13
+ 1408 0103 11       		.uleb128 0x11
+ 1409 0104 01       		.uleb128 0x1
+ 1410 0105 12       		.uleb128 0x12
+ 1411 0106 06       		.uleb128 0x6
+ 1412 0107 40       		.uleb128 0x40
+ 1413 0108 18       		.uleb128 0x18
+ 1414 0109 9742     		.uleb128 0x2117
+ 1415 010b 19       		.uleb128 0x19
+ 1416 010c 01       		.uleb128 0x1
+ 1417 010d 13       		.uleb128 0x13
+ 1418 010e 00       		.byte	0
+ 1419 010f 00       		.byte	0
+ 1420 0110 12       		.uleb128 0x12
+ 1421 0111 34       		.uleb128 0x34
+ 1422 0112 00       		.byte	0
+ 1423 0113 03       		.uleb128 0x3
+ 1424 0114 0E       		.uleb128 0xe
+ 1425 0115 3A       		.uleb128 0x3a
+ 1426 0116 0B       		.uleb128 0xb
+ 1427 0117 3B       		.uleb128 0x3b
+ 1428 0118 05       		.uleb128 0x5
+ 1429 0119 49       		.uleb128 0x49
+ 1430 011a 13       		.uleb128 0x13
+ 1431 011b 1C       		.uleb128 0x1c
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 41
+
+
+ 1432 011c 0B       		.uleb128 0xb
+ 1433 011d 00       		.byte	0
+ 1434 011e 00       		.byte	0
+ 1435 011f 13       		.uleb128 0x13
+ 1436 0120 34       		.uleb128 0x34
+ 1437 0121 00       		.byte	0
+ 1438 0122 03       		.uleb128 0x3
+ 1439 0123 0E       		.uleb128 0xe
+ 1440 0124 3A       		.uleb128 0x3a
+ 1441 0125 0B       		.uleb128 0xb
+ 1442 0126 3B       		.uleb128 0x3b
+ 1443 0127 05       		.uleb128 0x5
+ 1444 0128 49       		.uleb128 0x49
+ 1445 0129 13       		.uleb128 0x13
+ 1446 012a 02       		.uleb128 0x2
+ 1447 012b 17       		.uleb128 0x17
+ 1448 012c 00       		.byte	0
+ 1449 012d 00       		.byte	0
+ 1450 012e 14       		.uleb128 0x14
+ 1451 012f 05       		.uleb128 0x5
+ 1452 0130 00       		.byte	0
+ 1453 0131 03       		.uleb128 0x3
+ 1454 0132 0E       		.uleb128 0xe
+ 1455 0133 3A       		.uleb128 0x3a
+ 1456 0134 0B       		.uleb128 0xb
+ 1457 0135 3B       		.uleb128 0x3b
+ 1458 0136 05       		.uleb128 0x5
+ 1459 0137 49       		.uleb128 0x49
+ 1460 0138 13       		.uleb128 0x13
+ 1461 0139 02       		.uleb128 0x2
+ 1462 013a 18       		.uleb128 0x18
+ 1463 013b 00       		.byte	0
+ 1464 013c 00       		.byte	0
+ 1465 013d 15       		.uleb128 0x15
+ 1466 013e 34       		.uleb128 0x34
+ 1467 013f 00       		.byte	0
+ 1468 0140 03       		.uleb128 0x3
+ 1469 0141 0E       		.uleb128 0xe
+ 1470 0142 3A       		.uleb128 0x3a
+ 1471 0143 0B       		.uleb128 0xb
+ 1472 0144 3B       		.uleb128 0x3b
+ 1473 0145 05       		.uleb128 0x5
+ 1474 0146 49       		.uleb128 0x49
+ 1475 0147 13       		.uleb128 0x13
+ 1476 0148 02       		.uleb128 0x2
+ 1477 0149 18       		.uleb128 0x18
+ 1478 014a 00       		.byte	0
+ 1479 014b 00       		.byte	0
+ 1480 014c 16       		.uleb128 0x16
+ 1481 014d 26       		.uleb128 0x26
+ 1482 014e 00       		.byte	0
+ 1483 014f 49       		.uleb128 0x49
+ 1484 0150 13       		.uleb128 0x13
+ 1485 0151 00       		.byte	0
+ 1486 0152 00       		.byte	0
+ 1487 0153 17       		.uleb128 0x17
+ 1488 0154 34       		.uleb128 0x34
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 42
+
+
+ 1489 0155 00       		.byte	0
+ 1490 0156 03       		.uleb128 0x3
+ 1491 0157 0E       		.uleb128 0xe
+ 1492 0158 3A       		.uleb128 0x3a
+ 1493 0159 0B       		.uleb128 0xb
+ 1494 015a 3B       		.uleb128 0x3b
+ 1495 015b 0B       		.uleb128 0xb
+ 1496 015c 49       		.uleb128 0x49
+ 1497 015d 13       		.uleb128 0x13
+ 1498 015e 02       		.uleb128 0x2
+ 1499 015f 18       		.uleb128 0x18
+ 1500 0160 00       		.byte	0
+ 1501 0161 00       		.byte	0
+ 1502 0162 18       		.uleb128 0x18
+ 1503 0163 34       		.uleb128 0x34
+ 1504 0164 00       		.byte	0
+ 1505 0165 03       		.uleb128 0x3
+ 1506 0166 0E       		.uleb128 0xe
+ 1507 0167 3A       		.uleb128 0x3a
+ 1508 0168 0B       		.uleb128 0xb
+ 1509 0169 3B       		.uleb128 0x3b
+ 1510 016a 0B       		.uleb128 0xb
+ 1511 016b 49       		.uleb128 0x49
+ 1512 016c 13       		.uleb128 0x13
+ 1513 016d 3F       		.uleb128 0x3f
+ 1514 016e 19       		.uleb128 0x19
+ 1515 016f 3C       		.uleb128 0x3c
+ 1516 0170 19       		.uleb128 0x19
+ 1517 0171 00       		.byte	0
+ 1518 0172 00       		.byte	0
+ 1519 0173 19       		.uleb128 0x19
+ 1520 0174 34       		.uleb128 0x34
+ 1521 0175 00       		.byte	0
+ 1522 0176 03       		.uleb128 0x3
+ 1523 0177 0E       		.uleb128 0xe
+ 1524 0178 3A       		.uleb128 0x3a
+ 1525 0179 0B       		.uleb128 0xb
+ 1526 017a 3B       		.uleb128 0x3b
+ 1527 017b 05       		.uleb128 0x5
+ 1528 017c 49       		.uleb128 0x49
+ 1529 017d 13       		.uleb128 0x13
+ 1530 017e 3F       		.uleb128 0x3f
+ 1531 017f 19       		.uleb128 0x19
+ 1532 0180 3C       		.uleb128 0x3c
+ 1533 0181 19       		.uleb128 0x19
+ 1534 0182 00       		.byte	0
+ 1535 0183 00       		.byte	0
+ 1536 0184 1A       		.uleb128 0x1a
+ 1537 0185 35       		.uleb128 0x35
+ 1538 0186 00       		.byte	0
+ 1539 0187 49       		.uleb128 0x49
+ 1540 0188 13       		.uleb128 0x13
+ 1541 0189 00       		.byte	0
+ 1542 018a 00       		.byte	0
+ 1543 018b 1B       		.uleb128 0x1b
+ 1544 018c 2E       		.uleb128 0x2e
+ 1545 018d 00       		.byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 43
+
+
+ 1546 018e 3F       		.uleb128 0x3f
+ 1547 018f 19       		.uleb128 0x19
+ 1548 0190 3C       		.uleb128 0x3c
+ 1549 0191 19       		.uleb128 0x19
+ 1550 0192 6E       		.uleb128 0x6e
+ 1551 0193 0E       		.uleb128 0xe
+ 1552 0194 03       		.uleb128 0x3
+ 1553 0195 0E       		.uleb128 0xe
+ 1554 0196 3A       		.uleb128 0x3a
+ 1555 0197 0B       		.uleb128 0xb
+ 1556 0198 3B       		.uleb128 0x3b
+ 1557 0199 0B       		.uleb128 0xb
+ 1558 019a 00       		.byte	0
+ 1559 019b 00       		.byte	0
+ 1560 019c 00       		.byte	0
+ 1561              		.section	.debug_loc,"",%progbits
+ 1562              	.Ldebug_loc0:
+ 1563              	.LLST0:
+ 1564 0000 00000000 		.4byte	.LVL0
+ 1565 0004 13000000 		.4byte	.LVL1-1
+ 1566 0008 0100     		.2byte	0x1
+ 1567 000a 50       		.byte	0x50
+ 1568 000b 13000000 		.4byte	.LVL1-1
+ 1569 000f 26000000 		.4byte	.LVL5
+ 1570 0013 0400     		.2byte	0x4
+ 1571 0015 F3       		.byte	0xf3
+ 1572 0016 01       		.uleb128 0x1
+ 1573 0017 50       		.byte	0x50
+ 1574 0018 9F       		.byte	0x9f
+ 1575 0019 26000000 		.4byte	.LVL5
+ 1576 001d 35000000 		.4byte	.LVL6-1
+ 1577 0021 0100     		.2byte	0x1
+ 1578 0023 50       		.byte	0x50
+ 1579 0024 35000000 		.4byte	.LVL6-1
+ 1580 0028 4C000000 		.4byte	.LFE110
+ 1581 002c 0400     		.2byte	0x4
+ 1582 002e F3       		.byte	0xf3
+ 1583 002f 01       		.uleb128 0x1
+ 1584 0030 50       		.byte	0x50
+ 1585 0031 9F       		.byte	0x9f
+ 1586 0032 00000000 		.4byte	0
+ 1587 0036 00000000 		.4byte	0
+ 1588              	.LLST1:
+ 1589 003a 00000000 		.4byte	.LVL10
+ 1590 003e 06000000 		.4byte	.LVL11
+ 1591 0042 0100     		.2byte	0x1
+ 1592 0044 50       		.byte	0x50
+ 1593 0045 06000000 		.4byte	.LVL11
+ 1594 0049 1A000000 		.4byte	.LVL15
+ 1595 004d 0400     		.2byte	0x4
+ 1596 004f F3       		.byte	0xf3
+ 1597 0050 01       		.uleb128 0x1
+ 1598 0051 50       		.byte	0x50
+ 1599 0052 9F       		.byte	0x9f
+ 1600 0053 1A000000 		.4byte	.LVL15
+ 1601 0057 1C000000 		.4byte	.LVL16
+ 1602 005b 0100     		.2byte	0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 44
+
+
+ 1603 005d 50       		.byte	0x50
+ 1604 005e 1C000000 		.4byte	.LVL16
+ 1605 0062 30000000 		.4byte	.LFE111
+ 1606 0066 0400     		.2byte	0x4
+ 1607 0068 F3       		.byte	0xf3
+ 1608 0069 01       		.uleb128 0x1
+ 1609 006a 50       		.byte	0x50
+ 1610 006b 9F       		.byte	0x9f
+ 1611 006c 00000000 		.4byte	0
+ 1612 0070 00000000 		.4byte	0
+ 1613              	.LLST2:
+ 1614 0074 00000000 		.4byte	.LVL10
+ 1615 0078 09000000 		.4byte	.LVL12-1
+ 1616 007c 0100     		.2byte	0x1
+ 1617 007e 51       		.byte	0x51
+ 1618 007f 09000000 		.4byte	.LVL12-1
+ 1619 0083 1A000000 		.4byte	.LVL15
+ 1620 0087 0400     		.2byte	0x4
+ 1621 0089 F3       		.byte	0xf3
+ 1622 008a 01       		.uleb128 0x1
+ 1623 008b 51       		.byte	0x51
+ 1624 008c 9F       		.byte	0x9f
+ 1625 008d 1A000000 		.4byte	.LVL15
+ 1626 0091 1F000000 		.4byte	.LVL17-1
+ 1627 0095 0100     		.2byte	0x1
+ 1628 0097 51       		.byte	0x51
+ 1629 0098 1F000000 		.4byte	.LVL17-1
+ 1630 009c 30000000 		.4byte	.LFE111
+ 1631 00a0 0400     		.2byte	0x4
+ 1632 00a2 F3       		.byte	0xf3
+ 1633 00a3 01       		.uleb128 0x1
+ 1634 00a4 51       		.byte	0x51
+ 1635 00a5 9F       		.byte	0x9f
+ 1636 00a6 00000000 		.4byte	0
+ 1637 00aa 00000000 		.4byte	0
+ 1638              	.LLST3:
+ 1639 00ae 18000000 		.4byte	.LVL14
+ 1640 00b2 1A000000 		.4byte	.LVL15
+ 1641 00b6 0100     		.2byte	0x1
+ 1642 00b8 50       		.byte	0x50
+ 1643 00b9 2E000000 		.4byte	.LVL19
+ 1644 00bd 30000000 		.4byte	.LFE111
+ 1645 00c1 0100     		.2byte	0x1
+ 1646 00c3 50       		.byte	0x50
+ 1647 00c4 00000000 		.4byte	0
+ 1648 00c8 00000000 		.4byte	0
+ 1649              	.LLST4:
+ 1650 00cc 00000000 		.4byte	.LVL20
+ 1651 00d0 07000000 		.4byte	.LVL21-1
+ 1652 00d4 0100     		.2byte	0x1
+ 1653 00d6 50       		.byte	0x50
+ 1654 00d7 07000000 		.4byte	.LVL21-1
+ 1655 00db 0A000000 		.4byte	.LVL22
+ 1656 00df 0400     		.2byte	0x4
+ 1657 00e1 F3       		.byte	0xf3
+ 1658 00e2 01       		.uleb128 0x1
+ 1659 00e3 50       		.byte	0x50
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 45
+
+
+ 1660 00e4 9F       		.byte	0x9f
+ 1661 00e5 0A000000 		.4byte	.LVL22
+ 1662 00e9 0C000000 		.4byte	.LVL23
+ 1663 00ed 0100     		.2byte	0x1
+ 1664 00ef 50       		.byte	0x50
+ 1665 00f0 0C000000 		.4byte	.LVL23
+ 1666 00f4 12000000 		.4byte	.LFE112
+ 1667 00f8 0400     		.2byte	0x4
+ 1668 00fa F3       		.byte	0xf3
+ 1669 00fb 01       		.uleb128 0x1
+ 1670 00fc 50       		.byte	0x50
+ 1671 00fd 9F       		.byte	0x9f
+ 1672 00fe 00000000 		.4byte	0
+ 1673 0102 00000000 		.4byte	0
+ 1674              	.LLST5:
+ 1675 0106 00000000 		.4byte	.LVL25
+ 1676 010a 06000000 		.4byte	.LVL26
+ 1677 010e 0100     		.2byte	0x1
+ 1678 0110 50       		.byte	0x50
+ 1679 0111 06000000 		.4byte	.LVL26
+ 1680 0115 0C000000 		.4byte	.LVL28
+ 1681 0119 0400     		.2byte	0x4
+ 1682 011b F3       		.byte	0xf3
+ 1683 011c 01       		.uleb128 0x1
+ 1684 011d 50       		.byte	0x50
+ 1685 011e 9F       		.byte	0x9f
+ 1686 011f 0C000000 		.4byte	.LVL28
+ 1687 0123 0E000000 		.4byte	.LVL29
+ 1688 0127 0100     		.2byte	0x1
+ 1689 0129 50       		.byte	0x50
+ 1690 012a 0E000000 		.4byte	.LVL29
+ 1691 012e 14000000 		.4byte	.LFE113
+ 1692 0132 0400     		.2byte	0x4
+ 1693 0134 F3       		.byte	0xf3
+ 1694 0135 01       		.uleb128 0x1
+ 1695 0136 50       		.byte	0x50
+ 1696 0137 9F       		.byte	0x9f
+ 1697 0138 00000000 		.4byte	0
+ 1698 013c 00000000 		.4byte	0
+ 1699              	.LLST6:
+ 1700 0140 00000000 		.4byte	.LVL31
+ 1701 0144 02000000 		.4byte	.LVL32
+ 1702 0148 0100     		.2byte	0x1
+ 1703 014a 50       		.byte	0x50
+ 1704 014b 02000000 		.4byte	.LVL32
+ 1705 014f 04000000 		.4byte	.LFE114
+ 1706 0153 0400     		.2byte	0x4
+ 1707 0155 F3       		.byte	0xf3
+ 1708 0156 01       		.uleb128 0x1
+ 1709 0157 50       		.byte	0x50
+ 1710 0158 9F       		.byte	0x9f
+ 1711 0159 00000000 		.4byte	0
+ 1712 015d 00000000 		.4byte	0
+ 1713              	.LLST7:
+ 1714 0161 00000000 		.4byte	.LVL33
+ 1715 0165 2B000000 		.4byte	.LVL37-1
+ 1716 0169 0100     		.2byte	0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 46
+
+
+ 1717 016b 50       		.byte	0x50
+ 1718 016c 2B000000 		.4byte	.LVL37-1
+ 1719 0170 3C000000 		.4byte	.LVL40
+ 1720 0174 0400     		.2byte	0x4
+ 1721 0176 F3       		.byte	0xf3
+ 1722 0177 01       		.uleb128 0x1
+ 1723 0178 50       		.byte	0x50
+ 1724 0179 9F       		.byte	0x9f
+ 1725 017a 3C000000 		.4byte	.LVL40
+ 1726 017e 3F000000 		.4byte	.LVL41-1
+ 1727 0182 0100     		.2byte	0x1
+ 1728 0184 50       		.byte	0x50
+ 1729 0185 3F000000 		.4byte	.LVL41-1
+ 1730 0189 58000000 		.4byte	.LFE115
+ 1731 018d 0400     		.2byte	0x4
+ 1732 018f F3       		.byte	0xf3
+ 1733 0190 01       		.uleb128 0x1
+ 1734 0191 50       		.byte	0x50
+ 1735 0192 9F       		.byte	0x9f
+ 1736 0193 00000000 		.4byte	0
+ 1737 0197 00000000 		.4byte	0
+ 1738              	.LLST8:
+ 1739 019b 00000000 		.4byte	.LVL33
+ 1740 019f 1C000000 		.4byte	.LVL34
+ 1741 01a3 0100     		.2byte	0x1
+ 1742 01a5 51       		.byte	0x51
+ 1743 01a6 1C000000 		.4byte	.LVL34
+ 1744 01aa 52000000 		.4byte	.LVL44
+ 1745 01ae 0100     		.2byte	0x1
+ 1746 01b0 55       		.byte	0x55
+ 1747 01b1 00000000 		.4byte	0
+ 1748 01b5 00000000 		.4byte	0
+ 1749              	.LLST9:
+ 1750 01b9 20000000 		.4byte	.LVL35
+ 1751 01bd 26000000 		.4byte	.LVL36
+ 1752 01c1 0100     		.2byte	0x1
+ 1753 01c3 54       		.byte	0x54
+ 1754 01c4 26000000 		.4byte	.LVL36
+ 1755 01c8 52000000 		.4byte	.LVL44
+ 1756 01cc 0500     		.2byte	0x5
+ 1757 01ce 75       		.byte	0x75
+ 1758 01cf 00       		.sleb128 0
+ 1759 01d0 31       		.byte	0x31
+ 1760 01d1 24       		.byte	0x24
+ 1761 01d2 9F       		.byte	0x9f
+ 1762 01d3 52000000 		.4byte	.LVL44
+ 1763 01d7 58000000 		.4byte	.LFE115
+ 1764 01db 0500     		.2byte	0x5
+ 1765 01dd 70       		.byte	0x70
+ 1766 01de 00       		.sleb128 0
+ 1767 01df 31       		.byte	0x31
+ 1768 01e0 24       		.byte	0x24
+ 1769 01e1 9F       		.byte	0x9f
+ 1770 01e2 00000000 		.4byte	0
+ 1771 01e6 00000000 		.4byte	0
+ 1772              	.LLST10:
+ 1773 01ea 26000000 		.4byte	.LVL36
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 47
+
+
+ 1774 01ee 52000000 		.4byte	.LVL44
+ 1775 01f2 0100     		.2byte	0x1
+ 1776 01f4 54       		.byte	0x54
+ 1777 01f5 52000000 		.4byte	.LVL44
+ 1778 01f9 58000000 		.4byte	.LFE115
+ 1779 01fd 1500     		.2byte	0x15
+ 1780 01ff 0C       		.byte	0xc
+ 1781 0200 40190100 		.4byte	0x11940
+ 1782 0204 F7       		.byte	0xf7
+ 1783 0205 25       		.uleb128 0x25
+ 1784 0206 70       		.byte	0x70
+ 1785 0207 00       		.sleb128 0
+ 1786 0208 31       		.byte	0x31
+ 1787 0209 24       		.byte	0x24
+ 1788 020a 0A       		.byte	0xa
+ 1789 020b FFFF     		.2byte	0xffff
+ 1790 020d 1A       		.byte	0x1a
+ 1791 020e F7       		.byte	0xf7
+ 1792 020f 25       		.uleb128 0x25
+ 1793 0210 1B       		.byte	0x1b
+ 1794 0211 F7       		.byte	0xf7
+ 1795 0212 00       		.uleb128 0
+ 1796 0213 9F       		.byte	0x9f
+ 1797 0214 00000000 		.4byte	0
+ 1798 0218 00000000 		.4byte	0
+ 1799              	.LLST11:
+ 1800 021c 00000000 		.4byte	.LVL45
+ 1801 0220 16000000 		.4byte	.LVL46
+ 1802 0224 0100     		.2byte	0x1
+ 1803 0226 50       		.byte	0x50
+ 1804 0227 16000000 		.4byte	.LVL46
+ 1805 022b 18000000 		.4byte	.LVL47
+ 1806 022f 0400     		.2byte	0x4
+ 1807 0231 F3       		.byte	0xf3
+ 1808 0232 01       		.uleb128 0x1
+ 1809 0233 50       		.byte	0x50
+ 1810 0234 9F       		.byte	0x9f
+ 1811 0235 18000000 		.4byte	.LVL47
+ 1812 0239 2A000000 		.4byte	.LVL48
+ 1813 023d 0100     		.2byte	0x1
+ 1814 023f 50       		.byte	0x50
+ 1815 0240 2A000000 		.4byte	.LVL48
+ 1816 0244 2C000000 		.4byte	.LVL49
+ 1817 0248 0400     		.2byte	0x4
+ 1818 024a F3       		.byte	0xf3
+ 1819 024b 01       		.uleb128 0x1
+ 1820 024c 50       		.byte	0x50
+ 1821 024d 9F       		.byte	0x9f
+ 1822 024e 2C000000 		.4byte	.LVL49
+ 1823 0252 2E000000 		.4byte	.LVL50
+ 1824 0256 0100     		.2byte	0x1
+ 1825 0258 50       		.byte	0x50
+ 1826 0259 2E000000 		.4byte	.LVL50
+ 1827 025d 30000000 		.4byte	.LVL51
+ 1828 0261 0400     		.2byte	0x4
+ 1829 0263 F3       		.byte	0xf3
+ 1830 0264 01       		.uleb128 0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 48
+
+
+ 1831 0265 50       		.byte	0x50
+ 1832 0266 9F       		.byte	0x9f
+ 1833 0267 30000000 		.4byte	.LVL51
+ 1834 026b 32000000 		.4byte	.LVL52
+ 1835 026f 0100     		.2byte	0x1
+ 1836 0271 50       		.byte	0x50
+ 1837 0272 32000000 		.4byte	.LVL52
+ 1838 0276 34000000 		.4byte	.LVL53
+ 1839 027a 0400     		.2byte	0x4
+ 1840 027c F3       		.byte	0xf3
+ 1841 027d 01       		.uleb128 0x1
+ 1842 027e 50       		.byte	0x50
+ 1843 027f 9F       		.byte	0x9f
+ 1844 0280 34000000 		.4byte	.LVL53
+ 1845 0284 36000000 		.4byte	.LVL54
+ 1846 0288 0100     		.2byte	0x1
+ 1847 028a 50       		.byte	0x50
+ 1848 028b 36000000 		.4byte	.LVL54
+ 1849 028f 38000000 		.4byte	.LVL55
+ 1850 0293 0400     		.2byte	0x4
+ 1851 0295 F3       		.byte	0xf3
+ 1852 0296 01       		.uleb128 0x1
+ 1853 0297 50       		.byte	0x50
+ 1854 0298 9F       		.byte	0x9f
+ 1855 0299 38000000 		.4byte	.LVL55
+ 1856 029d 3A000000 		.4byte	.LVL56
+ 1857 02a1 0100     		.2byte	0x1
+ 1858 02a3 50       		.byte	0x50
+ 1859 02a4 3A000000 		.4byte	.LVL56
+ 1860 02a8 3C000000 		.4byte	.LFE116
+ 1861 02ac 0400     		.2byte	0x4
+ 1862 02ae F3       		.byte	0xf3
+ 1863 02af 01       		.uleb128 0x1
+ 1864 02b0 50       		.byte	0x50
+ 1865 02b1 9F       		.byte	0x9f
+ 1866 02b2 00000000 		.4byte	0
+ 1867 02b6 00000000 		.4byte	0
+ 1868              	.LLST12:
+ 1869 02ba 00000000 		.4byte	.LVL57
+ 1870 02be 05000000 		.4byte	.LVL58-1
+ 1871 02c2 0100     		.2byte	0x1
+ 1872 02c4 50       		.byte	0x50
+ 1873 02c5 05000000 		.4byte	.LVL58-1
+ 1874 02c9 0A000000 		.4byte	.LFE117
+ 1875 02cd 0400     		.2byte	0x4
+ 1876 02cf F3       		.byte	0xf3
+ 1877 02d0 01       		.uleb128 0x1
+ 1878 02d1 50       		.byte	0x50
+ 1879 02d2 9F       		.byte	0x9f
+ 1880 02d3 00000000 		.4byte	0
+ 1881 02d7 00000000 		.4byte	0
+ 1882              	.LLST13:
+ 1883 02db 00000000 		.4byte	.LVL59
+ 1884 02df 08000000 		.4byte	.LVL60
+ 1885 02e3 0100     		.2byte	0x1
+ 1886 02e5 50       		.byte	0x50
+ 1887 02e6 08000000 		.4byte	.LVL60
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 49
+
+
+ 1888 02ea 1C000000 		.4byte	.LFE118
+ 1889 02ee 0400     		.2byte	0x4
+ 1890 02f0 F3       		.byte	0xf3
+ 1891 02f1 01       		.uleb128 0x1
+ 1892 02f2 50       		.byte	0x50
+ 1893 02f3 9F       		.byte	0x9f
+ 1894 02f4 00000000 		.4byte	0
+ 1895 02f8 00000000 		.4byte	0
+ 1896              	.LLST14:
+ 1897 02fc 00000000 		.4byte	.LVL59
+ 1898 0300 08000000 		.4byte	.LVL60
+ 1899 0304 0100     		.2byte	0x1
+ 1900 0306 51       		.byte	0x51
+ 1901 0307 08000000 		.4byte	.LVL60
+ 1902 030b 0A000000 		.4byte	.LVL61
+ 1903 030f 0100     		.2byte	0x1
+ 1904 0311 55       		.byte	0x55
+ 1905 0312 0A000000 		.4byte	.LVL61
+ 1906 0316 1C000000 		.4byte	.LFE118
+ 1907 031a 0100     		.2byte	0x1
+ 1908 031c 56       		.byte	0x56
+ 1909 031d 00000000 		.4byte	0
+ 1910 0321 00000000 		.4byte	0
+ 1911              	.LLST15:
+ 1912 0325 00000000 		.4byte	.LVL59
+ 1913 0329 08000000 		.4byte	.LVL60
+ 1914 032d 0100     		.2byte	0x1
+ 1915 032f 52       		.byte	0x52
+ 1916 0330 08000000 		.4byte	.LVL60
+ 1917 0334 14000000 		.4byte	.LVL63
+ 1918 0338 0100     		.2byte	0x1
+ 1919 033a 54       		.byte	0x54
+ 1920 033b 14000000 		.4byte	.LVL63
+ 1921 033f 18000000 		.4byte	.LVL64
+ 1922 0343 0300     		.2byte	0x3
+ 1923 0345 74       		.byte	0x74
+ 1924 0346 7F       		.sleb128 -1
+ 1925 0347 9F       		.byte	0x9f
+ 1926 0348 18000000 		.4byte	.LVL64
+ 1927 034c 1C000000 		.4byte	.LFE118
+ 1928 0350 0100     		.2byte	0x1
+ 1929 0352 54       		.byte	0x54
+ 1930 0353 00000000 		.4byte	0
+ 1931 0357 00000000 		.4byte	0
+ 1932              	.LLST16:
+ 1933 035b 00000000 		.4byte	.LVL65
+ 1934 035f 06000000 		.4byte	.LVL66
+ 1935 0363 0100     		.2byte	0x1
+ 1936 0365 50       		.byte	0x50
+ 1937 0366 06000000 		.4byte	.LVL66
+ 1938 036a 18000000 		.4byte	.LFE119
+ 1939 036e 0400     		.2byte	0x4
+ 1940 0370 F3       		.byte	0xf3
+ 1941 0371 01       		.uleb128 0x1
+ 1942 0372 50       		.byte	0x50
+ 1943 0373 9F       		.byte	0x9f
+ 1944 0374 00000000 		.4byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 50
+
+
+ 1945 0378 00000000 		.4byte	0
+ 1946              	.LLST17:
+ 1947 037c 00000000 		.4byte	.LVL65
+ 1948 0380 08000000 		.4byte	.LVL67
+ 1949 0384 0100     		.2byte	0x1
+ 1950 0386 51       		.byte	0x51
+ 1951 0387 08000000 		.4byte	.LVL67
+ 1952 038b 18000000 		.4byte	.LFE119
+ 1953 038f 0100     		.2byte	0x1
+ 1954 0391 55       		.byte	0x55
+ 1955 0392 00000000 		.4byte	0
+ 1956 0396 00000000 		.4byte	0
+ 1957              	.LLST18:
+ 1958 039a 00000000 		.4byte	.LVL65
+ 1959 039e 06000000 		.4byte	.LVL66
+ 1960 03a2 0100     		.2byte	0x1
+ 1961 03a4 52       		.byte	0x52
+ 1962 03a5 06000000 		.4byte	.LVL66
+ 1963 03a9 10000000 		.4byte	.LVL68
+ 1964 03ad 0100     		.2byte	0x1
+ 1965 03af 54       		.byte	0x54
+ 1966 03b0 10000000 		.4byte	.LVL68
+ 1967 03b4 14000000 		.4byte	.LVL69
+ 1968 03b8 0300     		.2byte	0x3
+ 1969 03ba 74       		.byte	0x74
+ 1970 03bb 7F       		.sleb128 -1
+ 1971 03bc 9F       		.byte	0x9f
+ 1972 03bd 14000000 		.4byte	.LVL69
+ 1973 03c1 18000000 		.4byte	.LFE119
+ 1974 03c5 0100     		.2byte	0x1
+ 1975 03c7 54       		.byte	0x54
+ 1976 03c8 00000000 		.4byte	0
+ 1977 03cc 00000000 		.4byte	0
+ 1978              		.section	.debug_aranges,"",%progbits
+ 1979 0000 64000000 		.4byte	0x64
+ 1980 0004 0200     		.2byte	0x2
+ 1981 0006 00000000 		.4byte	.Ldebug_info0
+ 1982 000a 04       		.byte	0x4
+ 1983 000b 00       		.byte	0
+ 1984 000c 0000     		.2byte	0
+ 1985 000e 0000     		.2byte	0
+ 1986 0010 00000000 		.4byte	.LFB110
+ 1987 0014 4C000000 		.4byte	.LFE110-.LFB110
+ 1988 0018 00000000 		.4byte	.LFB111
+ 1989 001c 30000000 		.4byte	.LFE111-.LFB111
+ 1990 0020 00000000 		.4byte	.LFB112
+ 1991 0024 12000000 		.4byte	.LFE112-.LFB112
+ 1992 0028 00000000 		.4byte	.LFB113
+ 1993 002c 14000000 		.4byte	.LFE113-.LFB113
+ 1994 0030 00000000 		.4byte	.LFB114
+ 1995 0034 04000000 		.4byte	.LFE114-.LFB114
+ 1996 0038 00000000 		.4byte	.LFB115
+ 1997 003c 58000000 		.4byte	.LFE115-.LFB115
+ 1998 0040 00000000 		.4byte	.LFB116
+ 1999 0044 3C000000 		.4byte	.LFE116-.LFB116
+ 2000 0048 00000000 		.4byte	.LFB117
+ 2001 004c 0A000000 		.4byte	.LFE117-.LFB117
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 51
+
+
+ 2002 0050 00000000 		.4byte	.LFB118
+ 2003 0054 1C000000 		.4byte	.LFE118-.LFB118
+ 2004 0058 00000000 		.4byte	.LFB119
+ 2005 005c 18000000 		.4byte	.LFE119-.LFB119
+ 2006 0060 00000000 		.4byte	0
+ 2007 0064 00000000 		.4byte	0
+ 2008              		.section	.debug_ranges,"",%progbits
+ 2009              	.Ldebug_ranges0:
+ 2010 0000 00000000 		.4byte	.LFB110
+ 2011 0004 4C000000 		.4byte	.LFE110
+ 2012 0008 00000000 		.4byte	.LFB111
+ 2013 000c 30000000 		.4byte	.LFE111
+ 2014 0010 00000000 		.4byte	.LFB112
+ 2015 0014 12000000 		.4byte	.LFE112
+ 2016 0018 00000000 		.4byte	.LFB113
+ 2017 001c 14000000 		.4byte	.LFE113
+ 2018 0020 00000000 		.4byte	.LFB114
+ 2019 0024 04000000 		.4byte	.LFE114
+ 2020 0028 00000000 		.4byte	.LFB115
+ 2021 002c 58000000 		.4byte	.LFE115
+ 2022 0030 00000000 		.4byte	.LFB116
+ 2023 0034 3C000000 		.4byte	.LFE116
+ 2024 0038 00000000 		.4byte	.LFB117
+ 2025 003c 0A000000 		.4byte	.LFE117
+ 2026 0040 00000000 		.4byte	.LFB118
+ 2027 0044 1C000000 		.4byte	.LFE118
+ 2028 0048 00000000 		.4byte	.LFB119
+ 2029 004c 18000000 		.4byte	.LFE119
+ 2030 0050 00000000 		.4byte	0
+ 2031 0054 00000000 		.4byte	0
+ 2032              		.section	.debug_line,"",%progbits
+ 2033              	.Ldebug_line0:
+ 2034 0000 60030000 		.section	.debug_str,"MS",%progbits,1
+ 2034      02003C02 
+ 2034      00000201 
+ 2034      FB0E0D00 
+ 2034      01010101 
+ 2035              	.LASF55:
+ 2036 0000 656D4669 		.ascii	"emFile_SPI0_ReadRxData\000"
+ 2036      6C655F53 
+ 2036      5049305F 
+ 2036      52656164 
+ 2036      52784461 
+ 2037              	.LASF28:
+ 2038 0017 46535F4D 		.ascii	"FS_MMC_HW_X_IsWriteProtected\000"
+ 2038      4D435F48 
+ 2038      575F585F 
+ 2038      49735772 
+ 2038      69746550 
+ 2039              	.LASF27:
+ 2040 0034 77705374 		.ascii	"wpState\000"
+ 2040      61746500 
+ 2041              	.LASF52:
+ 2042 003c 656D4669 		.ascii	"emFile_SPI0_Start\000"
+ 2042      6C655F53 
+ 2042      5049305F 
+ 2042      53746172 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 52
+
+
+ 2042      7400
+ 2043              	.LASF59:
+ 2044 004e 433A5C48 		.ascii	"C:\\H_da\\SS26\\Research Project\\Workspace01\\MP3_"
+ 2044      5F64615C 
+ 2044      53533236 
+ 2044      5C526573 
+ 2044      65617263 
+ 2045 007c 76342E63 		.ascii	"v4.cydsn\000"
+ 2045      7964736E 
+ 2045      00
+ 2046              	.LASF11:
+ 2047 0085 5F5F696E 		.ascii	"__int32_t\000"
+ 2047      7433325F 
+ 2047      7400
+ 2048              	.LASF1:
+ 2049 008f 73686F72 		.ascii	"short unsigned int\000"
+ 2049      7420756E 
+ 2049      7369676E 
+ 2049      65642069 
+ 2049      6E7400
+ 2050              	.LASF49:
+ 2051 00a2 656D4669 		.ascii	"emFile_Clock_1_Stop\000"
+ 2051      6C655F43 
+ 2051      6C6F636B 
+ 2051      5F315F53 
+ 2051      746F7000 
+ 2052              	.LASF21:
+ 2053 00b6 45455F54 		.ascii	"EE_TID\000"
+ 2053      494400
+ 2054              	.LASF50:
+ 2055 00bd 656D4669 		.ascii	"emFile_Clock_1_SetDividerRegister\000"
+ 2055      6C655F43 
+ 2055      6C6F636B 
+ 2055      5F315F53 
+ 2055      65744469 
+ 2056              	.LASF14:
+ 2057 00df 666C6F61 		.ascii	"float\000"
+ 2057      7400
+ 2058              	.LASF10:
+ 2059 00e5 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2059      206C6F6E 
+ 2059      6720756E 
+ 2059      7369676E 
+ 2059      65642069 
+ 2060              	.LASF17:
+ 2061 00fc 45455F49 		.ascii	"EE_INT32\000"
+ 2061      4E543332 
+ 2061      00
+ 2062              	.LASF3:
+ 2063 0105 756E7369 		.ascii	"unsigned char\000"
+ 2063      676E6564 
+ 2063      20636861 
+ 2063      7200
+ 2064              	.LASF57:
+ 2065 0113 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2065      43313120 
+ 2065      352E342E 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 53
+
+
+ 2065      31203230 
+ 2065      31363036 
+ 2066 0146 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2066      20726576 
+ 2066      6973696F 
+ 2066      6E203233 
+ 2066      37373135 
+ 2067 0179 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 2067      66756E63 
+ 2067      74696F6E 
+ 2067      2D736563 
+ 2067      74696F6E 
+ 2068              	.LASF18:
+ 2069 01a1 45455F55 		.ascii	"EE_UINT32\000"
+ 2069      494E5433 
+ 2069      3200
+ 2070              	.LASF29:
+ 2071 01ab 46535F4D 		.ascii	"FS_MMC_HW_X_SetMaxSpeed\000"
+ 2071      4D435F48 
+ 2071      575F585F 
+ 2071      5365744D 
+ 2071      61785370 
+ 2072              	.LASF2:
+ 2073 01c3 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2073      20756E73 
+ 2073      69676E65 
+ 2073      6420696E 
+ 2073      7400
+ 2074              	.LASF54:
+ 2075 01d5 656D4669 		.ascii	"emFile_SPI0_ReadTxStatus\000"
+ 2075      6C655F53 
+ 2075      5049305F 
+ 2075      52656164 
+ 2075      54785374 
+ 2076              	.LASF38:
+ 2077 01ee 46535F4D 		.ascii	"FS_MMC_HW_X_Read\000"
+ 2077      4D435F48 
+ 2077      575F585F 
+ 2077      52656164 
+ 2077      00
+ 2078              	.LASF43:
+ 2079 01ff 45455F6F 		.ascii	"EE_oo_IRQ_disable_count\000"
+ 2079      6F5F4952 
+ 2079      515F6469 
+ 2079      7361626C 
+ 2079      655F636F 
+ 2080              	.LASF48:
+ 2081 0217 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 2081      52784275 
+ 2081      66666572 
+ 2081      00
+ 2082              	.LASF58:
+ 2083 0224 47656E65 		.ascii	"Generated_Source\\PSoC5\\emFile_MMC_HW_SPI.c\000"
+ 2083      72617465 
+ 2083      645F536F 
+ 2083      75726365 
+ 2083      5C50536F 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 54
+
+
+ 2084              	.LASF15:
+ 2085 024f 646F7562 		.ascii	"double\000"
+ 2085      6C6500
+ 2086              	.LASF24:
+ 2087 0256 46535F4D 		.ascii	"FS_MMC_HW_X_EnableCS\000"
+ 2087      4D435F48 
+ 2087      575F585F 
+ 2087      456E6162 
+ 2087      6C654353 
+ 2088              	.LASF31:
+ 2089 026b 66726571 		.ascii	"freq\000"
+ 2089      00
+ 2090              	.LASF32:
+ 2091 0270 64697652 		.ascii	"divResult\000"
+ 2091      6573756C 
+ 2091      7400
+ 2092              	.LASF30:
+ 2093 027a 4D617846 		.ascii	"MaxFreq\000"
+ 2093      72657100 
+ 2094              	.LASF37:
+ 2095 0282 46535F4D 		.ascii	"FS_MMC_HW_X_IsPresent\000"
+ 2095      4D435F48 
+ 2095      575F585F 
+ 2095      49735072 
+ 2095      6573656E 
+ 2096              	.LASF46:
+ 2097 0298 45455F73 		.ascii	"EE_std_endcycle_next_tid\000"
+ 2097      74645F65 
+ 2097      6E646379 
+ 2097      636C655F 
+ 2097      6E657874 
+ 2098              	.LASF0:
+ 2099 02b1 756E7369 		.ascii	"unsigned int\000"
+ 2099      676E6564 
+ 2099      20696E74 
+ 2099      00
+ 2100              	.LASF20:
+ 2101 02be 45455F46 		.ascii	"EE_FREG\000"
+ 2101      52454700 
+ 2102              	.LASF26:
+ 2103 02c6 73706944 		.ascii	"spiData\000"
+ 2103      61746100 
+ 2104              	.LASF44:
+ 2105 02ce 45455F6F 		.ascii	"EE_oo_IRQ_suspend_status\000"
+ 2105      6F5F4952 
+ 2105      515F7375 
+ 2105      7370656E 
+ 2105      645F7374 
+ 2106              	.LASF5:
+ 2107 02e7 63686172 		.ascii	"char\000"
+ 2107      00
+ 2108              	.LASF35:
+ 2109 02ec 566D6178 		.ascii	"Vmax\000"
+ 2109      00
+ 2110              	.LASF36:
+ 2111 02f1 72657375 		.ascii	"result\000"
+ 2111      6C7400
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 55
+
+
+ 2112              	.LASF45:
+ 2113 02f8 45455F41 		.ascii	"EE_ApplicationMode\000"
+ 2113      70706C69 
+ 2113      63617469 
+ 2113      6F6E4D6F 
+ 2113      646500
+ 2114              	.LASF56:
+ 2115 030b 656D4669 		.ascii	"emFile_SPI0_CS_Write\000"
+ 2115      6C655F53 
+ 2115      5049305F 
+ 2115      43535F57 
+ 2115      72697465 
+ 2116              	.LASF41:
+ 2117 0320 46535F4D 		.ascii	"FS_MMC_HW_X_Write\000"
+ 2117      4D435F48 
+ 2117      575F585F 
+ 2117      57726974 
+ 2117      6500
+ 2118              	.LASF12:
+ 2119 0332 696E7433 		.ascii	"int32_t\000"
+ 2119      325F7400 
+ 2120              	.LASF4:
+ 2121 033a 73697A65 		.ascii	"sizetype\000"
+ 2121      74797065 
+ 2121      00
+ 2122              	.LASF9:
+ 2123 0343 6C6F6E67 		.ascii	"long long int\000"
+ 2123      206C6F6E 
+ 2123      6720696E 
+ 2123      7400
+ 2124              	.LASF40:
+ 2125 0351 4E756D42 		.ascii	"NumBytes\000"
+ 2125      79746573 
+ 2125      00
+ 2126              	.LASF34:
+ 2127 035a 566D696E 		.ascii	"Vmin\000"
+ 2127      00
+ 2128              	.LASF19:
+ 2129 035f 45455F55 		.ascii	"EE_UREG\000"
+ 2129      52454700 
+ 2130              	.LASF47:
+ 2131 0367 45455F49 		.ascii	"EE_IRQ_nesting_level\000"
+ 2131      52515F6E 
+ 2131      65737469 
+ 2131      6E675F6C 
+ 2131      6576656C 
+ 2132              	.LASF6:
+ 2133 037c 73686F72 		.ascii	"short int\000"
+ 2133      7420696E 
+ 2133      7400
+ 2134              	.LASF61:
+ 2135 0386 656D4669 		.ascii	"emFile_ReadWriteSPI\000"
+ 2135      6C655F52 
+ 2135      65616457 
+ 2135      72697465 
+ 2135      53504900 
+ 2136              	.LASF13:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 56
+
+
+ 2137 039a 75696E74 		.ascii	"uint8\000"
+ 2137      3800
+ 2138              	.LASF39:
+ 2139 03a0 70446174 		.ascii	"pData\000"
+ 2139      6100
+ 2140              	.LASF22:
+ 2141 03a6 556E6974 		.ascii	"Unit\000"
+ 2141      00
+ 2142              	.LASF7:
+ 2143 03ab 6C6F6E67 		.ascii	"long int\000"
+ 2143      20696E74 
+ 2143      00
+ 2144              	.LASF60:
+ 2145 03b4 656D4669 		.ascii	"emFile_Init\000"
+ 2145      6C655F49 
+ 2145      6E697400 
+ 2146              	.LASF53:
+ 2147 03c0 656D4669 		.ascii	"emFile_SPI0_WriteTxData\000"
+ 2147      6C655F53 
+ 2147      5049305F 
+ 2147      57726974 
+ 2147      65547844 
+ 2148              	.LASF16:
+ 2149 03d8 6C6F6E67 		.ascii	"long double\000"
+ 2149      20646F75 
+ 2149      626C6500 
+ 2150              	.LASF8:
+ 2151 03e4 7369676E 		.ascii	"signed char\000"
+ 2151      65642063 
+ 2151      68617200 
+ 2152              	.LASF23:
+ 2153 03f0 44617461 		.ascii	"Data\000"
+ 2153      00
+ 2154              	.LASF42:
+ 2155 03f5 656D4669 		.ascii	"emFile_isInited0\000"
+ 2155      6C655F69 
+ 2155      73496E69 
+ 2155      74656430 
+ 2155      00
+ 2156              	.LASF25:
+ 2157 0406 46535F4D 		.ascii	"FS_MMC_HW_X_DisableCS\000"
+ 2157      4D435F48 
+ 2157      575F585F 
+ 2157      44697361 
+ 2157      626C6543 
+ 2158              	.LASF51:
+ 2159 041c 656D4669 		.ascii	"emFile_Clock_1_Start\000"
+ 2159      6C655F43 
+ 2159      6C6F636B 
+ 2159      5F315F53 
+ 2159      74617274 
+ 2160              	.LASF33:
+ 2161 0431 46535F4D 		.ascii	"FS_MMC_HW_X_SetVoltage\000"
+ 2161      4D435F48 
+ 2161      575F585F 
+ 2161      53657456 
+ 2161      6F6C7461 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2UDjFL.s 			page 57
+
+
+ 2162              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,0 +1,1033 @@
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco9Thk0.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"ceh_cfg.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.CEH_debug,"ax",%progbits
+  20              		.align	2
+  21              		.global	CEH_debug
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	CEH_debug, %function
+  25              	CEH_debug:
+  26              	.LFB110:
+  27              		.file 1 "source\\bsw\\Services\\ceh\\ceh_cfg.c"
+   1:source\bsw\Services\ceh/ceh_cfg.c **** /**
+   2:source\bsw\Services\ceh/ceh_cfg.c **** * \file ceh_cfg.c
+   3:source\bsw\Services\ceh/ceh_cfg.c **** * \author Duyen
+   4:source\bsw\Services\ceh/ceh_cfg.c **** * \date 07.02.2025
+   5:source\bsw\Services\ceh/ceh_cfg.c **** *
+   6:source\bsw\Services\ceh/ceh_cfg.c **** * \brief Configuration file for central error handler service
+   7:source\bsw\Services\ceh/ceh_cfg.c **** *
+   8:source\bsw\Services\ceh/ceh_cfg.c **** * User defined functions which are required for the CEH service are implemented here
+   9:source\bsw\Services\ceh/ceh_cfg.c **** *
+  10:source\bsw\Services\ceh/ceh_cfg.c **** * \note <notes>
+  11:source\bsw\Services\ceh/ceh_cfg.c **** * \todo <todos>
+  12:source\bsw\Services\ceh/ceh_cfg.c **** * \warning <warnings, e.g. dependencies, order of execution etc.>
+  13:source\bsw\Services\ceh/ceh_cfg.c **** *
+  14:source\bsw\Services\ceh/ceh_cfg.c **** *  Changelog:\n
+  15:source\bsw\Services\ceh/ceh_cfg.c **** *  - <version; data of change; author>
+  16:source\bsw\Services\ceh/ceh_cfg.c **** *            - <description of the change>
+  17:source\bsw\Services\ceh/ceh_cfg.c **** *
+  18:source\bsw\Services\ceh/ceh_cfg.c **** * \copyright Copyright ©2025
+  19:source\bsw\Services\ceh/ceh_cfg.c **** * Department of electrical engineering and information technology, Hochschule Darmstadt - Universit
+  20:source\bsw\Services\ceh/ceh_cfg.c **** * Permission to use, copy, modify, and distribute this software and its documentation for education
+  21:source\bsw\Services\ceh/ceh_cfg.c **** * (unless permitted by h_da) and official h_da projects, is hereby granted for enrolled students of
+  22:source\bsw\Services\ceh/ceh_cfg.c **** * this paragraph and the following paragraph appear in all copies, modifications, and distributions
+  23:source\bsw\Services\ceh/ceh_cfg.c **** * Contact Prof.Dr.-Ing. Peter Fromm, peter.fromm@h-da.de, Birkenweg 8 64295 Darmstadt - GERMANY for
+  24:source\bsw\Services\ceh/ceh_cfg.c **** *
+  25:source\bsw\Services\ceh/ceh_cfg.c **** * \warning This software is a PROTOTYPE version and is not designed or intended for use in producti
+  26:source\bsw\Services\ceh/ceh_cfg.c **** * The user represents and warrants that it will NOT use or redistribute the Software for such purpo
+  27:source\bsw\Services\ceh/ceh_cfg.c **** * This prototype is for research purposes only. This software is provided "AS IS," without a warran
+  28:source\bsw\Services\ceh/ceh_cfg.c **** */
+  29:source\bsw\Services\ceh/ceh_cfg.c **** 
+  30:source\bsw\Services\ceh/ceh_cfg.c **** #ifndef CEH_CFG_C_
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco9Thk0.s 			page 2
+
+
+  31:source\bsw\Services\ceh/ceh_cfg.c **** #define CEH_CFG_C_
+  32:source\bsw\Services\ceh/ceh_cfg.c **** 
+  33:source\bsw\Services\ceh/ceh_cfg.c **** /*****************************************************************************/
+  34:source\bsw\Services\ceh/ceh_cfg.c **** /* Include files                                                             */
+  35:source\bsw\Services\ceh/ceh_cfg.c **** /*****************************************************************************/
+  36:source\bsw\Services\ceh/ceh_cfg.c **** 
+  37:source\bsw\Services\ceh/ceh_cfg.c **** #include "global.h"
+  38:source\bsw\Services\ceh/ceh_cfg.c **** #include "project.h"
+  39:source\bsw\Services\ceh/ceh_cfg.c **** 
+  40:source\bsw\Services\ceh/ceh_cfg.c **** /*****************************************************************************/
+  41:source\bsw\Services\ceh/ceh_cfg.c **** /* Local pre-processor symbols/macros ('#define')                            */
+  42:source\bsw\Services\ceh/ceh_cfg.c **** /*****************************************************************************/
+  43:source\bsw\Services\ceh/ceh_cfg.c **** 
+  44:source\bsw\Services\ceh/ceh_cfg.c **** 
+  45:source\bsw\Services\ceh/ceh_cfg.c **** 
+  46:source\bsw\Services\ceh/ceh_cfg.c **** 
+  47:source\bsw\Services\ceh/ceh_cfg.c **** /*****************************************************************************/
+  48:source\bsw\Services\ceh/ceh_cfg.c **** /* Global variable definitions (declared in header file with 'extern')       */
+  49:source\bsw\Services\ceh/ceh_cfg.c **** /*****************************************************************************/
+  50:source\bsw\Services\ceh/ceh_cfg.c **** 
+  51:source\bsw\Services\ceh/ceh_cfg.c **** 
+  52:source\bsw\Services\ceh/ceh_cfg.c **** /*****************************************************************************/
+  53:source\bsw\Services\ceh/ceh_cfg.c **** /* Local type definitions ('typedef')                                        */
+  54:source\bsw\Services\ceh/ceh_cfg.c **** /*****************************************************************************/
+  55:source\bsw\Services\ceh/ceh_cfg.c **** 
+  56:source\bsw\Services\ceh/ceh_cfg.c **** 
+  57:source\bsw\Services\ceh/ceh_cfg.c **** /*****************************************************************************/
+  58:source\bsw\Services\ceh/ceh_cfg.c **** /* Local variable definitions ('static')                                     */
+  59:source\bsw\Services\ceh/ceh_cfg.c **** /*****************************************************************************/
+  60:source\bsw\Services\ceh/ceh_cfg.c **** 
+  61:source\bsw\Services\ceh/ceh_cfg.c **** 
+  62:source\bsw\Services\ceh/ceh_cfg.c **** /*****************************************************************************/
+  63:source\bsw\Services\ceh/ceh_cfg.c **** /* Local function prototypes ('static')                                      */
+  64:source\bsw\Services\ceh/ceh_cfg.c **** /*****************************************************************************/
+  65:source\bsw\Services\ceh/ceh_cfg.c **** 
+  66:source\bsw\Services\ceh/ceh_cfg.c **** 
+  67:source\bsw\Services\ceh/ceh_cfg.c **** /*****************************************************************************/
+  68:source\bsw\Services\ceh/ceh_cfg.c **** /* Function implementation - global ('extern') and local ('static')          */
+  69:source\bsw\Services\ceh/ceh_cfg.c **** /*****************************************************************************/
+  70:source\bsw\Services\ceh/ceh_cfg.c **** 
+  71:source\bsw\Services\ceh/ceh_cfg.c **** /**
+  72:source\bsw\Services\ceh/ceh_cfg.c ****  * \brief Callback function if the debug feature is enable for this
+  73:source\bsw\Services\ceh/ceh_cfg.c ****  * error event
+  74:source\bsw\Services\ceh/ceh_cfg.c ****  *
+  75:source\bsw\Services\ceh/ceh_cfg.c ****  */
+  76:source\bsw\Services\ceh/ceh_cfg.c **** void CEH_debug()
+  77:source\bsw\Services\ceh/ceh_cfg.c **** {
+  28              		.loc 1 77 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  78:source\bsw\Services\ceh/ceh_cfg.c **** 	// user defined function
+  79:source\bsw\Services\ceh/ceh_cfg.c **** 
+  80:source\bsw\Services\ceh/ceh_cfg.c **** 	// Debug method depends on build setting
+  81:source\bsw\Services\ceh/ceh_cfg.c **** 	#ifdef DEBUG
+  82:source\bsw\Services\ceh/ceh_cfg.c **** 		//For debugger breakpoint (build configuration set to DEBUG)
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco9Thk0.s 			page 3
+
+
+  83:source\bsw\Services\ceh/ceh_cfg.c **** 		__asm("bkpt");
+  33              		.loc 1 83 0
+  34              		.syntax unified
+  35              	@ 83 "source\bsw\Services\ceh\ceh_cfg.c" 1
+  36 0000 00BE     		bkpt
+  37              	@ 0 "" 2
+  38              		.thumb
+  39              		.syntax unified
+  40 0002 7047     		bx	lr
+  41              		.cfi_endproc
+  42              	.LFE110:
+  43              		.size	CEH_debug, .-CEH_debug
+  44              		.section	.text.CEH_deactiveActor,"ax",%progbits
+  45              		.align	2
+  46              		.global	CEH_deactiveActor
+  47              		.thumb
+  48              		.thumb_func
+  49              		.type	CEH_deactiveActor, %function
+  50              	CEH_deactiveActor:
+  51              	.LFB111:
+  84:source\bsw\Services\ceh/ceh_cfg.c **** 	#elif
+  85:source\bsw\Services\ceh/ceh_cfg.c **** 		//For final system endless loop (build configuration set to RELEASE)
+  86:source\bsw\Services\ceh/ceh_cfg.c **** 		while(1);
+  87:source\bsw\Services\ceh/ceh_cfg.c **** 	#endif
+  88:source\bsw\Services\ceh/ceh_cfg.c **** }
+  89:source\bsw\Services\ceh/ceh_cfg.c **** 
+  90:source\bsw\Services\ceh/ceh_cfg.c **** /**
+  91:source\bsw\Services\ceh/ceh_cfg.c ****  * \brief Callback function when the actuator action for the event
+  92:source\bsw\Services\ceh/ceh_cfg.c ****  * is configured to CEH_STOP
+  93:source\bsw\Services\ceh/ceh_cfg.c ****  *
+  94:source\bsw\Services\ceh/ceh_cfg.c ****  */
+  95:source\bsw\Services\ceh/ceh_cfg.c **** void CEH_deactiveActor()
+  96:source\bsw\Services\ceh/ceh_cfg.c **** {
+  52              		.loc 1 96 0
+  53              		.cfi_startproc
+  54              		@ args = 0, pretend = 0, frame = 0
+  55              		@ frame_needed = 0, uses_anonymous_args = 0
+  56              		@ link register save eliminated.
+  57 0000 7047     		bx	lr
+  58              		.cfi_endproc
+  59              	.LFE111:
+  60              		.size	CEH_deactiveActor, .-CEH_deactiveActor
+  61 0002 00BF     		.section	.text.CEH_emergencyStop,"ax",%progbits
+  62              		.align	2
+  63              		.global	CEH_emergencyStop
+  64              		.thumb
+  65              		.thumb_func
+  66              		.type	CEH_emergencyStop, %function
+  67              	CEH_emergencyStop:
+  68              	.LFB112:
+  97:source\bsw\Services\ceh/ceh_cfg.c **** 	// user defined function
+  98:source\bsw\Services\ceh/ceh_cfg.c **** 
+  99:source\bsw\Services\ceh/ceh_cfg.c **** }
+ 100:source\bsw\Services\ceh/ceh_cfg.c **** 
+ 101:source\bsw\Services\ceh/ceh_cfg.c **** /**
+ 102:source\bsw\Services\ceh/ceh_cfg.c ****  * \brief Callback function when the actuator action for the event
+ 103:source\bsw\Services\ceh/ceh_cfg.c ****  * is configured to CEH_EMERGENCY_STOP
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco9Thk0.s 			page 4
+
+
+ 104:source\bsw\Services\ceh/ceh_cfg.c ****  *
+ 105:source\bsw\Services\ceh/ceh_cfg.c ****  */
+ 106:source\bsw\Services\ceh/ceh_cfg.c **** void CEH_emergencyStop()
+ 107:source\bsw\Services\ceh/ceh_cfg.c **** {
+  69              		.loc 1 107 0
+  70              		.cfi_startproc
+  71              		@ args = 0, pretend = 0, frame = 0
+  72              		@ frame_needed = 0, uses_anonymous_args = 0
+  73              		@ link register save eliminated.
+  74 0000 7047     		bx	lr
+  75              		.cfi_endproc
+  76              	.LFE112:
+  77              		.size	CEH_emergencyStop, .-CEH_emergencyStop
+  78 0002 00BF     		.section	.text.CEH_lock,"ax",%progbits
+  79              		.align	2
+  80              		.global	CEH_lock
+  81              		.thumb
+  82              		.thumb_func
+  83              		.type	CEH_lock, %function
+  84              	CEH_lock:
+  85              	.LFB113:
+ 108:source\bsw\Services\ceh/ceh_cfg.c **** 	// user defined function
+ 109:source\bsw\Services\ceh/ceh_cfg.c **** 
+ 110:source\bsw\Services\ceh/ceh_cfg.c **** }
+ 111:source\bsw\Services\ceh/ceh_cfg.c **** 
+ 112:source\bsw\Services\ceh/ceh_cfg.c **** /**
+ 113:source\bsw\Services\ceh/ceh_cfg.c ****  * \brief Lock the critical region
+ 114:source\bsw\Services\ceh/ceh_cfg.c ****  *
+ 115:source\bsw\Services\ceh/ceh_cfg.c ****  */
+ 116:source\bsw\Services\ceh/ceh_cfg.c **** void CEH_lock()
+ 117:source\bsw\Services\ceh/ceh_cfg.c **** {
+  86              		.loc 1 117 0
+  87              		.cfi_startproc
+  88              		@ args = 0, pretend = 0, frame = 0
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90              		@ link register save eliminated.
+  91 0000 7047     		bx	lr
+  92              		.cfi_endproc
+  93              	.LFE113:
+  94              		.size	CEH_lock, .-CEH_lock
+  95 0002 00BF     		.section	.text.CEH_unlock,"ax",%progbits
+  96              		.align	2
+  97              		.global	CEH_unlock
+  98              		.thumb
+  99              		.thumb_func
+ 100              		.type	CEH_unlock, %function
+ 101              	CEH_unlock:
+ 102              	.LFB114:
+ 118:source\bsw\Services\ceh/ceh_cfg.c **** 	// user defined function
+ 119:source\bsw\Services\ceh/ceh_cfg.c **** 	// Mutex required?
+ 120:source\bsw\Services\ceh/ceh_cfg.c **** }
+ 121:source\bsw\Services\ceh/ceh_cfg.c **** 
+ 122:source\bsw\Services\ceh/ceh_cfg.c **** /**
+ 123:source\bsw\Services\ceh/ceh_cfg.c ****  * \brief Unlock the critical region
+ 124:source\bsw\Services\ceh/ceh_cfg.c ****  *
+ 125:source\bsw\Services\ceh/ceh_cfg.c ****  */
+ 126:source\bsw\Services\ceh/ceh_cfg.c **** void CEH_unlock()
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco9Thk0.s 			page 5
+
+
+ 127:source\bsw\Services\ceh/ceh_cfg.c **** {
+ 103              		.loc 1 127 0
+ 104              		.cfi_startproc
+ 105              		@ args = 0, pretend = 0, frame = 0
+ 106              		@ frame_needed = 0, uses_anonymous_args = 0
+ 107              		@ link register save eliminated.
+ 108 0000 7047     		bx	lr
+ 109              		.cfi_endproc
+ 110              	.LFE114:
+ 111              		.size	CEH_unlock, .-CEH_unlock
+ 112 0002 00BF     		.section	.text.CEH_getTimeInMs,"ax",%progbits
+ 113              		.align	2
+ 114              		.global	CEH_getTimeInMs
+ 115              		.thumb
+ 116              		.thumb_func
+ 117              		.type	CEH_getTimeInMs, %function
+ 118              	CEH_getTimeInMs:
+ 119              	.LFB115:
+ 128:source\bsw\Services\ceh/ceh_cfg.c **** 	// user defined function
+ 129:source\bsw\Services\ceh/ceh_cfg.c **** 	// Mutex required?
+ 130:source\bsw\Services\ceh/ceh_cfg.c **** }
+ 131:source\bsw\Services\ceh/ceh_cfg.c **** 
+ 132:source\bsw\Services\ceh/ceh_cfg.c **** /**
+ 133:source\bsw\Services\ceh/ceh_cfg.c ****  * \brief Get the time in millisecond
+ 134:source\bsw\Services\ceh/ceh_cfg.c ****  *
+ 135:source\bsw\Services\ceh/ceh_cfg.c ****  * \return uint32_t		: [OUT] Current time in millisecond
+ 136:source\bsw\Services\ceh/ceh_cfg.c ****  */
+ 137:source\bsw\Services\ceh/ceh_cfg.c **** uint32_t CEH_getTimeInMs()
+ 138:source\bsw\Services\ceh/ceh_cfg.c **** {
+ 120              		.loc 1 138 0
+ 121              		.cfi_startproc
+ 122              		@ args = 0, pretend = 0, frame = 8
+ 123              		@ frame_needed = 0, uses_anonymous_args = 0
+ 124              		.loc 1 138 0
+ 125 0000 00B5     		push	{lr}
+ 126              		.cfi_def_cfa_offset 4
+ 127              		.cfi_offset 14, -4
+ 128 0002 83B0     		sub	sp, sp, #12
+ 129              		.cfi_def_cfa_offset 16
+ 139:source\bsw\Services\ceh/ceh_cfg.c ****     TickType t = 0;
+ 130              		.loc 1 139 0
+ 131 0004 0020     		movs	r0, #0
+ 132 0006 02A9     		add	r1, sp, #8
+ 133 0008 41F8040D 		str	r0, [r1, #-4]!
+ 140:source\bsw\Services\ceh/ceh_cfg.c ****     GetCounterValue(cnt_systick, &t);
+ 134              		.loc 1 140 0
+ 135 000c FFF7FEFF 		bl	EE_oo_GetCounterValue
+ 136              	.LVL0:
+ 141:source\bsw\Services\ceh/ceh_cfg.c **** 	return (uint32_t) t;
+ 142:source\bsw\Services\ceh/ceh_cfg.c **** }
+ 137              		.loc 1 142 0
+ 138 0010 0198     		ldr	r0, [sp, #4]
+ 139 0012 03B0     		add	sp, sp, #12
+ 140              		.cfi_def_cfa_offset 4
+ 141              		@ sp needed
+ 142 0014 5DF804FB 		ldr	pc, [sp], #4
+ 143              		.cfi_endproc
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco9Thk0.s 			page 6
+
+
+ 144              	.LFE115:
+ 145              		.size	CEH_getTimeInMs, .-CEH_getTimeInMs
+ 146              		.text
+ 147              	.Letext0:
+ 148              		.file 2 ".\\source\\bsw/global.h"
+ 149              		.file 3 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
+ 150              		.file 4 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
+ 151              		.file 5 "Generated_Source\\PSoC5/ErikaOS_1_common_ee_types.inc"
+ 152              		.file 6 "Generated_Source\\PSoC5/ErikaOS_1_cortex_mx_ee_cpu.inc"
+ 153              		.file 7 "Generated_Source\\PSoC5/ErikaOS_1_ee_oo_common.inc"
+ 154              		.file 8 "Generated_Source\\PSoC5/ErikaOS_1_ee_oo_intfunc.inc"
+ 155              		.file 9 "Generated_Source\\PSoC5/ErikaOS_1_cortex_mx_ee_context.inc"
+ 156              		.file 10 "Generated_Source\\PSoC5/ErikaOS_1_common_ee_primitives.inc"
+ 157              		.file 11 "Generated_Source\\PSoC5/core_cm3.h"
+ 158              		.file 12 "Generated_Source\\PSoC5/ErikaOS_1_ee_oo_kernel.inc"
+ 159              		.section	.debug_info,"",%progbits
+ 160              	.Ldebug_info0:
+ 161 0000 D3010000 		.4byte	0x1d3
+ 162 0004 0400     		.2byte	0x4
+ 163 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 164 000a 04       		.byte	0x4
+ 165 000b 01       		.uleb128 0x1
+ 166 000c 7E000000 		.4byte	.LASF34
+ 167 0010 0C       		.byte	0xc
+ 168 0011 9C020000 		.4byte	.LASF35
+ 169 0015 00000000 		.4byte	.LASF36
+ 170 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 171 001d 00000000 		.4byte	0
+ 172 0021 00000000 		.4byte	.Ldebug_line0
+ 173 0025 02       		.uleb128 0x2
+ 174 0026 04       		.byte	0x4
+ 175 0027 07       		.byte	0x7
+ 176 0028 CA010000 		.4byte	.LASF0
+ 177 002c 02       		.uleb128 0x2
+ 178 002d 01       		.byte	0x1
+ 179 002e 06       		.byte	0x6
+ 180 002f 85020000 		.4byte	.LASF1
+ 181 0033 02       		.uleb128 0x2
+ 182 0034 01       		.byte	0x1
+ 183 0035 08       		.byte	0x8
+ 184 0036 70000000 		.4byte	.LASF2
+ 185 003a 02       		.uleb128 0x2
+ 186 003b 02       		.byte	0x2
+ 187 003c 05       		.byte	0x5
+ 188 003d 54020000 		.4byte	.LASF3
+ 189 0041 02       		.uleb128 0x2
+ 190 0042 02       		.byte	0x2
+ 191 0043 07       		.byte	0x7
+ 192 0044 39010000 		.4byte	.LASF4
+ 193 0048 02       		.uleb128 0x2
+ 194 0049 04       		.byte	0x4
+ 195 004a 05       		.byte	0x5
+ 196 004b 41000000 		.4byte	.LASF5
+ 197 004f 03       		.uleb128 0x3
+ 198 0050 5E020000 		.4byte	.LASF12
+ 199 0054 02       		.byte	0x2
+ 200 0055 96       		.byte	0x96
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco9Thk0.s 			page 7
+
+
+ 201 0056 5A000000 		.4byte	0x5a
+ 202 005a 02       		.uleb128 0x2
+ 203 005b 04       		.byte	0x4
+ 204 005c 07       		.byte	0x7
+ 205 005d 27010000 		.4byte	.LASF6
+ 206 0061 02       		.uleb128 0x2
+ 207 0062 04       		.byte	0x4
+ 208 0063 04       		.byte	0x4
+ 209 0064 6A000000 		.4byte	.LASF7
+ 210 0068 02       		.uleb128 0x2
+ 211 0069 08       		.byte	0x8
+ 212 006a 04       		.byte	0x4
+ 213 006b 97010000 		.4byte	.LASF8
+ 214 006f 02       		.uleb128 0x2
+ 215 0070 08       		.byte	0x8
+ 216 0071 05       		.byte	0x5
+ 217 0072 24020000 		.4byte	.LASF9
+ 218 0076 02       		.uleb128 0x2
+ 219 0077 08       		.byte	0x8
+ 220 0078 07       		.byte	0x7
+ 221 0079 E9010000 		.4byte	.LASF10
+ 222 007d 02       		.uleb128 0x2
+ 223 007e 01       		.byte	0x1
+ 224 007f 08       		.byte	0x8
+ 225 0080 32020000 		.4byte	.LASF11
+ 226 0084 03       		.uleb128 0x3
+ 227 0085 37000000 		.4byte	.LASF13
+ 228 0089 03       		.byte	0x3
+ 229 008a 3F       		.byte	0x3f
+ 230 008b 48000000 		.4byte	0x48
+ 231 008f 04       		.uleb128 0x4
+ 232 0090 04       		.byte	0x4
+ 233 0091 05       		.byte	0x5
+ 234 0092 696E7400 		.ascii	"int\000"
+ 235 0096 03       		.uleb128 0x3
+ 236 0097 13020000 		.4byte	.LASF14
+ 237 009b 04       		.byte	0x4
+ 238 009c 2C       		.byte	0x2c
+ 239 009d 84000000 		.4byte	0x84
+ 240 00a1 02       		.uleb128 0x2
+ 241 00a2 08       		.byte	0x8
+ 242 00a3 04       		.byte	0x4
+ 243 00a4 79020000 		.4byte	.LASF15
+ 244 00a8 03       		.uleb128 0x3
+ 245 00a9 1E010000 		.4byte	.LASF16
+ 246 00ad 05       		.byte	0x5
+ 247 00ae 53       		.byte	0x53
+ 248 00af 8F000000 		.4byte	0x8f
+ 249 00b3 03       		.uleb128 0x3
+ 250 00b4 DF010000 		.4byte	.LASF17
+ 251 00b8 05       		.byte	0x5
+ 252 00b9 54       		.byte	0x54
+ 253 00ba 25000000 		.4byte	0x25
+ 254 00be 03       		.uleb128 0x3
+ 255 00bf 37020000 		.4byte	.LASF18
+ 256 00c3 06       		.byte	0x6
+ 257 00c4 4D       		.byte	0x4d
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco9Thk0.s 			page 8
+
+
+ 258 00c5 B3000000 		.4byte	0xb3
+ 259 00c9 03       		.uleb128 0x3
+ 260 00ca D7010000 		.4byte	.LASF19
+ 261 00ce 06       		.byte	0x6
+ 262 00cf 4F       		.byte	0x4f
+ 263 00d0 B3000000 		.4byte	0xb3
+ 264 00d4 03       		.uleb128 0x3
+ 265 00d5 63000000 		.4byte	.LASF20
+ 266 00d9 06       		.byte	0x6
+ 267 00da 78       		.byte	0x78
+ 268 00db A8000000 		.4byte	0xa8
+ 269 00df 05       		.uleb128 0x5
+ 270 00e0 BE020000 		.4byte	.LASF21
+ 271 00e4 07       		.byte	0x7
+ 272 00e5 3502     		.2byte	0x235
+ 273 00e7 BE000000 		.4byte	0xbe
+ 274 00eb 02       		.uleb128 0x2
+ 275 00ec 04       		.byte	0x4
+ 276 00ed 07       		.byte	0x7
+ 277 00ee 1B020000 		.4byte	.LASF22
+ 278 00f2 06       		.uleb128 0x6
+ 279 00f3 A7010000 		.4byte	.LASF23
+ 280 00f7 01       		.byte	0x1
+ 281 00f8 4C       		.byte	0x4c
+ 282 00f9 00000000 		.4byte	.LFB110
+ 283 00fd 04000000 		.4byte	.LFE110-.LFB110
+ 284 0101 01       		.uleb128 0x1
+ 285 0102 9C       		.byte	0x9c
+ 286 0103 06       		.uleb128 0x6
+ 287 0104 67020000 		.4byte	.LASF24
+ 288 0108 01       		.byte	0x1
+ 289 0109 5F       		.byte	0x5f
+ 290 010a 00000000 		.4byte	.LFB111
+ 291 010e 02000000 		.4byte	.LFE111-.LFB111
+ 292 0112 01       		.uleb128 0x1
+ 293 0113 9C       		.byte	0x9c
+ 294 0114 06       		.uleb128 0x6
+ 295 0115 0C010000 		.4byte	.LASF25
+ 296 0119 01       		.byte	0x1
+ 297 011a 6A       		.byte	0x6a
+ 298 011b 00000000 		.4byte	.LFB112
+ 299 011f 02000000 		.4byte	.LFE112-.LFB112
+ 300 0123 01       		.uleb128 0x1
+ 301 0124 9C       		.byte	0x9c
+ 302 0125 06       		.uleb128 0x6
+ 303 0126 9E010000 		.4byte	.LASF26
+ 304 012a 01       		.byte	0x1
+ 305 012b 74       		.byte	0x74
+ 306 012c 00000000 		.4byte	.LFB113
+ 307 0130 02000000 		.4byte	.LFE113-.LFB113
+ 308 0134 01       		.uleb128 0x1
+ 309 0135 9C       		.byte	0x9c
+ 310 0136 06       		.uleb128 0x6
+ 311 0137 91020000 		.4byte	.LASF27
+ 312 013b 01       		.byte	0x1
+ 313 013c 7E       		.byte	0x7e
+ 314 013d 00000000 		.4byte	.LFB114
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco9Thk0.s 			page 9
+
+
+ 315 0141 02000000 		.4byte	.LFE114-.LFB114
+ 316 0145 01       		.uleb128 0x1
+ 317 0146 9C       		.byte	0x9c
+ 318 0147 07       		.uleb128 0x7
+ 319 0148 71010000 		.4byte	.LASF37
+ 320 014c 01       		.byte	0x1
+ 321 014d 89       		.byte	0x89
+ 322 014e 4F000000 		.4byte	0x4f
+ 323 0152 00000000 		.4byte	.LFB115
+ 324 0156 18000000 		.4byte	.LFE115-.LFB115
+ 325 015a 01       		.uleb128 0x1
+ 326 015b 9C       		.byte	0x9c
+ 327 015c 82010000 		.4byte	0x182
+ 328 0160 08       		.uleb128 0x8
+ 329 0161 7400     		.ascii	"t\000"
+ 330 0163 01       		.byte	0x1
+ 331 0164 8B       		.byte	0x8b
+ 332 0165 DF000000 		.4byte	0xdf
+ 333 0169 02       		.uleb128 0x2
+ 334 016a 91       		.byte	0x91
+ 335 016b 74       		.sleb128 -12
+ 336 016c 09       		.uleb128 0x9
+ 337 016d 10000000 		.4byte	.LVL0
+ 338 0171 CA010000 		.4byte	0x1ca
+ 339 0175 0A       		.uleb128 0xa
+ 340 0176 01       		.uleb128 0x1
+ 341 0177 50       		.byte	0x50
+ 342 0178 01       		.uleb128 0x1
+ 343 0179 30       		.byte	0x30
+ 344 017a 0A       		.uleb128 0xa
+ 345 017b 01       		.uleb128 0x1
+ 346 017c 51       		.byte	0x51
+ 347 017d 02       		.uleb128 0x2
+ 348 017e 91       		.byte	0x91
+ 349 017f 74       		.sleb128 -12
+ 350 0180 00       		.byte	0
+ 351 0181 00       		.byte	0
+ 352 0182 0B       		.uleb128 0xb
+ 353 0183 4C010000 		.4byte	.LASF28
+ 354 0187 08       		.byte	0x8
+ 355 0188 40       		.byte	0x40
+ 356 0189 BE000000 		.4byte	0xbe
+ 357 018d 0B       		.uleb128 0xb
+ 358 018e 4A000000 		.4byte	.LASF29
+ 359 0192 08       		.byte	0x8
+ 360 0193 47       		.byte	0x47
+ 361 0194 C9000000 		.4byte	0xc9
+ 362 0198 0B       		.uleb128 0xb
+ 363 0199 00020000 		.4byte	.LASF30
+ 364 019d 08       		.byte	0x8
+ 365 019e 4A       		.byte	0x4a
+ 366 019f BE000000 		.4byte	0xbe
+ 367 01a3 0B       		.uleb128 0xb
+ 368 01a4 B1010000 		.4byte	.LASF31
+ 369 01a8 09       		.byte	0x9
+ 370 01a9 48       		.byte	0x48
+ 371 01aa D4000000 		.4byte	0xd4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco9Thk0.s 			page 10
+
+
+ 372 01ae 0B       		.uleb128 0xb
+ 373 01af 3F020000 		.4byte	.LASF32
+ 374 01b3 0A       		.byte	0xa
+ 375 01b4 44       		.byte	0x44
+ 376 01b5 BE000000 		.4byte	0xbe
+ 377 01b9 0C       		.uleb128 0xc
+ 378 01ba 64010000 		.4byte	.LASF33
+ 379 01be 0B       		.byte	0xb
+ 380 01bf 1207     		.2byte	0x712
+ 381 01c1 C5010000 		.4byte	0x1c5
+ 382 01c5 0D       		.uleb128 0xd
+ 383 01c6 96000000 		.4byte	0x96
+ 384 01ca 0E       		.uleb128 0xe
+ 385 01cb 81010000 		.4byte	.LASF38
+ 386 01cf 81010000 		.4byte	.LASF38
+ 387 01d3 0C       		.byte	0xc
+ 388 01d4 B001     		.2byte	0x1b0
+ 389 01d6 00       		.byte	0
+ 390              		.section	.debug_abbrev,"",%progbits
+ 391              	.Ldebug_abbrev0:
+ 392 0000 01       		.uleb128 0x1
+ 393 0001 11       		.uleb128 0x11
+ 394 0002 01       		.byte	0x1
+ 395 0003 25       		.uleb128 0x25
+ 396 0004 0E       		.uleb128 0xe
+ 397 0005 13       		.uleb128 0x13
+ 398 0006 0B       		.uleb128 0xb
+ 399 0007 03       		.uleb128 0x3
+ 400 0008 0E       		.uleb128 0xe
+ 401 0009 1B       		.uleb128 0x1b
+ 402 000a 0E       		.uleb128 0xe
+ 403 000b 55       		.uleb128 0x55
+ 404 000c 17       		.uleb128 0x17
+ 405 000d 11       		.uleb128 0x11
+ 406 000e 01       		.uleb128 0x1
+ 407 000f 10       		.uleb128 0x10
+ 408 0010 17       		.uleb128 0x17
+ 409 0011 00       		.byte	0
+ 410 0012 00       		.byte	0
+ 411 0013 02       		.uleb128 0x2
+ 412 0014 24       		.uleb128 0x24
+ 413 0015 00       		.byte	0
+ 414 0016 0B       		.uleb128 0xb
+ 415 0017 0B       		.uleb128 0xb
+ 416 0018 3E       		.uleb128 0x3e
+ 417 0019 0B       		.uleb128 0xb
+ 418 001a 03       		.uleb128 0x3
+ 419 001b 0E       		.uleb128 0xe
+ 420 001c 00       		.byte	0
+ 421 001d 00       		.byte	0
+ 422 001e 03       		.uleb128 0x3
+ 423 001f 16       		.uleb128 0x16
+ 424 0020 00       		.byte	0
+ 425 0021 03       		.uleb128 0x3
+ 426 0022 0E       		.uleb128 0xe
+ 427 0023 3A       		.uleb128 0x3a
+ 428 0024 0B       		.uleb128 0xb
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco9Thk0.s 			page 11
+
+
+ 429 0025 3B       		.uleb128 0x3b
+ 430 0026 0B       		.uleb128 0xb
+ 431 0027 49       		.uleb128 0x49
+ 432 0028 13       		.uleb128 0x13
+ 433 0029 00       		.byte	0
+ 434 002a 00       		.byte	0
+ 435 002b 04       		.uleb128 0x4
+ 436 002c 24       		.uleb128 0x24
+ 437 002d 00       		.byte	0
+ 438 002e 0B       		.uleb128 0xb
+ 439 002f 0B       		.uleb128 0xb
+ 440 0030 3E       		.uleb128 0x3e
+ 441 0031 0B       		.uleb128 0xb
+ 442 0032 03       		.uleb128 0x3
+ 443 0033 08       		.uleb128 0x8
+ 444 0034 00       		.byte	0
+ 445 0035 00       		.byte	0
+ 446 0036 05       		.uleb128 0x5
+ 447 0037 16       		.uleb128 0x16
+ 448 0038 00       		.byte	0
+ 449 0039 03       		.uleb128 0x3
+ 450 003a 0E       		.uleb128 0xe
+ 451 003b 3A       		.uleb128 0x3a
+ 452 003c 0B       		.uleb128 0xb
+ 453 003d 3B       		.uleb128 0x3b
+ 454 003e 05       		.uleb128 0x5
+ 455 003f 49       		.uleb128 0x49
+ 456 0040 13       		.uleb128 0x13
+ 457 0041 00       		.byte	0
+ 458 0042 00       		.byte	0
+ 459 0043 06       		.uleb128 0x6
+ 460 0044 2E       		.uleb128 0x2e
+ 461 0045 00       		.byte	0
+ 462 0046 3F       		.uleb128 0x3f
+ 463 0047 19       		.uleb128 0x19
+ 464 0048 03       		.uleb128 0x3
+ 465 0049 0E       		.uleb128 0xe
+ 466 004a 3A       		.uleb128 0x3a
+ 467 004b 0B       		.uleb128 0xb
+ 468 004c 3B       		.uleb128 0x3b
+ 469 004d 0B       		.uleb128 0xb
+ 470 004e 11       		.uleb128 0x11
+ 471 004f 01       		.uleb128 0x1
+ 472 0050 12       		.uleb128 0x12
+ 473 0051 06       		.uleb128 0x6
+ 474 0052 40       		.uleb128 0x40
+ 475 0053 18       		.uleb128 0x18
+ 476 0054 9742     		.uleb128 0x2117
+ 477 0056 19       		.uleb128 0x19
+ 478 0057 00       		.byte	0
+ 479 0058 00       		.byte	0
+ 480 0059 07       		.uleb128 0x7
+ 481 005a 2E       		.uleb128 0x2e
+ 482 005b 01       		.byte	0x1
+ 483 005c 3F       		.uleb128 0x3f
+ 484 005d 19       		.uleb128 0x19
+ 485 005e 03       		.uleb128 0x3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco9Thk0.s 			page 12
+
+
+ 486 005f 0E       		.uleb128 0xe
+ 487 0060 3A       		.uleb128 0x3a
+ 488 0061 0B       		.uleb128 0xb
+ 489 0062 3B       		.uleb128 0x3b
+ 490 0063 0B       		.uleb128 0xb
+ 491 0064 49       		.uleb128 0x49
+ 492 0065 13       		.uleb128 0x13
+ 493 0066 11       		.uleb128 0x11
+ 494 0067 01       		.uleb128 0x1
+ 495 0068 12       		.uleb128 0x12
+ 496 0069 06       		.uleb128 0x6
+ 497 006a 40       		.uleb128 0x40
+ 498 006b 18       		.uleb128 0x18
+ 499 006c 9742     		.uleb128 0x2117
+ 500 006e 19       		.uleb128 0x19
+ 501 006f 01       		.uleb128 0x1
+ 502 0070 13       		.uleb128 0x13
+ 503 0071 00       		.byte	0
+ 504 0072 00       		.byte	0
+ 505 0073 08       		.uleb128 0x8
+ 506 0074 34       		.uleb128 0x34
+ 507 0075 00       		.byte	0
+ 508 0076 03       		.uleb128 0x3
+ 509 0077 08       		.uleb128 0x8
+ 510 0078 3A       		.uleb128 0x3a
+ 511 0079 0B       		.uleb128 0xb
+ 512 007a 3B       		.uleb128 0x3b
+ 513 007b 0B       		.uleb128 0xb
+ 514 007c 49       		.uleb128 0x49
+ 515 007d 13       		.uleb128 0x13
+ 516 007e 02       		.uleb128 0x2
+ 517 007f 18       		.uleb128 0x18
+ 518 0080 00       		.byte	0
+ 519 0081 00       		.byte	0
+ 520 0082 09       		.uleb128 0x9
+ 521 0083 898201   		.uleb128 0x4109
+ 522 0086 01       		.byte	0x1
+ 523 0087 11       		.uleb128 0x11
+ 524 0088 01       		.uleb128 0x1
+ 525 0089 31       		.uleb128 0x31
+ 526 008a 13       		.uleb128 0x13
+ 527 008b 00       		.byte	0
+ 528 008c 00       		.byte	0
+ 529 008d 0A       		.uleb128 0xa
+ 530 008e 8A8201   		.uleb128 0x410a
+ 531 0091 00       		.byte	0
+ 532 0092 02       		.uleb128 0x2
+ 533 0093 18       		.uleb128 0x18
+ 534 0094 9142     		.uleb128 0x2111
+ 535 0096 18       		.uleb128 0x18
+ 536 0097 00       		.byte	0
+ 537 0098 00       		.byte	0
+ 538 0099 0B       		.uleb128 0xb
+ 539 009a 34       		.uleb128 0x34
+ 540 009b 00       		.byte	0
+ 541 009c 03       		.uleb128 0x3
+ 542 009d 0E       		.uleb128 0xe
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco9Thk0.s 			page 13
+
+
+ 543 009e 3A       		.uleb128 0x3a
+ 544 009f 0B       		.uleb128 0xb
+ 545 00a0 3B       		.uleb128 0x3b
+ 546 00a1 0B       		.uleb128 0xb
+ 547 00a2 49       		.uleb128 0x49
+ 548 00a3 13       		.uleb128 0x13
+ 549 00a4 3F       		.uleb128 0x3f
+ 550 00a5 19       		.uleb128 0x19
+ 551 00a6 3C       		.uleb128 0x3c
+ 552 00a7 19       		.uleb128 0x19
+ 553 00a8 00       		.byte	0
+ 554 00a9 00       		.byte	0
+ 555 00aa 0C       		.uleb128 0xc
+ 556 00ab 34       		.uleb128 0x34
+ 557 00ac 00       		.byte	0
+ 558 00ad 03       		.uleb128 0x3
+ 559 00ae 0E       		.uleb128 0xe
+ 560 00af 3A       		.uleb128 0x3a
+ 561 00b0 0B       		.uleb128 0xb
+ 562 00b1 3B       		.uleb128 0x3b
+ 563 00b2 05       		.uleb128 0x5
+ 564 00b3 49       		.uleb128 0x49
+ 565 00b4 13       		.uleb128 0x13
+ 566 00b5 3F       		.uleb128 0x3f
+ 567 00b6 19       		.uleb128 0x19
+ 568 00b7 3C       		.uleb128 0x3c
+ 569 00b8 19       		.uleb128 0x19
+ 570 00b9 00       		.byte	0
+ 571 00ba 00       		.byte	0
+ 572 00bb 0D       		.uleb128 0xd
+ 573 00bc 35       		.uleb128 0x35
+ 574 00bd 00       		.byte	0
+ 575 00be 49       		.uleb128 0x49
+ 576 00bf 13       		.uleb128 0x13
+ 577 00c0 00       		.byte	0
+ 578 00c1 00       		.byte	0
+ 579 00c2 0E       		.uleb128 0xe
+ 580 00c3 2E       		.uleb128 0x2e
+ 581 00c4 00       		.byte	0
+ 582 00c5 3F       		.uleb128 0x3f
+ 583 00c6 19       		.uleb128 0x19
+ 584 00c7 3C       		.uleb128 0x3c
+ 585 00c8 19       		.uleb128 0x19
+ 586 00c9 6E       		.uleb128 0x6e
+ 587 00ca 0E       		.uleb128 0xe
+ 588 00cb 03       		.uleb128 0x3
+ 589 00cc 0E       		.uleb128 0xe
+ 590 00cd 3A       		.uleb128 0x3a
+ 591 00ce 0B       		.uleb128 0xb
+ 592 00cf 3B       		.uleb128 0x3b
+ 593 00d0 05       		.uleb128 0x5
+ 594 00d1 00       		.byte	0
+ 595 00d2 00       		.byte	0
+ 596 00d3 00       		.byte	0
+ 597              		.section	.debug_aranges,"",%progbits
+ 598 0000 44000000 		.4byte	0x44
+ 599 0004 0200     		.2byte	0x2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco9Thk0.s 			page 14
+
+
+ 600 0006 00000000 		.4byte	.Ldebug_info0
+ 601 000a 04       		.byte	0x4
+ 602 000b 00       		.byte	0
+ 603 000c 0000     		.2byte	0
+ 604 000e 0000     		.2byte	0
+ 605 0010 00000000 		.4byte	.LFB110
+ 606 0014 04000000 		.4byte	.LFE110-.LFB110
+ 607 0018 00000000 		.4byte	.LFB111
+ 608 001c 02000000 		.4byte	.LFE111-.LFB111
+ 609 0020 00000000 		.4byte	.LFB112
+ 610 0024 02000000 		.4byte	.LFE112-.LFB112
+ 611 0028 00000000 		.4byte	.LFB113
+ 612 002c 02000000 		.4byte	.LFE113-.LFB113
+ 613 0030 00000000 		.4byte	.LFB114
+ 614 0034 02000000 		.4byte	.LFE114-.LFB114
+ 615 0038 00000000 		.4byte	.LFB115
+ 616 003c 18000000 		.4byte	.LFE115-.LFB115
+ 617 0040 00000000 		.4byte	0
+ 618 0044 00000000 		.4byte	0
+ 619              		.section	.debug_ranges,"",%progbits
+ 620              	.Ldebug_ranges0:
+ 621 0000 00000000 		.4byte	.LFB110
+ 622 0004 04000000 		.4byte	.LFE110
+ 623 0008 00000000 		.4byte	.LFB111
+ 624 000c 02000000 		.4byte	.LFE111
+ 625 0010 00000000 		.4byte	.LFB112
+ 626 0014 02000000 		.4byte	.LFE112
+ 627 0018 00000000 		.4byte	.LFB113
+ 628 001c 02000000 		.4byte	.LFE113
+ 629 0020 00000000 		.4byte	.LFB114
+ 630 0024 02000000 		.4byte	.LFE114
+ 631 0028 00000000 		.4byte	.LFB115
+ 632 002c 18000000 		.4byte	.LFE115
+ 633 0030 00000000 		.4byte	0
+ 634 0034 00000000 		.4byte	0
+ 635              		.section	.debug_line,"",%progbits
+ 636              	.Ldebug_line0:
+ 637 0000 C4020000 		.section	.debug_str,"MS",%progbits,1
+ 637      02005902 
+ 637      00000201 
+ 637      FB0E0D00 
+ 637      01010101 
+ 638              	.LASF36:
+ 639 0000 433A5C48 		.ascii	"C:\\H_da\\SS26\\Research Project\\Workspace01\\MP3_"
+ 639      5F64615C 
+ 639      53533236 
+ 639      5C526573 
+ 639      65617263 
+ 640 002e 76342E63 		.ascii	"v4.cydsn\000"
+ 640      7964736E 
+ 640      00
+ 641              	.LASF13:
+ 642 0037 5F5F696E 		.ascii	"__int32_t\000"
+ 642      7433325F 
+ 642      7400
+ 643              	.LASF5:
+ 644 0041 6C6F6E67 		.ascii	"long int\000"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco9Thk0.s 			page 15
+
+
+ 644      20696E74 
+ 644      00
+ 645              	.LASF29:
+ 646 004a 45455F6F 		.ascii	"EE_oo_IRQ_suspend_status\000"
+ 646      6F5F4952 
+ 646      515F7375 
+ 646      7370656E 
+ 646      645F7374 
+ 647              	.LASF20:
+ 648 0063 45455F54 		.ascii	"EE_TID\000"
+ 648      494400
+ 649              	.LASF7:
+ 650 006a 666C6F61 		.ascii	"float\000"
+ 650      7400
+ 651              	.LASF2:
+ 652 0070 756E7369 		.ascii	"unsigned char\000"
+ 652      676E6564 
+ 652      20636861 
+ 652      7200
+ 653              	.LASF34:
+ 654 007e 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 654      43313120 
+ 654      352E342E 
+ 654      31203230 
+ 654      31363036 
+ 655 00b1 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 655      20726576 
+ 655      6973696F 
+ 655      6E203233 
+ 655      37373135 
+ 656 00e4 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 656      66756E63 
+ 656      74696F6E 
+ 656      2D736563 
+ 656      74696F6E 
+ 657              	.LASF25:
+ 658 010c 4345485F 		.ascii	"CEH_emergencyStop\000"
+ 658      656D6572 
+ 658      67656E63 
+ 658      7953746F 
+ 658      7000
+ 659              	.LASF16:
+ 660 011e 45455F49 		.ascii	"EE_INT32\000"
+ 660      4E543332 
+ 660      00
+ 661              	.LASF6:
+ 662 0127 6C6F6E67 		.ascii	"long unsigned int\000"
+ 662      20756E73 
+ 662      69676E65 
+ 662      6420696E 
+ 662      7400
+ 663              	.LASF4:
+ 664 0139 73686F72 		.ascii	"short unsigned int\000"
+ 664      7420756E 
+ 664      7369676E 
+ 664      65642069 
+ 664      6E7400
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco9Thk0.s 			page 16
+
+
+ 665              	.LASF28:
+ 666 014c 45455F6F 		.ascii	"EE_oo_IRQ_disable_count\000"
+ 666      6F5F4952 
+ 666      515F6469 
+ 666      7361626C 
+ 666      655F636F 
+ 667              	.LASF33:
+ 668 0164 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 668      52784275 
+ 668      66666572 
+ 668      00
+ 669              	.LASF37:
+ 670 0171 4345485F 		.ascii	"CEH_getTimeInMs\000"
+ 670      67657454 
+ 670      696D6549 
+ 670      6E4D7300 
+ 671              	.LASF38:
+ 672 0181 45455F6F 		.ascii	"EE_oo_GetCounterValue\000"
+ 672      6F5F4765 
+ 672      74436F75 
+ 672      6E746572 
+ 672      56616C75 
+ 673              	.LASF8:
+ 674 0197 646F7562 		.ascii	"double\000"
+ 674      6C6500
+ 675              	.LASF26:
+ 676 019e 4345485F 		.ascii	"CEH_lock\000"
+ 676      6C6F636B 
+ 676      00
+ 677              	.LASF23:
+ 678 01a7 4345485F 		.ascii	"CEH_debug\000"
+ 678      64656275 
+ 678      6700
+ 679              	.LASF31:
+ 680 01b1 45455F73 		.ascii	"EE_std_endcycle_next_tid\000"
+ 680      74645F65 
+ 680      6E646379 
+ 680      636C655F 
+ 680      6E657874 
+ 681              	.LASF0:
+ 682 01ca 756E7369 		.ascii	"unsigned int\000"
+ 682      676E6564 
+ 682      20696E74 
+ 682      00
+ 683              	.LASF19:
+ 684 01d7 45455F46 		.ascii	"EE_FREG\000"
+ 684      52454700 
+ 685              	.LASF17:
+ 686 01df 45455F55 		.ascii	"EE_UINT32\000"
+ 686      494E5433 
+ 686      3200
+ 687              	.LASF10:
+ 688 01e9 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 688      206C6F6E 
+ 688      6720756E 
+ 688      7369676E 
+ 688      65642069 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco9Thk0.s 			page 17
+
+
+ 689              	.LASF30:
+ 690 0200 45455F41 		.ascii	"EE_ApplicationMode\000"
+ 690      70706C69 
+ 690      63617469 
+ 690      6F6E4D6F 
+ 690      646500
+ 691              	.LASF14:
+ 692 0213 696E7433 		.ascii	"int32_t\000"
+ 692      325F7400 
+ 693              	.LASF22:
+ 694 021b 73697A65 		.ascii	"sizetype\000"
+ 694      74797065 
+ 694      00
+ 695              	.LASF9:
+ 696 0224 6C6F6E67 		.ascii	"long long int\000"
+ 696      206C6F6E 
+ 696      6720696E 
+ 696      7400
+ 697              	.LASF11:
+ 698 0232 63686172 		.ascii	"char\000"
+ 698      00
+ 699              	.LASF18:
+ 700 0237 45455F55 		.ascii	"EE_UREG\000"
+ 700      52454700 
+ 701              	.LASF32:
+ 702 023f 45455F49 		.ascii	"EE_IRQ_nesting_level\000"
+ 702      52515F6E 
+ 702      65737469 
+ 702      6E675F6C 
+ 702      6576656C 
+ 703              	.LASF3:
+ 704 0254 73686F72 		.ascii	"short int\000"
+ 704      7420696E 
+ 704      7400
+ 705              	.LASF12:
+ 706 025e 75696E74 		.ascii	"uint32_t\000"
+ 706      33325F74 
+ 706      00
+ 707              	.LASF24:
+ 708 0267 4345485F 		.ascii	"CEH_deactiveActor\000"
+ 708      64656163 
+ 708      74697665 
+ 708      4163746F 
+ 708      7200
+ 709              	.LASF15:
+ 710 0279 6C6F6E67 		.ascii	"long double\000"
+ 710      20646F75 
+ 710      626C6500 
+ 711              	.LASF1:
+ 712 0285 7369676E 		.ascii	"signed char\000"
+ 712      65642063 
+ 712      68617200 
+ 713              	.LASF27:
+ 714 0291 4345485F 		.ascii	"CEH_unlock\000"
+ 714      756E6C6F 
+ 714      636B00
+ 715              	.LASF35:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cco9Thk0.s 			page 18
+
+
+ 716 029c 736F7572 		.ascii	"source\\bsw\\Services\\ceh\\ceh_cfg.c\000"
+ 716      63655C62 
+ 716      73775C53 
+ 716      65727669 
+ 716      6365735C 
+ 717              	.LASF21:
+ 718 02be 5469636B 		.ascii	"TickType\000"
+ 718      54797065 
+ 718      00
+ 719              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

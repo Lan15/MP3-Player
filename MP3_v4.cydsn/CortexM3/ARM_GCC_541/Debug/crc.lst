@@ -1,0 +1,983 @@
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2bHOdS.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"crc.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.CRC_calc8,"ax",%progbits
+  20              		.align	2
+  21              		.global	CRC_calc8
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	CRC_calc8, %function
+  25              	CRC_calc8:
+  26              	.LFB0:
+  27              		.file 1 "source\\bsw\\Services\\math\\crc.c"
+   1:source\bsw\Services\math/crc.c **** /*******************************************************************************
+   2:source\bsw\Services\math/crc.c **** * File Name: crc.c
+   3:source\bsw\Services\math/crc.c **** *
+   4:source\bsw\Services\math/crc.c **** * Version: 1.10
+   5:source\bsw\Services\math/crc.c **** *
+   6:source\bsw\Services\math/crc.c **** * author : marzi
+   7:source\bsw\Services\math/crc.c **** * Description: the crc8 and crc16 calculation (table calculation is also included)
+   8:source\bsw\Services\math/crc.c **** *
+   9:source\bsw\Services\math/crc.c **** ********************************************************************************
+  10:source\bsw\Services\math/crc.c **** *******************************************************************************/
+  11:source\bsw\Services\math/crc.c **** 
+  12:source\bsw\Services\math/crc.c **** #include "crc.h"
+  13:source\bsw\Services\math/crc.c **** 
+  14:source\bsw\Services\math/crc.c **** 
+  15:source\bsw\Services\math/crc.c **** 
+  16:source\bsw\Services\math/crc.c **** /**
+  17:source\bsw\Services\math/crc.c ****  * calculating crc8 
+  18:source\bsw\Services\math/crc.c ****  * \param   CRC8_t const * const me     : [IN] configuration for the CRC calculation
+  19:source\bsw\Services\math/crc.c ****  * \param   uint8_t* data               : [IN] pointer to data
+  20:source\bsw\Services\math/crc.c ****  * \param   uint16_t len                : [IN] size of data
+  21:source\bsw\Services\math/crc.c ****  * \return calculated CRC8 value
+  22:source\bsw\Services\math/crc.c **** */
+  23:source\bsw\Services\math/crc.c **** uint8_t CRC_calc8(CRC8_t const * const me, uint8_t* data, uint16_t len)
+  24:source\bsw\Services\math/crc.c **** {
+  28              		.loc 1 24 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2bHOdS.s 			page 2
+
+
+  34 0000 70B4     		push	{r4, r5, r6}
+  35              		.cfi_def_cfa_offset 12
+  36              		.cfi_offset 4, -12
+  37              		.cfi_offset 5, -8
+  38              		.cfi_offset 6, -4
+  39 0002 0646     		mov	r6, r0
+  40              	.LVL1:
+  41              	.LBB2:
+  25:source\bsw\Services\math/crc.c ****      uint8_t crc = 0x00; // init value
+  26:source\bsw\Services\math/crc.c ****      for (uint16_t i = 0; i < len; i++) {
+  42              		.loc 1 26 0
+  43 0004 0023     		movs	r3, #0
+  44              	.LBE2:
+  25:source\bsw\Services\math/crc.c ****      uint8_t crc = 0x00; // init value
+  45              		.loc 1 25 0
+  46 0006 1846     		mov	r0, r3
+  47              	.LVL2:
+  48              	.LBB3:
+  49              		.loc 1 26 0
+  50 0008 05E0     		b	.L2
+  51              	.LVL3:
+  52              	.L3:
+  27:source\bsw\Services\math/crc.c ****           crc =  me->table[data[i] ^ crc];
+  53              		.loc 1 27 0 discriminator 3
+  54 000a 3568     		ldr	r5, [r6]
+  55 000c CC5C     		ldrb	r4, [r1, r3]	@ zero_extendqisi2
+  56 000e 4440     		eors	r4, r4, r0
+  57 0010 285D     		ldrb	r0, [r5, r4]	@ zero_extendqisi2
+  58              	.LVL4:
+  26:source\bsw\Services\math/crc.c ****           crc =  me->table[data[i] ^ crc];
+  59              		.loc 1 26 0 discriminator 3
+  60 0012 0133     		adds	r3, r3, #1
+  61              	.LVL5:
+  62 0014 9BB2     		uxth	r3, r3
+  63              	.LVL6:
+  64              	.L2:
+  26:source\bsw\Services\math/crc.c ****           crc =  me->table[data[i] ^ crc];
+  65              		.loc 1 26 0 is_stmt 0 discriminator 1
+  66 0016 9342     		cmp	r3, r2
+  67 0018 F7D3     		bcc	.L3
+  68              	.LBE3:
+  28:source\bsw\Services\math/crc.c ****       }
+  29:source\bsw\Services\math/crc.c ****     return crc;
+  30:source\bsw\Services\math/crc.c ****  }
+  69              		.loc 1 30 0 is_stmt 1
+  70 001a 70BC     		pop	{r4, r5, r6}
+  71              		.cfi_restore 6
+  72              		.cfi_restore 5
+  73              		.cfi_restore 4
+  74              		.cfi_def_cfa_offset 0
+  75              	.LVL7:
+  76 001c 7047     		bx	lr
+  77              		.cfi_endproc
+  78              	.LFE0:
+  79              		.size	CRC_calc8, .-CRC_calc8
+  80 001e 00BF     		.section	.text.CRC_calc16,"ax",%progbits
+  81              		.align	2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2bHOdS.s 			page 3
+
+
+  82              		.global	CRC_calc16
+  83              		.thumb
+  84              		.thumb_func
+  85              		.type	CRC_calc16, %function
+  86              	CRC_calc16:
+  87              	.LFB1:
+  31:source\bsw\Services\math/crc.c **** 
+  32:source\bsw\Services\math/crc.c **** 
+  33:source\bsw\Services\math/crc.c **** /**
+  34:source\bsw\Services\math/crc.c ****  * calculating crc16
+  35:source\bsw\Services\math/crc.c ****  * \param   CRC16_t const * const me    : [IN] configuration for the CRC calculation
+  36:source\bsw\Services\math/crc.c ****  * \param   uint8_t* data               : [IN] pointer to data
+  37:source\bsw\Services\math/crc.c ****  * \param   uint16_t len                : [IN] size of data
+  38:source\bsw\Services\math/crc.c ****  * \return calculated CRC8 value
+  39:source\bsw\Services\math/crc.c **** */
+  40:source\bsw\Services\math/crc.c **** uint16_t CRC_calc16(CRC16_t const * const me, uint8_t* data, uint16_t len)
+  41:source\bsw\Services\math/crc.c **** {
+  88              		.loc 1 41 0
+  89              		.cfi_startproc
+  90              		@ args = 0, pretend = 0, frame = 0
+  91              		@ frame_needed = 0, uses_anonymous_args = 0
+  92              		@ link register save eliminated.
+  93              	.LVL8:
+  94 0000 70B4     		push	{r4, r5, r6}
+  95              		.cfi_def_cfa_offset 12
+  96              		.cfi_offset 4, -12
+  97              		.cfi_offset 5, -8
+  98              		.cfi_offset 6, -4
+  99              	.LVL9:
+ 100              	.LBB4:
+  42:source\bsw\Services\math/crc.c **** 	uint16_t crc = 0;   //Initial value
+  43:source\bsw\Services\math/crc.c ****     for (uint16_t i = 0; i < len; i++)
+ 101              		.loc 1 43 0
+ 102 0002 0023     		movs	r3, #0
+ 103              	.LBE4:
+  42:source\bsw\Services\math/crc.c **** 	uint16_t crc = 0;   //Initial value
+ 104              		.loc 1 42 0
+ 105 0004 1C46     		mov	r4, r3
+ 106              	.LBB6:
+ 107              		.loc 1 43 0
+ 108 0006 0AE0     		b	.L6
+ 109              	.LVL10:
+ 110              	.L7:
+ 111              	.LBB5:
+  44:source\bsw\Services\math/crc.c ****     {
+  45:source\bsw\Services\math/crc.c ****         /* XOR-in next input byte into MSB of crc, that's our new intermediate divident */
+  46:source\bsw\Services\math/crc.c ****     	uint8_t pos = (uint8_t)( (crc >> 8) ^ data[i]); /* equal: ((crc ^ (b << 8)) >> 8) */
+ 112              		.loc 1 46 0 discriminator 3
+ 113 0008 CD5C     		ldrb	r5, [r1, r3]	@ zero_extendqisi2
+ 114 000a 85EA1425 		eor	r5, r5, r4, lsr #8
+ 115              	.LVL11:
+  47:source\bsw\Services\math/crc.c ****         /* Shift out the MSB used for division per lookuptable and XOR with the remainder */
+  48:source\bsw\Services\math/crc.c ****         crc = (uint16_t)((crc << 8) ^ (uint16_t)(me->table[pos]));
+ 116              		.loc 1 48 0 discriminator 3
+ 117 000e 0668     		ldr	r6, [r0]
+ 118 0010 36F81550 		ldrh	r5, [r6, r5, lsl #1]
+ 119              	.LVL12:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2bHOdS.s 			page 4
+
+
+ 120 0014 85EA0424 		eor	r4, r5, r4, lsl #8
+ 121              	.LVL13:
+ 122 0018 A4B2     		uxth	r4, r4
+ 123              	.LVL14:
+ 124              	.LBE5:
+  43:source\bsw\Services\math/crc.c ****     {
+ 125              		.loc 1 43 0 discriminator 3
+ 126 001a 0133     		adds	r3, r3, #1
+ 127              	.LVL15:
+ 128 001c 9BB2     		uxth	r3, r3
+ 129              	.LVL16:
+ 130              	.L6:
+  43:source\bsw\Services\math/crc.c ****     {
+ 131              		.loc 1 43 0 is_stmt 0 discriminator 1
+ 132 001e 9342     		cmp	r3, r2
+ 133 0020 F2D3     		bcc	.L7
+ 134              	.LBE6:
+  49:source\bsw\Services\math/crc.c **** 
+  50:source\bsw\Services\math/crc.c ****     }
+  51:source\bsw\Services\math/crc.c **** 
+  52:source\bsw\Services\math/crc.c ****     return crc;
+  53:source\bsw\Services\math/crc.c **** }
+ 135              		.loc 1 53 0 is_stmt 1
+ 136 0022 2046     		mov	r0, r4
+ 137              	.LVL17:
+ 138 0024 70BC     		pop	{r4, r5, r6}
+ 139              		.cfi_restore 6
+ 140              		.cfi_restore 5
+ 141              		.cfi_restore 4
+ 142              		.cfi_def_cfa_offset 0
+ 143              	.LVL18:
+ 144 0026 7047     		bx	lr
+ 145              		.cfi_endproc
+ 146              	.LFE1:
+ 147              		.size	CRC_calc16, .-CRC_calc16
+ 148              		.text
+ 149              	.Letext0:
+ 150              		.file 2 ".\\source\\bsw/global.h"
+ 151              		.file 3 "source\\bsw\\Services\\math\\crc_type.h"
+ 152              		.section	.debug_info,"",%progbits
+ 153              	.Ldebug_info0:
+ 154 0000 0B020000 		.4byte	0x20b
+ 155 0004 0400     		.2byte	0x4
+ 156 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 157 000a 04       		.byte	0x4
+ 158 000b 01       		.uleb128 0x1
+ 159 000c 1B000000 		.4byte	.LASF21
+ 160 0010 0C       		.byte	0xc
+ 161 0011 DE000000 		.4byte	.LASF22
+ 162 0015 3B010000 		.4byte	.LASF23
+ 163 0019 30000000 		.4byte	.Ldebug_ranges0+0x30
+ 164 001d 00000000 		.4byte	0
+ 165 0021 00000000 		.4byte	.Ldebug_line0
+ 166 0025 02       		.uleb128 0x2
+ 167 0026 04       		.byte	0x4
+ 168 0027 07       		.byte	0x7
+ 169 0028 0E000000 		.4byte	.LASF0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2bHOdS.s 			page 5
+
+
+ 170 002c 02       		.uleb128 0x2
+ 171 002d 01       		.byte	0x1
+ 172 002e 06       		.byte	0x6
+ 173 002f 95010000 		.4byte	.LASF1
+ 174 0033 03       		.uleb128 0x3
+ 175 0034 10010000 		.4byte	.LASF4
+ 176 0038 02       		.byte	0x2
+ 177 0039 91       		.byte	0x91
+ 178 003a 3E000000 		.4byte	0x3e
+ 179 003e 02       		.uleb128 0x2
+ 180 003f 01       		.byte	0x1
+ 181 0040 08       		.byte	0x8
+ 182 0041 18010000 		.4byte	.LASF2
+ 183 0045 02       		.uleb128 0x2
+ 184 0046 02       		.byte	0x2
+ 185 0047 05       		.byte	0x5
+ 186 0048 AC010000 		.4byte	.LASF3
+ 187 004c 03       		.uleb128 0x3
+ 188 004d B6010000 		.4byte	.LASF5
+ 189 0051 02       		.byte	0x2
+ 190 0052 93       		.byte	0x93
+ 191 0053 57000000 		.4byte	0x57
+ 192 0057 02       		.uleb128 0x2
+ 193 0058 02       		.byte	0x2
+ 194 0059 07       		.byte	0x7
+ 195 005a 82010000 		.4byte	.LASF6
+ 196 005e 02       		.uleb128 0x2
+ 197 005f 04       		.byte	0x4
+ 198 0060 05       		.byte	0x5
+ 199 0061 79010000 		.4byte	.LASF7
+ 200 0065 02       		.uleb128 0x2
+ 201 0066 04       		.byte	0x4
+ 202 0067 07       		.byte	0x7
+ 203 0068 A9000000 		.4byte	.LASF8
+ 204 006c 02       		.uleb128 0x2
+ 205 006d 04       		.byte	0x4
+ 206 006e 04       		.byte	0x4
+ 207 006f A6010000 		.4byte	.LASF9
+ 208 0073 02       		.uleb128 0x2
+ 209 0074 08       		.byte	0x8
+ 210 0075 04       		.byte	0x4
+ 211 0076 72010000 		.4byte	.LASF10
+ 212 007a 02       		.uleb128 0x2
+ 213 007b 08       		.byte	0x8
+ 214 007c 05       		.byte	0x5
+ 215 007d 00000000 		.4byte	.LASF11
+ 216 0081 02       		.uleb128 0x2
+ 217 0082 08       		.byte	0x8
+ 218 0083 07       		.byte	0x7
+ 219 0084 C2000000 		.4byte	.LASF12
+ 220 0088 02       		.uleb128 0x2
+ 221 0089 01       		.byte	0x1
+ 222 008a 08       		.byte	0x8
+ 223 008b 30010000 		.4byte	.LASF13
+ 224 008f 04       		.uleb128 0x4
+ 225 0090 08       		.byte	0x8
+ 226 0091 03       		.byte	0x3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2bHOdS.s 			page 6
+
+
+ 227 0092 2A       		.byte	0x2a
+ 228 0093 B0000000 		.4byte	0xb0
+ 229 0097 05       		.uleb128 0x5
+ 230 0098 35010000 		.4byte	.LASF14
+ 231 009c 03       		.byte	0x3
+ 232 009d 2C       		.byte	0x2c
+ 233 009e BB000000 		.4byte	0xbb
+ 234 00a2 00       		.byte	0
+ 235 00a3 05       		.uleb128 0x5
+ 236 00a4 A1010000 		.4byte	.LASF15
+ 237 00a8 03       		.byte	0x3
+ 238 00a9 2D       		.byte	0x2d
+ 239 00aa 4C000000 		.4byte	0x4c
+ 240 00ae 04       		.byte	0x4
+ 241 00af 00       		.byte	0
+ 242 00b0 06       		.uleb128 0x6
+ 243 00b1 04       		.byte	0x4
+ 244 00b2 B6000000 		.4byte	0xb6
+ 245 00b6 07       		.uleb128 0x7
+ 246 00b7 33000000 		.4byte	0x33
+ 247 00bb 07       		.uleb128 0x7
+ 248 00bc B0000000 		.4byte	0xb0
+ 249 00c0 03       		.uleb128 0x3
+ 250 00c1 BB000000 		.4byte	.LASF16
+ 251 00c5 03       		.byte	0x3
+ 252 00c6 2F       		.byte	0x2f
+ 253 00c7 8F000000 		.4byte	0x8f
+ 254 00cb 04       		.uleb128 0x4
+ 255 00cc 08       		.byte	0x8
+ 256 00cd 03       		.byte	0x3
+ 257 00ce 34       		.byte	0x34
+ 258 00cf EC000000 		.4byte	0xec
+ 259 00d3 05       		.uleb128 0x5
+ 260 00d4 35010000 		.4byte	.LASF14
+ 261 00d8 03       		.byte	0x3
+ 262 00d9 36       		.byte	0x36
+ 263 00da F7000000 		.4byte	0xf7
+ 264 00de 00       		.byte	0
+ 265 00df 05       		.uleb128 0x5
+ 266 00e0 A1010000 		.4byte	.LASF15
+ 267 00e4 03       		.byte	0x3
+ 268 00e5 37       		.byte	0x37
+ 269 00e6 4C000000 		.4byte	0x4c
+ 270 00ea 04       		.byte	0x4
+ 271 00eb 00       		.byte	0
+ 272 00ec 06       		.uleb128 0x6
+ 273 00ed 04       		.byte	0x4
+ 274 00ee F2000000 		.4byte	0xf2
+ 275 00f2 07       		.uleb128 0x7
+ 276 00f3 4C000000 		.4byte	0x4c
+ 277 00f7 07       		.uleb128 0x7
+ 278 00f8 EC000000 		.4byte	0xec
+ 279 00fc 03       		.uleb128 0x3
+ 280 00fd FD000000 		.4byte	.LASF17
+ 281 0101 03       		.byte	0x3
+ 282 0102 39       		.byte	0x39
+ 283 0103 CB000000 		.4byte	0xcb
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2bHOdS.s 			page 7
+
+
+ 284 0107 08       		.uleb128 0x8
+ 285 0108 26010000 		.4byte	.LASF19
+ 286 010c 01       		.byte	0x1
+ 287 010d 17       		.byte	0x17
+ 288 010e 33000000 		.4byte	0x33
+ 289 0112 00000000 		.4byte	.LFB0
+ 290 0116 1E000000 		.4byte	.LFE0-.LFB0
+ 291 011a 01       		.uleb128 0x1
+ 292 011b 9C       		.byte	0x9c
+ 293 011c 6B010000 		.4byte	0x16b
+ 294 0120 09       		.uleb128 0x9
+ 295 0121 6D6500   		.ascii	"me\000"
+ 296 0124 01       		.byte	0x1
+ 297 0125 17       		.byte	0x17
+ 298 0126 76010000 		.4byte	0x176
+ 299 012a 00000000 		.4byte	.LLST0
+ 300 012e 0A       		.uleb128 0xa
+ 301 012f D9000000 		.4byte	.LASF18
+ 302 0133 01       		.byte	0x1
+ 303 0134 17       		.byte	0x17
+ 304 0135 7B010000 		.4byte	0x17b
+ 305 0139 01       		.uleb128 0x1
+ 306 013a 51       		.byte	0x51
+ 307 013b 0B       		.uleb128 0xb
+ 308 013c 6C656E00 		.ascii	"len\000"
+ 309 0140 01       		.byte	0x1
+ 310 0141 17       		.byte	0x17
+ 311 0142 4C000000 		.4byte	0x4c
+ 312 0146 01       		.uleb128 0x1
+ 313 0147 52       		.byte	0x52
+ 314 0148 0C       		.uleb128 0xc
+ 315 0149 63726300 		.ascii	"crc\000"
+ 316 014d 01       		.byte	0x1
+ 317 014e 19       		.byte	0x19
+ 318 014f 33000000 		.4byte	0x33
+ 319 0153 2C000000 		.4byte	.LLST1
+ 320 0157 0D       		.uleb128 0xd
+ 321 0158 00000000 		.4byte	.Ldebug_ranges0+0
+ 322 015c 0C       		.uleb128 0xc
+ 323 015d 6900     		.ascii	"i\000"
+ 324 015f 01       		.byte	0x1
+ 325 0160 1A       		.byte	0x1a
+ 326 0161 4C000000 		.4byte	0x4c
+ 327 0165 4B000000 		.4byte	.LLST2
+ 328 0169 00       		.byte	0
+ 329 016a 00       		.byte	0
+ 330 016b 06       		.uleb128 0x6
+ 331 016c 04       		.byte	0x4
+ 332 016d 71010000 		.4byte	0x171
+ 333 0171 07       		.uleb128 0x7
+ 334 0172 C0000000 		.4byte	0xc0
+ 335 0176 07       		.uleb128 0x7
+ 336 0177 6B010000 		.4byte	0x16b
+ 337 017b 06       		.uleb128 0x6
+ 338 017c 04       		.byte	0x4
+ 339 017d 33000000 		.4byte	0x33
+ 340 0181 08       		.uleb128 0x8
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2bHOdS.s 			page 8
+
+
+ 341 0182 05010000 		.4byte	.LASF20
+ 342 0186 01       		.byte	0x1
+ 343 0187 28       		.byte	0x28
+ 344 0188 4C000000 		.4byte	0x4c
+ 345 018c 00000000 		.4byte	.LFB1
+ 346 0190 28000000 		.4byte	.LFE1-.LFB1
+ 347 0194 01       		.uleb128 0x1
+ 348 0195 9C       		.byte	0x9c
+ 349 0196 FE010000 		.4byte	0x1fe
+ 350 019a 09       		.uleb128 0x9
+ 351 019b 6D6500   		.ascii	"me\000"
+ 352 019e 01       		.byte	0x1
+ 353 019f 28       		.byte	0x28
+ 354 01a0 09020000 		.4byte	0x209
+ 355 01a4 75000000 		.4byte	.LLST3
+ 356 01a8 0A       		.uleb128 0xa
+ 357 01a9 D9000000 		.4byte	.LASF18
+ 358 01ad 01       		.byte	0x1
+ 359 01ae 28       		.byte	0x28
+ 360 01af 7B010000 		.4byte	0x17b
+ 361 01b3 01       		.uleb128 0x1
+ 362 01b4 51       		.byte	0x51
+ 363 01b5 0B       		.uleb128 0xb
+ 364 01b6 6C656E00 		.ascii	"len\000"
+ 365 01ba 01       		.byte	0x1
+ 366 01bb 28       		.byte	0x28
+ 367 01bc 4C000000 		.4byte	0x4c
+ 368 01c0 01       		.uleb128 0x1
+ 369 01c1 52       		.byte	0x52
+ 370 01c2 0C       		.uleb128 0xc
+ 371 01c3 63726300 		.ascii	"crc\000"
+ 372 01c7 01       		.byte	0x1
+ 373 01c8 2A       		.byte	0x2a
+ 374 01c9 4C000000 		.4byte	0x4c
+ 375 01cd 96000000 		.4byte	.LLST4
+ 376 01d1 0D       		.uleb128 0xd
+ 377 01d2 18000000 		.4byte	.Ldebug_ranges0+0x18
+ 378 01d6 0C       		.uleb128 0xc
+ 379 01d7 6900     		.ascii	"i\000"
+ 380 01d9 01       		.byte	0x1
+ 381 01da 2B       		.byte	0x2b
+ 382 01db 4C000000 		.4byte	0x4c
+ 383 01df C0000000 		.4byte	.LLST5
+ 384 01e3 0E       		.uleb128 0xe
+ 385 01e4 08000000 		.4byte	.LBB5
+ 386 01e8 12000000 		.4byte	.LBE5-.LBB5
+ 387 01ec 0C       		.uleb128 0xc
+ 388 01ed 706F7300 		.ascii	"pos\000"
+ 389 01f1 01       		.byte	0x1
+ 390 01f2 2E       		.byte	0x2e
+ 391 01f3 33000000 		.4byte	0x33
+ 392 01f7 EA000000 		.4byte	.LLST6
+ 393 01fb 00       		.byte	0
+ 394 01fc 00       		.byte	0
+ 395 01fd 00       		.byte	0
+ 396 01fe 06       		.uleb128 0x6
+ 397 01ff 04       		.byte	0x4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2bHOdS.s 			page 9
+
+
+ 398 0200 04020000 		.4byte	0x204
+ 399 0204 07       		.uleb128 0x7
+ 400 0205 FC000000 		.4byte	0xfc
+ 401 0209 07       		.uleb128 0x7
+ 402 020a FE010000 		.4byte	0x1fe
+ 403 020e 00       		.byte	0
+ 404              		.section	.debug_abbrev,"",%progbits
+ 405              	.Ldebug_abbrev0:
+ 406 0000 01       		.uleb128 0x1
+ 407 0001 11       		.uleb128 0x11
+ 408 0002 01       		.byte	0x1
+ 409 0003 25       		.uleb128 0x25
+ 410 0004 0E       		.uleb128 0xe
+ 411 0005 13       		.uleb128 0x13
+ 412 0006 0B       		.uleb128 0xb
+ 413 0007 03       		.uleb128 0x3
+ 414 0008 0E       		.uleb128 0xe
+ 415 0009 1B       		.uleb128 0x1b
+ 416 000a 0E       		.uleb128 0xe
+ 417 000b 55       		.uleb128 0x55
+ 418 000c 17       		.uleb128 0x17
+ 419 000d 11       		.uleb128 0x11
+ 420 000e 01       		.uleb128 0x1
+ 421 000f 10       		.uleb128 0x10
+ 422 0010 17       		.uleb128 0x17
+ 423 0011 00       		.byte	0
+ 424 0012 00       		.byte	0
+ 425 0013 02       		.uleb128 0x2
+ 426 0014 24       		.uleb128 0x24
+ 427 0015 00       		.byte	0
+ 428 0016 0B       		.uleb128 0xb
+ 429 0017 0B       		.uleb128 0xb
+ 430 0018 3E       		.uleb128 0x3e
+ 431 0019 0B       		.uleb128 0xb
+ 432 001a 03       		.uleb128 0x3
+ 433 001b 0E       		.uleb128 0xe
+ 434 001c 00       		.byte	0
+ 435 001d 00       		.byte	0
+ 436 001e 03       		.uleb128 0x3
+ 437 001f 16       		.uleb128 0x16
+ 438 0020 00       		.byte	0
+ 439 0021 03       		.uleb128 0x3
+ 440 0022 0E       		.uleb128 0xe
+ 441 0023 3A       		.uleb128 0x3a
+ 442 0024 0B       		.uleb128 0xb
+ 443 0025 3B       		.uleb128 0x3b
+ 444 0026 0B       		.uleb128 0xb
+ 445 0027 49       		.uleb128 0x49
+ 446 0028 13       		.uleb128 0x13
+ 447 0029 00       		.byte	0
+ 448 002a 00       		.byte	0
+ 449 002b 04       		.uleb128 0x4
+ 450 002c 13       		.uleb128 0x13
+ 451 002d 01       		.byte	0x1
+ 452 002e 0B       		.uleb128 0xb
+ 453 002f 0B       		.uleb128 0xb
+ 454 0030 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2bHOdS.s 			page 10
+
+
+ 455 0031 0B       		.uleb128 0xb
+ 456 0032 3B       		.uleb128 0x3b
+ 457 0033 0B       		.uleb128 0xb
+ 458 0034 01       		.uleb128 0x1
+ 459 0035 13       		.uleb128 0x13
+ 460 0036 00       		.byte	0
+ 461 0037 00       		.byte	0
+ 462 0038 05       		.uleb128 0x5
+ 463 0039 0D       		.uleb128 0xd
+ 464 003a 00       		.byte	0
+ 465 003b 03       		.uleb128 0x3
+ 466 003c 0E       		.uleb128 0xe
+ 467 003d 3A       		.uleb128 0x3a
+ 468 003e 0B       		.uleb128 0xb
+ 469 003f 3B       		.uleb128 0x3b
+ 470 0040 0B       		.uleb128 0xb
+ 471 0041 49       		.uleb128 0x49
+ 472 0042 13       		.uleb128 0x13
+ 473 0043 38       		.uleb128 0x38
+ 474 0044 0B       		.uleb128 0xb
+ 475 0045 00       		.byte	0
+ 476 0046 00       		.byte	0
+ 477 0047 06       		.uleb128 0x6
+ 478 0048 0F       		.uleb128 0xf
+ 479 0049 00       		.byte	0
+ 480 004a 0B       		.uleb128 0xb
+ 481 004b 0B       		.uleb128 0xb
+ 482 004c 49       		.uleb128 0x49
+ 483 004d 13       		.uleb128 0x13
+ 484 004e 00       		.byte	0
+ 485 004f 00       		.byte	0
+ 486 0050 07       		.uleb128 0x7
+ 487 0051 26       		.uleb128 0x26
+ 488 0052 00       		.byte	0
+ 489 0053 49       		.uleb128 0x49
+ 490 0054 13       		.uleb128 0x13
+ 491 0055 00       		.byte	0
+ 492 0056 00       		.byte	0
+ 493 0057 08       		.uleb128 0x8
+ 494 0058 2E       		.uleb128 0x2e
+ 495 0059 01       		.byte	0x1
+ 496 005a 3F       		.uleb128 0x3f
+ 497 005b 19       		.uleb128 0x19
+ 498 005c 03       		.uleb128 0x3
+ 499 005d 0E       		.uleb128 0xe
+ 500 005e 3A       		.uleb128 0x3a
+ 501 005f 0B       		.uleb128 0xb
+ 502 0060 3B       		.uleb128 0x3b
+ 503 0061 0B       		.uleb128 0xb
+ 504 0062 27       		.uleb128 0x27
+ 505 0063 19       		.uleb128 0x19
+ 506 0064 49       		.uleb128 0x49
+ 507 0065 13       		.uleb128 0x13
+ 508 0066 11       		.uleb128 0x11
+ 509 0067 01       		.uleb128 0x1
+ 510 0068 12       		.uleb128 0x12
+ 511 0069 06       		.uleb128 0x6
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2bHOdS.s 			page 11
+
+
+ 512 006a 40       		.uleb128 0x40
+ 513 006b 18       		.uleb128 0x18
+ 514 006c 9742     		.uleb128 0x2117
+ 515 006e 19       		.uleb128 0x19
+ 516 006f 01       		.uleb128 0x1
+ 517 0070 13       		.uleb128 0x13
+ 518 0071 00       		.byte	0
+ 519 0072 00       		.byte	0
+ 520 0073 09       		.uleb128 0x9
+ 521 0074 05       		.uleb128 0x5
+ 522 0075 00       		.byte	0
+ 523 0076 03       		.uleb128 0x3
+ 524 0077 08       		.uleb128 0x8
+ 525 0078 3A       		.uleb128 0x3a
+ 526 0079 0B       		.uleb128 0xb
+ 527 007a 3B       		.uleb128 0x3b
+ 528 007b 0B       		.uleb128 0xb
+ 529 007c 49       		.uleb128 0x49
+ 530 007d 13       		.uleb128 0x13
+ 531 007e 02       		.uleb128 0x2
+ 532 007f 17       		.uleb128 0x17
+ 533 0080 00       		.byte	0
+ 534 0081 00       		.byte	0
+ 535 0082 0A       		.uleb128 0xa
+ 536 0083 05       		.uleb128 0x5
+ 537 0084 00       		.byte	0
+ 538 0085 03       		.uleb128 0x3
+ 539 0086 0E       		.uleb128 0xe
+ 540 0087 3A       		.uleb128 0x3a
+ 541 0088 0B       		.uleb128 0xb
+ 542 0089 3B       		.uleb128 0x3b
+ 543 008a 0B       		.uleb128 0xb
+ 544 008b 49       		.uleb128 0x49
+ 545 008c 13       		.uleb128 0x13
+ 546 008d 02       		.uleb128 0x2
+ 547 008e 18       		.uleb128 0x18
+ 548 008f 00       		.byte	0
+ 549 0090 00       		.byte	0
+ 550 0091 0B       		.uleb128 0xb
+ 551 0092 05       		.uleb128 0x5
+ 552 0093 00       		.byte	0
+ 553 0094 03       		.uleb128 0x3
+ 554 0095 08       		.uleb128 0x8
+ 555 0096 3A       		.uleb128 0x3a
+ 556 0097 0B       		.uleb128 0xb
+ 557 0098 3B       		.uleb128 0x3b
+ 558 0099 0B       		.uleb128 0xb
+ 559 009a 49       		.uleb128 0x49
+ 560 009b 13       		.uleb128 0x13
+ 561 009c 02       		.uleb128 0x2
+ 562 009d 18       		.uleb128 0x18
+ 563 009e 00       		.byte	0
+ 564 009f 00       		.byte	0
+ 565 00a0 0C       		.uleb128 0xc
+ 566 00a1 34       		.uleb128 0x34
+ 567 00a2 00       		.byte	0
+ 568 00a3 03       		.uleb128 0x3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2bHOdS.s 			page 12
+
+
+ 569 00a4 08       		.uleb128 0x8
+ 570 00a5 3A       		.uleb128 0x3a
+ 571 00a6 0B       		.uleb128 0xb
+ 572 00a7 3B       		.uleb128 0x3b
+ 573 00a8 0B       		.uleb128 0xb
+ 574 00a9 49       		.uleb128 0x49
+ 575 00aa 13       		.uleb128 0x13
+ 576 00ab 02       		.uleb128 0x2
+ 577 00ac 17       		.uleb128 0x17
+ 578 00ad 00       		.byte	0
+ 579 00ae 00       		.byte	0
+ 580 00af 0D       		.uleb128 0xd
+ 581 00b0 0B       		.uleb128 0xb
+ 582 00b1 01       		.byte	0x1
+ 583 00b2 55       		.uleb128 0x55
+ 584 00b3 17       		.uleb128 0x17
+ 585 00b4 00       		.byte	0
+ 586 00b5 00       		.byte	0
+ 587 00b6 0E       		.uleb128 0xe
+ 588 00b7 0B       		.uleb128 0xb
+ 589 00b8 01       		.byte	0x1
+ 590 00b9 11       		.uleb128 0x11
+ 591 00ba 01       		.uleb128 0x1
+ 592 00bb 12       		.uleb128 0x12
+ 593 00bc 06       		.uleb128 0x6
+ 594 00bd 00       		.byte	0
+ 595 00be 00       		.byte	0
+ 596 00bf 00       		.byte	0
+ 597              		.section	.debug_loc,"",%progbits
+ 598              	.Ldebug_loc0:
+ 599              	.LLST0:
+ 600 0000 00000000 		.4byte	.LVL0
+ 601 0004 08000000 		.4byte	.LVL2
+ 602 0008 0100     		.2byte	0x1
+ 603 000a 50       		.byte	0x50
+ 604 000b 08000000 		.4byte	.LVL2
+ 605 000f 1C000000 		.4byte	.LVL7
+ 606 0013 0100     		.2byte	0x1
+ 607 0015 56       		.byte	0x56
+ 608 0016 1C000000 		.4byte	.LVL7
+ 609 001a 1E000000 		.4byte	.LFE0
+ 610 001e 0400     		.2byte	0x4
+ 611 0020 F3       		.byte	0xf3
+ 612 0021 01       		.uleb128 0x1
+ 613 0022 50       		.byte	0x50
+ 614 0023 9F       		.byte	0x9f
+ 615 0024 00000000 		.4byte	0
+ 616 0028 00000000 		.4byte	0
+ 617              	.LLST1:
+ 618 002c 04000000 		.4byte	.LVL1
+ 619 0030 0A000000 		.4byte	.LVL3
+ 620 0034 0200     		.2byte	0x2
+ 621 0036 30       		.byte	0x30
+ 622 0037 9F       		.byte	0x9f
+ 623 0038 0A000000 		.4byte	.LVL3
+ 624 003c 1E000000 		.4byte	.LFE0
+ 625 0040 0100     		.2byte	0x1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2bHOdS.s 			page 13
+
+
+ 626 0042 50       		.byte	0x50
+ 627 0043 00000000 		.4byte	0
+ 628 0047 00000000 		.4byte	0
+ 629              	.LLST2:
+ 630 004b 04000000 		.4byte	.LVL1
+ 631 004f 0A000000 		.4byte	.LVL3
+ 632 0053 0200     		.2byte	0x2
+ 633 0055 30       		.byte	0x30
+ 634 0056 9F       		.byte	0x9f
+ 635 0057 0A000000 		.4byte	.LVL3
+ 636 005b 14000000 		.4byte	.LVL5
+ 637 005f 0100     		.2byte	0x1
+ 638 0061 53       		.byte	0x53
+ 639 0062 16000000 		.4byte	.LVL6
+ 640 0066 1E000000 		.4byte	.LFE0
+ 641 006a 0100     		.2byte	0x1
+ 642 006c 53       		.byte	0x53
+ 643 006d 00000000 		.4byte	0
+ 644 0071 00000000 		.4byte	0
+ 645              	.LLST3:
+ 646 0075 00000000 		.4byte	.LVL8
+ 647 0079 24000000 		.4byte	.LVL17
+ 648 007d 0100     		.2byte	0x1
+ 649 007f 50       		.byte	0x50
+ 650 0080 24000000 		.4byte	.LVL17
+ 651 0084 28000000 		.4byte	.LFE1
+ 652 0088 0400     		.2byte	0x4
+ 653 008a F3       		.byte	0xf3
+ 654 008b 01       		.uleb128 0x1
+ 655 008c 50       		.byte	0x50
+ 656 008d 9F       		.byte	0x9f
+ 657 008e 00000000 		.4byte	0
+ 658 0092 00000000 		.4byte	0
+ 659              	.LLST4:
+ 660 0096 02000000 		.4byte	.LVL9
+ 661 009a 08000000 		.4byte	.LVL10
+ 662 009e 0200     		.2byte	0x2
+ 663 00a0 30       		.byte	0x30
+ 664 00a1 9F       		.byte	0x9f
+ 665 00a2 08000000 		.4byte	.LVL10
+ 666 00a6 18000000 		.4byte	.LVL13
+ 667 00aa 0100     		.2byte	0x1
+ 668 00ac 54       		.byte	0x54
+ 669 00ad 1A000000 		.4byte	.LVL14
+ 670 00b1 26000000 		.4byte	.LVL18
+ 671 00b5 0100     		.2byte	0x1
+ 672 00b7 54       		.byte	0x54
+ 673 00b8 00000000 		.4byte	0
+ 674 00bc 00000000 		.4byte	0
+ 675              	.LLST5:
+ 676 00c0 02000000 		.4byte	.LVL9
+ 677 00c4 08000000 		.4byte	.LVL10
+ 678 00c8 0200     		.2byte	0x2
+ 679 00ca 30       		.byte	0x30
+ 680 00cb 9F       		.byte	0x9f
+ 681 00cc 08000000 		.4byte	.LVL10
+ 682 00d0 1C000000 		.4byte	.LVL15
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2bHOdS.s 			page 14
+
+
+ 683 00d4 0100     		.2byte	0x1
+ 684 00d6 53       		.byte	0x53
+ 685 00d7 1E000000 		.4byte	.LVL16
+ 686 00db 28000000 		.4byte	.LFE1
+ 687 00df 0100     		.2byte	0x1
+ 688 00e1 53       		.byte	0x53
+ 689 00e2 00000000 		.4byte	0
+ 690 00e6 00000000 		.4byte	0
+ 691              	.LLST6:
+ 692 00ea 0E000000 		.4byte	.LVL11
+ 693 00ee 14000000 		.4byte	.LVL12
+ 694 00f2 0100     		.2byte	0x1
+ 695 00f4 55       		.byte	0x55
+ 696 00f5 14000000 		.4byte	.LVL12
+ 697 00f9 18000000 		.4byte	.LVL13
+ 698 00fd 1000     		.2byte	0x10
+ 699 00ff 74       		.byte	0x74
+ 700 0100 00       		.sleb128 0
+ 701 0101 38       		.byte	0x38
+ 702 0102 25       		.byte	0x25
+ 703 0103 71       		.byte	0x71
+ 704 0104 00       		.sleb128 0
+ 705 0105 73       		.byte	0x73
+ 706 0106 00       		.sleb128 0
+ 707 0107 22       		.byte	0x22
+ 708 0108 94       		.byte	0x94
+ 709 0109 01       		.byte	0x1
+ 710 010a 08       		.byte	0x8
+ 711 010b FF       		.byte	0xff
+ 712 010c 1A       		.byte	0x1a
+ 713 010d 27       		.byte	0x27
+ 714 010e 9F       		.byte	0x9f
+ 715 010f 00000000 		.4byte	0
+ 716 0113 00000000 		.4byte	0
+ 717              		.section	.debug_aranges,"",%progbits
+ 718 0000 24000000 		.4byte	0x24
+ 719 0004 0200     		.2byte	0x2
+ 720 0006 00000000 		.4byte	.Ldebug_info0
+ 721 000a 04       		.byte	0x4
+ 722 000b 00       		.byte	0
+ 723 000c 0000     		.2byte	0
+ 724 000e 0000     		.2byte	0
+ 725 0010 00000000 		.4byte	.LFB0
+ 726 0014 1E000000 		.4byte	.LFE0-.LFB0
+ 727 0018 00000000 		.4byte	.LFB1
+ 728 001c 28000000 		.4byte	.LFE1-.LFB1
+ 729 0020 00000000 		.4byte	0
+ 730 0024 00000000 		.4byte	0
+ 731              		.section	.debug_ranges,"",%progbits
+ 732              	.Ldebug_ranges0:
+ 733 0000 04000000 		.4byte	.LBB2
+ 734 0004 06000000 		.4byte	.LBE2
+ 735 0008 08000000 		.4byte	.LBB3
+ 736 000c 1A000000 		.4byte	.LBE3
+ 737 0010 00000000 		.4byte	0
+ 738 0014 00000000 		.4byte	0
+ 739 0018 02000000 		.4byte	.LBB4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2bHOdS.s 			page 15
+
+
+ 740 001c 04000000 		.4byte	.LBE4
+ 741 0020 06000000 		.4byte	.LBB6
+ 742 0024 22000000 		.4byte	.LBE6
+ 743 0028 00000000 		.4byte	0
+ 744 002c 00000000 		.4byte	0
+ 745 0030 00000000 		.4byte	.LFB0
+ 746 0034 1E000000 		.4byte	.LFE0
+ 747 0038 00000000 		.4byte	.LFB1
+ 748 003c 28000000 		.4byte	.LFE1
+ 749 0040 00000000 		.4byte	0
+ 750 0044 00000000 		.4byte	0
+ 751              		.section	.debug_line,"",%progbits
+ 752              	.Ldebug_line0:
+ 753 0000 B1000000 		.section	.debug_str,"MS",%progbits,1
+ 753      02005C00 
+ 753      00000201 
+ 753      FB0E0D00 
+ 753      01010101 
+ 754              	.LASF11:
+ 755 0000 6C6F6E67 		.ascii	"long long int\000"
+ 755      206C6F6E 
+ 755      6720696E 
+ 755      7400
+ 756              	.LASF0:
+ 757 000e 756E7369 		.ascii	"unsigned int\000"
+ 757      676E6564 
+ 757      20696E74 
+ 757      00
+ 758              	.LASF21:
+ 759 001b 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 759      43313120 
+ 759      352E342E 
+ 759      31203230 
+ 759      31363036 
+ 760 004e 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 760      20726576 
+ 760      6973696F 
+ 760      6E203233 
+ 760      37373135 
+ 761 0081 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 761      66756E63 
+ 761      74696F6E 
+ 761      2D736563 
+ 761      74696F6E 
+ 762              	.LASF8:
+ 763 00a9 6C6F6E67 		.ascii	"long unsigned int\000"
+ 763      20756E73 
+ 763      69676E65 
+ 763      6420696E 
+ 763      7400
+ 764              	.LASF16:
+ 765 00bb 43524338 		.ascii	"CRC8_t\000"
+ 765      5F7400
+ 766              	.LASF12:
+ 767 00c2 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 767      206C6F6E 
+ 767      6720756E 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2bHOdS.s 			page 16
+
+
+ 767      7369676E 
+ 767      65642069 
+ 768              	.LASF18:
+ 769 00d9 64617461 		.ascii	"data\000"
+ 769      00
+ 770              	.LASF22:
+ 771 00de 736F7572 		.ascii	"source\\bsw\\Services\\math\\crc.c\000"
+ 771      63655C62 
+ 771      73775C53 
+ 771      65727669 
+ 771      6365735C 
+ 772              	.LASF17:
+ 773 00fd 43524331 		.ascii	"CRC16_t\000"
+ 773      365F7400 
+ 774              	.LASF20:
+ 775 0105 4352435F 		.ascii	"CRC_calc16\000"
+ 775      63616C63 
+ 775      313600
+ 776              	.LASF4:
+ 777 0110 75696E74 		.ascii	"uint8_t\000"
+ 777      385F7400 
+ 778              	.LASF2:
+ 779 0118 756E7369 		.ascii	"unsigned char\000"
+ 779      676E6564 
+ 779      20636861 
+ 779      7200
+ 780              	.LASF19:
+ 781 0126 4352435F 		.ascii	"CRC_calc8\000"
+ 781      63616C63 
+ 781      3800
+ 782              	.LASF13:
+ 783 0130 63686172 		.ascii	"char\000"
+ 783      00
+ 784              	.LASF14:
+ 785 0135 7461626C 		.ascii	"table\000"
+ 785      6500
+ 786              	.LASF23:
+ 787 013b 433A5C48 		.ascii	"C:\\H_da\\SS26\\Research Project\\Workspace01\\MP3_"
+ 787      5F64615C 
+ 787      53533236 
+ 787      5C526573 
+ 787      65617263 
+ 788 0169 76342E63 		.ascii	"v4.cydsn\000"
+ 788      7964736E 
+ 788      00
+ 789              	.LASF10:
+ 790 0172 646F7562 		.ascii	"double\000"
+ 790      6C6500
+ 791              	.LASF7:
+ 792 0179 6C6F6E67 		.ascii	"long int\000"
+ 792      20696E74 
+ 792      00
+ 793              	.LASF6:
+ 794 0182 73686F72 		.ascii	"short unsigned int\000"
+ 794      7420756E 
+ 794      7369676E 
+ 794      65642069 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc2bHOdS.s 			page 17
+
+
+ 794      6E7400
+ 795              	.LASF1:
+ 796 0195 7369676E 		.ascii	"signed char\000"
+ 796      65642063 
+ 796      68617200 
+ 797              	.LASF15:
+ 798 01a1 73697A65 		.ascii	"size\000"
+ 798      00
+ 799              	.LASF9:
+ 800 01a6 666C6F61 		.ascii	"float\000"
+ 800      7400
+ 801              	.LASF3:
+ 802 01ac 73686F72 		.ascii	"short int\000"
+ 802      7420696E 
+ 802      7400
+ 803              	.LASF5:
+ 804 01b6 75696E74 		.ascii	"uint16_t\000"
+ 804      31365F74 
+ 804      00
+ 805              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

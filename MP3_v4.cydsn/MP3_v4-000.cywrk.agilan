@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CyXmlSerializer>
+<!--This file is machine generated and read. It is not intended to be edited by hand.-->
+<!--Due to this, there is no schema for this file.-->
+<CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspcCustomData" version="4">
+<CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997 type_name="CyDesigner.Common.Base.CyCustomData" version="2">
+<userData>
+<dataGuid v="5f2be1a5-0687-4501-bb8c-cf21cb8211bf">
+<CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf type_name="CyDesigner.Common.ProjMgmt.GUI.CyBookmarkData" version="1">
+<indicators />
+</CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf>
+</dataGuid>
+<dataGuid v="1b906a0f-a7b6-4e4d-a428-82f98b53cb35">
+<CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35 type_name="CyDesigner.Common.ProjMgmt.GUI.CyExplorerWindow+CyExplorerWindowState" version="3" SelectedTab="Source">
+<TreeKeys>
+<v>Source</v>
+<v>Components</v>
+<v>Output</v>
+</TreeKeys>
+<TreeStates>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="MP3_v4-000\MP3_v4\asw\main.c">
+<ExpandedNodeIds>
+<v>MP3_v4-000</v>
+<v>MP3_v4-000\MP3_v4</v>
+<v>MP3_v4-000\MP3_v4\TopDesign</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\Pins</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\Analog</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\Clocks</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\Interrupts</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\DMA</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\System</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\Directives</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\Flash Security</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\EEPROM</v>
+<v>MP3_v4-000\MP3_v4\asw</v>
+<v>MP3_v4-000\MP3_v4\asw\emFile.c</v>
+<v>MP3_v4-000\MP3_v4\asw\emFile.h</v>
+<v>MP3_v4-000\MP3_v4\asw\main.c</v>
+<v>MP3_v4-000\MP3_v4\asw\mp3.c</v>
+<v>MP3_v4-000\MP3_v4\asw\mp3.h</v>
+<v>MP3_v4-000\MP3_v4\asw\sound.c</v>
+<v>MP3_v4-000\MP3_v4\asw\sound.h</v>
+<v>MP3_v4-000\MP3_v4\asw\wav_parser.c</v>
+<v>MP3_v4-000\MP3_v4\asw\wav_parser.h</v>
+<v>MP3_v4-000\MP3_v4\bsw</v>
+<v>MP3_v4-000\MP3_v4\bsw\labboard</v>
+<v>MP3_v4-000\MP3_v4\bsw\labboard\button.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\labboard\button.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\labboard\joystick.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\labboard\joystick.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\labboard\led.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\labboard\led.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\labboard\seven.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\labboard\seven.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\analysis</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\analysis\stackanalysis.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\analysis\stackanalysis.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\analysis\stackanalysis_cfg.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\analysis\stackanalysis_cfg.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\analysis\timing.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\analysis\timing.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\ceh</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\ceh\ceh.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\ceh\ceh.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\ceh\ceh_cfg.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\ceh\ceh_cfg.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\ceh\ceh_log_cfg.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\ceh\ceh_log_cfg.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\ceh\ceh_type.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\ceh\HardFault_Handler.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\ceh\HardFault_Handler.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\ceh\HardFault_Regdef_CM3.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\fsm</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\fsm\statemachine.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\fsm\statemachine.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\fsm\statemachine_type.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\log</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\log\log.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\log\log.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\log\log_cfg.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\log\log_cfg.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\log\sprintf.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\log\sprintf.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\log\sprintf_cfg.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\math</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\math\crc.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\math\crc.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\math\crc_cfg.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\math\crc_cfg.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\math\crc_type.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\math\math_helper.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\message</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\message\eventqueue.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\message\eventqueue.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\message\eventqueue_cfg.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\message\message.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\message\message.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\message\message_cfg.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\message\ringbuffer.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\message\ringbuffer.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\message\ringbuffer_2.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\message\ringbuffer_cfg.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeMono12pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeMono18pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeMono24pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeMono9pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeMonoBold12pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeMonoBold18pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeMonoBold24pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeMonoBold9pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeMonoBoldOblique12pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeMonoBoldOblique18pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeMonoBoldOblique24pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeMonoBoldOblique9pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeMonoOblique12pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeMonoOblique18pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeMonoOblique24pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeMonoOblique9pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSans12pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSans18pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSans24pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSans9pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSansBold12pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSansBold18pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSansBold24pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSansBold9pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSansBoldOblique12pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSansBoldOblique18pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSansBoldOblique24pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSansBoldOblique9pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSansOblique12pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSansOblique18pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSansOblique24pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSansOblique9pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSerif12pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSerif18pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSerif24pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSerif9pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSerifBold12pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSerifBold18pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSerifBold24pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSerifBold9pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSerifBoldItalic12pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSerifBoldItalic18pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSerifBoldItalic24pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSerifBoldItalic9pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSerifItalic12pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSerifItalic18pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSerifItalic24pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\FreeSerifItalic9pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\glcdfont.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\Org_01.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\Picopixel.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\Tiny3x3a2pt7b.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\fonts\TomThumb.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\ST7735.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\tft.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\tft\tft.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tracerecorder</v>
+<v>MP3_v4-000\MP3_v4\bsw\tracerecorder\config</v>
+<v>MP3_v4-000\MP3_v4\bsw\tracerecorder\config\trcConfig.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tracerecorder\config\trcSnapshotConfig.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tracerecorder\config\trcStreamingConfig.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tracerecorder\include</v>
+<v>MP3_v4-000\MP3_v4\bsw\tracerecorder\include\ERIKAPorting.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tracerecorder\include\trcHardwarePort.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tracerecorder\include\trcKernelPort.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tracerecorder\include\trcPortDefines.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tracerecorder\include\trcRecorder.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tracerecorder\streamport</v>
+<v>MP3_v4-000\MP3_v4\bsw\tracerecorder\streamport\trcStreamingPort.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\tracerecorder\streamport\trcStreamingPort.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\tracerecorder\trcKernelPort.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\tracerecorder\trcSnapshotRecorder.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\tracerecorder\trcStreamingRecorder.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\derivate.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\global.h</v>
+<v>MP3_v4-000\MP3_v4\cyapicallbacks.h</v>
+<v>MP3_v4-000\MP3_v4\Generated_Source</v>
+<v>MP3_v4-000\MP3_v4\Generated_Source\PSoC5</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>MP3_v4-000</v>
+<v>MP3_v4-000\MP3_v4</v>
+<v>MP3_v4-000\MP3_v4\TopDesign</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\Pins</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\Analog</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\Clocks</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\Interrupts</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\DMA</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\System</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\Directives</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\Flash Security</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\EEPROM</v>
+<v>MP3_v4-000\MP3_v4\asw</v>
+<v>MP3_v4-000\MP3_v4\asw\emFile.c</v>
+<v>MP3_v4-000\MP3_v4\asw\emFile.h</v>
+<v>MP3_v4-000\MP3_v4\asw\main.c</v>
+<v>MP3_v4-000\MP3_v4\asw\mp3.c</v>
+<v>MP3_v4-000\MP3_v4\asw\mp3.h</v>
+<v>MP3_v4-000\MP3_v4\asw\sound.c</v>
+<v>MP3_v4-000\MP3_v4\asw\sound.h</v>
+<v>MP3_v4-000\MP3_v4\asw\wav_parser.c</v>
+<v>MP3_v4-000\MP3_v4\asw\wav_parser.h</v>
+<v>MP3_v4-000\MP3_v4\bsw</v>
+<v>MP3_v4-000\MP3_v4\bsw\labboard</v>
+<v>MP3_v4-000\MP3_v4\bsw\labboard\button.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\labboard\button.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\labboard\joystick.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\labboard\joystick.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\labboard\led.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\labboard\led.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\labboard\seven.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\labboard\seven.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\analysis</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\analysis\stackanalysis.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\analysis\stackanalysis.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\analysis\stackanalysis_cfg.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\analysis\stackanalysis_cfg.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\analysis\timing.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\analysis\timing.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\ceh</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\ceh\ceh.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\ceh\ceh.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\ceh\ceh_cfg.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\ceh\ceh_cfg.h</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\ceh\ceh_log_cfg.c</v>
+<v>MP3_v4-000\MP3_v4\bsw\services\ceh\ceh_log_cfg.h</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>MP3_v4-000</v>
+<v>MP3_v4-000\MP3_v4</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\common_ee_compiler_gcc.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\common_ee_hal_structs.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\common_ee_hal_structs.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\common_ee_irqstub.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\common_ee_primitives.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\common_ee_stdint.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\common_ee_types.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\cortex_mx_ee_context.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\cortex_mx_ee_context.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\cortex_mx_ee_cpu.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\cortex_mx_ee_internal.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\cortex_mx_ee_irq.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\cortex_mx_ee_irq_cng_cont.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\cortex_mx_ee_nvic.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\cortex_mx_ee_system_timer.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\cortex_mx_ee_systick.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\cortex_mx_ee_utils.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee.h</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_activate.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_alcancel.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_alget.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_algetbase.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_alsetabs.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_alsetrel.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_altick.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_api.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_as_internal.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_as_kernel.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_as_timing_prot.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_chaintas.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_evclear.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_evget.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_evset.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_evwait.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_force_schedule.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_getcountervalue.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_getelapsedvalue.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_gettaskid.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_gettaskstate.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_gnu_change_context_isr.s</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_gnu_irq_stack.s</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_gnu_multi_context.s</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_gnu_oo.s</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_internal.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_iparam.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_irq.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_irqendin.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_lockres.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_lookup.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_oo_api.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_oo_common.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_oo_inline.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_oo_internal.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_oo_intfunc.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_oo_irq.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_oo_kernel.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_os.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_rq_exchg.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_rq_first.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_rq_inser.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_rtdruid_versions.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_schedule.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_semgetvalue.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_sempost.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_semtrywait.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_semwait.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_shtdown.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_startos.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_terminat.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_thendin.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_tnterm.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_tracing.h</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_tstub.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_ulockallres.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_ulockres.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\eecfg.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\eecfg.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\event_definition.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ISR_definition.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\resource_priorities.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\task_priorities.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\Custom</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\Custom\ErikaOSAlarmsCounters.cs</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\Custom\ErikaOSAlarmsCounters.Designer.cs</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\Custom\ErikaOSAlarmsCounters.resx</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\Custom\ErikaOSControl.cs</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\Custom\ErikaOSControl.Designer.cs</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\Custom\ErikaOSControl.resx</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\Custom\ErikaOSCustomizer.cs</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\Custom\ErikaOSEventsResources.cs</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\Custom\ErikaOSEventsResources.Designer.cs</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\Custom\ErikaOSEventsResources.resx</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\Custom\ErikaOSISRs.cs</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\Custom\ErikaOSISRs.Designer.cs</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\Custom\ErikaOSISRs.resx</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\Custom\ErikaOSParameters.cs</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\Custom\ErikaOSTask.cs</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\Custom\ErikaOSTask.Designer.cs</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\Custom\ErikaOSTask.resx</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\ErikaOS_v2_5_3.cysym</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\ErikaOS_v2_5_3.pdf</v>
+<v>MP3_v4-000\MP3_v4\TopDesign</v>
+<v>MP3_v4-000\MP3_v4\TopDesign\TopDesign.cysch</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>MP3_v4-000</v>
+<v>MP3_v4-000\MP3_v4</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\common_ee_compiler_gcc.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\common_ee_hal_structs.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\common_ee_hal_structs.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\common_ee_irqstub.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\common_ee_primitives.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\common_ee_stdint.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\common_ee_types.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\cortex_mx_ee_context.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\cortex_mx_ee_context.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\cortex_mx_ee_cpu.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\cortex_mx_ee_internal.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\cortex_mx_ee_irq.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\cortex_mx_ee_irq_cng_cont.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\cortex_mx_ee_nvic.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\cortex_mx_ee_system_timer.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\cortex_mx_ee_systick.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\cortex_mx_ee_utils.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee.h</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_activate.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_alcancel.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_alget.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_algetbase.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_alsetabs.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_alsetrel.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_altick.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_api.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_as_internal.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_as_kernel.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_as_timing_prot.inc</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_chaintas.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_evclear.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_evget.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_evset.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_evwait.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_force_schedule.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_getcountervalue.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_getelapsedvalue.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_gettaskid.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_gettaskstate.c</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_gnu_change_context_isr.s</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_gnu_irq_stack.s</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_gnu_multi_context.s</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_gnu_oo.s</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3\API\ee_internal.inc</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>MP3_v4-000</v>
+<v>MP3_v4-000\MP3_v4</v>
+<v>MP3_v4-000\MP3_v4\CortexM3</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\button.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\BUTTON_1.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\BUTTON_2.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\BUTTON_3.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\BUTTON_4.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\BUTTON_JOYSTICK.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ceh.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ceh_cfg.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ceh_log_cfg.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\CLK_LED.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\crc.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\crc_cfg.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_CONV.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_DEAD.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_FILL.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_FS.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_Clock_1.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_ConfigMMC_SPI.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_miso0.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_MMC_HW_SPI.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_mosi0.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_PM.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_sclk0.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_SPI0.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_SPI0_CS.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_SPI0_INT.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_SPI0_PM.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_common_ee_hal_structs.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_cortex_mx_ee_context.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_cortex_mx_ee_system_timer.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_cortex_mx_ee_utils.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_activate.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_alcancel.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_alget.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_algetbase.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_alsetabs.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_alsetrel.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_altick.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_chaintas.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_evclear.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_evget.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_evset.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_evwait.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_force_schedule.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_getcountervalue.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_getelapsedvalue.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_gettaskid.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_gettaskstate.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_gnu_change_context_isr.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_gnu_irq_stack.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_gnu_multi_context.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_gnu_oo.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_iparam.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_irqendin.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_lockres.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_lookup.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_rq_exchg.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_rq_first.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_rq_inser.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_schedule.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_semgetvalue.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_sempost.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_semtrywait.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_semwait.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_shtdown.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_startos.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_terminat.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_thendin.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_tnterm.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_tstub.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_ulockallres.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_ee_ulockres.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_eecfg.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\eventqueue.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\HardFault_Handler.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_Button.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_Button_Joystick.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_Timer.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\joystick.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\JOYSTICK_ADC_XY.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\JOYSTICK_ADC_XY_FinalBuf_dma.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\JOYSTICK_ADC_XY_INT.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\JOYSTICK_ADC_XY_IntClock.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\JOYSTICK_ADC_XY_IRQ.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\JOYSTICK_ADC_XY_PM.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\JOYSTICK_ADC_XY_SAR.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\JOYSTICK_ADC_XY_SAR_INT.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\JOYSTICK_ADC_XY_SAR_PM.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\JOYSTICK_ADC_XY_TempBuf_dma.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\JOYSTICK_X.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\JOYSTICK_Y.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\led.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\LED_green.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\LED_red.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\LED_yellow.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\log.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\log_cfg.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\message.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\mp3.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_Clock.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\RGB_B.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\RGB_G.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\RGB_PWM_blue.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\RGB_PWM_blue_PM.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\RGB_PWM_green.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\RGB_PWM_green_PM.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\RGB_PWM_red.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\RGB_PWM_red_PM.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\RGB_R.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ringbuffer.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\seven.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SEVEN_A.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SEVEN_B.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SEVEN_C.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SEVEN_D.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SEVEN_DP.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SEVEN_E.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SEVEN_F.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SEVEN_G.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SEVEN_reg.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SEVEN_reg_PM.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SEVEN_SELECT.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\sound.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SOUND_Control.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SOUND_Control_PM.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SOUND_ENABLE.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SOUND_MUX_0.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SOUND_MUX_1.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SOUND_OUT.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SOUND_PWM.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SOUND_PWM_CLOCK.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SOUND_PWM_PM.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SOUND_SAMPLE.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SOUND_SAMPLE_CLOCK.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\SOUND_SAMPLE_PM.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\sprintf.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\stackanalysis.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\stackanalysis_cfg.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\statemachine.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\tft.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\TFT_BackLight.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\TFT_BackLight_PM.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\TFT_CS.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\TFT_DC.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\TFT_LED.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\TFT_RES.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\TFT_SCL.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\TFT_SDA.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\TFT_SPI.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\TFT_SPI_INT.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\TFT_SPI_IntClock.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\TFT_SPI_PM.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\timing.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\trcKernelPort.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\trcSnapshotRecorder.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\trcStreamingPort.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\trcStreamingRecorder.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_LOG.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_LOG_BOOT.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_LOG_INT.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_LOG_IntClock.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_LOG_PM.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_audio.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_boot.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_cdc.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_cls.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_descr.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_Dm.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_Dp.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_drv.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_episr.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_hid.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_midi.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_msc.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_pm.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_std.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_vnd.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\wav_parser.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\MP3_v4.elf</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\MP3_v4.hex</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\MP3_v4.map</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.gpdsc</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.rpt</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4_timing.html</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>MP3_v4-000</v>
+<v>MP3_v4-000\MP3_v4</v>
+<v>MP3_v4-000\MP3_v4\CortexM3</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\button.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\BUTTON_1.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\BUTTON_2.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\BUTTON_3.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\BUTTON_4.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\BUTTON_JOYSTICK.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ceh.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ceh_cfg.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ceh_log_cfg.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\CLK_LED.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\crc.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\crc_cfg.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_CONV.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_DEAD.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_FILL.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\DBG_FS.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_Clock_1.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_ConfigMMC_SPI.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_miso0.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_MMC_HW_SPI.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_mosi0.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_PM.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_sclk0.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_SPI0.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_SPI0_CS.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_SPI0_INT.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\emFile_SPI0_PM.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_common_ee_hal_structs.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_cortex_mx_ee_context.lst</v>
+<v>MP3_v4-000\MP3_v4\CortexM3\ARM_GCC_541\Debug\Listing Files\ErikaOS_1_cortex_mx_ee_system_timer.lst</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStates>
+<TreeKeysV2>
+<v>Datasheet</v>
+</TreeKeysV2>
+<TreeStatesV2>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>MP3_v4-000</v>
+<v>MP3_v4-000\MP3_v4</v>
+<v>MP3_v4-000\MP3_v4\PSoC 5LP Architecture TRM</v>
+<v>MP3_v4-000\MP3_v4\CY8C58LP Family Datasheet</v>
+<v>MP3_v4-000\MP3_v4\System Reference Guides</v>
+<v>MP3_v4-000\MP3_v4\System Reference Guides\cy_boot_v5_80</v>
+<v>MP3_v4-000\MP3_v4\ADC_SAR_SEQ_v2_10.pdf</v>
+<v>MP3_v4-000\MP3_v4\Counter_v3_0.pdf</v>
+<v>MP3_v4-000\MP3_v4\cy_clock_v2_20</v>
+<v>MP3_v4-000\MP3_v4\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>MP3_v4-000\MP3_v4\cy_constant_v1_0</v>
+<v>MP3_v4-000\MP3_v4\cy_constant_v1_0\cy_constant_v1_0.pdf</v>
+<v>MP3_v4-000\MP3_v4\cy_isr_v1_70</v>
+<v>MP3_v4-000\MP3_v4\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
+<v>MP3_v4-000\MP3_v4\cy_pins_v2_20</v>
+<v>MP3_v4-000\MP3_v4\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>MP3_v4-000\MP3_v4\CyControlReg_v1_80</v>
+<v>MP3_v4-000\MP3_v4\CyControlReg_v1_80\CyControlReg_v1_80.pdf</v>
+<v>MP3_v4-000\MP3_v4\emFile_v1_20.pdf</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3.pdf</v>
+<v>MP3_v4-000\MP3_v4\Gnd_v1_0.pdf</v>
+<v>MP3_v4-000\MP3_v4\or_v1_0.pdf</v>
+<v>MP3_v4-000\MP3_v4\Power_v1_0.pdf</v>
+<v>MP3_v4-000\MP3_v4\PWM_v3_30</v>
+<v>MP3_v4-000\MP3_v4\PWM_v3_30\PWM_v3_30.pdf</v>
+<v>MP3_v4-000\MP3_v4\Resistor_v1_0.pdf</v>
+<v>MP3_v4-000\MP3_v4\SPI_Master_v2_50.pdf</v>
+<v>MP3_v4-000\MP3_v4\UART_v2_50.pdf</v>
+<v>MP3_v4-000\MP3_v4\USBFS_v3_20.pdf</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>MP3_v4-000</v>
+<v>MP3_v4-000\MP3_v4</v>
+<v>MP3_v4-000\MP3_v4\PSoC 5LP Architecture TRM</v>
+<v>MP3_v4-000\MP3_v4\CY8C58LP Family Datasheet</v>
+<v>MP3_v4-000\MP3_v4\System Reference Guides</v>
+<v>MP3_v4-000\MP3_v4\System Reference Guides\cy_boot_v5_80</v>
+<v>MP3_v4-000\MP3_v4\ADC_SAR_SEQ_v2_10.pdf</v>
+<v>MP3_v4-000\MP3_v4\Counter_v3_0.pdf</v>
+<v>MP3_v4-000\MP3_v4\cy_clock_v2_20</v>
+<v>MP3_v4-000\MP3_v4\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>MP3_v4-000\MP3_v4\cy_constant_v1_0</v>
+<v>MP3_v4-000\MP3_v4\cy_constant_v1_0\cy_constant_v1_0.pdf</v>
+<v>MP3_v4-000\MP3_v4\cy_isr_v1_70</v>
+<v>MP3_v4-000\MP3_v4\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
+<v>MP3_v4-000\MP3_v4\cy_pins_v2_20</v>
+<v>MP3_v4-000\MP3_v4\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>MP3_v4-000\MP3_v4\CyControlReg_v1_80</v>
+<v>MP3_v4-000\MP3_v4\CyControlReg_v1_80\CyControlReg_v1_80.pdf</v>
+<v>MP3_v4-000\MP3_v4\emFile_v1_20.pdf</v>
+<v>MP3_v4-000\MP3_v4\ErikaOS_v2_5_3.pdf</v>
+<v>MP3_v4-000\MP3_v4\Gnd_v1_0.pdf</v>
+<v>MP3_v4-000\MP3_v4\or_v1_0.pdf</v>
+<v>MP3_v4-000\MP3_v4\Power_v1_0.pdf</v>
+<v>MP3_v4-000\MP3_v4\PWM_v3_30</v>
+<v>MP3_v4-000\MP3_v4\PWM_v3_30\PWM_v3_30.pdf</v>
+<v>MP3_v4-000\MP3_v4\Resistor_v1_0.pdf</v>
+<v>MP3_v4-000\MP3_v4\SPI_Master_v2_50.pdf</v>
+<v>MP3_v4-000\MP3_v4\UART_v2_50.pdf</v>
+<v>MP3_v4-000\MP3_v4\USBFS_v3_20.pdf</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStatesV2>
+</CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
+</dataGuid>
+</userData>
+</CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
+<Unloaded />
+<OpenDocs>
+<name v=".\TopDesign\TopDesign.cysch" />
+<name v=".\source\asw\main.c" />
+<name v=".\source\asw\mp3.c" />
+<name v=".\MP3_v4.cydwr" />
+<name v=".\Generated_Source\PSoC5\CySpc.h" />
+<name v=".\Generated_Source\PSoC5\CyFlash.h" />
+<name v=".\Generated_Source\PSoC5\ErikaOS_1_eecfg.c" />
+<name v="${CyRoot}\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\ADC_SAR_SEQ_v2_10\PSoC5\ADC_SAR_SEQ_v2_10.cysch" />
+<name v=".\source\bsw\TraceRecorder\streamport\trcStreamingPort.c" />
+</OpenDocs>
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1265, 657" SelectedTabbedMdiWindow="3445d93e-8024-41cf-9358-cc66e3ed9a59"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="cb98b672-06dc-4884-8407-7d2e5bb839d7" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\TopDesign\TopDesign.cysch" Guid="b2a3e896-93d2-408c-a24c-c6200cb84786" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\asw\main.c" Guid="e78f0611-d1c9-43f7-a44d-1f91c742ccaa" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\asw\mp3.c" Guid="3445d93e-8024-41cf-9358-cc66e3ed9a59" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\MP3_v4.cydwr" Guid="1398543b-3f15-44bd-8145-064d8c8df128" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\Generated_Source\PSoC5\CySpc.h" Guid="4912249b-4dbb-48e5-8156-52989844cde3" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\Generated_Source\PSoC5\CyFlash.h" Guid="28166947-8f2d-434f-a6b5-0c4085cd57b2" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\Generated_Source\PSoC5\ErikaOS_1_eecfg.c" Guid="6b3d1dee-6456-4d20-bd43-d0ee61810c93" /><DocumentWindow Key="C:\H_Da Softwares &amp; Projects\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\ADC_SAR_SEQ_v2_10\PSoC5\ADC_SAR_SEQ_v2_10.cysch" Guid="c9f5498f-130e-4cdf-9a42-3e6b037187ce" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\bsw\TraceRecorder\streamport\trcStreamingPort.c" Guid="2578049b-301b-44ab-9905-1bd0029318cb" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+<config v="" />
+<AutoUpdate v="true" />
+</CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
+</CyXmlSerializer>

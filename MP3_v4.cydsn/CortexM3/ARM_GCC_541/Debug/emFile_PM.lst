@@ -1,0 +1,924 @@
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccSZmvUS.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"emFile_PM.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.emFile_SaveConfig,"ax",%progbits
+  20              		.align	2
+  21              		.global	emFile_SaveConfig
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	emFile_SaveConfig, %function
+  25              	emFile_SaveConfig:
+  26              	.LFB110:
+  27              		.file 1 "Generated_Source\\PSoC5\\emFile_PM.c"
+   1:Generated_Source\PSoC5/emFile_PM.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/emFile_PM.c **** * File Name: emFile_PM.c
+   3:Generated_Source\PSoC5/emFile_PM.c **** * Version 1.20
+   4:Generated_Source\PSoC5/emFile_PM.c **** *
+   5:Generated_Source\PSoC5/emFile_PM.c **** * Description:
+   6:Generated_Source\PSoC5/emFile_PM.c **** *  This file provides the API source code for Power Management of the emFile
+   7:Generated_Source\PSoC5/emFile_PM.c **** *  component.
+   8:Generated_Source\PSoC5/emFile_PM.c **** *
+   9:Generated_Source\PSoC5/emFile_PM.c **** * Note:
+  10:Generated_Source\PSoC5/emFile_PM.c **** *
+  11:Generated_Source\PSoC5/emFile_PM.c **** *******************************************************************************
+  12:Generated_Source\PSoC5/emFile_PM.c **** * Copyright 2011-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  13:Generated_Source\PSoC5/emFile_PM.c **** * You may use this file only in accordance with the license, terms, conditions,
+  14:Generated_Source\PSoC5/emFile_PM.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  15:Generated_Source\PSoC5/emFile_PM.c **** * the software package with which this file was provided.
+  16:Generated_Source\PSoC5/emFile_PM.c **** *******************************************************************************/
+  17:Generated_Source\PSoC5/emFile_PM.c **** 
+  18:Generated_Source\PSoC5/emFile_PM.c **** #include <project.h>
+  19:Generated_Source\PSoC5/emFile_PM.c **** #include "emFile.h"
+  20:Generated_Source\PSoC5/emFile_PM.c **** 
+  21:Generated_Source\PSoC5/emFile_PM.c **** 
+  22:Generated_Source\PSoC5/emFile_PM.c **** /*******************************************************************************
+  23:Generated_Source\PSoC5/emFile_PM.c **** * Function Name: emFile_SaveConfig
+  24:Generated_Source\PSoC5/emFile_PM.c **** ********************************************************************************
+  25:Generated_Source\PSoC5/emFile_PM.c **** *
+  26:Generated_Source\PSoC5/emFile_PM.c **** * Summary:
+  27:Generated_Source\PSoC5/emFile_PM.c **** *  Saves SPI Masters configuration.
+  28:Generated_Source\PSoC5/emFile_PM.c **** *
+  29:Generated_Source\PSoC5/emFile_PM.c **** * Parameters:
+  30:Generated_Source\PSoC5/emFile_PM.c **** *  None
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccSZmvUS.s 			page 2
+
+
+  31:Generated_Source\PSoC5/emFile_PM.c **** *
+  32:Generated_Source\PSoC5/emFile_PM.c **** * Return:
+  33:Generated_Source\PSoC5/emFile_PM.c **** *  None
+  34:Generated_Source\PSoC5/emFile_PM.c **** *
+  35:Generated_Source\PSoC5/emFile_PM.c **** * Reentrant:
+  36:Generated_Source\PSoC5/emFile_PM.c **** *  No
+  37:Generated_Source\PSoC5/emFile_PM.c **** *
+  38:Generated_Source\PSoC5/emFile_PM.c **** *******************************************************************************/
+  39:Generated_Source\PSoC5/emFile_PM.c **** void emFile_SaveConfig(void) 
+  40:Generated_Source\PSoC5/emFile_PM.c **** {
+  28              		.loc 1 40 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+  35              		.cfi_offset 14, -4
+  41:Generated_Source\PSoC5/emFile_PM.c ****     #if(emFile_NUMBER_SD_CARDS == 4u)
+  42:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI0_SaveConfig();
+  43:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI1_SaveConfig();
+  44:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI2_SaveConfig();
+  45:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI3_SaveConfig();
+  46:Generated_Source\PSoC5/emFile_PM.c ****     #elif(emFile_NUMBER_SD_CARDS == 3u)
+  47:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI0_SaveConfig();
+  48:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI1_SaveConfig();
+  49:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI2_SaveConfig();
+  50:Generated_Source\PSoC5/emFile_PM.c ****     #elif(emFile_NUMBER_SD_CARDS == 2u)
+  51:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI0_SaveConfig();
+  52:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI1_SaveConfig();
+  53:Generated_Source\PSoC5/emFile_PM.c ****     #else
+  54:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI0_SaveConfig();
+  36              		.loc 1 54 0
+  37 0002 FFF7FEFF 		bl	emFile_SPI0_SaveConfig
+  38              	.LVL0:
+  39 0006 08BD     		pop	{r3, pc}
+  40              		.cfi_endproc
+  41              	.LFE110:
+  42              		.size	emFile_SaveConfig, .-emFile_SaveConfig
+  43              		.section	.text.emFile_RestoreConfig,"ax",%progbits
+  44              		.align	2
+  45              		.global	emFile_RestoreConfig
+  46              		.thumb
+  47              		.thumb_func
+  48              		.type	emFile_RestoreConfig, %function
+  49              	emFile_RestoreConfig:
+  50              	.LFB111:
+  55:Generated_Source\PSoC5/emFile_PM.c ****     #endif /* (emFile_NUMBER_SD_CARDS == 4u) */
+  56:Generated_Source\PSoC5/emFile_PM.c **** }
+  57:Generated_Source\PSoC5/emFile_PM.c **** 
+  58:Generated_Source\PSoC5/emFile_PM.c **** 
+  59:Generated_Source\PSoC5/emFile_PM.c **** /*******************************************************************************
+  60:Generated_Source\PSoC5/emFile_PM.c **** * Function Name: emFile_RestoreConfig
+  61:Generated_Source\PSoC5/emFile_PM.c **** ********************************************************************************
+  62:Generated_Source\PSoC5/emFile_PM.c **** *
+  63:Generated_Source\PSoC5/emFile_PM.c **** * Summary:
+  64:Generated_Source\PSoC5/emFile_PM.c **** *  Restores SPI Masters configuration.
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccSZmvUS.s 			page 3
+
+
+  65:Generated_Source\PSoC5/emFile_PM.c **** *
+  66:Generated_Source\PSoC5/emFile_PM.c **** * Parameters:
+  67:Generated_Source\PSoC5/emFile_PM.c **** *  None
+  68:Generated_Source\PSoC5/emFile_PM.c **** *
+  69:Generated_Source\PSoC5/emFile_PM.c **** * Return:
+  70:Generated_Source\PSoC5/emFile_PM.c **** *  None
+  71:Generated_Source\PSoC5/emFile_PM.c **** *
+  72:Generated_Source\PSoC5/emFile_PM.c **** * Side Effects:
+  73:Generated_Source\PSoC5/emFile_PM.c **** *  If this API is called without first calling SaveConfig then in the following
+  74:Generated_Source\PSoC5/emFile_PM.c **** *  registers will be default values from Customizer:
+  75:Generated_Source\PSoC5/emFile_PM.c **** *
+  76:Generated_Source\PSoC5/emFile_PM.c **** *******************************************************************************/
+  77:Generated_Source\PSoC5/emFile_PM.c **** void emFile_RestoreConfig(void) 
+  78:Generated_Source\PSoC5/emFile_PM.c **** {
+  51              		.loc 1 78 0
+  52              		.cfi_startproc
+  53              		@ args = 0, pretend = 0, frame = 0
+  54              		@ frame_needed = 0, uses_anonymous_args = 0
+  55 0000 08B5     		push	{r3, lr}
+  56              		.cfi_def_cfa_offset 8
+  57              		.cfi_offset 3, -8
+  58              		.cfi_offset 14, -4
+  79:Generated_Source\PSoC5/emFile_PM.c ****     #if(emFile_NUMBER_SD_CARDS == 4u)
+  80:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI0_RestoreConfig();
+  81:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI1_RestoreConfig();
+  82:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI2_RestoreConfig();
+  83:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI3_RestoreConfig();
+  84:Generated_Source\PSoC5/emFile_PM.c ****     #elif(emFile_NUMBER_SD_CARDS == 3u)
+  85:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI0_SaveConfig();
+  86:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI1_SaveConfig();
+  87:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI2_SaveConfig();
+  88:Generated_Source\PSoC5/emFile_PM.c ****     #elif(emFile_NUMBER_SD_CARDS == 2u)
+  89:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI0_SaveConfig();
+  90:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI1_SaveConfig();
+  91:Generated_Source\PSoC5/emFile_PM.c ****     #else
+  92:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI0_SaveConfig();
+  59              		.loc 1 92 0
+  60 0002 FFF7FEFF 		bl	emFile_SPI0_SaveConfig
+  61              	.LVL1:
+  62 0006 08BD     		pop	{r3, pc}
+  63              		.cfi_endproc
+  64              	.LFE111:
+  65              		.size	emFile_RestoreConfig, .-emFile_RestoreConfig
+  66              		.section	.text.emFile_Sleep,"ax",%progbits
+  67              		.align	2
+  68              		.global	emFile_Sleep
+  69              		.thumb
+  70              		.thumb_func
+  71              		.type	emFile_Sleep, %function
+  72              	emFile_Sleep:
+  73              	.LFB112:
+  93:Generated_Source\PSoC5/emFile_PM.c ****     #endif /* (emFile_NUMBER_SD_CARDS == 4u) */
+  94:Generated_Source\PSoC5/emFile_PM.c **** }
+  95:Generated_Source\PSoC5/emFile_PM.c **** 
+  96:Generated_Source\PSoC5/emFile_PM.c **** 
+  97:Generated_Source\PSoC5/emFile_PM.c **** /*******************************************************************************
+  98:Generated_Source\PSoC5/emFile_PM.c **** * Function Name: emFile_Sleep
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccSZmvUS.s 			page 4
+
+
+  99:Generated_Source\PSoC5/emFile_PM.c **** ********************************************************************************
+ 100:Generated_Source\PSoC5/emFile_PM.c **** *
+ 101:Generated_Source\PSoC5/emFile_PM.c **** * Summary:
+ 102:Generated_Source\PSoC5/emFile_PM.c **** *  Prepare emFile to go to sleep.
+ 103:Generated_Source\PSoC5/emFile_PM.c **** *
+ 104:Generated_Source\PSoC5/emFile_PM.c **** * Parameters:
+ 105:Generated_Source\PSoC5/emFile_PM.c **** *  None
+ 106:Generated_Source\PSoC5/emFile_PM.c **** *
+ 107:Generated_Source\PSoC5/emFile_PM.c **** * Return:
+ 108:Generated_Source\PSoC5/emFile_PM.c **** *  None
+ 109:Generated_Source\PSoC5/emFile_PM.c **** *
+ 110:Generated_Source\PSoC5/emFile_PM.c **** * Reentrant:
+ 111:Generated_Source\PSoC5/emFile_PM.c **** *  No
+ 112:Generated_Source\PSoC5/emFile_PM.c **** *
+ 113:Generated_Source\PSoC5/emFile_PM.c **** *******************************************************************************/
+ 114:Generated_Source\PSoC5/emFile_PM.c **** void emFile_Sleep(void) 
+ 115:Generated_Source\PSoC5/emFile_PM.c **** {
+  74              		.loc 1 115 0
+  75              		.cfi_startproc
+  76              		@ args = 0, pretend = 0, frame = 0
+  77              		@ frame_needed = 0, uses_anonymous_args = 0
+  78 0000 08B5     		push	{r3, lr}
+  79              		.cfi_def_cfa_offset 8
+  80              		.cfi_offset 3, -8
+  81              		.cfi_offset 14, -4
+ 116:Generated_Source\PSoC5/emFile_PM.c ****     #if(emFile_NUMBER_SD_CARDS == 4u)
+ 117:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI0_Sleep();
+ 118:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI1_Sleep();
+ 119:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI2_Sleep();
+ 120:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI3_Sleep();
+ 121:Generated_Source\PSoC5/emFile_PM.c ****     #elif(emFile_NUMBER_SD_CARDS == 3u)
+ 122:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI0_Sleep();
+ 123:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI1_Sleep();
+ 124:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI2_Sleep();
+ 125:Generated_Source\PSoC5/emFile_PM.c ****     #elif(emFile_NUMBER_SD_CARDS == 2u)
+ 126:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI0_Sleep();
+ 127:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI1_Sleep();
+ 128:Generated_Source\PSoC5/emFile_PM.c ****     #else
+ 129:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI0_Sleep();
+  82              		.loc 1 129 0
+  83 0002 FFF7FEFF 		bl	emFile_SPI0_Sleep
+  84              	.LVL2:
+  85 0006 08BD     		pop	{r3, pc}
+  86              		.cfi_endproc
+  87              	.LFE112:
+  88              		.size	emFile_Sleep, .-emFile_Sleep
+  89              		.section	.text.emFile_Wakeup,"ax",%progbits
+  90              		.align	2
+  91              		.global	emFile_Wakeup
+  92              		.thumb
+  93              		.thumb_func
+  94              		.type	emFile_Wakeup, %function
+  95              	emFile_Wakeup:
+  96              	.LFB113:
+ 130:Generated_Source\PSoC5/emFile_PM.c ****     #endif /* (emFile_NUMBER_SD_CARDS == 4u) */
+ 131:Generated_Source\PSoC5/emFile_PM.c **** }
+ 132:Generated_Source\PSoC5/emFile_PM.c **** 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccSZmvUS.s 			page 5
+
+
+ 133:Generated_Source\PSoC5/emFile_PM.c **** 
+ 134:Generated_Source\PSoC5/emFile_PM.c **** /*******************************************************************************
+ 135:Generated_Source\PSoC5/emFile_PM.c **** * Function Name: emFile_Wakeup
+ 136:Generated_Source\PSoC5/emFile_PM.c **** ********************************************************************************
+ 137:Generated_Source\PSoC5/emFile_PM.c **** *
+ 138:Generated_Source\PSoC5/emFile_PM.c **** * Summary:
+ 139:Generated_Source\PSoC5/emFile_PM.c **** *  Prepare SPIM Components to wake up.
+ 140:Generated_Source\PSoC5/emFile_PM.c **** *
+ 141:Generated_Source\PSoC5/emFile_PM.c **** * Parameters:
+ 142:Generated_Source\PSoC5/emFile_PM.c **** *  None
+ 143:Generated_Source\PSoC5/emFile_PM.c **** *
+ 144:Generated_Source\PSoC5/emFile_PM.c **** * Return:
+ 145:Generated_Source\PSoC5/emFile_PM.c **** *  None
+ 146:Generated_Source\PSoC5/emFile_PM.c **** *
+ 147:Generated_Source\PSoC5/emFile_PM.c **** * Reentrant:
+ 148:Generated_Source\PSoC5/emFile_PM.c **** *  No
+ 149:Generated_Source\PSoC5/emFile_PM.c **** *
+ 150:Generated_Source\PSoC5/emFile_PM.c **** *******************************************************************************/
+ 151:Generated_Source\PSoC5/emFile_PM.c **** void emFile_Wakeup(void) 
+ 152:Generated_Source\PSoC5/emFile_PM.c **** {
+  97              		.loc 1 152 0
+  98              		.cfi_startproc
+  99              		@ args = 0, pretend = 0, frame = 0
+ 100              		@ frame_needed = 0, uses_anonymous_args = 0
+ 101 0000 08B5     		push	{r3, lr}
+ 102              		.cfi_def_cfa_offset 8
+ 103              		.cfi_offset 3, -8
+ 104              		.cfi_offset 14, -4
+ 153:Generated_Source\PSoC5/emFile_PM.c ****     #if(emFile_NUMBER_SD_CARDS == 4u)
+ 154:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI0_Wakeup();
+ 155:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI1_Wakeup();
+ 156:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI2_Wakeup();
+ 157:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI3_Wakeup();
+ 158:Generated_Source\PSoC5/emFile_PM.c ****     #elif(emFile_NUMBER_SD_CARDS == 3u)
+ 159:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI0_Wakeup();
+ 160:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI1_Wakeup();
+ 161:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI2_Wakeup();
+ 162:Generated_Source\PSoC5/emFile_PM.c ****     #elif(emFile_NUMBER_SD_CARDS == 2u)
+ 163:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI0_Wakeup();
+ 164:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI1_Wakeup();
+ 165:Generated_Source\PSoC5/emFile_PM.c ****     #else
+ 166:Generated_Source\PSoC5/emFile_PM.c ****         emFile_SPI0_Wakeup();
+ 105              		.loc 1 166 0
+ 106 0002 FFF7FEFF 		bl	emFile_SPI0_Wakeup
+ 107              	.LVL3:
+ 108 0006 08BD     		pop	{r3, pc}
+ 109              		.cfi_endproc
+ 110              	.LFE113:
+ 111              		.size	emFile_Wakeup, .-emFile_Wakeup
+ 112              		.text
+ 113              	.Letext0:
+ 114              		.file 2 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
+ 115              		.file 3 "c:\\h_da softwares & projects\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.1\\
+ 116              		.file 4 "Generated_Source\\PSoC5/ErikaOS_1_common_ee_types.inc"
+ 117              		.file 5 "Generated_Source\\PSoC5/ErikaOS_1_cortex_mx_ee_cpu.inc"
+ 118              		.file 6 "Generated_Source\\PSoC5/ErikaOS_1_ee_oo_intfunc.inc"
+ 119              		.file 7 "Generated_Source\\PSoC5/ErikaOS_1_cortex_mx_ee_context.inc"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccSZmvUS.s 			page 6
+
+
+ 120              		.file 8 "Generated_Source\\PSoC5/ErikaOS_1_common_ee_primitives.inc"
+ 121              		.file 9 "Generated_Source\\PSoC5/core_cm3.h"
+ 122              		.file 10 "Generated_Source\\PSoC5/emFile_SPI0.h"
+ 123              		.section	.debug_info,"",%progbits
+ 124              	.Ldebug_info0:
+ 125 0000 BD010000 		.4byte	0x1bd
+ 126 0004 0400     		.2byte	0x4
+ 127 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 128 000a 04       		.byte	0x4
+ 129 000b 01       		.uleb128 0x1
+ 130 000c 9E000000 		.4byte	.LASF34
+ 131 0010 0C       		.byte	0xc
+ 132 0011 09020000 		.4byte	.LASF35
+ 133 0015 00000000 		.4byte	.LASF36
+ 134 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 135 001d 00000000 		.4byte	0
+ 136 0021 00000000 		.4byte	.Ldebug_line0
+ 137 0025 02       		.uleb128 0x2
+ 138 0026 01       		.byte	0x1
+ 139 0027 06       		.byte	0x6
+ 140 0028 C0020000 		.4byte	.LASF0
+ 141 002c 02       		.uleb128 0x2
+ 142 002d 01       		.byte	0x1
+ 143 002e 08       		.byte	0x8
+ 144 002f 90000000 		.4byte	.LASF1
+ 145 0033 02       		.uleb128 0x2
+ 146 0034 02       		.byte	0x2
+ 147 0035 05       		.byte	0x5
+ 148 0036 A1020000 		.4byte	.LASF2
+ 149 003a 02       		.uleb128 0x2
+ 150 003b 02       		.byte	0x2
+ 151 003c 07       		.byte	0x7
+ 152 003d 47010000 		.4byte	.LASF3
+ 153 0041 03       		.uleb128 0x3
+ 154 0042 37000000 		.4byte	.LASF9
+ 155 0046 02       		.byte	0x2
+ 156 0047 3F       		.byte	0x3f
+ 157 0048 4C000000 		.4byte	0x4c
+ 158 004c 02       		.uleb128 0x2
+ 159 004d 04       		.byte	0x4
+ 160 004e 05       		.byte	0x5
+ 161 004f AB020000 		.4byte	.LASF4
+ 162 0053 02       		.uleb128 0x2
+ 163 0054 04       		.byte	0x4
+ 164 0055 07       		.byte	0x7
+ 165 0056 A8010000 		.4byte	.LASF5
+ 166 005a 02       		.uleb128 0x2
+ 167 005b 08       		.byte	0x8
+ 168 005c 05       		.byte	0x5
+ 169 005d 50020000 		.4byte	.LASF6
+ 170 0061 02       		.uleb128 0x2
+ 171 0062 08       		.byte	0x8
+ 172 0063 07       		.byte	0x7
+ 173 0064 F2010000 		.4byte	.LASF7
+ 174 0068 04       		.uleb128 0x4
+ 175 0069 04       		.byte	0x4
+ 176 006a 05       		.byte	0x5
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccSZmvUS.s 			page 7
+
+
+ 177 006b 696E7400 		.ascii	"int\000"
+ 178 006f 02       		.uleb128 0x2
+ 179 0070 04       		.byte	0x4
+ 180 0071 07       		.byte	0x7
+ 181 0072 D3010000 		.4byte	.LASF8
+ 182 0076 03       		.uleb128 0x3
+ 183 0077 3F020000 		.4byte	.LASF10
+ 184 007b 03       		.byte	0x3
+ 185 007c 2C       		.byte	0x2c
+ 186 007d 41000000 		.4byte	0x41
+ 187 0081 02       		.uleb128 0x2
+ 188 0082 04       		.byte	0x4
+ 189 0083 04       		.byte	0x4
+ 190 0084 8A000000 		.4byte	.LASF11
+ 191 0088 02       		.uleb128 0x2
+ 192 0089 08       		.byte	0x8
+ 193 008a 04       		.byte	0x4
+ 194 008b 56000000 		.4byte	.LASF12
+ 195 008f 02       		.uleb128 0x2
+ 196 0090 01       		.byte	0x1
+ 197 0091 08       		.byte	0x8
+ 198 0092 5E020000 		.4byte	.LASF13
+ 199 0096 02       		.uleb128 0x2
+ 200 0097 08       		.byte	0x8
+ 201 0098 04       		.byte	0x4
+ 202 0099 B4020000 		.4byte	.LASF14
+ 203 009d 03       		.uleb128 0x3
+ 204 009e 2C010000 		.4byte	.LASF15
+ 205 00a2 04       		.byte	0x4
+ 206 00a3 53       		.byte	0x53
+ 207 00a4 68000000 		.4byte	0x68
+ 208 00a8 03       		.uleb128 0x3
+ 209 00a9 E8010000 		.4byte	.LASF16
+ 210 00ad 04       		.byte	0x4
+ 211 00ae 54       		.byte	0x54
+ 212 00af 6F000000 		.4byte	0x6f
+ 213 00b3 03       		.uleb128 0x3
+ 214 00b4 71020000 		.4byte	.LASF17
+ 215 00b8 05       		.byte	0x5
+ 216 00b9 4D       		.byte	0x4d
+ 217 00ba A8000000 		.4byte	0xa8
+ 218 00be 03       		.uleb128 0x3
+ 219 00bf E0010000 		.4byte	.LASF18
+ 220 00c3 05       		.byte	0x5
+ 221 00c4 4F       		.byte	0x4f
+ 222 00c5 A8000000 		.4byte	0xa8
+ 223 00c9 03       		.uleb128 0x3
+ 224 00ca 76000000 		.4byte	.LASF19
+ 225 00ce 05       		.byte	0x5
+ 226 00cf 78       		.byte	0x78
+ 227 00d0 9D000000 		.4byte	0x9d
+ 228 00d4 02       		.uleb128 0x2
+ 229 00d5 04       		.byte	0x4
+ 230 00d6 07       		.byte	0x7
+ 231 00d7 47020000 		.4byte	.LASF20
+ 232 00db 05       		.uleb128 0x5
+ 233 00dc 35010000 		.4byte	.LASF21
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccSZmvUS.s 			page 8
+
+
+ 234 00e0 01       		.byte	0x1
+ 235 00e1 27       		.byte	0x27
+ 236 00e2 00000000 		.4byte	.LFB110
+ 237 00e6 08000000 		.4byte	.LFE110-.LFB110
+ 238 00ea 01       		.uleb128 0x1
+ 239 00eb 9C       		.byte	0x9c
+ 240 00ec FA000000 		.4byte	0xfa
+ 241 00f0 06       		.uleb128 0x6
+ 242 00f1 06000000 		.4byte	.LVL0
+ 243 00f5 9F010000 		.4byte	0x19f
+ 244 00f9 00       		.byte	0
+ 245 00fa 05       		.uleb128 0x5
+ 246 00fb 41000000 		.4byte	.LASF22
+ 247 00ff 01       		.byte	0x1
+ 248 0100 4D       		.byte	0x4d
+ 249 0101 00000000 		.4byte	.LFB111
+ 250 0105 08000000 		.4byte	.LFE111-.LFB111
+ 251 0109 01       		.uleb128 0x1
+ 252 010a 9C       		.byte	0x9c
+ 253 010b 19010000 		.4byte	0x119
+ 254 010f 06       		.uleb128 0x6
+ 255 0110 06000000 		.4byte	.LVL1
+ 256 0114 9F010000 		.4byte	0x19f
+ 257 0118 00       		.byte	0
+ 258 0119 05       		.uleb128 0x5
+ 259 011a 7D000000 		.4byte	.LASF23
+ 260 011e 01       		.byte	0x1
+ 261 011f 72       		.byte	0x72
+ 262 0120 00000000 		.4byte	.LFB112
+ 263 0124 08000000 		.4byte	.LFE112-.LFB112
+ 264 0128 01       		.uleb128 0x1
+ 265 0129 9C       		.byte	0x9c
+ 266 012a 38010000 		.4byte	0x138
+ 267 012e 06       		.uleb128 0x6
+ 268 012f 06000000 		.4byte	.LVL2
+ 269 0133 AA010000 		.4byte	0x1aa
+ 270 0137 00       		.byte	0
+ 271 0138 05       		.uleb128 0x5
+ 272 0139 63020000 		.4byte	.LASF24
+ 273 013d 01       		.byte	0x1
+ 274 013e 97       		.byte	0x97
+ 275 013f 00000000 		.4byte	.LFB113
+ 276 0143 08000000 		.4byte	.LFE113-.LFB113
+ 277 0147 01       		.uleb128 0x1
+ 278 0148 9C       		.byte	0x9c
+ 279 0149 57010000 		.4byte	0x157
+ 280 014d 06       		.uleb128 0x6
+ 281 014e 06000000 		.4byte	.LVL3
+ 282 0152 B5010000 		.4byte	0x1b5
+ 283 0156 00       		.byte	0
+ 284 0157 07       		.uleb128 0x7
+ 285 0158 6C010000 		.4byte	.LASF25
+ 286 015c 06       		.byte	0x6
+ 287 015d 40       		.byte	0x40
+ 288 015e B3000000 		.4byte	0xb3
+ 289 0162 07       		.uleb128 0x7
+ 290 0163 5D000000 		.4byte	.LASF26
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccSZmvUS.s 			page 9
+
+
+ 291 0167 06       		.byte	0x6
+ 292 0168 47       		.byte	0x47
+ 293 0169 BE000000 		.4byte	0xbe
+ 294 016d 07       		.uleb128 0x7
+ 295 016e 2C020000 		.4byte	.LASF27
+ 296 0172 06       		.byte	0x6
+ 297 0173 4A       		.byte	0x4a
+ 298 0174 B3000000 		.4byte	0xb3
+ 299 0178 07       		.uleb128 0x7
+ 300 0179 BA010000 		.4byte	.LASF28
+ 301 017d 07       		.byte	0x7
+ 302 017e 48       		.byte	0x48
+ 303 017f C9000000 		.4byte	0xc9
+ 304 0183 07       		.uleb128 0x7
+ 305 0184 79020000 		.4byte	.LASF29
+ 306 0188 08       		.byte	0x8
+ 307 0189 44       		.byte	0x44
+ 308 018a B3000000 		.4byte	0xb3
+ 309 018e 08       		.uleb128 0x8
+ 310 018f 84010000 		.4byte	.LASF30
+ 311 0193 09       		.byte	0x9
+ 312 0194 1207     		.2byte	0x712
+ 313 0196 9A010000 		.4byte	0x19a
+ 314 019a 09       		.uleb128 0x9
+ 315 019b 76000000 		.4byte	0x76
+ 316 019f 0A       		.uleb128 0xa
+ 317 01a0 91010000 		.4byte	.LASF31
+ 318 01a4 91010000 		.4byte	.LASF31
+ 319 01a8 0A       		.byte	0xa
+ 320 01a9 62       		.byte	0x62
+ 321 01aa 0A       		.uleb128 0xa
+ 322 01ab 5A010000 		.4byte	.LASF32
+ 323 01af 5A010000 		.4byte	.LASF32
+ 324 01b3 0A       		.byte	0xa
+ 325 01b4 60       		.byte	0x60
+ 326 01b5 0A       		.uleb128 0xa
+ 327 01b6 8E020000 		.4byte	.LASF33
+ 328 01ba 8E020000 		.4byte	.LASF33
+ 329 01be 0A       		.byte	0xa
+ 330 01bf 61       		.byte	0x61
+ 331 01c0 00       		.byte	0
+ 332              		.section	.debug_abbrev,"",%progbits
+ 333              	.Ldebug_abbrev0:
+ 334 0000 01       		.uleb128 0x1
+ 335 0001 11       		.uleb128 0x11
+ 336 0002 01       		.byte	0x1
+ 337 0003 25       		.uleb128 0x25
+ 338 0004 0E       		.uleb128 0xe
+ 339 0005 13       		.uleb128 0x13
+ 340 0006 0B       		.uleb128 0xb
+ 341 0007 03       		.uleb128 0x3
+ 342 0008 0E       		.uleb128 0xe
+ 343 0009 1B       		.uleb128 0x1b
+ 344 000a 0E       		.uleb128 0xe
+ 345 000b 55       		.uleb128 0x55
+ 346 000c 17       		.uleb128 0x17
+ 347 000d 11       		.uleb128 0x11
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccSZmvUS.s 			page 10
+
+
+ 348 000e 01       		.uleb128 0x1
+ 349 000f 10       		.uleb128 0x10
+ 350 0010 17       		.uleb128 0x17
+ 351 0011 00       		.byte	0
+ 352 0012 00       		.byte	0
+ 353 0013 02       		.uleb128 0x2
+ 354 0014 24       		.uleb128 0x24
+ 355 0015 00       		.byte	0
+ 356 0016 0B       		.uleb128 0xb
+ 357 0017 0B       		.uleb128 0xb
+ 358 0018 3E       		.uleb128 0x3e
+ 359 0019 0B       		.uleb128 0xb
+ 360 001a 03       		.uleb128 0x3
+ 361 001b 0E       		.uleb128 0xe
+ 362 001c 00       		.byte	0
+ 363 001d 00       		.byte	0
+ 364 001e 03       		.uleb128 0x3
+ 365 001f 16       		.uleb128 0x16
+ 366 0020 00       		.byte	0
+ 367 0021 03       		.uleb128 0x3
+ 368 0022 0E       		.uleb128 0xe
+ 369 0023 3A       		.uleb128 0x3a
+ 370 0024 0B       		.uleb128 0xb
+ 371 0025 3B       		.uleb128 0x3b
+ 372 0026 0B       		.uleb128 0xb
+ 373 0027 49       		.uleb128 0x49
+ 374 0028 13       		.uleb128 0x13
+ 375 0029 00       		.byte	0
+ 376 002a 00       		.byte	0
+ 377 002b 04       		.uleb128 0x4
+ 378 002c 24       		.uleb128 0x24
+ 379 002d 00       		.byte	0
+ 380 002e 0B       		.uleb128 0xb
+ 381 002f 0B       		.uleb128 0xb
+ 382 0030 3E       		.uleb128 0x3e
+ 383 0031 0B       		.uleb128 0xb
+ 384 0032 03       		.uleb128 0x3
+ 385 0033 08       		.uleb128 0x8
+ 386 0034 00       		.byte	0
+ 387 0035 00       		.byte	0
+ 388 0036 05       		.uleb128 0x5
+ 389 0037 2E       		.uleb128 0x2e
+ 390 0038 01       		.byte	0x1
+ 391 0039 3F       		.uleb128 0x3f
+ 392 003a 19       		.uleb128 0x19
+ 393 003b 03       		.uleb128 0x3
+ 394 003c 0E       		.uleb128 0xe
+ 395 003d 3A       		.uleb128 0x3a
+ 396 003e 0B       		.uleb128 0xb
+ 397 003f 3B       		.uleb128 0x3b
+ 398 0040 0B       		.uleb128 0xb
+ 399 0041 27       		.uleb128 0x27
+ 400 0042 19       		.uleb128 0x19
+ 401 0043 11       		.uleb128 0x11
+ 402 0044 01       		.uleb128 0x1
+ 403 0045 12       		.uleb128 0x12
+ 404 0046 06       		.uleb128 0x6
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccSZmvUS.s 			page 11
+
+
+ 405 0047 40       		.uleb128 0x40
+ 406 0048 18       		.uleb128 0x18
+ 407 0049 9742     		.uleb128 0x2117
+ 408 004b 19       		.uleb128 0x19
+ 409 004c 01       		.uleb128 0x1
+ 410 004d 13       		.uleb128 0x13
+ 411 004e 00       		.byte	0
+ 412 004f 00       		.byte	0
+ 413 0050 06       		.uleb128 0x6
+ 414 0051 898201   		.uleb128 0x4109
+ 415 0054 00       		.byte	0
+ 416 0055 11       		.uleb128 0x11
+ 417 0056 01       		.uleb128 0x1
+ 418 0057 31       		.uleb128 0x31
+ 419 0058 13       		.uleb128 0x13
+ 420 0059 00       		.byte	0
+ 421 005a 00       		.byte	0
+ 422 005b 07       		.uleb128 0x7
+ 423 005c 34       		.uleb128 0x34
+ 424 005d 00       		.byte	0
+ 425 005e 03       		.uleb128 0x3
+ 426 005f 0E       		.uleb128 0xe
+ 427 0060 3A       		.uleb128 0x3a
+ 428 0061 0B       		.uleb128 0xb
+ 429 0062 3B       		.uleb128 0x3b
+ 430 0063 0B       		.uleb128 0xb
+ 431 0064 49       		.uleb128 0x49
+ 432 0065 13       		.uleb128 0x13
+ 433 0066 3F       		.uleb128 0x3f
+ 434 0067 19       		.uleb128 0x19
+ 435 0068 3C       		.uleb128 0x3c
+ 436 0069 19       		.uleb128 0x19
+ 437 006a 00       		.byte	0
+ 438 006b 00       		.byte	0
+ 439 006c 08       		.uleb128 0x8
+ 440 006d 34       		.uleb128 0x34
+ 441 006e 00       		.byte	0
+ 442 006f 03       		.uleb128 0x3
+ 443 0070 0E       		.uleb128 0xe
+ 444 0071 3A       		.uleb128 0x3a
+ 445 0072 0B       		.uleb128 0xb
+ 446 0073 3B       		.uleb128 0x3b
+ 447 0074 05       		.uleb128 0x5
+ 448 0075 49       		.uleb128 0x49
+ 449 0076 13       		.uleb128 0x13
+ 450 0077 3F       		.uleb128 0x3f
+ 451 0078 19       		.uleb128 0x19
+ 452 0079 3C       		.uleb128 0x3c
+ 453 007a 19       		.uleb128 0x19
+ 454 007b 00       		.byte	0
+ 455 007c 00       		.byte	0
+ 456 007d 09       		.uleb128 0x9
+ 457 007e 35       		.uleb128 0x35
+ 458 007f 00       		.byte	0
+ 459 0080 49       		.uleb128 0x49
+ 460 0081 13       		.uleb128 0x13
+ 461 0082 00       		.byte	0
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccSZmvUS.s 			page 12
+
+
+ 462 0083 00       		.byte	0
+ 463 0084 0A       		.uleb128 0xa
+ 464 0085 2E       		.uleb128 0x2e
+ 465 0086 00       		.byte	0
+ 466 0087 3F       		.uleb128 0x3f
+ 467 0088 19       		.uleb128 0x19
+ 468 0089 3C       		.uleb128 0x3c
+ 469 008a 19       		.uleb128 0x19
+ 470 008b 6E       		.uleb128 0x6e
+ 471 008c 0E       		.uleb128 0xe
+ 472 008d 03       		.uleb128 0x3
+ 473 008e 0E       		.uleb128 0xe
+ 474 008f 3A       		.uleb128 0x3a
+ 475 0090 0B       		.uleb128 0xb
+ 476 0091 3B       		.uleb128 0x3b
+ 477 0092 0B       		.uleb128 0xb
+ 478 0093 00       		.byte	0
+ 479 0094 00       		.byte	0
+ 480 0095 00       		.byte	0
+ 481              		.section	.debug_aranges,"",%progbits
+ 482 0000 34000000 		.4byte	0x34
+ 483 0004 0200     		.2byte	0x2
+ 484 0006 00000000 		.4byte	.Ldebug_info0
+ 485 000a 04       		.byte	0x4
+ 486 000b 00       		.byte	0
+ 487 000c 0000     		.2byte	0
+ 488 000e 0000     		.2byte	0
+ 489 0010 00000000 		.4byte	.LFB110
+ 490 0014 08000000 		.4byte	.LFE110-.LFB110
+ 491 0018 00000000 		.4byte	.LFB111
+ 492 001c 08000000 		.4byte	.LFE111-.LFB111
+ 493 0020 00000000 		.4byte	.LFB112
+ 494 0024 08000000 		.4byte	.LFE112-.LFB112
+ 495 0028 00000000 		.4byte	.LFB113
+ 496 002c 08000000 		.4byte	.LFE113-.LFB113
+ 497 0030 00000000 		.4byte	0
+ 498 0034 00000000 		.4byte	0
+ 499              		.section	.debug_ranges,"",%progbits
+ 500              	.Ldebug_ranges0:
+ 501 0000 00000000 		.4byte	.LFB110
+ 502 0004 08000000 		.4byte	.LFE110
+ 503 0008 00000000 		.4byte	.LFB111
+ 504 000c 08000000 		.4byte	.LFE111
+ 505 0010 00000000 		.4byte	.LFB112
+ 506 0014 08000000 		.4byte	.LFE112
+ 507 0018 00000000 		.4byte	.LFB113
+ 508 001c 08000000 		.4byte	.LFE113
+ 509 0020 00000000 		.4byte	0
+ 510 0024 00000000 		.4byte	0
+ 511              		.section	.debug_line,"",%progbits
+ 512              	.Ldebug_line0:
+ 513 0000 50020000 		.section	.debug_str,"MS",%progbits,1
+ 513      0200FF01 
+ 513      00000201 
+ 513      FB0E0D00 
+ 513      01010101 
+ 514              	.LASF36:
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccSZmvUS.s 			page 13
+
+
+ 515 0000 433A5C48 		.ascii	"C:\\H_da\\SS26\\Research Project\\Workspace01\\MP3_"
+ 515      5F64615C 
+ 515      53533236 
+ 515      5C526573 
+ 515      65617263 
+ 516 002e 76342E63 		.ascii	"v4.cydsn\000"
+ 516      7964736E 
+ 516      00
+ 517              	.LASF9:
+ 518 0037 5F5F696E 		.ascii	"__int32_t\000"
+ 518      7433325F 
+ 518      7400
+ 519              	.LASF22:
+ 520 0041 656D4669 		.ascii	"emFile_RestoreConfig\000"
+ 520      6C655F52 
+ 520      6573746F 
+ 520      7265436F 
+ 520      6E666967 
+ 521              	.LASF12:
+ 522 0056 646F7562 		.ascii	"double\000"
+ 522      6C6500
+ 523              	.LASF26:
+ 524 005d 45455F6F 		.ascii	"EE_oo_IRQ_suspend_status\000"
+ 524      6F5F4952 
+ 524      515F7375 
+ 524      7370656E 
+ 524      645F7374 
+ 525              	.LASF19:
+ 526 0076 45455F54 		.ascii	"EE_TID\000"
+ 526      494400
+ 527              	.LASF23:
+ 528 007d 656D4669 		.ascii	"emFile_Sleep\000"
+ 528      6C655F53 
+ 528      6C656570 
+ 528      00
+ 529              	.LASF11:
+ 530 008a 666C6F61 		.ascii	"float\000"
+ 530      7400
+ 531              	.LASF1:
+ 532 0090 756E7369 		.ascii	"unsigned char\000"
+ 532      676E6564 
+ 532      20636861 
+ 532      7200
+ 533              	.LASF34:
+ 534 009e 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 534      43313120 
+ 534      352E342E 
+ 534      31203230 
+ 534      31363036 
+ 535 00d1 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 535      20726576 
+ 535      6973696F 
+ 535      6E203233 
+ 535      37373135 
+ 536 0104 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 536      66756E63 
+ 536      74696F6E 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccSZmvUS.s 			page 14
+
+
+ 536      2D736563 
+ 536      74696F6E 
+ 537              	.LASF15:
+ 538 012c 45455F49 		.ascii	"EE_INT32\000"
+ 538      4E543332 
+ 538      00
+ 539              	.LASF21:
+ 540 0135 656D4669 		.ascii	"emFile_SaveConfig\000"
+ 540      6C655F53 
+ 540      61766543 
+ 540      6F6E6669 
+ 540      6700
+ 541              	.LASF3:
+ 542 0147 73686F72 		.ascii	"short unsigned int\000"
+ 542      7420756E 
+ 542      7369676E 
+ 542      65642069 
+ 542      6E7400
+ 543              	.LASF32:
+ 544 015a 656D4669 		.ascii	"emFile_SPI0_Sleep\000"
+ 544      6C655F53 
+ 544      5049305F 
+ 544      536C6565 
+ 544      7000
+ 545              	.LASF25:
+ 546 016c 45455F6F 		.ascii	"EE_oo_IRQ_disable_count\000"
+ 546      6F5F4952 
+ 546      515F6469 
+ 546      7361626C 
+ 546      655F636F 
+ 547              	.LASF30:
+ 548 0184 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 548      52784275 
+ 548      66666572 
+ 548      00
+ 549              	.LASF31:
+ 550 0191 656D4669 		.ascii	"emFile_SPI0_SaveConfig\000"
+ 550      6C655F53 
+ 550      5049305F 
+ 550      53617665 
+ 550      436F6E66 
+ 551              	.LASF5:
+ 552 01a8 6C6F6E67 		.ascii	"long unsigned int\000"
+ 552      20756E73 
+ 552      69676E65 
+ 552      6420696E 
+ 552      7400
+ 553              	.LASF28:
+ 554 01ba 45455F73 		.ascii	"EE_std_endcycle_next_tid\000"
+ 554      74645F65 
+ 554      6E646379 
+ 554      636C655F 
+ 554      6E657874 
+ 555              	.LASF8:
+ 556 01d3 756E7369 		.ascii	"unsigned int\000"
+ 556      676E6564 
+ 556      20696E74 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccSZmvUS.s 			page 15
+
+
+ 556      00
+ 557              	.LASF18:
+ 558 01e0 45455F46 		.ascii	"EE_FREG\000"
+ 558      52454700 
+ 559              	.LASF16:
+ 560 01e8 45455F55 		.ascii	"EE_UINT32\000"
+ 560      494E5433 
+ 560      3200
+ 561              	.LASF7:
+ 562 01f2 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 562      206C6F6E 
+ 562      6720756E 
+ 562      7369676E 
+ 562      65642069 
+ 563              	.LASF35:
+ 564 0209 47656E65 		.ascii	"Generated_Source\\PSoC5\\emFile_PM.c\000"
+ 564      72617465 
+ 564      645F536F 
+ 564      75726365 
+ 564      5C50536F 
+ 565              	.LASF27:
+ 566 022c 45455F41 		.ascii	"EE_ApplicationMode\000"
+ 566      70706C69 
+ 566      63617469 
+ 566      6F6E4D6F 
+ 566      646500
+ 567              	.LASF10:
+ 568 023f 696E7433 		.ascii	"int32_t\000"
+ 568      325F7400 
+ 569              	.LASF20:
+ 570 0247 73697A65 		.ascii	"sizetype\000"
+ 570      74797065 
+ 570      00
+ 571              	.LASF6:
+ 572 0250 6C6F6E67 		.ascii	"long long int\000"
+ 572      206C6F6E 
+ 572      6720696E 
+ 572      7400
+ 573              	.LASF13:
+ 574 025e 63686172 		.ascii	"char\000"
+ 574      00
+ 575              	.LASF24:
+ 576 0263 656D4669 		.ascii	"emFile_Wakeup\000"
+ 576      6C655F57 
+ 576      616B6575 
+ 576      7000
+ 577              	.LASF17:
+ 578 0271 45455F55 		.ascii	"EE_UREG\000"
+ 578      52454700 
+ 579              	.LASF29:
+ 580 0279 45455F49 		.ascii	"EE_IRQ_nesting_level\000"
+ 580      52515F6E 
+ 580      65737469 
+ 580      6E675F6C 
+ 580      6576656C 
+ 581              	.LASF33:
+ 582 028e 656D4669 		.ascii	"emFile_SPI0_Wakeup\000"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccSZmvUS.s 			page 16
+
+
+ 582      6C655F53 
+ 582      5049305F 
+ 582      57616B65 
+ 582      757000
+ 583              	.LASF2:
+ 584 02a1 73686F72 		.ascii	"short int\000"
+ 584      7420696E 
+ 584      7400
+ 585              	.LASF4:
+ 586 02ab 6C6F6E67 		.ascii	"long int\000"
+ 586      20696E74 
+ 586      00
+ 587              	.LASF14:
+ 588 02b4 6C6F6E67 		.ascii	"long double\000"
+ 588      20646F75 
+ 588      626C6500 
+ 589              	.LASF0:
+ 590 02c0 7369676E 		.ascii	"signed char\000"
+ 590      65642063 
+ 590      68617200 
+ 591              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
