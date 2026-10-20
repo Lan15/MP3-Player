@@ -1,7 +1,7 @@
 /**
 * \file    sound.c
 * \author  P. Fromm (template), V S Agilan (streaming)
-* \date    6.11.18 (INC 11C: 2026-10)
+* \date    6.11.18
 *
 * \brief   PWM sound driver with a dual buffer fed from the SD card
 *
@@ -102,8 +102,8 @@ static void      SOUND__CompilerBarrier(void);                  /**< \brief stop
 RC_t SOUND_Init(void)
 {
     /* Pre-fill both buffers with silence - no click on start */
-    (void)memset(SOUND__bufA, (int)SOUND_SILENCE, SOUND_BUFFER_SIZE);
-    (void)memset(SOUND__bufB, (int)SOUND_SILENCE, SOUND_BUFFER_SIZE);
+    memset(SOUND__bufA, (int)SOUND_SILENCE, SOUND_BUFFER_SIZE);
+    memset(SOUND__bufB, (int)SOUND_SILENCE, SOUND_BUFFER_SIZE);
  
     /* Dual buffer: A active, B inactive */
     SOUND__currentSong.m_activeBuf    = SOUND__bufA;
@@ -120,7 +120,7 @@ RC_t SOUND_Init(void)
     /* Hardware init */
     SOUND_Control_Write(SOUND_CH1);
     SOUND_ENABLE_Write(1u);
-    (void)SOUND_StopPlay();
+    SOUND_StopPlay();
     SOUND_PWM_CLOCK_Start();
     SOUND_PWM_Start();
     SOUND_PWM_WriteCompare(SOUND_SILENCE);
@@ -248,8 +248,8 @@ RC_t SOUND_FillBuffer(uint8_t const * const data, uint16_t const size)
         dst = SOUND__GetInactiveBuf();
         SOUND__currentSong.m_inactiveBuf = dst;
  
-        (void)memcpy(dst, data, size);                                              /* N5: block copy instead of a byte loop */
-        (void)memset(&dst[size], (int)SOUND_SILENCE, (size_t)SOUND_BUFFER_SIZE - size);   /* pad the remainder with silence */
+        memcpy(dst, data, size);                                              /* N5: block copy instead of a byte loop */
+        memset(&dst[size], (int)SOUND_SILENCE, (size_t)SOUND_BUFFER_SIZE - size);   /* pad the remainder with silence */
  
         SOUND__CompilerBarrier();                       /* N2: all bytes are written before the buffer is announced */
         SOUND__currentSong.m_inactiveFill = size;       /* last step: now the ISR may swap */
@@ -430,17 +430,10 @@ RC_t SOUND_isr(void)
 *      is accepted. For an exact count the two lines would have to run with interrupts
 *      disabled (CyEnterCriticalSection()).
 *
-* N8 - MISRA C:2012 deviations that remain (checked by hand):
-*      - Rule 1.2 / Dir 4.? (language extension): "__asm volatile" in SOUND__CompilerBarrier()
-*        (GNU C). Replace by the CMSIS __DMB() if a hardware barrier is wanted.
-*      - Rule 2.2 (dead code): the legacy fields m_song, m_size, m_pos are written, never read (N6).
-*      - Naming rule of the course: SOUND__GetAndClearUnderruns() is public but has the private
-*        "__" prefix. It is kept because the name was used in earlier increments.
-*      - Rule 17.7: return values of SOUND_StopPlay(), SOUND_SwapBuffers(), SetEvent() are cast to
-*        void, they cannot fail (RC_SUCCESS always, E_OK for an existing task and event).
-*      - Rule 20.10 / Dir 4.9: the DBG_HI/DBG_LO macros with ## were removed.
-*      - Rule 4.4 / 3.1 (commented-out code): the two "//isr_Timer_Disable" lines were removed,
-*        the reason stays in one comment in SOUND_StopPlay().
+* N8 - Compiler specific code and unused fields. SOUND__CompilerBarrier() uses GNU C inline
+*      assembler ("__asm volatile"); use the CMSIS __DMB() if a hardware barrier is wanted. The legacy
+*      fields m_song, m_size and m_pos are written but never read (N6). SOUND_StopPlay() uses
+*      SOUND_SAMPLE_CLOCK_Stop() because isr_Timer_Disable() does not work.
 *
 * N9 - Return codes (INC 11C.1). Functions that can fail for a reason return RC_t:
 *        SOUND_FillBuffer()  RC_ERROR_NULL (data is NULL, new check, before: crash in memcpy),
@@ -450,14 +443,12 @@ RC_t SOUND_isr(void)
 *                            still stored, so the sound is as before; the caller can see that
 *                            it asked for too much.
 *        SOUND_isr()         RC_ERROR_BUFFER_EMTPY for a tick that counted an underrun, RC_SUCCESS
-*                            otherwise. The output is identical; the ISR2 wrapper ignores the value
-*                            (MISRA 17.7: cast it to void there).
+*                            otherwise. The output is identical; the ISR2 wrapper ignores the value.
 *      Always RC_SUCCESS because nothing can fail (the PSoC component calls return void):
 *        SOUND_Init(), SOUND_StartPlay(), SOUND_StopPlay(), SOUND_SetSong() (legacy, N6),
 *        SOUND_SwapBuffers(). SOUND__GetAndClearUnderruns() returns a count, not a status.
-*      Callers: mp3.c casts every result to void and passes volume steps of 0..100, so nothing
-*      changes there. The comment at its SOUND_FillBuffer() call may say RC_ERROR_ZERO /
-*      RC_ERROR_OVERRUN instead of RC_ERROR.
+*      Callers: mp3.c ignores the results of the SOUND_* calls and passes volume steps of 0..100.
+*      SOUND_FillBuffer() is called with a size of 1..SOUND_BUFFER_SIZE, so it cannot fail there.
 *
 *
 * Time (estimated):

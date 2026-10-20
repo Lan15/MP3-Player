@@ -121,7 +121,7 @@ typedef enum{
  *          Sends the bootup sequence to the TFT, applies #TFT_ORIENTATION and sets the backlight to #TFT_BACKLIGHT
  * \return  none
  */
-void TFT_init();
+void TFT_Init();
 
 //-------------------------------------[Screen API]
 

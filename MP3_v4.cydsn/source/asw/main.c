@@ -11,7 +11,7 @@
 * 
 * \file    main.c
 * \author  V S Agilan (application), PSoC Creator template
-* \date    INC 11D: 2026-10
+* \date    10.2026
 *
 * \brief   Application entry point of the WAV / MP3 player: OS start, the tasks and
 *          the interrupt service routines
@@ -26,7 +26,7 @@
 *   | tsk_init        | start-up, runs once                 | drivers, EE_system_init, MP3_Init     |
 *   | tsk_control     | ev_1s, ev_Button1..ev_Button4       | MP3_ProcessEvent() (player state)     |
 *   | tsk_reader      | ev_BufEmpty (set by SOUND_isr)      | MP3_Reader() (SD read + convert)      |
-*   | tsk_display     | alarm alrm_display, every 200 ms    | MP3__showSong() (TFT song list)       |
+*   | tsk_display     | alarm alrm_display, every 200 ms    | MP3__showSong() (TFT song list), N5   |
 *   | tsk_background  | tsk_init                            | idle loop, lowest priority            |
 *   | isr_Button      | button interrupt                    | SetEvent(tsk_control, ev_ButtonN)     |
 *   | isr_Timer       | sample timer, 22050 Hz              | SOUND_isr() (next sample to the VDAC) |
@@ -42,30 +42,30 @@
 *   | Button3 | play          | pause         | resume  |
 *   | Button4 | -             | stop          | stop    |
 *
-* The table follows the code of MP3_ProcessEvent() (see also mp3.h). The comment that
-* was here before INC 11D said "Button 1: Increase Volume, Next Song" and "Button 2:
-* Decrease Volume, Prev Song"; the song direction was the other way round (N11).
+* The table follows the code of MP3_ProcessEvent() (see also mp3.h and N10).
 *
 * Start-up sequence of tsk_init (order matters, N1):
-*   UART_LOG_Start, SOUND_SAMPLE_Start, LED_Init, SEVEN_Init, TFT_init, SOUND_Init,
-*   EE_system_init, MP3_Init, SetRelAlarm (alrm_1s, alrm_display), ActivateTask
-*   (tsk_reader, tsk_control, tsk_background), TerminateTask.
+*   UART_LOG_Start, SOUND_SAMPLE_Start, LED_Init, SEVEN_Init, JOYSTICK_Init, TFT_Init, SOUND_Init,
+*   EE_system_init, EE_systick_start, MP3_Init, log message + CEH_HASBOOTED,
+*   SetRelAlarm (alrm_1s, alrm_trace), ActivateTask (tsk_reader, tsk_control, tsk_background),
+*   TerminateTask.
 *
 * \todo <todos>
 * \warning tsk_control must not interrupt a running MP3_Reader() (shared reader state),
 *          check the task priorities in the OIL file (N6, and N7 in mp3.c).
-* \warning This file was changed in INC 11D by COMMENTS AND NOTES ONLY. No statement,
-*          declaration or value was changed. Things that could be improved in the code
-*          are listed in N2, N3, N8, N9 and N11 and are left for a code increment.
+* \warning The alarm alrm_display is not started in tsk_init (the call is commented out), so
+*          tsk_display does not run and the TFT is not updated cyclically (N5).
 * \warning This software is a PROTOTYPE version and is not designed or intended
 *          for use in production, especially not for safety-critical applications!
 *
 * Changelog:\n
 *  - 6.11.18 : template
-*  - INC 3   : debug task with the ISR tick count (now in the #if 0 block, N10)
+*  - INC 3   : debug task with the ISR tick count (now in the #if 0 block, N9)
 *  - INC 10  : TFT_init() before MP3_Init(), tsk_display, alarm alrm_display
 *  - INC 11D : Doxygen file header and function comments in the project style,
 *              notes N1..N11 at the end of the file, ASCII only. No code change.
+*  - INC 14  : log service and central error handler: start message and CEH_HASBOOTED in tsk_init,
+*              underrun report in tsk_control (1 s tick), ignored events logged; note N11
 *
 * \copyright Copyright 2016
 * Department of electrical engineering and information technology, Hochschule Darmstadt - University of applied sciences (h_da). All Rights Reserved.
@@ -83,8 +83,8 @@
 #include "global.h"
 
 #include "HardFault_Handler.h"
-#include "log.h"
-#include "ceh.h"
+#include "log.h"          /* INC 14: LOG_I() */
+#include "ceh.h"          /* INC 14: CEH_report() */
 #include "trcRecorder.h"
 
 #include "led.h"
@@ -130,7 +130,7 @@ traceHandle TRC_ISRButtonHandle;
 /*****************************************************************************/
 
 /*****************************************************************************/
-/* Old sound tests (commented out, N9)                                       */
+/* Old sound tests (commented out, N8)                                       */
 /*****************************************************************************/
  
 /*void soundTest1()
@@ -194,9 +194,8 @@ void soundTest2()
  * The first task that runs is tsk_init.
  *
  * \return does not return (int by the C standard)
- * \note   Signature "int main()" is kept as it is (N8).
  */
-int main()                                                                  /* N8 */
+int main()
 {
     CyGlobalIntEnable; /* Enable global interrupts. */
    
@@ -230,10 +229,8 @@ int main()                                                                  /* N
  * Executes a breakpoint instruction. Look at the call stack in the debugger to
  * see how the program got here. Without a debugger attached, a breakpoint instruction
  * typically ends in the hard fault handler of the Cortex-M3.
- *
- * \note Signature "void unhandledException()" is kept as it is (N8).
  */
-void unhandledException()                                                  /* N8 */
+void unhandledException()
 {
     //Ooops, something terrible happened....check the call stack to see how we got here...
     __asm("bkpt");
@@ -283,9 +280,10 @@ EventMaskType GetAndClearHighestEvent(EventMaskRefType ev)
  *      TFT, sound driver),
  *   2. EE_system_init() - reconfigures the ISRs with the OS parameters,
  *   3. MP3_Init() - scan the SD card, draw the TFT header,
- *   4. start the two alarms, activate the other tasks and terminate itself.
+ *   4. start the alarms, activate the other tasks and terminate itself.
  *
- * The return values of SOUND_Init() and MP3_Init() are not evaluated here (N2).
+ * The return values of SOUND_Init() and MP3_Init() are not evaluated here (N2). After MP3_Init()
+ * a start message is written to the log and CEH_HASBOOTED is reported (N11).
  *
  * \note Runs only once. TerminateTask() is the last call.
  */
@@ -299,8 +297,8 @@ TASK(tsk_init)
     LED_Init();
     SEVEN_Init();
     JOYSTICK_Init();
-    TFT_init();     /* INC 10 — init TFT before MP3_Init so display is ready for song list */
-    SOUND_Init();                                                           /* N1, N2 */
+    TFT_Init();     /* INC 10 - init TFT before MP3_Init so display is ready for song list */
+    SOUND_Init();                                                          /* N1, N2 */
     
     //Reconfigure ISRs with OS parameters.
     //This line MUST be called after the hardware driver initialisation!
@@ -312,8 +310,11 @@ TASK(tsk_init)
     
     //Application Init
     MP3_Init();                                                            /* N2 */
- 
-    //Start the cyclic alarms  
+
+    LOG_I("[MAIN] Player started");                                        /* N11 */
+    CEH_report(CEH_HASBOOTED, 0u);                                         /* N11 */
+    
+    //Start the cyclic alarms
     SetRelAlarm(alrm_1s,1000,1000);                                        /* N5 */
     SetRelAlarm(alrm_trace,1200,200);
     SetRelAlarm(alrm_display,1100,200);   /* INC 10 */                     /* N5 */
@@ -332,7 +333,7 @@ TASK(tsk_init)
  * Waits for ev_1s and ev_Button1..ev_Button4 (N4). All events that arrived are read
  * and cleared at once, then handled one by one with GetAndClearHighestEvent(): each
  * event is passed to MP3_ProcessEvent(), which runs the player state machine.
- * The result of MP3_ProcessEvent() is not evaluated (N2).
+ * An ignored event (RC_ERROR_INVALID_STATE, RC_ERROR_BAD_PARAM) is logged with LOG_V / LOG_W (N2, N11).
  *
  * \note Never ends. Must not interrupt a running MP3_Reader() (N6).
  */
@@ -352,7 +353,26 @@ TASK(tsk_control)
         while(0 != ev)
         {
             nextEvent = GetAndClearHighestEvent(&ev);
-            RC_t result = MP3_ProcessEvent(nextEvent);                           /* N2: result is not used */
+            RC_t const result = MP3_ProcessEvent(nextEvent);                     /* N2, N11: only logged */
+            
+            if (ev_1s == nextEvent)
+            {
+                uint32_t const underruns = SOUND__GetAndClearUnderruns();        /* N11: late ISR ticks of the last second */
+
+                if (underruns > 0u)
+                {
+                    CEH_report(CEH_SOUND_UNDERRUN, underruns);                  /* N11 */
+                }
+            }
+            
+            if ((RC_ERROR_INVALID_STATE == result) && (ev_1s != nextEvent))
+            {
+                LOG_V("[MAIN] Event ignored, no songs");
+            }
+            else if (RC_ERROR_BAD_PARAM == result)
+            {
+                LOG_W("[MAIN] Unknown event 0x%x", (uint32_t)nextEvent);
+            }
         }
     }
 }
@@ -481,7 +501,7 @@ ISR2(isr_Button)
  */
 ISR2(isr_Timer)
 {
-    /* N9: old PWM test, commented out
+    /* N8: old PWM test, commented out
     static uint32_t a = 0;
     a = (a+1) % 2;
     SOUND_PWM_WriteCompare(a*255);
@@ -491,7 +511,7 @@ ISR2(isr_Timer)
 }
 
 //Debugging aid
-#if 0                                                                      /* N10 */
+#if 0                                                                      /* N9 */
 TASK(tsk_sd)
 {
     char        sdVolName[10];
@@ -801,30 +821,27 @@ TASK(tsk_background)
 * N1 - Start-up order in tsk_init. The drivers are started first and EE_system_init() comes after
 *      them: it reconfigures the ISRs with the OS parameters and must be called after the hardware
 *      driver initialisation (original comment). SOUND_Init() (both buffers silent, sample timer
-*      stopped, see sound.h) is done before isr_Timer can run. TFT_init() comes before MP3_Init()
+*      stopped, see sound.h) is done before isr_Timer can run. TFT_Init() comes before MP3_Init()
 *      (INC 10) so that the display is ready when the song list is drawn. MP3_Init() is last
-*      because it scans the SD card and draws the TFT header. The alarms are started and the other
-*      tasks are activated only after that, so tsk_control and tsk_reader never see a player
-*      that is not initialised.
+*      because it scans the SD card. The alarms are started and the other tasks are activated only
+*      after that, so tsk_control and tsk_reader never see a player that is not initialised.
 *
-* N2 - Return values that are not evaluated here. SOUND_Init(): always RC_SUCCESS. MP3_Init():
-*      RC_SUCCESS or RC_ERROR_OPEN (a folder could not be opened); the failure is already reported
-*      by the player itself (UART log, error flag, TFT message), so there is nothing more to do in
-*      tsk_init. MP3_ProcessEvent(): RC_ERROR_BAD_PARAM or RC_ERROR_INVALID_STATE for an event that
-*      was ignored, which is normal operation. The result is stored in the local variable "result"
-*      of tsk_control and never read: gcc reports it as unused, MISRA C:2012 Rule 2.2 and 17.7.
-*      "(void)MP3_ProcessEvent(nextEvent);" would show that this is intended. SOUND_isr(): returns
-*      RC_ERROR_BUFFER_EMTPY on an underrun tick; the driver counts it itself and an ISR cannot
-*      react to it. Left unchanged, because INC 11D changes comments only.
+* N2 - Return values that are not evaluated in tsk_init. SOUND_Init(): always RC_SUCCESS.
+*      MP3_Init(): RC_SUCCESS or RC_ERROR_OPEN (a folder could not be opened); the failure is
+*      already reported by the player itself (log, CEH event, error flag, TFT message), so there is
+*      nothing more to do in tsk_init. MP3_ProcessEvent(): RC_ERROR_BAD_PARAM or
+*      RC_ERROR_INVALID_STATE for an event that was ignored; tsk_control only logs it (N11).
+*      SOUND_isr(): returns RC_ERROR_BUFFER_EMTPY on an underrun tick; the driver counts it itself
+*      and an ISR cannot react to it.
 *
 * N3 - GetAndClearHighestEvent(). (a) The function returns the lowest bit number that is set;
 *      "highest" means the highest priority. If several events arrive together they are handled
 *      in the order of the event bits (numbering in the OIL file), not in the order of arrival.
 *      (b) It works on the copy "ev" of the caller only. The events of the OS were already
 *      cleared by ClearEvent(ev) in tsk_control. (c) "1<<i" is a shift of a signed int. If
-*      EventMaskType has 32 bit, bit 31 would be a signed overflow (MISRA C:2012 Rule 10.1 and 12.2,
-*      template rule 3: do not mix signed and unsigned). It is not reached as long as no event uses
-*      bit 31 (tsk_control waits for 5 events, tsk_reader for 1). A code change should use "1u<<i".
+*      EventMaskType has 32 bit, bit 31 would be a signed overflow. It is not reached as long as
+*      no event uses bit 31 (tsk_control waits for 5 events, tsk_reader for 1). Use "1u<<i" if
+*      more events are added.
 *
 * N4 - Event handling in tsk_control. WaitEvent() blocks until one of the five events is set,
 *      GetEvent() reads the set events and ClearEvent(ev) clears exactly these bits. An event that
@@ -836,11 +853,13 @@ TASK(tsk_background)
 *
 * N5 - Time base and alarms. EE_systick_set_period(MILLISECONDS_TO_TICKS(1, BCLK__BUS_CLK__HZ))
 *      makes one tick of cnt_systick one millisecond. alrm_1s starts after 1000 ms and repeats every
-*      1000 ms (ev_1s for the play time of the player). alrm_display starts after 1100 ms and repeats
-*      every 200 ms (tsk_display). The display times 1100, 1300, ... are odd multiples of 100 ms and
-*      the 1 s ticks are even multiples, so both alarms never expire in the same millisecond. The
-*      numbers are literals and not #defines (template rule 2: no magic numbers). What an alarm
-*      does when it expires (event or task activation) is set in the OIL file.
+*      1000 ms (ev_1s for the play time of the player). alrm_display would start after 1100 ms and
+*      repeat every 200 ms (tsk_display); the display times 1100, 1300, ... are odd multiples of
+*      100 ms and the 1 s ticks are even multiples, so both alarms never expire in the same
+*      millisecond. Currently the SetRelAlarm() call for alrm_display is commented out (TFT
+*      flicker investigation), so tsk_display never runs, and MP3__initDisplay() is not called in
+*      MP3_Init() either: the player does not draw on the TFT. What an alarm does when it expires
+*      (event or task activation) is set in the OIL file.
 *
 * N6 - Tasks, priorities and shared data. Priority and type of the tasks are set in the OIL file
 *      and cannot be seen here. mp3.c N7: tsk_control and tsk_reader share the state of the reader,
@@ -850,42 +869,39 @@ TASK(tsk_background)
 *      later, because the display compares the player state with what is drawn on every run
 *      (mp3.c N9). tsk_background must have the lowest priority, so it only uses the idle time.
 *
-* N7 - Code that does not return or is not reached. StartOS() does not return, the for(;;) loop
-*      with the nop below it in main() is a safety net. In tsk_reader the TerminateTask() after the
-*      endless while(1) is never reached (MISRA C:2012 Rule 2.1); it is kept because an OSEK task
-*      has to end with TerminateTask() or ChainTask(). tsk_control and tsk_background are endless
-*      loops. tsk_init and tsk_display end with TerminateTask() after every run.
+* N7 - Code that does not return. StartOS() does not return, the for(;;) loop with the nop below
+*      it in main() is a safety net. In tsk_reader the TerminateTask() after the endless while(1)
+*      is never reached; it is kept because an OSEK task has to end with TerminateTask() or
+*      ChainTask(). tsk_control and tsk_background are endless loops. tsk_init and tsk_display end
+*      with TerminateTask() after every run.
 *
-* N8 - Rules not met, left unchanged because only comments were changed (MISRA C:2012 and
-*      template). (a) Rule 8.2: "int main()" and "void unhandledException()" should have (void).
-*      (b) GetAndClearHighestEvent() has external linkage and no prototype in this file; if it is
-*      only used here it should be static with a prototype (Rule 8.4, 8.7). (c) Rule 1.2 and
-*      Dir 4.3: asm("nop") and __asm("bkpt") are compiler specific assembler statements. (d) Shift
-*      of a signed value: N3. (e) Result not used: N2. (f) Commented-out code, Dir 4.4: N9.
-*      (g) Magic numbers 1000, 1100, 200: N5. (h) tsk_display calls MP3__showSong(); the prefix
-*      MP3__ marks a private function (template rule 1) but the function is public in mp3.h.
-*      A rename to MP3_showSong() would fit the rule; it needs a change in mp3.c and mp3.h too.
+* N8 - Commented-out code that was kept: soundTest1() and soundTest2() (they use SOUND_Records,
+*      which the sound driver does not have any more), the square wave test in isr_Timer and the
+*      old UART line in tsk_display.
 *
-* N9 - Commented-out code that was kept (Dir 4.4): soundTest1() and soundTest2() (they use
-*      SOUND_Records, which the sound driver does not have any more), the two "Test" lines in
-*      tsk_init (the first one, "RC_t SOUND_StartPlay();", is a declaration and not a call), the
-*      square wave test in isr_Timer and the old UART line in tsk_display. They are candidates
-*      for removal in a code increment.
-*
-* N10 - The "#if 0" block at the end of the file is not compiled. It holds the old debug tasks
+* N9 - The "#if 0" block at the end of the file is not compiled. It holds the old debug tasks
 *      tsk_sd (SD card scan, WAV header test, path format test) and the INC 3 version of
 *      tsk_background (ISR tick count). It cannot be switched on as it is: it defines
 *      tsk_background a second time and uses SOUND_isrTickCount, which sound.h does not declare
-*      any more (INC 11C). The only change in the block is that the long dashes in some comments
-*      are replaced by "-" (ASCII only). It could be moved to a separate debug file or removed.
+*      any more (INC 11C).
 *
-* N11 - Button description corrected. The comment that was at the top of the old file said
-*      "Button 1 : Increase Volume, Next Song" and "Button 2 : Decrease Volume, Prev Song". The
-*      code in MP3_ProcessEvent() does it the other way round for the songs: while stopped,
-*      Button1 is the previous song and Button2 is the next song; while playing, Button1 is
-*      volume + and Button2 is volume -. Button3 is play / pause / resume, Button4 is stop. The
-*      table in the file header follows the code. If the old text was the wanted behaviour, then
-*      MP3_ProcessEvent() in mp3.c has to be changed, not this comment.
+* N10 - Buttons. In MP3_ProcessEvent() while stopped, Button1 is the previous song and Button2
+*      is the next song; while playing, Button1 is volume + and Button2 is volume -. Button3 is
+*      play / pause / resume, Button4 is stop. The table in the file header follows the code.
+*
+* N11 - Log service and error handler (INC 14). (a) tsk_init writes "[MAIN] Player started" with
+*      LOG_I and reports CEH_HASBOOTED (data 0), after MP3_Init() and before the alarms are
+*      started. (b) On each ev_1s tsk_control reads and clears the underrun counter of the sound
+*      driver (SOUND__GetAndClearUnderruns(), a count, N9 in sound.c) and reports CEH_SOUND_UNDERRUN
+*      with the number of late ticks when it is not 0. This is the one place for it: the ISR must
+*      not log or report (the UART blocks when its buffer is full). A single report can also
+*      appear at the end of a song, when the last buffer is played out and the sound is stopped a
+*      moment later. (c) The result of MP3_ProcessEvent() is logged: LOG_V "Event ignored, no
+*      songs" (not for the 1 s tick), LOG_W "Unknown event 0x..". (d) CEH_report() is called from
+*      tsk_control and tsk_reader; the list update is made atomic in ceh_cfg.c (N3 there).
+*      (e) FAULTHANDLER_Install(), CEH_init() and the Tracealyzer calls in main() are from the
+*      project template (INC 13). The only new output is the UART text.
+*
 */
  
 /* [main.c] END OF FILE */

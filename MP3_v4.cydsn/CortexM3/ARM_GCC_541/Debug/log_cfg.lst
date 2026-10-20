@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
   28:source\bsw\Services\log/log_cfg.c **** * This prototype is for research purposes only. This software is provided "AS IS," without a warran
   29:source\bsw\Services\log/log_cfg.c **** */
   30:source\bsw\Services\log/log_cfg.c **** 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 2
 
 
   31:source\bsw\Services\log/log_cfg.c **** /*****************************************************************************/
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
   35              		.cfi_offset 4, -8
   36              		.cfi_offset 14, -4
   37 0002 0446     		mov	r4, r0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 3
 
 
   78:source\bsw\Services\log/log_cfg.c **** 	// user code
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
   78 0002 0446     		mov	r4, r0
   92:source\bsw\Services\log/log_cfg.c **** 	// user code
   93:source\bsw\Services\log/log_cfg.c **** 	UART_LOG_PutString("DEBUG   : ");
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 4
 
 
   79              		.loc 1 93 0
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
  107:source\bsw\Services\log/log_cfg.c **** 	UART_LOG_PutString("VERBOSE : ");
  120              		.loc 1 107 0
  121 0004 0448     		ldr	r0, .L11
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 5
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 5
 
 
  122              	.LVL13:
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
  162 0004 0448     		ldr	r0, .L15
  163              	.LVL19:
  164 0006 FFF7FEFF 		bl	UART_LOG_PutString
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 6
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 6
 
 
  165              	.LVL20:
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
  205 0006 FFF7FEFF 		bl	UART_LOG_PutString
  206              	.LVL26:
  136:source\bsw\Services\log/log_cfg.c **** 	UART_LOG_PutString((char*)buffer);
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 7
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 7
 
 
  207              		.loc 1 136 0
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
  250              		.file 6 "Generated_Source\\PSoC5/ErikaOS_1_cortex_mx_ee_cpu.inc"
  251              		.file 7 "Generated_Source\\PSoC5/ErikaOS_1_ee_oo_intfunc.inc"
  252              		.file 8 "Generated_Source\\PSoC5/ErikaOS_1_cortex_mx_ee_context.inc"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 8
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 8
 
 
  253              		.file 9 "Generated_Source\\PSoC5/ErikaOS_1_common_ee_primitives.inc"
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
  307 0068 02       		.uleb128 0x2
  308 0069 08       		.byte	0x8
  309 006a 04       		.byte	0x4
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 9
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 9
 
 
  310 006b AF010000 		.4byte	.LASF8
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
  364 00da 78       		.byte	0x78
  365 00db A8000000 		.4byte	0xa8
  366 00df 02       		.uleb128 0x2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 10
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 10
 
 
  367 00e0 04       		.byte	0x4
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
  421 014f 05       		.uleb128 0x5
  422 0150 8A010000 		.4byte	.LASF23
  423 0154 01       		.byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 11
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 11
 
 
  424 0155 5A       		.byte	0x5a
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
  478 01c7 06       		.uleb128 0x6
  479 01c8 83020000 		.4byte	.LASF24
  480 01cc 01       		.byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 12
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 12
 
 
  481 01cd 68       		.byte	0x68
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
  535 0242 50020000 		.4byte	0x250
  536 0246 08       		.uleb128 0x8
  537 0247 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 13
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 13
 
 
  538 0248 50       		.byte	0x50
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
  592 02b4 10000000 		.4byte	.LVL27
  593 02b8 23030000 		.4byte	0x323
  594 02bc C7020000 		.4byte	0x2c7
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 14
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 14
 
 
  595 02c0 08       		.uleb128 0x8
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
  649 032d 8B       		.byte	0x8b
  650 032e 00       		.byte	0
  651              		.section	.debug_abbrev,"",%progbits
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 15
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 15
 
 
  652              	.Ldebug_abbrev0:
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
  706 0035 00       		.byte	0
  707 0036 05       		.uleb128 0x5
  708 0037 2E       		.uleb128 0x2e
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 16
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 16
 
 
  709 0038 01       		.byte	0x1
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
  763 0073 9142     		.uleb128 0x2111
  764 0075 18       		.uleb128 0x18
  765 0076 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 17
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 17
 
 
  766 0077 00       		.byte	0
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
  820 00af 35       		.uleb128 0x35
  821 00b0 00       		.byte	0
  822 00b1 49       		.uleb128 0x49
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 18
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 18
 
 
  823 00b2 13       		.uleb128 0x13
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
  877 004d 01       		.uleb128 0x1
  878 004e 50       		.byte	0x50
  879 004f 9F       		.byte	0x9f
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 19
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 19
 
 
  880 0050 00000000 		.4byte	0
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
  934 00d4 00000000 		.4byte	0
  935 00d8 00000000 		.4byte	0
  936              		.section	.debug_aranges,"",%progbits
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 20
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 20
 
 
  937 0000 3C000000 		.4byte	0x3c
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
  979 0041 4C4F475F 		.ascii	"LOG_print_e\000"
  979      7072696E 
  979      745F6500 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 21
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 21
 
 
  980              	.LASF29:
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
  999      69676E65 
  999      6420696E 
  999      7400
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 22
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 22
 
 
  1000              	.LASF4:
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 1
  1025      206C6F6E 
  1025      6720756E 
  1025      7369676E 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\cc1yTPkz.s 			page 23
+ARM GAS  C:\Users\agila\AppData\Local\Temp\cc02Yczs.s 			page 23
 
 
  1025      65642069 

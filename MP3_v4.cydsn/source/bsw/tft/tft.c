@@ -190,7 +190,7 @@ RC_t TFT_send(TFT_payload_t type, uint8_t payload){
 
 
 //----------------- CTRL
-void TFT_init(){
+void TFT_Init(){
     
     //init local vars
     _width    = CFG_TFT_WIDTH;

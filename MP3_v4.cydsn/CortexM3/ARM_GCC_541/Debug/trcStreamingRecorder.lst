@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
   29:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  * third party rights, merchantability, or fitness for any particular purpose.
   30:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  * In no event will PERCEPIO, its technology partners, or distributors be liable
   31:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  * to you for any consequential, incidental or special damages, including any
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 2
 
 
   32:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  * lost profits or lost savings, even if a representative of PERCEPIO has been
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
   86:source\bsw\TraceRecorder/trcStreamingRecorder.c ****   uint16_t platform;
   87:source\bsw\TraceRecorder/trcStreamingRecorder.c ****   uint32_t options;
   88:source\bsw\TraceRecorder/trcStreamingRecorder.c ****   uint16_t symbolSize;
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 3
 
 
   89:source\bsw\TraceRecorder/trcStreamingRecorder.c ****   uint16_t symbolCount;
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  143:source\bsw\TraceRecorder/trcStreamingRecorder.c **** static SymbolTable symbolTable = { { { 0 } } };
  144:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 
  145:source\bsw\TraceRecorder/trcStreamingRecorder.c **** /* This points to the first unused entry in the symbol table. */
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 4
 
 
  146:source\bsw\TraceRecorder/trcStreamingRecorder.c **** static uint32_t firstFreeSymbolTableIndex = 0;
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  200:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  * - Tasks
  201:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  * - Named ISRs (xTraceSetISRProperties)
  202:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  * - Named kernel objects (vTraceStoreKernelObjectName)
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 5
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 5
 
 
  203:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  * - User event channels (xTraceRegisterString)
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  257:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 
  258:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 										
  259:source\bsw\TraceRecorder/trcStreamingRecorder.c **** /* Stores the header information on Start */
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 6
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 6
 
 
  260:source\bsw\TraceRecorder/trcStreamingRecorder.c **** static void prvTraceStoreHeader(void);
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  314:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  * and the corresponding return event is then the start of the next instance.
  315:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  * If the kernel call is not blocking, the viewer instead splits the current
  316:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  * fragment right before the kernel call, which makes this call the first event
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 7
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 7
 
 
  317:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  * of the next instance.
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  371:source\bsw\TraceRecorder/trcStreamingRecorder.c **** }
  372:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 
  373:source\bsw\TraceRecorder/trcStreamingRecorder.c **** /******************************************************************************
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 8
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 8
 
 
  374:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  * vTracePrint
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  428:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  *
  429:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  *	 traceString adc_uechannel = xTraceRegisterString("ADC User Events");
  430:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  *	 ...
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 9
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 9
 
 
  431:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  *	 vTracePrintF(adc_uechannel,
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  485:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  * xTraceSetISRProperties
  486:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  *
  487:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  * Stores a name and priority level for an Interrupt Service Routine, to allow
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 10
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 10
 
 
  488:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  * for better visualization. Returns a traceHandle used by vTraceStoreISRBegin. 
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  542:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	/* We are at the start of a possible ISR chain. 
  543:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	No context switches should have been triggered now. */
  544:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	if (ISR_stack_index == -1)
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 11
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 11
 
 
  545:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		isPendingContextSwitch = 0; 
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  599:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		ISR_stack_index--;
  600:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 
  601:source\bsw\TraceRecorder/trcStreamingRecorder.c **** #if (TRC_CFG_INCLUDE_ISR_TRACING == 1)
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 12
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 12
 
 
  602:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		/* Store return to interrupted ISR (if nested ISRs)*/
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  656:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		
  657:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		return "Exceeded OBJECT_DATA_SLOTS (see xTraceGetLastError)";
  658:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 13
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 13
 
 
  659:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	case PSF_WARNING_STRING_TOO_LONG:
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  713:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		macro normally set by ARM's CMSIS library, since typically available. You can however select 
  714:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		SysTick timestamping instead by defining adding "#define TRC_CFG_ARM_CM_USE_SYSTICK".*/
  715:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 14
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 14
 
 
  716:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		return "DWT_CYCCNT not supported (see xTraceGetLastError)";
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  770:source\bsw\TraceRecorder/trcStreamingRecorder.c **** * xTraceIsRecordingEnabled
  771:source\bsw\TraceRecorder/trcStreamingRecorder.c **** * Returns true (1) if the recorder is enabled (i.e. is recording), otherwise 0.
  772:source\bsw\TraceRecorder/trcStreamingRecorder.c **** ******************************************************************************/
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 15
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 15
 
 
  773:source\bsw\TraceRecorder/trcStreamingRecorder.c **** int xTraceIsRecordingEnabled(void)
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  827:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		prvTraceStoreSymbolTable();
  828:source\bsw\TraceRecorder/trcStreamingRecorder.c ****     	prvTraceStoreObjectDataTable();
  829:source\bsw\TraceRecorder/trcStreamingRecorder.c ****         prvTraceStoreEvent3(	PSF_EVENT_TRACE_START,
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 16
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 16
 
 
  830:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 							(uint32_t)TRACE_GET_OS_TICKS(),
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  884:source\bsw\TraceRecorder/trcStreamingRecorder.c ****             TRC_STREAM_PORT_ALLOCATE_EVENT(uint32_t, data, OBJECT_DATA_SLOT_SIZE);
  885:source\bsw\TraceRecorder/trcStreamingRecorder.c ****             if (data != NULL)
  886:source\bsw\TraceRecorder/trcStreamingRecorder.c ****             {
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 17
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 17
 
 
  887:source\bsw\TraceRecorder/trcStreamingRecorder.c ****                 for (j = 0; j < (OBJECT_DATA_SLOT_SIZE / sizeof(uint32_t)); j++)
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  941:source\bsw\TraceRecorder/trcStreamingRecorder.c **** void prvTraceStoreEvent0(uint16_t eventID)
  942:source\bsw\TraceRecorder/trcStreamingRecorder.c **** {
  943:source\bsw\TraceRecorder/trcStreamingRecorder.c ****   	TRACE_ALLOC_CRITICAL_SECTION();
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 18
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 18
 
 
  944:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  998:source\bsw\TraceRecorder/trcStreamingRecorder.c ****   	TRACE_ALLOC_CRITICAL_SECTION();
  999:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 
 1000:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	PSF_ASSERT(eventID < 4096, PSF_ERROR_EVENT_CODE_TOO_LARGE);
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 19
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 19
 
 
 1001:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
 1055:source\bsw\TraceRecorder/trcStreamingRecorder.c **** }
 1056:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 
 1057:source\bsw\TraceRecorder/trcStreamingRecorder.c **** /* Stores an event with <nParam> 32-bit integer parameters */
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 20
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 20
 
 
 1058:source\bsw\TraceRecorder/trcStreamingRecorder.c **** void prvTraceStoreEvent(int nParam, uint16_t eventID, ...)
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
 1112:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 										uint16_t eventID,
 1113:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 										traceString userEvtChannel,
 1114:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 										int len,
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 21
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 21
 
 
 1115:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 										const char* str,
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
 1169:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 				uint8_t* data8;
 1170:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 				event->base.EventID = (eventID) | (uint16_t)PARAM_COUNT(nWords);
 1171:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 				event->base.EventCount = (uint16_t)eventCounter;
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 22
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 22
 
 
 1172:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 				event->base.TS = prvGetTimestamp32();
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
 1226:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	/* If a user event channel is specified, add in the list */
 1227:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	if (userEvtChannel)
 1228:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	{
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 23
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 23
 
 
 1229:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		nArgs++;
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
 1283:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 				data8 = (uint8_t*) &(event->data[0]);
 1284:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 				for (i = 0; i < len; i++)
 1285:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 				{
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 24
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 24
 
 
 1286:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 					data8[offset + i] = str[i];
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
 1340:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		while ((name[i] != 0) && i < 128)
 1341:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		{
 1342:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 			i++;
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 25
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 25
 
 
 1343:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		}
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
 1397:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 				*ptr = 0; /* No other entry found, or this is the last entry */
 1398:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 
 1399:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 			/* Lower index */
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 26
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 26
 
 
 1400:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 			firstFreeSymbolTableIndex -= SYMBOL_TABLE_SLOT_SIZE;
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
 1454:source\bsw\TraceRecorder/trcStreamingRecorder.c **** void prvTraceDeleteObjectData(void *address)
 1455:source\bsw\TraceRecorder/trcStreamingRecorder.c **** {
 1456:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	uint32_t i, j;
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 27
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 27
 
 
 1457:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	uint32_t *ptr, *lastEntryPtr;
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
 1511:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		return 0;
 1512:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 
 1513:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	if (cmd->cmdCode > CMD_LAST_COMMAND)
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 28
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 28
 
 
 1514:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		return 0;
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
 1568:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	{
 1569:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		/* Verify that DWT is supported */
 1570:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		if (TRC_REG_DEMCR == 0)
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 29
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 29
 
 
 1571:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		{
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
   33 0000 014B     		ldr	r3, .L2
   34 0002 1868     		ldr	r0, [r3]
 1619:source\bsw\TraceRecorder/trcStreamingRecorder.c **** #endif
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 30
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 30
 
 
 1620:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
 1658:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	#endif
 1659:source\bsw\TraceRecorder/trcStreamingRecorder.c **** }
 1660:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 31
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 31
 
 
 1661:source\bsw\TraceRecorder/trcStreamingRecorder.c **** /* Retrieve a buffer page to write to. */
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
   92 0028 32F83020 		ldrh	r2, [r2, r0, lsl #3]
   93 002c 12B1     		cbz	r2, .L8
 1669:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	{
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 32
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 32
 
 
   94              		.loc 1 1669 0 is_stmt 0 discriminator 1
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  135              	.LBB138:
  136              		.file 2 "Generated_Source\\PSoC5/cmsis_gcc.h"
    1:Generated_Source\PSoC5/cmsis_gcc.h **** /**************************************************************************//**
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 33
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 33
 
 
    2:Generated_Source\PSoC5/cmsis_gcc.h ****  * @file     cmsis_gcc.h
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
   56:Generated_Source\PSoC5/cmsis_gcc.h **** #endif
   57:Generated_Source\PSoC5/cmsis_gcc.h **** #ifndef   __ALIGNED
   58:Generated_Source\PSoC5/cmsis_gcc.h ****   #define __ALIGNED(x)              __attribute__((aligned(x)))
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 34
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 34
 
 
   59:Generated_Source\PSoC5/cmsis_gcc.h **** #endif
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  113:Generated_Source\PSoC5/cmsis_gcc.h **** __attribute__((always_inline)) __STATIC_INLINE uint32_t __TZ_get_CONTROL_NS(void)
  114:Generated_Source\PSoC5/cmsis_gcc.h **** {
  115:Generated_Source\PSoC5/cmsis_gcc.h ****   uint32_t result;
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 35
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 35
 
 
  116:Generated_Source\PSoC5/cmsis_gcc.h **** 
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  170:Generated_Source\PSoC5/cmsis_gcc.h ****   __ASM volatile ("MRS %0, apsr" : "=r" (result) );
  171:Generated_Source\PSoC5/cmsis_gcc.h ****   return(result);
  172:Generated_Source\PSoC5/cmsis_gcc.h **** }
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 36
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 36
 
 
  173:Generated_Source\PSoC5/cmsis_gcc.h **** 
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  227:Generated_Source\PSoC5/cmsis_gcc.h **** }
  228:Generated_Source\PSoC5/cmsis_gcc.h **** 
  229:Generated_Source\PSoC5/cmsis_gcc.h **** 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 37
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 37
 
 
  230:Generated_Source\PSoC5/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  284:Generated_Source\PSoC5/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
  285:Generated_Source\PSoC5/cmsis_gcc.h **** /**
  286:Generated_Source\PSoC5/cmsis_gcc.h ****   \brief   Set Main Stack Pointer (non-secure)
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 38
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 38
 
 
  287:Generated_Source\PSoC5/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Main Stack Pointer (MSP) when in secure state.
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  329:Generated_Source\PSoC5/cmsis_gcc.h ****   \details Assigns the given value to the Priority Mask Register.
  330:Generated_Source\PSoC5/cmsis_gcc.h ****   \param [in]    priMask  Priority Mask
  331:Generated_Source\PSoC5/cmsis_gcc.h ****  */
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 39
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 39
 
 
  332:Generated_Source\PSoC5/cmsis_gcc.h **** __attribute__((always_inline)) __STATIC_INLINE void __set_PRIMASK(uint32_t priMask)
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  189              		.loc 1 1695 0
  190 0036 30BC     		pop	{r4, r5}
  191              		.cfi_restore 5
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 40
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 40
 
 
  192              		.cfi_restore 4
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
 1704:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	while((PageInfo[index].Status != PAGE_STATUS_READ) && (count++ < (TRC_CFG_PAGED_EVENT_BUFFER_PAGE_
  237              		.loc 1 1704 0
  238 001c 09E0     		b	.L20
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 41
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 41
 
 
  239              	.LVL18:
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  282              		.loc 1 1713 0
  283 005c 03E0     		b	.L25
  284              	.L24:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 42
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 42
 
 
 1714:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	}
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  331              		.cfi_endproc
  332              	.LFE113:
  333              		.size	vTraceSetFrequency, .-vTraceSetFrequency
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 43
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 43
 
 
  334              		.section	.text.xTraceGetLastError,"ax",%progbits
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  386 002d 49       		.byte	(.L33-.L35)/2
  387 002e 49       		.byte	(.L33-.L35)/2
  388 002f 49       		.byte	(.L33-.L35)/2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 44
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 44
 
 
  389 0030 49       		.byte	(.L33-.L35)/2
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  443 0066 49       		.byte	(.L33-.L35)/2
  444 0067 49       		.byte	(.L33-.L35)/2
  445 0068 49       		.byte	(.L33-.L35)/2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 45
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 45
 
 
  446 0069 49       		.byte	(.L33-.L35)/2
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  492 0094 0C48     		ldr	r0, .L47+32
  493 0096 7047     		bx	lr
  494              	.L38:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 46
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 46
 
 
  716:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  542              		.loc 1 735 0
  543 0000 034B     		ldr	r3, .L50
  544 0002 0022     		movs	r2, #0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 47
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 47
 
 
  545 0004 DA60     		str	r2, [r3, #12]
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  593              	.LFB124:
  779:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	CurrentFilterMask = filterMask;
  594              		.loc 1 779 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 48
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 48
 
 
  595              		.cfi_startproc
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  645              		.cfi_startproc
  646              		@ args = 0, pretend = 0, frame = 0
  647              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 49
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 49
 
 
  648              		@ link register save eliminated.
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  697 0022 2032     		adds	r2, r2, #32
  698              	.LVL34:
  699              	.L62:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 50
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 50
 
 
 1313:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	{
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  743              	.L69:
 1340:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		{
  744              		.loc 1 1340 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 51
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 51
 
 
  745 0056 C85C     		ldrb	r0, [r1, r3]	@ zero_extendqisi2
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  792              		.loc 1 1363 0
  793 0082 70BC     		pop	{r4, r5, r6}
  794              		.cfi_restore 6
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 52
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 52
 
 
  795              		.cfi_restore 5
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  847              		.thumb
  848              		.syntax unified
  849              	.LBE152:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 53
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 53
 
 
  850              	.LBE151:
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  894 0046 F8D9     		bls	.L82
 1394:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 			}
  895              		.loc 1 1394 0 is_stmt 1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 54
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 54
 
 
  896 0048 0C4B     		ldr	r3, .L87
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  944 0076 F0BC     		pop	{r4, r5, r6, r7}
  945              		.cfi_restore 7
  946              		.cfi_restore 6
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 55
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 55
 
 
  947              		.cfi_restore 5
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  999              		.thumb
  1000              		.syntax unified
  1001              	.LBE158:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 56
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 56
 
 
  1002              	.LBE157:
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  1045              		.loc 1 1442 0
  1046 004e 0835     		adds	r5, r5, #8
  1047 0050 054B     		ldr	r3, .L96
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 57
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 57
 
 
  1048              	.LVL68:
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  1099              		@ frame_needed = 0, uses_anonymous_args = 0
  1100              		@ link register save eliminated.
  1101              	.LVL73:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 58
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 58
 
 
  1102 0000 F0B4     		push	{r4, r5, r6, r7}
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  1151 0026 082C     		cmp	r4, #8
  1152 0028 17D9     		bls	.L101
 1469:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 			{
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 59
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 59
 
 
  1153              		.loc 1 1469 0 is_stmt 0 discriminator 1
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
 1490:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		}
  1199              		.loc 1 1490 0
  1200 0072 05E0     		b	.L105
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 60
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 60
 
 
  1201              	.LVL85:
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  1251              		@ args = 0, pretend = 0, frame = 0
  1252              		@ frame_needed = 0, uses_anonymous_args = 0
  1253              		@ link register save eliminated.
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 61
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 61
 
 
  1254              	.LVL89:
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  1297              	.LVL92:
  1298 0034 04E0     		b	.L111
  1299              	.LVL93:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 62
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 62
 
 
  1300              	.L112:
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
 1734:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  * In case of errors from the streaming interface, it registers a warning
 1735:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  * (PSF_WARNING_STREAM_PORT_WRITE) provided by xTraceGetLastError().
 1736:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  *
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 63
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 63
 
 
 1737:source\bsw\TraceRecorder/trcStreamingRecorder.c ****  *******************************************************************************/
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
 1791:source\bsw\TraceRecorder/trcStreamingRecorder.c **** *******************************************************************************/
 1792:source\bsw\TraceRecorder/trcStreamingRecorder.c **** void* prvPagedEventBufferGetWritePointer(int sizeOfEvent)
 1793:source\bsw\TraceRecorder/trcStreamingRecorder.c **** {
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 64
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 64
 
 
  1336              		.loc 1 1793 0
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  1376 0038 1B1B     		subs	r3, r3, r4
  1377 003a 002B     		cmp	r3, #0
  1378 003c 1EDA     		bge	.L119
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 65
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 65
 
 
 1808:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	{
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  1417 007c 094A     		ldr	r2, .L123
  1418 007e D168     		ldr	r1, [r2, #12]
  1419 0080 0A4B     		ldr	r3, .L123+8
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 66
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 66
 
 
  1420 0082 03EBC103 		add	r3, r3, r1, lsl #3
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  1463              		@ args = 0, pretend = 0, frame = 0
  1464              		@ frame_needed = 0, uses_anonymous_args = 0
  1465 0000 10B5     		push	{r4, lr}
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 67
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 67
 
 
  1466              		.cfi_def_cfa_offset 8
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  1513 0026 C280     		strh	r2, [r0, #6]	@ movhi
  913:source\bsw\TraceRecorder/trcStreamingRecorder.c ****             /* Lowest bit used for TRC_IRQ_PRIORITY_ORDER */
  1514              		.loc 1 913 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 68
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 68
 
 
  1515 0028 0022     		movs	r2, #0
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  1564              		.cfi_def_cfa_offset 16
  1565              		.cfi_offset 4, -16
  1566              		.cfi_offset 5, -12
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 69
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 69
 
 
  1567              		.cfi_offset 6, -8
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  1616 0024 02EB8102 		add	r2, r2, r1, lsl #2
  1617 0028 526A     		ldr	r2, [r2, #36]
  1618 002a 45F82320 		str	r2, [r5, r3, lsl #2]
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 70
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 70
 
 
  860:source\bsw\TraceRecorder/trcStreamingRecorder.c ****                 {
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  1669              		.align	2
  1670              		.thumb
  1671              		.thumb_func
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 71
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 71
 
 
  1672              		.type	prvTraceStoreObjectDataTable, %function
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  1722              	.LVL132:
  885:source\bsw\TraceRecorder/trcStreamingRecorder.c ****             {
  1723              		.loc 1 885 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 72
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 72
 
 
  1724 001a 0546     		mov	r5, r0
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  1773              		.syntax unified
  1774 0048 70BD     		pop	{r4, r5, r6, pc}
  1775              	.L153:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 73
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 73
 
 
  1776 004a 00BF     		.align	2
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  1825              	.L156:
 1224:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 
  1826              		.loc 1 1224 0 is_stmt 1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 74
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 74
 
 
  1827 0012 261D     		adds	r6, r4, #4
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  1870 0040 9E61     		str	r6, [r3, #24]
  1871              	.L161:
  1872              	.LVL154:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 75
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 75
 
 
 1253:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	}
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  1921              	.LBB194:
 1265:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 			if (event != NULL)
  1922              		.loc 1 1265 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 76
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 76
 
 
  1923 006a 8000     		lsls	r0, r0, #2
@@ -4558,7 +4558,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  1967              	.L164:
 1284:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 				{
  1968              		.loc 1 1284 0 is_stmt 0 discriminator 1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 77
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 77
 
 
  1969 00ac 9C42     		cmp	r4, r3
@@ -4618,7 +4618,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  2020              		.cfi_def_cfa_offset 8
  2021              		.cfi_offset 3, -8
  2022              		.cfi_offset 14, -4
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 78
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 78
 
 
  400:source\bsw\TraceRecorder/trcStreamingRecorder.c **** }
@@ -4678,7 +4678,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  2071              	.LFE130:
  2072              		.size	prvTraceStoreWarnings, .-prvTraceStoreWarnings
  2073              		.section	.text.prvTraceWarning,"ax",%progbits
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 79
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 79
 
 
  2074              		.align	2
@@ -4738,7 +4738,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  2123              		.cfi_offset 4, -16
  2124              		.cfi_offset 5, -12
  2125              		.cfi_offset 6, -8
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 80
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 80
 
 
  2126              		.cfi_offset 14, -4
@@ -4798,7 +4798,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  2172              	.L184:
 1772:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 				return 0;
  2173              		.loc 1 1772 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 81
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 81
 
 
  2174 0044 6A20     		movs	r0, #106
@@ -4858,7 +4858,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  2211              		@ link register save eliminated.
  2212              	.LVL190:
  2213 0000 30B4     		push	{r4, r5}
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 82
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 82
 
 
  2214              		.cfi_def_cfa_offset 8
@@ -4918,7 +4918,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  2257 0022 2468     		ldr	r4, [r4]
  2258 0024 02FB0342 		mla	r2, r2, r3, r4
  2259 0028 4260     		str	r2, [r0, #4]
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 83
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 83
 
 
 1858:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		PageInfo[i].Status = PAGE_STATUS_FREE;
@@ -4978,7 +4978,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  2306              		@ args = 0, pretend = 0, frame = 0
  2307              		@ frame_needed = 0, uses_anonymous_args = 0
  2308              	.LVL197:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 84
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 84
 
 
  800:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	{
@@ -5038,7 +5038,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  813:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	}
  2357              		.loc 1 813 0
  2358 0022 0225     		movs	r5, #2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 85
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 85
 
 
  2359              	.L198:
@@ -5098,7 +5098,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  2402              		.loc 1 834 0
  2403 0068 FFF7FEFF 		bl	prvTraceStoreWarnings
  2404              	.LVL211:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 86
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 86
 
 
  2405              	.L199:
@@ -5158,7 +5158,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  2457              	.LFE122:
  2458              		.size	vTraceStop, .-vTraceStop
  2459 000a 00BF     		.section	.text.prvProcessCommand,"ax",%progbits
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 87
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 87
 
 
  2460              		.align	2
@@ -5218,7 +5218,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  2509 0004 9B68     		ldr	r3, [r3, #8]
  2510 0006 5BB9     		cbnz	r3, .L211
 1547:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		prvTraceStoreWarnings();
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 88
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 88
 
 
  2511              		.loc 1 1547 0
@@ -5278,7 +5278,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  2561              		.cfi_offset 14, -4
  2562 0004 0B9F     		ldr	r7, [sp, #44]
  2563              	.LVL222:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 89
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 89
 
 
 1124:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	
@@ -5338,7 +5338,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  2608              		.loc 1 1147 0
  2609 003c 294B     		ldr	r3, .L231
  2610              	.LVL232:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 90
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 90
 
 
  2611 003e 9B69     		ldr	r3, [r3, #24]
@@ -5398,7 +5398,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  2659 0060 A01C     		adds	r0, r4, #2
 1162:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 
  2660              		.loc 1 1162 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 91
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 91
 
 
  2661 0062 204A     		ldr	r2, .L231
@@ -5458,7 +5458,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  2705 00a6 05E0     		b	.L226
  2706              	.L225:
 1187:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 					}
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 92
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 92
 
 
  2707              		.loc 1 1187 0
@@ -5518,7 +5518,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  2754              	.LBB220:
  2755              		.loc 2 334 0
  2756              		.syntax unified
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 93
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 93
 
 
  2757              	@ 334 "Generated_Source\PSoC5/cmsis_gcc.h" 1
@@ -5578,7 +5578,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  459:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 		{
  2808              		.loc 1 459 0
  2809 000e 2529     		cmp	r1, #37
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 94
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 94
 
 
  2810 0010 06D1     		bne	.L235
@@ -5638,7 +5638,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  2854 0046 09E0     		b	.L233
  2855              	.LVL260:
  2856              	.L239:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 95
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 95
 
 
  478:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 	}
@@ -5698,7 +5698,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  2908              		.cfi_offset 4, -20
  2909              		.cfi_offset 5, -16
  2910              		.cfi_offset 14, -12
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 96
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 96
 
 
  2911 0004 85B0     		sub	sp, sp, #20
@@ -5758,7 +5758,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  2958 0032 00BF     		.section	.text.vTraceStoreKernelObjectName,"ax",%progbits
  2959              		.align	2
  2960              		.global	vTraceStoreKernelObjectName
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 97
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 97
 
 
  2961              		.thumb
@@ -5818,7 +5818,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  365:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 
  3011              		.loc 1 365 0
  3012 0004 0146     		mov	r1, r0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 98
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 98
 
 
  3013 0006 FFF7FEFF 		bl	prvTraceSaveSymbol
@@ -5878,7 +5878,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  3061              		.loc 1 512 0
  3062 001a 2146     		mov	r1, r4
  3063 001c 2046     		mov	r0, r4
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 99
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 99
 
 
  3064 001e FFF7FEFF 		bl	prvTraceSaveSymbol
@@ -5938,7 +5938,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  3113              	.LVL283:
  3114              		.thumb
  3115              		.syntax unified
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 100
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 100
 
 
  3116              	.LBE222:
@@ -5998,7 +5998,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  3163              	.LBB227:
  3164              		.loc 2 334 0
  3165              		.syntax unified
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 101
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 101
 
 
  3166              	@ 334 "Generated_Source\PSoC5/cmsis_gcc.h" 1
@@ -6058,7 +6058,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  3217              		@ frame_needed = 0, uses_anonymous_args = 0
  3218 0000 08B5     		push	{r3, lr}
  3219              		.cfi_def_cfa_offset 8
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 102
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 102
 
 
  3220              		.cfi_offset 3, -8
@@ -6118,7 +6118,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  3269 0014 EFF31085 		MRS r5, primask
  3270              	@ 0 "" 2
  3271              	.LVL296:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 103
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 103
 
 
  3272              		.thumb
@@ -6178,7 +6178,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  3318              		.loc 1 987 0
  3319 004e BE60     		str	r6, [r7, #8]
  3320              	.LVL301:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 104
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 104
 
 
  3321              	.L267:
@@ -6238,7 +6238,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  3373              	.LBB238:
  3374              		.loc 2 334 0
  3375 0006 0123     		movs	r3, #1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 105
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 105
 
 
  3376              		.syntax unified
@@ -6298,7 +6298,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  3422              		.loc 1 614 0 is_stmt 1
  3423 004a FFF7FEFF 		bl	prvTraceGetCurrentTaskId
  3424              	.LVL309:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 106
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 106
 
 
  3425 004e 0146     		mov	r1, r0
@@ -6358,7 +6358,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  3477              		.thumb
  3478              		.syntax unified
  3479              	.LBE243:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 107
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 107
 
 
  3480              	.LBE242:
@@ -6418,7 +6418,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  3528              	@ 0 "" 2
  3529              		.thumb
  3530              		.syntax unified
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 108
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 108
 
 
  3531 0042 10BD     		pop	{r4, pc}
@@ -6478,7 +6478,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  3582              		.loc 1 1000 0
  3583 0004 B0F5805F 		cmp	r0, #4096
  3584 0008 04D3     		bcc	.L286
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 109
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 109
 
 
 1000:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 
@@ -6538,7 +6538,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  3634              	.LVL328:
  3635 0038 FFF7FEFF 		bl	prvPagedEventBufferGetWritePointer
  3636              	.LVL329:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 110
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 110
 
 
 1010:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 			{
@@ -6598,7 +6598,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  3685              	.LFB134:
 1029:source\bsw\TraceRecorder/trcStreamingRecorder.c ****   	TRACE_ALLOC_CRITICAL_SECTION();
  3686              		.loc 1 1029 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 111
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 111
 
 
  3687              		.cfi_startproc
@@ -6658,7 +6658,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  3738              		.thumb
  3739              		.syntax unified
  3740              	.LBE260:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 112
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 112
 
 
  3741              	.LBE259:
@@ -6718,7 +6718,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  3785              	@ 334 "Generated_Source\PSoC5/cmsis_gcc.h" 1
  3786 0064 85F31088 		MSR primask, r5
  3787              	@ 0 "" 2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 113
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 113
 
 
  3788              		.thumb
@@ -6778,7 +6778,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  3839              	.L300:
  3840 0018 0446     		mov	r4, r0
  3841              	.LBB264:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 114
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 114
 
 
  3842              	.LBB265:
@@ -6838,7 +6838,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  3889 0044 9BB2     		uxth	r3, r3
  3890 0046 1F43     		orrs	r7, r7, r3
  3891 0048 0780     		strh	r7, [r0]	@ movhi
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 115
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 115
 
 
 1079:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 				event->base.TS = prvGetTimestamp32();
@@ -6898,7 +6898,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  3939              	.L299:
  3940              	.LBE272:
  3941              	.LBE271:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 116
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 116
 
 
 1095:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 
@@ -6958,7 +6958,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  3991              		.loc 1 1652 0
  3992 0010 074B     		ldr	r3, .L311
  3993 0012 5A68     		ldr	r2, [r3, #4]
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 117
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 117
 
 
  3994 0014 0023     		movs	r3, #0
@@ -7018,7 +7018,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  4043 0016 1B68     		ldr	r3, [r3]
  4044 0018 1BB9     		cbnz	r3, .L314
 1582:source\bsw\TraceRecorder/trcStreamingRecorder.c **** 			break;
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 118
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 118
 
 
  4045              		.loc 1 1582 0
@@ -7078,7 +7078,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  4093              		.global	TotalBytesRemaining_LowWaterMark
  4094              		.global	DroppedEventCounter
  4095              		.global	timestampFrequency
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 119
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 119
 
 
  4096              		.global	uiTraceTickCount
@@ -7138,7 +7138,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  4142 006c 45786365 		.ascii	"Exceeded OBJECT_DATA_SLOTS (see xTraceGetLastError)"
  4142      65646564 
  4142      204F424A 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 120
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 120
 
 
  4142      4543545F 
@@ -7198,7 +7198,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  4165      74206372 
  4165      65617465 
  4165      20547A43 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 121
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 121
 
 
  4166 0221 000000   		.space	3
@@ -7258,7 +7258,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  4212              		.type	firstFreeObjectDataTableIndex, %object
  4213              		.size	firstFreeObjectDataTableIndex, 4
  4214              	firstFreeObjectDataTableIndex:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 122
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 122
 
 
  4215 0524 00000000 		.space	4
@@ -7318,7 +7318,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  4261 0000 38210000 		.4byte	0x2138
  4262 0004 0400     		.2byte	0x4
  4263 0006 00000000 		.4byte	.Ldebug_abbrev0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 123
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 123
 
 
  4264 000a 04       		.byte	0x4
@@ -7378,7 +7378,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  4318 007f 02       		.uleb128 0x2
  4319 0080 060A0000 		.4byte	.LASF7
  4320 0084 04       		.byte	0x4
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 124
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 124
 
 
  4321 0085 2B       		.byte	0x2b
@@ -7438,7 +7438,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  4375 00ee 7F000000 		.4byte	0x7f
  4376 00f2 02       		.uleb128 0x2
  4377 00f3 C7070000 		.4byte	.LASF19
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 125
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 125
 
 
  4378 00f7 05       		.byte	0x5
@@ -7498,7 +7498,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  4432 0163 04       		.byte	0x4
  4433 0164 07       		.byte	0x7
  4434 0165 12060000 		.4byte	.LASF30
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 126
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 126
 
 
  4435 0169 08       		.uleb128 0x8
@@ -7558,7 +7558,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  4489 01de 9806     		.2byte	0x698
  4490 01e0 71000000 		.4byte	0x71
  4491 01e4 02       		.byte	0x2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 127
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 127
 
 
  4492 01e5 0F       		.uleb128 0xf
@@ -7618,7 +7618,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  4546 0254 545300   		.ascii	"TS\000"
  4547 0257 01       		.byte	0x1
  4548 0258 37       		.byte	0x37
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 128
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 128
 
 
  4549 0259 FD000000 		.4byte	0xfd
@@ -7678,7 +7678,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  4603 02c2 00       		.byte	0
  4604 02c3 02       		.uleb128 0x2
  4605 02c4 64010000 		.4byte	.LASF47
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 129
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 129
 
 
  4606 02c8 01       		.byte	0x1
@@ -7738,7 +7738,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  4660 0331 08       		.byte	0x8
  4661 0332 00       		.byte	0
  4662 0333 02       		.uleb128 0x2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 130
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 130
 
 
  4663 0334 05010000 		.4byte	.LASF50
@@ -7798,7 +7798,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  4717 03a0 5B       		.byte	0x5b
  4718 03a1 E7000000 		.4byte	0xe7
  4719 03a5 12       		.byte	0x12
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 131
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 131
 
 
  4720 03a6 00       		.byte	0
@@ -7858,7 +7858,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  4774 0416 4001     		.2byte	0x140
  4775 0418 01       		.byte	0x1
  4776 0419 75       		.byte	0x75
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 132
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 132
 
 
  4777 041a 35040000 		.4byte	0x435
@@ -7918,7 +7918,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  4831 048b 12       		.uleb128 0x12
  4832 048c 7C000000 		.4byte	.LASF69
  4833 0490 01       		.byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 133
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 133
 
 
  4834 0491 7E       		.byte	0x7e
@@ -7978,7 +7978,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  4888 0509 00000000 		.4byte	.LFB150
  4889 050d 44000000 		.4byte	.LFE150-.LFB150
  4890 0511 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 134
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 134
 
 
  4891 0512 9C       		.byte	0x9c
@@ -8038,7 +8038,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  4945 059a 00       		.byte	0
  4946 059b 00       		.byte	0
  4947 059c 22       		.uleb128 0x22
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 135
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 135
 
 
  4948 059d AF040000 		.4byte	0x4af
@@ -8098,7 +8098,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  5002 0625 D1000000 		.4byte	0xd1
  5003 0629 F8000000 		.4byte	.LLST6
  5004 062d 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 136
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 136
 
 
  5005 062e 08       		.uleb128 0x8
@@ -8158,7 +8158,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  5059 06a9 BC060000 		.4byte	0x6bc
  5060 06ad 21       		.uleb128 0x21
  5061 06ae FB0B0000 		.4byte	.LASF87
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 137
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 137
 
 
  5062 06b2 01       		.byte	0x1
@@ -8218,7 +8218,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  5116 072d FD000000 		.4byte	0xfd
  5117 0731 C0010000 		.4byte	.LLST10
  5118 0735 1F       		.uleb128 0x1f
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 138
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 138
 
 
  5119 0736 6A070000 		.4byte	.LASF94
@@ -8278,7 +8278,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  5173 07c0 08       		.uleb128 0x8
  5174 07c1 04       		.byte	0x4
  5175 07c2 FD000000 		.4byte	0xfd
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 139
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 139
 
 
  5176 07c6 08       		.uleb128 0x8
@@ -8338,7 +8338,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  5230 0847 01       		.byte	0x1
  5231 0848 5C05     		.2byte	0x55c
  5232 084a 5E080000 		.4byte	0x85e
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 140
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 140
 
 
  5233 084e 23       		.uleb128 0x23
@@ -8398,7 +8398,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  5287 08cc 01       		.byte	0x1
  5288 08cd 8405     		.2byte	0x584
  5289 08cf FD000000 		.4byte	0xfd
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 141
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 141
 
 
  5290 08d3 D8020000 		.4byte	.LLST21
@@ -8458,7 +8458,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  5344 0960 00       		.byte	0
  5345 0961 00       		.byte	0
  5346 0962 29       		.uleb128 0x29
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 142
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 142
 
 
  5347 0963 DF090000 		.4byte	.LASF99
@@ -8518,7 +8518,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  5401 09e5 02000000 		.4byte	.LBB162
  5402 09e9 04000000 		.4byte	.LBE162-.LBB162
  5403 09ed 24       		.uleb128 0x24
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 143
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 143
 
 
  5404 09ee DA040000 		.4byte	0x4da
@@ -8578,7 +8578,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  5458 0a74 0007     		.2byte	0x700
  5459 0a76 47000000 		.4byte	0x47
  5460 0a7a 00000000 		.4byte	.LFB154
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 144
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 144
 
 
  5461 0a7e B0000000 		.4byte	.LFE154-.LFB154
@@ -8638,7 +8638,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  5515 0aff 130B0000 		.4byte	0xb13
  5516 0b03 23       		.uleb128 0x23
  5517 0b04 02000000 		.4byte	.LBB168
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 145
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 145
 
 
  5518 0b08 04000000 		.4byte	.LBE168-.LBB168
@@ -8698,7 +8698,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  5572 0b87 00000000 		.4byte	.LFB127
  5573 0b8b 50000000 		.4byte	.LFE127-.LFB127
  5574 0b8f 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 146
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 146
 
 
  5575 0b90 9C       		.byte	0x9c
@@ -8758,7 +8758,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  5629 0c16 C0070000 		.4byte	0x7c0
  5630 0c1a D2060000 		.4byte	.LLST41
  5631 0c1e 32       		.uleb128 0x32
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 147
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 147
 
 
  5632 0c1f 1A000000 		.4byte	.LVL117
@@ -8818,7 +8818,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  5686 0c98 6E03     		.2byte	0x36e
  5687 0c9a AE0C0000 		.4byte	0xcae
  5688 0c9e 23       		.uleb128 0x23
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 148
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 148
 
 
  5689 0c9f 02000000 		.4byte	.LBB182
@@ -8878,7 +8878,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  5743 0d24 01       		.uleb128 0x1
  5744 0d25 9C       		.byte	0x9c
  5745 0d26 BE0E0000 		.4byte	0xebe
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 149
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 149
 
 
  5746 0d2a 1E       		.uleb128 0x1e
@@ -8938,7 +8938,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  5800 0db8 28       		.uleb128 0x28
  5801 0db9 D8050000 		.4byte	.LASF77
  5802 0dbd 01       		.byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 150
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 150
 
 
  5803 0dbe C104     		.2byte	0x4c1
@@ -8998,7 +8998,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  5857 0e4d 01       		.byte	0x1
  5858 0e4e F104     		.2byte	0x4f1
  5859 0e50 BE0E0000 		.4byte	0xebe
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 151
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 151
 
 
  5860 0e54 03090000 		.4byte	.LLST59
@@ -9058,7 +9058,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  5914 0ed0 08000000 		.4byte	.LFE115-.LFB115
  5915 0ed4 01       		.uleb128 0x1
  5916 0ed5 9C       		.byte	0x9c
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 152
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 152
 
 
  5917 0ed6 130F0000 		.4byte	0xf13
@@ -9118,7 +9118,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  5971 0f4c 18000000 		.4byte	.LVL176
  5972 0f50 C40E0000 		.4byte	0xec4
  5973 0f54 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 153
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 153
 
 
  5974 0f55 00       		.byte	0
@@ -9178,7 +9178,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  6028 0fd7 F2000000 		.4byte	0xf2
  6029 0fdb 02       		.uleb128 0x2
  6030 0fdc 91       		.byte	0x91
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 154
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 154
 
 
  6031 0fdd 68       		.sleb128 -24
@@ -9238,7 +9238,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  6085 1041 1E       		.uleb128 0x1e
  6086 1042 74020000 		.4byte	.LASF133
  6087 1046 01       		.byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 155
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 155
 
 
  6088 1047 3607     		.2byte	0x736
@@ -9298,7 +9298,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  6142 10cf 01       		.byte	0x1
  6143 10d0 1A03     		.2byte	0x31a
  6144 10d2 00000000 		.4byte	.LFB126
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 156
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 156
 
 
  6145 10d6 80000000 		.4byte	.LFE126-.LFB126
@@ -9358,7 +9358,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  6199 115d 0C0B0000 		.4byte	.LLST75
  6200 1161 00       		.byte	0
  6201 1162 22       		.uleb128 0x22
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 157
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 157
 
 
  6202 1163 AF040000 		.4byte	0x4af
@@ -9418,7 +9418,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  6256 11df 01       		.uleb128 0x1
  6257 11e0 52       		.byte	0x52
  6258 11e1 02       		.uleb128 0x2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 158
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 158
 
 
  6259 11e2 75       		.byte	0x75
@@ -9478,7 +9478,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  6313 125e 01       		.uleb128 0x1
  6314 125f 9C       		.byte	0x9c
  6315 1260 A4120000 		.4byte	0x12a4
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 159
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 159
 
 
  6316 1264 1E       		.uleb128 0x1e
@@ -9538,7 +9538,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  6370 12e0 5904     		.2byte	0x459
  6371 12e2 9F010000 		.4byte	0x19f
  6372 12e6 E60B0000 		.4byte	.LLST81
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 160
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 160
 
 
  6373 12ea 2E       		.uleb128 0x2e
@@ -9598,7 +9598,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  6427 1373 4B0B0000 		.4byte	.LASF117
  6428 1377 01       		.byte	0x1
  6429 1378 7904     		.2byte	0x479
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 161
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 161
 
 
  6430 137a FD000000 		.4byte	0xfd
@@ -9658,7 +9658,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  6484 140c C0070000 		.4byte	0x7c0
  6485 1410 920D0000 		.4byte	.LLST92
  6486 1414 1B       		.uleb128 0x1b
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 162
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 162
 
 
  6487 1415 A7000000 		.4byte	.LASF121
@@ -9718,7 +9718,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  6541 1484 31150000 		.4byte	0x1531
  6542 1488 2E       		.uleb128 0x2e
  6543 1489 63686E00 		.ascii	"chn\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 163
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 163
 
 
  6544 148d 01       		.byte	0x1
@@ -9778,7 +9778,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  6598 14f3 01       		.uleb128 0x1
  6599 14f4 50       		.byte	0x50
  6600 14f5 33       		.uleb128 0x33
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 164
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 164
 
 
  6601 14f6 02       		.uleb128 0x2
@@ -9838,7 +9838,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  6655 1536 01       		.byte	0x1
  6656 1537 4A04     		.2byte	0x44a
  6657 1539 00000000 		.4byte	.LFB136
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 165
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 165
 
 
  6658 153d 32000000 		.4byte	.LFE136-.LFB136
@@ -9898,7 +9898,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  6712 15aa 33       		.uleb128 0x33
  6713 15ab 02       		.uleb128 0x2
  6714 15ac 7D       		.byte	0x7d
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 166
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 166
 
 
  6715 15ad 04       		.sleb128 4
@@ -9958,7 +9958,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  6769 1613 51       		.byte	0x51
  6770 1614 01       		.uleb128 0x1
  6771 1615 33       		.byte	0x33
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 167
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 167
 
 
  6772 1616 33       		.uleb128 0x33
@@ -10018,7 +10018,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  6826 1675 31       		.byte	0x31
  6827 1676 33       		.uleb128 0x33
  6828 1677 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 168
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 168
 
 
  6829 1678 51       		.byte	0x51
@@ -10078,7 +10078,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  6883 16db 00       		.sleb128 0
  6884 16dc 00       		.byte	0
  6885 16dd 34       		.uleb128 0x34
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 169
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 169
 
 
  6886 16de 1A000000 		.4byte	.LVL277
@@ -10138,7 +10138,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  6940 1727 00000000 		.4byte	.LFB131
  6941 172b 54000000 		.4byte	.LFE131-.LFB131
  6942 172f 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 170
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 170
 
 
  6943 1730 9C       		.byte	0x9c
@@ -10198,7 +10198,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  6997 17bf 33       		.uleb128 0x33
  6998 17c0 01       		.uleb128 0x1
  6999 17c1 50       		.byte	0x50
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 171
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 171
 
 
  7000 17c2 01       		.uleb128 0x1
@@ -10258,7 +10258,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  7054 1830 3F01     		.2byte	0x13f
  7055 1832 00000000 		.4byte	.LFB111
  7056 1836 0A000000 		.4byte	.LFE111-.LFB111
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 172
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 172
 
 
  7057 183a 01       		.uleb128 0x1
@@ -10318,7 +10318,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  7111 18b7 00       		.byte	0
  7112 18b8 00       		.byte	0
  7113 18b9 22       		.uleb128 0x22
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 173
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 173
 
 
  7114 18ba AF040000 		.4byte	0x4af
@@ -10378,7 +10378,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  7168 193e 00       		.byte	0
  7169 193f 08       		.uleb128 0x8
  7170 1940 04       		.byte	0x4
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 174
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 174
 
 
  7171 1941 8B020000 		.4byte	0x28b
@@ -10438,7 +10438,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  7225 19cd 01       		.byte	0x1
  7226 19ce 6602     		.2byte	0x266
  7227 19d0 C3000000 		.4byte	0xc3
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 175
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 175
 
 
  7228 19d4 DA190000 		.4byte	0x19da
@@ -10498,7 +10498,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  7282 1a4b 01       		.byte	0x1
  7283 1a4c 1802     		.2byte	0x218
  7284 1a4e AA010000 		.4byte	0x1aa
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 176
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 176
 
 
  7285 1a52 EC100000 		.4byte	.LLST117
@@ -10558,7 +10558,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  7339 1ae1 00       		.byte	0
  7340 1ae2 34       		.uleb128 0x34
  7341 1ae3 3E000000 		.4byte	.LVL316
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 177
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 177
 
 
  7342 1ae7 51180000 		.4byte	0x1851
@@ -10618,7 +10618,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  7396 1b54 D8050000 		.4byte	.LASF77
  7397 1b58 01       		.byte	0x1
  7398 1b59 E603     		.2byte	0x3e6
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 178
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 178
 
 
  7399 1b5b FD000000 		.4byte	0xfd
@@ -10678,7 +10678,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  7453 1be2 5E000000 		.4byte	.LBB255
  7454 1be6 0E000000 		.4byte	.LBE255-.LBB255
  7455 1bea 01       		.byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 179
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 179
 
 
  7456 1beb FD03     		.2byte	0x3fd
@@ -10738,7 +10738,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  7510 1c6c 01       		.byte	0x1
  7511 1c6d 0604     		.2byte	0x406
  7512 1c6f FD000000 		.4byte	0xfd
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 180
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 180
 
 
  7513 1c73 01       		.uleb128 0x1
@@ -10798,7 +10798,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  7567 1cfa 0C000000 		.4byte	.LBE262-.LBB262
  7568 1cfe 01       		.byte	0x1
  7569 1cff 1E04     		.2byte	0x41e
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 181
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 181
 
 
  7570 1d01 0F1D0000 		.4byte	0x1d0f
@@ -10858,7 +10858,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  7624 1d6f C3000000 		.4byte	0xc3
  7625 1d73 07140000 		.4byte	.LLST135
  7626 1d77 28       		.uleb128 0x28
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 182
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 182
 
 
  7627 1d78 D8050000 		.4byte	.LASF77
@@ -10918,7 +10918,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  7681 1e07 746D7000 		.ascii	"tmp\000"
  7682 1e0b 01       		.byte	0x1
  7683 1e0c 3D04     		.2byte	0x43d
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 183
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 183
 
 
  7684 1e0e C0070000 		.4byte	0x7c0
@@ -10978,7 +10978,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  7738 1e85 33       		.uleb128 0x33
  7739 1e86 01       		.uleb128 0x1
  7740 1e87 50       		.byte	0x50
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 184
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 184
 
 
  7741 1e88 01       		.uleb128 0x1
@@ -11038,7 +11038,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  7795 1edb 00       		.byte	0
  7796 1edc 00       		.byte	0
  7797 1edd 38       		.uleb128 0x38
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 185
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 185
 
 
  7798 1ede 53070000 		.4byte	.LASF163
@@ -11098,7 +11098,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  7852 1f50 08000000 		.4byte	errorCode
  7853 1f54 38       		.uleb128 0x38
  7854 1f55 2A000000 		.4byte	.LASF170
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 186
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 186
 
 
  7855 1f59 01       		.byte	0x1
@@ -11158,7 +11158,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  7909 1fce 41010000 		.4byte	0x141
  7910 1fd2 3C       		.uleb128 0x3c
  7911 1fd3 50010000 		.4byte	.LASF179
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 187
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 187
 
 
  7912 1fd7 0C       		.byte	0xc
@@ -11218,7 +11218,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  7966 204e 3D       		.uleb128 0x3d
  7967 204f 81070000 		.4byte	.LASF186
  7968 2053 01       		.byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 188
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 188
 
 
  7969 2054 B9       		.byte	0xb9
@@ -11278,7 +11278,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  8023 20c9 01       		.byte	0x1
  8024 20ca C1       		.byte	0xc1
  8025 20cb 69010000 		.4byte	0x169
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 189
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 189
 
 
  8026 20cf 05       		.uleb128 0x5
@@ -11338,7 +11338,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  8080 0001 11       		.uleb128 0x11
  8081 0002 01       		.byte	0x1
  8082 0003 25       		.uleb128 0x25
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 190
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 190
 
 
  8083 0004 0E       		.uleb128 0xe
@@ -11398,7 +11398,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  8137 003a 00       		.byte	0
  8138 003b 00       		.byte	0
  8139 003c 05       		.uleb128 0x5
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 191
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 191
 
 
  8140 003d 0F       		.uleb128 0xf
@@ -11458,7 +11458,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  8194 0073 00       		.byte	0
  8195 0074 00       		.byte	0
  8196 0075 0C       		.uleb128 0xc
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 192
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 192
 
 
  8197 0076 01       		.uleb128 0x1
@@ -11518,7 +11518,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  8251 00ac 49       		.uleb128 0x49
  8252 00ad 13       		.uleb128 0x13
  8253 00ae 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 193
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 193
 
 
  8254 00af 00       		.byte	0
@@ -11578,7 +11578,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  8308 00e5 13       		.uleb128 0x13
  8309 00e6 00       		.byte	0
  8310 00e7 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 194
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 194
 
 
  8311 00e8 15       		.uleb128 0x15
@@ -11638,7 +11638,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  8365 011e 00       		.byte	0
  8366 011f 03       		.uleb128 0x3
  8367 0120 0E       		.uleb128 0xe
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 195
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 195
 
 
  8368 0121 3A       		.uleb128 0x3a
@@ -11698,7 +11698,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  8422 0157 01       		.uleb128 0x1
  8423 0158 12       		.uleb128 0x12
  8424 0159 06       		.uleb128 0x6
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 196
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 196
 
 
  8425 015a 40       		.uleb128 0x40
@@ -11758,7 +11758,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  8479 0192 05       		.uleb128 0x5
  8480 0193 49       		.uleb128 0x49
  8481 0194 13       		.uleb128 0x13
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 197
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 197
 
 
  8482 0195 02       		.uleb128 0x2
@@ -11818,7 +11818,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  8536 01cc 05       		.uleb128 0x5
  8537 01cd 01       		.uleb128 0x1
  8538 01ce 13       		.uleb128 0x13
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 198
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 198
 
 
  8539 01cf 00       		.byte	0
@@ -11878,7 +11878,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  8593 0205 3A       		.uleb128 0x3a
  8594 0206 0B       		.uleb128 0xb
  8595 0207 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 199
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 199
 
 
  8596 0208 05       		.uleb128 0x5
@@ -11938,7 +11938,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  8650 0240 19       		.uleb128 0x19
  8651 0241 00       		.byte	0
  8652 0242 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 200
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 200
 
 
  8653 0243 2B       		.uleb128 0x2b
@@ -11998,7 +11998,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  8707 027a 01       		.uleb128 0x1
  8708 027b 12       		.uleb128 0x12
  8709 027c 06       		.uleb128 0x6
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 201
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 201
 
 
  8710 027d 40       		.uleb128 0x40
@@ -12058,7 +12058,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  8764 02b6 01       		.uleb128 0x1
  8765 02b7 13       		.uleb128 0x13
  8766 02b8 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 202
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 202
 
 
  8767 02b9 00       		.byte	0
@@ -12118,7 +12118,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  8821 02f6 37       		.uleb128 0x37
  8822 02f7 05       		.uleb128 0x5
  8823 02f8 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 203
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 203
 
 
  8824 02f9 03       		.uleb128 0x3
@@ -12178,7 +12178,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  8878 032f 0B       		.uleb128 0xb
  8879 0330 00       		.byte	0
  8880 0331 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 204
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 204
 
 
  8881 0332 3B       		.uleb128 0x3b
@@ -12238,7 +12238,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  8935 0368 3F       		.uleb128 0x3f
  8936 0369 19       		.uleb128 0x19
  8937 036a 3C       		.uleb128 0x3c
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 205
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 205
 
 
  8938 036b 19       		.uleb128 0x19
@@ -12298,7 +12298,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  8992 0036 0100     		.2byte	0x1
  8993 0038 50       		.byte	0x50
  8994 0039 16000000 		.4byte	.LVL5
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 206
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 206
 
 
  8995 003d 1A000000 		.4byte	.LVL6
@@ -12358,7 +12358,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  9049 00c3 02000000 		.4byte	.LVL16
  9050 00c7 1E000000 		.4byte	.LVL18
  9051 00cb 0200     		.2byte	0x2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 207
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 207
 
 
  9052 00cd 30       		.byte	0x30
@@ -12418,7 +12418,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  9106 0154 60000000 		.4byte	.LVL40
  9107 0158 0100     		.2byte	0x1
  9108 015a 51       		.byte	0x51
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 208
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 208
 
 
  9109 015b 60000000 		.4byte	.LVL40
@@ -12478,7 +12478,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  9163 01e2 24000000 		.4byte	.LVL34
  9164 01e6 0D00     		.2byte	0xd
  9165 01e8 72       		.byte	0x72
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 209
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 209
 
 
  9166 01e9 00       		.sleb128 0
@@ -12538,7 +12538,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  9220 026c 36000000 		.4byte	.LVL51
  9221 0270 3A000000 		.4byte	.LVL52
  9222 0274 0200     		.2byte	0x2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 210
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 210
 
 
  9223 0276 30       		.byte	0x30
@@ -12598,7 +12598,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  9277 0302 2E000000 		.4byte	.LVL67
  9278 0306 52000000 		.4byte	.LVL68
  9279 030a 0100     		.2byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 211
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 211
 
 
  9280 030c 53       		.byte	0x53
@@ -12658,7 +12658,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  9334 0390 0100     		.2byte	0x1
  9335 0392 52       		.byte	0x52
  9336 0393 00000000 		.4byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 212
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 212
 
 
  9337 0397 00000000 		.4byte	0
@@ -12718,7 +12718,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  9391 0420 36000000 		.4byte	.LVL93
  9392 0424 38000000 		.4byte	.LVL94
  9393 0428 0100     		.2byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 213
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 213
 
 
  9394 042a 50       		.byte	0x50
@@ -12778,7 +12778,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  9448 0496 22       		.byte	0x22
  9449 0497 71       		.byte	0x71
  9450 0498 00       		.sleb128 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 214
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 214
 
 
  9451 0499 22       		.byte	0x22
@@ -12838,7 +12838,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  9505 04d8 20       		.byte	0x20
  9506 04d9 9F       		.byte	0x9f
  9507 04da 36000000 		.4byte	.LVL93
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 215
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 215
 
 
  9508 04de 3A000000 		.4byte	.LVL95
@@ -12898,7 +12898,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  9562 0527 23       		.byte	0x23
  9563 0528 05       		.uleb128 0x5
  9564 0529 94       		.byte	0x94
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 216
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 216
 
 
  9565 052a 01       		.byte	0x1
@@ -12958,7 +12958,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  9619 0569 1A       		.byte	0x1a
  9620 056a 20       		.byte	0x20
  9621 056b 9F       		.byte	0x9f
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 217
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 217
 
 
  9622 056c 40000000 		.4byte	.LVL98
@@ -13018,7 +13018,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  9676 05b1 F3       		.byte	0xf3
  9677 05b2 01       		.uleb128 0x1
  9678 05b3 50       		.byte	0x50
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 218
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 218
 
 
  9679 05b4 23       		.byte	0x23
@@ -13078,7 +13078,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  9733 05f7 08000000 		.4byte	.LVL101
  9734 05fb 94000000 		.4byte	.LVL107
  9735 05ff 0100     		.2byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 219
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 219
 
 
  9736 0601 54       		.byte	0x54
@@ -13138,7 +13138,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  9790 0688 02000000 		.4byte	.LVL113
  9791 068c 14000000 		.4byte	.LVL116
  9792 0690 0200     		.2byte	0x2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 220
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 220
 
 
  9793 0692 30       		.byte	0x30
@@ -13198,7 +13198,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  9847 071b 40000000 		.4byte	.LVL140
  9848 071f 44000000 		.4byte	.LVL141
  9849 0723 0100     		.2byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 221
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 221
 
 
  9850 0725 54       		.byte	0x54
@@ -13258,7 +13258,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  9904 07b3 5B       		.byte	0x5b
  9905 07b4 C0000000 		.4byte	.LVL170
  9906 07b8 CC000000 		.4byte	.LFE138
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 222
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 222
 
 
  9907 07bc 0400     		.2byte	0x4
@@ -13318,7 +13318,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  9961 083d 76000000 		.4byte	.LVL161
  9962 0841 0100     		.2byte	0x1
  9963 0843 56       		.byte	0x56
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 223
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 223
 
 
  9964 0844 00000000 		.4byte	0
@@ -13378,7 +13378,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  10018 08d1 0100     		.2byte	0x1
  10019 08d3 5A       		.byte	0x5a
  10020 08d4 00000000 		.4byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 224
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 224
 
 
  10021 08d8 00000000 		.4byte	0
@@ -13438,7 +13438,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  10075 0961 C0000000 		.4byte	.LVL170
  10076 0965 C8000000 		.4byte	.LVL171
  10077 0969 0100     		.2byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 225
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 225
 
 
  10078 096b 58       		.byte	0x58
@@ -13498,7 +13498,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  10132 09ed 00000000 		.4byte	0
  10133 09f1 00000000 		.4byte	0
  10134              	.LLST67:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 226
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 226
 
 
  10135 09f5 04000000 		.4byte	.LVL179
@@ -13558,7 +13558,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  10189 0a81 0A000000 		.4byte	.LVL191
  10190 0a85 10000000 		.4byte	.LVL192
  10191 0a89 0200     		.2byte	0x2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 227
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 227
 
 
  10192 0a8b 31       		.byte	0x31
@@ -13618,7 +13618,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  10246 0b17 9F       		.byte	0x9f
  10247 0b18 00000000 		.4byte	0
  10248 0b1c 00000000 		.4byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 228
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 228
 
 
  10249              	.LLST76:
@@ -13678,7 +13678,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  10303 0ba3 55       		.byte	0x55
  10304 0ba4 00000000 		.4byte	0
  10305 0ba8 00000000 		.4byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 229
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 229
 
 
  10306              	.LLST80:
@@ -13738,7 +13738,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  10360              	.LLST82:
  10361 0c2b 00000000 		.4byte	.LVL221
  10362 0c2f 11000000 		.4byte	.LVL224-1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 230
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 230
 
 
  10363 0c33 0100     		.2byte	0x1
@@ -13798,7 +13798,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  10417 0cb6 00000000 		.4byte	0
  10418              	.LLST85:
  10419 0cba 34000000 		.4byte	.LVL229
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 231
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 231
 
 
  10420 0cbe 3A000000 		.4byte	.LVL230
@@ -13858,7 +13858,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  10474 0d49 00000000 		.4byte	0
  10475              	.LLST89:
  10476 0d4d 3C000000 		.4byte	.LVL231
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 232
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 232
 
 
  10477 0d51 4E000000 		.4byte	.LVL235
@@ -13918,7 +13918,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  10531 0ddc 48000000 		.4byte	.LVL260
  10532 0de0 58000000 		.4byte	.LVL261
  10533 0de4 0100     		.2byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 233
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 233
 
 
  10534 0de6 50       		.byte	0x50
@@ -13978,7 +13978,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  10588 0e71 50       		.byte	0x50
  10589 0e72 27000000 		.4byte	.LVL268-1
  10590 0e76 32000000 		.4byte	.LFE136
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 234
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 234
 
 
  10591 0e7a 0400     		.2byte	0x4
@@ -14038,7 +14038,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  10645 0f00 00000000 		.4byte	0
  10646              	.LLST102:
  10647 0f04 00000000 		.4byte	.LVL272
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 235
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 235
 
 
  10648 0f08 09000000 		.4byte	.LVL273-1
@@ -14098,7 +14098,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  10702 0f90 01       		.uleb128 0x1
  10703 0f91 50       		.byte	0x50
  10704 0f92 9F       		.byte	0x9f
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 236
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 236
 
 
  10705 0f93 00000000 		.4byte	0
@@ -14158,7 +14158,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  10759 101a 00000000 		.4byte	.LVL292
  10760 101e 0D000000 		.4byte	.LVL294-1
  10761 1022 0100     		.2byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 237
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 237
 
 
  10762 1024 51       		.byte	0x51
@@ -14218,7 +14218,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  10816 10ac 0100     		.2byte	0x1
  10817 10ae 50       		.byte	0x50
  10818 10af 14000000 		.4byte	.LVL306
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 238
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 238
 
 
  10819 10b3 64000000 		.4byte	.LFE119
@@ -14278,7 +14278,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  10873 1135 0C000000 		.4byte	.LVL314
  10874 1139 0200     		.2byte	0x2
  10875 113b 31       		.byte	0x31
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 239
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 239
 
 
  10876 113c 9F       		.byte	0x9f
@@ -14338,7 +14338,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  10930 11be 14000000 		.4byte	.LVL324
  10931 11c2 3B000000 		.4byte	.LVL329-1
  10932 11c6 0100     		.2byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 240
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 240
 
 
  10933 11c8 51       		.byte	0x51
@@ -14398,7 +14398,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  10987 124b 0100     		.2byte	0x1
  10988 124d 50       		.byte	0x50
  10989 124e 51000000 		.4byte	.LVL330-1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 241
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 241
 
 
  10990 1252 5E000000 		.4byte	.LVL331
@@ -14458,7 +14458,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11044 12d6 6C000000 		.4byte	.LVL345
  11045 12da 0100     		.2byte	0x1
  11046 12dc 58       		.byte	0x58
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 242
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 242
 
 
  11047 12dd 6C000000 		.4byte	.LVL345
@@ -14518,7 +14518,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11101 135c 22000000 		.4byte	.LVL338
  11102 1360 6C000000 		.4byte	.LVL345
  11103 1364 0100     		.2byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 243
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 243
 
 
  11104 1366 56       		.byte	0x56
@@ -14578,7 +14578,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11158 13ee 0100     		.2byte	0x1
  11159 13f0 54       		.byte	0x54
  11160 13f1 78000000 		.4byte	.LVL359
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 244
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 244
 
 
  11161 13f5 88000000 		.4byte	.LFE135
@@ -14638,7 +14638,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11215 1472 74000000 		.4byte	.LVL358
  11216 1476 78000000 		.4byte	.LVL359
  11217 147a 0100     		.2byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 245
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 245
 
 
  11218 147c 56       		.byte	0x56
@@ -14698,7 +14698,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11272 00bc 24000000 		.4byte	.LFE130-.LFB130
  11273 00c0 00000000 		.4byte	.LFB145
  11274 00c4 18000000 		.4byte	.LFE145-.LFB145
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 246
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 246
 
 
  11275 00c8 00000000 		.4byte	.LFB153
@@ -14758,7 +14758,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11329 0010 00000000 		.4byte	.LFB151
  11330 0014 48000000 		.4byte	.LFE151
  11331 0018 00000000 		.4byte	.LFB152
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 247
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 247
 
 
  11332 001c 78000000 		.4byte	.LFE152
@@ -14818,7 +14818,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11386 00f4 66000000 		.4byte	.LFE116
  11387 00f8 00000000 		.4byte	.LFB136
  11388 00fc 32000000 		.4byte	.LFE136
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 248
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 248
 
 
  11389 0100 00000000 		.4byte	.LFB112
@@ -14878,7 +14878,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11429      6F756E74 
  11429      657200
  11430              	.LASF26:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 249
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 249
 
 
  11431 0039 45455F55 		.ascii	"EE_UINT32\000"
@@ -14938,7 +14938,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11455      626F6C54 
  11455      61626C65 
  11455      42756666 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 250
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 250
 
 
  11455      65725549 
@@ -14998,7 +14998,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11477      64536C6F 
  11477      7400
  11478              	.LASF139:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 251
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 251
 
 
  11479 0190 70727654 		.ascii	"prvTraceError\000"
@@ -15058,7 +15058,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11503 022b 5F5F7661 		.ascii	"__va_list\000"
  11503      5F6C6973 
  11503      7400
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 252
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 252
 
 
  11504              	.LASF63:
@@ -15118,7 +15118,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11527 02e6 6F707469 		.ascii	"options\000"
  11527      6F6E7300 
  11528              	.LASF81:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 253
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 253
 
 
  11529 02ee 6C617374 		.ascii	"lastPage\000"
@@ -15178,7 +15178,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11551      63655365 
  11551      74467265 
  11551      7175656E 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 254
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 254
 
 
  11551      637900
@@ -15238,7 +15238,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11575 044e 45455F6F 		.ascii	"EE_oo_IRQ_disable_count\000"
  11575      6F5F4952 
  11575      515F6469 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 255
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 255
 
 
  11575      7361626C 
@@ -15298,7 +15298,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11595      61676552 
  11595      65616443 
  11595      6F6D706C 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 256
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 256
 
 
  11595      65746500 
@@ -15358,7 +15358,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11619              	.LASF198:
  11620 05ed 70727654 		.ascii	"prvTraceIsSchedulerSuspended\000"
  11620      72616365 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 257
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 257
 
 
  11620      49735363 
@@ -15418,7 +15418,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11642      646500
  11643              	.LASF164:
  11644 06da 66697273 		.ascii	"firstFreeSymbolTableIndex\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 258
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 258
 
 
  11644      74467265 
@@ -15478,7 +15478,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11668 0781 75695472 		.ascii	"uiTraceTickCount\000"
  11668      61636554 
  11668      69636B43 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 259
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 259
 
 
  11668      6F756E74 
@@ -15538,7 +15538,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11694 082d 43757272 		.ascii	"CurrentFilterMask\000"
  11694      656E7446 
  11694      696C7465 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 260
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 260
 
 
  11694      724D6173 
@@ -15598,7 +15598,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11712      6F6D466F 
  11712      7253796D 
  11712      626F6C00 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 261
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 261
 
 
  11713              	.LASF79:
@@ -15658,7 +15658,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11736      00
  11737              	.LASF147:
  11738 09fd 7072696F 		.ascii	"priority\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 262
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 262
 
 
  11738      72697479 
@@ -15718,7 +15718,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11760      657400
  11761              	.LASF43:
  11762 0aa9 4576656E 		.ascii	"EventCount\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 263
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 263
 
 
  11762      74436F75 
@@ -15778,7 +15778,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11786 0b5a 45455F49 		.ascii	"EE_IRQ_nesting_level\000"
  11786      52515F6E 
  11786      65737469 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 264
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 264
 
 
  11786      6E675F6C 
@@ -15838,7 +15838,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11809              	.LASF108:
  11810 0c13 70727654 		.ascii	"prvTraceStoreSymbolTable\000"
  11810      72616365 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 265
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 265
 
 
  11810      53746F72 
@@ -15898,7 +15898,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 1
  11832      75666665 
  11832      7200
  11833              	.LASF76:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxskRLB.s 			page 266
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccCNLI7M.s 			page 266
 
 
  11834 0ccb 72657375 		.ascii	"result\000"

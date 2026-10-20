@@ -1,7 +1,7 @@
 /**
 * \file    mp3.h
 * \author  P. Fromm (template), V S Agilan (player)
-* \date    6.11.18 (INC 11B: 2026-10)
+* \date    6.11.18
 *
 * \brief   A simple MP3 Player (WAV player) application layer: song list, state machine, SD card
 *          streaming and TFT song list
@@ -100,7 +100,9 @@
 *                \return per value); RC_t return codes: MP3_Init() returns the scan result,
 *                MP3_ProcessEvent() reports ignored events, MP3__openWavFile() passes on the
 *                reason; note N11 (return codes)
-*
+*  - INC 14    : UART text through the log service (LOG_x), errors reported to the central error
+*                handler (CEH_report), note N12 in mp3.c
+* 
 * \copyright Copyright 2016
 * Department of electrical engineering and information technology, Hochschule Darmstadt - University of applied sciences (h_da). All Rights Reserved.
 * Permission to use, copy, modify, and distribute this software and its documentation for educational, and research purposes in the context of non-commercial
@@ -149,7 +151,7 @@ public:
  * If the card cannot be read the error flag is set, the TFT then shows
  * "Error: See UART Log"; if no WAV file is found it shows "No Song Detected :(".
  *
- * Call once from tsk_init, after TFT_init() and SOUND_Init().
+ * Call once from tsk_init, after TFT_Init() and SOUND_Init().
  *
  * \return RC_SUCCESS when the card was scanned (also with 0 songs found),
  *         RC_ERROR_OPEN when a folder could not be opened, the list may be incomplete

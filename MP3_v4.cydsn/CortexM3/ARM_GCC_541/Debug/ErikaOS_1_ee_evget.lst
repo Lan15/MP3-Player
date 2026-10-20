@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
   28:Generated_Source\PSoC5/ErikaOS_1_ee_evget.c ****  * exception statement from your version.
   29:Generated_Source\PSoC5/ErikaOS_1_ee_evget.c ****  *
   30:Generated_Source\PSoC5/ErikaOS_1_ee_evget.c ****  * ERIKA Enterprise is distributed in the hope that it will be
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 2
 
 
   31:Generated_Source\PSoC5/ErikaOS_1_ee_evget.c ****  * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
   79:Generated_Source\PSoC5/ErikaOS_1_ee_evget.c ****       then the Operating System shall ignore the service AND shall return
   80:Generated_Source\PSoC5/ErikaOS_1_ee_evget.c ****       E_OS_DISABLEDINT if the service returns a StatusType value. */
   81:Generated_Source\PSoC5/ErikaOS_1_ee_evget.c ****   /*  [OS088]: If an OS-Application makes a service call from the wrong context
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 3
 
 
   82:Generated_Source\PSoC5/ErikaOS_1_ee_evget.c ****       AND is currently not inside a Category 1 ISR the Operating System module
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
   40 000a 6BB1     		cbz	r3, .L4
  130:Generated_Source\PSoC5/ErikaOS_1_ee_evget.c ****     ev = E_OS_ACCESS;
  131:Generated_Source\PSoC5/ErikaOS_1_ee_evget.c ****   } else if ( EE_th_status[TaskID] == SUSPENDED ) {
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 4
 
 
   41              		.loc 1 131 0
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
   70              	.L5:
  132:Generated_Source\PSoC5/ErikaOS_1_ee_evget.c ****   } else
   71              		.loc 1 132 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 5
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 5
 
 
   72 002c 0720     		movs	r0, #7
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  106 000b 01       		.uleb128 0x1
  107 000c 77040000 		.4byte	.LASF74
  108 0010 0C       		.byte	0xc
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 6
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 6
 
 
  109 0011 C7020000 		.4byte	.LASF75
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  163 007d 04       		.uleb128 0x4
  164 007e D5010000 		.4byte	.LASF11
  165 0082 02       		.byte	0x2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 7
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 7
 
 
  166 0083 3F       		.byte	0x3f
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  220 00fb ED000000 		.4byte	0xed
  221 00ff 05       		.uleb128 0x5
  222 0100 77020000 		.4byte	.LASF22
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 8
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 8
 
 
  223 0104 04       		.byte	0x4
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  277 0177 3E050000 		.4byte	.LASF30
  278 017b 04       		.byte	0x4
  279 017c 7F02     		.2byte	0x27f
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 9
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 9
 
 
  280 017e 0B010000 		.4byte	0x10b
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  334 01f0 00       		.byte	0
  335 01f1 05       		.uleb128 0x5
  336 01f2 9A030000 		.4byte	.LASF38
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 10
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 10
 
 
  337 01f6 04       		.byte	0x4
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  391 026c 00       		.byte	0
  392 026d 0C       		.uleb128 0xc
  393 026e 95010000 		.4byte	.LASF46
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 11
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 11
 
 
  394 0272 04       		.byte	0x4
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  448 02e6 F3000000 		.4byte	0xf3
  449 02ea 01       		.uleb128 0x1
  450 02eb 51       		.byte	0x51
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 12
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 12
 
 
  451 02ec 13       		.uleb128 0x13
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  505 0363 CA       		.byte	0xca
  506 0364 4D030000 		.4byte	0x34d
  507 0368 15       		.uleb128 0x15
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 13
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 13
 
 
  508 0369 CA000000 		.4byte	0xca
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  562 03e7 00       		.byte	0
  563 03e8 17       		.uleb128 0x17
  564 03e9 BF000000 		.4byte	0xbf
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 14
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 14
 
 
  565 03ed 18       		.uleb128 0x18
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  619 046f 16       		.uleb128 0x16
  620 0470 21030000 		.4byte	0x321
  621 0474 02       		.byte	0x2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 15
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 15
 
 
  622 0475 00       		.byte	0
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  676 000e 01       		.uleb128 0x1
  677 000f 10       		.uleb128 0x10
  678 0010 17       		.uleb128 0x17
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 16
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 16
 
 
  679 0011 00       		.byte	0
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  733 0047 0B       		.uleb128 0xb
  734 0048 49       		.uleb128 0x49
  735 0049 13       		.uleb128 0x13
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 17
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 17
 
 
  736 004a 00       		.byte	0
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  790 0080 0B       		.uleb128 0xb
  791 0081 0D       		.uleb128 0xd
  792 0082 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 18
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 18
 
 
  793 0083 03       		.uleb128 0x3
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  847 00b9 0B       		.uleb128 0xb
  848 00ba 01       		.uleb128 0x1
  849 00bb 13       		.uleb128 0x13
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 19
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 19
 
 
  850 00bc 00       		.byte	0
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  904 00f3 17       		.uleb128 0x17
  905 00f4 00       		.byte	0
  906 00f5 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 20
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 20
 
 
  907 00f6 12       		.uleb128 0x12
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  961 012c 00       		.byte	0
  962 012d 00       		.byte	0
  963 012e 16       		.uleb128 0x16
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 21
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 21
 
 
  964 012f 21       		.uleb128 0x21
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  1018 002e F3       		.byte	0xf3
  1019 002f 01       		.uleb128 0x1
  1020 0030 50       		.byte	0x50
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 22
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 22
 
 
  1021 0031 9F       		.byte	0x9f
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  1075 000c 0000     		.2byte	0
  1076 000e 0000     		.2byte	0
  1077 0010 00000000 		.4byte	.LFB70
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 23
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 23
 
 
  1078 0014 40000000 		.4byte	.LFE70-.LFB70
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  1106      6B526566 
  1106      54797065 
  1106      00
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 24
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 24
 
 
  1107              	.LASF63:
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  1132      79636C65 
  1132      00
  1133              	.LASF29:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 25
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 25
 
 
  1134 0131 76616C75 		.ascii	"value\000"
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  1154      645F7374 
  1155              	.LASF19:
  1156 01f6 45455F54 		.ascii	"EE_TYPE_RQ_MASK\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 26
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 26
 
 
  1156      5950455F 
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  1176      20636861 
  1176      7200
  1177              	.LASF66:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 27
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 27
 
 
  1178 02af 45455F63 		.ascii	"EE_counter_ROM\000"
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  1199              	.LASF13:
  1200 037e 45455F49 		.ascii	"EE_INT32\000"
  1200      4E543332 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 28
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 28
 
 
  1200      00
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  1223              	.LASF54:
  1224 0436 73697A65 		.ascii	"sizetype\000"
  1224      74797065 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 29
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 29
 
 
  1224      00
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 1
  1246      715F6C6F 
  1246      6F6B7570 
  1246      00
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccPlaLrs.s 			page 30
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccbE52Pb.s 			page 30
 
 
  1247              	.LASF30:

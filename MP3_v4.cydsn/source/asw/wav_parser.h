@@ -1,7 +1,7 @@
 /**
 * \file    wav_parser.h
 * \author  V S Agilan
-* \date    2025 (INC 11A: 2026-10)
+* \date    30.04.26
 *
 * \brief   WAV file header parser (emFile), refactored for SD card streaming
 *
@@ -39,12 +39,14 @@
 *   - INC 6D   : 44100 Hz accepted (decimated by the player)
 *   - INC 11A  : chunk walker with a single read window (fewer SD reads),
 *                RIFF pad byte handled, data length clamped to the file size,
-*                fmt chunk accepted at any position, no stdio (MISRA 21.6),
+*                fmt chunk accepted at any position, no stdio,
 *                Doxygen comments, notes N1..N9 at the end of wav_parser.c
 *   - INC 11A.1: function comments in the project style (\param type name : [IN|OUT] text,
 *               aligned colons, \return per value); RC_t return codes: WAV_ParseHeader()
-*               reports the reason (RC_ERROR_NULL, _READ_FAILS, _INVALID, _NOT_IMPLEMENTED)
+*               reports the reason (RC_ERROR_NULL, _READ_FAILS, _INVALID, RC_ERROR)
 *               and checks its pointers, WAV_PrintHeader() returns RC_t, notes N1..N10
+*   - INC 14   : UART_LOG_PutString() replaced by the log service (LOG_E/LOG_W/LOG_I), the helpers
+*               WAV__LogText / WAV__LogNumber removed, WAV_PrintHeader() prints four lines, note N11
 *
 * \copyright Copyright 2025
 * Department of electrical engineering and information technology,
@@ -117,19 +119,21 @@ typedef struct WAVFile_t
  * \param WAVFile *const wav           : [OUT] structure to fill, not NULL; header fields and data_length
  *                                     (limited to the bytes left in the file, N5) are valid on RC_SUCCESS
  * \return RC_SUCCESS when the header is valid, FS_FTell() gives the offset of the first PCM byte,
- *         RC_ERROR when a read or seek failed, the file is not RIFF/WAVE, the
- *         format is unsupported or there is no data chunk (a line
- *         "[WAV] ERROR: ..." was written to the UART log)
+ *         RC_ERROR_NULL when pFile or wav is NULL,
+ *         RC_ERROR_READ_FAILS when a read or seek failed,
+ *         RC_ERROR_INVALID when the file is not RIFF/WAVE, the fmt chunk is too small, data
+ *         comes before fmt or there is no data chunk,
+ *         RC_ERROR when the format is not supported (not PCM, channels, bits, block_align,
+ *         sample rate); the reason is written to the log
  */
 RC_t WAV_ParseHeader(FS_FILE * const pFile, WAVFile * const wav);
 
 /**
- * \brief Print all WAV header fields to the UART log (debug aid).
+ * \brief Print all WAV header fields to the log (debug aid).
  *
  * Prints file id, format, fmt size, audio format, channels, sample rate, bits per
  * sample, block align, data size and the duration (data_length / byte rate, not
- * printed if the byte rate is 0). Uses WAV__LogText() and WAV__LogNumber(), no
- * stdio (N7).
+ * printed if the byte rate is 0) as four LOG_I() lines (N11).
  *
  * \param WAVFile const *const wav     : [IN] parsed WAV file (result of WAV_ParseHeader())
  * \return RC_SUCCESS when the header was printed,

@@ -138,8 +138,13 @@
     DEF(			MESSAGE_BUFFERFULL,				ON,             UART,	        CEH_NONE            )	/* message buffer overrun */	\
  	/* ------------------- RTE Level Errors */\
 	/* ------------------- Application Level Errors */\
-    DEF(			FATAL,				            ON,             UART,	        CEH_EMERGENCY_STOP  )	/* Fatal application error */	\
-
+    DEF(			FATAL,				            ON,             UART,           CEH_EMERGENCY_STOP  )	/* Fatal application error */	\
+    DEF(            SD_SCAN_FAILED,                 OFF,            UART,           CEH_NONE            )   /* folder could not be opened, data = RC_t          */ \
+    DEF(            FILE_OPEN_FAILED,               OFF,            UART,           CEH_NONE            )   /* FS_FOpen failed, data = song index               */ \
+    DEF(            WAV_INVALID,                    OFF,            UART,           CEH_NONE            )   /* header rejected, data = RC_t of WAV_ParseHeader  */ \
+    DEF(            SD_READ_FAILED,                 OFF,            UART,           CEH_STOP            )   /* read error during playback, data = song index    */ \
+    DEF(            SOUND_UNDERRUN,                 OFF,            UART,           CEH_NONE            )   /* reader late, data = underruns in the last second */ \
+    
 /*****************************************************************************/
 /* User functions                                                            */
 /*****************************************************************************/

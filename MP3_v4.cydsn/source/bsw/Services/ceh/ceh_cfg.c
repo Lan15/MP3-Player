@@ -36,6 +36,8 @@
 
 #include "global.h"
 #include "project.h"
+    
+#include "sound.h"
 
 /*****************************************************************************/
 /* Local pre-processor symbols/macros ('#define')                            */
@@ -81,7 +83,7 @@ void CEH_debug()
 	#ifdef DEBUG
 		//For debugger breakpoint (build configuration set to DEBUG)
 		__asm("bkpt");
-	#elif
+	#else
 		//For final system endless loop (build configuration set to RELEASE)
 		while(1);
 	#endif
@@ -95,6 +97,8 @@ void CEH_debug()
 void CEH_deactiveActor()
 {
 	// user defined function
+    SOUND_StopPlay(); 
+    SOUND_PWM_WriteCompare(SOUND_SILENCE);
 
 }
 
@@ -106,6 +110,8 @@ void CEH_deactiveActor()
 void CEH_emergencyStop()
 {
 	// user defined function
+    CEH_deactiveActor(); 
+    SOUND_ENABLE_Write(0u);     /* amplifier off */
 
 }
 

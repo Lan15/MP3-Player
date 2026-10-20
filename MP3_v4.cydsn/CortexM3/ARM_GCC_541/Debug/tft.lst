@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
   29:source\bsw\tft/tft.c **** * \brief API glue for the SPI module
   30:source\bsw\tft/tft.c **** */
   31:source\bsw\tft/tft.c **** #define MODULE_SPI(x)       PPCAT(CFG_TFT_SPI_MODULE, x)
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 2
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 2
 
 
   32:source\bsw\tft/tft.c **** 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
   86:source\bsw\tft/tft.c **** /**
   87:source\bsw\tft/tft.c **** * \brief Outgoing data to the tft
   88:source\bsw\tft/tft.c **** */
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 3
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 3
 
 
   89:source\bsw\tft/tft.c **** typedef struct{
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  143:source\bsw\tft/tft.c ****         return;
  144:source\bsw\tft/tft.c ****     
  145:source\bsw\tft/tft.c ****     //get the next frame to be send
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 4
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 4
 
 
  146:source\bsw\tft/tft.c ****     TFT_data_t* p_next_frame=&TFT_RB_out.buffer[TFT_RB_out.read++];
@@ -228,7 +228,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  190:source\bsw\tft/tft.c **** 
  191:source\bsw\tft/tft.c **** 
  192:source\bsw\tft/tft.c **** //----------------- CTRL
- 193:source\bsw\tft/tft.c **** void TFT_init(){
+ 193:source\bsw\tft/tft.c **** void TFT_Init(){
  194:source\bsw\tft/tft.c ****     
  195:source\bsw\tft/tft.c ****     //init local vars
  196:source\bsw\tft/tft.c ****     _width    = CFG_TFT_WIDTH;
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  200:source\bsw\tft/tft.c ****     cursor_y=0;
  201:source\bsw\tft/tft.c ****     textsize=1;
  202:source\bsw\tft/tft.c ****     color=CFG_TFT_COLOR_TEXT;
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 5
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 5
 
 
  203:source\bsw\tft/tft.c ****     bgcolor=CFG_TFT_COLOR_TEXTBG;
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  257:source\bsw\tft/tft.c ****         b=100;
  258:source\bsw\tft/tft.c ****     MODULE_PWM(WriteCompare)(b);
  259:source\bsw\tft/tft.c **** }
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 6
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 6
 
 
  260:source\bsw\tft/tft.c **** 
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  314:source\bsw\tft/tft.c ****             xstart = rowstart;
  315:source\bsw\tft/tft.c ****             break;
  316:source\bsw\tft/tft.c ****     }
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 7
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 7
 
 
  317:source\bsw\tft/tft.c **** }
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  371:source\bsw\tft/tft.c **** void TFT_getTextBounds(char *str, int16_t x, int16_t y, int16_t *x1, int16_t *y1, uint16_t *w, uint
  372:source\bsw\tft/tft.c ****     uint8_t c; // Current character
  373:source\bsw\tft/tft.c **** 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 8
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 8
 
 
  374:source\bsw\tft/tft.c ****     *x1 = x;
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
   55 0014 A17A     		ldrb	r1, [r4, #10]	@ zero_extendqisi2
   56              	.LVL2:
   57 0016 684B     		ldr	r3, .L17
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 9
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 9
 
 
   58 0018 1879     		ldrb	r0, [r3, #4]	@ zero_extendqisi2
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  410:source\bsw\tft/tft.c ****                         yo = pgm_read_byte(&glyph->yOffset);
  102              		.loc 1 410 0
  103 0050 90F90600 		ldrsb	r0, [r0, #6]
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 10
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 10
 
 
  104              	.LVL14:
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  150 00ba 12B2     		sxth	r2, r2
  151              	.LVL22:
  419:source\bsw\tft/tft.c ****                         y2 = y1 + gh * ts - 1;
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 11
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 11
 
 
  152              		.loc 1 419 0
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  201              	.LBE2:
  425:source\bsw\tft/tft.c ****             }
  426:source\bsw\tft/tft.c ****         }
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 12
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 12
 
 
  427:source\bsw\tft/tft.c **** 
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  245              	.L11:
  438:source\bsw\tft/tft.c ****             }
  439:source\bsw\tft/tft.c ****             int x2 = *x + textsize * 6 - 1, // Lower-right pixel of char
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 13
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 13
 
 
  246              		.loc 1 439 0
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  295 01a0 01DA     		bge	.L15
  296              		.loc 1 444 0 is_stmt 0 discriminator 1
  297 01a2 089A     		ldr	r2, [sp, #32]
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 14
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 14
 
 
  298 01a4 1380     		strh	r3, [r2]	@ movhi
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  347 0012 A2FB0352 		umull	r5, r2, r2, r3
  348 0016 5209     		lsrs	r2, r2, #5
  349 0018 6425     		movs	r5, #100
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 15
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 15
 
 
  350 001a 05FB1233 		mls	r3, r5, r2, r3
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  398              	.LFB114:
  168:source\bsw\tft/tft.c **** 
  399              		.loc 1 168 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 16
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 16
 
 
  400              		.cfi_startproc
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  185:source\bsw\tft/tft.c ****         __TFT_SPI_TX_ISR();
  448              		.loc 1 185 0
  449 003e 012B     		cmp	r3, #1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 17
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 17
 
 
  450 0040 03D1     		bne	.L30
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  499              	.LVL54:
  500 000e 0020     		movs	r0, #0
  501              	.LVL55:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 18
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 18
 
 
  502 0010 FFF7FEFF 		bl	TFT_send
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  548 0062 0120     		movs	r0, #1
  549 0064 FFF7FEFF 		bl	TFT_send
  550              	.LVL64:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 19
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 19
 
 
  277:source\bsw\tft/tft.c **** 
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  599              		.cfi_endproc
  600              	.LFE116:
  601              		.size	TFT_setBacklight, .-TFT_setBacklight
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 20
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 20
 
 
  602 000e 00BF     		.section	.text.TFT_getBacklight,"ax",%progbits
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  650              		.loc 1 286 0
  651 000c 04F00300 		and	r0, r4, #3
  652 0010 2A4B     		ldr	r3, .L52
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 21
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 21
 
 
  653 0012 83F8D800 		strb	r0, [r3, #216]
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  697 0058 A3F8DA20 		strh	r2, [r3, #218]	@ movhi
  299:source\bsw\tft/tft.c ****             xstart = rowstart;
  698              		.loc 1 299 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 22
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 22
 
 
  699 005c 93F8DC20 		ldrb	r2, [r3, #220]	@ zero_extendqisi2
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  741 00a8 93F8DC20 		ldrb	r2, [r3, #220]	@ zero_extendqisi2
  742 00ac 83F8D720 		strb	r2, [r3, #215]
  314:source\bsw\tft/tft.c ****             break;
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 23
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 23
 
 
  743              		.loc 1 314 0
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  793              		@ frame_needed = 0, uses_anonymous_args = 0
  794              		@ link register save eliminated.
  795              	.LVL79:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 24
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 24
 
 
  327:source\bsw\tft/tft.c **** }
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  846              	.LVL81:
  337:source\bsw\tft/tft.c ****     bgcolor = b;
  847              		.loc 1 337 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 25
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 25
 
 
  848 0000 024B     		ldr	r3, .L64
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  897              		.loc 1 344 0
  898 0000 014B     		ldr	r3, .L70
  899 0002 B3F8E400 		ldrh	r0, [r3, #228]
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 26
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 26
 
 
  900 0006 7047     		bx	lr
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  950              	.LVL84:
  951 0004 FFE7     		b	.L76
  952              	.LVL85:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 27
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 27
 
 
  953              	.L77:
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1000 0020 B1F8E030 		ldrh	r3, [r1, #224]
  1001 0024 063B     		subs	r3, r3, #6
  1002 0026 A1F8E030 		strh	r3, [r1, #224]	@ movhi
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 28
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 28
 
 
  1003              	.L82:
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1052 001e 3B80     		strh	r3, [r7]	@ movhi
  378:source\bsw\tft/tft.c **** 
  1053              		.loc 1 378 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 29
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 29
 
 
  1054 0020 204B     		ldr	r3, .L91
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1102              	.L88:
  387:source\bsw\tft/tft.c ****         *y1 = miny;
  1103              		.loc 1 387 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 30
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 30
 
 
  1104 0082 BDF91820 		ldrsh	r2, [sp, #24]
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  463:source\bsw\tft/tft.c **** }
  464:source\bsw\tft/tft.c **** 
  465:source\bsw\tft/tft.c **** void TFT_write(uint8_t c) {
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 31
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 31
 
 
  466:source\bsw\tft/tft.c **** 
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1141              		@ frame_needed = 0, uses_anonymous_args = 0
  1142              	.LVL96:
  1143 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 32
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 32
 
 
  1144              		.cfi_def_cfa_offset 24
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1190              	.LVL102:
  1191 0040 CB19     		adds	r3, r1, r7
  1192 0042 013B     		subs	r3, r3, #1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 33
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 33
 
 
  1193 0044 00EB0802 		add	r2, r0, r8
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1236              		.loc 1 529 0 is_stmt 1 discriminator 2
  1237 007a 013F     		subs	r7, r7, #1
  1238              	.LVL114:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 34
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 34
 
 
  1239 007c 3FB2     		sxth	r7, r7
@@ -2038,20 +2038,20 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1289              	.L107:
  1290 001e 00BF     		.align	2
  1291              	.L106:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 35
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 35
 
 
  1292 0020 00000000 		.word	.LANCHOR0
  1293              		.cfi_endproc
  1294              	.LFE134:
  1295              		.size	TFT_fillScreen, .-TFT_fillScreen
- 1296              		.section	.text.TFT_init,"ax",%progbits
+ 1296              		.section	.text.TFT_Init,"ax",%progbits
  1297              		.align	2
- 1298              		.global	TFT_init
+ 1298              		.global	TFT_Init
  1299              		.thumb
  1300              		.thumb_func
- 1301              		.type	TFT_init, %function
- 1302              	TFT_init:
+ 1301              		.type	TFT_Init, %function
+ 1302              	TFT_Init:
  1303              	.LFB115:
  193:source\bsw\tft/tft.c ****     
  1304              		.loc 1 193 0
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1337 0028 A3F8E440 		strh	r4, [r3, #228]	@ movhi
  204:source\bsw\tft/tft.c ****     gfxFont=NULL;
  1338              		.loc 1 204 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 36
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 36
 
 
  1339 002c 5D71     		strb	r5, [r3, #5]
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1380              		.loc 1 225 0
  1381 006e 2946     		mov	r1, r5
  1382 0070 2046     		mov	r0, r4
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 37
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 37
 
 
  1383 0072 FFF7FEFF 		bl	TFT_send
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1427 00ac 2246     		mov	r2, r4
  240:source\bsw\tft/tft.c ****         }
  1428              		.loc 1 240 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 38
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 38
 
 
  1429 00ae 3546     		mov	r5, r6
@@ -2269,7 +2269,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1468 00e0 01000000 		.word	.LANCHOR1+1
  1469              		.cfi_endproc
  1470              	.LFE115:
- 1471              		.size	TFT_init, .-TFT_init
+ 1471              		.size	TFT_Init, .-TFT_Init
  1472              		.section	.text.TFT_clearScreen,"ax",%progbits
  1473              		.align	2
  1474              		.global	TFT_clearScreen
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1477              		.type	TFT_clearScreen, %function
  1478              	TFT_clearScreen:
  1479              	.LFB135:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 39
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 39
 
 
  514:source\bsw\tft/tft.c **** 
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1525 0018 9942     		cmp	r1, r3
  1526 001a 15DA     		bge	.L121
  537:source\bsw\tft/tft.c **** 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 40
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 40
 
 
  1527              		.loc 1 537 0 is_stmt 1
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1576              		.type	TFT_drawCircleHelper, %function
  1577              	TFT_drawCircleHelper:
  1578              	.LFB143:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 41
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 41
 
 
  545:source\bsw\tft/tft.c **** 
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  599:source\bsw\tft/tft.c ****     int16_t ystep;
  600:source\bsw\tft/tft.c **** 
  601:source\bsw\tft/tft.c ****     if (y0 < y1) {
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 42
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 42
 
 
  602:source\bsw\tft/tft.c ****         ystep = 1;
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  656:source\bsw\tft/tft.c ****     }
  657:source\bsw\tft/tft.c **** 
  658:source\bsw\tft/tft.c **** }
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 43
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 43
 
 
  659:source\bsw\tft/tft.c **** 
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1623              	.LVL163:
  1624              	.L131:
  668:source\bsw\tft/tft.c ****         if (f >= 0) {
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 44
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 44
 
 
  1625              		.loc 1 668 0
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1670 006e 1FFA87FA 		uxth	r10, r7
  1671 0072 06EB0A01 		add	r1, r6, r10
  1672 0076 05EB0B00 		add	r0, r5, fp
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 45
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 45
 
 
  1673 007a 019A     		ldr	r2, [sp, #4]
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1719 00e2 019A     		ldr	r2, [sp, #4]
  1720 00e4 09B2     		sxth	r1, r1
  1721 00e6 00B2     		sxth	r0, r0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 46
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 46
 
 
  1722 00e8 FFF7FEFF 		bl	TFT_drawPixel
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1767              		.section	.text.TFT_fastVLine,"ax",%progbits
  1768              		.align	2
  1769              		.global	TFT_fastVLine
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 47
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 47
 
 
  1770              		.thumb
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1818 002c 013B     		subs	r3, r3, #1
  1819 002e DBB2     		uxtb	r3, r3
  1820 0030 0246     		mov	r2, r0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 48
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 48
 
 
  1821 0032 FFF7FEFF 		bl	setAddrWindow
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1869              		.type	TFT_fillCircleHelper, %function
  1870              	TFT_fillCircleHelper:
  1871              	.LFB145:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 49
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 49
 
 
  694:source\bsw\tft/tft.c **** 
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  1912 002c 0027     		movs	r7, #0
  705:source\bsw\tft/tft.c ****     int16_t ddF_x = 1;
  1913              		.loc 1 705 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 50
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 50
 
 
  1914 002e 4FF0010B 		mov	fp, #1
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  719:source\bsw\tft/tft.c **** 
  720:source\bsw\tft/tft.c ****         if (cornername & 0x1) {
  1957              		.loc 1 720 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 51
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 51
 
 
  1958 0064 1AF0010F 		tst	r10, #1
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  2007 00d6 12B2     		sxth	r2, r2
  2008 00d8 09B2     		sxth	r1, r1
  2009 00da 00B2     		sxth	r0, r0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 52
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 52
 
 
  2010 00dc FFF7FEFF 		bl	TFT_fastVLine
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  2058 0002 1E46     		mov	r6, r3
  567:source\bsw\tft/tft.c ****     if((x+w-1) >= _width)  w = _width-x;
  2059              		.loc 1 567 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 53
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 53
 
 
  2060 0004 164B     		ldr	r3, .L154
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  2106              		.loc 1 576 0
  2107 0042 3946     		mov	r1, r7
  2108 0044 0220     		movs	r0, #2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 54
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 54
 
 
  2109 0046 FFF7FEFF 		bl	TFT_send
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  2160              		.cfi_def_cfa_offset 48
  2161 0006 0546     		mov	r5, r0
  2162 0008 0E46     		mov	r6, r1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 55
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 55
 
 
  2163 000a 1746     		mov	r7, r2
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  2210 004a 1746     		mov	r7, r2
  2211              	.LVL243:
  2212              	.L158:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 56
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 56
 
 
  2213              	.LBE8:
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  2258              		.loc 1 611 0
  2259 008e 009A     		ldr	r2, [sp]
  2260 0090 3146     		mov	r1, r6
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 57
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 57
 
 
  2261 0092 2846     		mov	r0, r5
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  2308              		.type	TFT_invertDisplay, %function
  2309              	TFT_invertDisplay:
  2310              	.LFB141:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 58
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 58
 
 
  621:source\bsw\tft/tft.c ****   TFT_write_cmd(i ? ST7735_INVON : ST7735_INVOFF);
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  2361              		.cfi_def_cfa_offset 64
  2362 0006 8246     		mov	r10, r0
  2363 0008 0E46     		mov	r6, r1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 59
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 59
 
 
  2364 000a 0292     		str	r2, [sp, #8]
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  2411 0060 4FF00009 		mov	r9, #0
  628:source\bsw\tft/tft.c ****     int16_t ddF_y = -2 * r;
  2412              		.loc 1 628 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 60
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 60
 
 
  2413 0064 0123     		movs	r3, #1
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  2458              		.loc 1 648 0
  2459 009c 0AEB0503 		add	r3, r10, r5
  2460 00a0 1BB2     		sxth	r3, r3
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 61
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 61
 
 
  2461 00a2 BDF80860 		ldrh	r6, [sp, #8]
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  654:source\bsw\tft/tft.c ****         TFT_drawPixel(x0 - y, y0 - x, color);
  2510              		.loc 1 654 0
  2511 010e C5EB0B05 		rsb	r5, r5, fp
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 62
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 62
 
 
  2512 0112 2DB2     		sxth	r5, r5
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  2562 0008 1546     		mov	r5, r2
  2563 000a 1F46     		mov	r7, r3
  697:source\bsw\tft/tft.c ****     TFT_fillCircleHelper(x0, y0, r, 3, 0, color);
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 63
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 63
 
 
  2564              		.loc 1 697 0
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  2613              		.cfi_offset 8, -16
  2614              		.cfi_offset 9, -12
  2615              		.cfi_offset 10, -8
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 64
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 64
 
 
  2616              		.cfi_offset 14, -4
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  2663              		.cfi_startproc
  2664              		@ args = 12, pretend = 0, frame = 32
  2665              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 65
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 65
 
 
  2666              	.LVL302:
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  2711 0030 CDF81490 		str	r9, [sp, #20]
  2712              	.LVL306:
  2713 0034 9946     		mov	r9, r3
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 66
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 66
 
 
  2714              	.LBE11:
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  2758              	.L200:
  2759 005e 1346     		mov	r3, r2
  2760 0060 0246     		mov	r2, r0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 67
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 67
 
 
  2761              	.LVL316:
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  2806 0094 0599     		ldr	r1, [sp, #20]
  2807 0096 1FFA81FB 		uxth	fp, r1
  2808 009a BDF81080 		ldrh	r8, [sp, #16]
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 68
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 68
 
 
  2809 009e C8EB0B03 		rsb	r3, r8, fp
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  2846 00d4 DDF814B0 		ldr	fp, [sp, #20]
  2847              	.L190:
  2848              	.LVL335:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 69
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 69
 
 
  783:source\bsw\tft/tft.c **** 
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  2888              	.LVL343:
  2889              	.L192:
  794:source\bsw\tft/tft.c ****         TFT_fastHLine(a, y, b-a+1, color);
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 70
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 70
 
 
  2890              		.loc 1 794 0 discriminator 2
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  2934              	.LVL353:
  803:source\bsw\tft/tft.c ****         b   = x0 + sb / dy02;
  2935              		.loc 1 803 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 71
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 71
 
 
  2936 0144 96FBF8F0 		sdiv	r0, r6, r8
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  813:source\bsw\tft/tft.c **** }
  2977              		.loc 1 813 0 is_stmt 1
  2978 0170 09B0     		add	sp, sp, #36
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 72
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 72
 
 
  2979              		.cfi_def_cfa_offset 36
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3028 0034 1AB2     		sxth	r2, r3
  3029              	.LVL366:
  3030 0036 4346     		mov	r3, r8
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 73
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 73
 
 
  3031 0038 0592     		str	r2, [sp, #20]
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3080              	.LVL373:
  824:source\bsw\tft/tft.c ****     TFT_drawCircleHelper(x+w-r-1, y+r    , r, 2, color);
  3081              		.loc 1 824 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 74
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 74
 
 
  3082 0096 C9EB0404 		rsb	r4, r9, r4
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3129              		@ args = 8, pretend = 0, frame = 8
  3130              		@ frame_needed = 0, uses_anonymous_args = 0
  3131              	.LVL377:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 75
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 75
 
 
  3132 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3180 0062 00B2     		sxth	r0, r0
  3181 0064 FFF7FEFF 		bl	TFT_fillCircleHelper
  3182              	.LVL381:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 76
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 76
 
 
  838:source\bsw\tft/tft.c ****     TFT_fillCircleHelper(x+r    , y+r, r, 2, h-2*r-1, color);
@@ -4558,7 +4558,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3230              	.LVL385:
  845:source\bsw\tft/tft.c ****     TFT_fastHLine(x, y+h-1, w, color);
  3231              		.loc 1 845 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 77
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 77
 
 
  3232 0016 F119     		adds	r1, r6, r7
@@ -4618,7 +4618,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3280              		.cfi_offset 9, -16
  3281              		.cfi_offset 10, -12
  3282              		.cfi_offset 11, -8
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 78
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 78
 
 
  3283              		.cfi_offset 14, -4
@@ -4678,7 +4678,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3327 0058 8346     		mov	fp, r0
  3328 005a 0595     		str	r5, [sp, #20]
  3329 005c 049E     		ldr	r6, [sp, #16]
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 79
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 79
 
 
  3330 005e 4EE0     		b	.L213
@@ -4738,7 +4738,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3374 00ac FFF7FEFF 		bl	TFT_fillRect
  3375              	.LVL398:
  3376 00b0 1CE0     		b	.L217
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 80
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 80
 
 
  3377              	.L215:
@@ -4798,7 +4798,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3423              	.LVL405:
  3424              	.L213:
  861:source\bsw\tft/tft.c ****             uint8_t line = pgm_read_byte(&font[c * 5 + i]);
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 81
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 81
 
 
  3425              		.loc 1 861 0 is_stmt 0 discriminator 1
@@ -4858,7 +4858,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3464 0140 137A     		ldrb	r3, [r2, #8]	@ zero_extendqisi2
  3465 0142 EB1A     		subs	r3, r5, r3
  3466 0144 DBB2     		uxtb	r3, r3
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 82
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 82
 
 
  3467              	.LVL409:
@@ -4918,7 +4918,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3507              	.LVL422:
  3508 0176 02E0     		b	.L222
  3509              	.LVL423:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 83
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 83
 
 
  3510              	.L229:
@@ -4978,7 +4978,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3539              	.L224:
  926:source\bsw\tft/tft.c ****                 }
  927:source\bsw\tft/tft.c ****                 if(bits & 0x80) {
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 84
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 84
 
 
  3540              		.loc 1 927 0
@@ -5038,7 +5038,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3586              	.LVL434:
  923:source\bsw\tft/tft.c ****                 if(!(bit++ & 7)) {
  3587              		.loc 1 923 0 discriminator 2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 85
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 85
 
 
  3588 01f2 0135     		adds	r5, r5, #1
@@ -5098,7 +5098,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3633              		.thumb
  3634              		.thumb_func
  3635              		.type	TFT_write, %function
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 86
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 86
 
 
  3636              	TFT_write:
@@ -5158,7 +5158,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3682 003e B2F8DE40 		ldrh	r4, [r2, #222]
  3683 0042 2344     		add	r3, r3, r4
  3684 0044 B2F90620 		ldrsh	r2, [r2, #6]
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 87
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 87
 
 
  3685 0048 9342     		cmp	r3, r2
@@ -5218,7 +5218,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3731              	.LVL447:
  3732 00a4 B2F8E030 		ldrh	r3, [r2, #224]
  3733 00a8 00FB0133 		mla	r3, r0, r1, r3
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 88
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 88
 
 
  3734 00ac A2F8E030 		strh	r3, [r2, #224]	@ movhi
@@ -5278,7 +5278,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3777 00da A9B1     		cbz	r1, .L241
  496:source\bsw\tft/tft.c ****                         cursor_x  = 0;
  3778              		.loc 1 496 0 is_stmt 0 discriminator 1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 89
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 89
 
 
  3779 00dc 1849     		ldr	r1, .L243
@@ -5338,7 +5338,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3828              	.LBE19:
  508:source\bsw\tft/tft.c **** 
  3829              		.loc 1 508 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 90
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 90
 
 
  3830 013a 02B0     		add	sp, sp, #8
@@ -5398,7 +5398,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3879              		.align	2
  3880              		.global	TFT_println
  3881              		.thumb
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 91
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 91
 
 
  3882              		.thumb_func
@@ -5458,7 +5458,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3929              		@ frame_needed = 0, uses_anonymous_args = 0
  3930              		@ link register save eliminated.
  943:source\bsw\tft/tft.c ****     return _width;
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 92
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 92
 
 
  944:source\bsw\tft/tft.c **** }
@@ -5518,7 +5518,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  3978              		@ link register save eliminated.
  951:source\bsw\tft/tft.c ****     return rotation;
  952:source\bsw\tft/tft.c **** }
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 93
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 93
 
 
  3979              		.loc 1 952 0
@@ -5578,7 +5578,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  959:source\bsw\tft/tft.c ****     return cursor_y;
  960:source\bsw\tft/tft.c **** }
  4027              		.loc 1 960 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 94
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 94
 
 
  4028 0000 014B     		ldr	r3, .L266
@@ -5638,7 +5638,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  4082 0026 C4       		.byte	-60
  4083 0027 02       		.byte	2
  4084 0028 8D       		.byte	-115
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 95
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 95
 
 
  4085 0029 EE       		.byte	-18
@@ -5698,7 +5698,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  4139 005c 00       		.byte	0
  4140 005d 3E       		.byte	62
  4141 005e 5B       		.byte	91
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 96
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 96
 
 
  4142 005f 4F       		.byte	79
@@ -5758,7 +5758,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  4196 0095 29       		.byte	41
  4197 0096 79       		.byte	121
  4198 0097 29       		.byte	41
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 97
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 97
 
 
  4199 0098 26       		.byte	38
@@ -5818,7 +5818,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  4253 00ce A2       		.byte	-94
  4254 00cf 94       		.byte	-108
  4255 00d0 08       		.byte	8
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 98
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 98
 
 
  4256 00d1 04       		.byte	4
@@ -5878,7 +5878,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  4310 0107 14       		.byte	20
  4311 0108 7F       		.byte	127
  4312 0109 14       		.byte	20
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 99
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 99
 
 
  4313 010a 7F       		.byte	127
@@ -5938,7 +5938,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  4367 0140 60       		.byte	96
  4368 0141 60       		.byte	96
  4369 0142 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 100
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 100
 
 
  4370 0143 20       		.byte	32
@@ -5998,7 +5998,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  4424 0179 1E       		.byte	30
  4425 017a 00       		.byte	0
  4426 017b 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 101
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 101
 
 
  4427 017c 14       		.byte	20
@@ -6058,7 +6058,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  4481 01b2 49       		.byte	73
  4482 01b3 49       		.byte	73
  4483 01b4 49       		.byte	73
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 102
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 102
 
 
  4484 01b5 41       		.byte	65
@@ -6118,7 +6118,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  4538 01eb 09       		.byte	9
  4539 01ec 06       		.byte	6
  4540 01ed 3E       		.byte	62
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 103
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 103
 
 
  4541 01ee 41       		.byte	65
@@ -6178,7 +6178,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  4595 0224 02       		.byte	2
  4596 0225 04       		.byte	4
  4597 0226 08       		.byte	8
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 104
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 104
 
 
  4598 0227 10       		.byte	16
@@ -6238,7 +6238,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  4652 025d A4       		.byte	-92
  4653 025e 9C       		.byte	-100
  4654 025f 78       		.byte	120
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 105
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 105
 
 
  4655 0260 7F       		.byte	127
@@ -6298,7 +6298,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  4709 0296 08       		.byte	8
  4710 0297 48       		.byte	72
  4711 0298 54       		.byte	84
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 106
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 106
 
 
  4712 0299 54       		.byte	84
@@ -6358,7 +6358,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  4766 02cf 01       		.byte	1
  4767 02d0 02       		.byte	2
  4768 02d1 04       		.byte	4
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 107
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 107
 
 
  4769 02d2 02       		.byte	2
@@ -6418,7 +6418,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  4823 0308 54       		.byte	84
  4824 0309 59       		.byte	89
  4825 030a 39       		.byte	57
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 108
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 108
 
 
  4826 030b 55       		.byte	85
@@ -6478,7 +6478,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  4880 0341 32       		.byte	50
  4881 0342 4A       		.byte	74
  4882 0343 48       		.byte	72
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 109
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 109
 
 
  4883 0344 48       		.byte	72
@@ -6538,7 +6538,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  4937 037a 54       		.byte	84
  4938 037b 79       		.byte	121
  4939 037c 41       		.byte	65
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 110
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 110
 
 
  4940 037d 00       		.byte	0
@@ -6598,7 +6598,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  4994 03b3 BA       		.byte	-70
  4995 03b4 2F       		.byte	47
  4996 03b5 10       		.byte	16
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 111
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 111
 
 
  4997 03b6 28       		.byte	40
@@ -6658,7 +6658,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5051 03ec 10       		.byte	16
  5052 03ed F0       		.byte	-16
  5053 03ee 10       		.byte	16
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 112
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 112
 
 
  5054 03ef F0       		.byte	-16
@@ -6718,7 +6718,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5108 0425 F0       		.byte	-16
  5109 0426 10       		.byte	16
  5110 0427 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 113
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 113
 
 
  5111 0428 00       		.byte	0
@@ -6778,7 +6778,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5165 045e 14       		.byte	20
  5166 045f 14       		.byte	20
  5167 0460 F7       		.byte	-9
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 114
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 114
 
 
  5168 0461 00       		.byte	0
@@ -6838,7 +6838,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5222 0497 10       		.byte	16
  5223 0498 1F       		.byte	31
  5224 0499 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 115
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 115
 
 
  5225 049a 00       		.byte	0
@@ -6898,7 +6898,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5279 04d0 63       		.byte	99
  5280 04d1 38       		.byte	56
  5281 04d2 44       		.byte	68
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 116
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 116
 
 
  5282 04d3 44       		.byte	68
@@ -6958,7 +6958,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5336 0509 2A       		.byte	42
  5337 050a 2A       		.byte	42
  5338 050b 2A       		.byte	42
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 117
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 117
 
 
  5339 050c 2A       		.byte	42
@@ -7018,7 +7018,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5393 0542 01       		.byte	1
  5394 0543 01       		.byte	1
  5395 0544 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 118
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 118
 
 
  5396 0545 1F       		.byte	31
@@ -7078,7 +7078,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5443      00000000 
  5444              		.type	xstart, %object
  5445              		.size	xstart, 1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 119
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 119
 
 
  5446              	xstart:
@@ -7138,7 +7138,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5500              		.file 15 "Generated_Source\\PSoC5/TFT_SPI.h"
  5501              		.file 16 ".\\source\\bsw\\Services\\log/log.h"
  5502              		.file 17 "Generated_Source\\PSoC5/TFT_BackLight.h"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 120
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 120
 
 
  5503              		.file 18 "Generated_Source\\PSoC5/TFT_RES.h"
@@ -7150,7 +7150,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5509 0006 00000000 		.4byte	.Ldebug_abbrev0
  5510 000a 04       		.byte	0x4
  5511 000b 01       		.uleb128 0x1
- 5512 000c D7010000 		.4byte	.LASF249
+ 5512 000c E0010000 		.4byte	.LASF249
  5513 0010 0C       		.byte	0xc
  5514 0011 9C0B0000 		.4byte	.LASF250
  5515 0015 6C080000 		.4byte	.LASF251
@@ -7164,16 +7164,16 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5523 002c 02       		.uleb128 0x2
  5524 002d 01       		.byte	0x1
  5525 002e 06       		.byte	0x6
- 5526 002f BD020000 		.4byte	.LASF1
+ 5526 002f C6020000 		.4byte	.LASF1
  5527 0033 03       		.uleb128 0x3
- 5528 0034 C9020000 		.4byte	.LASF4
+ 5528 0034 D2020000 		.4byte	.LASF4
  5529 0038 02       		.byte	0x2
  5530 0039 91       		.byte	0x91
  5531 003a 3E000000 		.4byte	0x3e
  5532 003e 02       		.uleb128 0x2
  5533 003f 01       		.byte	0x1
  5534 0040 08       		.byte	0x8
- 5535 0041 E2020000 		.4byte	.LASF2
+ 5535 0041 EB020000 		.4byte	.LASF2
  5536 0045 02       		.uleb128 0x2
  5537 0046 02       		.byte	0x2
  5538 0047 05       		.byte	0x5
@@ -7190,7 +7190,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5549 005e 02       		.uleb128 0x2
  5550 005f 04       		.byte	0x4
  5551 0060 05       		.byte	0x5
- 5552 0061 70010000 		.4byte	.LASF7
+ 5552 0061 79010000 		.4byte	.LASF7
  5553 0065 02       		.uleb128 0x2
  5554 0066 04       		.byte	0x4
  5555 0067 07       		.byte	0x7
@@ -7198,7 +7198,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5557 006c 02       		.uleb128 0x2
  5558 006d 04       		.byte	0x4
  5559 006e 04       		.byte	0x4
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 121
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 121
 
 
  5560 006f 51060000 		.4byte	.LASF9
@@ -7215,7 +7215,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5571 0083 07       		.byte	0x7
  5572 0084 2B080000 		.4byte	.LASF12
  5573 0088 03       		.uleb128 0x3
- 5574 0089 9C010000 		.4byte	.LASF13
+ 5574 0089 A5010000 		.4byte	.LASF13
  5575 008d 02       		.byte	0x2
  5576 008e 9C       		.byte	0x9c
  5577 008f 3E000000 		.4byte	0x3e
@@ -7258,7 +7258,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5614 00db 08       		.uleb128 0x8
  5615 00dc DB090000 		.4byte	.LASF22
  5616 00e0 79       		.sleb128 -7
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 122
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 122
 
 
  5617 00e1 08       		.uleb128 0x8
@@ -7274,7 +7274,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5627 00f4 DA040000 		.4byte	.LASF26
  5628 00f8 75       		.sleb128 -11
  5629 00f9 08       		.uleb128 0x8
- 5630 00fa 4D010000 		.4byte	.LASF27
+ 5630 00fa 56010000 		.4byte	.LASF27
  5631 00fe 74       		.sleb128 -12
  5632 00ff 08       		.uleb128 0x8
  5633 0100 00000000 		.4byte	.LASF28
@@ -7292,7 +7292,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5645 0118 3D0A0000 		.4byte	.LASF32
  5646 011c 6F       		.sleb128 -17
  5647 011d 08       		.uleb128 0x8
- 5648 011e 65020000 		.4byte	.LASF33
+ 5648 011e 6E020000 		.4byte	.LASF33
  5649 0122 6E       		.sleb128 -18
  5650 0123 08       		.uleb128 0x8
  5651 0124 9F070000 		.4byte	.LASF34
@@ -7304,7 +7304,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5657 0130 32060000 		.4byte	.LASF36
  5658 0134 6B       		.sleb128 -21
  5659 0135 08       		.uleb128 0x8
- 5660 0136 A5020000 		.4byte	.LASF37
+ 5660 0136 AE020000 		.4byte	.LASF37
  5661 013a 6A       		.sleb128 -22
  5662 013b 08       		.uleb128 0x8
  5663 013c BB0B0000 		.4byte	.LASF38
@@ -7317,8 +7317,8 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5670 014c 67       		.sleb128 -25
  5671 014d 00       		.byte	0
  5672 014e 03       		.uleb128 0x3
- 5673 014f 88010000 		.4byte	.LASF41
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 123
+ 5673 014f 91010000 		.4byte	.LASF41
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 123
 
 
  5674 0153 02       		.byte	0x2
@@ -7378,7 +7378,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5728 01c2 08       		.byte	0x8
  5729 01c3 05       		.byte	0x5
  5730 01c4 3D       		.byte	0x3d
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 124
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 124
 
 
  5731 01c5 12020000 		.4byte	0x212
@@ -7420,7 +7420,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5767 0210 06       		.byte	0x6
  5768 0211 00       		.byte	0
  5769 0212 03       		.uleb128 0x3
- 5770 0213 93010000 		.4byte	.LASF57
+ 5770 0213 9C010000 		.4byte	.LASF57
  5771 0217 05       		.byte	0x5
  5772 0218 42       		.byte	0x42
  5773 0219 C1010000 		.4byte	0x1c1
@@ -7438,7 +7438,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5785 0231 0B       		.uleb128 0xb
  5786 0232 4C030000 		.4byte	.LASF59
  5787 0236 05       		.byte	0x5
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 125
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 125
 
 
  5788 0237 49       		.byte	0x49
@@ -7490,7 +7490,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5834 0292 47000000 		.4byte	.LASF66
  5835 0296 02       		.byte	0x2
  5836 0297 07       		.uleb128 0x7
- 5837 0298 99020000 		.4byte	.LASF67
+ 5837 0298 A2020000 		.4byte	.LASF67
  5838 029c 03       		.byte	0x3
  5839 029d 00       		.byte	0
  5840 029e 03       		.uleb128 0x3
@@ -7498,7 +7498,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5842 02a3 05       		.byte	0x5
  5843 02a4 56       		.byte	0x56
  5844 02a5 79020000 		.4byte	0x279
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 126
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 126
 
 
  5845 02a9 06       		.uleb128 0x6
@@ -7517,7 +7517,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5858 02c3 2D060000 		.4byte	.LASF71
  5859 02c7 00F8     		.2byte	0xf800
  5860 02c9 0C       		.uleb128 0xc
- 5861 02ca DD020000 		.4byte	.LASF72
+ 5861 02ca E6020000 		.4byte	.LASF72
  5862 02ce 1FF8     		.2byte	0xf81f
  5863 02d0 0C       		.uleb128 0xc
  5864 02d1 F5080000 		.4byte	.LASF73
@@ -7532,13 +7532,13 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5873 02e5 09010000 		.4byte	.LASF75
  5874 02e9 1FF8     		.2byte	0xf81f
  5875 02eb 0C       		.uleb128 0xc
- 5876 02ec B7020000 		.4byte	.LASF76
+ 5876 02ec C0020000 		.4byte	.LASF76
  5877 02f0 E007     		.2byte	0x7e0
  5878 02f2 0C       		.uleb128 0xc
  5879 02f3 2C000000 		.4byte	.LASF77
  5880 02f7 E0FF     		.2byte	0xffe0
  5881 02f9 0C       		.uleb128 0xc
- 5882 02fa C5010000 		.4byte	.LASF78
+ 5882 02fa CE010000 		.4byte	.LASF78
  5883 02fe FF07     		.2byte	0x7ff
  5884 0300 0C       		.uleb128 0xc
  5885 0301 CF060000 		.4byte	.LASF79
@@ -7558,17 +7558,17 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5899 0323 0C       		.uleb128 0xc
  5900 0324 8F030000 		.4byte	.LASF84
  5901 0328 2A1A     		.2byte	0x1a2a
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 127
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 127
 
 
  5902 032a 0C       		.uleb128 0xc
- 5903 032b 8E020000 		.4byte	.LASF85
+ 5903 032b 97020000 		.4byte	.LASF85
  5904 032f 21F8     		.2byte	0xf821
  5905 0331 0C       		.uleb128 0xc
  5906 0332 C7030000 		.4byte	.LASF86
  5907 0336 6318     		.2byte	0x1863
  5908 0338 0C       		.uleb128 0xc
- 5909 0339 43010000 		.4byte	.LASF87
+ 5909 0339 4C010000 		.4byte	.LASF87
  5910 033d 658A     		.2byte	0x8a65
  5911 033f 0C       		.uleb128 0xc
  5912 0340 79050000 		.4byte	.LASF88
@@ -7617,8 +7617,8 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5955 0396 DF000000 		.4byte	.LASF100
  5956 039a 29       		.byte	0x29
  5957 039b 07       		.uleb128 0x7
- 5958 039c F0020000 		.4byte	.LASF101
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 128
+ 5958 039c F9020000 		.4byte	.LASF101
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 128
 
 
  5959 03a0 2A       		.byte	0x2a
@@ -7629,7 +7629,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5964 03a8 82030000 		.4byte	.LASF103
  5965 03ac 2C       		.byte	0x2c
  5966 03ad 07       		.uleb128 0x7
- 5967 03ae 5B010000 		.4byte	.LASF104
+ 5967 03ae 64010000 		.4byte	.LASF104
  5968 03b2 2E       		.byte	0x2e
  5969 03b3 07       		.uleb128 0x7
  5970 03b4 6B030000 		.4byte	.LASF105
@@ -7641,7 +7641,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  5976 03c0 49090000 		.4byte	.LASF107
  5977 03c4 36       		.byte	0x36
  5978 03c5 07       		.uleb128 0x7
- 5979 03c6 79010000 		.4byte	.LASF108
+ 5979 03c6 82010000 		.4byte	.LASF108
  5980 03ca B1       		.byte	0xb1
  5981 03cb 07       		.uleb128 0x7
  5982 03cc A8000000 		.4byte	.LASF109
@@ -7678,7 +7678,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  6013 040c DA       		.byte	0xda
  6014 040d 07       		.uleb128 0x7
  6015 040e 41040000 		.4byte	.LASF120
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 129
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 129
 
 
  6016 0412 DB       		.byte	0xdb
@@ -7737,8 +7737,8 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  6069 047a 54       		.byte	0x54
  6070 047b 25000000 		.4byte	0x25
  6071 047f 03       		.uleb128 0x3
- 6072 0480 68010000 		.4byte	.LASF135
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 130
+ 6072 0480 71010000 		.4byte	.LASF135
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 130
 
 
  6073 0484 08       		.byte	0x8
@@ -7798,7 +7798,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  6127 04ef 01       		.byte	0x1
  6128 04f0 5C       		.byte	0x5c
  6129 04f1 CA040000 		.4byte	0x4ca
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 131
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 131
 
 
  6130 04f5 0A       		.uleb128 0xa
@@ -7858,7 +7858,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  6184 0563 8901     		.2byte	0x189
  6185 0565 93000000 		.4byte	0x93
  6186 0569 00000000 		.4byte	.LLST0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 132
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 132
 
 
  6187 056d 12       		.uleb128 0x12
@@ -7918,7 +7918,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  6241 05fb CC000000 		.4byte	.LBE3-.LBB3
  6242 05ff 15       		.uleb128 0x15
  6243 0600 4C030000 		.4byte	.LASF59
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 133
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 133
 
 
  6244 0604 01       		.byte	0x1
@@ -7978,7 +7978,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  6298 068b 01       		.byte	0x1
  6299 068c A201     		.2byte	0x1a2
  6300 068e A0010000 		.4byte	0x1a0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 134
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 134
 
 
  6301 0692 B5020000 		.4byte	.LLST18
@@ -8038,7 +8038,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  6355 070d 1A       		.uleb128 0x1a
  6356 070e 40000000 		.4byte	.LVL40
  6357 0712 2E260000 		.4byte	0x262e
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 135
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 135
 
 
  6358 0716 20070000 		.4byte	0x720
@@ -8066,7 +8066,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  6380 0744 9C       		.byte	0x9c
  6381 0745 91070000 		.4byte	0x791
  6382 0749 1E       		.uleb128 0x1e
- 6383 074a 30010000 		.4byte	.LASF154
+ 6383 074a 39010000 		.4byte	.LASF154
  6384 074e 01       		.byte	0x1
  6385 074f A8       		.byte	0xa8
  6386 0750 BF040000 		.4byte	0x4bf
@@ -8098,7 +8098,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  6412 0788 46000000 		.4byte	.LVL50
  6413 078c D6060000 		.4byte	0x6d6
  6414 0790 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 136
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 136
 
 
  6415 0791 11       		.uleb128 0x11
@@ -8158,7 +8158,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  6469 080a 01       		.uleb128 0x1
  6470 080b 50       		.byte	0x50
  6471 080c 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 137
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 137
 
 
  6472 080d 31       		.byte	0x31
@@ -8218,7 +8218,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  6526 0867 02       		.uleb128 0x2
  6527 0868 08       		.byte	0x8
  6528 0869 2B       		.byte	0x2b
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 138
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 138
 
 
  6529 086a 00       		.byte	0
@@ -8278,7 +8278,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  6583 08ca 1B       		.uleb128 0x1b
  6584 08cb 01       		.uleb128 0x1
  6585 08cc 50       		.byte	0x50
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 139
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 139
 
 
  6586 08cd 01       		.uleb128 0x1
@@ -8338,7 +8338,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  6640 0940 01       		.byte	0x1
  6641 0941 1A01     		.2byte	0x11a
  6642 0943 9E020000 		.4byte	0x29e
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 140
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 140
 
 
  6643 0947 9E040000 		.4byte	.LLST30
@@ -8398,7 +8398,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  6697 09a4 01       		.uleb128 0x1
  6698 09a5 50       		.byte	0x50
  6699 09a6 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 141
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 141
 
 
  6700 09a7 31       		.byte	0x31
@@ -8458,7 +8458,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  6754 0a04 9C       		.byte	0x9c
  6755 0a05 160A0000 		.4byte	0xa16
  6756 0a09 23       		.uleb128 0x23
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 142
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 142
 
 
  6757 0a0a 6300     		.ascii	"c\000"
@@ -8486,7 +8486,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  6779 0a37 50       		.byte	0x50
  6780 0a38 00       		.byte	0
  6781 0a39 22       		.uleb128 0x22
- 6782 0a3a 35010000 		.4byte	.LASF164
+ 6782 0a3a 3E010000 		.4byte	.LASF164
  6783 0a3e 01       		.byte	0x1
  6784 0a3f 5001     		.2byte	0x150
  6785 0a41 00000000 		.4byte	.LFB123
@@ -8518,7 +8518,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  6811 0a78 0C000000 		.4byte	.LFE124-.LFB124
  6812 0a7c 01       		.uleb128 0x1
  6813 0a7d 9C       		.byte	0x9c
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 143
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 143
 
 
  6814 0a7e 24       		.uleb128 0x24
@@ -8578,7 +8578,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  6868 0af6 6301     		.2byte	0x163
  6869 0af8 FF0A0000 		.4byte	0xaff
  6870 0afc 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 144
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 144
 
 
  6871 0afd 50       		.byte	0x50
@@ -8638,7 +8638,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  6925 0b7b 01       		.byte	0x1
  6926 0b7c 7301     		.2byte	0x173
  6927 0b7e 020C0000 		.4byte	0xc02
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 145
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 145
 
 
  6928 0b82 C2050000 		.4byte	.LLST38
@@ -8698,7 +8698,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  6982 0be5 1B       		.uleb128 0x1b
  6983 0be6 01       		.uleb128 0x1
  6984 0be7 53       		.byte	0x53
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 146
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 146
 
 
  6985 0be8 02       		.uleb128 0x2
@@ -8758,7 +8758,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  7039 0c40 A0010000 		.4byte	0x1a0
  7040 0c44 79060000 		.4byte	.LLST42
  7041 0c48 12       		.uleb128 0x12
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 147
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 147
 
 
  7042 0c49 6800     		.ascii	"h\000"
@@ -8818,7 +8818,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  7096 0cbe 30070000 		.4byte	0x730
  7097 0cc2 1B       		.uleb128 0x1b
  7098 0cc3 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 148
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 148
 
 
  7099 0cc4 50       		.byte	0x50
@@ -8863,7 +8863,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  7138 0d08 00       		.byte	0
  7139 0d09 00       		.byte	0
  7140 0d0a 26       		.uleb128 0x26
- 7141 0d0b FD020000 		.4byte	.LASF253
+ 7141 0d0b 30010000 		.4byte	.LASF253
  7142 0d0f 01       		.byte	0x1
  7143 0d10 C1       		.byte	0xc1
  7144 0d11 00000000 		.4byte	.LFB115
@@ -8878,10 +8878,10 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  7153 0d26 62020000 		.4byte	0x262
  7154 0d2a 38070000 		.4byte	.LLST48
  7155 0d2e 19       		.uleb128 0x19
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 149
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 149
 
 
- 7156 0d2f D1020000 		.4byte	.LASF175
+ 7156 0d2f DA020000 		.4byte	.LASF175
  7157 0d33 01       		.byte	0x1
  7158 0d34 EA       		.byte	0xea
  7159 0d35 33000000 		.4byte	0x33
@@ -8938,7 +8938,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  7210 0da1 02       		.uleb128 0x2
  7211 0da2 08       		.byte	0x8
  7212 0da3 64       		.byte	0x64
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 150
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 150
 
 
  7213 0da4 00       		.byte	0
@@ -8998,7 +8998,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  7267 0e07 1B       		.uleb128 0x1b
  7268 0e08 01       		.uleb128 0x1
  7269 0e09 50       		.byte	0x50
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 151
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 151
 
 
  7270 0e0a 02       		.uleb128 0x2
@@ -9058,7 +9058,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  7324 0e6d 1B       		.uleb128 0x1b
  7325 0e6e 01       		.uleb128 0x1
  7326 0e6f 50       		.byte	0x50
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 152
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 152
 
 
  7327 0e70 01       		.uleb128 0x1
@@ -9118,7 +9118,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  7381 0ee8 13       		.uleb128 0x13
  7382 0ee9 32090000 		.4byte	.LASF172
  7383 0eed 01       		.byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 153
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 153
 
 
  7384 0eee 1902     		.2byte	0x219
@@ -9178,7 +9178,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  7438 0f46 00       		.byte	0
  7439 0f47 1F       		.uleb128 0x1f
  7440 0f48 46000000 		.4byte	.LVL156
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 154
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 154
 
 
  7441 0f4c 30070000 		.4byte	0x730
@@ -9223,7 +9223,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  7480 0f97 A0010000 		.4byte	0x1a0
  7481 0f9b AD080000 		.4byte	.LLST56
  7482 0f9f 13       		.uleb128 0x13
- 7483 0fa0 CC010000 		.4byte	.LASF180
+ 7483 0fa0 D5010000 		.4byte	.LASF180
  7484 0fa4 01       		.byte	0x1
  7485 0fa5 9402     		.2byte	0x294
  7486 0fa7 33000000 		.4byte	0x33
@@ -9238,7 +9238,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  7495 0fbd 00       		.sleb128 0
  7496 0fbe 17       		.uleb128 0x17
  7497 0fbf 6600     		.ascii	"f\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 155
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 155
 
 
  7498 0fc1 01       		.byte	0x1
@@ -9298,7 +9298,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  7552 1028 52       		.byte	0x52
  7553 1029 04       		.uleb128 0x4
  7554 102a 91       		.byte	0x91
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 156
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 156
 
 
  7555 102b 44       		.sleb128 -60
@@ -9358,7 +9358,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  7609 1073 7A       		.byte	0x7a
  7610 1074 00       		.sleb128 0
  7611 1075 1C       		.byte	0x1c
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 157
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 157
 
 
  7612 1076 1B       		.uleb128 0x1b
@@ -9418,7 +9418,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  7666 10be 01       		.uleb128 0x1
  7667 10bf 51       		.byte	0x51
  7668 10c0 05       		.uleb128 0x5
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 158
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 158
 
 
  7669 10c1 75       		.byte	0x75
@@ -9478,7 +9478,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  7723 1109 00       		.sleb128 0
  7724 110a 7B       		.byte	0x7b
  7725 110b 00       		.sleb128 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 159
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 159
 
 
  7726 110c 1C       		.byte	0x1c
@@ -9538,7 +9538,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  7780 114c 00000000 		.4byte	.LFB138
  7781 1150 64000000 		.4byte	.LFE138-.LFB138
  7782 1154 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 160
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 160
 
 
  7783 1155 9C       		.byte	0x9c
@@ -9598,7 +9598,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  7837 11d7 E7110000 		.4byte	0x11e7
  7838 11db 1B       		.uleb128 0x1b
  7839 11dc 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 161
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 161
 
 
  7840 11dd 50       		.byte	0x50
@@ -9655,10 +9655,10 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  7891 1237 A0010000 		.4byte	0x1a0
  7892 123b 980A0000 		.4byte	.LLST70
  7893 123f 13       		.uleb128 0x13
- 7894 1240 CC010000 		.4byte	.LASF180
+ 7894 1240 D5010000 		.4byte	.LASF180
  7895 1244 01       		.byte	0x1
  7896 1245 BE02     		.2byte	0x2be
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 162
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 162
 
 
  7897 1247 33000000 		.4byte	0x33
@@ -9718,7 +9718,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  7951 12c4 1B       		.uleb128 0x1b
  7952 12c5 01       		.uleb128 0x1
  7953 12c6 50       		.byte	0x50
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 163
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 163
 
 
  7954 12c7 06       		.uleb128 0x6
@@ -9778,7 +9778,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  8008 1306 01       		.uleb128 0x1
  8009 1307 51       		.byte	0x51
  8010 1308 06       		.uleb128 0x6
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 164
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 164
 
 
  8011 1309 91       		.byte	0x91
@@ -9838,7 +9838,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  8065 1348 0A       		.uleb128 0xa
  8066 1349 79       		.byte	0x79
  8067 134a 00       		.sleb128 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 165
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 165
 
 
  8068 134b 31       		.byte	0x31
@@ -9898,7 +9898,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  8122 1387 01       		.uleb128 0x1
  8123 1388 53       		.byte	0x53
  8124 1389 04       		.uleb128 0x4
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 166
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 166
 
 
  8125 138a 91       		.byte	0x91
@@ -9958,7 +9958,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  8179 1407 1A       		.uleb128 0x1a
  8180 1408 40000000 		.4byte	.LVL228
  8181 140c 2E260000 		.4byte	0x262e
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 167
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 167
 
 
  8182 1410 1A140000 		.4byte	0x141a
@@ -10018,7 +10018,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  8236 146e 12       		.uleb128 0x12
  8237 146f 793000   		.ascii	"y0\000"
  8238 1472 01       		.byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 168
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 168
 
 
  8239 1473 4602     		.2byte	0x246
@@ -10078,7 +10078,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  8293 14e2 5602     		.2byte	0x256
  8294 14e4 A0010000 		.4byte	0x1a0
  8295 14e8 3F0D0000 		.4byte	.LLST87
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 169
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 169
 
 
  8296 14ec 25       		.uleb128 0x25
@@ -10138,7 +10138,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  8350 156a 50       		.byte	0x50
  8351 156b 02       		.uleb128 0x2
  8352 156c 76       		.byte	0x76
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 170
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 170
 
 
  8353 156d 00       		.sleb128 0
@@ -10183,7 +10183,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  8392 159a 00       		.byte	0
  8393 159b 00       		.byte	0
  8394 159c 22       		.uleb128 0x22
- 8395 159d A6010000 		.4byte	.LASF190
+ 8395 159d AF010000 		.4byte	.LASF190
  8396 15a1 01       		.byte	0x1
  8397 15a2 6D02     		.2byte	0x26d
  8398 15a4 00000000 		.4byte	.LFB141
@@ -10198,7 +10198,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  8407 15b8 88000000 		.4byte	0x88
  8408 15bc 730D0000 		.4byte	.LLST88
  8409 15c0 1F       		.uleb128 0x1f
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 171
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 171
 
 
  8410 15c1 10000000 		.4byte	.LVL264
@@ -10258,7 +10258,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  8464 1640 25       		.uleb128 0x25
  8465 1641 D30A0000 		.4byte	.LASF182
  8466 1645 01       		.byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 172
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 172
 
 
  8467 1646 7502     		.2byte	0x275
@@ -10318,7 +10318,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  8521 169f 00       		.sleb128 0
  8522 16a0 1B       		.uleb128 0x1b
  8523 16a1 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 173
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 173
 
 
  8524 16a2 51       		.byte	0x51
@@ -10378,7 +10378,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  8578 16ea 01       		.uleb128 0x1
  8579 16eb 51       		.byte	0x51
  8580 16ec 02       		.uleb128 0x2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 174
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 174
 
 
  8581 16ed 76       		.byte	0x76
@@ -10438,7 +10438,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  8635 1735 52       		.byte	0x52
  8636 1736 04       		.uleb128 0x4
  8637 1737 91       		.byte	0x91
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 175
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 175
 
 
  8638 1738 44       		.sleb128 -60
@@ -10498,7 +10498,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  8692 1780 02       		.byte	0x2
  8693 1781 00       		.byte	0
  8694 1782 1A       		.uleb128 0x1a
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 176
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 176
 
 
  8695 1783 FE000000 		.4byte	.LVL288
@@ -10558,7 +10558,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  8749 17d4 01       		.uleb128 0x1
  8750 17d5 50       		.byte	0x50
  8751 17d6 02       		.uleb128 0x2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 177
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 177
 
 
  8752 17d7 77       		.byte	0x77
@@ -10618,7 +10618,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  8806 1829 793000   		.ascii	"y0\000"
  8807 182c 01       		.byte	0x1
  8808 182d B702     		.2byte	0x2b7
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 178
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 178
 
 
  8809 182f A0010000 		.4byte	0x1a0
@@ -10678,7 +10678,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  8863 1888 02       		.uleb128 0x2
  8864 1889 77       		.byte	0x77
  8865 188a 00       		.sleb128 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 179
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 179
 
 
  8866 188b 00       		.byte	0
@@ -10738,7 +10738,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  8920 18d6 DC02     		.2byte	0x2dc
  8921 18d8 A0010000 		.4byte	0x1a0
  8922 18dc 170F0000 		.4byte	.LLST100
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 180
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 180
 
 
  8923 18e0 12       		.uleb128 0x12
@@ -10798,7 +10798,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  8977 194d 51       		.byte	0x51
  8978 194e 02       		.uleb128 0x2
  8979 194f 78       		.byte	0x78
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 181
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 181
 
 
  8980 1950 00       		.sleb128 0
@@ -10858,7 +10858,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  9034 198f 74       		.byte	0x74
  9035 1990 00       		.sleb128 0
  9036 1991 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 182
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 182
 
 
  9037 1992 1F       		.uleb128 0x1f
@@ -10918,7 +10918,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  9091 19e6 E302     		.2byte	0x2e3
  9092 19e8 A0010000 		.4byte	0x1a0
  9093 19ec E80F0000 		.4byte	.LLST105
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 183
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 183
 
 
  9094 19f0 12       		.uleb128 0x12
@@ -10978,7 +10978,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  9148 1a6d A0010000 		.4byte	0x1a0
  9149 1a71 E2110000 		.4byte	.LLST113
  9150 1a75 15       		.uleb128 0x15
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 184
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 184
 
 
  9151 1a76 AC030000 		.4byte	.LASF195
@@ -11038,7 +11038,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  9205 1b04 E902     		.2byte	0x2e9
  9206 1b06 A0010000 		.4byte	0x1a0
  9207 1b0a 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 185
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 185
 
 
  9208 1b0b 14       		.uleb128 0x14
@@ -11098,7 +11098,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  9262 1b90 1B       		.uleb128 0x1b
  9263 1b91 01       		.uleb128 0x1
  9264 1b92 50       		.byte	0x50
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 186
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 186
 
 
  9265 1b93 02       		.uleb128 0x2
@@ -11158,7 +11158,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  9319 1bd8 94       		.byte	0x94
  9320 1bd9 02       		.byte	0x2
  9321 1bda 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 187
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 187
 
 
  9322 1bdb 00       		.byte	0
@@ -11218,7 +11218,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  9376 1c53 1B       		.uleb128 0x1b
  9377 1c54 01       		.uleb128 0x1
  9378 1c55 50       		.byte	0x50
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 188
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 188
 
 
  9379 1c56 02       		.uleb128 0x2
@@ -11278,7 +11278,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  9433 1c95 78       		.byte	0x78
  9434 1c96 00       		.sleb128 0
  9435 1c97 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 189
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 189
 
 
  9436 1c98 1A       		.uleb128 0x1a
@@ -11338,7 +11338,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  9490 1ce0 01       		.uleb128 0x1
  9491 1ce1 53       		.byte	0x53
  9492 1ce2 02       		.uleb128 0x2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 190
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 190
 
 
  9493 1ce3 78       		.byte	0x78
@@ -11398,7 +11398,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  9547 1d2b 1B       		.uleb128 0x1b
  9548 1d2c 01       		.uleb128 0x1
  9549 1d2d 52       		.byte	0x52
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 191
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 191
 
 
  9550 1d2e 02       		.uleb128 0x2
@@ -11458,7 +11458,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  9604 1d73 1B       		.uleb128 0x1b
  9605 1d74 01       		.uleb128 0x1
  9606 1d75 50       		.byte	0x50
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 192
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 192
 
 
  9607 1d76 02       		.uleb128 0x2
@@ -11518,7 +11518,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  9661 1dcb A0010000 		.4byte	0x1a0
  9662 1dcf C9130000 		.4byte	.LLST128
  9663 1dd3 12       		.uleb128 0x12
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 193
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 193
 
 
  9664 1dd4 6800     		.ascii	"h\000"
@@ -11578,7 +11578,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  9718 1e27 1B       		.uleb128 0x1b
  9719 1e28 02       		.uleb128 0x2
  9720 1e29 7D       		.byte	0x7d
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 194
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 194
 
 
  9721 1e2a 00       		.sleb128 0
@@ -11638,7 +11638,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  9775 1e69 1F       		.uleb128 0x1f
  9776 1e6a 7C000000 		.4byte	.LVL382
  9777 1e6e FD110000 		.4byte	0x11fd
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 195
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 195
 
 
  9778 1e72 1B       		.uleb128 0x1b
@@ -11681,7 +11681,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  9815 1e97 00       		.byte	0
  9816 1e98 00       		.byte	0
  9817 1e99 22       		.uleb128 0x22
- 9818 1e9a B8010000 		.4byte	.LASF203
+ 9818 1e9a C1010000 		.4byte	.LASF203
  9819 1e9e 01       		.byte	0x1
  9820 1e9f 4B03     		.2byte	0x34b
  9821 1ea1 00000000 		.4byte	.LFB150
@@ -11698,7 +11698,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  9832 1ebd 12       		.uleb128 0x12
  9833 1ebe 7900     		.ascii	"y\000"
  9834 1ec0 01       		.byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 196
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 196
 
 
  9835 1ec1 4B03     		.2byte	0x34b
@@ -11758,7 +11758,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  9889 1f21 90130000 		.4byte	0x1390
  9890 1f25 471F0000 		.4byte	0x1f47
  9891 1f29 1B       		.uleb128 0x1b
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 197
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 197
 
 
  9892 1f2a 01       		.uleb128 0x1
@@ -11818,7 +11818,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  9946 1f69 02       		.uleb128 0x2
  9947 1f6a 75       		.byte	0x75
  9948 1f6b 00       		.sleb128 0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 198
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 198
 
 
  9949 1f6c 00       		.byte	0
@@ -11878,7 +11878,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  10003 1fbf A0010000 		.4byte	0x1a0
  10004 1fc3 C6140000 		.4byte	.LLST135
  10005 1fc7 12       		.uleb128 0x12
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 199
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 199
 
 
  10006 1fc8 6300     		.ascii	"c\000"
@@ -11938,7 +11938,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  10060 2058 75200000 		.4byte	0x2075
  10061 205c 1B       		.uleb128 0x1b
  10062 205d 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 200
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 200
 
 
  10063 205e 50       		.byte	0x50
@@ -11998,7 +11998,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  10117 209f 7B       		.byte	0x7b
  10118 20a0 00       		.sleb128 0
  10119 20a1 22       		.byte	0x22
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 201
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 201
 
 
  10120 20a2 1B       		.uleb128 0x1b
@@ -12058,7 +12058,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  10174 20e7 50       		.byte	0x50
  10175 20e8 0C       		.uleb128 0xc
  10176 20e9 7A       		.byte	0x7a
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 202
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 202
 
 
  10177 20ea 00       		.sleb128 0
@@ -12118,7 +12118,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  10231 212e 01       		.byte	0x1
  10232 212f 7903     		.2byte	0x379
  10233 2131 68020000 		.4byte	0x268
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 203
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 203
 
 
  10234 2135 18160000 		.4byte	.LLST143
@@ -12178,7 +12178,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  10288 21bc 36170000 		.4byte	.LLST152
  10289 21c0 17       		.uleb128 0x17
  10290 21c1 62697400 		.ascii	"bit\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 204
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 204
 
 
  10291 21c5 01       		.byte	0x1
@@ -12238,7 +12238,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  10345 2221 94       		.byte	0x94
  10346 2222 02       		.byte	0x2
  10347 2223 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 205
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 205
 
 
  10348 2224 1F       		.uleb128 0x1f
@@ -12298,7 +12298,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  10402 2264 00       		.sleb128 0
  10403 2265 1B       		.uleb128 0x1b
  10404 2266 02       		.uleb128 0x2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 206
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 206
 
 
  10405 2267 7D       		.byte	0x7d
@@ -12358,7 +12358,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  10459 22af 32       		.byte	0x32
  10460 22b0 24       		.byte	0x24
  10461 22b1 7A       		.byte	0x7a
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 207
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 207
 
 
  10462 22b2 00       		.sleb128 0
@@ -12418,7 +12418,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  10516 22fd 05180000 		.4byte	.LLST156
  10517 2301 14       		.uleb128 0x14
  10518 2302 B6000000 		.4byte	.LBB19
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 208
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 208
 
 
  10519 2306 84000000 		.4byte	.LBE19-.LBB19
@@ -12478,7 +12478,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  10573 2381 00       		.byte	0
  10574 2382 00       		.byte	0
  10575 2383 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 209
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 209
 
 
  10576 2384 00       		.byte	0
@@ -12538,7 +12538,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  10630 2400 50       		.byte	0x50
  10631 2401 01       		.uleb128 0x1
  10632 2402 3A       		.byte	0x3a
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 210
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 210
 
 
  10633 2403 00       		.byte	0
@@ -12598,7 +12598,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  10687 2483 05       		.uleb128 0x5
  10688 2484 33000000 		.4byte	0x33
  10689 2488 2A       		.uleb128 0x2a
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 211
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 211
 
 
  10690 2489 FE040000 		.4byte	.LASF218
@@ -12658,7 +12658,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  10744 24ff DD000000 		.4byte	rowstart
  10745 2503 2A       		.uleb128 0x2a
  10746 2504 2F0C0000 		.4byte	.LASF222
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 212
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 212
 
 
  10747 2508 01       		.byte	0x1
@@ -12718,7 +12718,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  10801 257a 2A       		.uleb128 0x2a
  10802 257b 85060000 		.4byte	.LASF229
  10803 257f 01       		.byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 213
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 213
 
 
  10804 2580 75       		.byte	0x75
@@ -12778,7 +12778,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  10858 25f2 90050000 		.4byte	.LASF235
  10859 25f6 0A       		.byte	0xa
  10860 25f7 47       		.byte	0x47
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 214
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 214
 
 
  10861 25f8 8A040000 		.4byte	0x48a
@@ -12815,8 +12815,8 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  10892 2642 0F       		.byte	0xf
  10893 2643 5E       		.byte	0x5e
  10894 2644 30       		.uleb128 0x30
- 10895 2645 8D010000 		.4byte	.LASF242
- 10896 2649 8D010000 		.4byte	.LASF242
+ 10895 2645 96010000 		.4byte	.LASF242
+ 10896 2649 96010000 		.4byte	.LASF242
  10897 264d 10       		.byte	0x10
  10898 264e 96       		.byte	0x96
  10899 264f 30       		.uleb128 0x30
@@ -12838,7 +12838,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  10915 2671 01070000 		.4byte	.LASF246
  10916 2675 01070000 		.4byte	.LASF246
  10917 2679 12       		.byte	0x12
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 215
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 215
 
 
  10918 267a 26       		.byte	0x26
@@ -12848,8 +12848,8 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  10922 2684 13       		.byte	0x13
  10923 2685 76       		.byte	0x76
  10924 2686 30       		.uleb128 0x30
- 10925 2687 7A020000 		.4byte	.LASF248
- 10926 268b 7A020000 		.4byte	.LASF248
+ 10925 2687 83020000 		.4byte	.LASF248
+ 10926 268b 83020000 		.4byte	.LASF248
  10927 268f 11       		.byte	0x11
  10928 2690 92       		.byte	0x92
  10929 2691 00       		.byte	0
@@ -12898,7 +12898,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  10972 0028 13       		.uleb128 0x13
  10973 0029 00       		.byte	0
  10974 002a 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 216
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 216
 
 
  10975 002b 04       		.uleb128 0x4
@@ -12958,7 +12958,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  11029 0061 3E       		.uleb128 0x3e
  11030 0062 0B       		.uleb128 0xb
  11031 0063 03       		.uleb128 0x3
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 217
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 217
 
 
  11032 0064 08       		.uleb128 0x8
@@ -13018,7 +13018,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  11086 009a 3A       		.uleb128 0x3a
  11087 009b 0B       		.uleb128 0xb
  11088 009c 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 218
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 218
 
 
  11089 009d 0B       		.uleb128 0xb
@@ -13078,7 +13078,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  11143 00d4 0B       		.uleb128 0xb
  11144 00d5 3B       		.uleb128 0x3b
  11145 00d6 05       		.uleb128 0x5
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 219
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 219
 
 
  11146 00d7 49       		.uleb128 0x49
@@ -13138,7 +13138,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  11200 010d 00       		.byte	0
  11201 010e 00       		.byte	0
  11202 010f 17       		.uleb128 0x17
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 220
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 220
 
 
  11203 0110 34       		.uleb128 0x34
@@ -13198,7 +13198,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  11257 0147 1A       		.uleb128 0x1a
  11258 0148 898201   		.uleb128 0x4109
  11259 014b 01       		.byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 221
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 221
 
 
  11260 014c 11       		.uleb128 0x11
@@ -13258,7 +13258,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  11314 0188 03       		.uleb128 0x3
  11315 0189 0E       		.uleb128 0xe
  11316 018a 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 222
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 222
 
 
  11317 018b 0B       		.uleb128 0xb
@@ -13318,7 +13318,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  11371 01c4 01       		.uleb128 0x1
  11372 01c5 13       		.uleb128 0x13
  11373 01c6 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 223
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 223
 
 
  11374 01c7 00       		.byte	0
@@ -13378,7 +13378,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  11428 01fe 49       		.uleb128 0x49
  11429 01ff 13       		.uleb128 0x13
  11430 0200 11       		.uleb128 0x11
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 224
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 224
 
 
  11431 0201 01       		.uleb128 0x1
@@ -13438,7 +13438,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  11485 0239 3B       		.uleb128 0x3b
  11486 023a 05       		.uleb128 0x5
  11487 023b 49       		.uleb128 0x49
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 225
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 225
 
 
  11488 023c 13       		.uleb128 0x13
@@ -13498,7 +13498,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  11542 0272 05       		.uleb128 0x5
  11543 0273 00       		.byte	0
  11544 0274 00       		.byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 226
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 226
 
 
  11545 0275 2C       		.uleb128 0x2c
@@ -13558,7 +13558,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  11599 02ab 00       		.byte	0
  11600 02ac 00       		.byte	0
  11601 02ad 30       		.uleb128 0x30
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 227
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 227
 
 
  11602 02ae 2E       		.uleb128 0x2e
@@ -13618,7 +13618,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  11656 004f 00000000 		.4byte	0
  11657              	.LLST1:
  11658 0053 00000000 		.4byte	.LVL0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 228
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 228
 
 
  11659 0057 16000000 		.4byte	.LVL2
@@ -13678,7 +13678,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  11713 00d6 12000000 		.4byte	.LVL1
  11714 00da 0100     		.2byte	0x1
  11715 00dc 53       		.byte	0x53
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 229
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 229
 
 
  11716 00dd 12000000 		.4byte	.LVL1
@@ -13738,7 +13738,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  11770 015a BC010000 		.4byte	.LFE130
  11771 015e 0200     		.2byte	0x2
  11772 0160 7D       		.byte	0x7d
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 230
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 230
 
 
  11773 0161 00       		.sleb128 0
@@ -13798,7 +13798,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  11827 01e9 0100     		.2byte	0x1
  11828 01eb 56       		.byte	0x56
  11829 01ec 48000000 		.4byte	.LVL11
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 231
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 231
 
 
  11830 01f0 86000000 		.4byte	.LVL15
@@ -13858,7 +13858,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  11884 0281 94       		.byte	0x94
  11885 0282 01       		.byte	0x1
  11886 0283 08       		.byte	0x8
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 232
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 232
 
 
  11887 0284 FF       		.byte	0xff
@@ -13918,7 +13918,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  11941 030e 24       		.byte	0x24
  11942 030f 03       		.byte	0x3
  11943 0310 0E000000 		.4byte	TFT_RB_out+6
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 233
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 233
 
 
  11944 0314 22       		.byte	0x22
@@ -13978,7 +13978,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  11998              	.LLST24:
  11999 038d 00000000 		.4byte	.LVL43
  12000 0391 0C000000 		.4byte	.LVL44
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 234
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 234
 
 
  12001 0395 0100     		.2byte	0x1
@@ -14038,7 +14038,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  12055 040f 0400     		.2byte	0x4
  12056 0411 F3       		.byte	0xf3
  12057 0412 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 235
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 235
 
 
  12058 0413 50       		.byte	0x50
@@ -14098,7 +14098,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  12112 0495 50       		.byte	0x50
  12113 0496 00000000 		.4byte	0
  12114 049a 00000000 		.4byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 236
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 236
 
 
  12115              	.LLST30:
@@ -14158,7 +14158,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  12169 0527 0400     		.2byte	0x4
  12170 0529 F3       		.byte	0xf3
  12171 052a 01       		.uleb128 0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 237
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 237
 
 
  12172 052b 51       		.byte	0x51
@@ -14218,7 +14218,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  12226 05ad 04       		.sleb128 4
  12227 05ae A4000000 		.4byte	.LVL95
  12228 05b2 A8000000 		.4byte	.LFE129
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 238
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 238
 
 
  12229 05b6 0200     		.2byte	0x2
@@ -14278,7 +14278,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  12283 063e 00000000 		.4byte	0
  12284              	.LLST41:
  12285 0642 00000000 		.4byte	.LVL96
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 239
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 239
 
 
  12286 0646 40000000 		.4byte	.LVL102
@@ -14338,7 +14338,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  12340 06c9 00000000 		.4byte	0
  12341 06cd 00000000 		.4byte	0
  12342              	.LLST44:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 240
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 240
 
 
  12343 06d1 00000000 		.4byte	.LVL96
@@ -14398,7 +14398,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  12397 0759 A2000000 		.4byte	.LVL135
  12398 075d 0100     		.2byte	0x1
  12399 075f 54       		.byte	0x54
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 241
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 241
 
 
  12400 0760 A2000000 		.4byte	.LVL135
@@ -14458,7 +14458,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  12454 07f2 00000000 		.4byte	.LVL149
  12455 07f6 02000000 		.4byte	.LVL150
  12456 07fa 0100     		.2byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 242
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 242
 
 
  12457 07fc 50       		.byte	0x50
@@ -14518,7 +14518,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  12511 0880 F3       		.byte	0xf3
  12512 0881 01       		.uleb128 0x1
  12513 0882 50       		.byte	0x50
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 243
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 243
 
 
  12514 0883 9F       		.byte	0x9f
@@ -14578,7 +14578,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  12568 0905 60000000 		.4byte	.LVL173
  12569 0909 3C010000 		.4byte	.LFE143
  12570 090d 0100     		.2byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 244
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 244
 
 
  12571 090f 54       		.byte	0x54
@@ -14638,7 +14638,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  12625 0998 9F       		.byte	0x9f
  12626 0999 00000000 		.4byte	0
  12627 099d 00000000 		.4byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 245
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 245
 
 
  12628              	.LLST63:
@@ -14698,7 +14698,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  12682 0a26 53       		.byte	0x53
  12683 0a27 9F       		.byte	0x9f
  12684 0a28 00000000 		.4byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 246
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 246
 
 
  12685 0a2c 00000000 		.4byte	0
@@ -14758,7 +14758,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  12739 0ab0 9F       		.byte	0x9f
  12740 0ab1 00000000 		.4byte	0
  12741 0ab5 00000000 		.4byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 247
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 247
 
 
  12742              	.LLST71:
@@ -14818,7 +14818,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  12796 0b43 57       		.byte	0x57
  12797 0b44 54000000 		.4byte	.LVL210
  12798 0b48 06010000 		.4byte	.LFE145
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 248
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 248
 
 
  12799 0b4c 0100     		.2byte	0x1
@@ -14878,7 +14878,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  12853 0bcf 9F       		.byte	0x9f
  12854 0bd0 26000000 		.4byte	.LVL222
  12855 0bd4 42000000 		.4byte	.LVL229
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 249
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 249
 
 
  12856 0bd8 0100     		.2byte	0x1
@@ -14938,7 +14938,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  12910 0c65 B2000000 		.4byte	.LVL260
  12911 0c69 0100     		.2byte	0x1
  12912 0c6b 55       		.byte	0x55
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 250
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 250
 
 
  12913 0c6c B4000000 		.4byte	.LVL261
@@ -14998,7 +14998,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  12967 0cf7 9F       		.byte	0x9f
  12968 0cf8 3C000000 		.4byte	.LVL239
  12969 0cfc 46000000 		.4byte	.LVL241
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 251
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 251
 
 
  12970 0d00 0100     		.2byte	0x1
@@ -15058,7 +15058,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  13024 0d8c 00000000 		.4byte	0
  13025 0d90 00000000 		.4byte	0
  13026              	.LLST89:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 252
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 252
 
 
  13027 0d94 00000000 		.4byte	.LVL265
@@ -15118,7 +15118,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  13081 0e18 00000000 		.4byte	0
  13082 0e1c 00000000 		.4byte	0
  13083              	.LLST93:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 253
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 253
 
 
  13084 0e20 18000000 		.4byte	.LVL266
@@ -15178,7 +15178,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  13138 0ea9 00000000 		.4byte	.LVL292
  13139 0ead 0E000000 		.4byte	.LVL293
  13140 0eb1 0100     		.2byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 254
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 254
 
 
  13141 0eb3 51       		.byte	0x51
@@ -15238,7 +15238,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  13195 0f30 00000000 		.4byte	0
  13196 0f34 00000000 		.4byte	0
  13197              	.LLST101:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 255
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 255
 
 
  13198 0f38 00000000 		.4byte	.LVL298
@@ -15298,7 +15298,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  13252 0fb8 4C000000 		.4byte	.LVL311
  13253 0fbc 0100     		.2byte	0x1
  13254 0fbe 50       		.byte	0x50
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 256
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 256
 
 
  13255 0fbf 4E000000 		.4byte	.LVL312
@@ -15358,7 +15358,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  13309 1052 0300     		.2byte	0x3
  13310 1054 91       		.byte	0x91
  13311 1055 BC7F     		.sleb128 -68
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 257
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 257
 
 
  13312 1057 00000000 		.4byte	0
@@ -15418,7 +15418,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  13366 10e1 0200     		.2byte	0x2
  13367 10e3 91       		.byte	0x91
  13368 10e4 04       		.sleb128 4
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 258
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 258
 
 
  13369 10e5 3C000000 		.4byte	.LVL308
@@ -15478,7 +15478,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  13423 1179 06010000 		.4byte	.LVL343
  13424 117d 08010000 		.4byte	.LVL344
  13425 1181 0100     		.2byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 259
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 259
 
 
  13426 1183 52       		.byte	0x52
@@ -15538,7 +15538,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  13480              	.LLST115:
  13481 1214 A6000000 		.4byte	.LVL326
  13482 1218 E6000000 		.4byte	.LVL337
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 260
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 260
 
 
  13483 121c 0100     		.2byte	0x1
@@ -15598,7 +15598,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  13537 1293 C6000000 		.4byte	.LVL332
  13538 1297 70010000 		.4byte	.LVL363
  13539 129b 0200     		.2byte	0x2
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 261
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 261
 
 
  13540 129d 91       		.byte	0x91
@@ -15658,7 +15658,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  13594 1326 51       		.byte	0x51
  13595 1327 41000000 		.4byte	.LVL368-1
  13596 132b DC000000 		.4byte	.LFE148
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 262
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 262
 
 
  13597 132f 0400     		.2byte	0x4
@@ -15718,7 +15718,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  13651 13b2 51       		.byte	0x51
  13652 13b3 39000000 		.4byte	.LVL380-1
  13653 13b7 82000000 		.4byte	.LFE149
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 263
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 263
 
 
  13654 13bb 0400     		.2byte	0x4
@@ -15778,7 +15778,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  13708 143e F3       		.byte	0xf3
  13709 143f 01       		.uleb128 0x1
  13710 1440 51       		.byte	0x51
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 264
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 264
 
 
  13711 1441 9F       		.byte	0x9f
@@ -15838,7 +15838,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  13765 14be 00000000 		.4byte	0
  13766 14c2 00000000 		.4byte	0
  13767              	.LLST135:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 265
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 265
 
 
  13768 14c6 00000000 		.4byte	.LVL389
@@ -15898,7 +15898,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  13822 1539 66010000 		.4byte	.LVL418
  13823 153d 86010000 		.4byte	.LVL426
  13824 1541 1100     		.2byte	0x11
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 266
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 266
 
 
  13825 1543 75       		.byte	0x75
@@ -15958,7 +15958,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  13879 15b5 00000000 		.4byte	0
  13880 15b9 00000000 		.4byte	0
  13881              	.LLST140:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 267
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 267
 
 
  13882 15bd 60000000 		.4byte	.LVL394
@@ -16018,7 +16018,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  13936 1651 0100     		.2byte	0x1
  13937 1653 53       		.byte	0x53
  13938 1654 98010000 		.4byte	.LVL430
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 268
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 268
 
 
  13939 1658 0E020000 		.4byte	.LVL441
@@ -16078,7 +16078,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  13993 16e3 86010000 		.4byte	.LVL426
  13994 16e7 F4010000 		.4byte	.LVL435
  13995 16eb 0100     		.2byte	0x1
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 269
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 269
 
 
  13996 16ed 55       		.byte	0x55
@@ -16138,7 +16138,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14050 177b FA010000 		.4byte	.LVL437
  14051 177f 0100     		.2byte	0x1
  14052 1781 56       		.byte	0x56
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 270
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 270
 
 
  14053 1782 FA010000 		.4byte	.LVL437
@@ -16198,7 +16198,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14107 1809 7C000000 		.4byte	.LVL444
  14108 180d 0100     		.2byte	0x1
  14109 180f 50       		.byte	0x50
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 271
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 271
 
 
  14110 1810 7C000000 		.4byte	.LVL444
@@ -16258,7 +16258,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14164 1891 0100     		.2byte	0x1
  14165 1893 54       		.byte	0x54
  14166 1894 00000000 		.4byte	0
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 272
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 272
 
 
  14167 1898 00000000 		.4byte	0
@@ -16318,7 +16318,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14221 1910 50       		.byte	0x50
  14222 1911 06000000 		.4byte	.LVL464
  14223 1915 14000000 		.4byte	.LFE131
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 273
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 273
 
 
  14224 1919 0100     		.2byte	0x1
@@ -16378,7 +16378,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14278 008c 34000000 		.4byte	.LFE128-.LFB128
  14279 0090 00000000 		.4byte	.LFB129
  14280 0094 A8000000 		.4byte	.LFE129-.LFB129
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 274
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 274
 
 
  14281 0098 00000000 		.4byte	.LFB136
@@ -16438,7 +16438,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14335 0170 00000000 		.4byte	0
  14336 0174 00000000 		.4byte	0
  14337              		.section	.debug_ranges,"",%progbits
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 275
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 275
 
 
  14338              	.Ldebug_ranges0:
@@ -16498,7 +16498,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14392 00d4 BE000000 		.4byte	.LFE140
  14393 00d8 00000000 		.4byte	.LFB141
  14394 00dc 12000000 		.4byte	.LFE141
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 276
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 276
 
 
  14395 00e0 00000000 		.4byte	.LFB142
@@ -16558,7 +16558,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14437      564C696E 
  14437      6500
  14438              	.LASF77:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 277
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 277
 
 
  14439 002c 4359414E 		.ascii	"CYAN\000"
@@ -16618,7 +16618,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14463      523300
  14464              	.LASF51:
  14465 00c6 6269746D 		.ascii	"bitmapOffset\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 278
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 278
 
 
  14465      61704F66 
@@ -16660,153 +16660,153 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14483      77726974 
  14483      654C696E 
  14483      6500
- 14484              	.LASF154:
- 14485 0130 74797065 		.ascii	"type\000"
+ 14484              	.LASF253:
+ 14485 0130 5446545F 		.ascii	"TFT_Init\000"
+ 14485      496E6974 
  14485      00
- 14486              	.LASF164:
- 14487 0135 5446545F 		.ascii	"TFT_setColors\000"
- 14487      73657443 
- 14487      6F6C6F72 
- 14487      7300
- 14488              	.LASF87:
- 14489 0143 4C475241 		.ascii	"LGRAYBLUE\000"
- 14489      59424C55 
- 14489      4500
- 14490              	.LASF27:
- 14491 014d 52435F45 		.ascii	"RC_ERROR_OPEN\000"
- 14491      52524F52 
- 14491      5F4F5045 
- 14491      4E00
- 14492              	.LASF104:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 279
+ 14486              	.LASF154:
+ 14487 0139 74797065 		.ascii	"type\000"
+ 14487      00
+ 14488              	.LASF164:
+ 14489 013e 5446545F 		.ascii	"TFT_setColors\000"
+ 14489      73657443 
+ 14489      6F6C6F72 
+ 14489      7300
+ 14490              	.LASF87:
+ 14491 014c 4C475241 		.ascii	"LGRAYBLUE\000"
+ 14491      59424C55 
+ 14491      4500
+ 14492              	.LASF27:
+ 14493 0156 52435F45 		.ascii	"RC_ERROR_OPEN\000"
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 279
 
 
- 14493 015b 53543737 		.ascii	"ST7735_RAMRD\000"
- 14493      33355F52 
- 14493      414D5244 
- 14493      00
- 14494              	.LASF135:
- 14495 0168 45455F55 		.ascii	"EE_UREG\000"
- 14495      52454700 
- 14496              	.LASF7:
- 14497 0170 6C6F6E67 		.ascii	"long int\000"
- 14497      20696E74 
- 14497      00
- 14498              	.LASF108:
- 14499 0179 53543737 		.ascii	"ST7735_FRMCTR1\000"
- 14499      33355F46 
- 14499      524D4354 
- 14499      523100
- 14500              	.LASF41:
- 14501 0188 52435F74 		.ascii	"RC_t\000"
- 14501      00
- 14502              	.LASF242:
- 14503 018d 4C4F475F 		.ascii	"LOG_E\000"
- 14503      4500
- 14504              	.LASF57:
- 14505 0193 47465867 		.ascii	"GFXglyph\000"
- 14505      6C797068 
- 14505      00
- 14506              	.LASF13:
- 14507 019c 626F6F6C 		.ascii	"boolean_t\000"
- 14507      65616E5F 
- 14507      7400
- 14508              	.LASF190:
- 14509 01a6 5446545F 		.ascii	"TFT_invertDisplay\000"
- 14509      696E7665 
- 14509      72744469 
- 14509      73706C61 
- 14509      7900
- 14510              	.LASF203:
- 14511 01b8 5446545F 		.ascii	"TFT_drawRect\000"
- 14511      64726177 
- 14511      52656374 
- 14511      00
- 14512              	.LASF78:
- 14513 01c5 59454C4C 		.ascii	"YELLOW\000"
- 14513      4F5700
- 14514              	.LASF180:
- 14515 01cc 636F726E 		.ascii	"cornername\000"
- 14515      65726E61 
- 14515      6D6500
- 14516              	.LASF249:
- 14517 01d7 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 14517      43313120 
- 14517      352E342E 
- 14517      31203230 
- 14517      31363036 
- 14518 020a 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 14518      20726576 
- 14518      6973696F 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 280
+ 14493      52524F52 
+ 14493      5F4F5045 
+ 14493      4E00
+ 14494              	.LASF104:
+ 14495 0164 53543737 		.ascii	"ST7735_RAMRD\000"
+ 14495      33355F52 
+ 14495      414D5244 
+ 14495      00
+ 14496              	.LASF135:
+ 14497 0171 45455F55 		.ascii	"EE_UREG\000"
+ 14497      52454700 
+ 14498              	.LASF7:
+ 14499 0179 6C6F6E67 		.ascii	"long int\000"
+ 14499      20696E74 
+ 14499      00
+ 14500              	.LASF108:
+ 14501 0182 53543737 		.ascii	"ST7735_FRMCTR1\000"
+ 14501      33355F46 
+ 14501      524D4354 
+ 14501      523100
+ 14502              	.LASF41:
+ 14503 0191 52435F74 		.ascii	"RC_t\000"
+ 14503      00
+ 14504              	.LASF242:
+ 14505 0196 4C4F475F 		.ascii	"LOG_E\000"
+ 14505      4500
+ 14506              	.LASF57:
+ 14507 019c 47465867 		.ascii	"GFXglyph\000"
+ 14507      6C797068 
+ 14507      00
+ 14508              	.LASF13:
+ 14509 01a5 626F6F6C 		.ascii	"boolean_t\000"
+ 14509      65616E5F 
+ 14509      7400
+ 14510              	.LASF190:
+ 14511 01af 5446545F 		.ascii	"TFT_invertDisplay\000"
+ 14511      696E7665 
+ 14511      72744469 
+ 14511      73706C61 
+ 14511      7900
+ 14512              	.LASF203:
+ 14513 01c1 5446545F 		.ascii	"TFT_drawRect\000"
+ 14513      64726177 
+ 14513      52656374 
+ 14513      00
+ 14514              	.LASF78:
+ 14515 01ce 59454C4C 		.ascii	"YELLOW\000"
+ 14515      4F5700
+ 14516              	.LASF180:
+ 14517 01d5 636F726E 		.ascii	"cornername\000"
+ 14517      65726E61 
+ 14517      6D6500
+ 14518              	.LASF249:
+ 14519 01e0 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 14519      43313120 
+ 14519      352E342E 
+ 14519      31203230 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 280
 
 
- 14518      6E203233 
- 14518      37373135 
- 14519 023d 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 14519      66756E63 
- 14519      74696F6E 
- 14519      2D736563 
- 14519      74696F6E 
- 14520              	.LASF33:
- 14521 0265 52435F45 		.ascii	"RC_ERROR_WRITE_FAILS\000"
- 14521      52524F52 
- 14521      5F575249 
- 14521      54455F46 
- 14521      41494C53 
- 14522              	.LASF248:
- 14523 027a 5446545F 		.ascii	"TFT_BackLight_Start\000"
- 14523      4261636B 
- 14523      4C696768 
- 14523      745F5374 
- 14523      61727400 
- 14524              	.LASF85:
- 14525 028e 4C494748 		.ascii	"LIGHTGREEN\000"
- 14525      54475245 
- 14525      454E00
- 14526              	.LASF67:
- 14527 0299 5446545F 		.ascii	"TFT_rot_270\000"
- 14527      726F745F 
- 14527      32373000 
- 14528              	.LASF37:
- 14529 02a5 52435F45 		.ascii	"RC_ERROR_CANCELED\000"
- 14529      52524F52 
- 14529      5F43414E 
- 14529      43454C45 
- 14529      4400
- 14530              	.LASF76:
- 14531 02b7 47524545 		.ascii	"GREEN\000"
- 14531      4E00
- 14532              	.LASF1:
- 14533 02bd 7369676E 		.ascii	"signed char\000"
- 14533      65642063 
- 14533      68617200 
- 14534              	.LASF4:
- 14535 02c9 75696E74 		.ascii	"uint8_t\000"
- 14535      385F7400 
- 14536              	.LASF175:
- 14537 02d1 6E756D43 		.ascii	"numCommands\000"
- 14537      6F6D6D61 
- 14537      6E647300 
- 14538              	.LASF72:
- 14539 02dd 42524544 		.ascii	"BRED\000"
- 14539      00
- 14540              	.LASF2:
- 14541 02e2 756E7369 		.ascii	"unsigned char\000"
- 14541      676E6564 
- 14541      20636861 
- 14541      7200
- 14542              	.LASF101:
- 14543 02f0 53543737 		.ascii	"ST7735_CASET\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 281
+ 14519      31363036 
+ 14520 0213 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 14520      20726576 
+ 14520      6973696F 
+ 14520      6E203233 
+ 14520      37373135 
+ 14521 0246 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 14521      66756E63 
+ 14521      74696F6E 
+ 14521      2D736563 
+ 14521      74696F6E 
+ 14522              	.LASF33:
+ 14523 026e 52435F45 		.ascii	"RC_ERROR_WRITE_FAILS\000"
+ 14523      52524F52 
+ 14523      5F575249 
+ 14523      54455F46 
+ 14523      41494C53 
+ 14524              	.LASF248:
+ 14525 0283 5446545F 		.ascii	"TFT_BackLight_Start\000"
+ 14525      4261636B 
+ 14525      4C696768 
+ 14525      745F5374 
+ 14525      61727400 
+ 14526              	.LASF85:
+ 14527 0297 4C494748 		.ascii	"LIGHTGREEN\000"
+ 14527      54475245 
+ 14527      454E00
+ 14528              	.LASF67:
+ 14529 02a2 5446545F 		.ascii	"TFT_rot_270\000"
+ 14529      726F745F 
+ 14529      32373000 
+ 14530              	.LASF37:
+ 14531 02ae 52435F45 		.ascii	"RC_ERROR_CANCELED\000"
+ 14531      52524F52 
+ 14531      5F43414E 
+ 14531      43454C45 
+ 14531      4400
+ 14532              	.LASF76:
+ 14533 02c0 47524545 		.ascii	"GREEN\000"
+ 14533      4E00
+ 14534              	.LASF1:
+ 14535 02c6 7369676E 		.ascii	"signed char\000"
+ 14535      65642063 
+ 14535      68617200 
+ 14536              	.LASF4:
+ 14537 02d2 75696E74 		.ascii	"uint8_t\000"
+ 14537      385F7400 
+ 14538              	.LASF175:
+ 14539 02da 6E756D43 		.ascii	"numCommands\000"
+ 14539      6F6D6D61 
+ 14539      6E647300 
+ 14540              	.LASF72:
+ 14541 02e6 42524544 		.ascii	"BRED\000"
+ 14541      00
+ 14542              	.LASF2:
+ 14543 02eb 756E7369 		.ascii	"unsigned char\000"
+ 14543      676E6564 
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 281
 
 
- 14543      33355F43 
- 14543      41534554 
- 14543      00
- 14544              	.LASF253:
- 14545 02fd 5446545F 		.ascii	"TFT_init\000"
- 14545      696E6974 
+ 14543      20636861 
+ 14543      7200
+ 14544              	.LASF101:
+ 14545 02f9 53543737 		.ascii	"ST7735_CASET\000"
+ 14545      33355F43 
+ 14545      41534554 
  14545      00
  14546              	.LASF40:
  14547 0306 52435F45 		.ascii	"RC_ERROR_NOT_IMPLEMENTED\000"
@@ -16858,7 +16858,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14567      33355F52 
  14567      414D5752 
  14567      00
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 282
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 282
 
 
  14568              	.LASF84:
@@ -16918,7 +16918,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14591      41444354 
  14591      4C5F4D59 
  14591      00
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 283
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 283
 
 
  14592              	.LASF106:
@@ -16978,7 +16978,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14613      3600
  14614              	.LASF199:
  14615 04bc 64783132 		.ascii	"dx12\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 284
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 284
 
 
  14615      00
@@ -17038,7 +17038,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14637      00
  14638              	.LASF142:
  14639 0557 7061796C 		.ascii	"payload\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 285
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 285
 
 
  14639      6F616400 
@@ -17098,7 +17098,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14665      73657454 
  14665      65787443 
  14665      6F6C6F72 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 286
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 286
 
 
  14665      00
@@ -17158,7 +17158,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14691 067c 63757273 		.ascii	"cursor_x\000"
  14691      6F725F78 
  14691      00
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 287
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 287
 
 
  14692              	.LASF229:
@@ -17218,7 +17218,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14723      00
  14724              	.LASF246:
  14725 0701 5446545F 		.ascii	"TFT_RES_Write\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 288
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 288
 
 
  14725      5245535F 
@@ -17278,7 +17278,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14751      41444354 
  14751      4C5F4247 
  14751      5200
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 289
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 289
 
 
  14752              	.LASF34:
@@ -17338,7 +17338,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14777      6720756E 
  14777      7369676E 
  14777      65642069 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 290
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 290
 
 
  14778              	.LASF247:
@@ -17398,7 +17398,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14802      6E676C65 
  14802      00
  14803              	.LASF73:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 291
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 291
 
 
  14804 08f5 47524544 		.ascii	"GRED\000"
@@ -17458,7 +17458,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14828      4E543332 
  14828      00
  14829              	.LASF147:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 292
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 292
 
 
  14830 0993 62756666 		.ascii	"buffer\000"
@@ -17518,7 +17518,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14852      365F7400 
  14853              	.LASF32:
  14854 0a3d 52435F45 		.ascii	"RC_ERROR_READ_FAILS\000"
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 293
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 293
 
 
  14854      52524F52 
@@ -17578,7 +17578,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14876      44445354 
  14876      00
  14877              	.LASF176:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 294
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 294
 
 
  14878 0ae6 6E756D41 		.ascii	"numArgs\000"
@@ -17638,7 +17638,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14899              	.LASF217:
  14900 0b8d 5446545F 		.ascii	"TFT_getCursorY\000"
  14900      67657443 
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 295
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 295
 
 
  14900      7572736F 
@@ -17698,7 +17698,7 @@ ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 1
  14924 0c2f 78737461 		.ascii	"xstart\000"
  14924      727400
  14925              	.LASF89:
-ARM GAS  C:\Users\agila\AppData\Local\Temp\ccvGdjpi.s 			page 296
+ARM GAS  C:\Users\agila\AppData\Local\Temp\ccxPTKZ9.s 			page 296
 
 
  14926 0c36 53543737 		.ascii	"ST7735_NOP\000"

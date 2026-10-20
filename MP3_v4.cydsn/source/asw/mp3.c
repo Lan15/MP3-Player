@@ -1,7 +1,7 @@
 /**
 * \file    mp3.c
 * \author  P. Fromm (template), V S Agilan (player)
-* \date    6.11.18 (INC 11B: 2026-10)
+* \date    6.11.18
 *
 * \brief   A simple MP3 Player (WAV player) application layer (state machine, SD card scan,
 *          PCM streaming and conversion, TFT song list)
@@ -14,7 +14,7 @@
 *   3. SD card scan           MP3__scanSD()       (tsk_init, subfolders included)
 *   4. TFT song list          MP3__showSong()     (tsk_display)
 *
-* Design notes N1..N10 are collected at the end of this file. A marker like
+* Design notes N1..N12 are collected at the end of this file. A marker like
 * "N4" in a comment means: read note N4 at the end for the reason.
 *
 * \copyright Copyright 2016
@@ -32,6 +32,9 @@
 /*****************************************************************************/
 /* Include files                                                             */
 /*****************************************************************************/
+#include "log.h"          /* INC 14: LOG_x() (N12) */
+#include "ceh.h"          /* INC 14: CEH_report() (N12) */
+
 #include "mp3.h"
 #include "sound.h"
 #include "seven.h"
@@ -45,7 +48,7 @@
 #include "wav_parser.h"
 #include "FS.h"
 
-#include <string.h>         /* memcpy(), strlen(), strcmp() - no <stdio.h>, see N10 */
+#include <string.h>         /* memcpy(), strlen(), strcmp() */
 
 /*****************************************************************************/
 /* Local pre-processor symbols/macros ('#define')                            */
@@ -106,6 +109,9 @@
 
 /** Set to 1 to compile the event/state trace MP3__showEventAndState() (N10). */
 #define MP3__DEBUG_LOG          (0u)
+
+/** Longest part of a path that is written to the log (prefix 31 + 2 quotes + this value stay below LOG_BUFFER_SIZE, N12). */
+#define MP3__LOG_PATH_MAX       (48u)
 
 /*****************************************************************************/
 /* Global variable definitions (declared in header file with 'extern')       */
@@ -216,7 +222,7 @@ static void MP3__convertBlock(uint16_t const samples);                          
 static boolean_t MP3__isWavName(const char * const name);                                                             /**< \brief is the file name a WAV file (".WAV" or ".wav")?                          */
 static boolean_t MP3__hasAttr(U8 const attr, uint32_t const flag);                                                    /**< \brief does an emFile attribute byte contain a flag?                            */
 static RC_t MP3__buildPath(char * const dst, size_t const dstSize, const char * const dir, const char * const name);  /**< \brief build "dir\name" with a length check (N6, N11)                           */
-static void MP3__logPath(const char * const prefix, const char * const path);                                         /**< \brief write "prefix + path + '" to the UART log (N10)                          */
+static void MP3__logPath(const char * const prefix, const char * const path);                                         /**< \brief write "prefix + path + '" to the log with LOG_W (N12)                  */
 static const char * MP3__shortName(const char * const fullPath);                                                      /**< \brief file name of a full path, for the display                                */
 static FS_DIR * MP3__scanReopen(uint8_t const level);                                                                 /**< \brief reopen the folder of a scan level, skip the entries already read (N6)    */
 static RC_t MP3__scanSD(void);                                                                                        /**< \brief scan the SD card from the root, fill the song list (N6, N11)             */
@@ -249,7 +255,7 @@ static void MP3__showEventAndState(EventMaskType const ev, MP3__State_t const st
  * FS_Init() and scans the card from the root (MP3__scanSD, N6). A scan problem
  * sets the error flag (N8). Writes "No WAV files found" once if nothing was found.
  *
- * Call once from tsk_init after TFT_init() and SOUND_Init().
+ * Call once from tsk_init after TFT_Init() and SOUND_Init().
  *
  * \return RC_SUCCESS when the card was scanned (also with 0 songs found),
  *         RC_ERROR_OPEN when a folder could not be opened, the list may be incomplete
@@ -268,18 +274,25 @@ RC_t MP3_Init(void)
     MP3__reader.m_newSongRequest = FALSE;
  
     /* Scan SD card for WAV files */
-    UART_LOG_PutString("\r\n[MP3] Scanning SD card...\r\n");
+    LOG_I("[MP3] Scanning SD card...");                /* N12 */
  
     FS_Init();
     rc = MP3__scanSD();                             /* INC 9: scan from the root, subfolders included (N6, N11) */
+    
+    if (rc != RC_SUCCESS)
+    {
+        CEH_report(CEH_SD_SCAN_FAILED, (uint32_t)rc);     /* N12: a folder could not be opened, the list may be incomplete */
+    }
  
     /* Reported once here, not at the end of every folder (N6). An error
        was already reported by the scan itself. */
     if ((MP3__player.m_noSongs == 0u) && (MP3__error == FALSE))
     {
-        UART_LOG_PutString("[MP3] No WAV files found\r\n");
+        LOG_W("[MP3] No WAV files found");
     }
  
+    LOG_I("[MP3] Player ready, %u song(s)", (uint32_t)MP3__player.m_noSongs);   /* N12 */
+    
     MP3__applyVolume();
     MP3__initDisplay();                             /* INC 10: header is drawn once, here */
  
@@ -370,7 +383,7 @@ RC_t MP3_ProcessEvent(EventMaskType nextEvent)
                     if (MP3__reader.m_failCount >= MP3__player.m_noSongs)
                     {
                         /* INC 7: every file failed - stop instead of looping forever */
-                        UART_LOG_PutString("[MP3] No playable song\r\n");
+                        LOG_W("[MP3] No playable song");
                         MP3__error          = TRUE;             /* INC 10C */
                         MP3__player.m_state = MP3STATE_ISSTOPPED;
                     }
@@ -442,7 +455,7 @@ void MP3_Reader(void)
             }
             MP3__reader.m_newSongRequest = FALSE;
             MP3__reader.m_state          = MP3READER_OPEN;
-            /* fall through - open the new song with the same event (N10, Rule 16.3) */
+            /* fall through - open the new song with the same event (N10) */
         }
 
         case MP3READER_OPEN:
@@ -461,14 +474,14 @@ void MP3_Reader(void)
                 MP3__setRemainingPlaytime();
 
                 MP3__readBlock();                           /* INC 5C: pre-fill buffer A, becomes active */
-                (void)SOUND_SwapBuffers();
+                SOUND_SwapBuffers();
 
                 if (MP3__bytesRemaining > 0u)
                 {
                     MP3__readBlock();                       /* pre-fill buffer B, inactive, ready for the first swap */
                 }
 
-                (void)SOUND_StartPlay();
+                SOUND_StartPlay();
 
                 MP3__reader.m_state = MP3READER_STREAMING;
             }
@@ -611,7 +624,7 @@ static void MP3__applyVolume(void)
     uint8_t const vol = MP3__player.m_volume;
 
     SEVEN_Set(SEVEN_1, vol);
-    (void)SOUND_SetVolume((uint8_t)(vol * MP3__VOLUME_STEP));
+    SOUND_SetVolume((uint8_t)(vol * MP3__VOLUME_STEP));
 }
 
 /**
@@ -766,7 +779,8 @@ static RC_t MP3__openWavFile(uint16_t const songIndex)
  
         if (MP3__pFile == NULL)
         {
-            UART_LOG_PutString("\r\n[MP3] ERROR: FS_FOpen failed\n");
+            LOG_E("[MP3] FS_FOpen failed: %s", MP3__songList[songIndex]);
+            CEH_report(CEH_FILE_OPEN_FAILED, (uint32_t)songIndex);    /* N12 */
             MP3__error = TRUE;                              /* INC 10C */
             rc         = RC_ERROR_OPEN;
         }
@@ -776,9 +790,10 @@ static RC_t MP3__openWavFile(uint16_t const songIndex)
  
             if (rc != RC_SUCCESS)
             {
-                (void)FS_FClose(MP3__pFile);
+                FS_FClose(MP3__pFile);
                 MP3__pFile = NULL;
-                UART_LOG_PutString("\r\n[MP3] ERROR: WAV header invalid\n");
+                LOG_W("[MP3] WAV header invalid (rc %d)", (int32_t)rc);
+                CEH_report(CEH_WAV_INVALID, (uint32_t)rc);            /* N12 */
                 MP3__error = TRUE;                          /* INC 10C */
             }
             else
@@ -806,7 +821,7 @@ static void MP3__closeWavFile(void)
 {
     if (MP3__pFile != NULL)
     {
-        (void)FS_FClose(MP3__pFile);
+        FS_FClose(MP3__pFile);
         MP3__pFile = NULL;
     }
     MP3__bytesRemaining = 0u;
@@ -869,7 +884,7 @@ static void MP3__readBlock(void)
     /* INC 8 / N5: put back the partial output sample kept from the previous call */
     if (MP3__carryLen > 0u)
     {
-        (void)memcpy(MP3__readBuf, MP3__carry, MP3__carryLen);
+        memcpy(MP3__readBuf, MP3__carry, MP3__carryLen);
     }
 
     DBG_FS_Write(1u);                               /* shows the total SD read time */
@@ -880,7 +895,8 @@ static void MP3__readBlock(void)
     {
         if (toRead > 0u)                            /* INC 10C: asked for data, got none = read error */
         {
-            UART_LOG_PutString("\r\n[MP3] ERROR: SD read failed\n");
+            LOG_E("[MP3] SD read failed");
+            CEH_report(CEH_SD_READ_FAILED, (uint32_t)MP3__player.m_currentSong);   /* N12: safe state STOP = sound off */
             MP3__error = TRUE;
         }
         MP3__bytesRemaining = 0u;                   /* read error -> force EOF, avoid an endless loop */
@@ -896,7 +912,7 @@ static void MP3__readBlock(void)
 
         if (MP3__carryLen > 0u)
         {
-            (void)memcpy(MP3__carry, &MP3__readBuf[(uint32_t)samples * inBytes], MP3__carryLen);
+            memcpy(MP3__carry, &MP3__readBuf[(uint32_t)samples * inBytes], MP3__carryLen);
         }
 
         DBG_CONV_Write(1u);                         /* shows the conversion run time */
@@ -909,7 +925,7 @@ static void MP3__readBlock(void)
         if (samples > 0u)
         {
             DBG_FILL_Write(1u);                     /* shows copy and padding time */
-            (void)SOUND_FillBuffer(MP3__readBuf, samples);  /* samples is 1..SOUND_BUFFER_SIZE, so no RC_ERROR (N10) */
+            SOUND_FillBuffer(MP3__readBuf, samples);  /* samples is 1..SOUND_BUFFER_SIZE, cannot fail (N10) */
             DBG_FILL_Write(0u);
         }
     }
@@ -1057,25 +1073,32 @@ static RC_t MP3__buildPath(char * const dst, size_t const dstSize, const char * 
     {
         if (isRoot == FALSE)
         {
-            (void)memcpy(dst, dir, dirLen);
+            memcpy(dst, dir, dirLen);
         }
         dst[prefixLen - 1u] = MP3__PATH_SEP;
-        (void)memcpy(&dst[prefixLen], name, nameLen + 1u);      /* including the NUL */
+        memcpy(&dst[prefixLen], name, nameLen + 1u);      /* including the NUL */
         rc = RC_SUCCESS;
     }
     return rc;
 }
 
 /**
- * \brief Write "prefix + path + '" to the UART log (no sprintf, N10).
- * \param char const *const prefix   : [IN] text before the path, ends with a quote
- * \param char const *const path     : [IN] path to show
+ * \brief Write "prefix + 'path'" to the log with LOG_W (N12).
+ * \param char const *const prefix   : [IN] text before the path, ends with the opening quote, at most 32 characters
+ * \param char const *const path     : [IN] path to show, cut after MP3__LOG_PATH_MAX characters
  */
 static void MP3__logPath(const char * const prefix, const char * const path)
 {
-    UART_LOG_PutString(prefix);
-    UART_LOG_PutString(path);
-    UART_LOG_PutString("'\r\n");
+    char   shortPath[MP3__LOG_PATH_MAX + 1u];
+    size_t len = strlen(path);
+ 
+    if (len > MP3__LOG_PATH_MAX)
+    {
+        len = MP3__LOG_PATH_MAX;                            /* N12: the log line has room for 100 characters only */
+    }
+    memcpy(shortPath, path, len);
+    shortPath[len] = '\0';
+    LOG_W("%s%s'", prefix, shortPath);
 }
 
 /**
@@ -1134,7 +1157,7 @@ static FS_DIR * MP3__scanReopen(uint8_t const level)
  * the list is full. Subfolders are scanned down to MP3__SCAN_MAX_DEPTH levels.
  *
  * It is a loop with an explicit level counter instead of a recursive function
- * (MISRA C:2012 Rule 17.2). The parent folder is closed while a subfolder is
+ * (N6). The parent folder is closed while a subfolder is
  * scanned and opened again afterwards, skipping what was already read (N6).
  *
  * \return RC_SUCCESS when every folder could be opened (also with 0 songs found),
@@ -1204,9 +1227,9 @@ static RC_t MP3__scanSD(void)
                     else
                     {
                         /* N6: release the handle BEFORE opening the subfolder */
-                        (void)FS_CloseDir(pDir);
+                        FS_CloseDir(pDir);
                         level++;
-                        (void)memcpy(MP3__scanPath, fullPath, strlen(fullPath) + 1u);
+                        memcpy(MP3__scanPath, fullPath, strlen(fullPath) + 1u);
                         MP3__scanLen[level] = (uint8_t)strlen(fullPath);
                         MP3__scanIdx[level] = 0u;
  
@@ -1222,7 +1245,7 @@ static RC_t MP3__scanSD(void)
                 else if (MP3__isWavName(MP3__entryName) == TRUE)
                 {
                     /* fullPath is shorter than MP3_FILENAME_MAXLEN (checked in MP3__buildPath) */
-                    (void)memcpy(MP3__songList[MP3__player.m_noSongs], fullPath, strlen(fullPath) + 1u);
+                    memcpy(MP3__songList[MP3__player.m_noSongs], fullPath, strlen(fullPath) + 1u);
                     MP3__player.m_noSongs++;
                 }
                 else
@@ -1236,7 +1259,7 @@ static RC_t MP3__scanSD(void)
         {
             if (pDir != NULL)
             {
-                (void)FS_CloseDir(pDir);
+                FS_CloseDir(pDir);
                 pDir = NULL;
             }
             if (level == 0u)
@@ -1310,8 +1333,8 @@ static void MP3__drawRow(uint16_t const i, uint16_t const selected)
     TFT_setCursor(MP3__TEXT_X, (int16_t)(MP3__ROW0_TEXT_Y + row));
 
     /* N9: "(*) path" built in a static buffer, MP3__songList entries are always NUL terminated and shorter than MP3_FILENAME_MAXLEN */
-    (void)memcpy(MP3__rowText, (sel == TRUE) ? "(*) " : "( ) ", MP3__ROW_PREFIX_LEN);
-    (void)memcpy(&MP3__rowText[MP3__ROW_PREFIX_LEN], MP3__songList[i], len + 1u);
+    memcpy(MP3__rowText, (sel == TRUE) ? "(*) " : "( ) ", MP3__ROW_PREFIX_LEN);
+    memcpy(&MP3__rowText[MP3__ROW_PREFIX_LEN], MP3__songList[i], len + 1u);
     TFT_print(MP3__rowText);
 }
 
@@ -1443,11 +1466,7 @@ static void MP3__showEventAndState(EventMaskType const ev, MP3__State_t const st
         default :                 stateStr = "IsStopped"; break;
     }
 
-    UART_LOG_PutString("State: ");
-    UART_LOG_PutString(stateStr);
-    UART_LOG_PutString(" | Event: ");
-    UART_LOG_PutString(eventStr);
-    UART_LOG_PutString("\r\n");
+    LOG_D("State: %s | Event: %s", stateStr, eventStr);
 }
 #endif
 
@@ -1493,8 +1512,8 @@ static void MP3__showEventAndState(EventMaskType const ev, MP3__State_t const st
 *      afterwards (the already consumed entries are read again and skipped). emFile may allow only
 *      a few open directory handles at the same time; closing the parent first is the safe way.
 *      (Whether a nested FS_OpenDir() really fails on the target was not confirmed.)
-*      (b) The scan is a loop with a level counter, not a recursive function (MISRA Rule 17.2). Its
-*      state is small: MP3__scanPath holds the path of the folder in work; the path of an upper level
+*      (b) The scan is a loop with a level counter, not a recursive function, so the stack does not
+*      grow with the folder depth. Its state is small: MP3__scanPath holds the path of the folder in work; the path of an upper level
 *      is just the beginning of it, so only the length (MP3__scanLen) and the number of entries read
 *      (MP3__scanIdx) are kept per level - about 90 bytes of RAM for 9 levels, no stack growth.
 *      (c) MP3__entryName is static: FS_DirEnt2Name() writes the whole name without a size
@@ -1528,30 +1547,23 @@ static void MP3__showEventAndState(EventMaskType const ev, MP3__State_t const st
 *      by a black rectangle instead of a full screen clear, so there is no flicker. The text
 *      "(*) path" is built in the static MP3__rowText and sent with one TFT_print(), instead of
 *      TFT_printf() whose macro would place a 128 byte buffer on the stack of tsk_display and
-*      uses sprintf (N10).
+*      uses sprintf.
 *
-* N10 - MISRA C:2012 deviations that remain (checked by hand):
-*      - Rule 16.3 (fall through): in MP3_Reader() the IDLE case runs into the OPEN case on
-*        purpose, to open a requested song in the same run. Marked with a comment.
-*      - Rule 17.2 (recursion): removed, the folder scan is a loop now (N6).
-*      - Rule 14.4 (non-Boolean condition): the state machines test events as "nextEvent & ev_x",
-*        as in the original code, for readability. Not changed on purpose.
-*      - Rule 21.6 (stdio): none in this file any more. sprintf/snprintf were replaced by
-*        string pieces and the length checked MP3__buildPath().
-*      - Rule 7.4 (string literal to char *): TFT_print() and TFT_println() in tft.h take
-*        "char *". Fix in tft.h: "const char *" (no behaviour change).
-*      - Rule 17.7 (return value ignored): the return values of SOUND_* and SetEvent() are
-*        cast to void. SOUND_FillBuffer() can only fail for size 0 or > SOUND_BUFFER_SIZE, and
-*        samples is in 1..SOUND_BUFFER_SIZE by construction. SOUND_StartPlay/StopPlay/
-*        SwapBuffers/SetVolume always return RC_SUCCESS.
-*      - Rule 8.7/8.9 style: all helpers are static now (they were global before).
-*      - Rule 2.1/2.2/3.1 (dead and commented-out code): all commented-out debug prints were removed. MP3__shortName() is kept (needed for
-*        the display) but is not called yet, so the compiler may report it as unused. MP3__showEventAndState() stays, but is only
-*        compiled with MP3__DEBUG_LOG 1.
-*      - Dir 4.9 / Rule 20.10: the DBG_HI/DBG_LO macros with ## were replaced by direct
-*        DBG_xxx_Write() calls.
-*      - Naming rule of the course: MP3__showSong() is public but has the private "__" prefix.
-*        It is kept because main.c calls it.
+* N10 - Details of the code.
+*      - Fall through: in MP3_Reader() the IDLE case runs into the OPEN case on purpose, to open a
+*        requested song in the same run.
+*      - The state machines test events as "nextEvent & ev_x" (bit masks).
+*      - No <stdio.h>: the file uses string pieces and a length check (MP3__buildPath()) instead of
+*        sprintf/snprintf.
+*      - TFT_print() and TFT_println() in tft.h take "char *", so a string literal is passed to a
+*        non-const parameter (tft.h could take "const char *").
+*      - Results of SOUND_* and SetEvent() are not evaluated. SOUND_FillBuffer() can only fail for
+*        size 0 or > SOUND_BUFFER_SIZE, and samples is in 1..SOUND_BUFFER_SIZE by construction.
+*        SOUND_StartPlay/StopPlay/SwapBuffers/SetVolume always return RC_SUCCESS (volume steps are
+*        0..100).
+*      - All helpers are static.
+*      - MP3__shortName() is kept for the display but is not called yet, so the compiler may
+*        report it as unused. MP3__showEventAndState() is only compiled with MP3__DEBUG_LOG 1.
 *
 * N11 - Return codes (INC 11B.1). Functions that can fail for a reason return RC_t:
 *        MP3__openWavFile()   RC_ERROR_RANGE (songIndex not in the list, new check),
@@ -1575,9 +1587,31 @@ static void MP3__showEventAndState(EventMaskType const ev, MP3__State_t const st
 *        MP3__nextSong() / MP3__prevSong() are guarded against an empty list, no caller could react.
 *        MP3__scanReopen()    returns the FS_DIR handle, NULL = failed (like FS_OpenDir()).
 *        MP3__isWavName(), MP3__hasAttr(), MP3__songEnded() are yes/no questions (boolean_t).
-*      main.c ignores the result of MP3_Init() and stores that of MP3_ProcessEvent() in an unused
-*      variable, so nothing changes there. MISRA 17.7 asks for a "(void)" cast if the result is ignored.
+*      main.c ignores the result of MP3_Init() and only logs that of MP3_ProcessEvent() (main.c N11).
 *
+* N12 - Log and error handler (INC 14). The UART text of the player goes through the log service (log.h)
+*      and the errors are also reported to the central error handler (ceh.h). One line per event:
+*        LOG_I   "Scanning SD card...", "Player ready, n song(s)"
+*        LOG_W   no WAV files, no playable song, scan problems (cannot open dir, path too long, folder
+*                too deep), WAV header invalid
+*        LOG_E   FS_FOpen failed, SD read failed
+*        LOG_D   state and event trace (only with MP3__DEBUG_LOG 1)
+*      CEH events (ceh_cfg.h, all with debug OFF so that no breakpoint is executed without a debugger):
+*        CEH_SD_SCAN_FAILED     MP3_Init(), data = RC_t of the scan (two's complement), reaction none
+*        CEH_FILE_OPEN_FAILED   MP3__openWavFile(), data = song index, reaction none
+*        CEH_WAV_INVALID        MP3__openWavFile(), data = RC_t of WAV_ParseHeader(), reaction none
+*        CEH_SD_READ_FAILED     MP3__readBlock(), data = song index, reaction STOP (sound off, ceh_cfg.c N2)
+*        CEH_SOUND_UNDERRUN     tsk_control (main.c N11), data = late ticks, reaction none
+*      The calls are in the error paths only: nothing is logged per block while streaming. At 115200 Baud
+*      one line of 100 characters takes about 9 ms, one fifth of the refill time of 46 ms. MP3__logPath()
+*      cuts a path after MP3__LOG_PATH_MAX (48) characters, the whole line must fit into LOG_BUFFER_SIZE
+*      (100), otherwise the log service drops it. Song paths are at most MP3_FILENAME_MAXLEN (64)
+*      characters, "[MP3] FS_FOpen failed: " plus a path is at most 86 characters. Behaviour: identical,
+*      except (a) the UART text (level prefix, no "\r\n" in front), (b) the new CEH events and (c) one
+*      real change: after an SD read error while streaming the reaction STOP now stops the sample
+*      clock and sets the PWM to silence at once. Before, no buffer was filled any more, the ISR
+*      counted underruns and held the last sample value (a DC level on the speaker) until the 1 s
+*      tick found the song over (MP3__songEnded). Not called from an ISR.
 *
 * Time:
 * SPI       SCLK                4MHz
