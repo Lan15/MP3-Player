@@ -66,6 +66,7 @@
 *              notes N1..N11 at the end of the file, ASCII only. No code change.
 *  - INC 14  : log service and central error handler: start message and CEH_HASBOOTED in tsk_init,
 *              underrun report in tsk_control (1 s tick), ignored events logged; note N11
+*  - INC 14.1: the underrun report is made in tsk_background, tsk_control only counts (N11)
 *
 * \copyright Copyright 2016
 * Department of electrical engineering and information technology, Hochschule Darmstadt - University of applied sciences (h_da). All Rights Reserved.
@@ -103,6 +104,8 @@
 
 #undef      TRC_SYSTICK     //Activate this to visualise the Systick in Tracealayser
 
+#define MP3__UNDERRUN_LOG          (0u)    /** underrun report enable macro */
+
 /*****************************************************************************/
 /* Global variable definitions (declared in header file with 'extern')       */
 /*****************************************************************************/
@@ -118,12 +121,11 @@ traceHandle TRC_ISRButtonHandle;
 /*****************************************************************************/
 /* Local variable definitions ('static')                                     */
 /*****************************************************************************/
-
+static volatile uint32_t main__underruns = 0u;  /**< \brief late ISR ticks counted by tsk_control, reported by tsk_background (N11) */
 
 /*****************************************************************************/
 /* Local function prototypes ('static')                                      */
 /*****************************************************************************/
-
 
 /*****************************************************************************/
 /* Function implementation - global ('extern') and local ('static')          */
@@ -355,23 +357,16 @@ TASK(tsk_control)
             nextEvent = GetAndClearHighestEvent(&ev);
             RC_t const result = MP3_ProcessEvent(nextEvent);                     /* N2, N11: only logged */
             
+            #if MP3__UNDERRUN_LOG
             if (ev_1s == nextEvent)
             {
-                uint32_t const underruns = SOUND__GetAndClearUnderruns();        /* N11: late ISR ticks of the last second */
-
-                if (underruns > 0u)
-                {
-                    CEH_report(CEH_SOUND_UNDERRUN, underruns);                  /* N11 */
-                }
+                main__underruns += SOUND__GetAndClearUnderruns();   /* N11: only counted here, reported in tsk_background */
             }
+            #endif
             
             if ((RC_ERROR_INVALID_STATE == result) && (ev_1s != nextEvent))
             {
                 LOG_V("[MAIN] Event ignored, no songs");
-            }
-            else if (RC_ERROR_BAD_PARAM == result)
-            {
-                LOG_W("[MAIN] Unknown event 0x%x", (uint32_t)nextEvent);
             }
         }
     }
@@ -432,7 +427,19 @@ TASK(tsk_background)
 {
     while(1)
     {
-        //do something with low priority
+        #if MP3__UNDERRUN_LOG   //Debugging aid
+        uint32_t underruns;
+
+        SuspendAllInterrupts();     /* N11: take over and clear the count atomically */
+        underruns = main__underruns;
+        main__underruns = 0u;
+        ResumeAllInterrupts();
+
+        if (n > 0u)
+        {
+            CEH_report(CEH_SOUND_UNDERRUN, n);                      /* N11 */
+        }
+        #endif
         asm("nop");
     }
 }
@@ -892,9 +899,13 @@ TASK(tsk_background)
 * N11 - Log service and error handler (INC 14). (a) tsk_init writes "[MAIN] Player started" with
 *      LOG_I and reports CEH_HASBOOTED (data 0), after MP3_Init() and before the alarms are
 *      started. (b) On each ev_1s tsk_control reads and clears the underrun counter of the sound
-*      driver (SOUND__GetAndClearUnderruns(), a count, N9 in sound.c) and reports CEH_SOUND_UNDERRUN
-*      with the number of late ticks when it is not 0. This is the one place for it: the ISR must
-*      not log or report (the UART blocks when its buffer is full). A single report can also
+*      driver (SOUND__GetAndClearUnderruns(), a count, N9 in sound.c) and adds it to main__underruns.
+*      tsk_background takes the sum over under SuspendAllInterrupts() and reports CEH_SOUND_UNDERRUN
+*      with the number of late ticks when it is not 0 (INC 14.1). The report writes about 45
+*      characters to the UART (about 4 ms), so it is not done in tsk_control, which could delay
+*      tsk_reader. The ISR must not log or report either (the UART blocks when its buffer is full).
+*      tsk_control is the only writer of main__underruns and tsk_background has the lower
+*      priority, so the lock in tsk_background is enough. A single report can also
 *      appear at the end of a song, when the last buffer is played out and the sound is stopped a
 *      moment later. (c) The result of MP3_ProcessEvent() is logged: LOG_V "Event ignored, no
 *      songs" (not for the 1 s tick), LOG_W "Unknown event 0x..". (d) CEH_report() is called from

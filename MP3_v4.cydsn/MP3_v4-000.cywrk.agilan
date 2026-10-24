@@ -18,7 +18,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="MP3_v4-000\MP3_v4\asw\sound.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
 <ExpandedNodeIds>
 <v>MP3_v4-000</v>
 <v>MP3_v4-000\MP3_v4</v>
@@ -183,6 +183,15 @@
 <v>MP3_v4-000\MP3_v4\Generated_Source\PSoC5</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
+<v>MP3_v4-000</v>
+<v>MP3_v4-000\MP3_v4</v>
+<v>MP3_v4-000\MP3_v4\TopDesign</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\Pins</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\Analog</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\Clocks</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\Interrupts</v>
+<v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\DMA</v>
 <v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\System</v>
 <v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\Directives</v>
 <v>MP3_v4-000\MP3_v4\MP3_v4.cydwr\Flash Security</v>
@@ -223,15 +232,6 @@
 <v>MP3_v4-000\MP3_v4\bsw\services\ceh\ceh_log_cfg.c</v>
 <v>MP3_v4-000\MP3_v4\bsw\services\ceh\ceh_log_cfg.h</v>
 <v>MP3_v4-000\MP3_v4\bsw\services\ceh\ceh_type.h</v>
-<v>MP3_v4-000\MP3_v4\bsw\services\ceh\HardFault_Handler.c</v>
-<v>MP3_v4-000\MP3_v4\bsw\services\ceh\HardFault_Handler.h</v>
-<v>MP3_v4-000\MP3_v4\bsw\services\ceh\HardFault_Regdef_CM3.h</v>
-<v>MP3_v4-000\MP3_v4\bsw\services\fsm</v>
-<v>MP3_v4-000\MP3_v4\bsw\services\fsm\statemachine.c</v>
-<v>MP3_v4-000\MP3_v4\bsw\services\fsm\statemachine.h</v>
-<v>MP3_v4-000\MP3_v4\bsw\services\fsm\statemachine_type.h</v>
-<v>MP3_v4-000\MP3_v4\bsw\services\log</v>
-<v>MP3_v4-000\MP3_v4\bsw\services\log\log.c</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -748,6 +748,8 @@
 <name v=".\source\bsw\Services\ceh\ceh_cfg.c" />
 <name v=".\source\bsw\Services\ceh\ceh_cfg.h" />
 <name v=".\source\asw\wav_parser.c" />
+<name v=".\source\asw\wav_parser.h" />
+<name v=".\source\bsw\global.h" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -755,7 +757,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1265, 657" SelectedTabbedMdiWindow="e78f0611-d1c9-43f7-a44d-1f91c742ccaa"><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\TopDesign\TopDesign.cysch" Guid="b2a3e896-93d2-408c-a24c-c6200cb84786" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\asw\main.c" Guid="e78f0611-d1c9-43f7-a44d-1f91c742ccaa" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\asw\mp3.c" Guid="3445d93e-8024-41cf-9358-cc66e3ed9a59" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\MP3_v4.cydwr" Guid="1398543b-3f15-44bd-8145-064d8c8df128" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\Generated_Source\PSoC5\CySpc.h" Guid="4912249b-4dbb-48e5-8156-52989844cde3" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\Generated_Source\PSoC5\CyFlash.h" Guid="28166947-8f2d-434f-a6b5-0c4085cd57b2" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\Generated_Source\PSoC5\ErikaOS_1_eecfg.c" Guid="6b3d1dee-6456-4d20-bd43-d0ee61810c93" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\bsw\TraceRecorder\streamport\trcStreamingPort.c" Guid="2578049b-301b-44ab-9905-1bd0029318cb" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\asw\sound.c" Guid="12bffd47-42fd-4d75-8171-5b3d6abaa377" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\asw\mp3.h" Guid="52bee02c-9bfa-4617-b09f-ab6cde5dcff3" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="cb98b672-06dc-4884-8407-7d2e5bb839d7" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\bsw\tft\tft.c" Guid="98804f74-35b9-4056-8abf-9d51446d9da0" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\bsw\tft\tft.h" Guid="e22927b7-9fde-47dc-a762-7bd6436d75a5" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\Generated_Source\PSoC5\TFT_BackLight.h" Guid="dd984828-5fe4-4fdc-a37e-1c276974c8b3" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\Generated_Source\PSoC5\TFT_BackLight.c" Guid="c3b35040-e860-487e-99c8-2ccb69567f1d" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\bsw\Services\ceh\ceh_cfg.c" Guid="ca6e686e-b061-43b9-af74-658bb615f3e1" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\bsw\Services\ceh\ceh_cfg.h" Guid="0bd384ad-a194-4055-90bd-3888d5b1f063" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\asw\wav_parser.c" Guid="8a683b40-9826-4d97-a06c-5ef7b5432b98" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1265, 657" SelectedTabbedMdiWindow="3445d93e-8024-41cf-9358-cc66e3ed9a59"><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\TopDesign\TopDesign.cysch" Guid="b2a3e896-93d2-408c-a24c-c6200cb84786" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\asw\main.c" Guid="e78f0611-d1c9-43f7-a44d-1f91c742ccaa" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\asw\mp3.c" Guid="3445d93e-8024-41cf-9358-cc66e3ed9a59" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\MP3_v4.cydwr" Guid="1398543b-3f15-44bd-8145-064d8c8df128" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\Generated_Source\PSoC5\CySpc.h" Guid="4912249b-4dbb-48e5-8156-52989844cde3" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\Generated_Source\PSoC5\CyFlash.h" Guid="28166947-8f2d-434f-a6b5-0c4085cd57b2" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\Generated_Source\PSoC5\ErikaOS_1_eecfg.c" Guid="6b3d1dee-6456-4d20-bd43-d0ee61810c93" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\bsw\TraceRecorder\streamport\trcStreamingPort.c" Guid="2578049b-301b-44ab-9905-1bd0029318cb" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\asw\sound.c" Guid="12bffd47-42fd-4d75-8171-5b3d6abaa377" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\asw\mp3.h" Guid="52bee02c-9bfa-4617-b09f-ab6cde5dcff3" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="cb98b672-06dc-4884-8407-7d2e5bb839d7" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\bsw\tft\tft.c" Guid="98804f74-35b9-4056-8abf-9d51446d9da0" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\bsw\tft\tft.h" Guid="e22927b7-9fde-47dc-a762-7bd6436d75a5" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\Generated_Source\PSoC5\TFT_BackLight.h" Guid="dd984828-5fe4-4fdc-a37e-1c276974c8b3" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\Generated_Source\PSoC5\TFT_BackLight.c" Guid="c3b35040-e860-487e-99c8-2ccb69567f1d" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\bsw\Services\ceh\ceh_cfg.c" Guid="ca6e686e-b061-43b9-af74-658bb615f3e1" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\bsw\Services\ceh\ceh_cfg.h" Guid="0bd384ad-a194-4055-90bd-3888d5b1f063" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\asw\wav_parser.c" Guid="8a683b40-9826-4d97-a06c-5ef7b5432b98" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\asw\wav_parser.h" Guid="a0bebffa-9ba1-4046-b10a-f0b3074958cf" /><DocumentWindow Key="C:\H_da\SS26\Research Project\Workspace01\MP3_v4.cydsn\source\bsw\global.h" Guid="137b5eec-8e7d-413f-a5fb-f76e354c367e" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
